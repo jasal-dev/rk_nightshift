@@ -1,0 +1,190 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/rooms/squad_room.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room.png" id="bg"]
+[ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_mug.png" id="ov_mug"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_fg_desk.png" id="occ_fg_desk"]
+
+[node name="SquadRoom" type="Node2D"]
+script = ExtResource("script")
+room_id = "squad_room"
+room_name = "Homicide, Room 214"
+far_y = 587.5
+near_y = 914.3
+far_scale = 0.647
+near_scale = 1.19
+reflection_strength = 0.0
+tint = Color(0.78, 0.74, 0.7, 1)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("bg")
+centered = false
+
+[node name="Mug" type="Sprite2D" parent="."]
+texture = ExtResource("ov_mug")
+centered = false
+position = Vector2(528, 578)
+
+[node name="WalkArea" type="Polygon2D" parent="."]
+color = Color(0.2, 0.9, 0.4, 0.3)
+polygon = PackedVector2Array(6, 814.2, 416.8, 581.8, 625.4, 584.9, 387.3, 785.4, 849.3, 796.3, 896.2, 669.6, 1699.3, 684.4, 1914, 842.8, 1914, 953.4, 1247, 934.2, 1229.5, 865.1, 6, 833.2)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="FgDesk" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_fg_desk")
+centered = false
+position = Vector2(1700, 977)
+offset = Vector2(-303, -253)
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="start" type="Marker2D" parent="Spawns"]
+position = Vector2(711, 826)
+
+[node name="street" type="Marker2D" parent="Spawns"]
+position = Vector2(516, 588)
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="window" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "window"
+display_name = "window"
+walk_to = Vector2(0, 0)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/window"]
+polygon = PackedVector2Array(836.2, 468.7, 843.3, 271.6, 848.8, 270.2, 1459.5, 271.6, 1469.7, 273.1, 1468.4, 475.2, 1467.8, 483.9, 1134.9, 480.4, 836.3, 477.2)
+
+[node name="radiator" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "radiator"
+display_name = "radiator"
+walk_to = Vector2(0, 0)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/radiator"]
+polygon = PackedVector2Array(876, 497.6, 878.7, 493.4, 1092.8, 495.9, 1096.4, 505.1, 1096.5, 505.9, 1095.3, 569.9, 1092, 574.6, 876.8, 571.5)
+
+[node name="clock" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "clock"
+display_name = "clock"
+walk_to = Vector2(0, 0)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/clock"]
+polygon = PackedVector2Array(697.2, 277, 722.4, 250.3, 723.8, 250.2, 750.5, 276.9, 725.4, 303.2, 724, 303.6)
+
+[node name="case_board" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "case_board"
+display_name = "murder board"
+walk_to = Vector2(0, 0)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/case_board"]
+polygon = PackedVector2Array(614, 585.2, 624, 340, 625.5, 339.6, 811.6, 340.5, 833.1, 582.2, 833.2, 588.5, 829.3, 594.8, 775.2, 594, 614.3, 591.5)
+
+[node name="desk" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "desk"
+display_name = "desk"
+walk_to = Vector2(597, 810)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/desk"]
+polygon = PackedVector2Array(420.9, 661.7, 487.1, 615.8, 860.2, 621.9, 860.3, 629.3, 854.8, 739.1, 833, 793.5, 823.1, 793.2, 439.3, 779.5, 421.5, 669.7)
+
+[node name="door" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "door"
+display_name = "door"
+walk_to = Vector2(518, 587)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/door"]
+polygon = PackedVector2Array(461.7, 338.5, 464.1, 338, 607.2, 338.7, 611.3, 343.9, 621.4, 568.6, 618.1, 577.9, 616.3, 579.3, 477, 577.2)
+
+[node name="coat_rack" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "coat_rack"
+display_name = "coat rack"
+walk_to = Vector2(434, 598)
+face = "left"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/coat_rack"]
+polygon = PackedVector2Array(373.8, 406.2, 374.8, 404.3, 380.6, 395.6, 381.9, 394.2, 395, 390.8, 414.3, 392.7, 428.4, 400.4, 429.8, 402.9, 443, 590.1, 441, 592.2, 385.7, 597.7, 383.4, 595.5)
+
+[node name="typewriter" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "typewriter"
+display_name = "computer"
+walk_to = Vector2(597, 810)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/typewriter"]
+polygon = PackedVector2Array(593.9, 555.7, 688.4, 548.5, 689.7, 549.8, 691.8, 610.2, 684.3, 648.7, 604.4, 652.9, 596.8, 617.2)
+
+[node name="lamp" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "lamp"
+display_name = "desk lamp"
+walk_to = Vector2(462, 803)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/lamp"]
+polygon = PackedVector2Array(488.2, 564.2, 513, 558.6, 555.8, 566.2, 557, 587.7, 539.1, 630.5, 521.9, 648.2, 502.5, 629.9, 489.6, 585.7)
+
+[node name="phone" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "phone"
+display_name = "desk phone"
+walk_to = Vector2(747, 810)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/phone"]
+polygon = PackedVector2Array(762.2, 624.3, 767.9, 614.9, 769.6, 612.6, 803.5, 613.1, 808.3, 618.9, 808.4, 627.9, 798.1, 635.8, 762.4, 633.4)
+
+[node name="mug" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "mug"
+display_name = "coffee mug"
+walk_to = Vector2(539, 805)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/mug"]
+polygon = PackedVector2Array(565.3, 635.2, 572.2, 628.2, 579.8, 635.5, 586.3, 645.1, 580.7, 652.9, 573.8, 659.9, 566.2, 652.7, 565.5, 644.7, 565.3, 641.6)
+
+[node name="wastebasket" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "wastebasket"
+display_name = "wastebasket"
+walk_to = Vector2(909, 835)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/wastebasket"]
+polygon = PackedVector2Array(856.3, 766.8, 859.2, 757.4, 866, 739.3, 919.4, 740.5, 922.2, 747.9, 922.5, 809.9, 917.2, 832.2, 857.2, 830.7)
+
+[node name="cabinet" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "cabinet"
+display_name = "filing cabinet"
+walk_to = Vector2(1660, 698)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/cabinet"]
+polygon = PackedVector2Array(1670.5, 665, 1674.7, 620.2, 1679.2, 573, 1686.9, 492.6, 1687.3, 488.9, 1706.6, 459.5, 1775.8, 460.2, 1806.9, 470.9, 1874.9, 527.3, 1850.9, 726.5, 1750.8, 724.5, 1706.8, 691.9)
+
+[node name="coffee_machine" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "coffee_machine"
+display_name = "coffee machine"
+walk_to = Vector2(1630, 685)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/coffee_machine"]
+polygon = PackedVector2Array(1437.6, 590.1, 1443.6, 494.4, 1456.5, 476.1, 1465, 468.4, 1494.3, 441.9, 1545.3, 442.4, 1559.7, 449.1, 1599.7, 507.9, 1591.3, 608, 1453.3, 605.8)
