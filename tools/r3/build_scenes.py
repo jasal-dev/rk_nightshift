@@ -14,6 +14,14 @@ ROOMS = {
     'street': dict(node='Street', script='res://scripts/rooms/street.gd', name='Street', reflection=0.2),
     'pier9_dock': dict(node='Pier9Dock', script='res://scripts/rooms/pier9_dock.gd', name='Pier 9', reflection=0.2),
     'vance_office': dict(node='VanceOffice', script='res://scripts/rooms/vance_office.gd', name="Vance's office"),
+    'mulholland_overlook': dict(node='MulhollandOverlook', script='res://scripts/rooms/mulholland_overlook.gd',
+                                name='Mulholland overlook', reflection=0.15),
+    'prius_interior': dict(node='PriusInterior', script='res://scripts/rooms/prius_interior.gd',
+                           name="Kenji's Prius"),
+    'norms_diner': dict(node='NormsDiner', script="res://scripts/rooms/norms_diner.gd", name="Norm's on Sunset",
+                        reflection=0.08),
+    'kenji_apartment': dict(node='KenjiApartment', script='res://scripts/rooms/kenji_apartment.gd',
+                            name="Kenji's apartment"),
 }
 
 

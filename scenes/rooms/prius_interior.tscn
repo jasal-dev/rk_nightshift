@@ -1,0 +1,147 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/rooms/prius_interior.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/rooms/prius_interior.png" id="bg"]
+[ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
+
+[node name="PriusInterior" type="Node2D"]
+script = ExtResource("script")
+room_id = "prius_interior"
+room_name = "Kenji's Prius"
+far_y = 1046
+near_y = 1076
+far_scale = 1.0
+near_scale = 1.0
+reflection_strength = 0.0
+tint = Color(0.8, 0.76, 0.8, 1)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("bg")
+centered = false
+
+[node name="WalkArea" type="Polygon2D" parent="."]
+color = Color(0.2, 0.9, 0.4, 0.3)
+polygon = PackedVector2Array(840, 1046, 1080, 1046, 1080, 1076, 840, 1076)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="mulholland_overlook" type="Marker2D" parent="Spawns"]
+position = Vector2(960, 1062)
+
+[node name="start" type="Marker2D" parent="Spawns"]
+position = Vector2(960, 1062)
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="out" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "out"
+display_name = "back outside"
+walk_to = Vector2(0, 0)
+face = "none"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/out"]
+polygon = PackedVector2Array(0, 1080, 0, 270.9, 529.4, 313.8, 581.2, 789.5, 279.5, 1080)
+
+[node name="back_seat" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "back_seat"
+display_name = "back seat"
+walk_to = Vector2(0, 0)
+face = "none"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/back_seat"]
+polygon = PackedVector2Array(1240, 950, 1920, 950, 1920, 1080, 1240, 1080)
+
+[node name="door_pocket" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "door_pocket"
+display_name = "driver's door pocket"
+walk_to = Vector2(0, 0)
+face = "none"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/door_pocket"]
+polygon = PackedVector2Array(239.2, 717.6, 395.3, 788.9, 414.7, 908.2, 260, 819.9)
+
+[node name="kenji" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "kenji"
+display_name = "Kenji"
+walk_to = Vector2(0, 0)
+face = "none"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/kenji"]
+polygon = PackedVector2Array(381.1, 289.8, 843.9, 286.5, 859.8, 832.6, 457.2, 813)
+
+[node name="glovebox" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "glovebox"
+display_name = "glovebox"
+walk_to = Vector2(0, 0)
+face = "none"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/glovebox"]
+polygon = PackedVector2Array(1081.6, 633, 1084, 561.1, 1282.7, 565.2, 1276.3, 638.4)
+
+[node name="cups" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "cups"
+display_name = "cup holders"
+walk_to = Vector2(0, 0)
+face = "none"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/cups"]
+polygon = PackedVector2Array(920.9, 635.9, 1067.7, 640.1, 1065.1, 724.5, 921.8, 719.2)
+
+[node name="head_unit" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "head_unit"
+display_name = "dashboard screen"
+walk_to = Vector2(0, 0)
+face = "none"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/head_unit"]
+polygon = PackedVector2Array(950, 484.5, 1060.6, 485.9, 1058.8, 552.4, 950.2, 550.3)
+
+[node name="ignition" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "ignition"
+display_name = "ignition"
+walk_to = Vector2(0, 0)
+face = "none"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/ignition"]
+polygon = PackedVector2Array(907.7, 543.2, 957.7, 544.2, 957.7, 584.7, 908.3, 583.6)
+
+[node name="phone_mount" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "phone_mount"
+display_name = "phone in the dash mount"
+walk_to = Vector2(0, 0)
+face = "none"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/phone_mount"]
+polygon = PackedVector2Array(911.1, 435.1, 968.9, 435.6, 968.7, 517.3, 912.2, 516.3)
+
+[node name="dashcam" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "dashcam"
+display_name = "dashcam mount"
+walk_to = Vector2(0, 0)
+face = "none"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/dashcam"]
+polygon = PackedVector2Array(958.9, 326, 1052.4, 325.7, 1051.1, 383, 959, 382.7)
+
+[node name="visor" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "visor"
+display_name = "sun visor"
+walk_to = Vector2(0, 0)
+face = "none"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/visor"]
+polygon = PackedVector2Array(697.9, 306.3, 905.2, 305.3, 906.2, 370.7, 702.2, 370.4)

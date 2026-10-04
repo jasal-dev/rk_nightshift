@@ -3,6 +3,7 @@ import math, os, sys
 import numpy as np
 from PIL import Image, ImageFilter
 from scene3d import Scene, Camera, WORLD, Rx, Ry, Rz, aces, Frame
+import textures as tx
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
@@ -27,6 +28,18 @@ def scene():
     S.mat('singe', (60, 40, 28), namp=0.4, nscale=30)
     S.mat('leather', (60, 40, 30), spec=0.3, shin=30, namp=0.1, nscale=40)
     S.mat('elastic', (20, 20, 22))
+    # Case 2
+    S.mat('glide', (220, 220, 220), tex=tx.glide_card(), texmode=1, spec=0.4, shin=40)
+    S.mat('teal', (30, 150, 134), spec=0.3)
+    S.mat('ink_dk', (30, 34, 70))
+    S.mat('dodger', (30, 70, 160), spec=0.5)
+    S.mat('plastic', (24, 24, 28), spec=0.8, shin=60)
+    S.mat('lens', (10, 12, 20), spec=1.6, shin=90)
+    S.mat('clear', (200, 210, 220), spec=1.2, shin=80)
+    S.mat('sdcard', (40, 80, 160), spec=0.5)
+    S.mat('peas', (110, 170, 70), spec=0.5, shin=40, namp=0.15, nscale=40)
+    S.mat('tape', (220, 210, 170), spec=0.4)
+    S.mat('screen_on', (20, 120, 110), emis=(40, 210, 180), emis_mult=1.2)
     return S
 
 
@@ -79,6 +92,54 @@ def build(item):
         S.wbox((0.02, 0, -0.008), (0.23, 0.31, 0.026), 'paper')
         S.wbox((0.16, 0, 0.042), (0.012, 0.335, 0.006), 'elastic')
         rot = Rz(-10) @ Rx(-20)
+    elif item == 'driver_card':
+        S.wbox((0, 0, 0), (0.36, 0.23, 0.012), 'glide', rnd=0.01)
+        rot = Rz(-8) @ Rx(-20)
+    elif item == 'norms_receipt':
+        S.wbox((0, 0, 0), (0.16, 0.36, 0.006), 'paper', rnd=0.003)
+        S.wbox((0, 0.29, 0.008), (0.12, 0.035, 0.003), 'red')
+        for k in range(6):
+            S.wbox((-0.02 + (k % 2) * 0.03, 0.17 - k * 0.075, 0.008), (0.1 - (k % 2) * 0.03, 0.012, 0.002), 'ink_dk')
+        rot = Rz(12) @ Rx(-20)
+    elif item == 'kenji_keys':
+        for k in range(14):
+            a0, a1 = k / 14 * 2 * math.pi, (k + 1) / 14 * 2 * math.pi
+            S.cyl((0.13 * math.cos(a0) - 0.15, 0.13 * math.sin(a0) + 0.15, 0),
+                  (0.13 * math.cos(a1) - 0.15, 0.13 * math.sin(a1) + 0.15, 0), 0.014, 'steel')
+        S.wbox((0.1, -0.05, 0), (0.08, 0.11, 0.035), 'plastic', rnd=0.03, rot=Rz(-40))           # the car fob
+        S.wbox((-0.2, -0.16, 0), (0.035, 0.15, 0.01), 'brass', rot=Rz(10))                     # house key
+        S.fcyl((-0.23, 0.02, 0), 0.06, 0.012, 'brass', axis='z')
+        S.cone((0.06, 0.2, 0), (0.34, 0.36, 0), 0.025, 0.045, 'dodger')                       # little plastic bat
+        rot = Rx(-20)
+    elif item == 'card_slip':
+        S.wbox((0, 0, 0), (0.24, 0.34, 0.006), 'paper', rnd=0.003)
+        for k in range(4):
+            S.wbox((-0.04, 0.22 - k * 0.07, 0.008), (0.15, 0.01, 0.002), 'ink_dk')
+        pts = [(-0.16, -0.16), (-0.1, -0.08), (-0.05, -0.2), (0.0, -0.09), (0.05, -0.21), (0.1, -0.1), (0.16, -0.18)]
+        for a, b in zip(pts, pts[1:]):
+            S.cyl((a[0], a[1], 0.01), (b[0], b[1], 0.01), 0.008, 'ink_dk')
+        rot = Rz(-10) @ Rx(-20)
+    elif item == 'frozen_peas':
+        S.ell(WORLD, (0, 0, 0), (0.3, 0.36, 0.08), 'peas', k=0.05)
+        S.ell(WORLD, (0, 0.33, 0), (0.24, 0.06, 0.04), 'peas')
+        S.wbox((0, 0.02, 0.07), (0.14, 0.1, 0.012), 'paper', rot=Rx(-5))
+        S.wbox((0, 0.2, 0.0), (0.33, 0.035, 0.09), 'tape')
+        rot = Rz(10) @ Rx(-20)
+    elif item == 'sd_cards':
+        S.wbox((-0.12, 0.12, 0), (0.2, 0.1, 0.07), 'plastic', rnd=0.03)                         # the dashcam
+        S.fcyl((-0.2, 0.12, 0.08), 0.055, 0.02, 'lens', axis='z')
+        S.fcyl((-0.04, 0.12, 0.08), 0.045, 0.02, 'lens', axis='z')
+        S.wbox((0.1, -0.16, 0), (0.24, 0.13, 0.03), 'clear', rnd=0.02)                         # the card case
+        for k in range(5):
+            S.wbox((-0.06 + k * 0.08, -0.16, 0.035), (0.028, 0.04, 0.004), 'sdcard')
+        rot = Rz(-6) @ Rx(-24)
+    elif item == 'ride_receipt':
+        S.wbox((0, 0, 0), (0.2, 0.38, 0.025), 'plastic', rnd=0.04)
+        S.wbox((0, 0.0, 0.026), (0.17, 0.33, 0.003), 'screen_on')
+        S.wbox((0, 0.24, 0.03), (0.13, 0.03, 0.002), 'teal')
+        for k in range(4):
+            S.wbox((-0.02, 0.12 - k * 0.09, 0.03), (0.11, 0.015, 0.002), 'ink')
+        rot = Rz(-12) @ Rx(-18)
     S.transform(rot)
     S.light((-1.2, 1.6, 2.0), (255, 236, 210), power=7, range=10, soft=8)
     S.light((1.4, 0.6, -1.0), (140, 180, 255), power=4, range=10, shadow=False)
@@ -87,7 +148,9 @@ def build(item):
 
 
 def main():
-    for item in (sys.argv[1:] or ('key', 'case_file', 'coffee', 'dime', 'matchbook', 'gaff', 'envelope', 'notebook')):
+    for item in (sys.argv[1:] or ('key', 'case_file', 'coffee', 'dime', 'matchbook', 'gaff', 'envelope', 'notebook',
+                                  'driver_card', 'norms_receipt', 'kenji_keys', 'card_slip', 'frozen_peas', 'sd_cards',
+                                  'ride_receipt')):
         S = build(item)
         cam = Camera((0, 0, 5), (0, 0, 0), W=SIZE * SS, H=SIZE * SS, ortho=True, ortho_h=0.95)
         env = dict(sky=(60, 60, 70), bounce=(30, 26, 26), fog=0, reflections=False, vol_scale=0, grid=0.12, ao_scale=0.3)

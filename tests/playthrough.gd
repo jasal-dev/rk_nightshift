@@ -1,5 +1,5 @@
 extends Node
-## Automated playthrough of Case 1. Runs the real game (scenes/main.tscn) at high speed, clicks
+## Automated playthrough of Cases 1 and 2. Runs the real game (scenes/main.tscn) at high speed, clicks
 ## hotspots through Main's own action path, skips every line and picks dialogue options by text,
 ## then checks the flags the later cases depend on.
 ##
@@ -37,23 +37,24 @@ func _process(_delta: float) -> void:
 				main.room.room_id if main.room else "-", main.busy, main._speaking, main._choosing,
 				main._waiting_click, main.ui.fade_rect.color.a])
 	if "--shots" in OS.get_cmdline_user_args():
-		for key in ["drive", "phone", "board", "pier9_dock", "vance_office", "street"]:
-			var on: bool = (main.ui.get(key) != null) if key in ["drive", "phone", "board"] 					else (main.room != null and main.room.room_id == key and not main.busy and main.ui.fade_rect.color.a < 0.01)
+		for key in ["drive", "phone", "board", "device", "pier9_dock", "vance_office", "street", "mulholland_overlook",
+				"norms_diner", "kenji_apartment", "prius_interior"]:
+			var ui_key: bool = key in ["drive", "phone", "board", "device"]
+			var on: bool = (main.ui.get(key) != null) if ui_key \
+					else (main.room != null and main.room.room_id == key and not main.busy and main.ui.fade_rect.color.a < 0.01)
+			var shot: String = key + ("_case2" if ui_key and Game.flag("case1_done") else "")
 			if on:
-				_shots[key] = int(_shots.get(key, 0)) + 1
-			if _shots.get(key, 0) == 20:      # a few frames in, once fades and layout have settled
-				get_viewport().get_texture().get_image().save_png("user://shot_%s.png" % key)
+				_shots[shot] = int(_shots.get(shot, 0)) + 1
+			if _shots.get(shot, 0) == 20:      # a few frames in, once fades and layout have settled
+				get_viewport().get_texture().get_image().save_png("user://shot_%s.png" % shot)
 	if main._speaking:
-		main._skip = not ("--shots" in OS.get_cmdline_user_args() and main.ui.board != null)
+		main._skip = not ("--shots" in OS.get_cmdline_user_args() and (main.ui.board != null or main.ui.device != null))
 	if main._choosing:
 		_answer()
 
 
 func _answer() -> void:
-	var opts: Array[String] = []
-	for b in main.ui.choices_box.get_children():
-		if b is Button and not b.is_queued_for_deletion():
-			opts.append(String(b.text).split(". ", true, 1)[1])
+	var opts: Array[String] = main.ui.options.duplicate()
 	if opts.is_empty():
 		return
 	if _choices.is_empty():
@@ -232,5 +233,126 @@ func _run() -> void:
 	expect(["told_doyle", "case1_done"])
 	if _failed:
 		return
-	print("PLAYTHROUGH OK - Case 1 finished. Flags: ", Game.flags.keys())
+	print("Case 1 finished.")
+	main._waiting_click = false                         # the "Case 2: Five Stars" card
+	await expect_room("mulholland_overlook")
+	if Game.has_item("envelope") or not Game.has_item("notebook"):
+		_fail("Case 1 items should stay on the desk, the notebook should come along: %s" % [Game.inventory])
+	await _case2()
+	if _failed:
+		return
+	print("PLAYTHROUGH OK - Cases 1 and 2 finished. Flags: ", Game.flags.keys())
 	_quit(0)
+
+
+func _case2() -> void:
+	print("Case 2, scene 2: the Mulholland overlook")
+	await act("car")                                    # Shah wants a word first
+	await act("inside")                                 # lean into the car
+	await expect_room("prius_interior")
+	if main.player.visible:
+		_fail("the detective shouldn't be drawn in the close-up")
+	await act("phone_mount")                            # no gloves, no touching
+	await act("out")
+	await expect_room("mulholland_overlook")
+	await act("park", "use", "", ["What have we got?", "Who was his last passenger?", "Anything else from the couple?",
+			"That'll do."])
+	await act("shah", "use", "", ["How did he die?", "When?", "Anything else?", "Thanks, Anita."])
+	expect(["met_park", "gloved", "clue_cabin_camera", "clue_brielle_alibi", "clue_walker", "clue_ligature", "clue_tod"])
+	await act("car")                                    # not yet: the car still has things to tell
+	await act("inside")
+	await expect_room("prius_interior")
+	await act("ignition")                               # read the screen first
+	await act("phone_mount", "use", "", ["Trips", "Earlier this week >", "More v", "More v",
+			"Wed 1:10 AM  Blue Note, Hollywood > Pryce Tower, Century City  -  Walt B.  *1", "< Back to tonight",
+			"Messages", "Close"])
+	expect(["clue_last_trip", "clue_threat", "got_ride_receipt"])
+	await act("head_unit", "use", "", ["Radio", "Navigation", "Recent destinations", "Close"])
+	expect(["clue_gps", "clue_off_app"])
+	await act("ignition")
+	await act("glovebox", "use", "kenji_keys")
+	await act("door_pocket")
+	await act("visor")
+	await act("dashcam")
+	await act("cups")
+	await act("back_seat", "look")
+	await act("kenji", "look")
+	await act("out")
+	await expect_room("mulholland_overlook")
+	if not main.player.visible:
+		_fail("the detective should be back in view")
+	await act("prius", "look")
+	await act("prius")
+	await act("ground", "look")
+	await act("wall", "use", "driver_card")
+	expect(["got_kenji_keys", "clue_empty_case", "got_receipt", "got_driver_card", "clue_dashcam", "clue_two_cups",
+			"clue_rat", "saw_grit"])
+	await act("car", "use", "", ["Not yet."])
+	expect(["left_overlook"])
+	if Game.has_item("kenji_keys"):
+		_fail("Kenji's keys should have gone to Park")
+	await act("car", "use", "", ["Norm's on Sunset"])
+	await expect_room("norms_diner")
+
+	print("Case 2, scene 3: Norm's on Sunset")
+	await act("rosa")                                   # too busy
+	await act("rosa", "use", "driver_card")             # still too busy
+	await act("coffee_pot", "look")
+	await act("coffee_pot")                             # Ray pours
+	await act("rosa", "use", "", ["I'm looking for a Glide driver. Kenji Ota."])
+	await act("rosa", "use", "driver_card")
+	await act("rosa", "use", "", ["Who paid?", "When did they leave?", "Can I see the card slip?", "Thanks, Rosa."])
+	expect(["helped_rosa", "clue_roommate_norms", "got_card_slip"])
+	await act("heck", "use", "", ["Kenji Ota.", "\"I'll put you in the ground.\"", "Was Kenji into anything?",
+			"What about his roommate?", "Never mind."])
+	await act("heck", "use", "driver_card")
+	await act("booth6")
+	expect(["clue_heck_alibi", "clue_side_thing", "clue_napkin"])
+	await act("door", "use", "", ["Kenji's place, Silver Lake"])
+	await expect_room("kenji_apartment")
+
+	print("Case 2, scene 4: the apartment")
+	await act("fridge")                                 # Devin's leaning on it
+	await act("devin", "use", "", ["Who are you?", "When did you last see Kenji?", "Did Kenji have enemies?",
+			"Mind if I look around?", "I'll be in touch."])
+	await act("camera_bag", "look")
+	await act("sneakers", "look")
+	await act("laptop", "look")
+	await act("kenji_desk")
+	await act("photos")
+	await act("devin", "use", "card_slip")              # the first lie
+	await act("devin", "use", "", ["His car never came back here."])
+	expect(["clue_devin_story", "clue_strap", "clue_sneakers", "clue_laptop", "clue_kenji_quitting", "devin_lie1_broken",
+			"search_consent"])
+	await act("front_door")                             # not before the search
+	await act("fridge", "look")
+	await act("freezer", "look")
+	await act("freezer")
+	await _idle()
+	main.busy = true
+	await main.examine_item("frozen_peas")              # the cards, a lawyer, and Park up the stairs
+	main.busy = false
+	expect(["clue_peas_note", "got_peas", "got_sd_cards", "devin_arrested"])
+	if not Game.has_item("sd_cards") or Game.has_item("frozen_peas"):
+		_fail("the peas should have become the dashcam and cards: %s" % [Game.inventory])
+	# quick save / load round trip in a Case 2 room
+	Game.player_position = main.player.position
+	Game.save_game()
+	await main._load()
+	await expect_room("kenji_apartment")
+	if main.room.get_node("Devin_couch").visible or main.room.get_node("Devin_fridge").visible:
+		_fail("Devin should be gone after the arrest")
+	await act("front_door", "use", "", ["Room 214"])    # the drive back, and Maya
+	await expect_room("squad_room")
+
+	print("Case 2, scene 5: the murder board")
+	await act("door")
+	await act("phone")
+	await act("case_board", "use", "ride_receipt")      # "After Kenji."
+	await act("case_board", "use", "card_slip", ["A stranger he picked up off the app.", "Heck Dominguez, the rival driver.",
+			"Devin Clark, his roommate.", "Kenji's note: giving Carla the cards", "Dashcam and memory cards, in the peas"])
+	while not main._waiting_click and not _failed:      # Doyle, then Otis with Case 3
+		await get_tree().process_frame
+	expect(["case2_deduced", "board_ride_receipt", "case2_done"])
+	if not main.room.get_node("Board_kenji").visible or not main.room.get_node("Board_receipt").visible:
+		_fail("the board should keep Kenji's corner and the ride receipt")

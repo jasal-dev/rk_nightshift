@@ -424,3 +424,334 @@ def ledger_cover(w=128, h=96):
     d.rectangle([0, 0, 18, h], fill=(26, 56, 36, 255))
     d.rectangle([40, 30, 100, 50], outline=(200, 170, 90, 255), width=2)
     return img
+
+
+# ---------------------------------------------------------------- Case 2: Mulholland overlook
+def city_basin(seed=81, w=2048, h=512):
+    """The LA basin at night seen from the hills: a grid of street lights thinning toward the horizon, boulevards
+    converging on it, a freeway, a cluster of downtown towers. Emissive (alpha = light), drawn in perspective."""
+    rng = random.Random(seed)
+    yy = np.linspace(0, 1, h)[:, None]
+    haze = np.clip(1 - yy * 6.0, 0, 1) ** 2                                  # thin glow at the horizon (top)
+    rgb = np.zeros((h, w, 3)); rgb[:] = np.array([255, 150, 90])
+    a = haze * 0.3 * np.ones((1, w))
+    img = to_img(rgb, a * 255); d = ImageDraw.Draw(img)
+    hz = 6                                                                    # horizon row
+    def row_y(t):                                                             # t: 0 far .. 1 near
+        return hz + (h - hz) * t ** 2.2
+    for i in range(1, 140):                                                   # rows of street lamps
+        t = i / 140
+        y = int(row_y(t))
+        step = max(2, int(3 + 26 * t))
+        size = 1 if t < 0.5 else 2
+        bright = rng.random() < 0.12
+        for x in range(rng.randint(0, step), w, step):
+            if rng.random() < (0.55 if not bright else 0.9):
+                col = rng.choice([(255, 190, 110), (255, 170, 90), (230, 230, 255), (255, 220, 160)])
+                al = int(150 + 105 * rng.random())
+                d.rectangle([x, y, x + size - 1, y + size - 1], fill=col + (al,))
+    vx = w * 0.46
+    for k in range(-14, 15):                                                  # boulevards
+        x1 = vx + k * w * 0.11
+        col = rng.choice([(255, 200, 120), (255, 150, 80)])
+        for t in np.linspace(0.02, 1, 160):
+            x = vx + (x1 - vx) * t ** 2.2 + rng.uniform(-1, 1)
+            if rng.random() < 0.6:
+                d.point((x, row_y(t)), fill=col + (230,))
+    for t in np.linspace(0.15, 1, 70):                                        # a freeway: tail and head lights
+        x = w * 0.18 + (w * 0.05) * t ** 2 * 10
+        y = row_y(t)
+        d.point((x, y), fill=(255, 40, 30, 255)); d.point((x + 3, y), fill=(255, 250, 230, 255))
+    x = int(w * 0.62)                                                         # downtown on the horizon
+    for _ in range(9):
+        bw, bh = rng.randint(6, 16), rng.randint(14, 46)
+        d.rectangle([x, hz - bh + 10, x + bw, hz + 10], fill=(20, 16, 24, 255))
+        for wy in range(hz - bh + 12, hz + 8, 3):
+            for wx in range(x + 1, x + bw - 1, 2):
+                if rng.random() < 0.35:
+                    d.point((wx, wy), fill=(255, 230, 180, 255))
+        x += bw + rng.randint(0, 4)
+    # neighbourhoods: lights cluster, hills and parks stay dark
+    arr = np.asarray(img).astype(float)
+    hood = np.clip((noise(w, h, 140, seed + 5, octaves=3) - 0.32) * 2.2, 0.08, 1.0)
+    arr[..., 3] *= np.maximum(hood, (np.linspace(0, 1, h)[:, None] < 0.08))
+    return Image.fromarray(arr.clip(0, 255).astype(np.uint8), 'RGBA').filter(ImageFilter.GaussianBlur(0.6))
+
+def night_clouds(seed=82, w=1024, h=256):
+    """Low cloud lit orange from underneath by the city. Emissive."""
+    n = noise(w, h, 90, seed, octaves=5)
+    yy = np.linspace(0, 1, h)[:, None]
+    glow = 0.15 + 0.85 * yy ** 2
+    rgb = np.dstack([0 * n + 150, 0 * n + 80, 0 * n + 70]) * (0.4 + 0.8 * n[..., None])
+    rgb = rgb * glow[..., None] + np.array([30, 24, 50]) * (1 - glow[..., None])
+    return to_img(rgb, np.clip(0.35 + 0.65 * glow * (0.6 + 0.6 * n), 0, 1) * 255)
+
+def decomposed_granite(seed=83, w=256, h=256):
+    """Pale orange crushed-granite pullout, wet: grit and darker damp patches."""
+    n = noise(w, h, 40, seed); g = np.random.default_rng(seed).random((h, w))
+    rgb = np.array([164, 118, 80], float)[None, None, :] * (0.72 + 0.4 * n[..., None]) * (0.85 + 0.25 * g[..., None])
+    damp = np.clip((noise(w, h, 70, seed + 1) - 0.5) * 3, 0, 1)
+    rgb = rgb * (1 - 0.35 * damp[..., None])
+    return to_img(rgb)
+
+def stone_wall(seed=84, w=256, h=128):
+    """Low wall of rough fieldstone set in mortar."""
+    rng = random.Random(seed)
+    img = Image.new('RGB', (w, h), (78, 72, 64)); d = ImageDraw.Draw(img)
+    y = 0
+    while y < h:
+        rh = rng.randint(18, 30); x = -rng.randint(0, 30)
+        while x < w:
+            sw = rng.randint(26, 52)
+            c = rng.randint(96, 136)
+            d.rounded_rectangle([x + 2, y + 2, x + sw - 2, y + rh - 2], 6, fill=(c, c - 8, c - 20))
+            x += sw
+        y += rh
+    n = noise(w, h, 8, seed)
+    arr = np.asarray(img).astype(float) * (0.75 + 0.4 * n[..., None])
+    return to_img(arr)
+
+def van_side(w=512, h=192):
+    """Coroner's van side panel: white with a blue stripe and the county lettering."""
+    img = Image.new('RGBA', (w, h), (214, 216, 218, 255)); d = ImageDraw.Draw(img)
+    d.rectangle([0, h * 0.62, w, h * 0.7], fill=(30, 60, 130, 255))
+    d.text((40, 40), 'CORONER', font=font('DejaVuSans-Bold.ttf', 52), fill=(30, 40, 70, 255))
+    d.text((44, 104), 'COUNTY OF LOS ANGELES', font=font('DejaVuSans-Bold.ttf', 18), fill=(30, 40, 70, 255))
+    d.ellipse([w - 120, 30, w - 40, 110], outline=(150, 120, 40, 255), width=6)
+    return img
+
+def overlook_sign(w=384, h=128):
+    img = Image.new('RGBA', (w, h), (90, 62, 40, 255)); d = ImageDraw.Draw(img)
+    d.rectangle([5, 5, w - 6, h - 6], outline=(222, 206, 170, 255), width=3)
+    f = font('DejaVuSans-Bold.ttf', 30)
+    for i, line in enumerate(('MULHOLLAND', 'SCENIC OVERLOOK')):
+        bb = d.textbbox((0, 0), line, font=f)
+        d.text(((w - bb[2]) // 2, 18 + i * 46), line, font=f, fill=(232, 218, 184, 255))
+    return img
+
+def device_screen(kind, w=128, h=96):
+    """Small glowing screens: 'glide' (driver app on a phone), 'radio' (car head unit)."""
+    if kind == 'glide':
+        img = Image.new('RGBA', (w, h), (10, 24, 26, 255)); d = ImageDraw.Draw(img)
+        d.rectangle([0, 0, w, 16], fill=(30, 170, 150, 255))
+        for i in range(5):
+            d.rectangle([8, 24 + i * 13, w - 20 - (i % 2) * 20, 30 + i * 13], fill=(170, 220, 210, 255))
+        return img
+    img = Image.new('RGBA', (w, h), (6, 12, 30, 255)); d = ImageDraw.Draw(img)
+    d.text((10, 26), '88.1 FM', font=font('DejaVuSans-Bold.ttf', 24), fill=(120, 190, 255, 255))
+    d.rectangle([10, 66, w - 10, 70], fill=(60, 110, 200, 255))
+    return img
+
+def glide_card(w=128, h=80):
+    """Kenji's Glide driver card: teal band, photo, five stars."""
+    img = Image.new('RGBA', (w, h), (236, 240, 238, 255)); d = ImageDraw.Draw(img)
+    d.rectangle([0, 0, w, 18], fill=(30, 150, 134, 255))
+    d.text((6, 1), 'GLIDE', font=font('DejaVuSans-Bold.ttf', 14), fill=(255, 255, 255, 255))
+    d.rectangle([8, 24, 44, 70], fill=(120, 110, 104, 255))
+    d.ellipse([16, 30, 36, 50], fill=(196, 160, 130, 255))
+    d.text((52, 26), 'K. OTA', font=font('DejaVuSans-Bold.ttf', 13), fill=(20, 30, 40, 255))
+    d.text((52, 46), '4.98 *****', font=font('DejaVuSans-Bold.ttf', 11), fill=(200, 140, 20, 255))
+    return img
+
+
+# ---------------------------------------------------------------- Case 2: Norm's on Sunset
+def terrazzo(seed=85, w=256, h=256):
+    rng = np.random.default_rng(seed)
+    n = noise(w, h, 30, seed)
+    rgb = np.array([196, 176, 150], float)[None, None, :] * (0.88 + 0.15 * n[..., None])
+    img = to_img(rgb); d = ImageDraw.Draw(img)
+    for _ in range(1400):
+        x, y = int(rng.integers(0, w)), int(rng.integers(0, h)); r = int(rng.integers(1, 3))
+        c = [(150, 60, 40), (60, 60, 64), (230, 226, 214), (190, 120, 60)][int(rng.integers(0, 4))]
+        d.ellipse([x, y, x + r, y + r], fill=c + (255,))
+    return img
+
+def sunset_street(seed=86, w=512, h=192):
+    """Sunset Boulevard through the diner's windows: wet street, car lights, signs across the road. Emissive."""
+    rng = random.Random(seed)
+    yy = np.linspace(0, 1, h)[:, None, None]
+    rgb = np.array([40, 30, 60], float) * (1 - yy) + np.array([60, 40, 40], float) * yy
+    rgb = np.broadcast_to(rgb, (h, w, 3)).copy()
+    img = to_img(rgb, np.full((h, w), 150)); d = ImageDraw.Draw(img)
+    for x in range(0, w, 60):                                                  # buildings across the street
+        bh = rng.randint(50, 110)
+        d.rectangle([x, h * 0.55 - bh, x + rng.randint(40, 58), h * 0.55], fill=(18, 16, 24, 255))
+        if rng.random() < 0.5:
+            d.rectangle([x + 6, h * 0.55 - bh + 10, x + 40, h * 0.55 - bh + 22],
+                        fill=rng.choice([(255, 80, 120), (90, 200, 255), (255, 200, 90)]) + (255,))
+    d.rectangle([0, h * 0.55, w, h], fill=(26, 24, 30, 255))                    # wet street
+    for _ in range(14):                                                        # headlights and their reflections
+        x = rng.randint(0, w); c = rng.choice([(255, 240, 210), (255, 50, 40), (255, 170, 80)])
+        d.ellipse([x, h * 0.62, x + 8, h * 0.62 + 5], fill=c + (255,))
+        d.rectangle([x + 2, h * 0.66, x + 5, h * 0.95], fill=c + (90,))
+    for x in range(30, w, 140):                                                 # street lamps
+        d.rectangle([x, h * 0.1, x + 2, h * 0.55], fill=(30, 30, 36, 255))
+        d.ellipse([x - 5, h * 0.08, x + 7, h * 0.13], fill=(255, 190, 120, 255))
+    return img.filter(ImageFilter.GaussianBlur(1.2))
+
+def pie_case(w=256, h=192):
+    """The lit pie case: three glass shelves of pies."""
+    img = Image.new('RGBA', (w, h), (250, 244, 226, 255)); d = ImageDraw.Draw(img)
+    for r in range(3):
+        y = 20 + r * 60
+        d.rectangle([0, y + 40, w, y + 44], fill=(200, 200, 196, 255))
+        for c in range(4):
+            x = 12 + c * 62
+            col = [(150, 30, 40), (200, 150, 80), (240, 220, 120), (120, 70, 40)][(c + r) % 4]
+            d.ellipse([x, y + 10, x + 48, y + 40], fill=(190, 140, 80, 255))
+            d.ellipse([x + 4, y + 12, x + 44, y + 32], fill=col + (255,))
+            if (c + r) % 4 == 2:                                                  # meringue
+                d.ellipse([x + 6, y + 2, x + 42, y + 24], fill=(250, 248, 236, 255))
+    return img
+
+def jukebox_front(w=96, h=160):
+    img = Image.new('RGBA', (w, h), (60, 20, 30, 255)); d = ImageDraw.Draw(img)
+    d.pieslice([4, 2, w - 4, 80], 180, 360, fill=(255, 140, 60, 255))
+    d.rectangle([4, 40, w - 4, 70], fill=(255, 200, 120, 255))
+    for i in range(6):
+        d.rectangle([10, 80 + i * 10, w - 10, 85 + i * 10], fill=(255, 230, 190, 255))
+    d.rectangle([20, h - 30, w - 20, h - 10], fill=(120, 180, 255, 255))
+    return img
+
+def norms_sign(w=512, h=160):
+    """Googie sign: NORM'S in red on a white starburst board. Emissive."""
+    img = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
+    d.polygon([(10, h * 0.5), (w * 0.2, 6), (w * 0.85, 14), (w - 6, h * 0.55), (w * 0.8, h - 8), (w * 0.15, h - 14)],
+              fill=(250, 240, 220, 200))
+    f = font('DejaVuSans-Bold.ttf', 92)
+    bb = d.textbbox((0, 0), "NORM'S", font=f)
+    d.text(((w - bb[2]) // 2, (h - bb[3]) // 2 - 12), "NORM'S", font=f, fill=(230, 30, 40, 255))
+    return img
+
+def menu_board(w=384, h=96):
+    img = Image.new('RGBA', (w, h), (30, 26, 24, 255)); d = ImageDraw.Draw(img)
+    f = font('DejaVuSans-Bold.ttf', 18)
+    for i, t in enumerate(('COFFEE 2.00   PIE 4.75   A LA MODE +1.50', 'OPEN 24 HOURS SINCE 1957')):
+        d.text((14, 16 + i * 38), t, font=f, fill=(250, 230, 180, 255))
+    return img
+
+
+# ---------------------------------------------------------------- Case 2: Kenji and Devin's apartment
+def floorboards(seed=87, w=256, h=256, base=(120, 84, 54)):
+    rng = random.Random(seed)
+    img = Image.new('RGB', (w, h), base); d = ImageDraw.Draw(img)
+    for i in range(0, w, 32):
+        c = tuple(int(v * rng.uniform(0.9, 1.06)) for v in base)
+        d.rectangle([i, 0, i + 31, h], fill=c)
+        d.line([i, 0, i, h], fill=(60, 40, 26), width=2)
+        y = rng.randint(0, h); d.line([i, y, i + 31, y], fill=(70, 48, 30), width=2)
+    n = noise(w, h, 6, seed)
+    return to_img(np.asarray(img).astype(float) * (0.8 + 0.3 * n[..., None]))
+
+def night_photo(kind, w=192, h=128):
+    """Devin's framed night photos of LA: 'freeway', 'bowl', 'overlook'."""
+    img = Image.new('RGBA', (w, h), (14, 12, 22, 255)); d = ImageDraw.Draw(img)
+    if kind == 'freeway':
+        for k in range(40):
+            t = k / 40
+            d.line([w * 0.1, h, w * (0.3 + t * 0.6), h * 0.35], fill=(255, int(80 + 150 * t), 60, 255), width=1)
+            d.line([w * 0.3, h, w * (0.35 + t * 0.6), h * 0.38], fill=(250, 240, 220, 255), width=1)
+    elif kind == 'bowl':
+        d.pieslice([w * 0.2, h * 0.3, w * 0.8, h * 0.95], 180, 360, fill=(240, 236, 220, 255))
+        for i in range(5):
+            d.arc([w * (0.22 + i * 0.03), h * (0.33 + i * 0.03), w * (0.78 - i * 0.03), h * 0.95], 180, 360,
+                  fill=(160, 150, 200, 255), width=1)
+        d.rectangle([0, h * 0.9, w, h], fill=(30, 26, 40, 255))
+    else:                                                                       # the overlook: wall, city below
+        sub = city_basin(seed=88, w=w * 4, h=h * 2).resize((w, h // 2))
+        img.paste(sub, (0, h // 3), sub)
+        d.rectangle([0, h * 0.8, w, h], fill=(70, 60, 50, 255))
+    return img
+
+def hushhush_printout(w=128, h=160):
+    img = Image.new('RGBA', (w, h), (240, 238, 232, 255)); d = ImageDraw.Draw(img)
+    d.rectangle([0, 0, w, 24], fill=(220, 30, 120, 255))
+    d.text((6, 3), 'HushHush', font=font('DejaVuSans-Bold.ttf', 16), fill=(255, 255, 255, 255))
+    d.text((6, 30), "STUDIO ASSISTANT'S", font=font('DejaVuSans-Bold.ttf', 9), fill=(20, 20, 20, 255))
+    d.text((6, 42), 'BACK-SEAT MELTDOWN', font=font('DejaVuSans-Bold.ttf', 9), fill=(20, 20, 20, 255))
+    d.rectangle([6, 58, w - 6, 118], fill=(70, 80, 90, 255))                   # cabin-camera still
+    d.ellipse([46, 70, 76, 100], fill=(170, 140, 120, 255))
+    for i in range(4):
+        d.rectangle([6, 126 + i * 8, w - 20, 129 + i * 8], fill=(90, 90, 96, 255))
+    d.rectangle([w - 46, 6, w - 8, 18], fill=(255, 230, 80, 255))               # yellow sticky note
+    return img
+
+def certificate(w=192, h=128):
+    img = Image.new('RGBA', (w, h), (240, 236, 222, 255)); d = ImageDraw.Draw(img)
+    d.rectangle([6, 6, w - 7, h - 7], outline=(30, 150, 134, 255), width=4)
+    d.text((24, 18), 'GLIDE', font=font('DejaVuSans-Bold.ttf', 22), fill=(30, 150, 134, 255))
+    d.text((24, 50), 'DRIVER OF THE MONTH', font=font('DejaVuSans-Bold.ttf', 13), fill=(40, 40, 50, 255))
+    d.text((24, 76), '* * * * *', font=font('DejaVuSans-Bold.ttf', 18), fill=(210, 160, 30, 255))
+    return img
+
+def pennant(w=192, h=64):
+    img = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
+    d.polygon([(0, 0), (w, h // 2), (0, h)], fill=(20, 60, 150, 255))
+    d.text((12, h // 2 - 12), 'DODGERS', font=font('DejaVuSerif-BoldItalic.ttf', 20), fill=(250, 250, 250, 255))
+    return img
+
+def fridge_door(seed=89, w=128, h=256):
+    """An old round-cornered fridge, covered in magnets and takeout menus, Kenji's note in the middle."""
+    rng = random.Random(seed)
+    img = Image.new('RGBA', (w, h), (222, 218, 200, 255)); d = ImageDraw.Draw(img)
+    d.line([0, h * 0.32, w, h * 0.32], fill=(150, 146, 130, 255), width=3)    # freezer seam
+    d.rectangle([w - 14, h * 0.1, w - 8, h * 0.26], fill=(180, 180, 176, 255))
+    d.rectangle([w - 14, h * 0.4, w - 8, h * 0.6], fill=(180, 180, 176, 255))
+    for _ in range(9):
+        x, y = rng.randint(6, w - 50), rng.randint(int(h * 0.36), h - 50)
+        d.rectangle([x, y, x + rng.randint(26, 40), y + rng.randint(30, 44)],
+                    fill=rng.choice([(250, 250, 240), (250, 220, 120), (240, 170, 160), (190, 220, 250)]) + (255,))
+        d.ellipse([x + 8, y - 3, x + 16, y + 5], fill=rng.choice([(200, 40, 40), (40, 120, 200), (40, 160, 70)]) + (255,))
+    d.rectangle([36, h * 0.5, 92, h * 0.62], fill=(255, 240, 120, 255))       # Kenji's note
+    for i in range(3):
+        d.line([40, h * 0.52 + 8 + i * 7, 86, h * 0.52 + 8 + i * 7], fill=(40, 40, 90, 255), width=1)
+    return img
+
+def dashcam_box(w=96, h=96):
+    img = Image.new('RGBA', (w, h), (30, 32, 36, 255)); d = ImageDraw.Draw(img)
+    d.text((8, 10), 'DuoCam 2', font=font('DejaVuSans-Bold.ttf', 15), fill=(240, 240, 240, 255))
+    d.rectangle([14, 40, 82, 80], fill=(60, 64, 72, 255)); d.ellipse([30, 46, 58, 74], fill=(10, 10, 14, 255))
+    return img
+
+def laptop_screen(w=128, h=80):
+    img = Image.new('RGBA', (w, h), (30, 30, 34, 255)); d = ImageDraw.Draw(img)
+    d.rectangle([0, 0, w, 8], fill=(60, 60, 66, 255))
+    for i in range(3):
+        for j in range(2):
+            d.rectangle([24 + i * 34, 14 + j * 32, 52 + i * 34, 40 + j * 32],
+                        fill=[(230, 220, 200), (200, 170, 150), (240, 236, 230)][(i + j) % 3] + (255,))
+    d.rectangle([2, 12, 18, h - 4], fill=(44, 44, 50, 255))
+    return img
+
+
+# ---------------------------------------------------------------- Case 2: squad room board pins
+def board_pins(kind, w=96, h=128):
+    """Pinned paper for the murder board: 'kenji' (Glide card, card slip, Polaroid of the cards, a marker line
+    through it all), 'envelope' (Danny's '1 of 3'), 'receipt' (print of Walt B.'s ride)."""
+    img = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
+    if kind == 'kenji':
+        img.paste(glide_card().resize((w - 10, 46)), (2, 4))
+        d.rectangle([8, 54, 46, 120], fill=(240, 238, 228, 255))               # card slip
+        for i in range(5):
+            d.line([12, 62 + i * 9, 40, 62 + i * 9], fill=(90, 90, 110, 255))
+        d.rectangle([52, 58, 92, 110], fill=(246, 246, 240, 255))              # Polaroid of the cards
+        d.rectangle([56, 62, 88, 94], fill=(40, 50, 60, 255))
+        for i in range(4):
+            d.rectangle([59 + i * 7, 70, 63 + i * 7, 80], fill=(200, 60, 60, 255))
+        d.line([0, h - 4, w, 6], fill=(30, 30, 30, 255), width=3)
+        pins = ((w // 2, 6), (26, 56), (72, 60))
+    elif kind == 'envelope':
+        d.rectangle([6, 30, w - 6, 90], fill=(206, 212, 226, 255))
+        d.polygon([(6, 30), (w // 2, 62), (w - 6, 30)], outline=(150, 156, 170, 255))
+        d.text((24, 66), '1 of 3', font=font('DejaVuSans-Bold.ttf', 14), fill=(30, 40, 120, 255))
+        d.ellipse([w - 30, 26, w - 2, 46], fill=(60, 40, 28, 255))
+        pins = ((w // 2, 34),)
+    else:
+        d.rectangle([14, 10, w - 14, h - 10], fill=(244, 244, 240, 255))
+        d.rectangle([20, 16, w - 20, 34], fill=(30, 150, 134, 255))
+        for i in range(6):
+            d.rectangle([22, 44 + i * 11, w - 24 - (i % 2) * 12, 48 + i * 11], fill=(70, 70, 80, 255))
+        pins = ((w // 2, 14),)
+    for x, y in pins:
+        d.ellipse([x - 3, y - 3, x + 3, y + 3], fill=(220, 40, 40, 255))
+    return img

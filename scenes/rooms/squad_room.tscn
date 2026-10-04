@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room.png" id="bg"]
 [ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_mug.png" id="ov_mug"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_envelope.png" id="ov_board_envelope"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_kenji.png" id="ov_board_kenji"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_receipt.png" id="ov_board_receipt"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_fg_desk.png" id="occ_fg_desk"]
 
 [node name="SquadRoom" type="Node2D"]
@@ -25,6 +28,21 @@ centered = false
 texture = ExtResource("ov_mug")
 centered = false
 position = Vector2(528, 578)
+
+[node name="Board_envelope" type="Sprite2D" parent="."]
+texture = ExtResource("ov_board_envelope")
+centered = false
+position = Vector2(634, 425)
+
+[node name="Board_kenji" type="Sprite2D" parent="."]
+texture = ExtResource("ov_board_kenji")
+centered = false
+position = Vector2(624, 359)
+
+[node name="Board_receipt" type="Sprite2D" parent="."]
+texture = ExtResource("ov_board_receipt")
+centered = false
+position = Vector2(665, 434)
 
 [node name="WalkArea" type="Polygon2D" parent="."]
 color = Color(0.2, 0.9, 0.4, 0.3)

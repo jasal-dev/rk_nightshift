@@ -1,0 +1,316 @@
+{
+ "room": "prius_interior",
+ "hotspots": {
+  "kenji": {
+   "name": "Kenji",
+   "polygon": [
+    [
+     381.1,
+     289.8
+    ],
+    [
+     843.9,
+     286.5
+    ],
+    [
+     859.8,
+     832.6
+    ],
+    [
+     457.2,
+     813.0
+    ]
+   ],
+   "walk_to": null,
+   "face": "none"
+  },
+  "phone_mount": {
+   "name": "phone in the dash mount",
+   "polygon": [
+    [
+     911.1,
+     435.1
+    ],
+    [
+     968.9,
+     435.6
+    ],
+    [
+     968.7,
+     517.3
+    ],
+    [
+     912.2,
+     516.3
+    ]
+   ],
+   "walk_to": null,
+   "face": "none"
+  },
+  "head_unit": {
+   "name": "dashboard screen",
+   "polygon": [
+    [
+     950.0,
+     484.5
+    ],
+    [
+     1060.6,
+     485.9
+    ],
+    [
+     1058.8,
+     552.4
+    ],
+    [
+     950.2,
+     550.3
+    ]
+   ],
+   "walk_to": null,
+   "face": "none"
+  },
+  "dashcam": {
+   "name": "dashcam mount",
+   "polygon": [
+    [
+     958.9,
+     326.0
+    ],
+    [
+     1052.4,
+     325.7
+    ],
+    [
+     1051.1,
+     383.0
+    ],
+    [
+     959.0,
+     382.7
+    ]
+   ],
+   "walk_to": null,
+   "face": "none"
+  },
+  "cups": {
+   "name": "cup holders",
+   "polygon": [
+    [
+     920.9,
+     635.9
+    ],
+    [
+     1067.7,
+     640.1
+    ],
+    [
+     1065.1,
+     724.5
+    ],
+    [
+     921.8,
+     719.2
+    ]
+   ],
+   "walk_to": null,
+   "face": "none"
+  },
+  "door_pocket": {
+   "name": "driver's door pocket",
+   "polygon": [
+    [
+     239.2,
+     717.6
+    ],
+    [
+     395.3,
+     788.9
+    ],
+    [
+     414.7,
+     908.2
+    ],
+    [
+     260.0,
+     819.9
+    ]
+   ],
+   "walk_to": null,
+   "face": "none"
+  },
+  "visor": {
+   "name": "sun visor",
+   "polygon": [
+    [
+     697.9,
+     306.3
+    ],
+    [
+     905.2,
+     305.3
+    ],
+    [
+     906.2,
+     370.7
+    ],
+    [
+     702.2,
+     370.4
+    ]
+   ],
+   "walk_to": null,
+   "face": "none"
+  },
+  "ignition": {
+   "name": "ignition",
+   "polygon": [
+    [
+     907.7,
+     543.2
+    ],
+    [
+     957.7,
+     544.2
+    ],
+    [
+     957.7,
+     584.7
+    ],
+    [
+     908.3,
+     583.6
+    ]
+   ],
+   "walk_to": null,
+   "face": "none"
+  },
+  "glovebox": {
+   "name": "glovebox",
+   "polygon": [
+    [
+     1081.6,
+     633.0
+    ],
+    [
+     1084.0,
+     561.1
+    ],
+    [
+     1282.7,
+     565.2
+    ],
+    [
+     1276.3,
+     638.4
+    ]
+   ],
+   "walk_to": null,
+   "face": "none"
+  },
+  "back_seat": {
+   "name": "back seat",
+   "polygon": [
+    [
+     1240,
+     950
+    ],
+    [
+     1920,
+     950
+    ],
+    [
+     1920,
+     1080
+    ],
+    [
+     1240,
+     1080
+    ]
+   ],
+   "walk_to": null,
+   "face": "none"
+  },
+  "out": {
+   "name": "back outside",
+   "polygon": [
+    [
+     0.0,
+     1080
+    ],
+    [
+     0.0,
+     270.9
+    ],
+    [
+     529.4,
+     313.8
+    ],
+    [
+     581.2,
+     789.5
+    ],
+    [
+     279.5,
+     1080
+    ]
+   ],
+   "walk_to": null,
+   "face": "none"
+  }
+ },
+ "order": [
+  "out",
+  "back_seat",
+  "door_pocket",
+  "kenji",
+  "glovebox",
+  "cups",
+  "head_unit",
+  "ignition",
+  "phone_mount",
+  "dashcam",
+  "visor"
+ ],
+ "walk": [
+  [
+   840,
+   1046
+  ],
+  [
+   1080,
+   1046
+  ],
+  [
+   1080,
+   1076
+  ],
+  [
+   840,
+   1076
+  ]
+ ],
+ "spawns": {
+  "mulholland_overlook": [
+   960,
+   1062
+  ],
+  "start": [
+   960,
+   1062
+  ]
+ },
+ "obstacles": [],
+ "far_y": 1046,
+ "far_scale": 1.0,
+ "near_y": 1076,
+ "near_scale": 1.0,
+ "tint": [
+  0.8,
+  0.76,
+  0.8
+ ],
+ "extra": {},
+ "overlays": {},
+ "occluders": {}
+}

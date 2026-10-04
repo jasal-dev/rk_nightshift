@@ -713,6 +713,18 @@
   "mug": [
    528,
    578
+  ],
+  "board_envelope": [
+   634,
+   425
+  ],
+  "board_kenji": [
+   624,
+   359
+  ],
+  "board_receipt": [
+   665,
+   434
   ]
  },
  "occluders": {

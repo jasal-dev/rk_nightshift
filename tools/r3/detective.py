@@ -41,6 +41,10 @@ def materials(S):
     S.mat('buckle',   (150, 150, 154), spec=0.8, shin=50)
     S.mat('phone',    (20, 22, 26),    spec=0.6, shin=60)
     S.mat('screen',   (40, 60, 90), emis=(120, 170, 230), emis_mult=1.5)
+    # only used by the supporting cast (npc.py), recoloured per character
+    S.mat('cap',      (30, 34, 50),    spec=0.3, shin=30, namp=0.05, nscale=60)
+    S.mat('torch',    (40, 40, 44),    spec=0.8, shin=50)
+    S.mat('torch_lit', (255, 240, 210), emis=(255, 240, 210), emis_mult=6)
 
 
 COAT_LEN = 0.40  # how far the overcoat hangs below the hip joint (m): just above the knee
@@ -50,7 +54,10 @@ DEFAULT = dict(yaw=90, lean=0, cyaw=0, pyaw=0, sway=0, dx=0, breath=0, shrug=0,
                lhp=5, labd=2.5, lk=3, lfp=0, rhp=-4, rabd=2.5, rk=3, rfp=0,
                lsp=-2, lsa=9, le=12, lin=4, lw=0, lroll=0, lhand='relaxed',
                rsp=-2, rsa=9, re=12, rin=4, rw=0, rroll=0, rhand='relaxed',
-               hp=0, hy=0, mouth=0, blink=0, props=(), coatlen=COAT_LEN, coatswing=0)
+               hp=0, hy=0, hr=0, mouth=0, blink=0, props=(), coatlen=COAT_LEN, coatswing=0,
+               stubble=True, hair='short')
+# supporting cast only: stubble=False, hair = 'short' (receding) | 'full' | 'bun' | 'bun_pencil' | 'long' | 'cap',
+# hr = head roll (degrees, + tilts toward the figure's left)
 
 def leg_geo(pel, side, hp, abd, knee, fp):
     hip = pel.to((side * 0.092, -0.035, 0.0))
@@ -178,7 +185,7 @@ def build(p):
 
     # --- neck + head
     pivot = chest.to((0, 0.632 + br, -0.002))
-    hM = chest.M @ Ry(p['hy']) @ Rx(p['hp'])
+    hM = chest.M @ Ry(p['hy']) @ Rx(p['hp']) @ Rz(p['hr'])
     head = Frame(pivot + hM @ A(0, 0.092, 0.014), hM, 1.18)
     S.cone(chest.to((0, 0.56 + br, -0.005)), head.to((0, -0.075, -0.018)), 0.064, 0.058, 'skin', k=0.04)
     build_head(S, head, p)
@@ -222,18 +229,33 @@ def build_head(S, h, p):
                                 ((-s, 0, 0), -ex * s + 0.013), ((0, 0, -1), -0.05)], feather=0.0025)
     S.decal(h, sk, 'lips', [((1, 0, 0), 0.018), ((-1, 0, 0), 0.018), ((0, 1, 0), -0.049), ((0, -1, 0), 0.062), ((0, 0, -1), -0.065)], feather=0.004)
     # stubble on the lower face and jaw
-    S.decal(h, sk, 'stubble', [((0, 1, 0.25), -0.03), ((0, 0, -1), 0.005)], feather=0.012)
-    S.decal(h, sk, 'stubble', [((0, 1, 0), -0.05), ((0, 0, -1), 0.03)], feather=0.012)
+    if p['stubble']:
+        S.decal(h, sk, 'stubble', [((0, 1, 0.25), -0.03), ((0, 0, -1), 0.005)], feather=0.012)
+        S.decal(h, sk, 'stubble', [((0, 1, 0), -0.05), ((0, 0, -1), 0.03)], feather=0.012)
     # short salt-and-pepper hair, a little swept back, grey at the temples
     S.decal(h, sk, 'hair', [((0, -1, 0.7), 0.004), ((0, -1, 0), -0.035)], feather=0.006)
     S.ell(h, (0, 0.05, -0.012), (0.069, 0.06, 0.09), 'hair', k=0.018)               # top mass
     S.ell(h, (0, 0.074, 0.03), (0.054, 0.032, 0.05), 'hair', k=0.022, rot=Rx(-12))  # front lift
     S.ell(h, (0, 0.012, -0.052), (0.066, 0.066, 0.054), 'hair', k=0.02)             # back
+    style = p['hair']
     for s in (1, -1):
         S.ell(h, (s * 0.057, 0.026, -0.014), (0.014, 0.04, 0.062), 'hair', k=0.018)  # sides
-        S.decal(h, 'hair', 'skin', [((-s, 0, 0), -0.05), ((0, 1, 0), 0.058), ((0, 0, -1), -0.052)], feather=0.008)   # receding temples
+        if style == 'short':
+            S.decal(h, 'hair', 'skin', [((-s, 0, 0), -0.05), ((0, 1, 0), 0.058), ((0, 0, -1), -0.052)], feather=0.008)   # receding temples
         S.decal(h, 'hair', 'hairgrey', [((-s, 0, 0), -0.048), ((0, 1, 0), 0.048), ((0, -1, 0), 0.004),
                                         ((0, 0, 1), 0.05), ((0, 0, -1), 0.035)], feather=0.014)        # grey at the temples
+    if style in ('bun', 'bun_pencil'):                                               # pinned up
+        S.sph(h.to((0, 0.06, -0.078)), 0.036 * q, 'hair', k=0.012)
+        if style == 'bun_pencil':
+            S.cone(h.to((-0.06, 0.1, -0.07)), h.to((0.05, 0.05, -0.09)), 0.004 * q, 0.004 * q, 'card')
+    elif style == 'long':                                                            # to the shoulders
+        S.ell(h, (0, -0.03, -0.05), (0.072, 0.11, 0.05), 'hair', k=0.025)
+        for s in (1, -1):
+            S.ell(h, (s * 0.06, -0.03, -0.01), (0.018, 0.09, 0.05), 'hair', k=0.02)
+    elif style == 'cap':                                                             # patrol cap
+        S.ell(h, (0, 0.062, -0.006), (0.075, 0.042, 0.092), 'cap', k=0.01)
+        S.box(h, (0, 0.05, 0.088), (0.06, 0.004, 0.035), 0.003, 'cap', rot=Rx(-12))
+        S.ell(h, (0, -0.02, -0.07), (0.05, 0.05, 0.03), 'hair', k=0.02)            # tucked-up hair
 
 def build_arm(S, chest, side, sh, sp, sa, el, inward, wr, roll, hand, p, key):
     s = side
@@ -275,6 +297,9 @@ def build_arm(S, chest, side, sh, sp, sa, el, inward, wr, roll, hand, p, key):
         S.box(nf, (0, 0.002, 0.004), (0.046, 0.064, 0.006), 0.001, 'paper')
     if ('pen', key) in props:
         S.cone(hf.to((-s * 0.02, -0.07, 0.03)), hf.to((-s * 0.03, -0.15, 0.06)), 0.004, 0.003, 'pen')
+    if ('torch', key) in props:
+        S.cone(hf.to((-s * 0.02, -0.08, -0.06)), hf.to((-s * 0.02, -0.08, 0.12)), 0.016, 0.022, 'torch')
+        S.cyl(hf.to((-s * 0.02, -0.08, 0.12)), hf.to((-s * 0.02, -0.08, 0.125)), 0.02, 'torch_lit')
     if ('badge', key) in props:
         bf = Frame(grip + chest.M @ A(0, 0.02, 0.03), chest.M)
         S.box(bf, (0, 0, 0), (0.04, 0.055, 0.007), 0.004, 'leather')

@@ -61,7 +61,9 @@ def export_meta(S, cam, meta, floor_y=0.1):
     P = lambda p: cam.project(p, OUTW, OUTH)
     hs = {}
     for tag, (name, walk, face) in meta['hotspots'].items():
-        if tag in meta.get('hotspot_shapes', {}):
+        if tag in meta.get('screen_shapes', {}):
+            pts = meta['screen_shapes'][tag]                     # already in pixels
+        elif tag in meta.get('hotspot_shapes', {}):
             pts = [P(p)[:2] for p in meta['hotspot_shapes'][tag]]
         else:
             pts = []
@@ -74,16 +76,22 @@ def export_meta(S, cam, meta, floor_y=0.1):
         if walk is not None:
             x, y, _ = P((walk[0], floor_y, walk[1])); w2 = (round(x), round(y))
         hs[tag] = dict(name=name, polygon=poly, walk_to=w2, face=face)
-    walk = [tuple(round(v, 1) for v in P((x, floor_y, z))[:2]) for x, z in meta['walk']]
-    walk = clip_poly(walk, 6, 0, OUTW - 6, OUTH - 2)
-    spawns = {k: tuple(round(v) for v in P((x, floor_y, z))[:2]) for k, (x, z) in meta['spawns'].items()}
-    # depth scaling: person height in px is linear in screen y on a flat floor
-    samples = []
-    for z in (meta['walk_zmin'], meta['walk_zmax']):
-        x = meta.get('scale_x', 0.0)
-        fx, fy, _ = P((x, floor_y, z)); hx, hy, _ = P((x, floor_y + PERSON_M, z))
-        samples.append((fy, (fy - hy) / SPRITE_PX))
-    (fy0, s0), (fy1, s1) = samples
+    if 'screen' in meta:
+        # a close-up with no floor to walk on (the detective is hidden): walk area, spawns and scale in pixels
+        sc = meta['screen']
+        walk, spawns = sc['walk'], sc['spawns']
+        (fy0, s0), (fy1, s1) = sc['scale']
+    else:
+        walk = [tuple(round(v, 1) for v in P((x, floor_y, z))[:2]) for x, z in meta['walk']]
+        walk = clip_poly(walk, 6, 0, OUTW - 6, OUTH - 2)
+        spawns = {k: tuple(round(v) for v in P((x, floor_y, z))[:2]) for k, (x, z) in meta['spawns'].items()}
+        # depth scaling: person height in px is linear in screen y on a flat floor
+        samples = []
+        for z in (meta['walk_zmin'], meta['walk_zmax']):
+            x = meta.get('scale_x', 0.0)
+            fx, fy, _ = P((x, floor_y, z)); hx, hy, _ = P((x, floor_y + PERSON_M, z))
+            samples.append((fy, (fy - hy) / SPRITE_PX))
+        (fy0, s0), (fy1, s1) = samples
     obstacles = []
     for (x, z, r) in meta.get('obstacles', []):
         ring = [P((x + r * math.cos(a), floor_y, z + r * math.sin(a)))[:2]
@@ -141,9 +149,11 @@ def main():
     print(f'render {time.time() - t:.1f}s, {len(S.prims)} prims')
     img, alpha = composite(surf, vol, ss, exposure=a.exposure or meta.get('exposure', 1.0), grade=meta.get('grade'))
     overlays = {}
+    hidden = set()
     for tag in meta.get('overlays', []):
-        # render again without the prop; the difference becomes a sprite the game can hide
-        S2, _, _, _ = mod.build(hide={tag})
+        # render again without the prop (and the overlays before it); the difference becomes a sprite the game can hide
+        hidden.add(tag)
+        S2, _, _, _ = mod.build(hide=set(hidden))
         s2, _, v2 = S2.render(cam, env, a.room + '_no_' + tag)
         img2, _ = composite(s2, v2, ss, exposure=a.exposure or meta.get('exposure', 1.0), grade=meta.get('grade'))
         overlays[tag] = img
@@ -151,9 +161,14 @@ def main():
         overlays[tag] = (img.copy(), diff)
         img = img2
     occ_masks = {}
+    if meta.get('occluders') and hidden:
+        # occluders are cut from the background without any overlay prop in front of them
+        S2, _, _, _ = mod.build(hide=set(hidden))
+        _, depth, _ = S2.render(cam, dict(env, vol_scale=0, reflections=False), a.room + '_occ_base')
+        depth = np.nan_to_num(depth, nan=1e6, posinf=1e6)
     for tag in meta.get('occluders', {}):
         # render again without the prop; wherever the prop was the nearest surface, it covers the player
-        S2, _, _, _ = mod.build(hide={tag})
+        S2, _, _, _ = mod.build(hide=hidden | {tag})
         _, d2, _ = S2.render(cam, dict(env, vol_scale=0, reflections=False), a.room + '_occ_' + tag)
         d2 = np.nan_to_num(d2, nan=1e6, posinf=1e6)
         hit = (d2 - depth > np.maximum(0.03, 0.01 * depth)).astype(np.float32)
@@ -192,8 +207,9 @@ def main():
             info['occluders'][tag] = dict(pos=[int(x0), int(y0)], base=[round(bx), round(by)])
         with open(os.path.join(HERE, 'out', f'{a.room}.json'), 'w') as f:
             json.dump(info, f, indent=1)
-        import light_probes
-        light_probes.bake(a.room, S, cam, env, meta, info['walk'])
+        if 'screen' not in meta:
+            import light_probes
+            light_probes.bake(a.room, S, cam, env, meta, info['walk'])
     print('done')
 
 

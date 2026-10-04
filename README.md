@@ -2,9 +2,14 @@
 
 A small point-and-click detective adventure built in **pure Godot 4** (no plugins), with pre-rendered 1080p art.
 It's present-day Los Angeles, after midnight and raining.
-This is **Case 1: Dead Piano Player**, about 35 minutes of play: four rooms (the squad room, the street
-outside the Blue Note, Pier 9 and Vance's office), eight items, six notebook clues, five conversations,
-a drive and the deduction at the murder board. It ends on the title card for Case 2.
+It has two cases so far, and ends on the title card for Case 3.
+
+- **Case 1: Dead Piano Player**, about 35 minutes: the squad room, the street outside the Blue Note, Pier 9 and
+  Vance's office, eight items, six notebook clues, a drive and the deduction at the murder board.
+- **Case 2: Five Stars**, about 25 minutes: a rideshare driver dead behind the wheel at the Mulholland overlook.
+  Four new places (the overlook, a close-up inside the car, Norm's on Sunset and Kenji's apartment in Silver Lake),
+  seven items, 23 notebook clues, phone and car screens to read, a choice of where to drive, and a second
+  deduction. The murder board keeps its pins from one case to the next.
 
 ## Running it
 
@@ -23,7 +28,7 @@ that's an exact 2×. The window opens at the largest 16:9 size that fits your sc
 | **F5** / **F9** | Quick save / quick load |
 | **F11** or **Alt+Enter** | Toggle fullscreen (remembered between sessions) |
 
-**Walkthrough (spoilers):**
+**Walkthrough (spoilers), Case 1:**
 
 1. *Squad room.* Look at the desk lamp, then use it to get the key. Use the key on the filing cabinet
    to get the Reyes file, and read it with a right click in the inventory (that fills the notebook).
@@ -41,6 +46,26 @@ that's an exact 2×. The window opens at the largest 16:9 size that fits your sc
 6. *Squad room.* Use the murder board (or the envelope on it): "For something he had", then pin the
    envelope and "Wallet left, phone gone". Use the desk phone to call Doyle.
 
+**Walkthrough (spoilers), Case 2:**
+
+1. *The Mulholland overlook.* Talk to Officer Park and ask everything (the last passenger's video, the man
+   walking down Mulholland). Talk to Dr. Shah: she hands you gloves, and nothing in the car can be touched
+   without them. Ask how and when he died.
+2. *Inside the car* (use the open door). Use the phone in the dash mount: the Trips tab (his last fare ended at
+   11:52) and the Messages tab (Heck's threat). Optional, and easy to miss: Trips, "Earlier this week", "More"
+   twice, then Wednesday's 1:10 a.m. ride from the Blue Note. Ray photographs it for later.
+   Use the dashboard screen: Navigation, Recent destinations (home, Norm's, the overlook). Now the ignition
+   gives you Kenji's keys, which open the glovebox. Take the receipt from the door pocket and the driver
+   card from the sun visor. Go back outside and use your car.
+3. *Norm's on Sunset.* Rosa is too busy: use the coffee pot on the warmer to pour for the counter. Show her
+   Kenji's driver card, ask who paid, then ask for the card slip with the receipt in your pocket (or use the
+   receipt on her). Heck, in the back booth, is optional: his alibi and "the side thing". Booth 6 has a napkin.
+4. *Kenji's apartment.* Ask Devin when he last saw Kenji. Then "You weren't home all night" (or use the card
+   slip on him), and "His car never came back here". Once he says search, use the freezer, then examine the
+   bag of peas in the inventory. The camera bag, the sneakers and the laptop are worth a look along the way.
+5. *Room 214* (the front door, then the car). Use the murder board: Devin Clark, then the card slip (or Rosa's
+   statement) for "He was with Kenji tonight" and the dashcam and memory cards for "What he killed him for".
+
 ## Project layout
 
 ```
@@ -55,7 +80,8 @@ scripts/room.gd           Base class for rooms: walk-area pathfinding, hotspot l
 scripts/hotspot.gd        Clickable area (Area2D + CollisionPolygon2D), with walk_to and face
 scenes/rooms/*.tscn       Room scenes: Background, WalkArea, Actors (+ walk-behind props), Obstacles, Spawns, Hotspots
 scripts/rooms/*.gd        Room logic: one interact() function per room
-tests/playthrough.tscn    Automated playthrough of Case 1 (see "Testing")
+scripts/case2.gd          Case 2's shared pieces: speech colours, the drives, the car menu between locations
+tests/playthrough.tscn    Automated playthrough of Cases 1 and 2 (see "Testing")
 assets/                   Generated room art, character sheets, light probes, item icons, cursors
 tools/                    Python generators for the art (Pillow + numpy)
 ```
@@ -87,26 +113,46 @@ await main.change_room("street", "squad_room")   # the calling room is freed: no
 main.clue("clue_id")                # write a Game.CLUES line in the notebook ("Notebook updated")
 await main.narrate("Voice-over.")     # Ray speaking off-screen (drives, the murder board)
 await main.drive_begin(); await main.text_message("hi", false, "Maya"); await main.drive_end()
-await main.end_case("1:40 a.m.", "Case 2: Five Stars")
-main.ui.show_board("Question?"); main.ui.set_board_pins(["card", "card"]); main.ui.hide_board()
-Game.set_flag("x"); Game.flag("x"); Game.has_item("id")
+await main.case_card("1:40 a.m.", "Case 2: Five Stars")   # title card between cases (click to go on)
+await main.end_case("2:45 a.m.", "Case 3: Walk of Fame", 2) # last card: the game ends here for now
+main.ui.show_board("Question?", "NAME\nCaption"); main.ui.set_board_pins(["card", ""], ["", "slot label"])
+var pick: String = await main.device("Glide Driver", ["Status", "Trips"], 0, "body text", ["row", "row"])
+main.ui.show_device("Title", [], 0, "body", ["row"], false); main.ui.hide_device()   # a screen that only shows
+main.voice("Line.", speaker_at("rosa"), Case2.ROSA_COLOR)   # speaker_at(): just above a hotspot
+await Case2.car_menu(main, room_id)  # Case 2: where to next (Norm's, Kenji's place, Room 214)
+Game.set_flag("x"); Game.flag("x"); Game.has_item("id"); Game.clues(Game.current_case())
 ```
+
+`main.device()` shows a phone or car screen (Kenji's Glide app, the Prius dashboard) with tabs, tappable
+rows and a Close button, and returns `"tab:<i>"`, `"row:<i>"` or `"close"`. The screen stays up while Ray
+talks about what he tapped, so a room script runs it in a loop and calls `ui.hide_device()` when done.
+Notebook clues are tagged with their case (`Game.CLUES[id] = [case, line]`); the notebook shows the current
+case's, and each case's murder board only offers its own cards.
 
 Tiny and Vance are part of their rooms' 3D sets (`tools/r3/npc.py` poses the detective's rig,
 recolours it and bakes it into the background), so they don't animate; they talk with
 `main.voice()` from where they sit. Off-screen voices use colours per character: Sal pink, Nina
-green, Doyle pale blue, Otis warm yellow, Tiny tan, Vance grey-violet.
+green, Doyle pale blue, Otis warm yellow, Tiny tan, Vance grey-violet. Case 2's cast works the same way
+(`npc.CAST` holds their looks: hair styles, no stubble, a patrol cap): Shah teal, Park light orange, Rosa
+coral, Heck mustard, Devin pale lilac, Brielle hot pink. Devin has two poses in the apartment, both overlays
+the room script shows by flag (at the fridge, then on the couch).
+
+`prius_interior` is a close-up: the same 3D set as the overlook with the camera inside the car. Its room
+script sets `show_player = false`, so the detective isn't drawn, and its hotspots have no `walk_to`.
 
 ## Testing
 
-`tests/playthrough.tscn` plays all of Case 1 at 8× speed through the game's own click handling,
-answering every dialogue by text, and checks the flags later cases depend on. From the project folder:
+`tests/playthrough.tscn` plays all of Cases 1 and 2 at 8× speed through the game's own click handling,
+answering every dialogue and device screen by text, and checks the flags later cases depend on. From the
+project folder:
 
 ```
 Godot_v4.7.2-stable_win64_console.exe --headless --path . res://tests/playthrough.tscn
 ```
 
 It prints each action and ends with `PLAYTHROUGH OK` (exit code 0), or says where it got stuck.
+Add `-- --shots` (and leave out `--headless`) to also save screenshots of each room, the drives, the phone,
+the device screens and the boards to `user://`.
 
 ## Regenerating art
 
@@ -129,8 +175,14 @@ python build_scenes.py                # -> scenes/rooms/*.tscn from out/*.json
 cd ..; python gen_art.py              # cursors, raindrop
 ```
 
-- `street.py`, `squad_room.py`, `pier9_dock.py` and `vance_office.py` describe the sets: geometry,
-  materials, lights, camera, and each hotspot's 3D walk-to point. `npc.py` places Tiny and Vance.
+- `street.py`, `squad_room.py`, `pier9_dock.py`, `vance_office.py`, `mulholland_overlook.py`,
+  `prius_interior.py`, `norms_diner.py` and `kenji_apartment.py` describe the sets: geometry, materials,
+  lights, camera, and each hotspot's 3D walk-to point. `npc.py` places the supporting cast.
+- **Overlays** (`overlays=[...]` in `meta`) are props the game shows or hides by flag: the mug, the pins on
+  the murder board, Devin's two poses. `render_room.py` takes them out of the set one at a time and cuts the
+  difference out as a sprite, so the background has none of them.
+- **Close-ups** (a `screen` entry in `meta`) give the walk area, spawns and scale in pixels instead of on
+  the floor, and skip the light probes; `screen_shapes` gives hotspots in pixels too.
 - Text on signs comes from the DejaVu fonts. `textures.py` looks for them in
   `/usr/share/fonts/truetype/dejavu/` and then in matplotlib's copy, so it works on Windows too.
 - **Walk-behind props.** In a set file, wrap the prop in `with S.tag('name'):` behind an

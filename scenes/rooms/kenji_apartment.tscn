@@ -1,0 +1,231 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/rooms/kenji_apartment.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment.png" id="bg"]
+[ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
+[ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_devin_fridge.png" id="ov_devin_fridge"]
+[ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_devin_couch.png" id="ov_devin_couch"]
+[ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_couch.png" id="occ_couch"]
+[ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_table.png" id="occ_table"]
+
+[node name="KenjiApartment" type="Node2D"]
+script = ExtResource("script")
+room_id = "kenji_apartment"
+room_name = "Kenji's apartment"
+far_y = 580.7
+near_y = 925.5
+far_scale = 0.711
+near_scale = 1.377
+reflection_strength = 0.0
+tint = Color(0.86, 0.8, 0.74, 1)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("bg")
+centered = false
+
+[node name="Devin_fridge" type="Sprite2D" parent="."]
+texture = ExtResource("ov_devin_fridge")
+centered = false
+position = Vector2(1378, 350)
+
+[node name="Devin_couch" type="Sprite2D" parent="."]
+texture = ExtResource("ov_devin_couch")
+centered = false
+position = Vector2(680, 408)
+
+[node name="WalkArea" type="Polygon2D" parent="."]
+color = Color(0.2, 0.9, 0.4, 0.3)
+polygon = PackedVector2Array(525.3, 580.7, 1467.2, 580.7, 1506.1, 607.7, 1473.6, 607.7, 1903.6, 925.5, 6, 925.5, 6, 907.4, 305.9, 693.8, 467.5, 627.5)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Couch" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_couch")
+centered = false
+position = Vector2(711, 682)
+offset = Vector2(-179, -156)
+
+[node name="Table" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_table")
+centered = false
+position = Vector2(682, 736)
+offset = Vector2(-117, -123)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle1" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(714.4, 662.6, 696, 675.3, 658.7, 685.1, 612.9, 688.7, 572.6, 685.1, 550.1, 675.3, 550.7, 662.6, 572.7, 650.6, 608.9, 642.2, 650.2, 639.2, 686.9, 642.2, 710.6, 650.6)
+
+[node name="Obstacle2" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(893, 662.6, 879.8, 675.3, 846.5, 685.1, 802.2, 688.7, 760.4, 685.1, 733.9, 675.3, 729.3, 662.6, 746.4, 650.6, 779.1, 642.2, 819.2, 639.2, 857.2, 642.2, 884.2, 650.6)
+
+[node name="Obstacle3" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(766.9, 718.3, 751.3, 731.5, 718.2, 741.6, 676.5, 745.4, 639, 741.6, 616.9, 731.5, 615.8, 718.3, 634.5, 705.7, 666.9, 697, 704.7, 693.8, 739.2, 697, 762, 705.7)
+
+[node name="Obstacle4" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(666.2, 718.3, 652, 728.5, 625, 736.2, 592.4, 739.1, 564, 736.2, 548.1, 728.5, 548.6, 718.3, 564.6, 708.5, 591.1, 701.5, 621.2, 699.1, 647.8, 701.5, 664.3, 708.5)
+
+[node name="Obstacle5" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(834.1, 718.3, 823.4, 728.5, 799, 736.2, 767.5, 739.1, 738.1, 736.2, 719.5, 728.5, 716.5, 718.3, 729.1, 708.5, 753.2, 701.5, 782.5, 699.1, 810, 701.5, 828.9, 708.5)
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="drive" type="Marker2D" parent="Spawns"]
+position = Vector2(477, 590)
+
+[node name="mulholland_overlook" type="Marker2D" parent="Spawns"]
+position = Vector2(477, 590)
+
+[node name="norms_diner" type="Marker2D" parent="Spawns"]
+position = Vector2(477, 590)
+
+[node name="start" type="Marker2D" parent="Spawns"]
+position = Vector2(941, 787)
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="photos" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "photos"
+display_name = "photos on the wall"
+walk_to = Vector2(782, 628)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/photos"]
+polygon = PackedVector2Array(638.6, 290.2, 639.4, 290.1, 736.2, 290.1, 930, 332.8, 930.4, 440, 930.4, 440.6, 758.5, 440.6, 645.1, 422.9)
+
+[node name="front_door" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "front_door"
+display_name = "front door"
+walk_to = Vector2(483, 585)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/front_door"]
+polygon = PackedVector2Array(436.4, 334.7, 439, 334.1, 553.2, 334.1, 568.1, 574.4, 566.2, 576, 455.7, 576)
+
+[node name="devin_door" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "devin_door"
+display_name = "Devin's door"
+walk_to = Vector2(1235, 585)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/devin_door"]
+polygon = PackedVector2Array(1168.9, 574.9, 1176.9, 334.3, 1279.3, 334.3, 1280.9, 334.8, 1269.1, 576.6, 1169.9, 576.6)
+
+[node name="kenji_desk" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "kenji_desk"
+display_name = "Kenji's desk"
+walk_to = Vector2(1033, 585)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/kenji_desk"]
+polygon = PackedVector2Array(955.1, 445.8, 955.3, 437.3, 1055.1, 403.5, 1057.9, 406.3, 1077.1, 437.3, 1081.8, 445.8, 1081.7, 450.6, 1077.2, 518.3, 958.1, 518.3, 955.1, 450.6)
+
+[node name="certificate" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "certificate"
+display_name = "certificate"
+walk_to = Vector2(1033, 585)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/certificate"]
+polygon = PackedVector2Array(974.1, 392.4, 974.2, 359.2, 1021.6, 359.2, 1021.7, 359.5, 1021.4, 392.7, 974.2, 392.7)
+
+[node name="pennant" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "pennant"
+display_name = "Dodgers pennant"
+walk_to = Vector2(1033, 585)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/pennant"]
+polygon = PackedVector2Array(964.7, 350.7, 964.8, 325.8, 1041.1, 325.8, 1040.8, 350.8, 964.8, 350.8)
+
+[node name="dashcam_box" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "dashcam_box"
+display_name = "box on the shelf"
+walk_to = Vector2(1033, 585)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/dashcam_box"]
+polygon = PackedVector2Array(1030.8, 384.8, 1043.5, 366.1, 1062.5, 366.1, 1078, 384.8, 1080, 387.4, 1079.9, 390.3, 1032, 390.3, 1030.8, 387.6)
+
+[node name="camera_bag" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "camera_bag"
+display_name = "camera bag"
+walk_to = Vector2(585, 587)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/camera_bag"]
+polygon = PackedVector2Array(567, 437.5, 589.5, 387, 590.9, 385.5, 596.4, 385.4, 597.9, 386.8, 621, 434, 622.8, 466.9, 617.1, 470.9, 569, 470.9)
+
+[node name="sneakers" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "sneakers"
+display_name = "wet sneakers"
+walk_to = Vector2(535, 593)
+face = "left"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/sneakers"]
+polygon = PackedVector2Array(462.7, 580.1, 474.2, 572, 488.4, 572, 522, 573.4, 523, 581.5, 523.3, 585.7, 512.6, 594.4, 497.6, 594.4, 463.3, 592.9, 463, 588.7)
+
+[node name="fridge" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "fridge"
+display_name = "fridge"
+walk_to = Vector2(1474, 613)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/fridge"]
+polygon = PackedVector2Array(1387.8, 579.4, 1399.6, 405.6, 1488, 405.6, 1519.6, 416.2, 1503.7, 599.8, 1412.7, 599.8)
+
+[node name="freezer" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "freezer"
+display_name = "freezer"
+walk_to = Vector2(1474, 613)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/freezer"]
+polygon = PackedVector2Array(1399.6, 405.6, 1404.5, 333.3, 1493.9, 333.3, 1526.2, 339.7, 1519.6, 416.2, 1425.9, 416.2)
+
+[node name="laptop" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "laptop"
+display_name = "laptop"
+walk_to = Vector2(766, 794)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/laptop"]
+polygon = PackedVector2Array(680.7, 666.9, 682.7, 612, 766.7, 612, 765.3, 666.9)
+
+[node name="devin_couch" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "devin_couch"
+display_name = "Devin"
+walk_to = Vector2(902, 794)
+face = "left"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/devin_couch"]
+polygon = PackedVector2Array(717.1, 477, 811.1, 477, 814.6, 627.8, 722.8, 627.8)
+
+[node name="devin" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "devin"
+display_name = "Devin"
+walk_to = Vector2(1376, 620)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/devin"]
+polygon = PackedVector2Array(1414.9, 609.9, 1431.2, 385, 1529.3, 385, 1509.6, 609.9)

@@ -33,6 +33,8 @@ var board: Control                ## murder board close-up (deduction)
 var drive: Control                ## rain-on-windshield transition
 var phone: PanelContainer         ## text messages
 var phone_log: VBoxContainer
+var device: PanelContainer        ## a phone or car screen (Kenji's Glide app, the Prius head unit, ...)
+var options: Array[String] = []   ## the options on screen (dialogue choices or device buttons), in choice_made order
 var _drive_lights: Array[Sprite2D] = []
 var _drive_drops: Array[Sprite2D] = []
 var _wiper: Line2D
@@ -226,12 +228,14 @@ func toast(text: String, hold := 1.6) -> void:
 
 
 # --- dialogue choices -------------------------------------------------------
-func show_choices(options: Array) -> void:
+func show_choices(opts: Array) -> void:
 	for c in choices_box.get_children():
 		c.queue_free()
-	for i in options.size():
+	options.clear()
+	for i in opts.size():
+		options.append(String(opts[i]))
 		var b := Button.new()
-		b.text = "%d. %s" % [i + 1, options[i]]
+		b.text = "%d. %s" % [i + 1, opts[i]]
 		b.flat = true
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.focus_mode = Control.FOCUS_NONE
@@ -242,13 +246,123 @@ func show_choices(options: Array) -> void:
 		b.pressed.connect(func(): choice_made.emit(i))
 		choices_box.add_child(b)
 	# grow upwards from the bottom of the screen when there are many options
-	choices_box.size = Vector2(1824, 46.0 * options.size())
+	choices_box.size = Vector2(1824, 46.0 * opts.size())
 	choices_box.position = Vector2(48, 1050 - choices_box.size.y)
 	choices_box.visible = true
 
 
 func hide_choices() -> void:
 	choices_box.visible = false
+	options.clear()
+
+
+# --- device screens ---------------------------------------------------------
+## A phone or car screen on the right of the screen: a coloured title bar, optional tabs, a body text,
+## tappable rows and a Close button. Buttons emit choice_made with their index in `options`
+## (tabs first, then rows, then Close). With interactive = false it only shows (a video, a list).
+func show_device(title: String, tabs: Array, active: int, body: String, rows: Array, interactive := true,
+		accent := Color(0.12, 0.58, 0.52)) -> void:
+	hide_device()
+	options.clear()
+	device = PanelContainer.new()
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0.04, 0.05, 0.06, 0.97)
+	sb.border_color = Color(0.22, 0.23, 0.26)
+	sb.set_border_width_all(6)
+	sb.set_corner_radius_all(30)
+	sb.set_content_margin_all(20)
+	device.add_theme_stylebox_override("panel", sb)
+	device.position = Vector2(1236, 96)
+	device.custom_minimum_size = Vector2(600, 0)
+	device.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(device)
+	root.move_child(device, 0)
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 10)
+	device.add_child(vb)
+	var head := PanelContainer.new()
+	var hs := StyleBoxFlat.new()
+	hs.bg_color = accent
+	hs.set_corner_radius_all(12)
+	hs.set_content_margin_all(10)
+	head.add_theme_stylebox_override("panel", hs)
+	var hl := Label.new()
+	hl.text = title
+	hl.add_theme_font_size_override("font_size", 28)
+	hl.add_theme_color_override("font_color", Color.WHITE)
+	head.add_child(hl)
+	vb.add_child(head)
+	if not tabs.is_empty():
+		var tb := HBoxContainer.new()
+		tb.add_theme_constant_override("separation", 6)
+		vb.add_child(tb)
+		for i in tabs.size():
+			var b := _device_button(String(tabs[i]))
+			b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			b.alignment = HORIZONTAL_ALIGNMENT_CENTER
+			if i == active:
+				b.add_theme_color_override("font_color", accent.lightened(0.5))
+				b.add_theme_color_override("font_disabled_color", accent.lightened(0.5))
+			tb.add_child(b)
+	if body != "":
+		var bl := Label.new()
+		bl.text = body
+		bl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		bl.custom_minimum_size = Vector2(556, 0)
+		bl.add_theme_font_size_override("font_size", 24)
+		bl.add_theme_color_override("font_color", Color(0.85, 0.88, 0.9))
+		vb.add_child(bl)
+	for r in rows:
+		var b := _device_button(String(r))
+		var rs := StyleBoxFlat.new()
+		rs.bg_color = Color(1, 1, 1, 0.07)
+		rs.set_corner_radius_all(8)
+		rs.set_content_margin_all(8)
+		for st in ["normal", "hover", "pressed", "disabled"]:
+			b.add_theme_stylebox_override(st, rs)
+		vb.add_child(b)
+	if interactive:
+		var c := _device_button("Close")
+		c.alignment = HORIZONTAL_ALIGNMENT_CENTER
+		vb.add_child(c)
+	else:
+		lock_device()
+
+
+func _device_button(text: String) -> Button:
+	var i := options.size()
+	options.append(text)
+	var b := Button.new()
+	b.text = text
+	b.flat = true
+	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	b.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	b.custom_minimum_size = Vector2(0, 40)
+	b.focus_mode = Control.FOCUS_NONE
+	b.add_theme_font_size_override("font_size", 24)
+	b.add_theme_color_override("font_color", Color(0.78, 0.82, 0.84))
+	b.add_theme_color_override("font_hover_color", Color(1, 0.85, 0.45))
+	b.add_theme_color_override("font_pressed_color", Color(1, 0.85, 0.45))
+	b.add_theme_color_override("font_disabled_color", Color(0.78, 0.82, 0.84))
+	b.mouse_filter = Control.MOUSE_FILTER_STOP
+	b.pressed.connect(func(): choice_made.emit(i))
+	return b
+
+
+func lock_device() -> void:
+	## The screen stays up but stops taking clicks (while Ray reads it out).
+	options.clear()
+	if device == null:
+		return
+	for b in device.find_children("*", "Button", true, false):
+		(b as Button).disabled = true
+		(b as Button).mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+
+func hide_device() -> void:
+	if device:
+		device.queue_free()
+		device = null
 
 
 # --- fades and cards --------------------------------------------------------
@@ -279,9 +393,9 @@ func hide_card() -> void:
 
 
 # --- murder board (deduction) ---------------------------------------------------
-## A close-up of the board: Danny's photo in the middle, the question above it and up to two
+## A close-up of the board: the victim's photo in the middle, the question above it and up to two
 ## evidence cards pinned either side with red string. Choices and speech are drawn on top.
-func show_board(question: String) -> void:
+func show_board(question: String, caption := "DANNY REYES\n34. Piano, Blue Note") -> void:
 	hide_board()
 	board = Control.new()
 	board.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -320,7 +434,7 @@ func show_board(question: String) -> void:
 	head.size = Vector2(100, 120)
 	face.add_child(head)
 	var cap := Label.new()
-	cap.text = "DANNY REYES\n34. Piano, Blue Note"
+	cap.text = caption
 	cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	cap.add_theme_color_override("font_color", Color(0.15, 0.15, 0.25))
 	cap.add_theme_font_size_override("font_size", 24)
@@ -336,8 +450,8 @@ func set_board_question(question: String) -> void:
 		(board.get_node("Question") as Label).text = question
 
 
-func set_board_pins(pins: Array) -> void:
-	## pins: up to two card texts ("" = empty slot, shown as a question mark).
+func set_board_pins(pins: Array, labels: Array = []) -> void:
+	## pins: up to two card texts ("" = empty slot, shown as a question mark, or as its label when given).
 	if board == null:
 		return
 	for c in board.get_children():
@@ -353,13 +467,14 @@ func set_board_pins(pins: Array) -> void:
 		var card := _card_panel(r, Color(0.95, 0.93, 0.84) if filled else Color(0.3, 0.22, 0.15, 0.6),
 				Color(0.4, 0.36, 0.3) if filled else Color(0.7, 0.6, 0.45, 0.6), 2)
 		card.set_meta("slot", i)
+		var label := String(labels[i]) if i < labels.size() else ""
 		var l := Label.new()
-		l.text = String(pins[i]) if filled else "?"
+		l.text = String(pins[i]) if filled else ("?" if label == "" else label)
 		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		l.add_theme_color_override("font_color", Color(0.12, 0.12, 0.2) if filled else Color(0.85, 0.75, 0.55))
-		l.add_theme_font_size_override("font_size", 30 if filled else 64)
+		l.add_theme_font_size_override("font_size", 30 if filled or label != "" else 64)
 		l.position = Vector2(16, 10)
 		l.size = r.size - Vector2(32, 20)
 		card.add_child(l)

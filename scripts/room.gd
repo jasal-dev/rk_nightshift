@@ -28,6 +28,7 @@ extends Node2D
 
 var main: Node            ## set by Main; gives access to say(), choose(), change_room() ...
 var player: Player
+var show_player := true   ## false for close-ups (inside Kenji's car): the detective isn't drawn
 
 var _light := PackedFloat32Array()   ## light probe grid, 16 floats per cell (see light_at)
 var _light_cell := 32.0
@@ -116,6 +117,24 @@ func hotspots() -> Array[Hotspot]:
 			if c is Hotspot:
 				out.append(c)
 	return out
+
+
+func speaker_at(id: String) -> Vector2:
+	## Where a character's lines go: just above the top of their hotspot, in room coordinates.
+	var hs := hotspot(id)
+	if hs == null:
+		return Vector2(960, 300)
+	var top := INF
+	var x0 := INF
+	var x1 := -INF
+	for c in hs.get_children():
+		if c is CollisionPolygon2D:
+			for p in (c as CollisionPolygon2D).polygon:
+				var q: Vector2 = hs.transform * ((c as CollisionPolygon2D).transform * p)
+				top = minf(top, q.y)
+				x0 = minf(x0, q.x)
+				x1 = maxf(x1, q.x)
+	return Vector2((x0 + x1) * 0.5, top) if top < INF else hs.position
 
 
 func hotspot_at(p: Vector2) -> Hotspot:
@@ -221,18 +240,19 @@ func find_path(from: Vector2, to: Vector2) -> PackedVector2Array:
 
 
 # --- effects -----------------------------------------------------------
-func add_rain(amount := 500) -> void:
+func add_rain(amount := 500, slant := -0.1) -> void:
 	## Screen-wide rain in front of everything (outdoor rooms call this from _ready).
+	## slant: sideways drift per unit of fall (wind).
 	var rain := CPUParticles2D.new()
 	rain.name = "Rain"
 	rain.texture = preload("res://assets/rooms/raindrop.png")
 	rain.amount = amount
 	rain.lifetime = 0.9
 	rain.preprocess = 1.0
-	rain.position = Vector2(960, -40)
+	rain.position = Vector2(960 - slant * 500, -40)
 	rain.emission_shape = CPUParticles2D.EMISSION_SHAPE_RECTANGLE
-	rain.emission_rect_extents = Vector2(1140, 12)
-	rain.direction = Vector2(-0.1, 1)
+	rain.emission_rect_extents = Vector2(1140 + absf(slant) * 600, 12)
+	rain.direction = Vector2(slant, 1)
 	rain.spread = 2.0
 	rain.gravity = Vector2.ZERO
 	rain.initial_velocity_min = 1250.0

@@ -1,0 +1,133 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/rooms/norms_diner.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/rooms/norms_diner.png" id="bg"]
+[ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
+
+[node name="NormsDiner" type="Node2D"]
+script = ExtResource("script")
+room_id = "norms_diner"
+room_name = "Norm's on Sunset"
+far_y = 696.2
+near_y = 964.5
+far_scale = 0.792
+near_scale = 1.436
+reflection_strength = 0.08
+tint = Color(0.95, 0.85, 0.75, 1)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("bg")
+centered = false
+
+[node name="WalkArea" type="Polygon2D" parent="."]
+color = Color(0.2, 0.9, 0.4, 0.3)
+polygon = PackedVector2Array(6, 814.9, 248.9, 698.6, 1384.9, 694.4, 1752, 958.7, 6, 970.5)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="drive" type="Marker2D" parent="Spawns"]
+position = Vector2(164, 767)
+
+[node name="mulholland_overlook" type="Marker2D" parent="Spawns"]
+position = Vector2(164, 767)
+
+[node name="kenji_apartment" type="Marker2D" parent="Spawns"]
+position = Vector2(164, 767)
+
+[node name="start" type="Marker2D" parent="Spawns"]
+position = Vector2(541, 803)
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="window" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "window"
+display_name = "window"
+walk_to = Vector2(1588, 863)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/window"]
+polygon = PackedVector2Array(1920, 656.7, 1523.8, 541.5, 1533.8, 312.2, 1920, 274.7)
+
+[node name="door" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "door"
+display_name = "door"
+walk_to = Vector2(147, 767)
+face = "left"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/door"]
+polygon = PackedVector2Array(0, 386.5, 24, 386.1, 74.7, 386.1, 99.6, 754, 0, 799.8)
+
+[node name="jukebox" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "jukebox"
+display_name = "jukebox"
+walk_to = Vector2(285, 705)
+face = "left"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/jukebox"]
+polygon = PackedVector2Array(153.5, 497.6, 198.2, 459, 247.9, 453, 294.8, 491.1, 305.5, 700.4, 273, 717.5, 167.2, 717.9)
+
+[node name="pie_case" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "pie_case"
+display_name = "pie case"
+walk_to = Vector2(463, 696)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/pie_case"]
+polygon = PackedVector2Array(430, 430.6, 452.9, 427.8, 676, 427.7, 676.1, 434, 672.6, 528.8, 666.5, 535.7, 666.1, 536, 434.3, 536.4)
+
+[node name="regulars" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "regulars"
+display_name = "counter regulars"
+walk_to = Vector2(585, 696)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/regulars"]
+polygon = PackedVector2Array(433, 583.6, 435.6, 551.2, 446.3, 512, 461.8, 466, 593, 465.6, 606.8, 465.6, 950, 466, 962.8, 466.7, 976.8, 511.1, 980.7, 533.8, 981, 582.3, 980.8, 593.2, 978.5, 635.5, 977.9, 643.3, 977.7, 643.8, 977.2, 644, 976.7, 644.1, 623.1, 645.2, 517, 645.5, 507, 645.5, 457.8, 643.8, 457.6, 643.6, 436.5, 594.6)
+
+[node name="rosa" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "rosa"
+display_name = "Rosa"
+walk_to = Vector2(828, 695)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/rosa"]
+polygon = PackedVector2Array(802.3, 463.2, 878.1, 463.1, 878.7, 559.3, 803.5, 559.5)
+
+[node name="coffee_pot" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "coffee_pot"
+display_name = "coffee pot on the warmer"
+walk_to = Vector2(1223, 694)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/coffee_pot"]
+polygon = PackedVector2Array(1193.6, 545.4, 1193.7, 541.8, 1203.2, 515.4, 1210.1, 508.7, 1216.6, 515.4, 1226.8, 534.8, 1225.3, 548.5, 1209.2, 554.2, 1198.3, 548.6)
+
+[node name="heck" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "heck"
+display_name = "Heck"
+walk_to = Vector2(1367, 696)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/heck"]
+polygon = PackedVector2Array(1374.2, 586.4, 1376.3, 563.2, 1384.4, 535, 1400.5, 501.7, 1404.3, 494.5, 1422.6, 495.7, 1435.2, 535.4, 1442.7, 562.6, 1446.1, 650.6, 1445.9, 660.4, 1445.6, 660.7, 1399.6, 662, 1389, 661.7, 1384, 656.9, 1383.9, 656.7, 1375.1, 598.7)
+
+[node name="booth6" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "booth6"
+display_name = "booth 6"
+walk_to = Vector2(1471, 774)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/booth6"]
+polygon = PackedVector2Array(1525.2, 659.1, 1597.5, 658.5, 1916.1, 657.4, 1809.3, 658.2)

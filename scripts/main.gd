@@ -90,12 +90,25 @@ func _title() -> void:
 	busy = false
 
 
-func end_case(time: String, next_case: String) -> void:
-	## Title card for the next case. Case 2 isn't built yet, so this ends the game for now.
+func case_card(time: String, title: String) -> void:
+	## Title card between two cases ("1:40 a.m.  Case 2: Five Stars"). Click to go on; F9 loads instead,
+	## which frees the calling room, so nothing after this runs in that case.
+	busy = true
+	await ui.fade_to(1.0, 1.2)
+	ui.show_card([time, "", title, "", "", "Click to continue"],
+			[Color(0.45, 0.75, 1.0), Color.WHITE, Color(0.85, 0.8, 0.7), Color.WHITE, Color.WHITE, Color(0.6, 0.6, 0.6)])
+	await wait_click()
+	ui.hide_card()
+	if _load_requested:
+		await _load()
+
+
+func end_case(time: String, next_case: String, done_case: int) -> void:
+	## Title card for the next case, which isn't built yet, so this ends the game for now.
 	busy = true
 	await ui.fade_to(1.0, 1.2)
 	ui.show_card([time, "", next_case, "", "",
-			"END OF CASE 1 - thanks for playing", "", "Click to play again"],
+			"END OF CASE %d - thanks for playing" % done_case, "", "Click to play again"],
 			[Color(0.45, 0.75, 1.0), Color.WHITE, Color(0.85, 0.8, 0.7), Color.WHITE, Color.WHITE,
 			Color(1, 0.85, 0.45), Color.WHITE, Color(0.6, 0.6, 0.6)])
 	await wait_click()
@@ -122,6 +135,7 @@ func _load() -> void:
 func change_room(id: String, from_room: String) -> void:
 	busy = true
 	Game.select_item("")
+	ui.hide_device()
 	if ui.fade_rect.color.a < 0.99:
 		await ui.fade_to(1.0, 0.35)
 	if player.get_parent():
@@ -138,6 +152,7 @@ func change_room(id: String, from_room: String) -> void:
 	player.stop()
 	player.position = Game.player_position if from_room == "__load" else room.spawn_point(from_room)
 	player.set_room(room)
+	player.visible = room.show_player
 	if from_room != "__load":
 		match from_room:
 			"squad_room": player.face("down")
@@ -213,7 +228,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif key and key.pressed and not key.echo:
 		if _choosing and key.keycode >= KEY_1 and key.keycode <= KEY_9:
 			var idx: int = key.keycode - KEY_1
-			if idx < ui.choices_box.get_child_count():
+			if idx < ui.options.size():
 				ui.choice_made.emit(idx)
 			return
 		if key.keycode == KEY_F11 or (key.keycode == KEY_ENTER and key.alt_pressed):
@@ -296,17 +311,26 @@ func examine_item(id: String) -> void:
 			await say("Sal sees everything. That's his job.")
 			Game.set_flag("read_file")
 		"notebook":
-			var lines := Game.clues()
+			var lines := Game.clues(Game.current_case())
 			if lines.is_empty():
-				await say("My notebook. Empty so far. The night is young.")
+				await say("My notebook. A fresh page. The night is young." if Game.current_case() > 1
+						else "My notebook. Empty so far. The night is young.")
 				return
 			player.face("down")
 			await player.play_action("notebook")
 			for c in lines:
-				await say(Game.CLUES[c])
+				await say(Game.clue_text(c))
 		"envelope":
 			await say("A Blue Note envelope, empty, singed. On the back in Danny's hand: '1 of 3.'")
 			await say("Whoever was paying Danny, they were on an installment plan.")
+		"frozen_peas":
+			if room.has_method("open_peas"):
+				await room.open_peas()
+			else:
+				await say(Game.ITEMS[id]["desc"])
+		"ride_receipt":
+			await say("My photo of Kenji's screen. Wednesday, 1:10 a.m. Blue Note, Hollywood, to Pryce Tower, Century City.")
+			await say("Rider: Walt B. One star. \"Wet, rude, smelled like gun oil.\"")
 		_:
 			await say(Game.ITEMS.get(id, {}).get("desc", "It's a %s." % Game.item_name(id)))
 
@@ -335,6 +359,18 @@ func drive_begin() -> void:
 	await ui.fade_to(1.0, 0.6)
 	ui.show_drive()
 	await ui.fade_to(0.0, 0.6)
+
+
+func drive_wait(seconds: float) -> void:
+	## Let the drive roll for a while. A click (or Space) skips it.
+	_speaking = true
+	_skip = false
+	var t := 0.0
+	while t < seconds and not _skip:
+		await get_tree().process_frame
+		t += get_process_delta_time()
+	_speaking = false
+	_skip = false
 
 
 func drive_end() -> void:
@@ -383,6 +419,22 @@ func _show_text(text: String, anchor: Vector2, color: Color) -> void:
 	_speaking = false
 	_skip = false
 	ui.hide_speech()
+
+
+func device(title: String, tabs: Array, active: int, body: String, rows: Array) -> String:
+	## A phone or car screen (see GameUI.show_device): tabs along the top, a body text, tappable rows and a
+	## Close button. Returns "tab:<i>", "row:<i>" or "close". The screen stays up while Ray talks about
+	## what he tapped; call it again to show the next state, or ui.hide_device() when done.
+	_choosing = true
+	ui.show_device(title, tabs, active, body, rows, true)
+	var idx: int = await ui.choice_made
+	ui.lock_device()
+	_choosing = false
+	if idx < tabs.size():
+		return "tab:%d" % idx
+	if idx < tabs.size() + rows.size():
+		return "row:%d" % (idx - tabs.size())
+	return "close"
 
 
 func choose(options: Array) -> int:

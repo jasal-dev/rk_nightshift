@@ -1,0 +1,150 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/rooms/mulholland_overlook.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/rooms/mulholland_overlook.png" id="bg"]
+[ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
+
+[node name="MulhollandOverlook" type="Node2D"]
+script = ExtResource("script")
+room_id = "mulholland_overlook"
+room_name = "Mulholland overlook"
+far_y = 624.9
+near_y = 951.2
+far_scale = 0.599
+near_scale = 1.206
+reflection_strength = 0.15
+tint = Color(0.76, 0.72, 0.84, 1)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("bg")
+centered = false
+
+[node name="WalkArea" type="Polygon2D" parent="."]
+color = Color(0.2, 0.9, 0.4, 0.3)
+polygon = PackedVector2Array(6, 962.8, 464.8, 628.9, 787.1, 625.5, 819.7, 723.6, 1095, 804.8, 1439.9, 769.1, 1345.7, 652.7, 1433.2, 651.7, 1531.8, 713.8, 1498.8, 825.6, 1625, 932.9, 6, 967.8)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="drive" type="Marker2D" parent="Spawns"]
+position = Vector2(251, 835)
+
+[node name="prius_interior" type="Marker2D" parent="Spawns"]
+position = Vector2(819, 726)
+
+[node name="start" type="Marker2D" parent="Spawns"]
+position = Vector2(643, 804)
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="view" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "view"
+display_name = "the city"
+walk_to = Vector2(0, 0)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/view"]
+polygon = PackedVector2Array(66.4, 0, 1920, 0, 1920, 355.9, 104.3, 358.6)
+
+[node name="wall" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "wall"
+display_name = "low wall"
+walk_to = Vector2(607, 632)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/wall"]
+polygon = PackedVector2Array(0, 522, 1920, 508.9, 1920, 583.7, 0, 601.9)
+
+[node name="sign" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "sign"
+display_name = "sign"
+walk_to = Vector2(490, 633)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/sign"]
+polygon = PackedVector2Array(206.6, 445.5, 209.5, 444.9, 375, 444.2, 380.2, 514.7, 371.7, 606, 367.3, 608.4, 252.4, 609.6, 240.8, 609.7, 213.3, 516.7)
+
+[node name="ground" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "ground"
+display_name = "ground"
+walk_to = Vector2(655, 781)
+face = "down"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/ground"]
+polygon = PackedVector2Array(697.6, 631.7, 715.3, 603.6, 881.3, 602, 899.9, 629.5)
+
+[node name="van" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "van"
+display_name = "coroner's van"
+walk_to = Vector2(1422, 666)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/van"]
+polygon = PackedVector2Array(1423.5, 565.8, 1435.2, 365.7, 1511.3, 356.8, 1595.5, 356.7, 1610.6, 357.6, 1920, 383.9, 1920, 720.8, 1708.7, 739.8, 1677.1, 740.3, 1622, 710.2, 1458.4, 620.8, 1429.4, 604.9)
+
+[node name="car" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "car"
+display_name = "my car"
+walk_to = Vector2(265, 810)
+face = "left"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/car"]
+polygon = PackedVector2Array(0, 552.5, 51.5, 538.8, 272.6, 537.1, 356.1, 569.3, 361.3, 636.8, 345, 688.3, 156.5, 816, 92.1, 859.6, 49.2, 860.4, 0, 858.7)
+
+[node name="park" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "park"
+display_name = "Officer Park"
+walk_to = Vector2(1463, 802)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/park"]
+polygon = PackedVector2Array(1547.3, 688.2, 1548.9, 664.1, 1549.6, 658.4, 1566.7, 585.1, 1586.9, 539.1, 1588.5, 537.9, 1598.4, 531.9, 1624.2, 534.4, 1625.1, 535.7, 1639.6, 589.2, 1643.4, 632.3, 1634.5, 735.4, 1633.7, 743.6, 1614.6, 812.8, 1614.3, 812.9, 1599.1, 810.8, 1557.5, 798, 1557.2, 797.8, 1549.6, 735)
+
+[node name="prius" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "prius"
+display_name = "white Prius"
+walk_to = Vector2(1107, 796)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/prius"]
+polygon = PackedVector2Array(882.5, 549.4, 885.5, 541.2, 936.9, 517.3, 945.2, 516.6, 985.6, 513.4, 1147.3, 500.8, 1257.8, 512.9, 1287.2, 537.8, 1377.9, 628.6, 1373.5, 710.9, 1326.2, 734.1, 1305.7, 738, 1146.1, 768.2, 1122.1, 772.7, 887.9, 675.6, 883.1, 611.8)
+
+[node name="inside" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "inside"
+display_name = "inside the car"
+walk_to = Vector2(820, 724)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/inside"]
+polygon = PackedVector2Array(966.6, 640.3, 966.7, 520.3, 1036.4, 540.3, 1035.1, 671.4)
+
+[node name="shah" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "shah"
+display_name = "Dr. Shah"
+walk_to = Vector2(851, 744)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/shah"]
+polygon = PackedVector2Array(909, 704, 911.8, 644.1, 920.3, 617.3, 982.8, 539.7, 989.5, 541.6, 1009.8, 552.8, 1051.8, 603.9, 1059.8, 614.8, 1059, 624.5, 1004.2, 682.4, 1003.7, 682.9, 969.2, 712.3, 931, 734.8, 930.3, 734.5, 925.1, 731.3, 909.2, 704.6)
+
+[node name="kenji" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "kenji"
+display_name = "Kenji"
+walk_to = Vector2(851, 744)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/kenji"]
+polygon = PackedVector2Array(1046.4, 597.7, 1047.2, 525, 1076.6, 532.8, 1075.5, 608.1)
