@@ -149,9 +149,9 @@ def build(hide=()):
                     S.wboxr(tx_ + sx * 0.25 - 0.025, 0, tz_ + sz * 0.6 - 0.025, tx_ + sx * 0.25 + 0.025, 0.4,
                             tz_ + sz * 0.6 + 0.025, 'wood_dk')
             with S.tag('laptop'):                                                     # open, turned to the room
-                S.wbox((tx_, 0.46, tz_ + 0.3), (0.17, 0.008, 0.12), 'black', rot=Ry(-20))
-                S.wbox((tx_ - 0.04, 0.58, tz_ + 0.18), (0.17, 0.115, 0.006), 'black', rot=Ry(-20) @ Rx(-12))
-                S.wbox((tx_ - 0.04, 0.58, tz_ + 0.187), (0.155, 0.1, 0.002), 'laptop', rot=Ry(-20) @ Rx(-12))
+                S.wbox((tx_ + 0.04, 0.46, tz_ + 0.25), (0.17, 0.008, 0.12), 'black', rot=Ry(80))
+                S.wbox((tx_ - 0.09, 0.58, tz_ + 0.27), (0.17, 0.115, 0.006), 'black', rot=Ry(80) @ Rx(-12))
+                S.wbox((tx_ - 0.083, 0.58, tz_ + 0.269), (0.155, 0.1, 0.002), 'laptop', rot=Ry(80) @ Rx(-12))
             S.cyl((tx_ + 0.1, 0.45, tz_ - 0.35), (tx_ + 0.1, 0.55, tz_ - 0.35), 0.04, 'enamel')
     lx, lz = cx + 0.1, cz - 1.35                                                         # floor lamp at the couch's end
     S.cyl((lx, 0, lz), (lx, 0.02, lz), 0.16, 'black')
@@ -251,7 +251,7 @@ def build(hide=()):
     S.light((2.3, 1.7, -1.3), (255, 226, 196), power=1.3, range=3.0, shadow=False)                 # soft fill on the fridge
     S.light((X1 - 0.2, 1.4, 0.4), (240, 236, 220), power=1.4, range=3.5, shadow=False)
     S.light((X1 + 1.5, 2.2, -0.25), (140, 160, 230), power=6, range=8, vol=0.3, soft=20)          # street light
-    S.light((cx - 1.1, 0.75, cz + 0.6), (200, 210, 255), power=0.6, range=2, shadow=False)        # laptop glow
+    S.light((cx - 0.9, 0.7, cz + 0.25), (200, 210, 255), power=0.6, range=2, shadow=False)        # laptop glow
     S.light((0.0, 1.7, 4.5), (255, 226, 196), power=2.4, range=12, soft=24)                        # spill from the hall
 
     cam = Camera((0.1, 2.95, 7.6), (0.1, 0.65, -2.2), fov=42, W=3840, H=2160)
