@@ -45,6 +45,9 @@ def materials(S):
     S.mat('cap',      (30, 34, 50),    spec=0.3, shin=30, namp=0.05, nscale=60)
     S.mat('torch',    (40, 40, 44),    spec=0.8, shin=50)
     S.mat('torch_lit', (255, 240, 210), emis=(255, 240, 210), emis_mult=6)
+    S.mat('sock',     (60, 56, 58),    spec=0.02, shin=8,  namp=0.08, nscale=60)
+    S.mat('pipe',     (70, 40, 24),    spec=0.5, shin=40)
+    S.mat('umbrella', (22, 22, 26),    spec=0.4, shin=30, namp=0.05, nscale=60)
 
 
 COAT_LEN = 0.40  # how far the overcoat hangs below the hip joint (m): just above the knee
@@ -55,9 +58,12 @@ DEFAULT = dict(yaw=90, lean=0, cyaw=0, pyaw=0, sway=0, dx=0, breath=0, shrug=0,
                lsp=-2, lsa=9, le=12, lin=4, lw=0, lroll=0, lhand='relaxed',
                rsp=-2, rsa=9, re=12, rin=4, rw=0, rroll=0, rhand='relaxed',
                hp=0, hy=0, hr=0, mouth=0, blink=0, props=(), coatlen=COAT_LEN, coatswing=0,
-               stubble=True, hair='short')
-# supporting cast only: stubble=False, hair = 'short' (receding) | 'full' | 'bun' | 'bun_pencil' | 'long' | 'cap',
-# hr = head roll (degrees, + tilts toward the figure's left)
+               stubble=True, hair='short', mustache=False, earring=None, noshoe=None, shoelen=1.0, cop=True)
+# supporting cast only: stubble=False, hair = 'short' (receding) | 'full' | 'bun' | 'bun_pencil' | 'long' | 'cap'
+#   | 'long_side' (down over the left ear and cheek) | 'bald' (a fringe at the back) | 'derby' (bowler hat),
+# hr = head roll (degrees, + tilts toward the figure's left), mustache (a short toothbrush one),
+# earring = 'l' / 'r' (one gold stud), noshoe = 'l' / 'r' (that foot in its sock), shoelen (shoe length scale),
+# cop = False drops the badge and holster from the belt
 
 def leg_geo(pel, side, hp, abd, knee, fp):
     hip = pel.to((side * 0.092, -0.035, 0.0))
@@ -94,18 +100,20 @@ def build(p):
         S.cone(hip, kn, 0.08, 0.06, 'pants', k=0.03)
         S.cone(kn, ank + (ank - kn) * 0.02, 0.058, 0.049, 'pants', k=0.012)
         S.ell(foot, (0, 0.035, -0.005), (0.053, 0.048, 0.05), 'pants', k=0.015)       # trouser break
-        S.ell(foot, (0, -0.03, 0.06), (0.048, 0.044, 0.138), 'shoe', k=0.025,
+        sh, so, sl = ('sock', 'sock', 0.85) if p['noshoe'] == k else ('shoe', 'sole', p['shoelen'])
+        S.ell(foot, (0, -0.03, 0.06 * sl), (0.048, 0.044, 0.138 * sl), sh, k=0.025,
               clip=(foot.M @ A(0, 1, 0), float(foot.M @ A(0, 1, 0) @ foot.to((0, -0.068, 0)))))
-        S.ell(foot, (0, -0.035, -0.04), (0.042, 0.042, 0.05), 'shoe', k=0.05)
-        S.ell(foot, (0, -0.07, 0.055), (0.046, 0.007, 0.138), 'sole')
-        S.ell(foot, (0, -0.066, -0.045), (0.038, 0.012, 0.042), 'sole')
+        S.ell(foot, (0, -0.035, -0.04), (0.042, 0.042, 0.05), sh, k=0.05)
+        S.ell(foot, (0, -0.07, 0.055 * sl), (0.046, 0.007, 0.138 * sl), so)
+        S.ell(foot, (0, -0.066, -0.045), (0.038, 0.012, 0.042), so)
 
     # --- trousers seat + belt
     S.ell(pel, (0, -0.02, -0.004), (0.146, 0.105, 0.1), 'pants', k=0.04)
     S.decal(pel, 'pants', 'belt', [((0, 1, 0), 0.077), ((0, -1, 0), -0.04)])
     S.box(pel, (0, 0.058, 0.103), (0.018, 0.015, 0.004), 0.002, 'buckle')
-    S.box(pel, (0.058, 0.045, 0.1), (0.02, 0.026, 0.005), 0.003, 'gold', rot=Ry(12))          # badge on the belt
-    S.box(pel, (-0.15, 0.0, 0.02), (0.022, 0.07, 0.045), 0.012, 'leather')                   # holster
+    if p['cop']:
+        S.box(pel, (0.058, 0.045, 0.1), (0.02, 0.026, 0.005), 0.003, 'gold', rot=Ry(12))      # badge on the belt
+        S.box(pel, (-0.15, 0.0, 0.02), (0.022, 0.07, 0.045), 0.012, 'leather')               # holster
 
     # --- shirt (inner torso), seen through the open coat
     S.ell(chest, (0, 0.37 + br, 0.0), (0.152, 0.14, 0.112 + br * 0.4), 'shirt', k=0.05)
@@ -232,12 +240,22 @@ def build_head(S, h, p):
     if p['stubble']:
         S.decal(h, sk, 'stubble', [((0, 1, 0.25), -0.03), ((0, 0, -1), 0.005)], feather=0.012)
         S.decal(h, sk, 'stubble', [((0, 1, 0), -0.05), ((0, 0, -1), 0.03)], feather=0.012)
+    if p['mustache']:
+        S.ell(h, (0, -0.036, 0.09), (0.013, 0.0055, 0.006), 'hair', k=0.003)          # toothbrush mustache
+    if p['earring']:
+        es = 1 if p['earring'] == 'l' else -1
+        S.sph(h.to((es * 0.066, -0.032, -0.004)), 0.0075 * q, 'gold')                  # one gold stud
     # short salt-and-pepper hair, a little swept back, grey at the temples
+    style = p['hair']
+    if style == 'bald':                                                              # a fringe round the back
+        S.ell(h, (0, -0.002, -0.06), (0.064, 0.042, 0.04), 'hair', k=0.02)
+        for s in (1, -1):
+            S.ell(h, (s * 0.058, 0.0, -0.026), (0.013, 0.026, 0.04), 'hair', k=0.016)
+        return
     S.decal(h, sk, 'hair', [((0, -1, 0.7), 0.004), ((0, -1, 0), -0.035)], feather=0.006)
     S.ell(h, (0, 0.05, -0.012), (0.069, 0.06, 0.09), 'hair', k=0.018)               # top mass
     S.ell(h, (0, 0.074, 0.03), (0.054, 0.032, 0.05), 'hair', k=0.022, rot=Rx(-12))  # front lift
     S.ell(h, (0, 0.012, -0.052), (0.066, 0.066, 0.054), 'hair', k=0.02)             # back
-    style = p['hair']
     for s in (1, -1):
         S.ell(h, (s * 0.057, 0.026, -0.014), (0.014, 0.04, 0.062), 'hair', k=0.018)  # sides
         if style == 'short':
@@ -248,10 +266,16 @@ def build_head(S, h, p):
         S.sph(h.to((0, 0.06, -0.078)), 0.036 * q, 'hair', k=0.012)
         if style == 'bun_pencil':
             S.cone(h.to((-0.06, 0.1, -0.07)), h.to((0.05, 0.05, -0.09)), 0.004 * q, 0.004 * q, 'card')
-    elif style == 'long':                                                            # to the shoulders
+    elif style in ('long', 'long_side'):                                             # to the shoulders
         S.ell(h, (0, -0.03, -0.05), (0.072, 0.11, 0.05), 'hair', k=0.025)
         for s in (1, -1):
             S.ell(h, (s * 0.06, -0.03, -0.01), (0.018, 0.09, 0.05), 'hair', k=0.02)
+        if style == 'long_side':                                                     # swept down over the left ear
+            S.ell(h, (0.05, -0.02, 0.04), (0.024, 0.1, 0.045), 'hair', k=0.02, rot=Rz(-8))
+            S.ell(h, (0.03, 0.06, 0.06), (0.04, 0.02, 0.035), 'hair', k=0.02, rot=Rz(-20))
+    elif style == 'derby':                                                           # a bowler hat
+        S.ell(h, (0, 0.078, -0.008), (0.07, 0.052, 0.078), 'cap', k=0.006)
+        S.tcyl(h, (0, 0.042, -0.008), (0.098, 0.106), (0.098, 0.106), 0.004, 'cap')
     elif style == 'cap':                                                             # patrol cap
         S.ell(h, (0, 0.062, -0.006), (0.075, 0.042, 0.092), 'cap', k=0.01)
         S.box(h, (0, 0.05, 0.088), (0.06, 0.004, 0.035), 0.003, 'cap', rot=Rx(-12))
@@ -300,6 +324,13 @@ def build_arm(S, chest, side, sh, sp, sa, el, inward, wr, roll, hand, p, key):
     if ('torch', key) in props:
         S.cone(hf.to((-s * 0.02, -0.08, -0.06)), hf.to((-s * 0.02, -0.08, 0.12)), 0.016, 0.022, 'torch')
         S.cyl(hf.to((-s * 0.02, -0.08, 0.12)), hf.to((-s * 0.02, -0.08, 0.125)), 0.02, 'torch_lit')
+    if ('pipe', key) in props:                                                       # a briar pipe
+        S.cyl(hf.to((-s * 0.02, -0.1, 0.03)), hf.to((-s * 0.02, -0.1, 0.13)), 0.006, 'pipe')
+        S.cone(hf.to((-s * 0.02, -0.1, 0.13)), hf.to((-s * 0.02, -0.05, 0.14)), 0.016, 0.019, 'pipe')
+    if ('umbrella', key) in props:                                                   # shaft up past the head, canopy
+        top = grip + chest.M @ A(0, 0.78, 0.02)
+        S.cyl(grip - chest.M @ A(0, 0.08, 0), top, 0.008, 'umbrella')
+        S.tcyl(Frame(top - chest.M @ A(0, 0.1, 0), chest.M), (0, 0, 0), (0.03, 0.03), (0.5, 0.5), 0.09, 'umbrella')
     if ('badge', key) in props:
         bf = Frame(grip + chest.M @ A(0, 0.02, 0.03), chest.M)
         S.box(bf, (0, 0, 0), (0.04, 0.055, 0.007), 0.004, 'leather')

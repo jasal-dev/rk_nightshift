@@ -34,15 +34,16 @@ def _translate(S, t):
     S.decals = [(f, to, [(n, o + float(np.asarray(n) @ t)) for n, o in pl], fe) for f, to, pl, fe in S.decals]
 
 
-def place(S, name, pose, pos, yaw=0.0, scale=1.0, colors=None, tag=None):
+def place(S, name, pose, pos, yaw=0.0, scale=1.0, colors=None, tag=None, rot=None):
     """Build the rig in `pose`, recolour materials (name -> rgb), turn it to `yaw` (0 = facing the camera's +z),
-    scale it and add it to scene S standing (or sitting) at floor point `pos`."""
+    scale it and add it to scene S standing (or sitting) at floor point `pos`. `rot` (a 3x3 matrix, applied before
+    the yaw) tips the whole figure over, for someone lying on the floor."""
     R = detective.build(pose)
     for m, rgb in (colors or {}).items():
         vals = R.mats[R.mat_index[m]]
         R.mat(m, rgb, spec=vals[3], shin=vals[4], namp=vals[5], nscale=vals[6], bump=vals[7], bscale=vals[8],
               wrap=vals[9], aniso=vals[10])
-    R.transform(Ry(yaw))
+    R.transform(Ry(yaw) if rot is None else Ry(yaw) @ rot)
     _scale(R, scale)
     _translate(R, pos)
     remap = {}
@@ -111,10 +112,33 @@ CAST = {
     'guard': (dict(hair='cap', coatlen=0.06),
               dict(coat=(40, 40, 46), coat_dk=(30, 30, 34), shirt=(150, 150, 160), pants=(36, 36, 40), cap=(36, 36, 40),
                    skin=(120, 84, 64), skin_dk=(100, 70, 54))),
+    # Case 3. Pearl Danvers: auburn hair down over her left ear, one gold star in the right, a grey patrol blanket
+    # round her shoulders over a red blouse
+    'pearl': (dict(stubble=False, hair='long_side', coatlen=0.3, earring='r', cop=False),
+              dict(coat=(78, 80, 88), coat_dk=(62, 64, 70), lining=(70, 72, 80), shirt=(150, 40, 52), pants=(30, 30, 36),
+                   hair=(128, 52, 30), hairgrey=(128, 52, 30), brow=(96, 44, 30), skin=(214, 168, 142),
+                   skin_dk=(186, 140, 118), lips=(176, 60, 66), shoe=(28, 22, 22))),
+    # Morty Kahn: bald with a white fringe, maroon bathrobe over blue pyjamas, brown loafers, no socks
+    'morty': (dict(hair='bald', coatlen=0.56, cop=False),
+              dict(coat=(104, 34, 42), coat_dk=(80, 26, 32), lining=(120, 44, 52), shirt=(140, 152, 184),
+                   pants=(128, 140, 172), hair=(206, 202, 196), hairgrey=(206, 202, 196), brow=(190, 186, 180),
+                   stubble=(176, 160, 150), skin=(198, 150, 124), skin_dk=(170, 124, 102), shoe=(96, 54, 30))),
+    # Desmond "Charlie" Pike: Chaplin's derby, mustache, tight black jacket, baggy grey trousers, big shoes
+    'charlie': (dict(stubble=False, hair='derby', mustache=True, coatlen=0.1, shoelen=1.35, cop=False),
+                dict(coat=(26, 24, 28), coat_dk=(18, 16, 20), lining=(40, 36, 40), shirt=(214, 210, 200),
+                     pants=(64, 64, 70), hair=(26, 22, 22), hairgrey=(26, 22, 22), brow=(24, 20, 20), cap=(16, 16, 18),
+                     skin=(214, 180, 160), skin_dk=(186, 150, 132), shoe=(18, 16, 16))),
+    # Gus Lindqvist: bald, white fringe, a fawn cardigan, brown slacks, one slipper
+    'gus': (dict(hair='bald', coatlen=0.04, noshoe='r', blink=1.0, cop=False),
+            dict(coat=(150, 124, 86), coat_dk=(124, 100, 70), lining=(130, 108, 76), shirt=(200, 196, 182),
+                 pants=(84, 68, 54), hair=(224, 222, 216), hairgrey=(224, 222, 216), brow=(210, 206, 200),
+                 stubble=(196, 186, 180), skin=(206, 160, 140), skin_dk=(178, 132, 116), shoe=(110, 40, 40),
+                 sock=(140, 136, 130))),
 }
 
 
-def cast(S, who, pose, pos, yaw=0.0, scale=1.0, tag=None):
-    """Place a member of the Case 2 cast: their look from CAST, merged with `pose`."""
+def cast(S, who, pose, pos, yaw=0.0, scale=1.0, tag=None, rot=None):
+    """Place a member of the supporting cast: their look from CAST, merged with `pose`."""
     look, colors = CAST[who]
-    place(S, who + (('_' + tag) if tag else ''), {**look, **pose}, pos, yaw=yaw, scale=scale, colors=colors, tag=tag)
+    place(S, who + (('_' + tag) if tag else ''), {**look, **pose}, pos, yaw=yaw, scale=scale, colors=colors, tag=tag,
+          rot=rot)

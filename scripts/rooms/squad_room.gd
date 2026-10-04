@@ -5,6 +5,8 @@ extends Room
 ## Scene 7 (back from Pier 9 with the envelope): the deduction at the murder board, the call to
 ##          Doyle, then Otis rings with Case 2, and Ray drives up to Mulholland.
 ## Case 2, scene 5 (back with Devin in custody): the deduction for Kenji, Doyle's call, then Otis with Case 3.
+## Case 3, scene 6 (back from Stardust with Pearl arrested): the deduction for Gus, Brenner's card pinned if Ray found it,
+## Doyle's call, then Otis with Case 4.
 ## The board keeps its pins between cases (overlays shown by flag).
 
 const DOYLE_COLOR := Color(0.7, 0.85, 1.0)
@@ -29,6 +31,8 @@ const EVIDENCE := [
 @onready var pin_envelope: Sprite2D = $Board_envelope
 @onready var pin_kenji: Sprite2D = $Board_kenji
 @onready var pin_receipt: Sprite2D = $Board_receipt
+@onready var pin_gus: Sprite2D = $Board_gus
+@onready var pin_brenner: Sprite2D = $Board_brenner
 
 
 func _ready() -> void:
@@ -44,6 +48,8 @@ func _sync() -> void:
 	pin_envelope.visible = Game.flag("board_envelope")
 	pin_kenji.visible = Game.flag("case2_deduced")
 	pin_receipt.visible = Game.flag("board_ride_receipt")
+	pin_gus.visible = Game.flag("case3_deduced")
+	pin_brenner.visible = Game.flag("board_brenner_card")
 
 
 func _back_from_pier() -> bool:
@@ -56,6 +62,11 @@ func _case2() -> bool:
 	return Game.flag("devin_arrested") and not Game.flag("case2_done")
 
 
+func _case3() -> bool:
+	## Case 3, scene 6: back from Hollywood Boulevard with Pearl Danvers arrested.
+	return Game.flag("pearl_arrested") and not Game.flag("case3_done")
+
+
 func on_enter(_from_room: String) -> void:
 	if _back_from_pier() and not Game.flag("back_in_214"):
 		Game.set_flag("back_in_214")
@@ -63,6 +74,9 @@ func on_enter(_from_room: String) -> void:
 	elif _case2() and not Game.flag("back_in_214_case2"):
 		Game.set_flag("back_in_214_case2")
 		await main.say("Room 214. Danny's still in the middle of the board. Kenji gets a corner.")
+	elif _case3() and not Game.flag("back_in_214_case3"):
+		Game.set_flag("back_in_214_case3")
+		await main.say("Room 214. Danny in the middle, Kenji in one corner. Gus gets the other.")
 
 
 func intro() -> void:
@@ -77,9 +91,12 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 	match hs.id:
 		"door":
 			if verb == "look":
-				await main.say("HOMICIDE. Room 214." if _back_from_pier() or _case2() else "HOMICIDE. Room 214. Home sweet home.")
+				await main.say("HOMICIDE. Room 214." if _back_from_pier() or _case2() or _case3()
+						else "HOMICIDE. Room 214. Home sweet home.")
 			elif item != "":
 				await main.say("The door's not locked. My problems are.")
+			elif _case3():
+				await main.say("Not yet. Gus is waiting on the board.")
 			elif _case2():
 				await main.say("Not yet. Kenji's waiting on the board.")
 			elif _back_from_pier():
@@ -97,7 +114,9 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.say("It's raining out. I'll be wet either way.")
 
 		"case_board":
-			if _case2():
+			if _case3():
+				await _board3(verb, item)
+			elif _case2():
 				await _board2(verb, item)
 			elif Game.flag("case1_deduced"):
 				if verb == "look":
@@ -142,11 +161,11 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 		"phone":
 			if verb == "look":
 				await main.say("The desk phone. It only rings when someone's dead.")
-				if not Game.flag("heard_voicemail") and not _back_from_pier() and not _case2():
+				if not Game.flag("heard_voicemail") and not _back_from_pier() and not _case2() and not _case3():
 					await main.say("The message light is blinking.")
 			elif item != "":
 				await default_response(verb, item)
-			elif _case2():
+			elif _case2() or _case3():
 				await main.say("Nothing to tell anybody yet.")
 			elif _back_from_pier():
 				if Game.flag("case1_deduced"):
@@ -212,7 +231,9 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.say("Painted shut. The blinds are the only thing in here that opens.")
 
 		"clock":
-			if _case2():
+			if _case3():
+				await main.say("Quarter to four. The hour when even the coffee gives up.")
+			elif _case2():
 				await main.say("Two-forty. Two cases down, if you count one that won't close.")
 			elif _back_from_pier():
 				await main.say("One twenty-five. The city's second shift is half over and I've got one envelope to show for it.")
@@ -551,4 +572,193 @@ func _calls2() -> void:
 	await main.say("Everybody in this town wants one.")
 	await main.voice("Not like this, they don't.", PHONE_AT, OTIS_COLOR)
 	Game.set_flag("case2_done")
-	await main.end_case("2:45 a.m.", "Case 3: Walk of Fame", 2)
+	await main.case_card("2:45 a.m.", "Case 3: Walk of Fame")
+	await Case3.drive_in(main)
+	await main.change_room("stardust_shop", "drive")
+
+
+func _board3(verb: String, item: String) -> void:
+	if verb == "look":
+		await main.say("Danny in the middle, Kenji and Gus in the corners. Three faces, one night.")
+	elif Game.flag("case3_deduced"):
+		await main.say("Gus is closed. Danny isn't.")
+	elif item == "brenner_card":
+		await main.say("After Gus.")
+	elif item == "" or item == "star_earring" or item == "fake_oscar":
+		await _deduction3(item)
+	else:
+		await main.say("Pinning that up won't solve anything.")
+
+
+# --- Case 3, scene 6: the deduction for Gus -------------------------------------------------
+## Case 3 evidence cards: [id, card text, slot it proves ("A" she was selling him out, "B" she was at the top of his
+## stairs, "" neither), Ray's line when it's pinned wrongly]. Only Case 3 cards, plus Brenner's card for a line.
+const EVIDENCE3 := [
+	["clue_practice_sigs", "Legal pad: \"Lyle Brandt\" forty times", "A", "That's what she was doing. I need where she was."],
+	["clue_gold_pen", "Headshots in the same gold pen", "A", "That's what she was doing. I need where she was."],
+	["clue_morty_bought", "Morty paid \"Stardust Archive\"; Pearl runs the email", "A",
+			"That's what she was doing. I need where she was."],
+	["star_earring", "Gold star earring, top of the stairs", "B", "That's where she was. First, why."],
+	["catalogue", "Calloway's catalogue, No. 734 sold", "", "That proves Lyle was sold. Who sold him?"],
+	["clue_uv_fakes", "Three fake signatures under UV", "", "Fakes on the wall. Whose hand?"],
+	["clue_phone_log", "Gus called Pearl at 12:52", "", "That's when he called her. I need why."],
+	["fake_oscar", "The floating prop Oscar", "", "That's what she did after. I need the top of the stairs."],
+	["clue_pushed", "Two small hands on his chest", "", "That's how he went down. Whose hands?"],
+	["clue_footprints", "Small heel prints to the tank", "", "Small heels. Half of Hollywood wears small heels."],
+	["clue_bare_ear", "Pearl's torn earlobe", "", "A torn ear. Torn where?"],
+	["clue_fiat", "Charlie: the yellow Fiat", "", "That's Charlie's eyes and ears. I want something Pearl left behind."],
+	["clue_shouting", "Charlie: the shouting", "", "That's Charlie's eyes and ears. I want something Pearl left behind."],
+	["clue_glass_out", "Glass outside", "", "That proves the robbery was a show. I need who killed him."],
+	["clue_key_opened", "Key-opened case", "", "That proves the robbery was a show. I need who killed him."],
+	["clue_staged", "Staged robbery", "", "That proves the robbery was a show. I need who killed him."],
+	["clue_register", "Cash in the register", "", "That proves the robbery was a show. I need who killed him."],
+	["clue_headshots_left", "Headshots still in the locker", "", "That's a lie about her pictures. I'm pinning the truth about Gus."],
+	["clue_pearl_story", "Pearl's story", "", "That's her story. It's had three drafts."],
+	["clue_eviction", "Eviction notice", "", "That's Pryce's business. This one was personal."],
+	["clue_whitaker_alibi", "Whitaker's alibi", "", "That's Pryce's business. This one was personal."],
+	["clue_morty_offer", "Morty's offer", "", "That's Morty. Morty didn't do it."],
+	["clue_morty_alibi", "Morty's alibi", "", "That's Morty. Morty didn't do it."],
+	["clue_tod_gus", "Time of death", "", "That's when, and why he was up there. The board wants who."],
+	["clue_cigar", "Gus's cigar", "", "That's when, and why he was up there. The board wants who."],
+	["brenner_card", "Walter Brenner's card", "", "That's a man who wanted Gus out. Gus went out another way."],
+]
+const SLOT_LABELS3 := ["She was selling him out", "She was at the top of his stairs"]
+
+
+func _deduction3(first: String) -> void:
+	main.ui.show_board("Seventy-one years, fourteen stairs, and two small hands. Whose?", "GUS LINDQVIST\n71. Stardust")
+	await main.narrate("Seventy-one years, fourteen stairs, and two small hands. Whose?")
+	# step 1: the culprit (wrong picks get a line; pick again)
+	while true:
+		var c: int = await main.choose(["Morty Kahn, the rival collector.", "Trent Whitaker, Pryce Development.",
+				"A burglar off the boulevard.", "Pearl Danvers, his assistant.", "(Step back from the board)"])
+		match c:
+			0:
+				if Game.flag("clue_morty_bought"):
+					await main.narrate("Morty had the real Lyle in his safe. You don't kill a man over the copy.")
+				elif Game.flag("clue_morty_alibi"):
+					await main.narrate("Morty spent the night losing to a dentist in Osaka.")
+				else:
+					await main.narrate("Morty wanted it. Wanting isn't pushing. And I never asked where he was.")
+			1:
+				if Game.flag("clue_whitaker_alibi"):
+					await main.narrate("Whitaker was in a Century City elevator in his tie. And a letter with twenty-three days to run doesn't need a push.")
+				else:
+					await main.narrate("Pryce sent a letter. A letter isn't a pair of hands. I never checked where Whitaker was.")
+			2:
+				await main.narrate("A burglar who breaks out, uses a key, leaves the cash and hides the loot on the roof? That's not a burglar. That's a stage manager.")
+			3:
+				await main.narrate("Pearlie.")
+				break
+			_:
+				main.ui.hide_board()
+				return
+	# step 2: two labeled slots. A right card stays pinned; a wrong one gets Ray's line and comes down.
+	main.ui.set_board_question("Pearl Danvers. Pin up what proves it.")
+	var pins: Array[String] = ["", ""]
+	var pre := _card3(first)
+	if first != "" and pre[2] != "":
+		pins[0 if pre[2] == "A" else 1] = first
+	var wrong_tries := 0
+	while true:
+		main.ui.set_board_pins(_pin_texts3(pins), SLOT_LABELS3)
+		for slot in 2:
+			if pins[slot] != "":
+				continue
+			main.ui.set_board_question(SLOT_LABELS3[slot] + ":")
+			var ids := _available_evidence3(pins)
+			var opts: Array = []
+			for id in ids:
+				opts.append(_card3(id)[1])
+			opts.append("(Step back from the board)")
+			var c: int = await main.choose(opts)
+			if c == ids.size():
+				main.ui.hide_board()
+				return
+			pins[slot] = ids[c]
+			main.ui.set_board_pins(_pin_texts3(pins), SLOT_LABELS3)
+		var right := 0
+		for slot in 2:
+			var card := _card3(pins[slot])
+			if card[2] == ("A" if slot == 0 else "B"):
+				right += 1
+			else:
+				await main.narrate(card[3])
+				pins[slot] = ""
+		if right == 2:
+			break
+		wrong_tries += 1
+		if wrong_tries == 3:
+			await main.narrate("Think, Ray. What was she doing behind his back, and what did she leave at the top of his stairs?")
+	# solved: a Polaroid of the dripping prop, the earring in its bag, the catalogue page; a line through the case
+	main.ui.set_board_question("LINDQVIST, G.  -  CLOSED")
+	await main.wait(0.6)
+	await main.narrate("Pearl Danvers. She sold him the fake, then she sold him the fall.")
+	Game.set_flag("case3_deduced")
+	main.ui.hide_board()
+	_sync()
+	if Game.flag("got_brenner_card"):
+		# no line, no music: the card goes up at the edge of Danny's corner, by the envelope (and the ride receipt)
+		await main.player.play_action("use")
+		Game.set_flag("board_brenner_card")
+		_sync()
+		await main.wait(1.4)
+	await _calls3()
+
+
+func _card3(id: String) -> Array:
+	for e: Array in EVIDENCE3:
+		if e[0] == id:
+			return e
+	return [id, id, "", ""]
+
+
+func _available_evidence3(exclude: Array[String]) -> Array[String]:
+	var out: Array[String] = []
+	for e: Array in EVIDENCE3:
+		var id: String = e[0]
+		if exclude.has(id):
+			continue
+		if Game.has_item(id) or (id.begins_with("clue_") and Game.flag(id)):
+			out.append(id)
+	return out
+
+
+func _pin_texts3(pins: Array[String]) -> Array:
+	var out := []
+	for id in pins:
+		out.append("" if id == "" else _card3(id)[1])
+	return out
+
+
+# --- Case 3, scene 6: Doyle calls, then Otis with Case 4 -------------------------------------
+func _calls3() -> void:
+	# No branches: Case 5 throws "I see the captain at eight" back at Doyle.
+	await main.wait(0.6)
+	await main.voice("*RIIING*", PHONE_AT, Color.WHITE)
+	await main.walk(hotspot("phone").walk_to)
+	main.player.face("up")
+	await main.player.play_action("use")
+	await main.voice("Ray. Otis says your Oscar turned up in a water tank.", PHONE_AT, DOYLE_COLOR)
+	await main.say("It was a fake. The killer wasn't.")
+	await main.voice("The assistant? Hollywood. Everybody's auditioning. Anything on Reyes?", PHONE_AT, DOYLE_COLOR)
+	await main.say("Danny's still on the board.")
+	await main.voice("I see the captain at eight. I'd like to hand him one thing that's finished.", PHONE_AT, DOYLE_COLOR)
+	await main.say("Hand him three. He likes numbers.")
+	await main.voice("Go home at six, Ray. That's an order dressed up as advice. *click*", PHONE_AT, DOYLE_COLOR)
+	await main.say("Six. Sure. This whole town's full of optimists.")
+	await main.wait(0.8)
+	await main.say("Ten to four.")
+	await main.voice("*RIIING*", PHONE_AT, Color.WHITE)
+	await main.player.play_action("use")
+	await main.voice("Ray. You want the good news or the river?", PHONE_AT, OTIS_COLOR)
+	await main.say("There's good news?")
+	await main.voice("No. LA River, Elysian Valley, under the Fletcher Drive bridge. Delivery rider, twenty-four, Owen Tate. Down in the channel.", PHONE_AT, OTIS_COLOR)
+	await main.say("The river's dry this time of year.")
+	await main.voice("That's how they saw him. Uniforms already cuffed a fella from the camp by the bridge. They call him Preacher. The kid's bike was at his tent.", PHONE_AT, OTIS_COLOR)
+	await main.say("Then it's closed. Why call me?")
+	await main.voice("Because the uniforms are happy. When uniforms are happy at four in the morning, somebody ought to check.", PHONE_AT, OTIS_COLOR)
+	await main.say("On my way.")
+	await main.voice("And Ray? Preacher's Army. He says he'll only talk to somebody who's been somewhere.", PHONE_AT, OTIS_COLOR)
+	Game.set_flag("case3_done")
+	await main.end_case("3:50 a.m.", "Case 4: Low Water", 3)

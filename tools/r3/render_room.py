@@ -97,8 +97,10 @@ def export_meta(S, cam, meta, floor_y=0.1):
         ring = [P((x + r * math.cos(a), floor_y, z + r * math.sin(a)))[:2]
                 for a in np.linspace(0, 2 * math.pi, 12, endpoint=False)]
         obstacles.append([(round(px, 1), round(py, 1)) for px, py in ring])
+    # overlays that stand on the floor (people) are y-sorted with the detective: their floor point, projected
+    bases = {k: [round(v) for v in P((x, floor_y, z))[:2]] for k, (x, z) in meta.get('overlay_bases', {}).items()}
     return dict(room=meta['room'], hotspots=hs, order=meta['hotspot_order'], walk=walk, spawns=spawns,
-                obstacles=obstacles,
+                obstacles=obstacles, overlay_bases=bases,
                 far_y=round(fy0, 1), far_scale=round(s0, 3), near_y=round(fy1, 1), near_scale=round(s1, 3),
                 tint=meta.get('tint', (1, 1, 1)), extra=meta.get('extra', {}))
 

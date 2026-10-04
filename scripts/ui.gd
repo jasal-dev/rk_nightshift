@@ -34,6 +34,7 @@ var drive: Control                ## rain-on-windshield transition
 var phone: PanelContainer         ## text messages
 var phone_log: VBoxContainer
 var device: PanelContainer        ## a phone or car screen (Kenji's Glide app, the Prius head unit, ...)
+var paper: Control                ## a document or picture held up close (a letter, a card, the UV lamp's view)
 var options: Array[String] = []   ## the options on screen (dialogue choices or device buttons), in choice_made order
 var _drive_lights: Array[Sprite2D] = []
 var _drive_drops: Array[Sprite2D] = []
@@ -363,6 +364,70 @@ func hide_device() -> void:
 	if device:
 		device.queue_free()
 		device = null
+
+
+# --- paper and picture close-ups ----------------------------------------------
+## A document Ray holds up to read (the "paper" skin of the device screen): cream stock, dark type, and an optional
+## note in a second hand (Gus's red ink, a ballpoint scrawl) under the type.
+func show_paper(title: String, body: String, note := "", note_color := Color(0.62, 0.08, 0.08)) -> void:
+	hide_paper()
+	var panel := PanelContainer.new()
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0.93, 0.9, 0.82)
+	sb.border_color = Color(0.62, 0.56, 0.44)
+	sb.set_border_width_all(2)
+	sb.set_content_margin_all(30)
+	sb.shadow_color = Color(0, 0, 0, 0.55)
+	sb.shadow_size = 14
+	sb.shadow_offset = Vector2(6, 8)
+	panel.add_theme_stylebox_override("panel", sb)
+	panel.position = Vector2(1160, 90)
+	panel.custom_minimum_size = Vector2(680, 0)
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	panel.rotation = deg_to_rad(-1.2)
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 14)
+	panel.add_child(vb)
+	for part in [[title, 30, Color(0.12, 0.12, 0.2)], [body, 24, Color(0.22, 0.2, 0.2)], [note, 27, note_color]]:
+		if String(part[0]) == "":
+			continue
+		var l := Label.new()
+		l.text = part[0]
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		l.custom_minimum_size = Vector2(620, 0)
+		l.add_theme_font_size_override("font_size", part[1])
+		l.add_theme_color_override("font_color", part[2])
+		vb.add_child(l)
+	paper = panel
+	root.add_child(paper)
+	root.move_child(paper, 0)
+
+
+## A picture filling most of the screen (the photo wall under the UV lamp), dimming the room behind it.
+func show_closeup(tex: Texture2D) -> void:
+	hide_paper()
+	var c := Control.new()
+	c.set_anchors_preset(Control.PRESET_FULL_RECT)
+	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var dim := ColorRect.new()
+	dim.color = Color(0, 0, 0, 0.75)
+	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	c.add_child(dim)
+	var pic := TextureRect.new()
+	pic.texture = tex
+	pic.position = (SCREEN - tex.get_size()) * 0.5 - Vector2(0, 50)
+	pic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	c.add_child(pic)
+	paper = c
+	root.add_child(paper)
+	root.move_child(paper, 0)
+
+
+func hide_paper() -> void:
+	if paper:
+		paper.queue_free()
+		paper = null
 
 
 # --- fades and cards --------------------------------------------------------

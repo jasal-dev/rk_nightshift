@@ -136,6 +136,7 @@ func change_room(id: String, from_room: String) -> void:
 	busy = true
 	Game.select_item("")
 	ui.hide_device()
+	ui.hide_paper()
 	if ui.fade_rect.color.a < 0.99:
 		await ui.fade_to(1.0, 0.35)
 	if player.get_parent():

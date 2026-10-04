@@ -699,6 +699,7 @@
   ]
  },
  "obstacles": [],
+ "overlay_bases": {},
  "far_y": 587.5,
  "far_scale": 0.647,
  "near_y": 914.3,
@@ -715,7 +716,7 @@
    578
   ],
   "board_envelope": [
-   634,
+   630,
    425
   ],
   "board_kenji": [
@@ -725,6 +726,14 @@
   "board_receipt": [
    665,
    434
+  ],
+  "board_gus": [
+   680,
+   420
+  ],
+  "board_brenner": [
+   630,
+   402
   ]
  },
  "occluders": {

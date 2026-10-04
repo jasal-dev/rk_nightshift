@@ -40,6 +40,14 @@ def scene():
     S.mat('peas', (110, 170, 70), spec=0.5, shin=40, namp=0.15, nscale=40)
     S.mat('tape', (220, 210, 170), spec=0.4)
     S.mat('screen_on', (20, 120, 110), emis=(40, 210, 180), emis_mult=1.2)
+    # Case 3
+    S.mat('gold', (226, 176, 64), spec=1.8, shin=80, namp=0.05, nscale=60)
+    S.mat('gold_dk', (150, 110, 40), spec=1.2, shin=60)
+    S.mat('uv', (150, 80, 255), emis=(150, 70, 255), emis_mult=1.6)
+    S.mat('masking', (222, 206, 156))
+    S.mat('catalogue', (20, 20, 24), tex=tx.catalogue_cover(), texmode=1, spec=1.0, shin=60)
+    S.mat('brenner', (236, 228, 206), tex=tx.brenner_card(), texmode=1, spec=0.2)
+    S.mat('water', (120, 160, 200), spec=1.6, shin=90)
     return S
 
 
@@ -140,6 +148,52 @@ def build(item):
         for k in range(4):
             S.wbox((-0.02, 0.12 - k * 0.09, 0.03), (0.11, 0.015, 0.002), 'ink')
         rot = Rz(-12) @ Rx(-18)
+    elif item == 'gus_keys':
+        for k in range(16):                                                                  # the ring
+            a0, a1 = k / 16 * 2 * math.pi, (k + 1) / 16 * 2 * math.pi
+            S.cyl((0.12 * math.cos(a0) - 0.12, 0.12 * math.sin(a0) + 0.18, 0),
+                  (0.12 * math.cos(a1) - 0.12, 0.12 * math.sin(a1) + 0.18, 0), 0.013, 'steel')
+        for ang, m, ln in ((-60, 'brass', 0.32), (-95, 'steel', 0.36), (-130, 'brass', 0.2)):
+            a = math.radians(ang)
+            c = (-0.12 + 0.12 * math.cos(a), 0.18 + 0.12 * math.sin(a))
+            R = Rz(ang + 90)
+            fr = Frame((c[0], c[1], 0), R)
+            S.fcyl(fr.to((0, -0.05, 0)), 0.05, 0.012, m, axis='z')
+            S.box(fr, (0, -0.05 - ln / 2, 0), (0.022, ln / 2, 0.012), 0.004, m)
+            S.box(fr, (0.025, -0.05 - ln * 0.8, 0), (0.012, 0.03, 0.012), 0.003, m)
+        rot = Rx(-20)
+    elif item == 'uv_lamp':
+        S.wbox((0, 0, 0), (0.12, 0.38, 0.06), 'plastic', rnd=0.04)                           # handheld body
+        S.wbox((0, 0.12, 0.062), (0.07, 0.2, 0.004), 'uv')                                    # the violet tube
+        S.wbox((0, -0.22, 0.065), (0.13, 0.05, 0.004), 'masking', rot=Rz(4))                  # Gus's tape note
+        for k in range(3):
+            S.wbox((-0.05 + k * 0.05, -0.22, 0.07), (0.018, 0.012, 0.002), 'ink_dk')
+        rot = Rz(-28) @ Rx(-20)
+    elif item == 'catalogue':
+        S.wbox((0, 0, 0), (0.28, 0.37, 0.03), 'catalogue', rnd=0.01)
+        S.wbox((0.0, 0.0, -0.005), (0.27, 0.36, 0.026), 'paper')
+        S.wbox((0.25, 0.3, 0.032), (0.04, 0.06, 0.002), 'paper', rot=Rz(45))                  # a corner turned down
+        rot = Rz(8) @ Rx(-20)
+    elif item == 'star_earring':
+        for k in range(5):
+            t = math.radians(k * 72)
+            S.cone((0, 0, 0), (0.3 * math.sin(t), 0.3 * math.cos(t), 0), 0.1, 0.02, 'gold')
+        S.sph((0, 0, 0.02), 0.09, 'gold')
+        S.cyl((0.0, -0.05, -0.04), (0.16, -0.32, -0.08), 0.018, 'gold_dk')                    # the post, bent back
+        rot = Rz(10) @ Rx(-15)
+    elif item == 'fake_oscar':
+        S.fcyl((0, -0.34, 0), 0.13, 0.06, 'gold_dk')                                          # the base
+        S.fcyl((0, -0.25, 0), 0.08, 0.03, 'gold')
+        S.cone((0, -0.22, 0), (0, 0.14, 0), 0.04, 0.065, 'gold', k=0.02)                    # a slim gold figure
+        S.ell(WORLD, (0, 0.17, 0), (0.07, 0.06, 0.05), 'gold', k=0.02)
+        S.sph((0, 0.27, 0), 0.045, 'gold', k=0.01)
+        S.cone((0.0, 0.1, 0.03), (0.0, -0.08, 0.05), 0.02, 0.015, 'gold')                    # arms folded on a sword
+        S.sph((0.08, -0.05, 0.08), 0.025, 'water')                                            # still dripping
+        S.sph((-0.06, -0.3, 0.12), 0.02, 'water')
+        rot = Ry(-20) @ Rx(-8)
+    elif item == 'brenner_card':
+        S.wbox((0, 0, 0), (0.37, 0.22, 0.008), 'brenner', rnd=0.005)
+        rot = Rz(-6) @ Rx(-22)
     S.transform(rot)
     S.light((-1.2, 1.6, 2.0), (255, 236, 210), power=7, range=10, soft=8)
     S.light((1.4, 0.6, -1.0), (140, 180, 255), power=4, range=10, shadow=False)
@@ -150,7 +204,8 @@ def build(item):
 def main():
     for item in (sys.argv[1:] or ('key', 'case_file', 'coffee', 'dime', 'matchbook', 'gaff', 'envelope', 'notebook',
                                   'driver_card', 'norms_receipt', 'kenji_keys', 'card_slip', 'frozen_peas', 'sd_cards',
-                                  'ride_receipt')):
+                                  'ride_receipt', 'gus_keys', 'uv_lamp', 'catalogue', 'star_earring', 'fake_oscar',
+                                  'brenner_card')):
         S = build(item)
         cam = Camera((0, 0, 5), (0, 0, 0), W=SIZE * SS, H=SIZE * SS, ortho=True, ortho_h=0.95)
         env = dict(sky=(60, 60, 70), bounce=(30, 26, 26), fog=0, reflections=False, vol_scale=0, grid=0.12, ao_scale=0.3)

@@ -25,6 +25,13 @@ const ITEMS := {
 	"frozen_peas": {"name": "bag of frozen peas", "desc": "A bag of frozen peas, taped shut. Nobody tapes peas."},
 	"sd_cards": {"name": "dashcam and memory cards", "desc": "A two-lens dashcam and eleven memory cards, January to November, labeled in Kenji's hand."},
 	"ride_receipt": {"name": "photo of Kenji's screen", "desc": ""},
+	# Case 3
+	"gus_keys": {"name": "Gus's keys", "desc": "Gus's key ring. A door key, a desk key, and a little brass one, like the key Pearl wears."},
+	"uv_lamp": {"name": "UV lamp", "desc": ""},
+	"catalogue": {"name": "Calloway's catalogue", "desc": ""},
+	"star_earring": {"name": "gold star earring", "desc": "A little gold star, five points, the post bent back. Torn out of somebody's ear."},
+	"fake_oscar": {"name": "the \"Oscar\"", "desc": ""},
+	"brenner_card": {"name": "Walter Brenner's card", "desc": ""},
 }
 
 ## Notebook clues: facts Ray writes down, as [case, line]. Each is a flag of the same name (set with
@@ -60,6 +67,34 @@ const CLUES := {
 	"clue_strap": [2, "Devin's camera bag: inch-wide herringbone strap."],
 	"clue_sneakers": [2, "Devin's wet sneakers: orange grit from the overlook lot."],
 	"clue_peas_note": [2, "Kenji's fridge note: Devin's peas, untouched since July."],
+	# Case 3
+	"clue_pearl_story": [3, "Pearl: closed at 9, came back at 2:15 for her headshots, found Gus. Door smashed, Oscar gone."],
+	"clue_keyholders": [3, "Two keys to the Oscar case: Gus's and Pearl's."],
+	"clue_pushed": [3, "Two fresh bruises on Gus's breastbone, the heels of two small hands. He was pushed backward."],
+	"clue_tod_gus": [3, "Gus died between 1:15 and 1:45."],
+	"clue_glass_out": [3, "The door glass is out on the sidewalk. Broken from the inside."],
+	"clue_key_opened": [3, "The Oscar case was opened with a key. Not a scratch on the lock."],
+	"clue_staged": [3, "Nobody broke in. Somebody with a key broke out."],
+	"clue_register": [3, "$212 in the register. A burglar who leaves the cash."],
+	"clue_eviction": [3, "Pryce Development, final notice to vacate. Delivered a week ago."],
+	"clue_whitaker_alibi": [3, "Whitaker, Pryce's agent, was on the Pryce Tower garage cameras from 11 p.m. to 3 a.m."],
+	"clue_same_serial": [3, "Calloway's sold Oscar No. 734 privately three weeks ago. Gus's certificate says No. 734."],
+	"clue_phone_log": [3, "Gus called Calloway's at 12:40, then Pearl at 12:52. Three minutes."],
+	"clue_headshots_left": [3, "Pearl \"came back for her headshots\". They're still in her locker."],
+	"clue_practice_sigs": [3, "A legal pad in Pearl's locker: \"Lyle Brandt\", forty times, getting better."],
+	"clue_uv_fakes": [3, "Under UV, three \"vintage\" signatures glow. Modern gold paint pen."],
+	"clue_gold_pen": [3, "Pearl's headshots are signed in the same gold pen. Same glow."],
+	"clue_morty_offer": [3, "Morty offered Gus $250,000 for the Oscar in March. Gus said he'd be buried with it."],
+	"clue_morty_alibi": [3, "Morty was bidding in a Tokyo online auction from 12:30 to 2:10."],
+	"clue_morty_bought": [3, "Morty bought the real Oscar three weeks ago, $180,000, from \"Stardust Archive\". Pearl runs the shop's email."],
+	"clue_weight": [3, "A real Oscar weighs eight and a half pounds. A prop is hollow resin."],
+	"clue_cigar": [3, "Gus's cigar, half smoked, by the roof door. He came up here to wait."],
+	"clue_footprints": [3, "Small heel prints in the wet gravel: stair door to the water tank and back. Not to the edge."],
+	"clue_replica": [3, "The \"Oscar\" in the tank floats. Hollow. A prop with No. 734 freshly engraved."],
+	"clue_bare_ear": [3, "Pearl's left earring is missing. The lobe is torn and red."],
+	"clue_fiat": [3, "Charlie: Pearl's yellow Fiat was in the alley around one."],
+	"clue_shouting": [3, "Charlie: around 1:30, Gus shouting \"How long?\" on the roof. Then nothing."],
+	"clue_block_empty": [3, "Charlie: Brenner said the block would be empty by Christmas, \"the jazz club too\"."],
 }
 
 var flags: Dictionary = {}
@@ -88,7 +123,9 @@ func flag(key: String) -> bool:
 
 
 func current_case() -> int:
-	## The case Ray is working: Case 2 starts once Otis's call ends Case 1.
+	## The case Ray is working: each one starts when Otis's call ends the one before.
+	if flag("case2_done"):
+		return 3
 	return 2 if flag("case1_done") else 1
 
 

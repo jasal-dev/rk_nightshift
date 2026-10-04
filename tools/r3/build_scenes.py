@@ -22,6 +22,14 @@ ROOMS = {
                         reflection=0.08),
     'kenji_apartment': dict(node='KenjiApartment', script='res://scripts/rooms/kenji_apartment.gd',
                             name="Kenji's apartment"),
+    'stardust_shop': dict(node='StardustShop', script='res://scripts/rooms/stardust_shop.gd',
+                          name='Stardust Memorabilia', reflection=0.06),
+    'stardust_office': dict(node='StardustOffice', script='res://scripts/rooms/stardust_office.gd',
+                            name="Stardust's back office"),
+    'stardust_roof': dict(node='StardustRoof', script='res://scripts/rooms/stardust_roof.gd',
+                          name='Stardust roof', reflection=0.18),
+    'stardust_roof_dark': dict(node='StardustRoofDark', script='res://scripts/rooms/stardust_roof_dark.gd',
+                               name='Stardust roof', reflection=0.1),
 }
 
 
@@ -67,7 +75,10 @@ def build(room):
           f'far_y = {d["far_y"]}', f'near_y = {d["near_y"]}', f'far_scale = {d["far_scale"]}',
           f'near_scale = {d["near_scale"]}', f'reflection_strength = {cfg.get("reflection", 0.0)}', f'tint = Color({tint[0]}, {tint[1]}, {tint[2]}, 1)', '',
           '[node name="Background" type="Sprite2D" parent="."]', 'texture = ExtResource("bg")', 'centered = false', '']
+    bases = d.get('overlay_bases', {})
     for tag, (x, y) in d.get('overlays', {}).items():
+        if tag in bases:
+            continue                      # people standing on the floor go under Actors, below
         nm = tag.capitalize()
         L += [f'[node name="{nm}" type="Sprite2D" parent="."]', f'texture = ExtResource("ov_{tag}")', 'centered = false',
               f'position = Vector2({x}, {y})', '']
@@ -77,6 +88,11 @@ def build(room):
     L += ['[node name="WalkArea" type="Polygon2D" parent="."]', 'color = Color(0.2, 0.9, 0.4, 0.3)',
           f'polygon = {pv(d["walk"])}', '',
           '[node name="Actors" type="Node2D" parent="."]', 'y_sort_enabled = true', '']
+    # people as overlays (shown by flag): y-sorted with the detective like the props below
+    for tag, (bx, by) in bases.items():
+        x0, y0 = d['overlays'][tag]
+        L += [f'[node name="{tag.capitalize()}" type="Sprite2D" parent="Actors"]', f'texture = ExtResource("ov_{tag}")',
+              'centered = false', f'position = Vector2({bx}, {by})', f'offset = Vector2({x0 - bx}, {y0 - by})', '']
     # walk-behind props: position = floor baseline (the y-sort key), offset places the cut-out image
     for tag, o in d.get('occluders', {}).items():
         (x0, y0), (bx, by) = o['pos'], o['base']

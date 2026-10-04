@@ -746,6 +746,31 @@ def board_pins(kind, w=96, h=128):
         d.text((24, 66), '1 of 3', font=font('DejaVuSans-Bold.ttf', 14), fill=(30, 40, 120, 255))
         d.ellipse([w - 30, 26, w - 2, 46], fill=(60, 40, 28, 255))
         pins = ((w // 2, 34),)
+    elif kind == 'gus':
+        d.rectangle([6, 6, 50, 62], fill=(246, 246, 240, 255))                     # Polaroid of the dripping prop
+        d.rectangle([10, 10, 46, 48], fill=(30, 34, 44, 255))
+        d.rectangle([25, 18, 31, 42], fill=(220, 176, 70, 255))
+        d.ellipse([23, 13, 33, 21], fill=(220, 176, 70, 255))
+        d.rectangle([21, 42, 35, 46], fill=(150, 110, 40, 255))
+        d.rectangle([56, 10, 90, 54], fill=(210, 220, 226, 200))                  # the earring in its evidence bag
+        d.rectangle([56, 10, 90, 16], fill=(200, 40, 40, 255))
+        cx, cy = 73, 36
+        star = [(cx + (9 if i % 2 == 0 else 4) * math.sin(i * math.pi / 5), cy - (9 if i % 2 == 0 else 4) * math.cos(i * math.pi / 5))
+                for i in range(10)]
+        d.polygon(star, fill=(226, 180, 70, 255))
+        d.rectangle([14, 68, 84, 122], fill=(240, 238, 230, 255))                 # the catalogue page, Gus's red ink
+        d.rectangle([20, 74, 46, 100], fill=(60, 50, 40, 255))
+        for i in range(3):
+            d.rectangle([50, 76 + i * 8, 80, 79 + i * 8], fill=(90, 90, 100, 255))
+        d.text((20, 104), '734??', font=font('DejaVuSans-Bold.ttf', 12), fill=(190, 20, 20, 255))
+        d.line([0, 8, w, h - 6], fill=(30, 30, 30, 255), width=3)                 # a line through the case
+        pins = ((28, 8), (73, 12), (49, 70))
+    elif kind == 'brenner':
+        d.rectangle([8, 40, w - 8, 92], fill=(236, 228, 206, 255))                 # Walter Brenner's card
+        d.text((14, 46), 'WALTER BRENNER', font=font('DejaVuSerif-Bold.ttf', 10), fill=(30, 50, 120, 255))
+        d.text((14, 62), 'LAPD (Ret.)', font=font('DejaVuSerif.ttf', 9), fill=(30, 50, 120, 255))
+        d.text((14, 74), 'Pryce Development', font=font('DejaVuSerif.ttf', 8), fill=(30, 50, 120, 255))
+        pins = ((w // 2, 44),)
     else:
         d.rectangle([14, 10, w - 14, h - 10], fill=(244, 244, 240, 255))
         d.rectangle([20, 16, w - 20, 34], fill=(30, 150, 134, 255))
@@ -756,4 +781,330 @@ def board_pins(kind, w=96, h=128):
         pins = ((w // 2, 14),)
     for x, y in pins:
         d.ellipse([x - 3, y - 3, x + 3, y + 3], fill=(220, 40, 40, 255))
+    return img
+
+
+# ---------------------------------------------------------------- Case 3: Stardust Memorabilia, Hollywood Boulevard
+def checker_floor(seed=91, w=256, h=256, tile=64):
+    """Old shop floor: black and cream linoleum squares, worn and scuffed."""
+    a = np.zeros((h, w, 3))
+    rng = np.random.default_rng(seed)
+    for ty in range(h // tile):
+        for tx_ in range(w // tile):
+            base = np.array([214, 204, 180]) if (tx_ + ty) % 2 == 0 else np.array([34, 32, 34])
+            a[ty * tile:(ty + 1) * tile, tx_ * tile:(tx_ + 1) * tile] = base * rng.uniform(0.9, 1.05)
+    n = noise(w, h, 12, seed)
+    a *= (0.82 + 0.3 * n[..., None]); a[::tile, :] *= 0.75; a[:, ::tile] *= 0.75
+    return to_img(a)
+
+
+def walk_star(seed=92, w=256, h=256):
+    """A Walk of Fame square on the sidewalk: charcoal terrazzo around a coral-pink star with a brass rim and a little
+    brass emblem. One star per tile; the sidewalk repeats it."""
+    n = noise(w, h, 3, seed, 2); g = np.random.default_rng(seed).random((h, w))
+    a = np.array([52, 50, 54], float)[None, None, :] * (0.8 + 0.3 * n[..., None]) * (0.9 + 0.2 * g[..., None])
+    m = int(w * 0.14)
+    a[m:h - m, m:w - m] = (np.array([150, 66, 68]) * (0.85 + 0.25 * n[m:h - m, m:w - m, None])
+                           * (0.92 + 0.15 * g[m:h - m, m:w - m, None]))
+    img = to_img(a); d = ImageDraw.Draw(img)
+    cx, cy, R, r = w / 2, h / 2 - 8, w * 0.27, w * 0.11
+    pts = [(cx + (R if i % 2 == 0 else r) * math.sin(i * math.pi / 5),
+            cy - (R if i % 2 == 0 else r) * math.cos(i * math.pi / 5)) for i in range(10)]
+    d.polygon(pts, fill=(196, 104, 104, 255))
+    d.line(pts + [pts[0]], fill=(206, 168, 90, 255), width=4)
+    d.ellipse([cx - 16, cy - 10, cx + 16, cy + 16], fill=(200, 160, 84, 255))
+    for k in range(2):
+        d.rectangle([cx - 46, h - m - 40 + k * 14, cx + 46, h - m - 34 + k * 14], fill=(196, 160, 86, 255))
+    d.line([0, 1, w, 1], fill=(26, 24, 26, 255), width=3)
+    d.line([1, 0, 1, h], fill=(26, 24, 26, 255), width=3)
+    return img
+
+
+# the wall of fame, 4 x 3; the named ones are the three fakes that glow under UV
+SIGNED = [('Bogart', (40, 40, 44)), ('Lyle Brandt', (46, 40, 36)), ('Monroe', (60, 56, 56)), ('', (34, 36, 40)),
+          ('', (50, 46, 42)), ('', (38, 38, 46)), ('', (48, 44, 44)), ('', (40, 44, 40)),
+          ('', (44, 40, 40)), ('', (36, 34, 38)), ('', (52, 48, 46)), ('', (40, 40, 40))]
+
+
+def _portrait(d, x0, y0, x1, y1, seed, bg, hat=False):
+    """A black-and-white studio portrait: a soft-lit head and shoulders on a dark ground (drawn into its own small
+    image, softened, and pasted, so it reads as a photograph rather than a drawing)."""
+    rng = random.Random(seed)
+    w, h = int(x1 - x0), int(y1 - y0)
+    im = Image.new('RGBA', (w, h), bg + (255,)); g = ImageDraw.Draw(im)
+    g.ellipse([w * 0.1, -h * 0.1, w * 0.9, h * 0.7], fill=tuple(min(255, c + 26) for c in bg) + (255,))   # backlight
+    cx = w / 2 + rng.uniform(-w * 0.08, w * 0.08)
+    tone = rng.randint(160, 210)
+    sy = h * 0.7
+    suit = (int(tone * 0.5),) * 3 + (255,)
+    g.chord([cx - w * 0.46, sy, cx + w * 0.46, sy + 2 * (h - sy)], 180, 360, fill=suit)                # suit
+    g.polygon([(cx - w * 0.08, sy), (cx + w * 0.08, sy), (cx, h)], fill=(tone - 20,) * 3 + (255,))        # collar
+    g.rectangle([cx - w * 0.1, h * 0.55, cx + w * 0.1, sy + 4], fill=(tone - 40,) * 3 + (255,))            # neck
+    hw, ht = w * rng.uniform(0.17, 0.21), h * 0.2
+    g.ellipse([cx - hw, ht, cx + hw, h * 0.62], fill=(tone,) * 3 + (255,))                                 # face
+    g.chord([cx - hw, ht, cx + hw, h * 0.62], 300, 60, fill=(tone - 30,) * 3 + (255,))                       # shadow side
+    hair = rng.choice([(24, 24, 24), (214, 210, 196), (64, 60, 56)])
+    g.chord([cx - hw * 1.1, ht - h * 0.05, cx + hw * 1.1, h * 0.46], 180, 360, fill=hair + (255,))
+    if hat:                                                                       # a fedora
+        g.rectangle([cx - hw * 1.0, ht - h * 0.12, cx + hw * 1.0, ht + h * 0.04], fill=(30, 30, 30, 255))
+        g.ellipse([cx - hw * 1.7, ht + h * 0.0, cx + hw * 1.7, ht + h * 0.09], fill=(24, 24, 24, 255))
+    im = im.filter(ImageFilter.GaussianBlur(max(0.8, w / 90)))
+    d._image.paste(im, (int(x0), int(y0)))
+
+
+def _signature(d, x0, y0, x1, y1, seed, color, width=2):
+    """A slanted autograph across the bottom of a photo: two words of uneven cursive loops (a tall capital, then
+    smaller letters), and a flourish underneath."""
+    rng = random.Random(seed)
+    H = y1 - y0
+    words = [rng.randint(3, 5), rng.randint(4, 7)]
+    total = sum(words) + 1.5
+    unit = (x1 - x0) / total
+    x, pts_all = x0, []
+    for wi, letters in enumerate(words):
+        pts = []
+        for li in range(letters):
+            lw = unit * rng.uniform(0.7, 1.2)
+            tall = H * (1.1 if li == 0 else rng.uniform(0.35, 0.7))
+            for j in range(10):
+                t = j / 9
+                f = t * 2 * math.pi
+                px = x + lw * t - lw * 0.35 * math.sin(f)
+                py = y1 - H * 0.2 - tall * (0.5 - 0.5 * math.cos(f)) - (px - x0) * 0.12
+                pts.append((px + (y1 - py) * 0.25, py))
+            x += lw
+        pts_all.append(pts)
+        x += unit * 1.2
+    for pts in pts_all:
+        d.line(pts, fill=color, width=width, joint='curve')
+    d.line([(x0 + (x1 - x0) * 0.1, y1 + H * 0.05), (x1, y1 - H * 0.25)], fill=color, width=max(1, width - 1))
+
+
+def _frames(w, h):
+    cols, rows = 4, 3
+    fw, fh, k = w / cols, h / rows, w / 512
+    for i in range(cols * rows):
+        c, r = i % cols, i // cols
+        x0, y0 = c * fw + (10 + (r % 2) * 4) * k, r * fh + 8 * k
+        yield i, x0, y0, x0 + fw - 24 * k, y0 + fh - 18 * k
+
+
+def signed_wall(w=512, h=320, uv=False):
+    """Gus's wall of fame: twelve signed studio portraits in cheap gold frames, 4 x 3, on a transparent ground.
+    With uv=True, the same wall under the UV lamp: violet and dark, and the three fakes (Bogart, Lyle Brandt, Monroe)
+    glowing gold, the modern paint pen lighting up like a premiere."""
+    img = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
+    for i, x0, y0, x1, y1 in _frames(w, h):
+        k = w / 512
+        d.rectangle([x0, y0, x1, y1], fill=(176, 140, 60, 255))                    # gold frame
+        d.rectangle([x0 + 3 * k, y0 + 3 * k, x1 - 3 * k, y1 - 3 * k], fill=(120, 92, 40, 255))
+        _portrait(d, x0 + 7 * k, y0 + 7 * k, x1 - 7 * k, y1 - 7 * k, 100 + i, SIGNED[i][1], hat=SIGNED[i][0] == 'Bogart')
+        _signature(d, x0 + 14 * k, y1 - 30 * k, x1 - 14 * k, y1 - 12 * k, 300 + i, (236, 232, 220, 255), int(2 * k))
+    if not uv:
+        return img
+    a = np.asarray(img).astype(float)
+    lum = a[..., :3].mean(-1, keepdims=True)
+    a[..., :3] = lum * np.array([0.32, 0.18, 0.62]) + np.array([8, 0, 24])
+    img = Image.fromarray(a.clip(0, 255).astype(np.uint8))
+    glow = Image.new('RGBA', (w, h), (0, 0, 0, 0)); gd = ImageDraw.Draw(glow)
+    for i, x0, y0, x1, y1 in _frames(w, h):
+        if SIGNED[i][0]:
+            k = w / 512
+            _signature(gd, x0 + 14 * k, y1 - 30 * k, x1 - 14 * k, y1 - 12 * k, 300 + i, (255, 214, 120, 255), int(4 * k))
+    img.alpha_composite(glow.filter(ImageFilter.GaussianBlur(6 * w / 512)))
+    img.alpha_composite(glow.filter(ImageFilter.GaussianBlur(2 * w / 512)))
+    img.alpha_composite(glow)
+    return img
+
+
+def academy_certificate(w=192, h=256):
+    img = Image.new('RGBA', (w, h), (232, 222, 196, 255)); d = ImageDraw.Draw(img)
+    d.rectangle([5, 5, w - 6, h - 6], outline=(150, 120, 60, 255), width=3)
+    d.rectangle([11, 11, w - 12, h - 12], outline=(150, 120, 60, 255), width=1)
+    f, fb = font('DejaVuSerif.ttf', 11), font('DejaVuSerif-Bold.ttf', 14)
+    lines = [('CERTIFICATE', fb, 24), ('OF PROVENANCE', f, 44), ('Academy Award statuette', f, 74),
+             ('Best Supporting Actor, 1954', f, 92), ('LYLE BRANDT', fb, 116), ('Harbor Lights', f, 138),
+             ('Base serial No. 734', fb, 166), ('From the Brandt estate, 1988', f, 192)]
+    for text, fn, y in lines:
+        bb = d.textbbox((0, 0), text, font=fn)
+        d.text(((w - bb[2]) / 2, y), text, font=fn, fill=(50, 40, 30, 255))
+    d.ellipse([w / 2 - 14, h - 46, w / 2 + 14, h - 18], fill=(160, 40, 40, 255))  # wax seal
+    return img
+
+
+def brass_plate(w=256, h=72):
+    img = Image.new('RGBA', (w, h), (190, 150, 72, 255)); d = ImageDraw.Draw(img)
+    d.rectangle([3, 3, w - 4, h - 4], outline=(120, 90, 40, 255), width=2)
+    for text, y, sz in (('LYLE BRANDT', 8, 18), ('BEST SUPPORTING ACTOR, 1954', 32, 12), ('HARBOR LIGHTS', 48, 12)):
+        fn = font('DejaVuSerif-Bold.ttf', sz)
+        bb = d.textbbox((0, 0), text, font=fn)
+        d.text(((w - bb[2]) / 2, y), text, font=fn, fill=(60, 40, 16, 255))
+    return img
+
+
+def chair_back(w=256, h=72):
+    """Director's chair canvas: STARDUST stencilled in white."""
+    img = Image.new('RGBA', (w, h), (30, 30, 34, 255)); d = ImageDraw.Draw(img)
+    fn = font('DejaVuSans-Bold.ttf', 40)
+    bb = d.textbbox((0, 0), 'STARDUST', font=fn)
+    d.text(((w - bb[2]) / 2, (h - bb[3]) / 2 - 4), 'STARDUST', font=fn, fill=(226, 222, 210, 255))
+    return img
+
+
+def movie_poster(title, sub, colors, seed=0, w=128, h=192):
+    """A one-sheet: a painted scene in two colours, the title in big letters, small credits."""
+    rng = random.Random(seed)
+    bg, fg = colors
+    img = Image.new('RGBA', (w, h), bg + (255,)); d = ImageDraw.Draw(img)
+    for i in range(6):
+        y = h * 0.1 + i * 12
+        x0 = rng.uniform(-30, w - 40)
+        d.ellipse([x0, y, x0 + rng.uniform(50, 110), y + rng.uniform(30, 70)], fill=tuple(int(c * 0.7) for c in bg) + (255,))
+    d.ellipse([w * 0.3, h * 0.18, w * 0.7, h * 0.48], fill=(220, 190, 160, 255))
+    d.ellipse([w * 0.18, h * 0.42, w * 0.82, h * 0.82], fill=tuple(int(c * 0.4) for c in bg) + (255,))
+    for size in range(18, 8, -1):
+        fn = font('DejaVuSerif-Bold.ttf', size)
+        bb = d.textbbox((0, 0), title, font=fn)
+        if bb[2] < w - 10:
+            break
+    d.text(((w - bb[2]) / 2, h * 0.8), title, font=fn, fill=fg + (255,))
+    fs = font('DejaVuSans.ttf', 9)
+    bb = d.textbbox((0, 0), sub, font=fs)
+    d.text(((w - bb[2]) / 2, h * 0.92), sub, font=fs, fill=fg + (255,))
+    return img
+
+
+def theatre_front(seed=93, w=512, h=256):
+    """The Chinese Theatre across the boulevard after hours: a deep red facade, faintly floodlit, over the big dark
+    entrance (alpha marks how much of it glows)."""
+    yy = np.linspace(0, 1, h)[:, None, None]
+    a = np.zeros((h, w, 3)) + np.array([110, 34, 26]) * (0.35 + 0.8 * yy)
+    glow = (20 + 50 * yy[..., 0]) * np.ones((1, w))
+    img = to_img(a, glow); d = ImageDraw.Draw(img)
+    d.rectangle([w * 0.36, h * 0.34, w * 0.64, h], fill=(14, 8, 8, 0))               # the entrance, dark
+    d.polygon([(w * 0.36, h * 0.34), (w * 0.5, h * 0.2), (w * 0.64, h * 0.34)], fill=(40, 90, 70, 60))
+    return img
+
+
+def tape_band(w=256, h=32):
+    img = Image.new('RGBA', (w, h), (230, 196, 30, 255)); d = ImageDraw.Draw(img)
+    fn = font('DejaVuSans-Bold.ttf', 18)
+    for x in range(0, w, 128):
+        d.text((x + 6, 6), 'POLICE LINE', font=fn, fill=(20, 20, 20, 255))
+    return img
+
+
+# ---------------------------------------------------------------- Case 3: the back office and the roof
+def fuse_panel(w=192, h=256):
+    """Gus's old fuse panel: grey steel, a row of black breakers with masking-tape labels in his capitals, and a
+    clockwork timer dial on the ROOF SIGN circuit."""
+    img = Image.new('RGBA', (w, h), (120, 124, 128, 255)); d = ImageDraw.Draw(img)
+    d.rectangle([4, 4, w - 5, h - 5], outline=(70, 72, 76, 255), width=3)
+    f = font('DejaVuSans-Bold.ttf', 11)
+    for i, label in enumerate(('SHOP', 'OFFICE', 'FRIDGE (NEVER)', 'ROOF SIGN')):
+        y = 24 + i * 52
+        d.rectangle([16, y, 40, y + 30], fill=(24, 24, 26, 255))                   # breaker
+        d.rectangle([22, y + 4, 34, y + 14], fill=(200, 200, 196, 255))
+        d.rectangle([50, y + 6, w - 14, y + 24], fill=(226, 212, 160, 255))        # masking tape
+        d.text((54, y + 8), label, font=f, fill=(30, 30, 40, 255))
+    d.text((54, 24 + 3 * 52 + 26), 'TIMER OFF AT 1', font=font('DejaVuSans-Bold.ttf', 9), fill=(30, 30, 40, 255))
+    d.text((54, 24 + 3 * 52 + 38), '($$$!)', font=font('DejaVuSans-Bold.ttf', 9), fill=(160, 30, 30, 255))
+    cx, cy = w - 40, h - 32
+    d.ellipse([cx - 20, cy - 20, cx + 20, cy + 20], fill=(230, 226, 214, 255), outline=(40, 40, 40, 255), width=2)
+    d.line([cx, cy, cx - 6, cy - 16], fill=(160, 30, 30, 255), width=3)          # set to 1:00
+    return img
+
+
+def tape_label(text, w=128, h=32):
+    """A strip of masking tape with a name on it in black marker."""
+    img = Image.new('RGBA', (w, h), (222, 206, 156, 255)); d = ImageDraw.Draw(img)
+    fn = font('DejaVuSans-Bold.ttf', 20)
+    bb = d.textbbox((0, 0), text, font=fn)
+    d.text(((w - bb[2]) / 2, (h - bb[3]) / 2 - 3), text, font=fn, fill=(24, 24, 28, 255))
+    return img
+
+
+def pryce_letter(w=128, h=168):
+    """Pryce Development's final notice: letterhead, a red FINAL NOTICE, lines of type, a certified-mail stamp."""
+    img = Image.new('RGBA', (w, h), (240, 238, 230, 255)); d = ImageDraw.Draw(img)
+    d.text((8, 6), 'PRYCE', font=font('DejaVuSans-Bold.ttf', 14), fill=(40, 50, 80, 255))
+    d.text((8, 22), 'DEVELOPMENT', font=font('DejaVuSans.ttf', 8), fill=(40, 50, 80, 255))
+    d.line([8, 34, w - 8, 34], fill=(40, 50, 80, 255), width=1)
+    d.text((8, 42), 'FINAL NOTICE', font=font('DejaVuSans-Bold.ttf', 11), fill=(170, 30, 30, 255))
+    d.text((8, 55), 'TO VACATE', font=font('DejaVuSans-Bold.ttf', 11), fill=(170, 30, 30, 255))
+    for i in range(9):
+        d.rectangle([8, 74 + i * 8, w - 8 - (i % 3) * 14, 77 + i * 8], fill=(90, 90, 100, 255))
+    d.rectangle([w - 50, h - 34, w - 8, h - 10], outline=(60, 60, 150, 255), width=2)  # certified mail stamp
+    return img
+
+
+def catalogue_cover(w=128, h=168):
+    img = Image.new('RGBA', (w, h), (20, 20, 24, 255)); d = ImageDraw.Draw(img)
+    d.text((10, 10), "CALLOWAY'S", font=font('DejaVuSerif-Bold.ttf', 15), fill=(212, 180, 100, 255))
+    d.text((10, 30), 'Beverly Hills', font=font('DejaVuSerif.ttf', 9), fill=(212, 180, 100, 255))
+    d.rectangle([20, 50, w - 20, h - 40], fill=(60, 50, 40, 255))
+    d.ellipse([w / 2 - 8, 62, w / 2 + 8, 78], fill=(220, 180, 80, 255))         # a gold statuette on the cover
+    d.rectangle([w / 2 - 5, 78, w / 2 + 5, 112], fill=(220, 180, 80, 255))
+    d.rectangle([w / 2 - 12, 112, w / 2 + 12, 120], fill=(30, 26, 22, 255))
+    d.text((10, h - 32), 'HOLLYWOOD LEGENDS', font=font('DejaVuSerif-Bold.ttf', 10), fill=(212, 180, 100, 255))
+    return img
+
+
+def stardust_letter(ch, color=(255, 110, 60), w=192, h=256):
+    """One six-foot neon letter for the roof sign: a red-gold tube on a black steel backing."""
+    m = Image.new('L', (w, h), 0); d = ImageDraw.Draw(m)
+    f = font('DejaVuSans-Bold.ttf', int(h * 0.92))
+    bb = d.textbbox((0, 0), ch, font=f)
+    d.text(((w - bb[2] - bb[0]) / 2, (h - bb[3] - bb[1]) / 2), ch, font=f, fill=255)
+    edge = m.filter(ImageFilter.FIND_EDGES).filter(ImageFilter.MaxFilter(9))
+    tube = np.asarray(edge, float) / 255
+    halo = np.asarray(m.filter(ImageFilter.GaussianBlur(10)), float) / 255
+    a = np.clip(tube + halo * 0.3, 0, 1)
+    rgb = np.array(color, float) * (1 - tube[..., None] * 0.4) + 255 * tube[..., None] * 0.4
+    return to_img(rgb, a * 255)
+
+
+def tar_gravel(seed=95, w=256, h=256):
+    """A tar-and-gravel roof, wet: dark pea gravel with lighter stones, bare black tar where it has worn thin."""
+    rng = np.random.default_rng(seed)
+    n = noise(w, h, 24, seed)
+    a = np.ones((h, w, 3)) * np.array([70, 66, 62], float) * (0.75 + 0.4 * n[..., None])
+    stones = rng.random((h, w))
+    a[stones > 0.82] *= 1.5
+    a[stones < 0.12] *= 0.55
+    bare = np.clip((noise(w, h, 60, seed + 1) - 0.62) * 6, 0, 1)
+    a = a * (1 - bare[..., None]) + np.array([20, 20, 22]) * bare[..., None]
+    return to_img(a)
+
+
+def tank_staves(seed=96, w=256, h=256):
+    """The old wooden water tank: weathered vertical staves, rust streaks under the iron hoops."""
+    rng = random.Random(seed)
+    img = Image.new('RGB', (w, h)); d = ImageDraw.Draw(img)
+    for i in range(0, w, 16):
+        c = rng.randint(70, 100)
+        d.rectangle([i, 0, i + 15, h], fill=(c, int(c * 0.72), int(c * 0.5)))
+        d.line([i, 0, i, h], fill=(36, 26, 20), width=2)
+    n = noise(w, h, 8, seed)
+    a = np.asarray(img, float) * (0.75 + 0.4 * n[..., None])
+    for y in (0.2, 0.55, 0.88):                                          # rust running down from the hoops
+        yy = int(h * y)
+        a[yy:yy + 30] = a[yy:yy + 30] * 0.75 + np.array([110, 50, 24]) * 0.25
+    return to_img(a)
+
+
+def brenner_card(w=192, h=112, back=False):
+    """Walter Brenner's business card: cream stock, raised blue type. The back has his note in ballpoint."""
+    img = Image.new('RGBA', (w, h), (236, 228, 206, 255)); d = ImageDraw.Draw(img)
+    blue = (30, 50, 120, 255)
+    if back:
+        f = font('DejaVuSerif-Italic.ttf', 12)
+        for i, line in enumerate(('Gus.', 'Think it over. Nobody else', 'is going to offer.', '        W.')):
+            d.text((12, 14 + i * 20), line, font=f, fill=(40, 50, 110, 255))
+        return img
+    d.text((12, 12), 'WALTER BRENNER', font=font('DejaVuSerif-Bold.ttf', 16), fill=blue)
+    d.text((12, 34), 'LAPD (Ret.)', font=font('DejaVuSerif.ttf', 11), fill=blue)
+    d.line([12, 52, w - 12, 52], fill=blue, width=1)
+    d.text((12, 60), 'Security Consultant', font=font('DejaVuSerif.ttf', 11), fill=blue)
+    d.text((12, 76), 'Pryce Development', font=font('DejaVuSerif-Bold.ttf', 11), fill=blue)
     return img

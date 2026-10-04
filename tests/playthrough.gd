@@ -1,5 +1,5 @@
 extends Node
-## Automated playthrough of Cases 1 and 2. Runs the real game (scenes/main.tscn) at high speed, clicks
+## Automated playthrough of Cases 1 to 3. Runs the real game (scenes/main.tscn) at high speed, clicks
 ## hotspots through Main's own action path, skips every line and picks dialogue options by text,
 ## then checks the flags the later cases depend on.
 ##
@@ -37,18 +37,21 @@ func _process(_delta: float) -> void:
 				main.room.room_id if main.room else "-", main.busy, main._speaking, main._choosing,
 				main._waiting_click, main.ui.fade_rect.color.a])
 	if "--shots" in OS.get_cmdline_user_args():
-		for key in ["drive", "phone", "board", "device", "pier9_dock", "vance_office", "street", "mulholland_overlook",
-				"norms_diner", "kenji_apartment", "prius_interior"]:
-			var ui_key: bool = key in ["drive", "phone", "board", "device"]
+		for key in ["drive", "phone", "board", "device", "paper", "pier9_dock", "vance_office", "street",
+				"mulholland_overlook", "norms_diner", "kenji_apartment", "prius_interior", "stardust_shop",
+				"stardust_office", "stardust_roof", "stardust_roof_dark", "squad_room"]:
+			var ui_key: bool = key in ["drive", "phone", "board", "device", "paper"]
 			var on: bool = (main.ui.get(key) != null) if ui_key \
 					else (main.room != null and main.room.room_id == key and not main.busy and main.ui.fade_rect.color.a < 0.01)
-			var shot: String = key + ("_case2" if ui_key and Game.flag("case1_done") else "")
+			var n_case: int = Game.current_case()
+			var shot: String = key + ("_case%d" % n_case if (ui_key or key == "squad_room") and n_case > 1 else "")
 			if on:
 				_shots[shot] = int(_shots.get(shot, 0)) + 1
 			if _shots.get(shot, 0) == 20:      # a few frames in, once fades and layout have settled
 				get_viewport().get_texture().get_image().save_png("user://shot_%s.png" % shot)
 	if main._speaking:
-		main._skip = not ("--shots" in OS.get_cmdline_user_args() and (main.ui.board != null or main.ui.device != null))
+		main._skip = not ("--shots" in OS.get_cmdline_user_args() and (main.ui.board != null or main.ui.device != null
+				or main.ui.paper != null))
 	if main._choosing:
 		_answer()
 
@@ -241,7 +244,13 @@ func _run() -> void:
 	await _case2()
 	if _failed:
 		return
-	print("PLAYTHROUGH OK - Cases 1 and 2 finished. Flags: ", Game.flags.keys())
+	print("Case 2 finished.")
+	main._waiting_click = false                         # the "Case 3: Walk of Fame" card, then the drive
+	await expect_room("stardust_shop")
+	await _case3()
+	if _failed:
+		return
+	print("PLAYTHROUGH OK - Cases 1 to 3 finished. Flags: ", Game.flags.keys())
 	_quit(0)
 
 
@@ -356,3 +365,128 @@ func _case2() -> void:
 	expect(["case2_deduced", "board_ride_receipt", "case2_done"])
 	if not main.room.get_node("Board_kenji").visible or not main.room.get_node("Board_receipt").visible:
 		_fail("the board should keep Kenji's corner and the ride receipt")
+
+
+func _case3() -> void:
+	print("Case 3, scene 2: Stardust Memorabilia")
+	for id in ["driver_card", "sd_cards", "ride_receipt", "card_slip"]:
+		if Game.has_item(id):
+			_fail("Case 2 items should stay behind: %s" % [Game.inventory])
+	expect(["case3_started", "met_park3"])
+	await act("front_door", "look")                     # the glass went out
+	await act("front_door")                             # not before the arrest
+	await act("display_case")                           # opened with a key: the robbery was staged
+	expect(["clue_glass_out", "clue_key_opened", "clue_staged"])
+	await act("register")
+	await act("counter", "look")
+	await act("window")
+	await act("chair")
+	await act("pearl", "use", "", ["What happened tonight?", "How long did you work for Gus?",
+			"Who has keys to the Oscar case?", "Who'd want the Oscar?", "I'll be back."])
+	await act("park", "use", "", ["Who's the man in the bathrobe?", "Anything from the canvass?", "That'll do."])
+	await act("morty", "use", "", ["Who are you?", "You wanted the Oscar.", "Where were you tonight?", "Good night, Morty."])
+	expect(["clue_register", "clue_pearl_story", "clue_keyholders", "clue_morty_offer", "clue_morty_alibi"])
+	await act("curtain")
+	await expect_room("stardust_office")
+
+	print("Case 3, scene 3: the back office")
+	await act("stairs")                                 # the sign is off: the dark roof
+	await expect_room("stardust_roof_dark")
+	await act("darkness", "look")
+	await act("darkness")
+	await act("roof_door")
+	await expect_room("stardust_office")
+	await act("shah", "use", "", ["How did he die?", "When?", "Did he fall, or was he helped?", "Anything else?",
+			"Thanks, Anita."])
+	expect(["got_gus_keys", "clue_tod_gus", "clue_pushed", "shah_palm"])
+	await act("drawer")                                 # locked
+	await act("desk")                                   # the eviction letter
+	await act("desk")                                   # Calloway's catalogue
+	await act("letter")                                 # the optional seed: Brenner's card
+	expect(["clue_eviction", "got_catalogue", "got_brenner_card"])
+	await act("drawer", "use", "gus_keys")              # the UV lamp
+	await act("phone", "use", "", ["Out  12:52 AM  PEARL CELL  3:04", "Voicemail", "Thu  PRYCE DEV  0:22", "Close"])
+	await act("pearl_locker")                           # the headshots
+	await act("pearl_locker")                           # the practice signatures
+	await act("pearl_locker", "use", "uv_lamp")         # nothing to compare yet
+	await act("cabinet")
+	await act("gus_locker", "use", "gus_keys")
+	await act("gus", "look")
+	await act("fuse_panel", "look")
+	await act("fuse_panel")                             # the roof sign back on
+	expect(["got_uv_lamp", "clue_phone_log", "clue_headshots_left", "clue_practice_sigs", "sign_on"])
+	if not main.room.get_node("Sign_glow").visible:
+		_fail("the sign's glow should spill down the stairs")
+	await act("curtain")
+	await expect_room("stardust_shop")
+	await act("photo_wall", "use", "uv_lamp")
+	await act("certificate", "use", "catalogue")
+	await act("morty", "use", "", ["Calloway's sold No. 734.", "What does a real one weigh?", "Good night, Morty."])
+	await act("park", "use", "", ["The developer's man.", "That'll do."])
+	await act("display_case", "use", "gus_keys")
+	expect(["clue_uv_fakes", "clue_same_serial", "clue_morty_bought", "clue_weight", "clue_whitaker_alibi"])
+	await act("curtain")
+	await expect_room("stardust_office")
+	await act("pearl_locker", "use", "uv_lamp")         # same gold pen
+	expect(["clue_gold_pen"])
+	await act("stairs")
+	await expect_room("stardust_roof")
+
+	print("Case 3, scene 4: the roof")
+	await act("neon", "look")
+	await act("water_tank", "look")
+	await act("gravel")
+	await act("lawn_chair", "look")
+	await act("coffee_can")
+	await act("blue_note", "look")
+	await act("theatre")
+	await act("roof_edge", "use", "uv_lamp")
+	await act("glint")                                  # the gold star earring
+	await act("water_tank")                             # the "Oscar" floats
+	await act("charlie", "use", "", ["What did you see tonight?", "Did you hear anything?", "You knew Gus?",
+			"Ever seen this man?", "Good night, Charlie."])
+	expect(["clue_footprints", "clue_cigar", "got_star_earring", "got_fake_oscar", "clue_replica", "clue_fiat",
+			"clue_shouting", "clue_block_empty"])
+	if main.room.get_node("Earring").visible:
+		_fail("the earring should be gone from the gravel")
+	await act("roof_door")
+	await expect_room("stardust_office")
+	await act("shah", "use", "star_earring")
+	await act("curtain")
+	await expect_room("stardust_shop")
+
+	print("Case 3, scene 5: breaking Pearl")
+	await act("pearl", "use", "star_earring")           # too early
+	await act("pearl", "use", "fake_oscar")             # "Where was he?" "Later."
+	await act("pearl", "use", "", ["Gus called you at twelve fifty-two."])
+	await act("pearl", "use", "fake_oscar")             # the robbery
+	await act("pearl", "look")                          # the torn earlobe
+	await act("pearl", "use", "", ["Gus didn't fall."])  # the roof, and Park takes her out
+	expect(["pearl_lie1_broken", "pearl_lie2_broken", "clue_bare_ear", "pearl_arrested"])
+	for n in ["Actors/Pearl_chair", "Actors/Pearl_stand", "Actors/Park"]:
+		if main.room.get_node(n).visible:
+			_fail("%s should be gone after the arrest" % n)
+	# quick save / load round trip in a Case 3 room
+	Game.player_position = main.player.position
+	Game.save_game()
+	await main._load()
+	await expect_room("stardust_shop")
+	await act("morty")                                  # "He said he'd be buried with it."
+	expect(["morty_lyle"])
+	await act("front_door")                             # the drive back, and Maya
+	await expect_room("squad_room")
+
+	print("Case 3, scene 6: the murder board")
+	await act("door")
+	await act("phone")
+	await act("clock")
+	await act("case_board", "use", "brenner_card")      # "After Gus."
+	await act("case_board", "use", "star_earring", ["Morty Kahn, the rival collector.", "Trent Whitaker, Pryce Development.",
+			"A burglar off the boulevard.", "Pearl Danvers, his assistant.", "Calloway's catalogue, No. 734 sold",
+			"Legal pad: \"Lyle Brandt\" forty times"])
+	while not main._waiting_click and not _failed:      # Doyle, then Otis with Case 4
+		await get_tree().process_frame
+	expect(["case3_deduced", "board_brenner_card", "case3_done"])
+	for n in ["Board_kenji", "Board_receipt", "Board_gus", "Board_brenner"]:
+		if not main.room.get_node(n).visible:
+			_fail("the board should show %s" % n)

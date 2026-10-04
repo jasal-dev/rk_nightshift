@@ -99,10 +99,12 @@ def build(hide=()):
             S.wboxr(x - 0.25, 0.0, Z0 + 0.3, x + 0.25, 0.06, Z0 + 0.55, 'desk_metal')
 
     # pins that stay up between cases (overlays the game shows by flag): Danny's envelope (Case 1),
-    # Kenji's corner (Case 2), and the photo of Walt B.'s ride beside the envelope (Case 2, optional)
+    # Kenji's corner (Case 2), the photo of Walt B.'s ride beside the envelope (Case 2, optional), Gus's corner
+    # (Case 3) and Walter Brenner's card above the ride receipt (Case 3, optional)
     BZ = Z0 + 0.4
     for tag, (x, y, w, h) in (('board_envelope', (-2.62, 1.36, 0.22, 0.29)), ('board_kenji', (-3.3, 1.92, 0.3, 0.4)),
-                              ('board_receipt', (-2.34, 1.33, 0.15, 0.2))):
+                              ('board_receipt', (-2.34, 1.33, 0.15, 0.2)), ('board_gus', (-2.08, 1.36, 0.3, 0.4)),
+                              ('board_brenner', (-2.36, 1.62, 0.15, 0.2))):
         if tag not in hide:
             S.mat(tag, (220, 220, 220), tex=tx.board_pins(tag.split('_')[1]), texmode=1, spec=0.2)
             S.wbox((x, y, BZ + 0.006), (w / 2, h / 2, 0.003), tag)
@@ -277,7 +279,7 @@ def build(hide=()):
         },
         hotspot_order=['window', 'radiator', 'clock', 'case_board', 'desk', 'door', 'coat_rack', 'typewriter', 'lamp',
                        'phone', 'mug', 'wastebasket', 'cabinet', 'coffee_machine'],
-        overlays=['mug', 'board_envelope', 'board_kenji', 'board_receipt'],
+        overlays=['mug', 'board_envelope', 'board_kenji', 'board_receipt', 'board_gus', 'board_brenner'],
         # walk-behind props: tag -> (x, z) floor point; the player is drawn behind while further away than it
         occluders={'fg_desk': (3.25, 3.2)},
         char_fill=((236, 222, 200), 0.3),

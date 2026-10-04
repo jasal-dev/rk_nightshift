@@ -2,7 +2,7 @@
 
 A small point-and-click detective adventure built in **pure Godot 4** (no plugins), with pre-rendered 1080p art.
 It's present-day Los Angeles, after midnight and raining.
-It has two cases so far, and ends on the title card for Case 3.
+It has three cases so far, and ends on the title card for Case 4.
 
 - **Case 1: Dead Piano Player**, about 35 minutes: the squad room, the street outside the Blue Note, Pier 9 and
   Vance's office, eight items, six notebook clues, a drive and the deduction at the murder board.
@@ -10,6 +10,26 @@ It has two cases so far, and ends on the title card for Case 3.
   Four new places (the overlook, a close-up inside the car, Norm's on Sunset and Kenji's apartment in Silver Lake),
   seven items, 23 notebook clues, phone and car screens to read, a choice of where to drive, and a second
   deduction. The murder board keeps its pins from one case to the next.
+- **Case 3: Walk of Fame**, about 30 minutes: a memorabilia dealer dead at the foot of his roof stairs on Hollywood
+  Boulevard, and his Oscar gone. Three rooms on foot (the shop, the back office, the roof, which stays dark until you
+  find the sign's breaker), six items, 27 notebook clues, a UV lamp, and a confession in three steps.
+
+**Walkthrough (spoilers), Case 3:**
+
+1. *The shop.* Look at the front door (the glass went out) and use the display case (opened with a key). Talk to
+   Pearl ("What happened tonight?"), Park and Morty (his alibi). Go through the curtain.
+2. *The back office.* Ask Shah how he died (Gus's keys), and whether he fell. Use the desk twice (the eviction letter,
+   then Calloway's catalogue); use the letter once more for the optional business card. Use the keys on the drawer
+   (the UV lamp). Use the cordless phone: the 12:52 call to Pearl. Use Pearl's locker twice. Use the fuse panel to put
+   the roof sign back on.
+3. *Back in the shop.* The UV lamp on the signed photos; the catalogue on the certificate; then ask Morty about
+   No. 734 and what a real one weighs. Optional: Park, "The developer's man".
+4. *The office, then the roof.* The UV lamp on Pearl's locker. Up the stairs: the gravel, the lawn chair, the glint
+   by the door (the earring), the water tank (the "Oscar"). Talk to Charlie; show him the card if you found it.
+5. *The shop.* Pearl: "Gus called you at twelve fifty-two", then use the "Oscar" on her, then the earring.
+   Then the front door.
+6. *Room 214.* Use the murder board: Pearl Danvers, then the legal pad (or the gold pen, or Morty's payment) and the
+   earring.
 
 ## Running it
 
@@ -81,7 +101,8 @@ scripts/hotspot.gd        Clickable area (Area2D + CollisionPolygon2D), with wal
 scenes/rooms/*.tscn       Room scenes: Background, WalkArea, Actors (+ walk-behind props), Obstacles, Spawns, Hotspots
 scripts/rooms/*.gd        Room logic: one interact() function per room
 scripts/case2.gd          Case 2's shared pieces: speech colours, the drives, the car menu between locations
-tests/playthrough.tscn    Automated playthrough of Cases 1 and 2 (see "Testing")
+scripts/case3.gd          Case 3's shared pieces: speech colours, the drive in and the drive back
+tests/playthrough.tscn    Automated playthrough of Cases 1 to 3 (see "Testing")
 assets/                   Generated room art, character sheets, light probes, item icons, cursors
 tools/                    Python generators for the art (Pillow + numpy)
 ```
@@ -118,6 +139,8 @@ await main.end_case("2:45 a.m.", "Case 3: Walk of Fame", 2) # last card: the gam
 main.ui.show_board("Question?", "NAME\nCaption"); main.ui.set_board_pins(["card", ""], ["", "slot label"])
 var pick: String = await main.device("Glide Driver", ["Status", "Trips"], 0, "body text", ["row", "row"])
 main.ui.show_device("Title", [], 0, "body", ["row"], false); main.ui.hide_device()   # a screen that only shows
+main.ui.show_paper("Title", "typed text", "a handwritten note"); main.ui.hide_paper()  # a letter or card, held up
+main.ui.show_closeup(Case3.UV_WALL); main.ui.hide_paper()   # a full-screen picture (the UV lamp's view)
 main.voice("Line.", speaker_at("rosa"), Case2.ROSA_COLOR)   # speaker_at(): just above a hotspot
 await Case2.car_menu(main, room_id)  # Case 2: where to next (Norm's, Kenji's place, Room 214)
 Game.set_flag("x"); Game.flag("x"); Game.has_item("id"); Game.clues(Game.current_case())
@@ -137,12 +160,18 @@ green, Doyle pale blue, Otis warm yellow, Tiny tan, Vance grey-violet. Case 2's 
 coral, Heck mustard, Devin pale lilac, Brielle hot pink. Devin has two poses in the apartment, both overlays
 the room script shows by flag (at the fridge, then on the couch).
 
+Case 3's cast (Pearl, Morty, Charlie, Gus) is in `npc.CAST` too: Pearl rose gold, Morty olive, Charlie silver grey.
+People who stand in the walkable area and come and go by flag (Pearl, Park in the shop) are overlays listed in
+`overlay_bases` in the set's `meta`: `build_scenes.py` puts them under `Actors`, y-sorted with the detective like the
+walk-behind props. The Stardust roof is two rooms on one set (`stardust_roof_dark.py` calls `stardust_roof.build(dark=True)`):
+the stairs go to the dark one until the sign's breaker is on.
+
 `prius_interior` is a close-up: the same 3D set as the overlook with the camera inside the car. Its room
 script sets `show_player = false`, so the detective isn't drawn, and its hotspots have no `walk_to`.
 
 ## Testing
 
-`tests/playthrough.tscn` plays all of Cases 1 and 2 at 8× speed through the game's own click handling,
+`tests/playthrough.tscn` plays all of Cases 1 to 3 at 8× speed through the game's own click handling,
 answering every dialogue and device screen by text, and checks the flags later cases depend on. From the
 project folder:
 
@@ -171,12 +200,14 @@ python render_room.py squad_room      # (add --preview for a fast low-res look)
 python gen_sprites.py                 # -> assets/characters/detective.png + detective_light.png + scripts/detective_anims.gd
 python light_probes.py street         # -> assets/rooms/street_light.json (render_room.py also does this)
 python gen_icons.py                   # -> assets/items/*.png (84x84)
+python gen_closeups.py                # -> assets/ui/uv_wall.png, uv_headshot.png (Case 3's UV lamp)
 python build_scenes.py                # -> scenes/rooms/*.tscn from out/*.json
 cd ..; python gen_art.py              # cursors, raindrop
 ```
 
 - `street.py`, `squad_room.py`, `pier9_dock.py`, `vance_office.py`, `mulholland_overlook.py`,
-  `prius_interior.py`, `norms_diner.py` and `kenji_apartment.py` describe the sets: geometry, materials,
+  `prius_interior.py`, `norms_diner.py`, `kenji_apartment.py`, `stardust_shop.py`, `stardust_office.py` and
+  `stardust_roof.py` (with `stardust_roof_dark.py`) describe the sets: geometry, materials,
   lights, camera, and each hotspot's 3D walk-to point. `npc.py` places the supporting cast.
 - **Overlays** (`overlays=[...]` in `meta`) are props the game shows or hides by flag: the mug, the pins on
   the murder board, Devin's two poses. `render_room.py` takes them out of the set one at a time and cuts the
