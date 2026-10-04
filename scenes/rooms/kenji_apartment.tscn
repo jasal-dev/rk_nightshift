@@ -26,7 +26,7 @@ centered = false
 [node name="Devin_fridge" type="Sprite2D" parent="."]
 texture = ExtResource("ov_devin_fridge")
 centered = false
-position = Vector2(1378, 350)
+position = Vector2(1273, 345)
 
 [node name="Devin_couch" type="Sprite2D" parent="."]
 texture = ExtResource("ov_devin_couch")
@@ -35,7 +35,7 @@ position = Vector2(680, 408)
 
 [node name="WalkArea" type="Polygon2D" parent="."]
 color = Color(0.2, 0.9, 0.4, 0.3)
-polygon = PackedVector2Array(525.3, 580.7, 1467.2, 580.7, 1506.1, 607.7, 1473.6, 607.7, 1903.6, 925.5, 6, 925.5, 6, 907.4, 305.9, 693.8, 467.5, 627.5)
+polygon = PackedVector2Array(525.3, 580.7, 1274, 580.7, 1301.1, 611.1, 1478.3, 611.1, 1903.6, 925.5, 6, 925.5, 6, 907.4, 305.9, 693.8, 467.5, 627.5)
 
 [node name="Actors" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -184,21 +184,21 @@ polygon = PackedVector2Array(462.7, 580.1, 474.2, 572, 488.4, 572, 522, 573.4, 5
 script = ExtResource("hs")
 id = "fridge"
 display_name = "fridge"
-walk_to = Vector2(1474, 613)
+walk_to = Vector2(1386, 616)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/fridge"]
-polygon = PackedVector2Array(1387.8, 579.4, 1399.6, 405.6, 1488, 405.6, 1519.6, 416.2, 1503.7, 599.8, 1412.7, 599.8)
+polygon = PackedVector2Array(1289, 579.4, 1298.1, 405.6, 1386.5, 405.6, 1412, 416.2, 1399.1, 599.8, 1308.1, 599.8)
 
 [node name="freezer" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "freezer"
 display_name = "freezer"
-walk_to = Vector2(1474, 613)
+walk_to = Vector2(1386, 616)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/freezer"]
-polygon = PackedVector2Array(1399.6, 405.6, 1404.5, 333.3, 1493.9, 333.3, 1526.2, 339.7, 1519.6, 416.2, 1425.9, 416.2)
+polygon = PackedVector2Array(1298.1, 405.6, 1301.9, 333.3, 1391.2, 333.3, 1417.3, 339.7, 1412, 416.2, 1318.3, 416.2)
 
 [node name="laptop" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
@@ -224,8 +224,8 @@ polygon = PackedVector2Array(717.1, 477, 811.1, 477, 814.6, 627.8, 722.8, 627.8)
 script = ExtResource("hs")
 id = "devin"
 display_name = "Devin"
-walk_to = Vector2(1376, 620)
+walk_to = Vector2(1287, 618)
 face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/devin"]
-polygon = PackedVector2Array(1414.9, 609.9, 1431.2, 385, 1529.3, 385, 1509.6, 609.9)
+polygon = PackedVector2Array(1327.1, 613.3, 1340.4, 386.4, 1430.2, 386.4, 1413.8, 613.3)

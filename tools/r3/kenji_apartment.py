@@ -16,7 +16,7 @@ KD0, KD1 = 0.0, 1.4          # Kenji's doorway (x)
 DD0, DD1 = 1.9, 2.8          # Devin's door
 FD0, FD1 = -4.3, -3.3        # front door
 COUCH = (-1.5, -0.65)        # couch centre (x, z), facing the camera (and the TV, off-screen)
-FRIDGE = (4.15, -3.0)        # fridge centre on the floor
+FRIDGE = (3.3, -3.0)         # fridge centre on the floor
 
 
 def build(hide=()):
@@ -173,9 +173,9 @@ def build(hide=()):
         S.sph((DD0 + 0.12, 1.0, ZB), 0.035, 'knob')
 
     # ---------------------------------------------------------------- open kitchen: counter, sink, the fridge
-    S.wboxr(3.0, 0, ZB, 3.75, 0.9, ZB + 0.62, 'cabinet')
-    S.wboxr(2.98, 0.9, ZB, 3.77, 0.95, ZB + 0.65, 'counter')
-    S.wboxr(3.0, 0.95, ZB, 3.75, 1.5, ZB + 0.02, 'tile')
+    S.wboxr(3.75, 0, ZB, X1, 0.9, ZB + 0.62, 'cabinet')
+    S.wboxr(3.73, 0.9, ZB, X1, 0.95, ZB + 0.65, 'counter')
+    S.wboxr(3.75, 0.95, ZB, X1, 1.5, ZB + 0.02, 'tile')
     S.wboxr(X1 - 0.62, 0, -2.2, X1, 0.9, 1.2, 'cabinet')                              # counter along the right wall
     S.wboxr(X1 - 0.65, 0.9, -2.2, X1, 0.95, 1.2, 'counter')
     S.wboxr(X1 - 0.5, 0.88, -0.6, X1 - 0.1, 0.96, 0.1, 'steel', op=1)                  # sink
@@ -200,8 +200,9 @@ def build(hide=()):
 
     # ---------------------------------------------------------------- Devin (overlays: one pose shows at a time)
     if 'devin_fridge' not in hide:
-        npc.cast(S, 'devin', dict(npc.ARMS_FOLDED, lean=-5, hp=-4, hy=-18, rhp=-6, lhp=8), (fx - 0.1, 0, fz + 0.62),
-                 yaw=-20, scale=0.96, tag='devin_fridge')
+        npc.cast(S, 'devin', dict(npc.ARMS_FOLDED, lean=-9, pyaw=6, sway=3, hp=10, hy=-24, hr=-6,
+                                  lhp=4, labd=1, lk=6, rhp=16, rabd=-7, rk=10, rfp=-14),
+                 (fx + 0.02, 0, fz + 0.62), yaw=-14, scale=0.96, tag='devin_fridge')
     if 'devin_couch' not in hide:
         npc.cast(S, 'devin', dict(npc.SEATED, lsp=20, le=60, lin=30, rsp=22, re=64, rin=30, lean=14, hp=12),
                  (cx + 0.35, 0.02, cz + 0.12), yaw=0, scale=0.96, tag='devin_couch')
@@ -222,13 +223,13 @@ def build(hide=()):
                fog_max=40, vol_scale=4, vol_steps=40, reflections=True, grid=0.5, ao_scale=0.9)
     meta = dict(
         room='kenji_apartment',
-        walk=[(-3.5, -2.9), (4.3, -2.9), (4.3, -2.05), (4.05, -2.05), (4.05, 3.0), (-4.0, 3.0), (-4.0, 0.0),
+        walk=[(-3.5, -2.9), (2.7, -2.9), (2.7, -1.95), (4.05, -1.95), (4.05, 3.0), (-4.0, 3.0), (-4.0, 0.0),
               (-3.5, -1.5)],
         walk_zmin=-2.9, walk_zmax=3.0, scale_x=0.0,
         spawns={'drive': (-3.8, -2.6), 'mulholland_overlook': (-3.8, -2.6), 'norms_diner': (-3.8, -2.6),
                 'start': (0.0, 1.5)},
         hotspots={
-            'devin': ('Devin', (3.2, -1.7), 'right'),
+            'devin': ('Devin', (2.55, -1.75), 'right'),
             'devin_couch': ('Devin', (-0.2, 1.6), 'left'),
             'kenji_desk': ("Kenji's desk", (0.7, -2.75), 'up'),
             'dashcam_box': ('box on the shelf', (0.7, -2.75), 'up'),
@@ -238,14 +239,14 @@ def build(hide=()):
             'sneakers': ('wet sneakers', (-3.3, -2.5), 'left'),
             'laptop': ('laptop', (-0.9, 1.6), 'up'),
             'photos': ('photos on the wall', (-1.2, -1.5), 'up'),
-            'fridge': ('fridge', (4.0, -1.9), 'up'),
-            'freezer': ('freezer', (4.0, -1.9), 'up'),
+            'fridge': ('fridge', (3.3, -1.8), 'up'),
+            'freezer': ('freezer', (3.3, -1.8), 'up'),
             'devin_door': ("Devin's door", (2.35, -2.75), 'up'),
             'front_door': ('front door', (-3.8, -2.75), 'up'),
         },
         hotspot_shapes={
-            'devin': [(fx - 0.45, 0.0, fz + 0.65), (fx + 0.3, 0.0, fz + 0.65), (fx + 0.3, 1.78, fz + 0.65),
-                      (fx - 0.45, 1.78, fz + 0.65)],
+            'devin': [(fx - 0.32, 0.0, fz + 0.75), (fx + 0.36, 0.0, fz + 0.75), (fx + 0.36, 1.78, fz + 0.75),
+                      (fx - 0.32, 1.78, fz + 0.75)],
             'devin_couch': [(cx + 0.05, 0.4, cz + 0.2), (cx + 0.65, 0.4, cz + 0.2), (cx + 0.65, 1.4, cz + 0.2),
                             (cx + 0.05, 1.4, cz + 0.2)],
             'laptop': [(cx - 0.05, 0.42, cz + 1.1), (cx + 0.45, 0.42, cz + 1.1), (cx + 0.45, 0.72, cz + 0.97),
