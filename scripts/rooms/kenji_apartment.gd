@@ -138,6 +138,18 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 			else:
 				await _freezer()
 
+		"tv":
+			if verb == "look":
+				await main.say("A big TV, switched off. A dark screen's easier to look at than a cop.")
+			else:
+				await main.say("I didn't come here to watch anything.")
+
+		"dining":
+			if verb == "look":
+				await main.say("Two plates and a takeout box. Dinner at six, Devin said. That part might even be true.")
+			else:
+				await main.say("Leftovers. Not evidence.")
+
 		"devin_door":
 			await main.say("Closed. His room, his rules, until I've got paper.")
 
