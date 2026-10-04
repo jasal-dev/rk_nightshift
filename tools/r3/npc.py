@@ -65,7 +65,7 @@ def place(S, name, pose, pos, yaw=0.0, scale=1.0, colors=None, tag=None):
 
 # ---------------------------------------------------------------- Case 2 cast: looks (rig options + colours) and poses
 STAND = dict(lsp=-2, le=14, rsp=-2, re=14)
-ARMS_FOLDED = dict(lsp=38, lsa=6, le=112, lin=58, rsp=34, rsa=6, re=116, rin=62, lhand='fist', rhand='fist')
+ARMS_FOLDED = dict(lsp=34, lsa=12, le=118, lin=96, rsp=30, rsa=12, re=106, rin=100)   # forearms crossed over the chest
 CROUCH = dict(lhp=96, lk=112, lfp=14, rhp=4, rk=100, rfp=-60, labd=8, rabd=6, lean=22, coatlen=0.2)
 
 CAST = {
@@ -91,7 +91,7 @@ CAST = {
                   skin_dk=(130, 88, 66))),
     # Devin Clark: grey hoodie, sweatpants, wet dark hair, a little beard
     'devin': (dict(hair='full', coatlen=0.02),
-              dict(coat=(98, 100, 106), coat_dk=(80, 82, 88), lining=(70, 72, 78), shirt=(60, 62, 66), pants=(66, 68, 74),
+              dict(coat=(124, 126, 132), coat_dk=(100, 102, 108), lining=(70, 72, 78), shirt=(44, 46, 50), pants=(66, 68, 74),
                    hair=(30, 26, 24), hairgrey=(30, 26, 24), brow=(34, 28, 24), stubble=(120, 94, 80), skin=(198, 160, 136),
                    skin_dk=(170, 134, 112), shoe=(200, 200, 204))),
     # Kenji Ota: dark bomber jacket

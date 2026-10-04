@@ -26,7 +26,7 @@ centered = false
 [node name="Devin_fridge" type="Sprite2D" parent="."]
 texture = ExtResource("ov_devin_fridge")
 centered = false
-position = Vector2(1273, 345)
+position = Vector2(1276, 345)
 
 [node name="Devin_couch" type="Sprite2D" parent="."]
 texture = ExtResource("ov_devin_couch")

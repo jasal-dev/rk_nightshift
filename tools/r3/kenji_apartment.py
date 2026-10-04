@@ -213,6 +213,7 @@ def build(hide=()):
     S.cone((-3.3, 1.65, -1.0), (-3.3, 1.38, -1.0), 0.12, 0.2, 'lampshade')
     S.light((KD1 - 0.3, 1.0, KZ + 0.3), (255, 196, 130), power=2.5, range=4, soft=10, vol=0.15)    # Kenji's desk lamp
     S.light((3.4, 1.45, ZB + 0.3), (240, 236, 220), power=1.6, range=3.5, shadow=False)           # under-cabinet strip
+    S.light((2.3, 1.7, -1.3), (255, 226, 196), power=1.3, range=3.0, shadow=False)                 # soft fill on the fridge
     S.light((X1 - 0.2, 1.4, 0.4), (240, 236, 220), power=1.4, range=3.5, shadow=False)
     S.light((X1 + 1.5, 2.2, -0.25), (140, 160, 230), power=6, range=8, vol=0.3, soft=20)          # street light
     S.light((cx + 0.2, 0.75, cz + 1.0), (200, 210, 255), power=0.6, range=2, shadow=False)        # laptop glow
