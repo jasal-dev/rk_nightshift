@@ -418,7 +418,7 @@ const EVIDENCE2 := [
 	["clue_heck_alibi", "Heck's alibi, the LAX queue", "", "That clears somebody. I'm here to catch somebody."],
 	["clue_threat", "Heck's threat", "", "Heck says things in traffic. Devin did things."],
 	["driver_card", "Kenji's driver card", "", "That's Kenji. He's already on the board."],
-	["ride_receipt", "Photo of Walt B.'s ride", "", "That's Tuesday. A different night. Maybe a different case."],
+	["ride_receipt", "Photo of Walt B.'s ride, billed to Pryce Development", "", "That's Tuesday. A different night. Maybe a different case."],
 ]
 const SLOT_LABELS := ["He was with Kenji tonight", "What he killed him for"]
 

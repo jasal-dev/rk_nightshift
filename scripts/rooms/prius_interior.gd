@@ -226,7 +226,7 @@ func _glide_app() -> void:
 func _ride_receipt() -> void:
 	## The optional seed. No fanfare: one line, a photo, and it's in Ray's phone.
 	main.ui.show_device("Glide Driver", [], 0,
-			"Wed 1:10 a.m.\nPickup: Blue Note, Hollywood\nDrop-off: Pryce Tower, Century City\nRider: Walt B.\n\nYou rated: 1 star\nNote: \"wet, rude, smelled like gun oil.\"",
+			"Wed 1:10 a.m.\nPickup: Blue Note, Hollywood\nDrop-off: Pryce Tower, Century City\nRider: Walt B.\nBilled to: Pryce Development (Business)\n\nYou rated: 1 star\nNote: \"wet, rude, smelled like gun oil.\"",
 			[], false, Case2.GLIDE)
 	await main.say("Blue Note. Two nights ago. Huh.")
 	if not Game.flag("got_ride_receipt"):

@@ -749,8 +749,10 @@ def board_pins(kind, w=96, h=128):
     else:
         d.rectangle([14, 10, w - 14, h - 10], fill=(244, 244, 240, 255))
         d.rectangle([20, 16, w - 20, 34], fill=(30, 150, 134, 255))
-        for i in range(6):
+        for i in range(4):
             d.rectangle([22, 44 + i * 11, w - 24 - (i % 2) * 12, 48 + i * 11], fill=(70, 70, 80, 255))
+        d.text((20, 88), 'BILLED TO', font=font('DejaVuSans-Bold.ttf', 9), fill=(40, 40, 50, 255))
+        d.text((20, 100), 'PRYCE DEV.', font=font('DejaVuSans-Bold.ttf', 11), fill=(150, 20, 20, 255))
         pins = ((w // 2, 14),)
     for x, y in pins:
         d.ellipse([x - 3, y - 3, x + 3, y + 3], fill=(220, 40, 40, 255))

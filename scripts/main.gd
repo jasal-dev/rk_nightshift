@@ -330,7 +330,7 @@ func examine_item(id: String) -> void:
 				await say(Game.ITEMS[id]["desc"])
 		"ride_receipt":
 			await say("My photo of Kenji's screen. Wednesday, 1:10 a.m. Blue Note, Hollywood, to Pryce Tower, Century City.")
-			await say("Rider: Walt B. One star. \"Wet, rude, smelled like gun oil.\"")
+			await say("Rider: Walt B. Billed to Pryce Development, on the business account. One star. \"Wet, rude, smelled like gun oil.\"")
 		_:
 			await say(Game.ITEMS.get(id, {}).get("desc", "It's a %s." % Game.item_name(id)))
 
