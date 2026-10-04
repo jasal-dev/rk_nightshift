@@ -50,8 +50,10 @@ def build(hide=()):
     S.mat('tile', (220, 220, 214), namp=0.1, nscale=20, spec=0.5)
     S.mat('bag', (22, 22, 24), spec=0.3, shin=20, namp=0.2, nscale=30)
     S.mat('strap', (40, 40, 44), namp=0.6, nscale=120)
-    S.mat('sneaker', (200, 200, 204), spec=0.3)
-    S.mat('sneaker_sole', (230, 120, 60))
+    S.mat('sneaker', (64, 70, 84), spec=0.3, namp=0.1, nscale=40)
+    S.mat('sneaker_sole', (226, 224, 218), spec=0.2)
+    S.mat('sneaker_in', (20, 20, 22))
+    S.mat('grit', (190, 120, 70), namp=0.5, nscale=60)
     S.mat('mat', (100, 70, 40), namp=0.5, nscale=40)
     S.mat('printout', (220, 220, 220), tex=tx.hushhush_printout(), texmode=1)
     S.mat('cert', (220, 220, 220), tex=tx.certificate(), texmode=1, spec=0.6, shin=60)
@@ -97,9 +99,16 @@ def build(hide=()):
         S.cyl((-2.78, 1.24, ZB + 0.16), (-2.93, 1.66, ZB + 0.1), 0.012, 'strap')
     S.wboxr(FD0 - 0.1, 0.0, ZB + 0.05, FD1 + 0.3, 0.015, ZB + 0.7, 'mat')
     with S.tag('sneakers'):
-        for k, x in enumerate((-3.95, -3.65)):
-            S.ell(WORLD, (x, 0.06, ZB + 0.38 + 0.05 * k), (0.06, 0.05, 0.14), 'sneaker', k=0.02)
-            S.wbox((x, 0.02, ZB + 0.38 + 0.05 * k), (0.062, 0.018, 0.145), 'sneaker_sole', rnd=0.015)
+        # a pair of running shoes kicked off on the mat, toes to the room, one tipped on its side
+        for (x, z, yaw, roll) in ((-3.98, ZB + 0.42, 18, 0), (-3.62, ZB + 0.5, -26, 70)):
+            F = Frame((x, 0.0, z), Ry(yaw) @ Rz(roll))
+            lift = 0.055 if roll else 0.0
+            S.box(F, (0, 0.022 + lift, 0), (0.05, 0.018, 0.14), 0.015, 'sneaker_sole')        # white midsole
+            S.box(F, (0, 0.06 + lift, -0.02), (0.045, 0.035, 0.11), 0.03, 'sneaker')         # upper
+            S.box(F, (0, 0.05 + lift, 0.09), (0.042, 0.022, 0.05), 0.022, 'sneaker')          # toe box
+            S.box(F, (0, 0.1 + lift, -0.085), (0.034, 0.012, 0.04), 0.008, 'sneaker_in')      # heel opening
+            S.box(F, (0, 0.093 + lift, 0.0), (0.02, 0.006, 0.06), 0.004, 'sneaker_sole')      # laces
+            S.box(F, (0, 0.006 + lift, 0), (0.048, 0.006, 0.135), 0.004, 'grit')               # orange grit in the treads
 
     # ---------------------------------------------------------------- photos on the back wall, behind the couch
     with S.tag('photos'):

@@ -201,7 +201,7 @@ walk_to = Vector2(504, 603)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/sneakers"]
-polygon = PackedVector2Array(427.2, 588, 440.3, 578.7, 455.4, 578.7, 491.3, 580.4, 492.5, 589, 492.8, 593.4, 480.6, 603.4, 464.5, 603.4, 427.9, 601.7, 427.5, 597.2)
+polygon = PackedVector2Array(429, 598.5, 429.3, 589.9, 430.5, 582.9, 431.7, 580.8, 440.9, 580.1, 479, 583.6, 485.2, 585.8, 488.6, 587.9, 486.2, 598.9, 486.1, 599.1, 460.4, 607.6, 459.5, 607.7, 429.8, 603.3, 429.4, 603)
 
 [node name="tv" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
