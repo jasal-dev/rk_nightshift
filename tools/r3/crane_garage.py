@@ -27,6 +27,7 @@ DOOR_Z = (-0.4, 0.6)           # the door up into the house, in the right wall
 CRANE_STAND = (1.7, 0.15)
 CRANE_STEP = (2.42, 0.1)
 DRAIN = (0.7, -1.6)
+SLOPE = 6.0                   # how steeply the street climbs, left to right (degrees)
 BUCKET = (1.25, -0.6)
 
 
@@ -197,11 +198,13 @@ def build(hide=()):
                  (CRANE_STEP[0], 0.0, CRANE_STEP[1]), yaw=-90, scale=0.95, tag='crane_step')
 
     # ---------------------------------------------------------------- outside: the steep street, the hill, the houses
-    S.wbox((0, -0.1, GZ0 - 8.0), (40, 0.1, 8.0), 'street', rot=Rz(9))                    # the street climbs left to right
-    S.wbox((0, 0.3, GZ0 - 9.6), (40, 0.6, 0.25), 'retain', rot=Rz(9))                    # the far curb and a low wall
-    S.wbox((0, 3.0, GZ0 - 26.0), (40, 2.5, 4.0), 'hillside', rot=Rz(9))
+    # a level concrete apron runs out from the door; the street beyond climbs left to right, dipping just below it
+    S.wboxr(GX0 - 0.3, -0.3, GZ0 - 2.6, GX1 + 0.3, 0.0, GZ0 + 0.01, 'floor')
+    S.wbox((0, -0.24, GZ0 - 7.6), (40, 0.1, 5.0), 'street', rot=Rz(SLOPE))
+    S.wbox((0, -0.05, GZ0 - 12.8), (40, 0.35, 0.25), 'retain', rot=Rz(SLOPE))           # the far curb and a low wall
+    S.wbox((0, 3.0, GZ0 - 26.0), (40, 2.5, 4.0), 'hillside', rot=Rz(SLOPE))
     for (x, z, w, h, m) in ((-6.0, -18.5, 4.0, 3.2, 'house'), (0.5, -19.5, 4.6, 3.6, 'house2'), (6.5, -20.0, 4.2, 3.0, 'house')):
-        y0 = x * math.tan(math.radians(9)) + 0.5
+        y0 = x * math.tan(math.radians(SLOPE)) + 0.5
         S.wboxr(x - w / 2, y0, z - 3, x + w / 2, y0 + h, z, m)
         S.wboxr(x - w / 2 - 0.3, y0 + h, z - 3.3, x + w / 2 + 0.3, y0 + h + 0.2, z + 0.3, 'retain')
         for k in range(2):
@@ -211,7 +214,7 @@ def build(hide=()):
     S.cyl((3.8, 6.0, GZ0 - 9.5), (2.6, 6.2, GZ0 - 9.5), 0.06, 'iron')
     S.wbox((2.5, 6.1, GZ0 - 9.5), (0.3, 0.08, 0.16), 'sodium')
     S.light((2.5, 5.8, GZ0 - 9.3), (255, 170, 90), power=26, range=16, soft=12, vol=0.3)
-    cars.car(S, 'parked', (-2.6, -0.42, GZ0 - 8.2), -90, (110, 30, 30), L=4.4, W=1.8, H=1.42, lights=False)
+    cars.car(S, 'parked', (-2.6, -0.14 - 2.6 * math.tan(math.radians(SLOPE)), GZ0 - 9.6), -90, (110, 30, 30), L=4.4, W=1.8, H=1.42, lights=False)
 
     S.sun((0.3, -1, -0.5), (70, 80, 120), power=0.25, shadow=False)
 
