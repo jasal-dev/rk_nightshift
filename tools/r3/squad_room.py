@@ -110,6 +110,20 @@ def build(hide=()):
         if tag not in hide:
             S.mat(tag, (220, 220, 220), tex=tx.board_pins(tag.split('_')[1]), texmode=1, spec=0.2)
             S.wbox((x, y, BZ + 0.006), (w / 2, h / 2, 0.003), tag)
+    # Case 5: Walt Brenner's name on the back of the Case 1 index card, the tab book photo and Sal's card beside Danny
+    # (board_walt); the red string between the three seeds, the envelope and the name (board_string); and, once
+    # Danny's case is packed in its box, the bare middle of the board (board_empty)
+    if 'board_walt' not in hide:
+        S.mat('board_walt', (220, 220, 220), tex=tx.board_pins('walt'), texmode=1, spec=0.2)
+        S.wbox((-2.82, 1.62, BZ + 0.007), (0.1, 0.13, 0.003), 'board_walt')
+    if 'board_string' not in hide:
+        S.mat('red_string', (200, 20, 20), spec=0.3)
+        pts = [(-2.34, 1.42), (-2.36, 1.71), (-2.5, 2.1), (-2.62, 1.48), (-2.82, 1.74)]
+        for (a, b) in zip(pts, pts[1:]):
+            S.cyl((a[0], a[1], BZ + 0.012), (b[0], b[1], BZ + 0.012), 0.004, 'red_string')
+    if 'board_empty' not in hide:
+        S.mat('board_empty', (214, 216, 208), tex=tx.board_pins('bare'), texmode=1, spec=0.2)
+        S.wbox((-2.675, 1.66, BZ + 0.011), (0.425, 0.5, 0.003), 'board_empty')
 
     # ---------------------------------------------------------------- back row desks with monitors
     def desk(x0, z0, w=1.9, d=0.85, monitor=None, chair=True):
@@ -160,6 +174,10 @@ def build(hide=()):
         S.wbox((mx + 0.009, 1.1, mz + 0.022), (0.28, 0.18, 0.005), 'screen2', rot=Ry(25))
         S.cyl((mx, 0.79, mz), (mx, 0.92, mz), 0.025, 'plastic_dk')
         S.wbox((mx + 0.1, 0.8, mz + 0.4), (0.24, 0.01, 0.08), 'plastic_dk', rot=Ry(15))
+    with S.tag('phone_list'):
+        S.mat('phone_list', (236, 236, 228), tex=tx.sign_board('HOLLYWOOD STN  x2186', (30, 30, 40), (236, 236, 228), 256, 64,
+              size=18), texmode=1, spec=0.6, shin=60)
+        S.wbox((hx0 + 1.72, 0.792, hz0 + 0.18), (0.11, 0.002, 0.075), 'phone_list', rot=Ry(-6))
     with S.tag('phone'):
         px, pz = hx0 + 2.05, hz0 + 0.25
         S.wbox((px, 0.82, pz), (0.12, 0.03, 0.1), 'plastic_dk', rot=Ry(-10))
@@ -271,6 +289,7 @@ def build(hide=()):
             'lamp': ('desk lamp', (-3.0, 1.5), 'up'),
             'typewriter': ('computer', (-2.2, 1.55), 'up'),
             'phone': ('desk phone', (-1.35, 1.5), 'up'),
+            'phone_list': ('phone list', (-1.6, 1.5), 'up'),
             'mug': ('coffee mug', (-2.55, 1.5), 'up'),
             'clock': ('clock', None, 'up'),
             'window': ('window', None, 'up'),
@@ -280,9 +299,9 @@ def build(hide=()):
             'coffee_machine': ('coffee machine', (4.5, -1.3), 'up'),
         },
         hotspot_order=['window', 'radiator', 'clock', 'case_board', 'desk', 'door', 'coat_rack', 'typewriter', 'lamp',
-                       'phone', 'mug', 'wastebasket', 'cabinet', 'coffee_machine'],
-        overlays=['mug', 'board_envelope', 'board_kenji', 'board_receipt', 'board_gus', 'board_brenner',
-                  'board_owen', 'board_phone', 'board_invite'],
+                       'phone', 'phone_list', 'mug', 'wastebasket', 'cabinet', 'coffee_machine'],
+        overlays=['board_empty', 'mug', 'board_envelope', 'board_kenji', 'board_receipt', 'board_gus', 'board_brenner',
+                  'board_owen', 'board_phone', 'board_invite', 'board_walt', 'board_string'],
         # walk-behind props: tag -> (x, z) floor point; the player is drawn behind while further away than it
         occluders={'fg_desk': (3.25, 3.2)},
         char_fill=((236, 222, 200), 0.3),

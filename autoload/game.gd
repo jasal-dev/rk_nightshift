@@ -39,6 +39,14 @@ const ITEMS := {
 	"valet_ticket": {"name": "valet ticket No. 47", "desc": ""},
 	"pryce_invite": {"name": "Pryce's invitation", "desc": ""},
 	"lab_receipt": {"name": "lab evidence receipt", "desc": ""},
+	# Case 5
+	"ray_phone": {"name": "my phone", "desc": ""},
+	"reporter_card": {"name": "Mara Quist's card", "desc": ""},
+	"tab_book": {"name": "Sal's tab book", "desc": ""},
+	"set_list": {"name": "Danny's set list", "desc": ""},
+	"danny_box": {"name": "Danny's box", "desc": ""},
+	"take_drive": {"name": "the drive", "desc": ""},
+	"brenner_38": {"name": "Brenner's .38", "desc": ""},
 }
 
 ## Notebook clues: facts Ray writes down, as [case, line]. Each is a flag of the same name (set with
@@ -143,6 +151,46 @@ const CLUES := {
 	"clue_crane_calls": [4, "Missed calls on Crane's phone: Ted at 2:31 and 2:48, Harlan Pryce at 3:05."],
 	"clue_yellow_paint": [4, "Chomp yellow in the Audi's grille."],
 	"clue_lens_match": [4, "Both headlight pieces fit Crane's broken headlight."],
+	# Case 5
+	"clue_mara_beat": [5, "Mara: Hollywood Core, forty stories, Haskell's the swing vote."],
+	"clue_no_note": [5, "No note. Sal wrote down every drink for thirty years."],
+	"clue_tape_helper": [5, "Park logged a retired cop named Walt inside Danny's tape on Tuesday for an hour. He asked whether they'd found the phone."],
+	"clue_latch": [5, "Front door was on the latch, not the deadbolt. Somebody left and pulled it shut."],
+	"clue_tab_habit": [5, "Sal: \"If it isn't in the book, it didn't happen.\""],
+	"clue_knock_only": [5, "Since Tuesday Sal only opened the door to Danny's knock."],
+	"clue_wb": [5, "Tab book: \"3:20 W.B. club soda. N/C.\" After closing."],
+	"clue_booth_tuesday": [5, "Tuesday: back booth, three men, two Macallan 18s and a club soda, cash, no names."],
+	"clue_decaf": [5, "\"D.R. decaf,\" every night."],
+	"clue_cash": [5, "The cash box untouched. Not a robbery."],
+	"clue_wet_glass": [5, "One glass washed after closing."],
+	"saw_key_tape": [5, "Letters taped on the piano keys."],
+	"clue_choke": [5, "Dead before the rope. A bar-arm choke from behind, a hold the LAPD banned in 1982."],
+	"clue_sal_tod": [5, "Sal died between 3:30 and 4:00."],
+	"clue_let_in": [5, "No defensive wounds. He turned his back on him."],
+	"clue_stool": [5, "Step stool four feet from the pipe."],
+	"clue_clean_hands": [5, "No rope burn on Sal's palms."],
+	"clue_locker": [5, "Sal's keys in Danny's locker; the sheet music searched."],
+	"clue_sal_no": [5, "Pryce's lawyers offered to buy out Sal's lease. Sal wrote NO."],
+	"clue_staged_hanging": [5, "Sal let him in, turned his back, and the man staged a suicide."],
+	"clue_back_locked": [5, "Alley door deadbolted from inside."],
+	"clue_umbrella": [5, "A wet umbrella hung up after closing; small sneaker prints to the cooler."],
+	"clue_nina_heard": [5, "Nina heard a man ask \"What did the kid leave you, Sal?\" at 3:30, then the front door at about 4."],
+	"clue_young_lady": [5, "The caller called Nina \"young lady\" and showed a police number."],
+	"clue_nina_call": [5, "Nina's phone: 1:52 a.m., (323) 555-0186, 2 minutes."],
+	"clue_lisbon": [5, "Danny: \"One of three, baby, and then Lisbon.\""],
+	"clue_knock_tune": [5, "The knock is a five-note tune Danny wrote Sal about what Sal served him instead of coffee."],
+	"clue_takes_app": [5, "Danny recorded every set on his phone."],
+	"clue_one_call": [5, "One call out from my desk all night: 1:30, to Doyle's office."],
+	"clue_desk_line": [5, "Nina's police number is Doyle's direct line."],
+	"clue_walt_aside": [5, "\"Thanks, Walt. Black is fine.\" Somebody was in her office at 1:30."],
+	"clue_visitor_log": [5, "Otis: Walter Brenner, retired, in 1:20, out 2:05, brought coffee."],
+	"clue_brenner_alone": [5, "Doyle at the copier 1:50 to 1:56; Walt alone in her office at 1:52."],
+	"knows_brenner": [5, "W.B. is Walter Brenner."],
+	"clue_takes_hint": [5, "Ike: Danny's Takes account, last upload Tuesday 11:52 p.m. Hint: \"the knock, the way I play it.\""],
+	"knows_password": [5, "The knock is D, E, C, A, F. Decaf."],
+	"clue_take": [5, "The take: Pryce, Haskell, Brenner. \"Then pay him, Walt.\""],
+	"clue_cabin_clip": [5, "Kenji's November cabin card: Brenner in the back seat at 1:12 a.m. Wednesday, wiping a revolver, Danny's phone in his lap."],
+	"clue_brenner_number": [5, "Brenner's cell, 213-555-0163, from Vance."],
 }
 
 var flags: Dictionary = {}
@@ -172,6 +220,8 @@ func flag(key: String) -> bool:
 
 func current_case() -> int:
 	## The case Ray is working: each one starts when Otis's call ends the one before.
+	if flag("case4_done"):
+		return 5
 	if flag("case3_done"):
 		return 4
 	if flag("case2_done"):

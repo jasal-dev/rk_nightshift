@@ -174,6 +174,51 @@ CAST = {
                 dict(coat=(226, 224, 218), coat_dk=(200, 198, 192), lining=(220, 218, 212), shirt=(230, 230, 226),
                      pants=(24, 24, 28), hair=(30, 24, 20), hairgrey=(30, 24, 20), skin=(176, 128, 100),
                      skin_dk=(150, 106, 82))),
+    # Case 5. Walter "Walt" Brenner: sixties, six-three, heavy, close-cut white hair, an old belted khaki raincoat, black
+    # cop's shoes polished like a parade
+    'brenner': (dict(hair='short_crop', stubble=False, coatlen=0.5, cop=False),
+                dict(coat=(122, 108, 80), coat_dk=(94, 82, 60), lining=(96, 84, 66), shirt=(206, 204, 196),
+                     pants=(48, 48, 52), hair=(228, 226, 222), hairgrey=(228, 226, 222), brow=(214, 210, 204),
+                     skin=(198, 146, 122), skin_dk=(172, 122, 102), lips=(170, 108, 96), shoe=(10, 10, 12))),
+    # Nina Alvarez: late twenties, long dark hair, a waitress's black shirt; Ray's raincoat round her shoulders
+    'nina': (dict(hair='long', stubble=False, coatlen=0.36, cop=False),
+             dict(coat=(84, 76, 66), coat_dk=(58, 52, 46), lining=(52, 40, 38), shirt=(22, 22, 26), pants=(40, 50, 76),
+                  hair=(26, 20, 18), hairgrey=(26, 20, 18), brow=(28, 22, 20), skin=(184, 136, 106),
+                  skin_dk=(156, 112, 88), lips=(150, 86, 84), shoe=(220, 220, 224))),
+    # Teodoro "Teo" Alcaraz: the porter, sixties, a grey work jacket, a grey mustache
+    'teo': (dict(hair='short', stubble=False, mustache=True, coatlen=0.04, cop=False),
+            dict(coat=(92, 96, 100), coat_dk=(72, 74, 78), lining=(70, 72, 76), shirt=(150, 140, 120), pants=(44, 46, 60),
+                 hair=(160, 156, 150), hairgrey=(190, 188, 184), brow=(150, 146, 140), skin=(150, 104, 78),
+                 skin_dk=(126, 86, 64), lips=(140, 90, 76), shoe=(40, 34, 30))),
+    # Mara Quist: forties, LA Times, a navy trench coat, shoulder-length brown hair
+    'mara': (dict(hair='long', stubble=False, coatlen=0.42, cop=False),
+             dict(coat=(36, 44, 66), coat_dk=(26, 32, 50), lining=(110, 40, 40), shirt=(200, 196, 186), pants=(30, 30, 36),
+                  hair=(96, 66, 44), hairgrey=(96, 66, 44), brow=(80, 56, 40), skin=(210, 166, 140),
+                  skin_dk=(182, 140, 118), lips=(170, 100, 96), shoe=(24, 22, 22))),
+    # Lt. Maureen Doyle: fifties, a good camel wool coat, ash-blonde hair pinned up for a meeting at eight
+    'doyle': (dict(hair='bun', stubble=False, coatlen=0.5, cop=False),
+              dict(coat=(150, 118, 82), coat_dk=(120, 92, 62), lining=(60, 50, 44), shirt=(40, 42, 52), pants=(36, 36, 42),
+                   hair=(176, 160, 130), hairgrey=(196, 190, 180), brow=(140, 124, 100), skin=(214, 172, 150),
+                   skin_dk=(186, 144, 124), lips=(166, 104, 100), shoe=(30, 24, 22))),
+    # Deputy DA Helen Okafor: forties, a raincoat over gym clothes, hair pulled back
+    'okafor': (dict(hair='bun', stubble=False, coatlen=0.4, cop=False),
+               dict(coat=(70, 74, 60), coat_dk=(54, 58, 46), lining=(90, 30, 60), shirt=(120, 40, 80), pants=(26, 26, 30),
+                    hair=(18, 14, 14), hairgrey=(18, 14, 14), brow=(20, 16, 16), skin=(98, 64, 46), skin_dk=(80, 52, 38),
+                    lips=(100, 60, 54), shoe=(220, 220, 224))),
+    # Harlan Pryce: sixties, silver hair, a navy suit that cost more than Ray's car
+    'pryce': (dict(hair='full', stubble=False, coatlen=0.06, cop=False),
+              dict(coat=(30, 36, 60), coat_dk=(22, 26, 44), lining=(120, 20, 30), shirt=(236, 236, 232), pants=(30, 36, 60),
+                   hair=(200, 200, 204), hairgrey=(220, 220, 224), brow=(170, 170, 172), skin=(212, 164, 140),
+                   skin_dk=(184, 138, 116), lips=(172, 110, 100), shoe=(16, 14, 14))),
+    # Danny Reyes, at his piano in the take: thirty-four, dark hair, a black shirt under a charcoal jacket
+    'danny': (dict(hair='full', stubble=True, coatlen=0.04, cop=False),
+              dict(coat=(44, 44, 50), coat_dk=(32, 32, 36), lining=(40, 40, 46), shirt=(24, 24, 28), pants=(30, 30, 36),
+                   hair=(24, 20, 18), hairgrey=(24, 20, 18), brow=(26, 22, 20), stubble=(120, 90, 72), skin=(178, 128, 98),
+                   skin_dk=(150, 106, 82))),
+    # the booth in the take: three dark shapes by a candle
+    'shadow': (dict(hair='full', stubble=False, coatlen=0.06, cop=False),
+               dict(coat=(26, 24, 26), coat_dk=(20, 18, 20), lining=(20, 18, 20), shirt=(60, 56, 54), pants=(22, 20, 22),
+                    hair=(30, 28, 28), hairgrey=(40, 38, 38), brow=(30, 28, 28), skin=(110, 80, 64), skin_dk=(90, 66, 52))),
 }
 
 

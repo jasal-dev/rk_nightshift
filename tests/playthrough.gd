@@ -1,5 +1,5 @@
 extends Node
-## Automated playthrough of Cases 1 to 4. Runs the real game (scenes/main.tscn) at high speed, clicks
+## Automated playthrough of all five cases, and the four endings of Case 5. Runs the real game (scenes/main.tscn) at high speed, clicks
 ## hotspots through Main's own action path, skips every line and picks dialogue options by text,
 ## then checks the flags the later cases depend on.
 ##
@@ -18,6 +18,8 @@ var _shots := {}         ## with `-- --shots`: screenshots of the drive, phone a
 
 var _user_save := ""     ## the player's own quicksave, put back when the test ends
 var _jig_solved := false
+var _piano_keys: Array[String] = []    ## keys still to press on Danny's piano
+var _piano_done := false
 
 
 func _ready() -> void:
@@ -41,12 +43,21 @@ func _process(_delta: float) -> void:
 		for key in ["drive", "phone", "board", "device", "paper", "pier9_dock", "vance_office", "street",
 				"mulholland_overlook", "norms_diner", "kenji_apartment", "prius_interior", "stardust_shop",
 				"stardust_office", "stardust_roof", "stardust_roof_dark", "fletcher_bridge", "river_channel", "glass_house",
-				"crane_garage", "night_lab", "squad_room", "jigsaw"]:
-			var ui_key: bool = key in ["drive", "phone", "board", "device", "paper", "jigsaw"]
+				"crane_garage", "night_lab", "squad_room", "jigsaw", "street_crime", "blue_note_bar", "blue_note_back",
+				"pier9_dawn", "pier9_sunrise", "piano", "scene_pic"]:
+			var ui_key: bool = key in ["drive", "phone", "board", "device", "paper", "jigsaw", "piano", "scene_pic"]
 			var on: bool = (main.ui.get(key) != null) if ui_key \
 					else (main.room != null and main.room.room_id == key and not main.busy and main.ui.fade_rect.color.a < 0.01)
 			var n_case: int = Game.current_case()
 			var shot: String = key + ("_case%d" % n_case if (ui_key or key == "squad_room") and n_case > 1 else "")
+			var state := _shot_state(key)
+			if state != "":
+				# Case 5's pier: one shot for each overlay state, taken while a choice is on screen
+				shot = key + "_" + state
+				on = main.room != null and main.room.room_id == key and (main._choosing or main._speaking) \
+						and main.ui.fade_rect.color.a < 0.01
+			elif ui_key:
+				on = on and main.ui.fade_rect.color.a < 0.01
 			if on:
 				_shots[shot] = int(_shots.get(shot, 0)) + 1
 			if _shots.get(shot, 0) == 20:      # a few frames in, once fades and layout have settled
@@ -63,6 +74,29 @@ func _process(_delta: float) -> void:
 			main.ui.jigsaw_place(i)
 	elif main.ui.jigsaw == null:
 		_jig_solved = false
+	if main.ui.piano != null:
+		# Danny's piano: one wrong run of five, then the knock, D, E, C, A, F (one key a frame)
+		if not _piano_done:
+			_piano_done = true
+			_piano_keys = ["G4", "G4", "B4", "C#4", "G5", "D4", "E4", "C4", "A4", "F4"]
+		elif not _piano_keys.is_empty() and not main._speaking:
+			main.ui.piano_press(_piano_keys.pop_front())
+	else:
+		_piano_done = false
+
+
+func _shot_state(key: String) -> String:
+	if main.room == null or main.room.room_id != key:
+		return ""
+	if key == "pier9_dawn" and Game.flag("brenner_here") and not Game.flag("brenner_arrested"):
+		for n in ["Brenner", "Brenner_gun", "Brenner_cuffed"]:
+			if main.room.get_node("Actors/" + n).visible:
+				return n.to_lower()
+	if key == "pier9_sunrise":
+		for n in ["Doyle", "Okafor", "Mara"]:
+			if main.room.get_node("Actors/" + n).visible:
+				return n.to_lower()
+	return ""
 
 
 func _answer() -> void:
@@ -265,7 +299,13 @@ func _run() -> void:
 	await _case4()
 	if _failed:
 		return
-	print("PLAYTHROUGH OK - Cases 1 to 4 finished. Flags: ", Game.flags.keys())
+	print("Case 4 finished.")
+	main._waiting_click = false                         # the "Case 5: Last Call" card, then across the street
+	await expect_room("street_crime")
+	await _case5()
+	if _failed:
+		return
+	print("PLAYTHROUGH OK - all five cases and four endings finished.")
 	_quit(0)
 
 
@@ -667,3 +707,212 @@ func _case4() -> void:
 	for n in ["Board_kenji", "Board_receipt", "Board_gus", "Board_brenner", "Board_owen", "Board_phone", "Board_invite"]:
 		if not main.room.get_node(n).visible:
 			_fail("the board should show %s" % n)
+
+
+func _case5() -> void:
+	print("Case 5, scene 1: across the street")
+	for id in ["lens_shard", "lens_piece", "valet_ticket", "pryce_invite", "lab_receipt", "danny_phone"]:
+		if Game.has_item(id):
+			_fail("Case 4 items should stay behind: %s" % [Game.inventory])
+	expect(["case5_started"])
+	if not Game.has_item("ray_phone"):
+		_fail("Ray should have his phone")
+	await act("precinct_door")                          # not yet: Sal first
+	await act("bar_door", "use", "", ["How do you know my name?"])     # Mara at the tape, and her card
+	expect(["got_reporter_card"])
+	await act("mara", "use", "", ["What are you working on?", "What do you know about the block?", "Goodnight."])
+	await act("park", "use", "", ["What happened?", "Who cut him down?", "What's patrol calling it?", "Danny's alley, Tuesday.",
+			"That'll do."])
+	await act("teo", "use", "", ["You found him?", "The front door.", "Sal's habits.", "Who knows the knock?", "Go home, Teo."])
+	await act("rezoning", "look")
+	await act("payphone")
+	await act("van", "look")
+	await act("patrol_car")
+	await act("car")                                    # not yet
+	expect(["clue_mara_beat", "clue_no_note", "clue_tape_helper", "clue_latch", "clue_tab_habit", "clue_knock_only"])
+	await act("bar_door")
+	await expect_room("blue_note_bar")
+
+	print("Case 5, scene 2: the bar")
+	await act("register", "look")
+	await act("register")                               # the tab book
+	await act("register")                               # the till: not a robbery
+	await _idle()
+	main.busy = true
+	await main.examine_item("tab_book")
+	main.busy = false
+	await act("rack", "look")
+	await act("piano", "look")
+	await act("piano")                                  # "I play like a cop."
+	await act("set_list")                               # Danny's set list
+	await act("stool")
+	await act("chairs", "look")
+	await act("back_booth", "look")
+	await act("poster", "look")
+	expect(["got_tab_book", "clue_wb", "clue_booth_tuesday", "clue_decaf", "clue_cash", "clue_wet_glass", "saw_key_tape",
+			"got_set_list"])
+	if main.room.get_node("Ledger").visible or main.room.get_node("Setlist").visible:
+		_fail("the tab book and the set list should be gone from the bar")
+	await act("back_door")
+	await expect_room("blue_note_back")
+
+	print("Case 5, scene 3: the back room")
+	await act("shah", "use", "", ["How did he die?", "When?", "Did he fight?", "Anything else?", "Thanks, Anita."])
+	await act("stool", "look")
+	await act("sal")
+	await act("locker")
+	await act("desk")
+	expect(["clue_choke", "clue_sal_tod", "clue_let_in", "clue_stool", "clue_clean_hands", "clue_locker", "clue_sal_no",
+			"clue_staged_hanging"])
+	await act("alley_door", "look")
+	await act("hooks", "look")
+	await act("hooks", "look")
+	await act("cooler", "look")
+	await act("cooler", "use", "", ["(Knock two slow, three fast.)", "LAPD. Come on out.", "Nina? It's Ray Kessler."])
+	expect(["clue_back_locked", "clue_umbrella", "nina_out"])
+	if not main.room.get_node("Actors/Nina").visible or main.room.get_node("Cooler_shut").visible:
+		_fail("Nina should be out of the cooler, and the cooler open")
+	await act("nina", "use", "", ["What happened tonight?", "The man who called you.", "Can I see your phone?",
+			"What did Danny have?", "Where does the knock come from?", "Did Danny record his sets?", "Stay with Dr. Shah."])
+	await act("park")
+	expect(["clue_nina_heard", "clue_young_lady", "clue_nina_call", "clue_lisbon", "clue_knock_tune", "clue_takes_app"])
+	# quick save / load round trip in a Case 5 room
+	Game.player_position = main.player.position
+	Game.save_game()
+	await main._load()
+	await expect_room("blue_note_back")
+	if not main.room.get_node("Actors/Nina").visible:
+		_fail("after loading, Nina should still be out")
+	await act("bar_door")
+	await expect_room("blue_note_bar")
+	await act("front_door")
+	await expect_room("street_crime")
+	if main.room.get_node("Actors/Park").visible:
+		_fail("Park should have gone into the back room")
+	await act("precinct_door")
+	await expect_room("squad_room")
+
+	print("Case 5, scene 4: Room 214, the leak")
+	await act("case_board")                             # not yet
+	await act("phone", "use", "", ["Call log", "Hang up"])
+	await act("phone_list")                             # the lieutenant's direct line
+	await act("case_board", "use", "", ["\"Ray, it's one-thirty.\"", "\"Thanks, Walt. Black is fine.\""])
+	await act("phone", "use", "", ["Call Otis"])        # the visitor log, then Doyle, then Ike
+	expect(["clue_one_call", "clue_desk_line", "clue_walt_aside", "clue_visitor_log", "clue_brenner_alone", "knows_brenner",
+			"lied_to_doyle", "clue_takes_hint", "asked_cabin_clip"])
+	await act("clock")
+	await act("door")
+	await expect_room("street_crime")
+	await act("bar_door")
+	await expect_room("blue_note_bar")
+
+	print("Case 5, scene 5: the piano")
+	await act("piano")                                  # one wrong run, then the knock: D, E, C, A, F
+	expect(["knows_password"])
+	await _idle()
+	_choices = ["Calls", "Call Ike Feld (lab)"]
+	main.busy = true
+	await main.examine_item("ray_phone")                # the take
+	main.busy = false
+	expect(["heard_take", "clue_take", "clue_cabin_clip"])
+	await act("back_booth", "look")
+	await act("front_door")
+	await expect_room("street_crime")
+	await act("precinct_door")
+	await expect_room("squad_room")
+
+	print("Case 5, scene 6: the board")
+	await act("door")                                   # the board first
+	await act("case_board", "use", "tab_book", ["Nobody. Sal hanged himself.", "Walt Brenner",
+			"Nina's caller was Doyle's desk line", "Otis: Walt alone in Doyle's office at 1:52",
+			"Vance", "Harlan Pryce, to protect the Haskell bribe", "Envelope, \"1 of 3\"",
+			"The take: \"Then pay him, Walt.\"", "The take: \"Then pay him, Walt.\"", "Envelope, \"1 of 3\""])
+	expect(["case5_deduced", "board_string"])
+	await act("case_board")                             # Danny's box
+	expect(["got_danny_box"])
+	for n in ["Board_empty"]:
+		if not main.room.get_node(n).visible:
+			_fail("the middle of the board should be bare")
+	for n in ["Board_envelope", "Board_walt", "Board_string"]:
+		if main.room.get_node(n).visible:
+			_fail("%s should be in Danny's box" % n)
+	await act("phone", "use", "", ["Call Harbor Marine"])
+	await act("phone", "use", "", ["Call Otis"])
+	await _idle()
+	_choices = ["New message to 213-555-0163"]
+	main.busy = true
+	await main.examine_item("ray_phone")                # the bait
+	main.busy = false
+	expect(["vance_in", "clue_brenner_number", "otis_backup", "bait_sent"])
+	await act("door")
+	await expect_room("street_crime")
+	await act("car")                                    # the lab, then the 110 to the pier
+	await expect_room("pier9_dawn")
+	expect(["got_take_drive"])
+	if not Game.has_item("take_drive") or not Game.has_item("danny_phone"):
+		_fail("Ike should have handed over the drive and Danny's phone: %s" % [Game.inventory])
+
+	print("Case 5, scene 8: Pier 9 at dawn")
+	await act("bollard")                                # Tiny and Vance first
+	await act("tiny")
+	await act("radio")
+	await act("vance", "use", "", ["Thanks for coming.", "The man on the phone.", "Stay out of sight.", "I'm ready."])
+	await act("bollard", "use", "", ["Wednesday, ten past one.", "You called Nina Alvarez.", "Let's see what you've got, Walt."])
+	expect(["brenner_here", "brenner_lie1_broken"])
+	if not main.room.get_node("Lincoln").visible or not main.room.get_node("Actors/Brenner").visible:
+		_fail("Brenner and his Lincoln should be on the pier")
+	await act("brenner", "use", "tab_book")             # step 2: Sal wrote him down
+	expect(["brenner_lie2_broken"])
+	await act("brenner", "use", "", ["Empty by Christmas.", "They drew a lobby.", "A long gray car.", "Officer Park logged you.",
+			"You were in the booth Tuesday.", "How much was Sal worth?", "Put it down, Walt.", "Put it down, Walt.",
+			"Think about Maureen.", "It's over.", "Sal poured you a drink.", "Who taught Maureen to clear a revolver?",
+			"Harlan's not coming, Walt."])
+	expect(["brenner_lie3_broken", "phone_in_harbor", "brenner_talked_down", "brenner_arrested"])
+	if not Game.has_item("brenner_38") or Game.has_item("danny_phone"):
+		_fail("Ray should have the .38, and Danny's phone should be in the harbor: %s" % [Game.inventory])
+	for n in ["Actors/Brenner", "Actors/Brenner_gun", "Actors/Brenner_cuffed"]:
+		if main.room.get_node(n).visible:
+			_fail("%s should be gone after the arrest" % n)
+	await act("vance")
+	await act("car")
+	await act("tiny", "use", "", ["Not yet."])          # Tiny's answer; the sun comes up, and Ray waits
+	expect(["tiny_told"])
+	await expect_room("pier9_sunrise")
+	if Game.flag("ending_chosen"):
+		_fail("'Not yet' should leave the choice open")
+
+	# the four endings, from the same sunrise
+	var flags: Dictionary = Game.flags.duplicate(true)
+	var inv: Array[String] = Game.inventory.duplicate()
+	await _ending("Ending A: Doyle, all three seeds", flags, inv, [], ["Call Lt. Doyle.", "Envelope, \"1 of 3\"",
+			"Walter Brenner's card", "Photo of Walt B.'s ride, billed to Pryce Development", "Pryce's invitation"],
+			"ending_doyle_best")
+	await _ending("Ending B: Doyle, no invitation", flags, inv, ["board_pryce_invite"], ["Call Lt. Doyle.",
+			"Walter Brenner's card", "Photo of Walt B.'s ride, billed to Pryce Development", "I don't have it."],
+			"ending_doyle_bitter")
+	await _ending("Ending C: Internal Affairs and the DA", flags, inv, [], ["Call Internal Affairs and the DA."], "ending_by_book")
+	await _ending("Ending D: the Times", flags, inv, [], ["Call Mara Quist at the Times."], "ending_times")
+
+
+func _ending(title: String, flags: Dictionary, inv: Array[String], drop: Array, answers: Array[String], want: String) -> void:
+	if _failed:
+		return
+	print(title)
+	Game.flags = flags.duplicate(true)
+	for f in drop:
+		Game.flags.erase(f)
+	Game.inventory = inv.duplicate()
+	Game.inventory_changed.emit()
+	await main.change_room("pier9_sunrise", "drive")
+	await expect_room("pier9_sunrise")
+	await act("bollard", "use", "", answers)            # the call, the ending, the last scene, the credits
+	while not main._waiting_click and not _failed:      # the last card
+		await get_tree().process_frame
+	expect([want, "game_done"])
+	for e in ["ending_doyle_best", "ending_doyle_bitter", "ending_by_book", "ending_times"]:
+		if e != want and Game.flag(e):
+			_fail("only %s should be set, not %s" % [want, e])
+	if want != "ending_doyle_best" and Game.has_item("take_drive"):
+		_fail("the drive should have been handed over")
+	main._waiting_click = false                         # a new game starts in Room 214
+	await expect_room("squad_room")

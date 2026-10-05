@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/rooms/squad_room.gd" id="script"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room.png" id="bg"]
 [ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_empty.png" id="ov_board_empty"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_mug.png" id="ov_mug"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_envelope.png" id="ov_board_envelope"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_kenji.png" id="ov_board_kenji"]
@@ -12,6 +13,8 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_owen.png" id="ov_board_owen"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_phone.png" id="ov_board_phone"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_invite.png" id="ov_board_invite"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_walt.png" id="ov_board_walt"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_string.png" id="ov_board_string"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_fg_desk.png" id="occ_fg_desk"]
 
 [node name="SquadRoom" type="Node2D"]
@@ -29,6 +32,11 @@ tint = Color(0.78, 0.74, 0.7, 1)
 texture = ExtResource("bg")
 centered = false
 
+[node name="Board_empty" type="Sprite2D" parent="."]
+texture = ExtResource("ov_board_empty")
+centered = false
+position = Vector2(629, 349)
+
 [node name="Mug" type="Sprite2D" parent="."]
 texture = ExtResource("ov_mug")
 centered = false
@@ -37,7 +45,7 @@ position = Vector2(528, 578)
 [node name="Board_envelope" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_envelope")
 centered = false
-position = Vector2(631, 425)
+position = Vector2(634, 425)
 
 [node name="Board_kenji" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_kenji")
@@ -47,22 +55,22 @@ position = Vector2(624, 359)
 [node name="Board_receipt" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_receipt")
 centered = false
-position = Vector2(665, 434)
+position = Vector2(665, 435)
 
 [node name="Board_gus" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_gus")
 centered = false
-position = Vector2(680, 420)
+position = Vector2(683, 420)
 
 [node name="Board_brenner" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_brenner")
 centered = false
-position = Vector2(631, 402)
+position = Vector2(658, 403)
 
 [node name="Board_owen" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_owen")
 centered = false
-position = Vector2(629, 413)
+position = Vector2(628, 413)
 
 [node name="Board_phone" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_phone")
@@ -72,7 +80,17 @@ position = Vector2(643, 361)
 [node name="Board_invite" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_invite")
 centered = false
-position = Vector2(640, 357)
+position = Vector2(667, 357)
+
+[node name="Board_walt" type="Sprite2D" parent="."]
+texture = ExtResource("ov_board_walt")
+centered = false
+position = Vector2(629, 399)
+
+[node name="Board_string" type="Sprite2D" parent="."]
+texture = ExtResource("ov_board_string")
+centered = false
+position = Vector2(629, 360)
 
 [node name="WalkArea" type="Polygon2D" parent="."]
 color = Color(0.2, 0.9, 0.4, 0.3)
@@ -196,6 +214,16 @@ face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/phone"]
 polygon = PackedVector2Array(762.2, 624.3, 767.9, 614.9, 769.6, 612.6, 803.5, 613.1, 808.3, 618.9, 808.4, 627.9, 798.1, 635.8, 762.4, 633.4)
+
+[node name="phone_list" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "phone_list"
+display_name = "phone list"
+walk_to = Vector2(703, 809)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/phone_list"]
+polygon = PackedVector2Array(717, 628.6, 724.3, 622.8, 756.7, 624.2, 756.8, 624.8, 749.9, 630.7, 717, 629.2)
 
 [node name="mug" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")

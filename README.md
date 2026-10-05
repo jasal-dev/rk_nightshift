@@ -2,7 +2,7 @@
 
 A small point-and-click detective adventure built in **pure Godot 4** (no plugins), with pre-rendered 1080p art.
 It's present-day Los Angeles, after midnight and raining.
-It has four cases so far, and ends on the title card for Case 5.
+It has five cases, one night shift from midnight to sunrise, and four endings.
 
 - **Case 1: Dead Piano Player**, about 35 minutes: the squad room, the street outside the Blue Note, Pier 9 and
   Vance's office, eight items, six notebook clues, a drive and the deduction at the murder board.
@@ -18,6 +18,33 @@ It has four cases so far, and ends on the title card for Case 5.
   under it, the glass house in Los Feliz where the rider made his last delivery, and a garage in Mount Washington)
   and the night window of the crime lab, six items, 40 notebook clues, a gate camera to watch, and a broken
   headlight to fit back together.
+- **Case 5: Last Call**, about 45 minutes: Sal Moretti, the Blue Note's bartender, hanging in his back room, and the
+  finale. The street outside in its crime-scene state, the Blue Note's bar and back room (first time inside),
+  Room 214, the lab, and Pier 9 at dawn and at sunrise. Eight items, 40 notebook clues, a desk phone with a long
+  memory, Danny's piano to play, his last recording, a three-part deduction, a showdown with a .38, and a choice
+  of where the recording goes, which picks one of four endings and their end cards.
+
+**Walkthrough (spoilers), Case 5:**
+
+1. *The street.* Head for the Blue Note's door: Mara Quist stops you and gives you her card. Ask Teo everything
+   (the latch, "If it isn't in the book"). Park's "Danny's alley, Tuesday" is optional. Go in.
+2. *The bar.* Use the register twice (the tab book, then the till), read the tab book (right click). Look at the
+   drying rack. Take the set list from the piano. Go through the door at the end of the bar.
+3. *The back room.* Ask Shah how he died. Look at the stool, use Sal, Danny's locker and the desk. Use the cooler,
+   then "Nina? It's Ray Kessler." Ask Nina everything, above all "Can I see your phone?" (1:52, a police number).
+4. *Room 214* (the front door, then the precinct). Desk phone: Call log. Look at the phone list (Doyle's direct
+   line). Use the board: "Thanks, Walt. Black is fine." Desk phone: Call Otis (Walter Brenner; then Doyle calls, then
+   Ike: the password hint).
+5. *The bar.* Use the piano and play the knock: D, E, C, A, F (the staff on the set list, or "D.R. decaf" in the
+   tab book). Right-click your phone: Calls, Call Ike. Listen to the take.
+6. *Room 214.* The board: Walt Brenner, then Otis's log and the tab book; Harlan Pryce, then the take and the
+   envelope. Use the board again (Danny's box). Desk phone: Call Harbor Marine, then Call Otis. Your phone: Texts,
+   the new message. Out to the car.
+7. *Pier 9.* Talk to Tiny and Vance ("I'm ready"), then use the bollard. Brenner: "You called Nina Alvarez", the tab
+   book on him, then "You were in the booth Tuesday". Then talk him down ("Think about Maureen", "Sal poured you a
+   drink", "Harlan's not coming") or force his hand. Talk to Tiny after.
+8. *Sunrise.* Choose who gets the drive. Lt. Doyle's best ending needs all three optional seeds pinned on the board:
+   the ride receipt (Case 2), Brenner's card (Case 3) and Pryce's invitation (Case 4).
 
 **Walkthrough (spoilers), Case 4:**
 
@@ -124,23 +151,29 @@ scripts/rooms/*.gd        Room logic: one interact() function per room
 scripts/case2.gd          Case 2's shared pieces: speech colours, the drives, the car menu between locations
 scripts/case3.gd          Case 3's shared pieces: speech colours, the drive in and the drive back
 scripts/case4.gd          Case 4's shared pieces: speech colours, the drives, the car menu, Otis running the plate
-tests/playthrough.tscn    Automated playthrough of Cases 1 to 4 (see "Testing")
+scripts/case5.gd          Case 5's shared pieces: speech colours, Ray's phone, the take, the drives, the credits
+tests/playthrough.tscn    Automated playthrough of all five cases and the four endings (see "Testing")
 assets/                   Generated room art, character sheets, light probes, item icons, cursors
 tools/                    Python generators for the art (Pillow + numpy)
+docs/                     Story outline, case scripts, story arc review, and the technical reference
 ```
+
+`docs/technical-reference.md` covers what this README doesn't: the runtime architecture, every set `meta` key,
+the file formats, the room map, how a case is put together, and checklists for adding rooms, items and cases.
 
 ## Adding a room
 
-1. Make the background at 1920×1080 (a 3D set in `tools/r3/`) and put it in `assets/rooms/`.
-2. Duplicate `scenes/rooms/street.tscn` and swap the background.
-3. Edit `WalkArea` (a Polygon2D) in the editor to cover the floor.
-4. Add a `Hotspot` (an Area2D using `hotspot.gd`) with a `CollisionPolygon2D` child for each
-   clickable thing. Set its `id`, `display_name`, `walk_to` and `face`.
-5. Add `Marker2D` spawns under `Spawns`, each named after the room you arrive from.
-6. Write a script that `extends Room` and implement `interact(hs, verb, item)` with a `match hs.id:`.
-7. Bake its light probes (`light_probes.py`) so the detective is lit by the room. Without them he's
-   drawn unlit, tinted with the room's `tint`.
-8. Go there with `await main.change_room("my_room", room_id)`.
+1. Write the 3D set, `tools/r3/<room>.py`, with a `build(hide=())` that returns the scene, camera, environment and
+   `meta`: the walk area, spawns (named after the room you arrive from), and each hotspot's name, walk-to point and
+   facing, all in floor coordinates.
+2. Render it with `python render_room.py <room>` (try `--preview` first). That writes the background, the overlay and
+   walk-behind cut-outs, `tools/r3/out/<room>.json` and the light probes.
+3. Add the room to `ROOMS` in `build_scenes.py` and run it to generate `scenes/rooms/<room>.tscn`. Don't edit the
+   `.tscn` by hand: it gets regenerated.
+4. Write `scripts/rooms/<room>.gd`, which `extends Room` and implements `interact(hs, verb, item)` with a `match hs.id:`.
+5. Go there with `await main.change_room("<room>", room_id)`.
+
+`docs/technical-reference.md` lists every `meta` key and has checklists for new items, clues and cases.
 
 ## Scripting API (available in room scripts as `main.*`)
 
@@ -157,7 +190,7 @@ main.clue("clue_id")                # write a Game.CLUES line in the notebook ("
 await main.narrate("Voice-over.")     # Ray speaking off-screen (drives, the murder board)
 await main.drive_begin(); await main.text_message("hi", false, "Maya"); await main.drive_end()
 await main.case_card("1:40 a.m.", "Case 2: Five Stars")   # title card between cases (click to go on)
-await main.end_case("4:50 a.m.", "Case 5: Last Call", 4)   # last card: the game ends here for now
+await main.the_end()                 # the last card after the credits; a new game starts after it
 main.ui.show_board("Question?", "NAME\nCaption"); main.ui.set_board_pins(["card", ""], ["", "slot label"])
 var pick: String = await main.device("Glide Driver", ["Status", "Trips"], 0, "body text", ["row", "row"])
 main.ui.show_device("Title", [], 0, "body", ["row"], false); main.ui.hide_device()   # a screen that only shows
@@ -198,14 +231,23 @@ road or on the reeds, the tarp over Crane's Audi, Crane standing or sitting on h
 `ui.show_jigsaw()`: a picture with holes and loose pieces you drag in and click to turn (`tools/r3/gen_closeups.py`
 draws them and prints each piece's target).
 
+Case 5's cast joins `npc.CAST`: Brenner gunmetal, Teo sand, Mara ink blue, Okafor plum, and Nina, Doyle, Pryce and
+Danny for the first time on screen (Pryce only in the end cards, `tools/r3/endcards.py`). The rig gained a paper
+coffee cup, a teacup, a .38 and a paring knife. The street (`street_crime.py`) and Pier 9 (`pier9_dawn.py`,
+`pier9_sunrise.py`) are variants of their Case 1 sets: `street.build(crime=True)`, `pier9_dock.build(time=...)`.
+The patrol car's light bar turns with two exclusive overlays. Danny's take is a still, not a room
+(`blue_note_take.py`, shown with `ui.show_scene()` under subtitles from `main.caption()`), and Danny in it is half
+there: `ghosts` in a set's `meta` blends a figure toward the frame without it. Danny's piano is `ui.show_piano()` and
+`main.piano(notes)`, which returns once the last five notes played spell the knock.
+
 `prius_interior` is a close-up: the same 3D set as the overlook with the camera inside the car. Its room
 script sets `show_player = false`, so the detective isn't drawn, and its hotspots have no `walk_to`.
 
 ## Testing
 
-`tests/playthrough.tscn` plays all of Cases 1 to 4 at 8× speed through the game's own click handling,
-answering every dialogue and device screen by text, and checks the flags later cases depend on. From the
-project folder:
+`tests/playthrough.tscn` plays all five cases at 8× speed through the game's own click handling, answering
+every dialogue and device screen by text, and checks the flags later cases depend on. At the end of Case 5 it
+plays each of the four endings from the same sunrise. From the project folder:
 
 ```
 Godot_v4.7.2-stable_win64_console.exe --headless --path . res://tests/playthrough.tscn
@@ -276,4 +318,5 @@ cd ..; python gen_art.py              # cursors, raindrop
 `.tscn` files. A full room render takes 1-3 minutes, the detective about a minute.
 `tools/gen_detective.py`, `tools/gen_font.py` and `assets/fonts/pixel.*` are left over from the
 640×360 pixel-art version. They're no longer used.
-`r3.c` changed (probe mode), so recompile it once with the gcc line above.
+On Windows without gcc, `tools/r3/build_r3.bat` builds `r3.exe` with the VS 2019 Build Tools.
+`python render_room.py <room> --meta-only` re-projects hotspots, walk area and spawns without re-rendering.

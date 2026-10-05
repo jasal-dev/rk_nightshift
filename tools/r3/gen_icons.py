@@ -59,6 +59,15 @@ def scene():
     S.mat('invite_gold', (220, 180, 90), spec=1.2, shin=60)
     S.mat('receipt_blue', (30, 50, 110))
     S.mat('phone_blk', (20, 20, 22), spec=1.2, shin=80)
+    # Case 5
+    S.mat('ray_screen', (20, 40, 80), emis=(90, 140, 220), emis_mult=1.0)
+    S.mat('ledger_g', (40, 90, 54), spec=0.3, namp=0.1, nscale=40)
+    S.mat('box_card', (176, 146, 100), namp=0.2, nscale=30)
+    S.mat('evidence_red', (170, 30, 30))
+    S.mat('gunmetal', (60, 62, 68), spec=1.6, shin=80)
+    S.mat('grip', (70, 46, 30), spec=0.5, shin=30)
+    S.mat('bag_clear', (200, 210, 220), spec=1.4, shin=90)
+    S.mat('times', (240, 240, 236))
     return S
 
 
@@ -245,6 +254,52 @@ def build(item):
         for k in range(5):
             S.wbox((-0.04, 0.15 - k * 0.09, 0.008), (0.18 - (k % 2) * 0.05, 0.014, 0.002), 'ink_dk')
         rot = Rz(-6) @ Rx(-20)
+    elif item == 'ray_phone':
+        S.wbox((0, 0, 0), (0.19, 0.36, 0.03), 'phone_blk', rnd=0.05)
+        S.wbox((0, 0.01, 0.031), (0.16, 0.3, 0.002), 'ray_screen')
+        for k in range(3):                                                                      # a text thread
+            S.wbox((-0.03 + (k % 2) * 0.06, 0.18 - k * 0.12, 0.034), (0.08, 0.035, 0.002), 'ink' if k % 2 else 'blue')
+        rot = Rz(-12) @ Rx(-18)
+    elif item == 'reporter_card':
+        S.wbox((0, 0, 0), (0.37, 0.22, 0.008), 'times', rnd=0.005)
+        S.wbox((-0.1, 0.1, 0.009), (0.22, 0.03, 0.002), 'ink_dk')                              # Los Angeles Times
+        S.wbox((-0.12, -0.02, 0.009), (0.14, 0.018, 0.002), 'ink_dk')
+        S.wbox((-0.12, -0.1, 0.009), (0.18, 0.012, 0.002), 'blue')                               # her cell, in pen
+        rot = Rz(8) @ Rx(-22)
+    elif item == 'tab_book':
+        S.wbox((0, 0, 0), (0.3, 0.38, 0.06), 'ledger_g', rnd=0.02)
+        S.wbox((0.02, 0, 0.0), (0.28, 0.36, 0.05), 'paper')
+        S.wbox((0.0, 0, 0.062), (0.29, 0.37, 0.004), 'ledger_g', rnd=0.01)
+        for k, c in enumerate(('red', 'blue', 'masking')):                                      # three bookmarks
+            S.wbox((-0.15 + k * 0.12, 0.42, 0.0), (0.025, 0.06, 0.004), c)
+        rot = Rz(-8) @ Rx(-22)
+    elif item == 'set_list':
+        S.wbox((0, 0, 0), (0.28, 0.38, 0.006), 'paper')
+        for k in range(5):
+            S.wbox((-0.04, 0.26 - k * 0.09, 0.007), (0.18 - (k % 2) * 0.05, 0.012, 0.002), 'ink_dk')
+        for k in range(5):                                                                      # the staff
+            S.wbox((0.0, -0.18 - k * 0.025, 0.007), (0.22, 0.003, 0.002), 'ink_dk')
+        S.wbox((0.0, 0.4, 0.008), (0.08, 0.03, 0.002), 'masking')                              # tape at the top
+        rot = Rz(6) @ Rx(-20)
+    elif item == 'danny_box':
+        S.wbox((0, 0, 0), (0.4, 0.2, 0.3), 'box_card', rnd=0.01)
+        S.wbox((0, 0.205, 0), (0.41, 0.01, 0.31), 'box_card', rnd=0.005)
+        S.wbox((0.0, 0.0, 0.302), (0.22, 0.08, 0.004), 'paper')
+        S.wbox((0.0, 0.03, 0.305), (0.16, 0.012, 0.002), 'evidence_red')
+        rot = Ry(-28) @ Rx(18)
+    elif item == 'take_drive':
+        S.wbox((0, 0, 0), (0.3, 0.36, 0.01), 'bag_clear', rnd=0.01)                            # the evidence bag
+        S.wbox((0, 0.3, 0.012), (0.3, 0.05, 0.004), 'evidence_red')
+        S.wbox((0, -0.04, 0.02), (0.06, 0.16, 0.02), 'phone_blk', rnd=0.01)                    # the drive
+        S.wbox((0, 0.13, 0.02), (0.035, 0.03, 0.012), 'silver')
+        rot = Rz(-10) @ Rx(-20)
+    elif item == 'brenner_38':
+        S.cone((-0.24, -0.06, 0), (-0.32, -0.3, 0), 0.06, 0.07, 'grip')                       # the grip
+        S.wbox((-0.12, 0.02, 0), (0.12, 0.07, 0.035), 'gunmetal', rnd=0.02)                    # the frame
+        S.fcyl((-0.08, 0.02, 0), 0.08, 0.05, 'gunmetal', axis='z')                             # the cylinder
+        S.cyl((0.02, 0.06, 0), (0.36, 0.06, 0), 0.03, 'gunmetal')                              # the barrel
+        S.wbox((-0.16, -0.08, 0.0), (0.05, 0.035, 0.012), 'gunmetal')                          # the trigger guard
+        rot = Rz(8) @ Rx(-25)
     S.transform(rot)
     S.light((-1.2, 1.6, 2.0), (255, 236, 210), power=7, range=10, soft=8)
     S.light((1.4, 0.6, -1.0), (140, 180, 255), power=4, range=10, shadow=False)
@@ -257,7 +312,8 @@ def main():
                                   'driver_card', 'norms_receipt', 'kenji_keys', 'card_slip', 'frozen_peas', 'sd_cards',
                                   'ride_receipt', 'gus_keys', 'uv_lamp', 'catalogue', 'star_earring', 'fake_oscar',
                                   'brenner_card', 'lens_shard', 'lens_piece', 'danny_phone', 'valet_ticket',
-                                  'pryce_invite', 'lab_receipt')):
+                                  'pryce_invite', 'lab_receipt', 'ray_phone', 'reporter_card', 'tab_book', 'set_list',
+                                  'danny_box', 'take_drive', 'brenner_38')):
         S = build(item)
         cam = Camera((0, 0, 5), (0, 0, 0), W=SIZE * SS, H=SIZE * SS, ortho=True, ortho_h=0.95)
         env = dict(sky=(60, 60, 70), bounce=(30, 26, 26), fog=0, reflections=False, vol_scale=0, grid=0.12, ao_scale=0.3)

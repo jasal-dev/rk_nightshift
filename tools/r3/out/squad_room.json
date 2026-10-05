@@ -312,6 +312,40 @@
    ],
    "face": "up"
   },
+  "phone_list": {
+   "name": "phone list",
+   "polygon": [
+    [
+     717.0,
+     628.6
+    ],
+    [
+     724.3,
+     622.8
+    ],
+    [
+     756.7,
+     624.2
+    ],
+    [
+     756.8,
+     624.8
+    ],
+    [
+     749.9,
+     630.7
+    ],
+    [
+     717.0,
+     629.2
+    ]
+   ],
+   "walk_to": [
+    703,
+    809
+   ],
+   "face": "up"
+  },
   "mug": {
    "name": "coffee mug",
    "polygon": [
@@ -633,6 +667,7 @@
   "typewriter",
   "lamp",
   "phone",
+  "phone_list",
   "mug",
   "wastebasket",
   "cabinet",
@@ -711,12 +746,16 @@
  ],
  "extra": {},
  "overlays": {
+  "board_empty": [
+   629,
+   349
+  ],
   "mug": [
    528,
    578
   ],
   "board_envelope": [
-   631,
+   634,
    425
   ],
   "board_kenji": [
@@ -725,18 +764,18 @@
   ],
   "board_receipt": [
    665,
-   434
+   435
   ],
   "board_gus": [
-   680,
+   683,
    420
   ],
   "board_brenner": [
-   631,
-   402
+   658,
+   403
   ],
   "board_owen": [
-   629,
+   628,
    413
   ],
   "board_phone": [
@@ -744,8 +783,16 @@
    361
   ],
   "board_invite": [
-   640,
+   667,
    357
+  ],
+  "board_walt": [
+   629,
+   399
+  ],
+  "board_string": [
+   629,
+   360
   ]
  },
  "occluders": {

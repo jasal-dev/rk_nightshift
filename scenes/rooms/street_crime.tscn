@@ -1,0 +1,272 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/rooms/street_crime.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime.png" id="bg"]
+[ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_park.png" id="ov_park"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_bar_red.png" id="ov_bar_red"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_bar_blue.png" id="ov_bar_blue"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_hydrant.png" id="occ_hydrant"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_streetlamp.png" id="occ_streetlamp"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_car.png" id="occ_car"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_patrol.png" id="occ_patrol"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_teo.png" id="occ_teo"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_mara.png" id="occ_mara"]
+
+[node name="StreetCrime" type="Node2D"]
+script = ExtResource("script")
+room_id = "street_crime"
+room_name = "Street"
+far_y = 799.8
+near_y = 876.5
+far_scale = 0.704
+near_scale = 0.887
+reflection_strength = 0.2
+tint = Color(0.7, 0.72, 0.88, 1)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("bg")
+centered = false
+
+[node name="Bar_red" type="Sprite2D" parent="."]
+texture = ExtResource("ov_bar_red")
+centered = false
+position = Vector2(0, 0)
+
+[node name="Bar_blue" type="Sprite2D" parent="."]
+texture = ExtResource("ov_bar_blue")
+centered = false
+position = Vector2(0, 0)
+
+[node name="WalkArea" type="Polygon2D" parent="."]
+color = Color(0.2, 0.9, 0.4, 0.3)
+polygon = PackedVector2Array(6, 796.6, 1914, 803.1, 1914, 818.7, 1857.7, 818.5, 1914, 838.8, 1914, 880.8, 6, 872.5)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Park" type="Sprite2D" parent="Actors"]
+texture = ExtResource("ov_park")
+centered = false
+position = Vector2(608, 807)
+offset = Vector2(-248, -307)
+
+[node name="Hydrant" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_hydrant")
+centered = false
+position = Vector2(134, 854)
+offset = Vector2(-35, -114)
+
+[node name="Streetlamp" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_streetlamp")
+centered = false
+position = Vector2(1414, 865)
+offset = Vector2(-11, -865)
+
+[node name="Car" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_car")
+centered = false
+position = Vector2(1708, 897)
+offset = Vector2(-26, -207)
+
+[node name="Patrol" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_patrol")
+centered = false
+position = Vector2(1263, 889)
+offset = Vector2(-386, -224)
+
+[node name="Teo" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_teo")
+centered = false
+position = Vector2(317, 852)
+offset = Vector2(-36, -187)
+
+[node name="Mara" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_mara")
+centered = false
+position = Vector2(778, 887)
+offset = Vector2(-42, -254)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle1" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(190.3, 854.7, 167.9, 861.1, 135.3, 865.9, 101.7, 867.6, 77, 865.7, 68.4, 860.7, 77.5, 854.2, 101.2, 848.1, 132.6, 843.7, 163.8, 842.3, 187.3, 843.9, 197.2, 848.5)
+
+[node name="Obstacle2" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(1461.1, 864.9, 1461.9, 870.3, 1449.5, 874.4, 1427.1, 875.8, 1401.1, 874.2, 1379, 870, 1366.8, 864.5, 1367.5, 859.3, 1380.2, 855.5, 1401.6, 854.3, 1426.2, 855.7, 1447.9, 859.6)
+
+[node name="Obstacle3" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(413.2, 849.3, 390.5, 857.2, 353.8, 863, 313.4, 865.1, 281.4, 862.7, 267.2, 856.6, 274, 848.8, 298.7, 841.3, 334.1, 836.1, 371.2, 834.3, 401.1, 836.4, 416.7, 841.8)
+
+[node name="Obstacle4" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(644.3, 806.8, 635.2, 810.4, 618.3, 813, 598.3, 814, 580.9, 812.9, 570.8, 810.2, 570.8, 806.6, 580.5, 803.1, 597.1, 800.6, 616.3, 799.8, 633.1, 800.8, 643.4, 803.3)
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="squad_room" type="Marker2D" parent="Spawns"]
+position = Vector2(1667, 819)
+
+[node name="blue_note_bar" type="Marker2D" parent="Spawns"]
+position = Vector2(457, 809)
+
+[node name="start" type="Marker2D" parent="Spawns"]
+position = Vector2(1667, 819)
+
+[node name="drive" type="Marker2D" parent="Spawns"]
+position = Vector2(1667, 819)
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="alley" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "alley"
+display_name = "alley"
+walk_to = Vector2(0, 0)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/alley"]
+polygon = PackedVector2Array(723, 106.3, 1058.7, 104.7, 1057.7, 798.7, 725.2, 797.5)
+
+[node name="van" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "van"
+display_name = "coroner's van"
+walk_to = Vector2(0, 0)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/van"]
+polygon = PackedVector2Array(866.3, 504.5, 1022.2, 504.5, 1022, 697.8, 866.5, 697.5)
+
+[node name="neon" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "neon"
+display_name = "neon sign"
+walk_to = Vector2(0, 0)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/neon"]
+polygon = PackedVector2Array(61.1, 308.2, 115.3, 224.5, 117.5, 222.2, 505.2, 220.9, 507.5, 223.2, 549.9, 309, 550.6, 436.2, 71.5, 436.6, 62.7, 435.9)
+
+[node name="trash_can" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "trash_can"
+display_name = "dumpster"
+walk_to = Vector2(964, 803)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/trash_can"]
+polygon = PackedVector2Array(792.8, 729.8, 799.5, 722.1, 929.1, 620.2, 1044, 620.4, 1050.9, 634.8, 1050.9, 643, 1045.3, 757.6, 953.1, 790.6, 890.9, 790.4, 845.8, 783.3, 792.9, 769.9)
+
+[node name="precinct_door" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "precinct_door"
+display_name = "precinct"
+walk_to = Vector2(1651, 812)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/precinct_door"]
+polygon = PackedVector2Array(1424.1, 760.3, 1426.1, 457.4, 1472.1, 452.4, 1757.5, 452.2, 1753.7, 787.9, 1469.7, 787)
+
+[node name="bar_door" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "bar_door"
+display_name = "Blue Note door"
+walk_to = Vector2(465, 804)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/bar_door"]
+polygon = PackedVector2Array(425.2, 516.9, 486, 510.5, 612.3, 510.5, 613.5, 748.9, 597.6, 766.5, 552, 796.9, 443, 796.6, 430.7, 785.6, 427.2, 780.5)
+
+[node name="rezoning" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "rezoning"
+display_name = "notice"
+walk_to = Vector2(366, 805)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/rezoning"]
+polygon = PackedVector2Array(375.5, 607.4, 430.1, 607.5, 430.7, 677.3, 376, 677.2)
+
+[node name="payphone" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "payphone"
+display_name = "payphone"
+walk_to = Vector2(775, 822)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/payphone"]
+polygon = PackedVector2Array(739.7, 586.4, 747.1, 530.2, 750.1, 529.9, 823.4, 529.9, 830.5, 584.6, 830.7, 693.9, 792.3, 800.1, 786.2, 806.2, 780.1, 800, 740.1, 698.1)
+
+[node name="tape" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "tape"
+display_name = "crime tape"
+walk_to = Vector2(0, 0)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/tape"]
+polygon = PackedVector2Array(132.5, 732.3, 1403.1, 715.5, 1402.9, 744.8, 1294.2, 751.5, 1186, 757.7, 1078.4, 763.3, 971.3, 767.8, 864.7, 771.1, 758.7, 773.1, 653.1, 773.7, 548.1, 773, 443.5, 771.1, 339.5, 768.2, 235.9, 764.7, 132.8, 760.8)
+
+[node name="flares" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "flares"
+display_name = "road flares"
+walk_to = Vector2(0, 0)
+face = "down"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/flares"]
+polygon = PackedVector2Array(115.6, 962.3, 295.6, 916.5, 697.2, 918.4, 621, 965)
+
+[node name="car" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "car"
+display_name = "car"
+walk_to = Vector2(1912, 870)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/car"]
+polygon = PackedVector2Array(1675.8, 861.8, 1676.8, 766.2, 1862.7, 688.3, 1920, 688.4, 1920, 999.2, 1907.1, 992.4)
+
+[node name="patrol_car" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "patrol_car"
+display_name = "patrol car"
+walk_to = Vector2(1166, 867)
+face = "down"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/patrol_car"]
+polygon = PackedVector2Array(877.4, 903.5, 884.2, 830.5, 886.2, 820.6, 904, 765.9, 1075.5, 676.5, 1182, 665, 1286.5, 665.2, 1384.5, 665.4, 1551.5, 677.4, 1666.6, 712.6, 1763.5, 828.7, 1770.9, 851.4, 1770.7, 870.5, 1768, 938, 1652.2, 994.5, 996.3, 990.7, 877.4, 933.5)
+
+[node name="park" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "park"
+display_name = "Officer Park"
+walk_to = Vector2(681, 819)
+face = "left"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/park"]
+polygon = PackedVector2Array(567.1, 581.9, 645.7, 581.9, 646.7, 800.7, 568.3, 800.4)
+
+[node name="teo" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "teo"
+display_name = "Teo"
+walk_to = Vector2(431, 856)
+face = "left"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/teo"]
+polygon = PackedVector2Array(279.1, 653, 418.7, 653.2, 420.1, 842.4, 280.9, 841.8)
+
+[node name="mara" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "mara"
+display_name = "Mara Quist"
+walk_to = Vector2(791, 864)
+face = "down"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/mara"]
+polygon = PackedVector2Array(731.1, 631.9, 824.6, 632.1, 825.1, 902.6, 732, 902.1)

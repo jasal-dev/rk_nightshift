@@ -1,0 +1,43 @@
+{
+ "room": "blue_note_take",
+ "hotspots": {},
+ "order": [],
+ "walk": [
+  [
+   0,
+   0
+  ],
+  [
+   1920,
+   0
+  ],
+  [
+   1920,
+   1080
+  ],
+  [
+   0,
+   1080
+  ]
+ ],
+ "spawns": {
+  "start": [
+   960,
+   900
+  ]
+ },
+ "obstacles": [],
+ "overlay_bases": {},
+ "far_y": 0,
+ "far_scale": 1.0,
+ "near_y": 1080,
+ "near_scale": 1.0,
+ "tint": [
+  0.86,
+  0.76,
+  0.7
+ ],
+ "extra": {},
+ "overlays": {},
+ "occluders": {}
+}

@@ -5,9 +5,14 @@ import numpy as np
 from scene3d import *
 import textures as tx
 import npc
+import cars
 
 
-def build(hide=()):
+def build(hide=(), time='night'):
+    """time: 'night' (Case 1), 'dawn' (Case 5, scene 8: the rain over, the sky going pink behind the crane, the barrel
+    cold, Vance in his doorway, Brenner's gray Lincoln and Brenner himself as overlays) or 'sunrise' (scenes 9 and 10:
+    the sun up over the port, the Lincoln left for the lab, and whoever Ray called, as overlays)."""
+    day = time != 'night'
     S = Scene()
     rng = random.Random(9)
     # ---------------------------------------------------------------- materials
@@ -53,12 +58,15 @@ def build(hide=()):
     S.mat('tire', (16, 16, 18))
     S.mat('taillight', (120, 10, 10), emis=(220, 30, 30), emis_mult=1.2)
     S.mat('lamp_head', (50, 50, 54), spec=0.3)
-    S.mat('lamp_glass', (255, 190, 120), emis=(255, 170, 90), emis_mult=6)
+    S.mat('lamp_glass', (255, 190, 120), emis=(255, 170, 90), emis_mult=0.0 if time == 'sunrise' else 6)
     S.mat('crane', (150, 60, 40), namp=0.2, nscale=4)
     S.mat('red_lamp', (255, 40, 30), emis=(255, 30, 20), emis_mult=8)
     S.mat('hull', (22, 24, 30), spec=0.2)
     S.mat('ship_light', (255, 230, 180), emis=(255, 220, 160), emis_mult=5)
-    S.mat('sky', (16, 12, 24), tex=tx.skyline(15, 1024, 256, k=3), texmode=3, texemis=1.0)
+    if day:
+        S.mat('sky', (40, 40, 60), tex=tx.dawn_sky(sun=time == 'sunrise'), texmode=3, texemis=1.25 if time == 'sunrise' else 1.0)
+    else:
+        S.mat('sky', (16, 12, 24), tex=tx.skyline(15, 1024, 256, k=3), texmode=3, texemis=1.0)
     S.mat('backing', (16, 14, 20), spec=0.2)
 
     # ---------------------------------------------------------------- pier deck and water
@@ -136,7 +144,8 @@ def build(hide=()):
             S.tcyl(Frame((bx, 0.78, bz)), (0, 0, 0), (0.285, 0.285), (0.285, 0.285), 0.02, 'ash')
             for k in range(6):
                 a = k * 1.1
-                S.ell(WORLD, (bx + 0.16 * math.cos(a), 0.81, bz + 0.16 * math.sin(a)), (0.07, 0.03, 0.06), 'ember', k=0.02)
+                S.ell(WORLD, (bx + 0.16 * math.cos(a), 0.81, bz + 0.16 * math.sin(a)), (0.07, 0.03, 0.06),
+                      'ash' if day else 'ember', k=0.02)
 
     # ---------------------------------------------------------------- piling with the boat hook
     px, pz = EDGE + 0.05, 3.1
@@ -190,25 +199,31 @@ def build(hide=()):
     S.wboxr(60, 6.0, -66, 76, 14.0, -56, 'hull')
     for k in range(24):
         S.sph((30 + k * 3.7, 5.2 + (k % 3) * 0.4, -52.0), 0.12, 'ship_light')
-    S.wboxr(-200, -2, -201, 300, 60, -200, 'sky')
+    S.wboxr(-200, -2, -201, 300, 140 if day else 60, -200, 'sky')
 
     # ---------------------------------------------------------------- lights
-    S.light((-3.0, 6.7, -0.6), (255, 160, 80), power=60, range=18, vol=0.45, volshadow=True, soft=16,
-            spot=((0.25, -1, 0.35), 32, 62))                                       # sodium lamp
-    S.light((1.5, 2.35, WZ + 0.35), (255, 190, 120), power=9, range=8, vol=0.3, soft=10)   # caged bulb over the door
-    S.light((px - 0.1, 1.5, pz + 0.1), (90, 255, 140), power=1.6, range=5, vol=0.25, soft=8)   # marker lamp on the piling
-    S.light((-9.5, 6.0, 4.5), (255, 165, 90), power=22, range=14, vol=0.15, soft=16,
-            spot=((0.3, -1, -0.2), 35, 70))                                         # another lamp, off to the left
-    S.light((bx, 0.95, bz), (255, 120, 50), power=2.2, range=4, vol=0.35, soft=8)            # burn barrel embers
-    S.light((tx_ + 0.86, 0.75, tz_ + 0.2), (255, 170, 80), power=0.25, range=2, shadow=False)
-    S.light((16.0, 9.0, -6.0), (150, 175, 255), power=70, range=45, vol=0.4, shadow=False)  # harbour floodlights
-    S.light((19.0, 18.0, -16.0), (255, 40, 30), power=4, range=26, vol=0.5, shadow=False)
-    S.sun((0.35, -1, -0.5), (70, 82, 130), power=0.35, shadow=False)
+    if day:
+        dawn_lights(S, hide, time, bx, bz, tx_, tz_, px, pz, WZ)
+    else:
+        S.light((-3.0, 6.7, -0.6), (255, 160, 80), power=60, range=18, vol=0.45, volshadow=True, soft=16,
+                spot=((0.25, -1, 0.35), 32, 62))                                       # sodium lamp
+        S.light((1.5, 2.35, WZ + 0.35), (255, 190, 120), power=9, range=8, vol=0.3, soft=10)   # caged bulb over the door
+        S.light((px - 0.1, 1.5, pz + 0.1), (90, 255, 140), power=1.6, range=5, vol=0.25, soft=8)   # marker lamp on the piling
+        S.light((-9.5, 6.0, 4.5), (255, 165, 90), power=22, range=14, vol=0.15, soft=16,
+                spot=((0.3, -1, -0.2), 35, 70))                                         # another lamp, off to the left
+        S.light((bx, 0.95, bz), (255, 120, 50), power=2.2, range=4, vol=0.35, soft=8)            # burn barrel embers
+        S.light((tx_ + 0.86, 0.75, tz_ + 0.2), (255, 170, 80), power=0.25, range=2, shadow=False)
+        S.light((16.0, 9.0, -6.0), (150, 175, 255), power=70, range=45, vol=0.4, shadow=False)  # harbour floodlights
+        S.light((19.0, 18.0, -16.0), (255, 40, 30), power=4, range=26, vol=0.5, shadow=False)
+        S.sun((0.35, -1, -0.5), (70, 82, 130), power=0.35, shadow=False)
 
     cam = Camera((0.4, 2.55, 13.6), (0.15, 2.25, 0), fov=38, W=3840, H=2160)
     env = dict(sky=(20, 22, 38), bounce=(14, 12, 16), fog_col=(22, 22, 34), fog=0.035, fog_h0=0.0, fog_hf=0.2,
                fog_max=140, vol_scale=4, vol_steps=40, reflections=True, grid=0.75, ao_scale=1.5)
 
+    if day:
+        dawn_extras(S, hide, time, EDGE)
+        return S, cam, dawn_env(time), dawn_meta(time, EDGE, bx, bz, px, pz)
     meta = dict(
         room='pier9_dock',
         walk=[(-4.0, -0.5), (4.5, -0.5), (4.5, 4.8), (-4.0, 4.8)],
@@ -236,3 +251,169 @@ def build(hide=()):
         tint=(0.72, 0.72, 0.86),
     )
     return S, cam, env, meta
+
+
+# ---------------------------------------------------------------- Case 5: dawn and sunrise
+LINCOLN = (-6.15, -0.75)      # Brenner's gray Lincoln Town Car, nose to the right, behind Ray's car
+BOLLARD = (5.05, 4.4)         # the iron bollard at the end of the pier, where Ray sets down Danny's phone
+BRENNER = (3.05, 3.65)        # where Brenner stands to talk, facing Ray at the bollard
+HOOD = (-2.95, -0.55)         # Brenner bent over the Lincoln's hood, cuffed
+VANCE = (1.5, -1.85)          # Vance in his doorway
+DOYLE = (-3.55, 2.25)         # by the hood of Ray's car, where the box is laid out
+OKAFOR = (-3.45, 2.2)
+MARA = (-3.5, 2.3)
+
+VANCE_COLORS = dict(coat=(52, 52, 58), coat_dk=(38, 38, 42), lining=(60, 56, 70), shirt=(104, 96, 118),
+                    pants=(44, 44, 50), hair=(190, 188, 184), hairgrey=(214, 212, 208), brow=(170, 168, 164),
+                    stubble=(166, 124, 104), skin=(170, 128, 106), skin_dk=(140, 102, 86))
+
+
+def dawn_env(time):
+    if time == 'sunrise':
+        return dict(sky=(120, 126, 150), bounce=(70, 58, 52), fog_col=(170, 140, 120), fog=0.008, fog_h0=0.0, fog_hf=0.12,
+                    fog_max=260, vol_scale=4, vol_steps=40, reflections=True, grid=0.75, ao_scale=1.4)
+    return dict(sky=(70, 70, 104), bounce=(42, 34, 44), fog_col=(120, 90, 110), fog=0.01, fog_h0=0.0, fog_hf=0.14,
+                fog_max=260, vol_scale=4, vol_steps=40, reflections=True, grid=0.75, ao_scale=1.4)
+
+
+def dawn_lights(S, hide, time, bx, bz, tx_, tz_, px, pz, WZ):
+    if time == 'sunrise':
+        S.sun((-0.8, -0.3, 0.52), (255, 200, 140), power=2.4, shadow=True, soft=6)        # the sun over the port
+        S.sun((0.3, -1, 0.2), (150, 170, 220), power=0.35, shadow=False)                  # the sky
+    else:
+        S.sun((-0.75, -0.22, 0.6), (255, 150, 150), power=0.7, shadow=True, soft=14)      # pink, before the sun
+        S.sun((0.3, -1, 0.2), (110, 120, 180), power=0.45, shadow=False)
+        S.light((-3.0, 6.7, -0.6), (255, 160, 80), power=30, range=18, vol=0.2, soft=16,
+                spot=((0.25, -1, 0.35), 32, 62))                                           # the sodium lamp, still on
+    S.light((1.5, 2.35, WZ + 0.35), (255, 190, 120), power=4, range=6, vol=0.1, soft=10)  # the caged bulb
+    S.light((1.5, 1.6, WZ - 0.6), (255, 200, 140), power=2.5, range=4, soft=10)          # Vance's office, through the door
+    S.light((px - 0.1, 1.5, pz + 0.1), (90, 255, 140), power=0.8, range=4, soft=8)       # the marker lamp on the piling
+    S.light((tx_ + 0.86, 0.75, tz_ + 0.2), (255, 170, 80), power=0.25, range=2, shadow=False)
+
+
+def dawn_extras(S, hide, time, EDGE):
+    S.mat('lincoln_dk', (20, 20, 24), spec=0.6)
+    S.mat('doorway', (30, 24, 20), emis=(110, 80, 50), emis_mult=0.25)
+    S.mat('phone_case', (16, 16, 18), spec=0.8, shin=50)
+    S.mat('sticker', (40, 80, 170), spec=0.4)
+    S.mat('cup_w', (232, 226, 210), spec=0.3)
+    S.mat('box', (176, 146, 100), namp=0.2, nscale=20)
+    S.mat('laptop', (60, 62, 66), spec=1.0, shin=60)
+    S.mat('laptop_lit', (40, 60, 90), emis=(140, 180, 230), emis_mult=1.2)
+    S.mat('paper_w', (236, 232, 220))
+    # Vance's door stands open; Vance in it, an overcoat over the cardigan, his tea
+    with S.tag('vance'):
+        S.wboxr(0.93, 0.02, -2.2 + 0.085, 2.07, 2.27, -2.2 + 0.1, 'doorway')
+        S.wbox((0.86, 1.15, -2.2 + 0.6), (0.04, 1.14, 0.56), 'green_door', rot=Ry(0))
+    npc.place(S, 'vance', dict(npc.STAND, props=(('teacup', 'l'),), lsp=30, le=92, lin=34, rsp=-2, re=16, hp=2,
+                               hy=24, coatlen=0.48),
+              (VANCE[0], 0.0, VANCE[1]), yaw=12, scale=0.98, tag='vance', colors=VANCE_COLORS)
+    # the bollard's things (overlays): Danny's dead phone, Brenner's coffee
+    bx, bz = BOLLARD
+    if time == 'dawn' and 'bollard_phone' not in hide:
+        with S.tag('bollard_phone'):
+            S.wbox((bx - 0.02, 0.715, bz), (0.04, 0.008, 0.075), 'phone_case', rot=Ry(20))
+            S.wbox((bx - 0.02, 0.724, bz + 0.02), (0.015, 0.002, 0.015), 'sticker', rot=Ry(20))
+    if time == 'dawn' and 'bollard_cup' not in hide:
+        with S.tag('bollard_cup'):
+            S.tcyl(Frame((bx + 0.1, 0.77, bz - 0.06)), (0, 0, 0), (0.044, 0.044), (0.034, 0.034), 0.065, 'cup_w')
+            S.tcyl(Frame((bx + 0.1, 0.84, bz - 0.06)), (0, 0, 0), (0.046, 0.046), (0.046, 0.046), 0.008, 'lincoln_dk')
+    # Brenner's gray Lincoln: an overlay at dawn (it arrives), part of the set at sunrise (left for the lab)
+    if time == 'sunrise' or 'lincoln' not in hide:
+        cars.car(S, 'lincoln', (LINCOLN[0], 0.0, LINCOLN[1]), -90, (118, 122, 128), L=5.5, W=1.95, H=1.45,
+                 lights=False, tag='lincoln_car')
+    if time == 'dawn':
+        stand = dict(npc.STAND, hp=4, hy=-6)
+        if 'brenner' not in hide:
+            npc.cast(S, 'brenner', dict(stand, props=(('cup', 'l'),), lsp=32, le=82, lin=26, rsp=-2, re=14),
+                     (BRENNER[0], 0.0, BRENNER[1]), yaw=58, scale=1.07, tag='brenner')
+        if 'brenner_gun' not in hide:
+            npc.cast(S, 'brenner', dict(stand, props=(('revolver', 'r'),), rsp=30, rsa=6, re=34, rin=10, rhand='fist',
+                                        lsp=-4, le=12, hp=6, hy=-2),
+                     (BRENNER[0], 0.0, BRENNER[1]), yaw=58, scale=1.07, tag='brenner_gun')
+        if 'brenner_cuffed' not in hide:
+            npc.cast(S, 'brenner', dict(npc.STAND, lean=66, lhp=30, rhp=26, lk=8, rk=6, lsp=-22, lsa=10, le=96, lin=96,
+                                        rsp=-22, rsa=10, re=96, rin=96, hp=-36, hy=34, coatlen=0.24),
+                     (HOOD[0], 0.0, HOOD[1]), yaw=-90, scale=1.07, tag='brenner_cuffed')
+    if time == 'sunrise':
+        # Danny's box laid open on the hood of Ray's car, for Doyle (with her), the drive for Okafor, Mara's laptop
+        if 'doyle' not in hide:
+            with S.tag('doyle_box'):
+                S.wboxr(-4.95, 0.93, 2.2, -4.5, 1.08, 2.75, 'box')
+                for k in range(4):
+                    S.wbox((-5.35 + k * 0.02, 0.935, 2.0 + k * 0.28), (0.1, 0.004, 0.12), 'paper_w', rot=Ry(10 * k))
+            npc.cast(S, 'doyle', dict(npc.STAND, lsp=26, le=70, lin=40, rsp=24, re=74, rin=42, hp=12, hy=-30),
+                     (DOYLE[0], 0.0, DOYLE[1]), yaw=-70, scale=0.95, tag='doyle')
+        if 'okafor' not in hide:
+            npc.cast(S, 'okafor', dict(npc.STAND, props=(('clipboard', 'r'),), rsp=30, re=86, rin=30, lsp=4, le=16,
+                                       hp=8, hy=20), (OKAFOR[0], 0.0, OKAFOR[1]), yaw=70, scale=0.94, tag='okafor')
+        if 'mara' not in hide:
+            with S.tag('mara_laptop'):
+                S.wbox((-4.75, 0.94, 2.55), (0.17, 0.01, 0.12), 'laptop', rot=Ry(-70))
+                S.wbox((-4.68, 1.05, 2.48), (0.17, 0.11, 0.008), 'laptop_lit', rot=Ry(-70) @ Rx(-12))
+            npc.cast(S, 'mara', dict(npc.STAND, headset=True, lsp=30, le=74, lin=20, rsp=30, re=78, rin=22, hp=18,
+                                     hy=-10), (MARA[0], 0.0, MARA[1]), yaw=-75, scale=0.94, tag='mara')
+
+
+def dawn_meta(time, EDGE, bx, bz, px, pz):
+    def rect(p, w, h):
+        x, z = p
+        return [(x - w, 0.0, z), (x + w, 0.0, z), (x + w, h, z), (x - w, h, z)]
+    lx, lz = LINCOLN
+    hs = {
+        'tiny': ('Tiny', (1.95, -0.25), 'right'),
+        'vance': ('Vance', (1.5, -0.35), 'up'),
+        'radio': ('radio', (3.7, -0.3), 'up'),
+        'barrel': ('burn barrel', (-0.05, 1.35), 'left'),
+        'piling': ('boat hook', (4.4, 3.1), 'right'),
+        'containers': ('containers', None, 'up'),
+        'crane': ('crane', None, 'up'),
+        'water': ('water', None, 'right'),
+        'warehouse_sign': ('sign', None, 'up'),
+        'car': ('car', (-3.6, 2.5), 'left'),
+        'bollard': ('bollard', (4.35, 4.25), 'right'),
+        'lincoln': ('gray Lincoln', (-2.9, 0.75), 'left'),
+    }
+    shapes = {'water': [(EDGE + 0.1, -1.1, 12), (EDGE + 0.1, -1.1, -45), (90, -1.1, -45), (90, -1.1, 12)],
+              'vance': rect((VANCE[0], VANCE[1]), 0.36, 1.8),
+              'bollard': [(BOLLARD[0] - 0.3, 0.0, BOLLARD[1]), (BOLLARD[0] + 0.3, 0.0, BOLLARD[1]),
+                          (BOLLARD[0] + 0.3, 0.95, BOLLARD[1]), (BOLLARD[0] - 0.3, 0.95, BOLLARD[1])],
+              'lincoln': [(lx - 2.75, 0.0, lz + 1.0), (lx + 2.75, 0.0, lz + 1.0), (lx + 2.75, 1.45, lz + 1.0),
+                          (lx - 2.75, 1.45, lz + 1.0), (lx - 2.0, 1.45, lz - 1.0), (lx + 2.0, 1.45, lz - 1.0)]}
+    order = ['crane', 'water', 'containers', 'warehouse_sign', 'lincoln', 'car', 'vance', 'radio', 'tiny', 'barrel',
+             'piling', 'bollard']
+    if time == 'dawn':
+        hs['brenner'] = ('Brenner', (4.2, 4.15), 'left')
+        hs['brenner_cuffed'] = ('Brenner', (-1.9, 0.75), 'left')
+        shapes['brenner'] = rect(BRENNER, 0.36, 1.95)
+        shapes['brenner_cuffed'] = [(HOOD[0] - 0.9, 0.0, HOOD[1]), (HOOD[0] + 0.4, 0.0, HOOD[1]),
+                                    (HOOD[0] + 0.4, 1.5, HOOD[1]), (HOOD[0] - 0.9, 1.5, HOOD[1])]
+        order += ['brenner_cuffed', 'brenner']
+        overlays = ['brenner', 'brenner_gun', 'brenner_cuffed', 'bollard_phone', 'bollard_cup', 'lincoln']
+        bases = {'brenner': BRENNER, 'brenner_gun': BRENNER, 'brenner_cuffed': HOOD}
+        exclusive = ['brenner', 'brenner_gun', 'brenner_cuffed']
+    else:
+        for k, p in (('doyle', DOYLE), ('okafor', OKAFOR), ('mara', MARA)):
+            hs[k] = ({'doyle': 'Lt. Doyle', 'okafor': 'Okafor', 'mara': 'Mara Quist'}[k], (-2.7, 2.6), 'left')
+            shapes[k] = rect(p, 0.34, 1.75)
+            order.append(k)
+        overlays = ['doyle', 'okafor', 'mara']
+        bases = {'doyle': DOYLE, 'okafor': OKAFOR, 'mara': MARA}
+        exclusive = ['doyle', 'okafor', 'mara']
+    return dict(
+        room='pier9_' + time,
+        walk=[(-3.0, -0.5), (4.5, -0.5), (4.5, 4.8), (-4.0, 4.8), (-4.0, 0.7), (-3.0, 0.7)],
+        walk_zmin=-0.5, walk_zmax=4.8, scale_x=0.0,
+        spawns={'drive': (-3.4, 2.6), 'night_lab': (-3.4, 2.6), 'pier9_dawn': (4.0, 4.1), 'start': (0.0, 2.0)},
+        hotspots=hs,
+        hotspot_shapes=shapes,
+        hotspot_order=order,
+        overlays=overlays,
+        overlay_bases=bases,
+        exclusive_overlays=exclusive,
+        occluders={'barrel': (bx, bz)},
+        obstacles=[(bx, bz, 0.45)],
+        char_fill=((236, 210, 210), 0.1) if time == 'dawn' else ((255, 236, 210), 0.08),
+        tint=(0.9, 0.82, 0.86) if time == 'dawn' else (1.0, 0.92, 0.84),
+        exposure=1.2 if time == 'dawn' else 1.05,
+    )

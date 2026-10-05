@@ -103,12 +103,12 @@ func case_card(time: String, title: String) -> void:
 		await _load()
 
 
-func end_case(time: String, next_case: String, done_case: int) -> void:
-	## Title card for the next case, which isn't built yet, so this ends the game for now.
+func the_end() -> void:
+	## After the credits: the last card, then a new game (or F9 to load).
 	busy = true
 	await ui.fade_to(1.0, 1.2)
-	ui.show_card([time, "", next_case, "", "",
-			"END OF CASE %d - thanks for playing" % done_case, "", "Click to play again"],
+	ui.hide_scene()
+	ui.show_card(["N I G H T S H I F T", "", "THE END", "", "", "Thanks for playing", "", "Click to play again"],
 			[Color(0.45, 0.75, 1.0), Color.WHITE, Color(0.85, 0.8, 0.7), Color.WHITE, Color.WHITE,
 			Color(1, 0.85, 0.45), Color.WHITE, Color(0.6, 0.6, 0.6)])
 	await wait_click()
@@ -138,6 +138,8 @@ func change_room(id: String, from_room: String) -> void:
 	ui.hide_device()
 	ui.hide_paper()
 	ui.hide_jigsaw()
+	ui.hide_piano()
+	ui.hide_scene()
 	if ui.fade_rect.color.a < 0.99:
 		await ui.fade_to(1.0, 0.35)
 	if player.get_parent():
@@ -159,7 +161,7 @@ func change_room(id: String, from_room: String) -> void:
 		match from_room:
 			"squad_room": player.face("down")
 			"street": player.face("down" if id == "squad_room" else "right")
-			"pier9_dock": player.face("down")
+			"pier9_dock", "pier9_dawn": player.face("down")
 			"vance_office": player.face("down")
 			_: player.face("right")
 	Game.current_room = id
@@ -371,6 +373,24 @@ Received: 4:46 AM",
 					"I. Feld", Color(0.12, 0.2, 0.55))
 			await say("Item one. Cell phone, black case, Blue Note sticker. Received by I. Feld.")
 			ui.hide_paper()
+		"ray_phone":
+			await Case5.phone(self)
+		"reporter_card":
+			await say("Mara Quist, Los Angeles Times. Metro. A cell number in pen on the back.")
+			await say("\"When it's a pattern, call me.\"")
+		"tab_book":
+			await Case5.read_tab_book(self)
+		"set_list":
+			await Case5.read_set_list(self)
+		"danny_box":
+			await say("Danny's whole case, in a box that held printer paper.")
+			await say("His photo, the envelope, the index card with a name on the back, the tab book page." + (
+					" And the papers that were never introduced." if Game.flag("board_string") else ""))
+		"take_drive":
+			await say("One drive in an evidence bag, hashed and logged, my name on the seal.")
+			await say("The original's frozen at Takes until a judge asks for it. This is the only copy anybody can play.")
+		"brenner_38":
+			await say("A .38 revolver, bagged. Shah will want to introduce it to Danny.")
 		_:
 			await say(Game.ITEMS.get(id, {}).get("desc", "It's a %s." % Game.item_name(id)))
 
@@ -459,6 +479,56 @@ func _show_text(text: String, anchor: Vector2, color: Color) -> void:
 	_speaking = false
 	_skip = false
 	ui.hide_speech()
+
+
+func caption(text: String, color := PLAYER_COLOR, skippable := true) -> void:
+	## A subtitle in the lower third (Danny's take, the end of the night). With skippable = false a click doesn't cut it
+	## short (the take, the first time through).
+	ui.set_hover("", Vector2.ZERO)
+	ui.show_speech(text, Vector2(960, 1010), color)
+	_speaking = true
+	_skip = false
+	var duration := clampf(1.2 + text.length() * 0.06, 2.0, 7.0)
+	var t := 0.0
+	while t < duration and (not _skip or not skippable):
+		await get_tree().process_frame
+		t += get_process_delta_time()
+	_speaking = false
+	_skip = false
+	ui.hide_speech()
+
+
+func piano(target: Array, set_list: Texture2D = null) -> bool:
+	## Danny's keyboard (GameUI.show_piano). Returns true once the last five notes played spell `target` by letter
+	## (octave doesn't count), then replays them in the knock's rhythm, slow, slow, quick-quick-quick; false if the
+	## player stepped back. Every five notes that miss count as a wrong run; Ray hints after three and six.
+	ui.show_piano(set_list)
+	var played: Array[String] = []
+	var since := 0
+	while true:
+		var key: String = await ui.piano_event
+		if key == "close":
+			ui.hide_piano()
+			return false
+		played.append(key)
+		since += 1
+		var want := "-".join(PackedStringArray(target))
+		if played.size() >= target.size() and "-".join(PackedStringArray(played.slice(played.size() - target.size()))) == want:
+			await wait(0.5)
+			for i in target.size():
+				ui.piano_press(String(target[i]) + "4", false)
+				await wait(0.7 if i < 2 else 0.25)
+			await wait(0.6)
+			return true
+		if since == target.size():
+			since = 0
+			Game.set_flag("piano_wrong_runs", int(Game.flags.get("piano_wrong_runs", 0)) + 1)
+			var runs := int(Game.flags.get("piano_wrong_runs", 0))
+			if runs == 3:
+				await say("Every Good Boy Deserves Fudge. Lines are E, G, B, D, F. His first note hangs just under the bottom line.")
+			elif runs == 6:
+				await say("Nina said he wrote Sal a tune about what Sal served him instead of coffee. Sal wrote it in his book every night.")
+	return false
 
 
 func device(title: String, tabs: Array, active: int, body: String, rows: Array) -> String:

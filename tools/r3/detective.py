@@ -373,6 +373,24 @@ def build_arm(S, chest, side, sh, sp, sa, el, inward, wr, roll, hand, p, key):
         pf = Frame(grip + chest.M @ A(0, 0.04, 0.03), chest.M @ Rx(-70))
         S.box(pf, (0, 0, 0), (0.036, 0.072, 0.005), 0.004, 'phone')
         S.box(pf, (0, 0, 0.0052), (0.032, 0.066, 0.001), 0.0, 'screen')
+    if ('cup', key) in props:                                                        # a paper coffee cup with a lid
+        uf = Frame(grip + chest.M @ A(0, 0.03, 0.0), chest.M)
+        S.tcyl(uf, (0, 0, 0), (0.042, 0.042), (0.032, 0.032), 0.065, 'paper')
+        S.tcyl(uf, (0, 0.07, 0), (0.044, 0.044), (0.044, 0.044), 0.008, 'pen')
+        S.tcyl(uf, (0, 0.005, 0), (0.0425, 0.0425), (0.039, 0.039), 0.02, 'card')
+    if ('teacup', key) in props:                                                     # a china cup on its saucer
+        tf = Frame(grip + chest.M @ A(0, 0.03, 0.04), chest.M)
+        S.tcyl(tf, (0, 0, 0), (0.07, 0.07), (0.07, 0.07), 0.004, 'paper')
+        S.tcyl(tf, (0, 0.03, 0), (0.04, 0.04), (0.03, 0.03), 0.03, 'paper')
+    if ('revolver', key) in props:                                                   # a .38 snub: grip in the fist
+        S.cone(hf.to((-s * 0.015, -0.06, -0.01)), hf.to((-s * 0.015, -0.12, -0.03)), 0.014, 0.016, 'leather')
+        S.box(Frame(hf.to((-s * 0.015, -0.07, 0.04)), Lh), (0, 0, 0), (0.012, 0.022, 0.03), 0.006, 'pen')     # frame
+        S.tcyl(Frame(hf.to((-s * 0.015, -0.068, 0.045)), Lh @ Rx(90)), (0, 0, 0), (0.02, 0.02), (0.02, 0.02),
+               0.022, 'pen')                                                         # cylinder
+        S.cyl(hf.to((-s * 0.015, -0.058, 0.06)), hf.to((-s * 0.015, -0.058, 0.13)), 0.009, 'pen')           # barrel
+    if ('knife', key) in props:                                                      # a paring knife
+        S.cyl(hf.to((-s * 0.02, -0.1, -0.02)), hf.to((-s * 0.02, -0.1, 0.05)), 0.009, 'leather')
+        S.box(Frame(hf.to((-s * 0.02, -0.1, 0.1)), Lh), (0, 0, 0), (0.002, 0.012, 0.05), 0.001, 'steel')
     if ('badge', key) in props:
         bf = Frame(grip + chest.M @ A(0, 0.02, 0.03), chest.M)
         S.box(bf, (0, 0, 0), (0.04, 0.055, 0.007), 0.004, 'leather')

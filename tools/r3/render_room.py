@@ -150,6 +150,12 @@ def main():
     depth = np.nan_to_num(depth, nan=1e6, posinf=1e6)
     print(f'render {time.time() - t:.1f}s, {len(S.prims)} prims')
     img, alpha = composite(surf, vol, ss, exposure=a.exposure or meta.get('exposure', 1.0), grade=meta.get('grade'))
+    for tag, k in meta.get('ghosts', {}).items():
+        # half there: blend the frame with the figure toward the frame without it (Danny at his piano in the take)
+        S2, _, _, _ = mod.build(hide={tag})
+        s2, _, v2 = S2.render(cam, env, a.room + '_ghost_' + tag)
+        img2, _ = composite(s2, v2, ss, exposure=a.exposure or meta.get('exposure', 1.0), grade=meta.get('grade'))
+        img = img2 + (img - img2) * k
     overlays = {}
     hidden = set()
     for tag in meta.get('overlays', []):

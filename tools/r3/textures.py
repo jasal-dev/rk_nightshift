@@ -804,6 +804,30 @@ def board_pins(kind, w=96, h=128):
         d.rectangle([38, 92, 76, 102], fill=(250, 220, 150, 255))                         # the lobby
         d.line([w // 2, 20, w // 2, h - 20], fill=(200, 190, 170, 255), width=1)            # the fold
         pins = ((w // 2, 24),)
+    elif kind == 'walt':
+        d.rectangle([4, 6, w - 4, 50], fill=(246, 244, 236, 255))                    # the index card, turned over
+        d.line([4, 16, w - 4, 16], fill=(200, 80, 80, 255))
+        d.text((8, 20), 'WALT BRENNER', font=font('DejaVuSans-Bold.ttf', 11), fill=(20, 24, 60, 255))
+        d.text((8, 36), 'for H. PRYCE, T. HASKELL', font=font('DejaVuSans.ttf', 7), fill=(20, 24, 60, 255))
+        d.rectangle([6, 58, 52, 112], fill=(246, 246, 240, 255))                     # photo of the tab book page
+        d.rectangle([10, 62, 48, 100], fill=(60, 96, 70, 255))
+        for i in range(4):
+            d.rectangle([13, 66 + i * 8, 44, 68 + i * 8], fill=(230, 226, 210, 255))
+        d.text((12, 100), '3:20 W.B.', font=font('DejaVuSans-Bold.ttf', 8), fill=(30, 30, 40, 255))
+        d.rectangle([58, 64, 92, 96], fill=(30, 34, 60, 255))                        # Sal's bar card: a cocktail glass
+        d.polygon([(66, 70), (84, 70), (75, 80)], fill=(220, 190, 110, 255))
+        d.line([75, 80, 75, 88], fill=(220, 190, 110, 255)); d.line([70, 88, 80, 88], fill=(220, 190, 110, 255))
+        pins = ((w // 2, 10), (29, 60), (75, 66))
+    elif kind == 'bare':
+        img = Image.new('RGBA', (w, h), (214, 216, 208, 255)); d = ImageDraw.Draw(img)
+        rng = random.Random(5)
+        for _ in range(14):                                                        # the holes where the pins were
+            x, y = rng.randint(6, w - 6), rng.randint(6, h - 6)
+            d.ellipse([x - 1, y - 1, x + 1, y + 1], fill=(120, 116, 110, 255))
+        for _ in range(5):                                                         # lighter squares where paper hung
+            x, y = rng.randint(4, w - 40), rng.randint(4, h - 50)
+            d.rectangle([x, y, x + rng.randint(20, 36), y + rng.randint(26, 44)], fill=(226, 228, 222, 255))
+        pins = ()
     else:
         d.rectangle([14, 10, w - 14, h - 10], fill=(244, 244, 240, 255))
         d.rectangle([20, 16, w - 20, 34], fill=(30, 150, 134, 255))
@@ -1342,3 +1366,100 @@ def dodgers_mug(w=64, h=64):
     img = Image.new('RGBA', (w, h), (236, 236, 236, 255)); d = ImageDraw.Draw(img)
     d.text((10, 20), 'LA', font=font('DejaVuSerif-BoldItalic.ttf', 24), fill=(20, 60, 150, 255))
     return img
+
+
+# ---------------------------------------------------------------- Case 5: the Blue Note, its back room, the pier at dawn
+def danny_poster(w=128, h=192):
+    """DANNY REYES, PIANO, THURSDAYS: a gig poster, a piano player's silhouette, a small eyeliner heart in the corner."""
+    img = Image.new('RGBA', (w, h), (22, 30, 58, 255)); d = ImageDraw.Draw(img)
+    d.rectangle([4, 4, w - 5, h - 5], outline=(210, 170, 80, 255), width=2)
+    d.ellipse([w // 2 - 40, 30, w // 2 + 40, 110], fill=(46, 70, 130, 255))
+    d.ellipse([w // 2 - 12, 44, w // 2 + 8, 64], fill=(14, 16, 24, 255))                # the player's head
+    d.polygon([(w // 2 - 22, 108), (w // 2 - 14, 66), (w // 2 + 10, 66), (w // 2 + 22, 108)], fill=(14, 16, 24, 255))
+    d.rectangle([w // 2 + 4, 84, w // 2 + 44, 92], fill=(236, 232, 220, 255))           # the keys
+    for x in range(w // 2 + 8, w // 2 + 44, 6):
+        d.rectangle([x, 84, x + 2, 88], fill=(14, 16, 24, 255))
+    f = font('DejaVuSans-Bold.ttf', 16); f2 = font('DejaVuSerif-BoldItalic.ttf', 14)
+    d.text((10, 118), 'DANNY', font=f, fill=(236, 220, 180, 255))
+    d.text((10, 136), 'REYES', font=f, fill=(236, 220, 180, 255))
+    d.text((10, 158), 'piano  THURSDAYS', font=f2, fill=(210, 170, 80, 255))
+    d.text((w - 22, h - 26), '♥', font=font('DejaVuSans.ttf', 14), fill=(20, 18, 22, 255))   # eyeliner heart
+    return img
+
+
+def reserved_card(w=96, h=48):
+    img = Image.new('RGBA', (w, h), (226, 216, 190, 255)); d = ImageDraw.Draw(img)
+    d.rectangle([2, 2, w - 3, h - 3], outline=(150, 120, 60, 255), width=2)
+    d.text((10, 14), 'RESERVED', font=font('DejaVuSerif-Bold.ttf', 14), fill=(110, 20, 24, 255))
+    return img
+
+
+def piano_keys(w=512, h=64, tape=True):
+    """A keyboard seen from above: white keys with black ones, Nina's masking-tape letters on the octave from middle C."""
+    img = Image.new('RGBA', (w, h), (232, 226, 210, 255)); d = ImageDraw.Draw(img)
+    n = 26
+    kw = w / n
+    for i in range(n):
+        d.line([i * kw, 0, i * kw, h], fill=(120, 116, 106, 255), width=1)
+    for i in range(n - 1):
+        if i % 7 in (0, 1, 3, 4, 5):
+            d.rectangle([i * kw + kw * 0.62, 0, i * kw + kw * 1.38, h * 0.6], fill=(16, 14, 16, 255))
+    if tape:
+        for i in range(7, 14):
+            d.rectangle([i * kw + 3, h * 0.72, i * kw + kw - 3, h - 4], fill=(214, 196, 140, 255))
+    return img
+
+
+def bar_wallpaper(seed=111, w=256, h=256):
+    """Deep blue flock paper with a faded gold diamond pattern, smoke-darkened toward the top."""
+    img = Image.new('RGB', (w, h), (26, 34, 58)); d = ImageDraw.Draw(img)
+    for y in range(0, h, 32):
+        for x in range(0, w, 32):
+            ox = 16 if (y // 32) % 2 else 0
+            d.polygon([(x + ox, y + 4), (x + ox + 10, y + 16), (x + ox, y + 28), (x + ox - 10, y + 16)], outline=(96, 80, 46))
+    n = noise(w, h, 8, seed)
+    return to_img(np.asarray(img).astype(float) * (0.8 + 0.35 * n[..., None]))
+
+
+def liquor_case(seed, w=128, h=96):
+    rng = random.Random(seed)
+    base = rng.choice([(176, 140, 96), (160, 126, 84), (186, 156, 110)])
+    img = Image.new('RGBA', (w, h), base + (255,)); d = ImageDraw.Draw(img)
+    label = rng.choice(['RYE', 'CAMPARI', 'GIN', 'BOURBON', 'VERMOUTH', 'TONIC'])
+    d.rectangle([10, 30, w - 10, 64], outline=(70, 40, 30, 255), width=2)
+    d.text((16, 36), label, font=font('DejaVuSans-Bold.ttf', 18), fill=(80, 30, 24, 255))
+    d.line([0, h // 2 - 30, w, h // 2 - 30], fill=(120, 90, 60, 255), width=3)
+    return img
+
+
+def locker_label(text, w=128, h=32):
+    img = Image.new('RGBA', (w, h), (226, 222, 200, 255)); d = ImageDraw.Draw(img)
+    d.text((8, 5), text, font=font('DejaVuSans-Bold.ttf', 18), fill=(30, 30, 36, 255))
+    return img
+
+
+def pryce_lease_letter(w=128, h=168):
+    """A lawyer's letter on Pryce Development's letterhead, NO across it in red, underlined three times."""
+    img = Image.new('RGBA', (w, h), (240, 238, 230, 255)); d = ImageDraw.Draw(img)
+    d.rectangle([8, 8, 60, 20], fill=(40, 50, 90, 255))
+    for i in range(12):
+        d.line([10, 34 + i * 9, w - 10 - (i * 7) % 30, 34 + i * 9], fill=(110, 110, 120, 255))
+    d.text((28, 52), 'NO', font=font('DejaVuSans-Bold.ttf', 48), fill=(196, 20, 20, 255))
+    for k in range(3):
+        d.line([24, 108 + k * 6, 100, 106 + k * 6], fill=(196, 20, 20, 255), width=3)
+    return img
+
+
+def dawn_sky(w=1024, h=256, sun=False):
+    """Navy at the top going to rose and gold at the horizon (sun=True: the sun is up, a hot band at the bottom)."""
+    yy = np.linspace(0, 1, h)[:, None]
+    if sun:
+        stops = [(0.0, (70, 110, 170)), (0.45, (190, 160, 160)), (0.8, (255, 190, 120)), (1.0, (255, 220, 160))]
+    else:
+        stops = [(0.0, (24, 30, 64)), (0.5, (90, 70, 110)), (0.8, (220, 120, 120)), (1.0, (250, 170, 130))]
+    ts = [t for t, _ in stops]
+    col = np.stack([np.interp(yy[:, 0], ts, [c[k] for _, c in stops]) for k in range(3)], -1)[:, None, :]
+    arr = np.broadcast_to(col, (h, w, 3)).copy()
+    n = noise(w, h, 5, 121)
+    arr *= (0.94 + 0.1 * n[..., None])
+    return to_img(arr)

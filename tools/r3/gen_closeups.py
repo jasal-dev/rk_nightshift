@@ -166,8 +166,64 @@ def headlight():
     return bg, pieces
 
 
+def set_list(w=760, h=640):
+    """Danny's set list for Tuesday (Case 5): four tunes in pencil, then AFTER: for Sal, and one short staff with five
+    notes, two slow and three fast: D under the bottom line, E on it, C on a ledger line, A in the second space, F in the
+    first. Decaf."""
+    img = Image.new('RGBA', (w, h), (238, 232, 212, 255)); d = ImageDraw.Draw(img)
+    n = tx.noise(w, h, 30, 7)
+    arr = np.asarray(img).astype(float); arr[..., :3] *= (0.94 + 0.08 * n[..., None]); img = Image.fromarray(arr.clip(0, 255).astype(np.uint8))
+    d = ImageDraw.Draw(img)
+    for y in range(110, h - 20, 34):
+        d.line([30, y, w - 30, y], fill=(170, 186, 210, 255), width=1)                     # ruled lines
+    d.line([70, 0, 70, h], fill=(220, 150, 150, 255), width=1)                               # the margin
+    d.rectangle([w // 2 - 70, -6, w // 2 + 70, 26], fill=(214, 196, 140, 230))                # tape at the top
+    pencil = (60, 60, 70, 255)
+    f = tx.font('DejaVuSerif-Italic.ttf', 30); fb = tx.font('DejaVuSerif-BoldItalic.ttf', 34)
+    d.text((86, 40), 'TUES   SET 2', font=fb, fill=pencil)
+    for i, line in enumerate(["'Round Midnight  (for Tiny, if he's in)", 'Body and Soul', 'Blue in Green', 'Lush Life']):
+        d.text((90, 112 + i * 34 - 28), line, font=f, fill=pencil)
+    d.text((86, 112 + 4 * 34 - 22), 'AFTER:  for Sal', font=fb, fill=pencil)
+    # the staff
+    x0, x1, top, gap = 110, w - 90, 420, 18
+    for k in range(5):
+        d.line([x0, top + k * gap, x1, top + k * gap], fill=pencil, width=2)
+    d.line([x0, top, x0, top + 4 * gap], fill=pencil, width=2)
+    d.line([x1, top, x1, top + 4 * gap], fill=pencil, width=2)
+    d.line([x1 - 6, top, x1 - 6, top + 4 * gap], fill=pencil, width=4)
+    # a treble clef, drawn by hand: a spiral round the G line and a long stroke with a hook
+    gy = top + 3 * gap
+    cx = x0 + 34
+    pts = [(cx + 13 * math.cos(a) * (0.4 + a / 14), gy + 13 * math.sin(a) * (0.4 + a / 14)) for a in np.linspace(0, 4.4 * math.pi / 2, 30)]
+    d.line(pts, fill=pencil, width=3)
+    d.line([(cx + 6, top - 22), (cx - 6, top + 10), (cx + 4, gy + 30), (cx - 4, gy + 40)], fill=pencil, width=3, joint='curve')
+    d.ellipse([cx - 10, gy + 34, cx - 2, gy + 42], fill=pencil)
+    bottom = top + 4 * gap                                     # E4
+    ys = {'D': bottom + gap / 2, 'E': bottom, 'C': bottom + gap, 'A': top + 2 * gap + gap / 2, 'F': top + 3 * gap + gap / 2}
+    xs = [x0 + 140, x0 + 250, x0 + 360, x0 + 425, x0 + 490]
+    notes = ['D', 'E', 'C', 'A', 'F']
+    stems = []
+    for i, (nx, nn) in enumerate(zip(xs, notes)):
+        y = ys[nn]
+        if nn == 'C':
+            d.line([nx - 20, y, nx + 20, y], fill=pencil, width=2)                            # the ledger line
+        box = [nx - 12, y - 9, nx + 12, y + 9]
+        if i < 2:
+            d.ellipse(box, outline=pencil, width=3)                                          # half notes, open
+        else:
+            d.ellipse(box, fill=pencil)                                                        # eighths, filled
+        stems.append((nx + 11, y))
+        d.line([nx + 11, y, nx + 11, y - 62], fill=pencil, width=3)
+    beam_y = min(y for _, y in stems[2:]) - 62
+    d.polygon([(stems[2][0], beam_y), (stems[4][0], beam_y), (stems[4][0], beam_y + 8), (stems[2][0], beam_y + 8)], fill=pencil)
+    for sx, sy in stems[2:]:
+        d.line([sx, sy, sx, beam_y + 4], fill=pencil, width=3)
+    return img.rotate(1.2, resample=Image.BICUBIC, expand=False, fillcolor=(0, 0, 0, 0))
+
+
 def main():
     out = os.path.join(ROOT, 'assets', 'ui')
+    set_list().save(os.path.join(out, 'set_list.png'))
     uv_wall().save(os.path.join(out, 'uv_wall.png'))
     uv_headshot().save(os.path.join(out, 'uv_headshot.png'))
     invite_render().save(os.path.join(out, 'invite_render.png'))

@@ -39,6 +39,14 @@ ROOMS = {
     'crane_garage': dict(node='CraneGarage', script='res://scripts/rooms/crane_garage.gd', name="Crane's garage",
                          reflection=0.1),
     'night_lab': dict(node='NightLab', script='res://scripts/rooms/night_lab.gd', name='Crime lab, night intake'),
+    'street_crime': dict(node='StreetCrime', script='res://scripts/rooms/street_crime.gd', name='Street', reflection=0.2),
+    'blue_note_bar': dict(node='BlueNoteBar', script='res://scripts/rooms/blue_note_bar.gd', name='The Blue Note',
+                          reflection=0.08),
+    'blue_note_back': dict(node='BlueNoteBack', script='res://scripts/rooms/blue_note_back.gd',
+                           name="The Blue Note, back room"),
+    'pier9_dawn': dict(node='Pier9Dawn', script='res://scripts/rooms/pier9_dawn.gd', name='Pier 9', reflection=0.2),
+    'pier9_sunrise': dict(node='Pier9Sunrise', script='res://scripts/rooms/pier9_sunrise.gd', name='Pier 9',
+                          reflection=0.2),
 }
 
 

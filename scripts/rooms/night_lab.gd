@@ -4,6 +4,9 @@ extends Room
 
 
 func on_enter(_from_room: String) -> void:
+	if Game.flag("case4_done"):
+		await _case5()
+		return
 	if not Game.flag("at_lab"):
 		Game.set_flag("at_lab")
 		await main.wait(0.4)
@@ -76,3 +79,22 @@ func _hand_over() -> void:
 	Game.set_flag("phone_at_lab")
 	await main.give("lab_receipt", false)
 	await main.say("Danny Reyes's phone. Two nights in the river, and the first thing it found was somebody who'd stay up for it.")
+
+
+func _case5() -> void:
+	## Scene 7: one drive, hashed and logged; Danny's phone, still dead. Then the 110 to Pier 9.
+	main.busy = true
+	await main.wait(0.4)
+	await _ike("One drive, hashed and logged. Takes froze the account at five fifty-one; the original sits there until a judge asks for it.")
+	await _ike("My machine forgot it ever met you. And your piano player's phone. It's still dead.")
+	await main.say("That's the idea.")
+	await _ike("Ray. Whatever you're doing at sunrise, do it somewhere with a lot of witnesses.")
+	await main.say("I've got a loan shark and a doorman.")
+	await main.wait(0.6)
+	await _ike("I meant cops.")
+	await main.say("So did I.")
+	Game.set_flag("got_take_drive")
+	await main.give("take_drive")
+	await main.give("danny_phone", false)
+	await Case5.drive_to_pier(main)
+	await main.change_room("pier9_dawn", "drive")

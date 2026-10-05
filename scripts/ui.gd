@@ -8,6 +8,7 @@ signal skip_requested
 signal choice_made(index: int)
 signal inventory_clicked(id: String, button: int)
 signal jigsaw_event(kind: String)   ## "wrong", "done" or "close" (see show_jigsaw)
+signal piano_event(key: String)     ## a key's letter ("C" .. "G", "C#" ...) or "close" (see show_piano)
 
 const FONT := preload("res://assets/fonts/DejaVuSansCondensed-Bold.ttf")
 const FONT_SIZE := 30
@@ -37,6 +38,10 @@ var phone_log: VBoxContainer
 var device: PanelContainer        ## a phone or car screen (Kenji's Glide app, the Prius head unit, ...)
 var paper: Control                ## a document or picture held up close (a letter, a card, the UV lamp's view)
 var jigsaw: Control              ## the fit-the-pieces close-up (Crane's headlight)
+var scene_pic: Control            ## a full-screen still under the speech (Case 5: the take, the 1:30 call, the end cards)
+var piano: Control                ## Danny's keyboard close-up (Case 5)
+var _piano_keys := {}             ## key name ("C4", "C#4" ...) -> its ColorRect
+var _piano_flash: Label
 var options: Array[String] = []   ## the options on screen (dialogue choices or device buttons), in choice_made order
 var _drive_lights: Array[Sprite2D] = []
 var _drive_drops: Array[Sprite2D] = []
@@ -268,12 +273,12 @@ func hide_choices() -> void:
 ## tappable rows and a Close button. Buttons emit choice_made with their index in `options`
 ## (tabs first, then rows, then Close). With interactive = false it only shows (a video, a list).
 func show_device(title: String, tabs: Array, active: int, body: String, rows: Array, interactive := true,
-		accent := Color(0.12, 0.58, 0.52)) -> void:
+		accent := Color(0.12, 0.58, 0.52), lcd := false) -> void:
 	hide_device()
 	options.clear()
 	device = PanelContainer.new()
 	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color(0.04, 0.05, 0.06, 0.97)
+	sb.bg_color = Color(0.1, 0.16, 0.08, 0.97) if lcd else Color(0.04, 0.05, 0.06, 0.97)
 	sb.border_color = Color(0.22, 0.23, 0.26)
 	sb.set_border_width_all(6)
 	sb.set_corner_radius_all(30)
@@ -317,7 +322,7 @@ func show_device(title: String, tabs: Array, active: int, body: String, rows: Ar
 		bl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		bl.custom_minimum_size = Vector2(556, 0)
 		bl.add_theme_font_size_override("font_size", 24)
-		bl.add_theme_color_override("font_color", Color(0.85, 0.88, 0.9))
+		bl.add_theme_color_override("font_color", Color(0.62, 0.95, 0.5) if lcd else Color(0.85, 0.88, 0.9))
 		vb.add_child(bl)
 	for r in rows:
 		var b := _device_button(String(r))
@@ -548,6 +553,180 @@ func _jig_drop(r: TextureRect) -> void:
 		var t := create_tween()
 		t.tween_property(r, "position", r.get_meta("home"), 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		jigsaw_event.emit("wrong")
+
+# --- Case 5: full-screen stills, the piano, the end cards ---------------------------------------
+## A still filling the screen under the speech and choices (the take, the end cards). dim > 0 darkens it; a caption
+## sits in the lower third.
+func show_scene(tex: Texture2D, dim := 0.0, caption := "") -> void:
+	hide_scene()
+	scene_pic = Control.new()
+	scene_pic.set_anchors_preset(Control.PRESET_FULL_RECT)
+	scene_pic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var back := ColorRect.new()
+	back.color = Color.BLACK
+	back.set_anchors_preset(Control.PRESET_FULL_RECT)
+	back.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	scene_pic.add_child(back)
+	if tex:
+		var pic := TextureRect.new()
+		pic.texture = tex
+		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		pic.set_anchors_preset(Control.PRESET_FULL_RECT)
+		pic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		scene_pic.add_child(pic)
+	if dim > 0.0:
+		var d := ColorRect.new()
+		d.color = Color(0, 0, 0, dim)
+		d.set_anchors_preset(Control.PRESET_FULL_RECT)
+		d.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		scene_pic.add_child(d)
+	if caption != "":
+		var l := _make_label(Color(1, 0.92, 0.7))
+		l.text = caption
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		l.add_theme_font_size_override("font_size", 36)
+		l.position = Vector2(160, 780)
+		l.size = Vector2(1600, 220)
+		scene_pic.add_child(l)
+	root.add_child(scene_pic)
+	root.move_child(scene_pic, 0)
+
+
+func hide_scene() -> void:
+	if scene_pic:
+		scene_pic.queue_free()
+		scene_pic = null
+
+
+## Danny's piano, seen from the bench: an octave and a half of keys from middle C, Nina's masking-tape letters on the
+## white keys of the first octave, the set list on the stand above when Ray has it. A click on a key emits
+## piano_event(letter) and flashes the letter; "Step back" emits piano_event("close").
+const WHITE_KEYS := ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5", "D5", "E5", "F5", "G5"]
+const BLACK_KEYS := {"C#4": 0, "D#4": 1, "F#4": 3, "G#4": 4, "A#4": 5, "C#5": 7, "D#5": 8, "F#5": 10}
+
+
+func show_piano(set_list: Texture2D = null) -> void:
+	hide_piano()
+	piano = Control.new()
+	piano.set_anchors_preset(Control.PRESET_FULL_RECT)
+	piano.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(piano)
+	root.move_child(piano, 0)
+	var dim := ColorRect.new()
+	dim.color = Color(0.03, 0.02, 0.03, 0.92)
+	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	dim.mouse_filter = Control.MOUSE_FILTER_STOP           # the room behind can't be clicked
+	piano.add_child(dim)
+	piano.add_child(_card_panel(Rect2(180, 540, 1560, 400), Color(0.04, 0.04, 0.05), Color(0.2, 0.2, 0.22), 4))
+	if set_list:
+		var sl := TextureRect.new()
+		sl.texture = set_list
+		sl.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		sl.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
+		sl.position = Vector2(700, 60)
+		sl.size = Vector2(520, 438)
+		sl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		piano.add_child(sl)
+	_piano_keys.clear()
+	var kw := 120.0
+	var x0 := 960.0 - kw * WHITE_KEYS.size() * 0.5
+	for i in WHITE_KEYS.size():
+		var k := ColorRect.new()
+		k.color = Color(0.93, 0.91, 0.85)
+		k.position = Vector2(x0 + i * kw + 2, 580)
+		k.size = Vector2(kw - 4, 330)
+		k.mouse_filter = Control.MOUSE_FILTER_STOP
+		var key_name: String = WHITE_KEYS[i]
+		k.gui_input.connect(_on_piano_input.bind(key_name))
+		piano.add_child(k)
+		_piano_keys[key_name] = k
+		if i < 7:                                       # Nina's masking tape, the letters in ballpoint
+			var tape := ColorRect.new()
+			tape.color = Color(0.84, 0.77, 0.55)
+			tape.position = Vector2(18, 250)
+			tape.size = Vector2(kw - 40, 56)
+			tape.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			k.add_child(tape)
+			var l := Label.new()
+			l.text = key_name.substr(0, 1)
+			l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			l.add_theme_color_override("font_color", Color(0.12, 0.16, 0.45))
+			l.add_theme_font_size_override("font_size", 36)
+			l.size = tape.size
+			tape.add_child(l)
+	for key_name: String in BLACK_KEYS:
+		var b := ColorRect.new()
+		b.color = Color(0.06, 0.06, 0.07)
+		b.position = Vector2(x0 + (int(BLACK_KEYS[key_name]) + 1) * kw - 36, 580)
+		b.size = Vector2(72, 200)
+		b.mouse_filter = Control.MOUSE_FILTER_STOP
+		b.gui_input.connect(_on_piano_input.bind(key_name))
+		piano.add_child(b)
+		_piano_keys[key_name] = b
+	_piano_flash = _make_label(Color(1, 0.9, 0.6))
+	_piano_flash.add_theme_font_size_override("font_size", 110)
+	_piano_flash.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_piano_flash.position = Vector2(140, 250)
+	_piano_flash.size = Vector2(460, 200)
+	_piano_flash.modulate.a = 0.0
+	piano.add_child(_piano_flash)
+	var hint := _make_label(Color(0.85, 0.8, 0.65))
+	hint.text = "Click the keys to play."
+	hint.position = Vector2(200, 960)
+	piano.add_child(hint)
+	var back := Button.new()
+	back.text = "Step back"
+	back.flat = true
+	back.focus_mode = Control.FOCUS_NONE
+	back.position = Vector2(1600, 990)
+	back.add_theme_color_override("font_color", Color(0.78, 0.82, 0.84))
+	back.add_theme_color_override("font_hover_color", Color(1, 0.85, 0.45))
+	back.pressed.connect(func(): piano_event.emit("close"))
+	piano.add_child(back)
+
+
+func hide_piano() -> void:
+	if piano:
+		piano.queue_free()
+		piano = null
+	_piano_keys.clear()
+
+
+func _on_piano_input(event: InputEvent, key: String) -> void:
+	var mb := event as InputEventMouseButton
+	if mb and mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT:
+		piano_press(key)
+
+
+func piano_press(key: String, emit := true) -> void:
+	## Press a key ("D4", "C#5"): it goes down and its letter flashes with a note glyph. Emits piano_event with the
+	## letter (sharps as "C#"). Also used by the automated playthrough and to replay the knock.
+	if piano == null or not _piano_keys.has(key):
+		return
+	var k: ColorRect = _piano_keys[key]
+	var up := Color(0.93, 0.91, 0.85) if key.length() == 2 else Color(0.06, 0.06, 0.07)
+	k.color = Color(0.72, 0.64, 0.42) if key.length() == 2 else Color(0.32, 0.27, 0.2)
+	_piano_flash.text = key.substr(0, key.length() - 1) + "  ♪"
+	_piano_flash.modulate.a = 1.0
+	get_tree().create_timer(0.18).timeout.connect(_piano_key_up.bind(k, up))
+	var t := create_tween()
+	t.tween_interval(0.18)
+	t.tween_property(_piano_flash, "modulate:a", 0.0, 0.7)
+	if emit:
+		piano_event.emit(key.substr(0, key.length() - 1))
+
+
+func _piano_key_up(k: ColorRect, up: Color) -> void:
+	if is_instance_valid(k):
+		k.color = up
+
+
+## One end card over the credits: a still (a room, or Pryce), dimmed, with its line under it.
+func show_endcard(tex: Texture2D, text: String) -> void:
+	show_scene(tex, 0.5, text)
+
 
 func hide_paper() -> void:
 	if paper:

@@ -3,8 +3,13 @@ import math, random
 import numpy as np
 from scene3d import *
 import textures as tx
+import npc
+import cars
 
-def build(hide=()):
+def build(hide=(), crime=False):
+    """crime=True: Case 5, 4:52 a.m. A patrol car at the curb, its light bar turning (two exclusive overlays), the
+    coroner's van backed into the alley, tape from the hydrant to the streetlamp and across the Blue Note's open door,
+    the neon dark. Officer Park at the door (an overlay), Teo on a crate by the hydrant, Mara Quist at the tape."""
     S = Scene()
     rng = random.Random(4)
     # ---------------------------------------------------------------- materials
@@ -24,10 +29,11 @@ def build(hide=()):
     S.mat('backing', (16, 14, 20), spec=0.2)
     S.mat('bar_window', (40, 24, 18), tex=tx.hires(tx.bar_interior(), 3), texmode=3, texemis=1.6, refl=0.15)
     S.mat('door_glow', (120, 70, 40), tex=tx.bar_door_glass(), texmode=3, texemis=1.1)
+    nm = 1 if crime else 2                                           # the neon is off (unlit glass) the morning Sal died
     S.mat('neon_blue', (20, 20, 30), tex=tx.neon_text('BLUE NOTE', (80, 150, 255), size=72,
-          fnt='DejaVuSerif-BoldItalic.ttf'), texmode=2, texemis=5.0)
-    S.mat('neon_open', (20, 20, 30), tex=tx.neon_text('OPEN', (255, 60, 150), size=48), texmode=2, texemis=4.0)
-    S.mat('neon_bar', (20, 20, 30), tex=tx.neon_text('COCKTAILS', (255, 90, 170), size=40, vertical=True), texmode=2,
+          fnt='DejaVuSerif-BoldItalic.ttf'), texmode=nm, texemis=5.0)
+    S.mat('neon_open', (20, 20, 30), tex=tx.neon_text('OPEN', (255, 60, 150), size=48), texmode=nm, texemis=4.0)
+    S.mat('neon_bar', (20, 20, 30), tex=tx.neon_text('COCKTAILS', (255, 90, 170), size=40, vertical=True), texmode=nm,
           texemis=4.0)
     S.mat('phone_sign', (30, 30, 40), tex=tx.sign_board('PHONE', (220, 235, 255), (30, 70, 160), 256, 64), texmode=3,
           texemis=2.0)
@@ -61,6 +67,8 @@ def build(hide=()):
     S.mat('alley_door', (200, 220, 200), emis=(180, 220, 190), emis_mult=1.2)
     S.mat('ac_unit', (110, 112, 108), namp=0.2, nscale=6)
     S.mat('newsbox', (120, 30, 30), spec=0.5)
+    S.mat('bar_inside', (60, 36, 24), tex=tx.hires(tx.bar_interior(seed=14), 3), texmode=3, texemis=1.9)
+    S.mat('floor_in', (120, 70, 44), namp=0.2, nscale=8, spec=0.4, refl=0.2)
     S.mat('notice', (220, 220, 210), tex=tx.hires(tx.rezoning_notice(), 3), texmode=1)
 
     # ---------------------------------------------------------------- ground
@@ -87,9 +95,17 @@ def build(hide=()):
     # door
     with S.tag('bar_door'):
         S.wboxr(-4.5, 0.15, -0.2, -3.3, 2.45, 0.05, 'wood_dk')
-        S.wboxr(-4.38, 0.15, -0.25, -3.42, 2.35, 0.06, 'backing')
-        S.wboxr(-4.2, 1.5, -0.26, -3.6, 2.0, 0.08, 'door_glow')
-        S.sph((-3.55, 1.15, 0.1), 0.04, 'chrome')
+        if not crime:
+            S.wboxr(-4.38, 0.15, -0.25, -3.42, 2.35, 0.06, 'backing')
+            S.wboxr(-4.2, 1.5, -0.26, -3.6, 2.0, 0.08, 'door_glow')
+            S.sph((-3.55, 1.15, 0.1), 0.04, 'chrome')
+        else:
+            # standing open: a lit vestibule behind it, the door swung in against the left jamb
+            S.wboxr(-4.38, 0.15, -1.6, -3.42, 2.35, 0.3, 'wood_dk', op=1)
+            S.wboxr(-4.38, 0.0, -1.6, -3.42, 0.15, 0.0, 'floor_in')
+            S.wboxr(-4.5, 0.15, -1.75, -3.3, 2.5, -1.6, 'bar_inside')
+            S.wbox((-4.3, 1.25, -0.5), (0.03, 1.1, 0.42), 'wood_dk', rot=Ry(0))
+            S.wbox((-4.26, 1.75, -0.5), (0.01, 0.25, 0.3), 'door_glow', rot=Ry(90))
     S.wboxr(-3.2, 1.6, 0.0, -2.95, 2.5, 0.06, 'backing')
     S.wboxr(-3.18, 1.62, 0.04, -2.97, 2.48, 0.07, 'neon_bar')
     # city notice of a public hearing, taped up between the window and the door
@@ -203,6 +219,8 @@ def build(hide=()):
             S.wboxr(cx0 - 0.03, 0.62, cz0 + 0.2, cx0 + 0.02, 0.74, cz0 + 0.5, 'taillight')
             S.wboxr(cx0 - 0.03, 0.62, cz1 - 0.5, cx0 + 0.02, 0.74, cz1 - 0.2, 'taillight')
             S.wboxr(cx0 - 0.04, 0.4, cz0 + 0.65, cx0 + 0.01, 0.56, cz1 - 0.65, 'plate')
+    if crime:
+        crime_scene(S, hide)
     # ---------------------------------------------------------------- distance: palms, wires, skyline
     for (x, z, h, lean) in [(-3.2, -22, 13, 1.5), (-1.0, -30, 16, -1.5), (-12, -30, 15, 2), (-7.5, -40, 18, 1)]:
         top = (x + lean, h, z)
@@ -226,9 +244,12 @@ def build(hide=()):
     for x in (-9.2, -5.8):
         S.light((x, 5.5, -2.8), (255, 220, 170), power=1.6, range=5, vol=0.3, shadow=False, spot=((0, 0.6, -1), 35, 70))
     S.light((-6.3, 1.7, -0.9), (255, 140, 70), power=10, range=8, vol=0.25)
-    S.light((-5.5, 3.7, 0.9), (90, 150, 255), power=6, range=8, vol=0.7, shadow=False)
-    S.light((-3.1, 2.1, 0.5), (255, 70, 160), power=2.5, range=6, vol=0.5, shadow=False)
-    S.light((-3.9, 1.8, 0.4), (255, 150, 80), power=2.0, range=5, vol=0.2, shadow=False)
+    if not crime:
+        S.light((-5.5, 3.7, 0.9), (90, 150, 255), power=6, range=8, vol=0.7, shadow=False)
+        S.light((-3.1, 2.1, 0.5), (255, 70, 160), power=2.5, range=6, vol=0.5, shadow=False)
+        S.light((-3.9, 1.8, 0.4), (255, 150, 80), power=2.0, range=5, vol=0.2, shadow=False)
+    else:
+        S.light((-3.9, 1.9, -1.0), (255, 170, 100), power=9, range=8, vol=0.5, volshadow=True, soft=10)   # out the open door
     S.light((5.7, 2.9, 0.8), (205, 222, 255), power=26, range=9, vol=0.9, spot=((0, -1, 0.15), 30, 70))
     for x in (4.0, 7.4):
         S.light((x, 2.35, 1.1), (70, 120, 255), power=2.0, range=5, shadow=False, vol=0.5)
@@ -240,6 +261,8 @@ def build(hide=()):
     env = dict(sky=(22, 22, 40), bounce=(14, 12, 18), fog_col=(22, 18, 36), fog=0.05, fog_h0=0.0, fog_hf=0.22,
                fog_max=120, vol_scale=4, vol_steps=40, reflections=True, grid=0.75, ao_scale=1.5)
 
+    if crime:
+        return S, cam, env, crime_meta()
     meta = dict(
         room='street',
         walk=[(-8.8, 0.6), (9.6, 0.6), (9.6, 1.25), (7.2, 1.25), (7.2, 3.4), (4.4, 3.4), (4.4, 4.8), (-8.8, 4.8)],
@@ -274,3 +297,156 @@ def build(hide=()):
         tint=(0.7, 0.72, 0.88),
     )
     return S, cam, env, meta
+
+
+# ---------------------------------------------------------------- Case 5: the crime scene at 4:52 a.m.
+PARK = (-2.7, 0.95)           # Officer Park at the Blue Note's door (an overlay)
+TEO = (-4.35, 2.55)           # Teo on a milk crate by the hydrant, his mop bucket beside him
+MARA = (-0.95, 3.6)           # Mara Quist in the street at the tape
+PATROL = (2.15, 4.5)          # the patrol car at the curb in front of the precinct, nose to the left
+HYDRANT, LAMP = (-5.6, 2.75), (3.3, 2.9)
+
+
+def crime_scene(S, hide):
+    S.mat('tape', (240, 200, 30), emis=(70, 58, 0), spec=0.5)
+    S.mat('van', (210, 212, 214), spec=1.0, shin=60, refl=0.25)
+    S.mat('van_back', (210, 212, 214), tex=tx.hires(tx.van_side(), 2), texmode=1, spec=1.0, shin=60, refl=0.2)
+    S.mat('amber', (200, 120, 20), emis=(255, 150, 30), emis_mult=2.0)
+    S.mat('flare', (255, 60, 30), emis=(255, 80, 40), emis_mult=7)
+    S.mat('crate', (40, 80, 150), spec=0.3, namp=0.2, nscale=20)
+    S.mat('bucket', (200, 168, 40), spec=0.6, shin=40)
+    S.mat('mop', (200, 196, 180), namp=0.5, nscale=40)
+    S.mat('mop_pole', (150, 120, 80))
+    S.mat('patrol_door', (230, 230, 230), tex=tx.sign_board('POLICE', (20, 20, 26), (236, 236, 236), 256, 64),
+          texmode=1, spec=1.2, shin=80, refl=0.25)
+    S.mat('lens_red', (90, 10, 10), spec=1.0, shin=60)
+    S.mat('lens_blue', (10, 20, 90), spec=1.0, shin=60)
+    S.mat('lit_red', (255, 40, 30), emis=(255, 30, 20), emis_mult=9)
+    S.mat('lit_blue', (40, 80, 255), emis=(40, 90, 255), emis_mult=9)
+
+    # tape: hydrant to streetlamp, sagging, and an X across the Blue Note's open door
+    def run(a, b, n=8, sag=0.12):
+        pts = [(a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t - sag * math.sin(math.pi * t), a[2] + (b[2] - a[2]) * t)
+               for t in np.linspace(0, 1, n + 1)]
+        for p0, p1 in zip(pts, pts[1:]):
+            S.cyl(p0, p1, 0.014, 'tape')
+    with S.tag('tape'):
+        run((HYDRANT[0], 0.86, HYDRANT[1]), (LAMP[0] - 0.08, 1.02, LAMP[1]), n=12, sag=0.14)
+        run((-4.48, 0.75, 0.1), (-3.32, 1.95, 0.1), n=3, sag=0.0)
+        run((-4.48, 1.95, 0.11), (-3.32, 0.75, 0.11), n=3, sag=0.0)
+
+    # the coroner's van backed into the alley, its doors toward the street
+    with S.tag('van'):
+        vx0, vx1, vz0, vz1 = -1.0, 0.78, -9.6, -4.3
+        S.wboxr(vx0, 0.35, vz0, vx1, 2.45, vz1, 'van', rnd=0.12)
+        S.wbox(((vx0 + vx1) / 2, 1.25, vz1 + 0.005), (0.8, 0.32, 0.01), 'van_back')
+        S.wboxr(vx0 + 0.15, 1.65, vz1 - 0.01, vx1 - 0.15, 2.25, vz1 + 0.015, 'car_glass')
+        S.wboxr(vx0 + 0.05, 0.55, vz1 - 0.01, vx0 + 0.25, 0.85, vz1 + 0.02, 'taillight')
+        S.wboxr(vx1 - 0.25, 0.55, vz1 - 0.01, vx1 - 0.05, 0.85, vz1 + 0.02, 'taillight')
+        S.wboxr(vx0 + 0.4, 2.46, vz1 - 0.6, vx1 - 0.4, 2.56, vz1 - 0.3, 'amber')
+        for wz in (vz0 + 0.9, vz1 - 0.9):
+            for wx in (vx0 + 0.02, vx1 - 0.02):
+                S.fcyl((wx, 0.37, wz), 0.37, 0.12, 'tire', axis='x')
+    S.light((-0.1, 2.75, -4.6), (255, 150, 40), power=2.0, range=6, vol=0.4, shadow=False)
+
+    # the patrol car, black and white, its light bar turning (bar_red / bar_blue overlays)
+    if 'patrol' not in hide:
+        px, pz = PATROL
+        cars.car(S, 'patrol', (px, 0.0, pz), 90, (16, 16, 20), L=4.6, W=1.84, H=1.45, lights=False, tag='patrol_car')
+        with S.tag('patrol_car'):
+            for x0, x1 in ((px - 1.0, px - 0.02), (px + 0.02, px + 0.95)):
+                S.wboxr(x0, 0.36, pz + 0.9, x1, 0.8, pz + 0.935, 'patrol_door' if x0 < px else 'van')
+            S.wboxr(px - 0.62, 1.44, pz - 0.28, px + 0.62, 1.5, pz + 0.28, 'trim', rnd=0.02)
+            S.wboxr(px - 0.6, 1.5, pz - 0.24, px - 0.02, 1.6, pz + 0.24, 'lens_red', rnd=0.03)
+            S.wboxr(px + 0.02, 1.5, pz - 0.24, px + 0.6, 1.6, pz + 0.24, 'lens_blue', rnd=0.03)
+        if 'bar_red' not in hide:
+            S.wboxr(px - 0.605, 1.495, pz - 0.245, px - 0.015, 1.605, pz + 0.245, 'lit_red', rnd=0.03)
+            S.light((px - 0.35, 1.75, pz - 0.2), (255, 40, 30), power=6, range=10, vol=0.25, shadow=False)
+        if 'bar_blue' not in hide:
+            S.wboxr(px + 0.015, 1.495, pz - 0.245, px + 0.605, 1.605, pz + 0.245, 'lit_blue', rnd=0.03)
+            S.light((px + 0.35, 1.75, pz - 0.2), (50, 90, 255), power=7, range=10, vol=0.25, shadow=False)
+
+    # road flares in the street, burning down
+    with S.tag('flares'):
+        for (x, z, a) in ((-2.8, 4.3, 20), (-1.8, 5.2, -35), (-3.6, 5.6, 70)):
+            S.cyl((x, 0.03, z), (x + 0.22 * math.cos(math.radians(a)), 0.03, z + 0.22 * math.sin(math.radians(a))),
+                  0.018, 'flare')
+    for (x, z) in ((-2.8, 4.3), (-1.8, 5.2), (-3.6, 5.6)):
+        S.light((x, 0.25, z), (255, 70, 40), power=0.9, range=3, vol=0.4, shadow=False)
+
+    # Teo on a milk crate, his mop bucket beside him
+    tx_, tz_ = TEO
+    if 'teo' not in hide:
+        with S.tag('teo'):
+            S.wboxr(tx_ - 0.2, 0.15, tz_ - 0.17, tx_ + 0.2, 0.47, tz_ + 0.17, 'crate', rnd=0.02)
+        npc.cast(S, 'teo', dict(npc.SEATED, lhp=78, lk=98, rhp=80, rk=102, lean=26, lsp=44, le=88, lin=36, rsp=44,
+                                re=92, rin=40, hp=24, hy=10), (tx_, 0.11, tz_ - 0.02), yaw=24, scale=0.97, tag='teo')
+    with S.tag('bucket'):
+        S.tcyl(Frame((tx_ + 0.55, 0.32, tz_ + 0.05)), (0, 0, 0), (0.2, 0.2), (0.16, 0.16), 0.17, 'bucket')
+        S.cyl((tx_ + 0.55, 0.3, tz_ + 0.05), (tx_ + 0.25, 1.45, tz_ - 0.45), 0.015, 'mop_pole')
+        S.ell(WORLD, (tx_ + 0.55, 0.47, tz_ + 0.05), (0.14, 0.05, 0.14), 'mop')
+
+    # Mara Quist at the tape, notebook dry under her coat
+    if 'mara' not in hide:
+        npc.cast(S, 'mara', dict(npc.STAND, props=(('notebook', 'l'), ('pen', 'r')), lsp=34, le=78, lin=40, rsp=28,
+                                 re=86, rin=40, hp=6, hy=-8, lhp=4, rhp=-6), (MARA[0], 0.0, MARA[1]), yaw=38,
+                 scale=0.94, tag='mara')
+
+    # Officer Park at the door, in her rain cape (overlay: she goes into the back room once Nina is out)
+    if 'park' not in hide:
+        npc.cast(S, 'park', dict(npc.ARMS_FOLDED, hp=4, hy=14, lhp=4, rhp=-4), (PARK[0], 0.15, PARK[1]), yaw=-18,
+                 scale=0.94, tag='park')
+
+
+def crime_meta():
+    P, T, M = PARK, TEO, MARA
+
+    def rect(x, z, w, h, y0=0.0):
+        return [(x - w, y0, z), (x + w, y0, z), (x + w, y0 + h, z), (x - w, y0 + h, z)]
+    tape = []
+    for t in np.linspace(0, 1, 13):
+        x = HYDRANT[0] + (LAMP[0] - 0.08 - HYDRANT[0]) * t
+        z = HYDRANT[1] + (LAMP[1] - HYDRANT[1]) * t
+        y = 0.86 + 0.16 * t - 0.14 * math.sin(math.pi * t)
+        tape += [(x, y - 0.1, z), (x, y + 0.1, z)]
+    return dict(
+        room='street_crime',
+        walk=[(-8.8, 0.6), (9.6, 0.6), (9.6, 1.25), (7.2, 1.25), (7.2, 3.3), (-8.8, 3.3)],
+        walk_zmin=0.6, walk_zmax=3.3, scale_x=0.0,
+        spawns={'squad_room': (5.7, 1.3), 'blue_note_bar': (-3.9, 1.05), 'start': (5.7, 1.3), 'drive': (5.7, 1.3)},
+        hotspots={
+            'bar_door': ('Blue Note door', (-3.9, 0.85), 'up'),
+            'neon': ('neon sign', None, 'up'),
+            'payphone': ('payphone', (-1.25, 1.55), 'up'),
+            'trash_can': ('dumpster', (0.2, 0.75), 'up'),
+            'alley': ('alley', None, 'up'),
+            'van': ("coroner's van", None, 'up'),
+            'precinct_door': ('precinct', (5.7, 1.0), 'up'),
+            'rezoning': ('notice', (-4.7, 0.9), 'up'),
+            'car': ('car', (6.6, 3.0), 'right'),
+            'patrol_car': ('patrol car', (1.6, 3.0), 'down'),
+            'tape': ('crime tape', None, 'up'),
+            'park': ('Officer Park', (-2.0, 1.45), 'left'),
+            'teo': ('Teo', (-3.5, 2.75), 'left'),
+            'mara': ('Mara Quist', (-0.95, 2.95), 'down'),
+            'flares': ('road flares', None, 'down'),
+        },
+        hotspot_shapes={'alley': [(-1.9, 0, 0), (1.0, 0, 0), (1.0, 6.0, 0), (-1.9, 6.0, 0)],
+                        'rezoning': [(-4.95, 1.05, 0.03), (-4.47, 1.05, 0.03), (-4.47, 1.66, 0.03), (-4.95, 1.66, 0.03)],
+                        'van': [(-1.0, 0.35, -4.3), (0.78, 0.35, -4.3), (0.78, 2.56, -4.3), (-1.0, 2.56, -4.3)],
+                        'tape': tape,
+                        'park': rect(P[0], P[1], 0.32, 1.78, 0.15),
+                        'teo': rect(T[0] + 0.2, T[1], 0.5, 1.35, 0.15),
+                        'mara': rect(M[0], M[1], 0.3, 1.74),
+                        'flares': [(-3.9, 0, 4.0), (-1.4, 0, 4.0), (-1.4, 0.3, 6.0), (-3.9, 0.3, 6.0)]},
+        hotspot_order=['alley', 'van', 'neon', 'trash_can', 'precinct_door', 'bar_door', 'rezoning', 'payphone',
+                       'tape', 'flares', 'car', 'patrol_car', 'park', 'teo', 'mara'],
+        overlays=['park', 'bar_red', 'bar_blue'],
+        overlay_bases={'park': PARK},
+        exclusive_overlays=['bar_red', 'bar_blue'],
+        occluders={'hydrant': HYDRANT, 'streetlamp': LAMP, 'car': (4.9, 3.75), 'patrol': (PATROL[0], PATROL[1] - 0.9),
+                   'teo': (T[0], T[1] + 0.1), 'mara': M},
+        obstacles=[(HYDRANT[0], HYDRANT[1], 0.4), (LAMP[0], LAMP[1], 0.32), (T[0] + 0.15, T[1], 0.5), (P[0], P[1], 0.3)],
+        char_fill=((190, 196, 230), 0.08),
+        tint=(0.7, 0.72, 0.88),
+    )

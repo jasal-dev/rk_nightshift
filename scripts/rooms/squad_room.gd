@@ -9,7 +9,10 @@ extends Room
 ## Doyle's call, then Otis with Case 4, and Ray drives to the river.
 ## Case 4, scene 7 (back from the lab with Crane arrested and Danny's phone with Ike): the deduction for Owen, the lab
 ## receipt pinned beside Danny (and Pryce's invitation if Ray found it), Doyle's call, then Otis: Sal is dead. Case 5's card.
-## The board keeps its pins between cases (overlays shown by flag).
+## Case 5, scenes 4 and 6 (Sal Moretti): the desk phone's call log and the phone list put Nina's police number on
+## Doyle's desk; the 1:30 call remembered at the board; Otis's visitor log names Walt Brenner, then Doyle calls and Ike
+## calls. Back with the take: the last deduction, Danny's box, Harbor Marine and Otis's car, and the text to Walt.
+## The board keeps its pins between cases (overlays shown by flag); once Danny's box is packed its middle is bare.
 
 const DOYLE_COLOR := Color(0.7, 0.85, 1.0)
 const OTIS_COLOR := Color(1.0, 0.85, 0.5)
@@ -38,6 +41,9 @@ const EVIDENCE := [
 @onready var pin_owen: Sprite2D = $Board_owen
 @onready var pin_phone: Sprite2D = $Board_phone
 @onready var pin_invite: Sprite2D = $Board_invite
+@onready var pin_walt: Sprite2D = $Board_walt
+@onready var pin_string: Sprite2D = $Board_string
+@onready var pin_empty: Sprite2D = $Board_empty
 
 
 func _ready() -> void:
@@ -58,6 +64,16 @@ func _sync() -> void:
 	pin_owen.visible = Game.flag("case4_deduced")
 	pin_phone.visible = Game.flag("board_danny_phone")
 	pin_invite.visible = Game.flag("board_pryce_invite")
+	pin_walt.visible = Game.flag("case5_deduced")
+	pin_string.visible = Game.flag("board_string")
+	# Danny's box: the middle of the board comes down and goes into it
+	var packed := Game.flag("got_danny_box")
+	pin_empty.visible = packed
+	for pin: Sprite2D in [pin_envelope, pin_receipt, pin_brenner, pin_phone, pin_invite, pin_walt, pin_string]:
+		pin.visible = pin.visible and not packed
+	var pl := hotspot("phone_list")
+	if pl:
+		pl.enabled = _case5()
 
 
 func _back_from_pier() -> bool:
@@ -80,6 +96,11 @@ func _case4() -> bool:
 	return Game.flag("phone_at_lab") and not Game.flag("case4_done")
 
 
+func _case5() -> bool:
+	## Case 5, scenes 4 and 6: Sal Moretti, until Ray drives to the pier.
+	return Game.flag("case4_done")
+
+
 func on_enter(_from_room: String) -> void:
 	if _back_from_pier() and not Game.flag("back_in_214"):
 		Game.set_flag("back_in_214")
@@ -93,6 +114,14 @@ func on_enter(_from_room: String) -> void:
 	elif _case4() and not Game.flag("back_in_214_case4"):
 		Game.set_flag("back_in_214_case4")
 		await main.say("Room 214. Kenji, Gus, and now Owen in the corners. Danny's still in the middle, waiting for somebody to notice him.")
+	elif _case5() and Game.flag("heard_take") and not Game.flag("back_in_214_board"):
+		Game.set_flag("back_in_214_board")
+		await main.say("Room 214. Five hours ago I pinned an envelope next to Danny and drew a question mark. Time to fill it in.")
+	elif _case5() and not Game.flag("back_in_214_case5"):
+		Game.set_flag("back_in_214_case5")
+		await main.say("Room 214. Whoever came for Sal knew he'd only open to Danny's knock. But he didn't know the knock. He had to call Nina for it.")
+		await main.narrate("Danny knocked like that on Vance's door every Tuesday. Tiny and Vance had the rhythm and never needed to ask. This man had the rule and not the rhythm.")
+		await main.narrate("I told somebody the rule. Who did I tell?")
 
 
 func intro() -> void:
@@ -111,6 +140,11 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 						else "HOMICIDE. Room 214. Home sweet home.")
 			elif item != "":
 				await main.say("The door's not locked. My problems are.")
+			elif _case5():
+				if Game.flag("heard_take") and not Game.flag("case5_deduced"):
+					await main.say("Not yet. The board first.")
+				else:
+					await main.change_room("street_crime", "squad_room")
 			elif _case4():
 				await main.say("Not yet. Owen's waiting on the board.")
 			elif _case3():
@@ -132,7 +166,9 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.say("It's raining out. I'll be wet either way.")
 
 		"case_board":
-			if _case4():
+			if _case5():
+				await _board5(verb, item)
+			elif _case4():
 				await _board4(verb, item)
 			elif _case3():
 				await _board3(verb, item)
@@ -185,6 +221,8 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 					await main.say("The message light is blinking.")
 			elif item != "":
 				await default_response(verb, item)
+			elif _case5():
+				await _phone5()
 			elif _case2() or _case3() or _case4():
 				await main.say("Nothing to tell anybody yet.")
 			elif _back_from_pier():
@@ -196,6 +234,12 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await _voicemail()
 			else:
 				await main.say("Nobody I want to call at this hour.")
+
+		"phone_list":
+			if item != "":
+				await default_response(verb, item)
+			else:
+				await _phone_list(verb)
 
 		"mug":
 			if verb == "look":
@@ -245,13 +289,19 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.say("Locked. I'm the one who locked it, too.")
 
 		"window":
-			if verb == "look":
+			if _case5():
+				await main.say("The sky's gone the color of a dirty dime. Sunrise in an hour." if Game.flag("heard_take")
+						else "Gray over the parking lot. The rain's thinking about stopping.")
+			elif verb == "look":
 				await main.say("Four million people out there. One of them killed Danny Reyes.")
 			else:
 				await main.say("Painted shut. The blinds are the only thing in here that opens.")
 
 		"clock":
-			if _case4():
+			if _case5():
+				await main.say("Five to six. Five minutes until I'm off shift. Then I'm a civilian with a badge." if Game.flag("heard_take")
+						else "Twenty past five. Forty minutes until I'm supposed to go home.")
+			elif _case4():
 				await main.say("Ten to five. The sky over the parking lot is thinking about getting lighter.")
 			elif _case3():
 				await main.say("Quarter to four. The hour when even the coffee gives up.")
@@ -991,4 +1041,443 @@ func _calls4() -> void:
 	main.player.face("right")
 	await main.wait(1.2)
 	Game.set_flag("case4_done")
-	await main.end_case("4:50 a.m.", "Case 5: Last Call", 4)
+	await main.case_card("4:50 a.m.", "Case 5: Last Call")
+	Case5.start(main)
+	await main.change_room("street_crime", "squad_room")
+
+
+# --- Case 5: the leak, the board, the meet -------------------------------------------------------------------------
+func _board5(verb: String, item: String) -> void:
+	if verb == "look":
+		if Game.flag("got_danny_box"):
+			await main.say("Four corners and a hole in the middle where a piano player used to be.")
+		elif Game.flag("case5_deduced"):
+			await main.say("Danny in the middle, Sal beside him now, and a name on the back of an index card.")
+		else:
+			await main.say("Four corners and a middle. Danny's still in the middle, and now Sal is somewhere in it too.")
+	elif Game.flag("got_danny_box"):
+		await main.say("Packed.")
+	elif Game.flag("case5_deduced"):
+		await _pack_box()
+	elif Game.flag("heard_take"):
+		await _deduction5(item)
+	elif item == "tab_book":
+		await main.say("After I know what Danny had.")
+	elif item != "":
+		await main.say("Pinning that up won't solve anything.")
+	elif Game.flag("clue_desk_line") and not Game.flag("clue_walt_aside"):
+		await _remember()
+	else:
+		await main.say("Not yet. I need what Danny had.")
+
+
+func _phone5() -> void:
+	## The desk phone: its call log, Otis (after the lieutenant's line turns up), Harbor Marine (after the board).
+	while true:
+		var opts := ["Call log"]
+		if Game.flag("clue_desk_line"):
+			opts.append("Call Otis")
+		if Game.flag("case5_deduced"):
+			opts.append("Call Harbor Marine")
+		opts.append("Hang up")
+		var c: int = await main.choose(opts)
+		match String(opts[c]):
+			"Call log":
+				await _call_log()
+			"Call Otis":
+				await _call_otis()
+				return
+			"Call Harbor Marine":
+				await _call_harbor()
+				return
+			_:
+				return
+
+
+func _call_log() -> void:
+	## Puzzle 4.1: the phone remembers.
+	await main.player.play_action("use")
+	main.ui.show_device("CALL LOG   x2140", [], 0, "4:50a  IN   x1000  FRONT DESK\n4:46a  IN   (310) 555-0122  DOYLE M CELL\n" +
+			"3:50a  IN   x1000  FRONT DESK\n3:46a  IN   (310) 555-0122  DOYLE M CELL\n2:45a  IN   x1000  FRONT DESK\n" +
+			"2:41a  IN   (310) 555-0122  DOYLE M CELL\n1:31a  IN   x1000  FRONT DESK\n1:30a  OUT  x2186  LT DOYLE   4:12\n" +
+			"11:40p IN   x2186  LT DOYLE (VMAIL)", [], false, Color(0.2, 0.4, 0.16), true)
+	await main.say("One call out, all night. One-thirty, to the lieutenant's office, one floor up.")
+	await main.say("I told her about Sal, and the knock, and Nina.")
+	main.clue("clue_one_call")
+	main.ui.hide_device()
+
+
+func _phone_list(verb: String) -> void:
+	## Puzzle 4.2: the lieutenant's direct line.
+	main.ui.show_paper("HOLLYWOOD STATION  -  INTERNAL", "Front desk ................ x1000\nWatch commander ....... x1100\n" +
+			"Homicide, Room 214 ...... x2140\nDoyle, Lt. M. ............... x2186\n      direct (323) 555-0186\nDetectives, 2nd fl ........ x2150")
+	if not Game.flag("clue_nina_call"):
+		await main.say("HOLLYWOOD STATION, INTERNAL. Every extension in the building." if verb == "look"
+				else "Every extension in the building. One of them made a call it shouldn't have.")
+	elif not Game.flag("clue_desk_line"):
+		await main.say("Three-two-three, five-five-five, oh-one-eight-six. The lieutenant's direct line.")
+		await main.say("That's Nina's police number. One fifty-two, twenty-two minutes after I hung up on her.")
+		main.clue("clue_desk_line")
+		main.ui.hide_paper()
+		await main.narrate("Maureen Doyle doesn't call waitresses at two in the morning. She doesn't call anybody. She has people for that.")
+	else:
+		await main.say("The lieutenant's direct line. Somebody else was holding it at one fifty-two.")
+	main.ui.hide_paper()
+
+
+func _remember() -> void:
+	## Puzzle 4.3: the 1:30 call, replayed. The player picks the line that matters.
+	main.ui.show_scene(null, 0.0, "1:30 a.m.")
+	await main.narrate("One-thirty. Rain on the window. Her voice on the line, one floor up.")
+	while true:
+		var c: int = await main.choose(["\"Ray, it's one-thirty.\"", "\"Where'd you even get Vance?\"",
+				"\"Moretti told the uniforms he was blind and deaf.\"", "\"Thanks, Walt. Black is fine.\"",
+				"\"Stop wasting the night on one case.\""])
+		match c:
+			0:
+				await main.narrate("She says that every time I call. It's always one-thirty somewhere.")
+			1:
+				await main.narrate("And I told her. Sal Moretti, the bartender.")
+			2:
+				await main.narrate("And I told her how he talks: through his door, if you knock right. Danny's knock. His girl Nina gave it to me. I said all of it.")
+			3:
+				await main.narrate("\"Thanks, Walt. Black is fine.\" Muffled, away from the phone, right in the middle of it.")
+				break
+			_:
+				await main.narrate("Her favorite song. Not the line.")
+	main.ui.hide_scene()
+	await main.say("There was somebody in her office at one-thirty in the morning, bringing her coffee and listening to her half of my call.")
+	await main.say("Her half had Sal's name in it. The rest she could tell him after she hung up.")
+	main.clue("clue_walt_aside")
+
+
+func _call_otis() -> void:
+	await main.player.play_action("use")
+	if not Game.flag("knows_brenner"):
+		await _visitor_log()
+	elif Game.flag("vance_in") and not Game.flag("otis_backup"):
+		await main.say("Otis. I need a black-and-white at Pier 9, San Pedro, at a quarter to seven. Lights off. No radio.")
+		await main.voice("Harbor's not our division, Ray.", PHONE_AT, OTIS_COLOR)
+		await main.say("I know.")
+		await main.voice("Does the lieutenant know?", PHONE_AT, OTIS_COLOR)
+		await main.say("No.")
+		await main.wait(1.0)
+		await main.voice("Then I don't either. Harbor Division owes me a favor from 2011. I'll call it in myself.", PHONE_AT, OTIS_COLOR)
+		await main.voice("Ray. Bring the coat back.", PHONE_AT, OTIS_COLOR)
+		Game.set_flag("otis_backup")
+	elif Game.flag("otis_backup"):
+		await main.voice("Front desk. Your car's called in, Ray. Lights off, no radio, quarter to seven. I don't know a thing.", PHONE_AT, OTIS_COLOR)
+	else:
+		await main.voice("Front desk. I've lost a page, Ray. Like I said.", PHONE_AT, OTIS_COLOR)
+
+
+func _visitor_log() -> void:
+	## Puzzle 4.4: Otis's visitor log, then the name on the board, Doyle's call (4.5) and Ike's (4.6).
+	await main.voice("Front desk. Ray, I'm sorry about Sal.", PHONE_AT, OTIS_COLOR)
+	await main.say("Otis. Who came up to see the lieutenant last night?")
+	await main.voice("(pages turning) One visitor after midnight. In at one-twenty, out at two-oh-five. Walter Brenner.", PHONE_AT, OTIS_COLOR)
+	await main.voice("Retired, showed me his old ID and signed in like a civilian. He brought the lieutenant a coffee from the place on Cahuenga, and he brought me one too. Black.", PHONE_AT, OTIS_COLOR)
+	await main.voice("Nobody ever brings the desk a coffee.", PHONE_AT, OTIS_COLOR)
+	await main.say("Walt.")
+	await main.voice("Old-timer. Rampart, way back. He was her training officer. She thinks the world of him. He drives for some developer now. Says the hours are better than ours.", PHONE_AT, OTIS_COLOR)
+	main.clue("clue_visitor_log")
+	await main.say("Was she with him the whole time?")
+	await main.voice("Funny you ask. I've got her hallway on my monitor. Ten to two she went down to the copier with a stack the size of a phone book. The captain's briefing.", PHONE_AT, OTIS_COLOR)
+	await main.voice("Six, seven minutes. He stayed in her office.", PHONE_AT, OTIS_COLOR)
+	await main.say("Alone.")
+	await main.voice("With the coffee. Ray, what's this about?", PHONE_AT, OTIS_COLOR)
+	await main.say("Nothing yet. Don't write down that I asked.")
+	await main.voice("I write everything down, Ray. But I've been known to lose a page.", PHONE_AT, OTIS_COLOR)
+	main.clue("clue_brenner_alone")
+	# at the board, with the first line that applies to each seed and echo
+	await main.walk(hotspot("case_board").walk_to if hotspot("case_board").walk_to != Vector2.ZERO else main.player.position)
+	if Game.flag("clue_wb"):
+		await main.say("W.B., club soda. Walter Brenner.")
+	if Game.flag("got_ride_receipt"):
+		await main.say("Walt B. A Glide from the Blue Note to Pryce Tower an hour after Danny died. One star. Gun oil. And Kenji had a camera on his back seat.")
+	if Game.flag("got_brenner_card"):
+		await main.say("Walter Brenner, LAPD, retired. Security consultant, Pryce Development.")
+	if Game.flag("clue_tape_helper"):
+		await main.say("Park's old-timer at Danny's tape. An old ID, coffee from Cahuenga, and one question: did we find the phone.")
+	if Game.flag("clue_pryce_driver"):
+		await main.say("\"He drives for some developer.\" Andre said Pryce's driver was a big old guy who used to be a cop.")
+	if Game.flag("clue_block_empty") or Game.flag("clue_big_man"):
+		await main.say("Big fellow, old cop's coat.")
+	if Game.flag("heard_caller"):
+		await main.say("A cop who'd stopped being one.")
+	await main.narrate("Maureen didn't make that call. She went to copy the captain's briefing, and the man who taught her to drive a black-and-white picked up her phone.")
+	await main.narrate("She told him what I told her, because I told her, because she's my boss. That's how it works.")
+	main.clue("knows_brenner")
+	await _doyle_calls()
+	await _ike_calls()
+
+
+func _doyle_calls() -> void:
+	## Puzzle 4.5: scripted, no branches. Ray lies to a lieutenant for the first time.
+	await main.wait(0.6)
+	await main.voice("*RIIING*", PHONE_AT, Color.WHITE)
+	await main.walk(hotspot("phone").walk_to)
+	main.player.face("up")
+	await main.player.play_action("use")
+	await main.voice("Ray. Otis says you're at the Blue Note.", PHONE_AT, DOYLE_COLOR)
+	await main.say("Sal Moretti's dead.")
+	await main.voice("I heard. Patrol says he hanged himself. I know you talked to him tonight. That's not on you.", PHONE_AT, DOYLE_COLOR)
+	await main.wait(0.8)
+	await main.say("Isn't it.")
+	await main.voice("Walt Brenner called me ten minutes ago. My old training officer; you've never met him. He listens to the scanner like it's a ballgame.", PHONE_AT, DOYLE_COLOR)
+	await main.voice("He heard the Blue Note call and asked if you were on it. He's worried about you. He says you sound like a man who's been up all night chasing a ghost.", PHONE_AT, DOYLE_COLOR)
+	await main.say("He's never heard me.")
+	await main.voice("He's heard me talk about you. That's worse. Tell me you're going home at six.", PHONE_AT, DOYLE_COLOR)
+	await main.wait(1.2)
+	await main.say("I'm going home at six.")
+	await main.voice("That's the first time you've ever listened to me.", PHONE_AT, DOYLE_COLOR)
+	await main.say("First time for everything.")
+	await main.voice("I see the captain at eight. Get some sleep. *click*", PHONE_AT, DOYLE_COLOR)
+	await main.narrate("Twenty-six years, and the first time I lied to a lieutenant it felt like the right thing. It felt like being sick. Both.")
+	Game.set_flag("lied_to_doyle")
+
+
+func _ike_calls() -> void:
+	## Puzzle 4.6: Ray's own phone buzzes before he's put the receiver down.
+	await main.wait(0.5)
+	await main.voice("*bzzz bzzz*", Case5.CALL_AT, Color.WHITE)
+	await main.player.play_action("use")
+	await main.voice("Kessler. You said one hour. It's been fifty minutes. I'm a man of my word.", Case5.CALL_AT, Case4.IKE_COLOR)
+	await main.say("Tell me.")
+	await main.voice("The phone's soup, like I said. But your piano player recorded every set on an app called Takes. Every take uploads to the cloud the second you hit stop.", Case5.CALL_AT, Case4.IKE_COLOR)
+	await main.voice("Account name \"reyes.keys.\" Last upload: Tuesday, eleven fifty-two p.m.", Case5.CALL_AT, Case4.IKE_COLOR)
+	await main.say("Eight minutes before he died.")
+	await main.voice("His mother in Fresno is next of kin. She gave written consent ten minutes ago, so this is legal, and I'd like to keep it that way.", Case5.CALL_AT, Case4.IKE_COLOR)
+	await main.voice("I can get in through account recovery, but it wants the password, and he left himself a hint. Quote: \"the knock, the way I play it.\"", Case5.CALL_AT, Case4.IKE_COLOR)
+	await main.voice("Three wrong tries and it locks for a day. You know what that means?", Case5.CALL_AT, Case4.IKE_COLOR)
+	await main.say("Maybe. Give me ten minutes and a piano.")
+	main.clue("clue_takes_hint")
+	if Game.flag("got_ride_receipt"):
+		await main.say("One more thing. The rideshare case. Eleven dashcam cards came in from a freezer around three. Pull November. Wednesday, ten past one, the back-seat lens.")
+		await main.voice("You know what my job is, right? It's this. Fine.", Case5.CALL_AT, Case4.IKE_COLOR)
+		Game.set_flag("asked_cabin_clip")
+
+
+func _call_harbor() -> void:
+	## Puzzle 6.3, step one: Tiny, then Vance, and a cell number.
+	await main.player.play_action("use")
+	if Game.flag("vance_in"):
+		await main.voice("Harbor Marine. Sunrise, Detective. Mr. Vance doesn't like to be asked twice.", PHONE_AT, Case5.TINY_COLOR)
+		return
+	await main.voice("Harbor Marine.", PHONE_AT, Case5.TINY_COLOR)
+	await main.say("Tiny. Ray Kessler. Friend of Danny's.")
+	await main.wait(1.2)
+	await main.voice("You found him.", PHONE_AT, Case5.TINY_COLOR)
+	await main.say("I found him. I need your pier at sunrise, and I need Mr. Vance.")
+	await main.voice("(muffled talk)", PHONE_AT, Case5.TINY_COLOR)
+	await main.voice("Detective. Dawn is an unchristian hour.", PHONE_AT, Case5.VANCE_COLOR)
+	if Game.flag("heard_caller"):
+		await main.say("You said a man telephoned you Wednesday, asking whether Danny paid you. You keep records, Mr. Vance.")
+	else:
+		await main.say("Did anyone else ask you about Danny this week?")
+		await main.voice("A man telephoned Wednesday. He wanted to know if Danny had paid me, and in what. He talked like a cop who'd stopped being one.", PHONE_AT, Case5.VANCE_COLOR)
+		await main.say("You keep records, Mr. Vance.")
+	await main.voice("I keep everyone's number. It's the only way to be sure of people.", PHONE_AT, Case5.VANCE_COLOR)
+	await main.voice("Two-one-three, five-five-five, oh-one-six-three. A cell telephone. A cop's voice and a civilian's manners.", PHONE_AT, Case5.VANCE_COLOR)
+	main.clue("clue_brenner_number")
+	if Game.flag("got_brenner_card"):
+		await main.say("Same number as the card on Gus's desk.")
+	await main.say("I'd like to meet him on your pier at sunrise. I'd like you there. Tiny too.")
+	await main.voice("You want witnesses who aren't police.", PHONE_AT, Case5.VANCE_COLOR)
+	await main.say("I want witnesses who aren't anybody's.")
+	await main.wait(0.8)
+	await main.voice("Danny paid his debts, Detective. I like to think I pay mine. Sunrise.", PHONE_AT, Case5.VANCE_COLOR)
+	Game.set_flag("vance_in")
+	await main.say("Otis can find me a patrol car nobody upstairs knows about.")
+
+
+# --- Case 5: the deduction (Puzzle 6.1) ------------------------------------------------------------------------------
+## Case 5 evidence cards: [id, card text, slot it proves ("A" he got the knock, "B" he was in the bar at 3:20, "C" what
+## Danny had, "D" what it was costing them, "" none), Ray's line when it's pinned wrongly]. An id is an inventory item, a
+## notebook clue, or a board flag (the envelope and the seeds pinned in earlier cases).
+const EVIDENCE5 := [
+	["clue_brenner_alone", "Otis: Walt alone in Doyle's office at 1:52", "A", "That's how he got the knock. Put him in the bar."],
+	["tab_book", "Tab book: \"3:20 W.B. club soda\"", "B", "That puts him at Sal's bar. First, how he got in."],
+	["clue_desk_line", "Nina's caller was Doyle's desk line", "", "That's Maureen's phone. Who was holding it?"],
+	["clue_nina_call", "Nina's call at 1:52", "", "That's when the knock got out. Not who took it."],
+	["clue_walt_aside", "\"Thanks, Walt. Black is fine.\"", "", "Walt was in the room. Was he alone with the phone?"],
+	["clue_one_call", "One call out, at 1:30", "", "That's what I told. Pin who listened."],
+	["clue_choke", "Bar-arm choke, banned in 1982", "", "That's how. Put him in the room."],
+	["clue_wet_glass", "One glass washed after closing", "", "Somebody washed a glass. Whose name goes with it?"],
+	["clue_nina_heard", "Nina heard a man ask what the kid left", "", "Nina heard a voice. She never saw a face."],
+	["clue_latch", "Front door on the latch, back door locked", "", "That's how he left. Pin him arriving."],
+	["clue_staged_hanging", "Stool, clean hands, no note", "", "That proves it wasn't Sal. It doesn't prove it was Walt."],
+	["clue_locker", "Danny's locker, Sal's keys", "", "Somebody was looking. Pin who."],
+	["clue_sal_no", "Pryce's letter, Sal's NO", "", "That's why Pryce wanted him gone. Not who came."],
+	["clue_take", "The take: \"Then pay him, Walt.\"", "C", "That's what Danny had. First, what it was costing them." ],
+	["board_envelope", "Envelope, \"1 of 3\"", "D", "That's the bill. First, what Danny had."],
+	["clue_booth_tuesday", "Tuesday's back booth, three men, cash", "", "That's who sat there. Pin what they said."],
+	["clue_takes_app", "Danny recorded every set", "", "He recorded a lot of sets. Pin the one that mattered."],
+	["clue_paid", "Paid Vance $8,000 in full", "", "That says he had money. What says there was more coming?"],
+	["clue_lisbon", "\"One of three, and then Lisbon\"", "", "Nina knew the dream. Pin the bill."],
+	["board_ride_receipt", "Photo of Walt B.'s ride, billed to Pryce Development", "*", ""],
+	["board_brenner_card", "Walter Brenner's card", "*", ""],
+	["board_pryce_invite", "Pryce's invitation", "*", ""],
+]
+
+
+func _card5(id: String) -> Array:
+	for e: Array in EVIDENCE5:
+		if e[0] == id:
+			return e
+	return [id, id, "", ""]
+
+
+func _available5(exclude: Array[String]) -> Array[String]:
+	var out: Array[String] = []
+	for e: Array in EVIDENCE5:
+		var id: String = e[0]
+		if exclude.has(id):
+			continue
+		if Game.has_item(id) or ((id.begins_with("clue_") or id.begins_with("board_")) and Game.flag(id)):
+			out.append(id)
+	return out
+
+
+func _pins5(labels: Array, slots: Array, first: String, seed_line: String, nudge: String) -> bool:
+	## Two labeled slots; a right card stays pinned, a wrong one gets Ray's line and comes down. Returns false if the
+	## player stepped back from the board.
+	var pins: Array[String] = ["", ""]
+	var pre := _card5(first)
+	if first != "" and slots.has(pre[2]):
+		pins[slots.find(pre[2])] = first
+	var wrong_tries := 0
+	while true:
+		main.ui.set_board_pins(_texts5(pins), labels)
+		for slot in 2:
+			if pins[slot] != "":
+				continue
+			main.ui.set_board_question(String(labels[slot]) + ":")
+			var ids := _available5(pins)
+			var opts: Array = []
+			for id in ids:
+				opts.append(_card5(id)[1])
+			opts.append("(Step back from the board)")
+			var c: int = await main.choose(opts)
+			if c == ids.size():
+				main.ui.hide_board()
+				return false
+			pins[slot] = ids[c]
+			main.ui.set_board_pins(_texts5(pins), labels)
+		var right := 0
+		for slot in 2:
+			var card := _card5(pins[slot])
+			if card[2] == slots[slot]:
+				right += 1
+			else:
+				await main.narrate(seed_line if card[2] == "*" else String(card[3]))
+				pins[slot] = ""
+		if right == 2:
+			return true
+		wrong_tries += 1
+		if wrong_tries == 3:
+			await main.narrate(nudge)
+	return false
+
+
+func _texts5(pins: Array[String]) -> Array:
+	var out := []
+	for id in pins:
+		out.append("" if id == "" else _card5(id)[1])
+	return out
+
+
+func _deduction5(first: String) -> void:
+	# step 1: who killed Sal
+	main.ui.show_board("Thirty-one years behind a bar, and he opened the door one last time. Who for?",
+			"SAL MORETTI\n64. The Blue Note")
+	await main.narrate("Thirty-one years behind a bar, and he opened the door one last time. Who for?")
+	while true:
+		var c: int = await main.choose(["Nobody. Sal hanged himself.", "Nina Alvarez", "Lt. Maureen Doyle", "Vance",
+				"Walt Brenner", "(Step back from the board)"])
+		match c:
+			0:
+				if Game.flag("clue_stool") or Game.flag("clue_clean_hands"):
+					await main.narrate("Shah says he was dead before the rope. And he'd have had to fly to that pipe.")
+				else:
+					await main.narrate("Shah says he was dead before the rope.")
+			1:
+				await main.narrate("Nina was in a cooler with a paring knife, hiding from the man who did it. She couldn't put a bar-arm choke on a man if he lay down for her.")
+			2:
+				await main.narrate("Her phone made the call. She was at the copier when it did. And nobody taught that hold to anyone who joined in '96.")
+			3:
+				await main.narrate("Vance and Tiny heard Danny's knock every Tuesday. Whoever killed Sal had to call Nina to get it.")
+			4:
+				await main.narrate("The man who brought the coffee.")
+				break
+			_:
+				main.ui.hide_board()
+				return
+	# step 2: how Walt got to Sal
+	main.ui.set_board_question("Walt Brenner. Pin up how he got to Sal.")
+	var ok: bool = await _pins5(["He got the knock", "He was in the bar at 3:20"], ["A", "B"], first,
+			"That's on the string. The board wants Tuesday and tonight.",
+			"Think, Ray. Who was holding Maureen's phone, and who did Sal write down?")
+	if not ok:
+		return
+	# step 3: who wanted Danny dead
+	main.ui.hide_board()
+	main.ui.show_board("Somebody pulled the trigger on Danny. Somebody else named the price. Who?")
+	await main.narrate("Somebody pulled the trigger on Danny. Somebody else named the price. Who?")
+	while true:
+		var c: int = await main.choose(["Vance", "Nina Alvarez", "Lt. Maureen Doyle",
+				"Harlan Pryce, to protect the Haskell bribe", "(Step back from the board)"])
+		match c:
+			0:
+				await main.narrate("Dead men don't pay, and Danny had paid.")
+			1:
+				await main.narrate("Nina had a plan for Lisbon. You don't kill the man who's buying the tickets.")
+			2:
+				await main.narrate("Maureen never heard of Danny Reyes until he was a file on her desk.")
+			3:
+				await main.narrate("\"Then pay him, Walt.\"")
+				break
+			_:
+				main.ui.hide_board()
+				return
+	main.ui.set_board_question("Harlan Pryce. Pin up what Danny had, and what it cost.")
+	ok = await _pins5(["What Danny had", "What it was costing them"], ["C", "D"], "",
+			"That's on the string. The board wants what Danny had and what he charged.",
+			"What did Danny have, and what was he charging for it?")
+	if not ok:
+		return
+	# solved: the name on the back of the Case 1 index card, the tab book photo and Sal's card beside Danny
+	main.ui.set_board_question("REYES, D.   MORETTI, S.   -   BRENNER, W.")
+	main.ui.set_board_pins(["WALT BRENNER\nfor H. PRYCE, T. HASKELL", "3:20 W.B. CLUB SODA\nand Sal's bar card"])
+	await main.wait(0.6)
+	await main.narrate("Walt Brenner. He killed Danny for a price somebody else named, and he killed Sal for opening a door.")
+	Game.set_flag("case5_deduced")
+	main.ui.hide_board()
+	_sync()
+	# the string, depending on the seeds pinned
+	var seeds := 0
+	for f in ["board_ride_receipt", "board_brenner_card", "board_pryce_invite"]:
+		if Game.flag(f):
+			seeds += 1
+	await main.player.play_action("use")
+	if seeds == 3:
+		Game.set_flag("board_string")
+		_sync()
+		await main.wait(1.0)
+		await main.narrate("A ride receipt, a business card and a party invitation. Three pieces of paper that hadn't been introduced. Now they're family.")
+	elif seeds > 0:
+		await main.narrate("A string with gaps in it. Gaps are where lawyers live.")
+	else:
+		await main.narrate("No string. A name, a dead man's handwriting, and a song I haven't picked up yet.")
+	await main.say("Danny's case goes in a box. Then I need a place, a witness, and a way to get Walt there.")
+
+
+func _pack_box() -> void:
+	## Puzzle 6.2: Danny's middle of the board goes into an evidence box.
+	await main.player.play_action("pickup")
+	await main.say("An empty evidence box from under the desk. Danny's photo, the envelope, the lab receipt, the index card, the tab book photo" +
+			(", and the three pieces of paper on the string." if Game.flag("board_string") else "."))
+	Game.set_flag("got_danny_box")
+	_sync()
+	await main.give("danny_box", false)
+	await main.say("If I'm wrong about the next hour, somebody should find all of this in one box.")
