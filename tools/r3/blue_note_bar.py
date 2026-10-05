@@ -127,10 +127,10 @@ def build(hide=(), take=False):
         S.wboxr(bx0, 0.0, bz0, bx1, 1.04, bz1, 'mahogany', rnd=0.02)
         S.wboxr(bx0 - 0.05, 1.04, bz0 - 0.05, bx1 + 0.12, 1.1, bz1 + 0.05, 'mahogany', rnd=0.025)
         S.cyl((bx1 + 0.16, 0.2, bz0), (bx1 + 0.16, 0.2, bz1), 0.025, 'brass')                   # the foot rail
-        for z in np.arange(bz0 + 0.4, bz1, 1.2):
-            S.wboxr(bx1 - 0.01, 0.12, z, bx1 + 0.01, 0.95, z + 0.9, 'mahogany_dk')            # panels
+        for z in np.arange(bz0 + 0.3, bz1 - 0.95, 1.15):
+            S.wboxr(bx1 - 0.01, 0.12, z, bx1 + 0.01, 0.95, z + 0.9, 'mahogany_dk')            # panels, within the bar
     with S.tag('bottles'):
-        S.wboxr(X0, 0.0, bz0 - 0.2, X0 + 0.45, 0.95, bz1 + 0.2, 'mahogany_dk')                 # back bar cabinet
+        S.wboxr(X0, 0.0, bz0 - 0.2, X0 + 0.45, 0.95, bz1 - 0.05, 'mahogany_dk')                # back bar cabinet
         for y in (1.35, 1.85, 2.3):
             S.wboxr(X0, y - 0.02, bz0 + 0.3, X0 + 0.28, y, bz1 - 0.3, 'shelf_glass')
             for z in np.arange(bz0 + 0.4, bz1 - 0.35, 0.16):
@@ -219,16 +219,18 @@ def build(hide=(), take=False):
     # ---------------------------------------------------------------- the booths along the right wall
     def booth(z0, z1, back=False):
         for zz, s in ((z0, 1), (z1, -1)):
-            S.wboxr(X1 - 1.55, 0.0, zz, X1, 0.45, zz + s * 0.55, 'leather_dk')
-            S.wboxr(X1 - 1.55, 0.45, zz + s * 0.05, X1, 0.52, zz + s * 0.55, 'leather', rnd=0.03)
-            S.wboxr(X1 - 1.55, 0.5, zz, X1, 1.35, zz + s * 0.14, 'leather', rnd=0.04)
-            S.wboxr(X1 - 1.6, 1.33, zz - s * 0.01, X1, 1.4, zz + s * 0.16, 'mahogany_dk')
-        tz = (z0 + z1) / 2
-        S.wboxr(X1 - 1.2, 0.72, tz - 0.4, X1 - 0.05, 0.76, tz + 0.4, 'table', rnd=0.02)
-        S.cyl((X1 - 0.62, 0.0, tz), (X1 - 0.62, 0.72, tz), 0.05, 'chrome')
+            S.wboxr(X1 - 1.45, 0.0, zz, X1, 0.45, zz + s * 0.5, 'leather_dk')
+            S.wboxr(X1 - 1.45, 0.45, zz + s * 0.05, X1, 0.52, zz + s * 0.5, 'leather', rnd=0.03)
+            S.wboxr(X1 - 1.45, 0.5, zz, X1, 1.15, zz + s * 0.14, 'leather', rnd=0.04)
+            S.wboxr(X1 - 1.5, 1.13, zz - s * 0.01, X1, 1.2, zz + s * 0.16, 'mahogany_dk')
+        tz = (z0 + z1) / 2                       # the table between the benches, with its lamp
+        S.wboxr(X1 - 1.25, 0.72, tz - 0.36, X1 - 0.05, 0.77, tz + 0.36, 'table', rnd=0.02)
+        S.cyl((X1 - 0.65, 0.0, tz), (X1 - 0.65, 0.72, tz), 0.05, 'chrome')
+        S.wboxr(X1 - 0.95, 0.0, tz - 0.22, X1 - 0.35, 0.03, tz + 0.22, 'chrome')
+        S.tcyl(Frame((X1 - 0.3, 0.8, tz)), (0, 0, 0), (0.035, 0.035), (0.045, 0.045), 0.04, 'candle_glass')
     with S.tag('booths'):
-        booth(-3.7, -2.0)
-        booth(-1.5, 0.2)
+        booth(-4.05, -2.05)
+        booth(-1.75, 0.25)
     with S.tag('back_booth'):
         # the last one, in the corner: a U of red leather round a table, the RESERVED card
         S.wboxr(X1 - 0.6, 0.0, ZB, X1, 0.45, -4.3, 'leather_dk')
@@ -250,7 +252,7 @@ def build(hide=(), take=False):
             S.tcyl(Frame((bx - 0.05, 0.8, bz - 0.35)), (0, 0, 0), (0.036, 0.036), (0.03, 0.03), 0.05, 'glass_c')
             S.wbox((bx + 0.05, 0.77, bz + 0.05), (0.12, 0.03, 0.08), 'paper', rot=Ry(20))              # the envelope
     # a wall sconce over each booth, dark tonight
-    for z in (-2.85, -0.65):
+    for z in (-3.05, -0.75):
         S.wbox((X1 - 0.05, 1.9, z), (0.04, 0.12, 0.08), 'brass')
         S.sph((X1 - 0.12, 1.98, z), 0.06, 'shade')
 
