@@ -31,7 +31,7 @@ centered = false
 [node name="Bar_red" type="Sprite2D" parent="."]
 texture = ExtResource("ov_bar_red")
 centered = false
-position = Vector2(0, 0)
+position = Vector2(8, 0)
 
 [node name="Bar_blue" type="Sprite2D" parent="."]
 texture = ExtResource("ov_bar_blue")
@@ -49,7 +49,7 @@ y_sort_enabled = true
 texture = ExtResource("ov_park")
 centered = false
 position = Vector2(608, 807)
-offset = Vector2(-248, -307)
+offset = Vector2(-253, -307)
 
 [node name="Hydrant" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_hydrant")
@@ -73,13 +73,13 @@ offset = Vector2(-26, -207)
 texture = ExtResource("occ_patrol")
 centered = false
 position = Vector2(1263, 889)
-offset = Vector2(-386, -224)
+offset = Vector2(-386, -231)
 
 [node name="Teo" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_teo")
 centered = false
 position = Vector2(317, 852)
-offset = Vector2(-36, -187)
+offset = Vector2(-36, -168)
 
 [node name="Mara" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_mara")
@@ -239,7 +239,7 @@ walk_to = Vector2(1166, 867)
 face = "down"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/patrol_car"]
-polygon = PackedVector2Array(877.4, 903.5, 884.2, 830.5, 886.2, 820.6, 904, 765.9, 1075.5, 676.5, 1182, 665, 1286.5, 665.2, 1384.5, 665.4, 1551.5, 677.4, 1666.6, 712.6, 1763.5, 828.7, 1770.9, 851.4, 1770.7, 870.5, 1768, 938, 1652.2, 994.5, 996.3, 990.7, 877.4, 933.5)
+polygon = PackedVector2Array(877.4, 903.5, 884.2, 830.5, 886.2, 820.6, 904, 765.9, 1075.5, 676.5, 1288.8, 658.7, 1366.6, 658.8, 1551.5, 677.4, 1666.6, 712.6, 1763.5, 828.7, 1770.9, 851.4, 1770.7, 870.5, 1768, 938, 1652.2, 994.5, 996.3, 990.7, 877.4, 933.5)
 
 [node name="park" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")

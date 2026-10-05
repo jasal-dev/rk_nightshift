@@ -302,6 +302,7 @@ def build(hide=(), crime=False):
 # ---------------------------------------------------------------- Case 5: the crime scene at 4:52 a.m.
 PARK = (-2.7, 0.95)           # Officer Park at the Blue Note's door (an overlay)
 TEO = (-4.35, 2.55)           # Teo on a milk crate by the hydrant, his mop bucket beside him
+TEO_Y = -0.02                 # the rig's floor level, so he sits on the crate's top (0.47) instead of above it
 MARA = (-0.95, 3.6)           # Mara Quist in the street at the tape
 PATROL = (2.15, 4.5)          # the patrol car at the curb in front of the precinct, nose to the left
 HYDRANT, LAMP = (-5.6, 2.75), (3.3, 2.9)
@@ -353,18 +354,19 @@ def crime_scene(S, hide):
     if 'patrol' not in hide:
         px, pz = PATROL
         cars.car(S, 'patrol', (px, 0.0, pz), 90, (16, 16, 20), L=4.6, W=1.84, H=1.45, lights=False, tag='patrol_car')
+        bx = px + 0.35                       # the roof's middle: the greenhouse sits toward the tail
         with S.tag('patrol_car'):
             for x0, x1 in ((px - 1.0, px - 0.02), (px + 0.02, px + 0.95)):
                 S.wboxr(x0, 0.36, pz + 0.9, x1, 0.8, pz + 0.935, 'patrol_door' if x0 < px else 'van')
-            S.wboxr(px - 0.62, 1.44, pz - 0.28, px + 0.62, 1.5, pz + 0.28, 'trim', rnd=0.02)
-            S.wboxr(px - 0.6, 1.5, pz - 0.24, px - 0.02, 1.6, pz + 0.24, 'lens_red', rnd=0.03)
-            S.wboxr(px + 0.02, 1.5, pz - 0.24, px + 0.6, 1.6, pz + 0.24, 'lens_blue', rnd=0.03)
+            S.wboxr(bx - 0.28, 1.44, pz - 0.66, bx + 0.28, 1.5, pz + 0.66, 'trim', rnd=0.02)
+            S.wboxr(bx - 0.24, 1.5, pz - 0.64, bx + 0.24, 1.6, pz - 0.02, 'lens_red', rnd=0.03)
+            S.wboxr(bx - 0.24, 1.5, pz + 0.02, bx + 0.24, 1.6, pz + 0.64, 'lens_blue', rnd=0.03)
         if 'bar_red' not in hide:
-            S.wboxr(px - 0.605, 1.495, pz - 0.245, px - 0.015, 1.605, pz + 0.245, 'lit_red', rnd=0.03)
-            S.light((px - 0.35, 1.75, pz - 0.2), (255, 40, 30), power=6, range=10, vol=0.25, shadow=False)
+            S.wboxr(bx - 0.245, 1.495, pz - 0.645, bx + 0.245, 1.605, pz - 0.015, 'lit_red', rnd=0.03)
+            S.light((bx, 1.75, pz - 0.35), (255, 40, 30), power=6, range=10, vol=0.25, shadow=False)
         if 'bar_blue' not in hide:
-            S.wboxr(px + 0.015, 1.495, pz - 0.245, px + 0.605, 1.605, pz + 0.245, 'lit_blue', rnd=0.03)
-            S.light((px + 0.35, 1.75, pz - 0.2), (50, 90, 255), power=7, range=10, vol=0.25, shadow=False)
+            S.wboxr(bx - 0.245, 1.495, pz + 0.015, bx + 0.245, 1.605, pz + 0.645, 'lit_blue', rnd=0.03)
+            S.light((bx, 1.75, pz + 0.35), (50, 90, 255), power=7, range=10, vol=0.25, shadow=False)
 
     # road flares in the street, burning down
     with S.tag('flares'):
@@ -380,7 +382,7 @@ def crime_scene(S, hide):
         with S.tag('teo'):
             S.wboxr(tx_ - 0.2, 0.15, tz_ - 0.17, tx_ + 0.2, 0.47, tz_ + 0.17, 'crate', rnd=0.02)
         npc.cast(S, 'teo', dict(npc.SEATED, lhp=78, lk=98, rhp=80, rk=102, lean=26, lsp=44, le=88, lin=36, rsp=44,
-                                re=92, rin=40, hp=24, hy=10), (tx_, 0.11, tz_ - 0.02), yaw=24, scale=0.97, tag='teo')
+                                re=92, rin=40, hp=24, hy=10), (tx_, TEO_Y, tz_ - 0.02), yaw=24, scale=0.97, tag='teo')
     with S.tag('bucket'):
         S.tcyl(Frame((tx_ + 0.55, 0.32, tz_ + 0.05)), (0, 0, 0), (0.2, 0.2), (0.16, 0.16), 0.17, 'bucket')
         S.cyl((tx_ + 0.55, 0.3, tz_ + 0.05), (tx_ + 0.25, 1.45, tz_ - 0.45), 0.015, 'mop_pole')
