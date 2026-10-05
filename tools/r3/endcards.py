@@ -59,12 +59,12 @@ def scene(kind):
         ground(S)
         S.mat('dirt', (110, 76, 50), namp=0.5, nscale=8, bump=0.4, bscale=10)
         S.mat('gold', (230, 180, 70), spec=1.8, shin=80, refl=0.3)
-        S.mat('banner', (220, 220, 220), tex=tx.sign_board('PRYCE HOLLYWOOD  -  BREAKING GROUND', (240, 230, 200), (24, 30, 60), 1024, 128, size=48),
+        S.mat('banner', (220, 220, 220), tex=tx.sign_board('PRYCE HOLLYWOOD', (240, 230, 200), (24, 30, 60), 1024, 256, size=88),
               texmode=1)
         S.mat('pole', (150, 150, 156), spec=1.0)
         S.ell(WORLD, (0.4, 0.0, 0.3), (1.2, 0.35, 0.9), 'dirt', k=0.1)
-        S.wboxr(-3.0, 1.5, -2.0, 3.0, 2.6, -1.95, 'banner')
-        for x in (-3.0, 3.0):
+        S.wboxr(-2.2, 1.7, -2.0, 2.2, 2.8, -1.95, 'banner')
+        for x in (-2.2, 2.2):
             S.cyl((x, 0.0, -1.97), (x, 2.7, -1.97), 0.04, 'pole')
         npc.cast(S, 'pryce', dict(npc.STAND, lsp=40, le=50, lin=30, rsp=44, re=46, rin=20, hp=4, hy=-6, lhp=8, rhp=-6,
                                   rhand='fist', lhand='fist'), (-0.4, 0.0, 0.4), yaw=20, scale=1.0)
