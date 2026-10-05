@@ -277,18 +277,19 @@ def build(hide=()):
     if 'debris' not in hide:
         with S.tag('debris'):
             dx, dz = 3.4, 6.4
-            T2 = Frame((dx, 0.12, dz), Ry(20) @ Rx(84))
+            T2 = Frame((dx, 0.115, dz), Ry(20) @ Rx(6))                 # an old tire, lying flat
             ring = [T2.to((0.3 * math.cos(a), 0, 0.3 * math.sin(a))) for a in np.linspace(0, 2 * math.pi, 17)]
             for a, b in zip(ring, ring[1:]):
                 S.cyl(a, b, 0.11, 'tire')
             for k in range(4):
                 S.wbox((dx + 0.6, 0.06 + k * 0.02, dz - 0.5 + k * 0.2), (0.6, 0.02, 0.06), 'trunk', rot=Ry(30 + k * 4))
             S.cone((dx - 0.5, 0.0, dz - 0.4), (dx - 0.62, 0.55, dz - 0.38), 0.17, 0.03, 'cone')
-            S.ell(WORLD, (dx + 0.2, 0.1, dz + 0.3), (0.3, 0.12, 0.2), 'bag', k=0.05)
+            S.ell(WORLD, (dx + 0.75, 0.12, dz + 0.35), (0.3, 0.12, 0.2), 'bag', k=0.05)
     # ---------------------------------------------------------------- Owen, Dr. Shah, the coroner's lantern
     ox, oz = OWEN
-    npc.cast(S, 'owen', dict(npc.STAND, lhp=24, lk=40, rhp=8, rk=18, lsp=50, lsa=2, le=60, rsp=-10, rsa=6, re=20,
-                             hy=20, hp=8),
+    # on his side, face away: knees drawn up a little, the top leg resting forward on the lower one, arms loose
+    npc.cast(S, 'owen', dict(npc.STAND, lhp=46, lk=70, labd=-4, rhp=26, rk=48, rabd=0, lsp=40, lsa=0, le=50, lin=20,
+                             rsp=56, rsa=4, re=30, hy=14, hp=16, lean=8),
              (ox, 0.21, oz), yaw=180, scale=0.94, rot=Rz(90), tag='owen')
     with S.tag('owen'):
         S.box(WORLD, (ox + 0.7, 0.22, oz + 0.75), (0.24, 0.22, 0.2), 0.03, 'chomp', rot=Ry(-20))   # his yellow bag

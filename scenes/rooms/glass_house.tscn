@@ -73,7 +73,7 @@ polygon = PackedVector2Array(867.2, 719.3, 860.7, 723, 846.3, 725.7, 827.9, 726.
 
 [node name="Obstacle3" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
-polygon = PackedVector2Array(1190.9, 734.1, 1188.8, 738.2, 1177, 741.2, 1158.7, 742.2, 1139.2, 741, 1124, 737.8, 1117.2, 733.6, 1120.4, 729.7, 1132.2, 726.9, 1149.6, 726, 1168.2, 727.1, 1183.3, 730)
+polygon = PackedVector2Array(1106.9, 796.1, 1102.7, 802.2, 1087.2, 806.8, 1064.4, 808.3, 1040.9, 806.4, 1023.6, 801.6, 1017.1, 795.5, 1022.7, 789.6, 1038.2, 785.5, 1059.7, 784.1, 1081.8, 785.8, 1099, 790.1)
 
 [node name="Obstacle4" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
@@ -81,11 +81,11 @@ polygon = PackedVector2Array(795.9, 699.7, 789, 702.8, 775, 705.1, 757.8, 705.9,
 
 [node name="Obstacle5" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
-polygon = PackedVector2Array(1477.3, 722.9, 1479.9, 727.9, 1468.7, 731.7, 1446.4, 733, 1419.6, 731.4, 1396.1, 727.4, 1382.4, 722.3, 1381.7, 717.5, 1393.4, 714.1, 1414.4, 713, 1439.4, 714.3, 1462.4, 717.9)
+polygon = PackedVector2Array(1634.1, 775.5, 1640.6, 782.7, 1629.8, 788.1, 1603.9, 790, 1570.7, 787.7, 1539.9, 782, 1520.4, 774.7, 1516.5, 767.8, 1528.5, 763, 1552.7, 761.5, 1583.2, 763.4, 1612.8, 768.5)
 
 [node name="Obstacle6" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
-polygon = PackedVector2Array(1456.1, 747, 1459.1, 754.5, 1443.3, 760.2, 1412.4, 762.2, 1375.8, 759.7, 1344.4, 753.8, 1327.1, 746.2, 1327.4, 739, 1344.2, 734.1, 1372.6, 732.5, 1406, 734.5, 1436.4, 739.7)
+polygon = PackedVector2Array(1317.5, 775, 1316.9, 784.1, 1296.5, 790.9, 1261.6, 793.3, 1222.6, 790.4, 1191.4, 783.2, 1176.6, 774.1, 1181, 765.5, 1202, 759.7, 1233.9, 757.8, 1269.2, 760.1, 1299.7, 766.3)
 
 [node name="Obstacle7" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
@@ -155,21 +155,21 @@ polygon = PackedVector2Array(1920, 842.2, 1788.2, 841.1, 1837.8, 831, 1920, 831.
 script = ExtResource("hs")
 id = "easel"
 display_name = "easel sign"
-walk_to = Vector2(1388, 744)
+walk_to = Vector2(1540, 806)
 face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/easel"]
-polygon = PackedVector2Array(1378.5, 662.5, 1378.7, 657.9, 1388.2, 533.6, 1405.6, 525.5, 1464.9, 527.4, 1483.1, 537.1, 1480, 669.7, 1468.6, 741.6, 1465.9, 744.2, 1387.3, 734.7, 1384.8, 732.2)
+polygon = PackedVector2Array(1515, 703.1, 1515.2, 697.6, 1526.2, 549.3, 1548, 539.8, 1623.4, 542.5, 1646.1, 554.2, 1642.6, 707.6, 1642.4, 713.4, 1628.2, 799.5, 1624.9, 802.6, 1525.1, 789.1, 1522.1, 786)
 
 [node name="gift_bags" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "gift_bags"
 display_name = "gift bags"
-walk_to = Vector2(1314, 758)
+walk_to = Vector2(1156, 789)
 face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/gift_bags"]
-polygon = PackedVector2Array(1332.1, 762.5, 1333.1, 711.4, 1337.2, 688.1, 1338.7, 683.7, 1340.1, 681.2, 1354.2, 672.5, 1394, 674.9, 1434.6, 677.4, 1448.4, 687.1, 1450.8, 694.8, 1453.6, 704.6, 1452.2, 754.7, 1448.3, 772.5)
+polygon = PackedVector2Array(1180.2, 792.3, 1180.9, 736.4, 1186.6, 710.6, 1192, 705.3, 1195.2, 702.3, 1209.1, 693, 1250.8, 695.9, 1293.6, 698.9, 1309, 709.5, 1316.2, 728.4, 1315.1, 783, 1302.6, 804.4)
 
 [node name="gate_camera" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
@@ -215,8 +215,8 @@ polygon = PackedVector2Array(793.7, 524.5, 868.5, 524.6, 869.5, 730.8, 795.6, 73
 script = ExtResource("hs")
 id = "courtney"
 display_name = "Courtney"
-walk_to = Vector2(1046, 747)
+walk_to = Vector2(924, 816)
 face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/courtney"]
-polygon = PackedVector2Array(1114.7, 745.7, 1116.5, 536, 1195.9, 536.1, 1193.2, 746.2)
+polygon = PackedVector2Array(1014.1, 810.1, 1014.9, 554.7, 1111.9, 554.9, 1109.7, 810.8)

@@ -32,7 +32,7 @@ y_sort_enabled = true
 texture = ExtResource("occ_wetsign")
 centered = false
 position = Vector2(217, 975)
-offset = Vector2(-67, -188)
+offset = Vector2(-58, -184)
 
 [node name="Bin" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_bin")

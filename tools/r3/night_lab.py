@@ -123,7 +123,8 @@ def build(hide=()):
         with S.tag('wetsign'):
             Wf = Frame((-2.3, 0, 0.75), Ry(25))
             for s_ in (-1, 1):
-                S.box(Wf, (0, 0.33, s_ * 0.12), (0.17, 0.33, 0.012), 0.01, 'caution', rot=Rx(s_ * 12))
+                S.box(Wf, (0, 0.33, s_ * 0.085), (0.17, 0.33, 0.012), 0.01, 'caution', rot=Rx(-s_ * 12))
+            S.box(Wf, (0, 0.665, 0.0), (0.17, 0.015, 0.02), 0.01, 'caution')                       # the hinge at the top
     if 'bin' not in hide:
         with S.tag('bin'):
             S.tcyl(Frame((2.7, 0.33, 0.6)), (0, 0, 0), (0.22, 0.22), (0.19, 0.19), 0.33, 'bin')
