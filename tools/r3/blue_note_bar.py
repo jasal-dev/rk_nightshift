@@ -145,9 +145,11 @@ def build(hide=(), take=False):
     # the register and Sal's tab book, by the front end of the bar
     with S.tag('register'):
         rz = 1.5
-        S.wbox((bx0 + 0.25, 1.24, rz), (0.18, 0.14, 0.2), 'register', rnd=0.02)
-        S.wbox((bx0 + 0.15, 1.42, rz), (0.06, 0.06, 0.16), 'register', rot=Rz(-20))
-        S.wbox((bx0 + 0.4, 1.13, rz), (0.08, 0.03, 0.18), 'register')
+        # facing the bartender (-x): the cash drawer and the sloped keys on his side, the little display for customers
+        S.wbox((bx0 + 0.28, 1.2, rz), (0.17, 0.1, 0.2), 'register', rnd=0.02)
+        S.wbox((bx0 + 0.09, 1.16, rz), (0.04, 0.05, 0.18), 'register', rnd=0.01)                 # cash drawer
+        S.wbox((bx0 + 0.22, 1.33, rz), (0.12, 0.03, 0.18), 'register', rot=Rz(22))               # keys, sloping his way
+        S.wbox((bx0 + 0.38, 1.45, rz), (0.03, 0.06, 0.12), 'register', rnd=0.01)                 # display for customers
     if 'ledger' not in hide:
         with S.tag('ledger'):
             S.wbox((bx0 + 0.32, 1.13, 1.02), (0.16, 0.025, 0.22), 'ledger', rot=Ry(8))
