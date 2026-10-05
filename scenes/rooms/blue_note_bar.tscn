@@ -26,16 +26,16 @@ centered = false
 [node name="Ledger" type="Sprite2D" parent="."]
 texture = ExtResource("ov_ledger")
 centered = false
-position = Vector2(143, 441)
+position = Vector2(111, 446)
 
 [node name="Setlist" type="Sprite2D" parent="."]
 texture = ExtResource("ov_setlist")
 centered = false
-position = Vector2(257, 403)
+position = Vector2(138, 397)
 
 [node name="WalkArea" type="Polygon2D" parent="."]
 color = Color(0.2, 0.9, 0.4, 0.3)
-polygon = PackedVector2Array(256.8, 951.1, 663.8, 580.3, 585.3, 577.6, 613.4, 557, 671.1, 557.4, 702.3, 580.6, 691, 592.3, 1222.1, 595.7, 1394.2, 835.6, 1611.6, 838, 1759.6, 972.2)
+polygon = PackedVector2Array(438.3, 953.6, 732, 597.5, 564.6, 592.7, 613.4, 557, 671.1, 557.4, 701.3, 581.7, 691, 592.3, 1222.1, 595.7, 1394.2, 835.6, 1611.6, 838, 1759.6, 972.2)
 
 [node name="Actors" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -76,7 +76,7 @@ polygon = PackedVector2Array(1245.6, 729.3, 1242.5, 743.5, 1217.5, 754.1, 1176.9
 
 [node name="Obstacle6" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
-polygon = PackedVector2Array(705.4, 598.6, 697.8, 602.4, 683.7, 605.2, 667.1, 606.1, 652.5, 605, 644.2, 602, 644.2, 598.2, 652.4, 594.5, 666.3, 591.9, 682.2, 591, 696.2, 592, 704.8, 594.8)
+polygon = PackedVector2Array(782.3, 615.1, 775.2, 619.3, 761.1, 622.4, 743.8, 623.5, 728.2, 622.2, 718.7, 619, 717.8, 614.7, 725.5, 610.6, 739.4, 607.7, 756, 606.7, 771, 607.9, 780.6, 611)
 
 [node name="Spawns" type="Node2D" parent="."]
 
@@ -99,7 +99,7 @@ walk_to = Vector2(0, 0)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/mirror"]
-polygon = PackedVector2Array(77.4, 389, 522.1, 335.6, 527.3, 335.6, 527.8, 343.1, 532.3, 483.8, 126.4, 663.7, 122.6, 663.6, 79.4, 403.3)
+polygon = PackedVector2Array(77.4, 389, 498, 338.5, 503.4, 338.5, 504, 346.3, 509.3, 494, 126.4, 663.7, 122.6, 663.6, 79.4, 403.3)
 
 [node name="bottles" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
@@ -109,17 +109,17 @@ walk_to = Vector2(0, 0)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/bottles"]
-polygon = PackedVector2Array(93.4, 452.4, 137.6, 392.1, 139.6, 389.7, 159.4, 384.2, 178.3, 379.1, 231, 372, 505.3, 338.4, 518.6, 338.6, 531.4, 342.2, 532.7, 343.5, 551.6, 369.8, 593.6, 500.6, 599, 591.7, 206.5, 901.9, 120.8, 900.8, 95.7, 726.2)
+polygon = PackedVector2Array(93.4, 452.4, 122.3, 397.4, 124.3, 395.1, 201.4, 378.1, 429.1, 347.6, 478.5, 341.5, 493.2, 339.7, 507.1, 340, 508.5, 341.3, 529, 374.5, 574.5, 511.1, 580.4, 606.4, 206.5, 901.9, 120.8, 900.8, 95.7, 726.2)
 
 [node name="bar" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "bar"
 display_name = "bar"
-walk_to = Vector2(540, 741)
+walk_to = Vector2(658, 742)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/bar"]
-polygon = PackedVector2Array(137.4, 704.8, 573.2, 488.3, 639.8, 488.5, 649.4, 577.5, 632.2, 596.7, 277.5, 907.6, 181.3, 906.3, 139, 716.4)
+polygon = PackedVector2Array(308, 706.3, 641.4, 498.8, 711.4, 499.1, 720.7, 592.4, 474.8, 873.8, 441.9, 909.7, 345, 908.5, 309.3, 717.9)
 
 [node name="booths" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
@@ -189,7 +189,7 @@ walk_to = Vector2(0, 0)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/chairs"]
-polygon = PackedVector2Array(733.2, 669.5, 733.9, 577.1, 750, 503.4, 751.8, 501.6, 789.5, 500.5, 1025.4, 495.1, 1065.6, 494.6, 1102.1, 495.3, 1218.8, 556.6, 1221.1, 558.8, 1228, 569.3, 1242.6, 655, 1242.3, 660.9, 1205.7, 755.3, 844.2, 774.3, 770.5, 773.5, 733.4, 675.6)
+polygon = PackedVector2Array(733.2, 669.5, 733.9, 577.1, 743.2, 510.1, 745, 508.2, 758, 501.7, 1024.8, 495.1, 1100, 495.4, 1218, 556.6, 1220.3, 558.9, 1228.9, 569.3, 1242.6, 655, 1242.3, 660.9, 1205.7, 755.3, 844.2, 774.3, 770.5, 773.5, 733.4, 675.6)
 
 [node name="jukebox" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
@@ -215,28 +215,28 @@ polygon = PackedVector2Array(1694, 865.3, 1746.1, 448.3, 1760, 448.4, 1920, 483.
 script = ExtResource("hs")
 id = "stool"
 display_name = "stool"
-walk_to = Vector2(676, 619)
+walk_to = Vector2(796, 628)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/stool"]
-polygon = PackedVector2Array(646.7, 532.6, 657.1, 525.1, 695.7, 525.2, 700.2, 600.4, 700.3, 603.3, 690.9, 613.7, 649.5, 613.5, 649.3, 610.4)
+polygon = PackedVector2Array(722.5, 546.1, 731.1, 537.7, 771.8, 538, 775.4, 616.8, 775.5, 619.8, 768.1, 631.3, 724.5, 631, 724.4, 627.8)
 
 [node name="rack" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "rack"
 display_name = "drying rack"
-walk_to = Vector2(582, 698)
+walk_to = Vector2(689, 699)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/rack"]
-polygon = PackedVector2Array(402.8, 579.3, 445, 557.9, 508.3, 529.8, 470.8, 549.1)
+polygon = PackedVector2Array(522.6, 580.1, 556.3, 558.6, 620.4, 530.4, 591.5, 549.8)
 
 [node name="register" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "register"
 display_name = "register and tab book"
-walk_to = Vector2(474, 807)
+walk_to = Vector2(609, 809)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/register"]
-polygon = PackedVector2Array(210.3, 586.8, 318.3, 544.4, 422.4, 631.5, 332.2, 687, 222.4, 686)
+polygon = PackedVector2Array(368.6, 587.9, 455, 545.2, 557.7, 632.5, 488.7, 688.3, 378.1, 687.4)

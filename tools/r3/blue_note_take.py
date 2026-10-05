@@ -7,7 +7,7 @@ from scene3d import Camera
 
 def build(hide=()):
     S, _, env, meta = bar.build(hide, take=True)
-    cam = Camera((-3.05, 1.6, -3.3), (1.6, 0.9, -5.7), fov=50, W=3840, H=2160)
+    cam = Camera((-2.3, 1.6, -3.4), (1.6, 0.9, -5.7), fov=52, W=3840, H=2160)
     meta = dict(meta, room='blue_note_take', overlays=[], occluders={}, obstacles=[], ghosts={'danny': 0.5},
                 exposure=2.3, hotspots={}, hotspot_order=[],
                 screen=dict(walk=[(0, 0), (1920, 0), (1920, 1080), (0, 1080)], spawns={'start': (960, 900)},

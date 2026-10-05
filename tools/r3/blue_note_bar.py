@@ -17,8 +17,8 @@ import textures as tx
 import npc
 
 X0, X1, ZB, ZF, H = -4.2, 4.2, -6.0, 3.6, 3.2
-BAR_X = (-3.85, -3.35)          # the bar counter (x), from the back of the room to the front
-BAR_Z = (-4.2, 2.3)
+BAR_X = (-3.0, -2.5)            # the bar counter (x), from the back of the room to the front
+BAR_Z = (-3.6, 2.3)
 STAGE = (-2.6, 2.0, -4.35)      # x0, x1, front edge z (it runs back to the wall)
 PIANO = (-0.15, -5.2)           # the baby grand's centre; its keyboard faces left (-x)
 BENCH = (-1.25, -5.05)
@@ -346,7 +346,7 @@ def build(hide=(), take=False):
     cam = Camera((0.3, 3.15, 8.2), (0.0, 0.85, -3.0), fov=46, W=3840, H=2160)
     env = dict(sky=(30, 26, 30), bounce=(46, 32, 28) if not take else (8, 6, 8), fog_col=(30, 24, 30), fog=0.02,
                fog_h0=0.0, fog_hf=0.06, fog_max=60, vol_scale=4, vol_steps=40, reflections=True, grid=0.5, ao_scale=0.9)
-    walk = [(-3.1, 2.9), (-3.1, -4.5), (-3.95, -4.6), (-3.95, -5.6), (-3.3, -5.6), (-2.7, -4.5), (-2.7, -4.0),
+    walk = [(-2.25, 2.9), (-2.25, -3.8), (-3.95, -3.95), (-3.95, -5.6), (-3.3, -5.6), (-2.7, -4.45), (-2.7, -4.0),
             (2.55, -4.0), (2.55, 1.5), (3.75, 1.5), (3.75, 2.9)]
     meta = dict(
         room='blue_note_bar',
@@ -354,9 +354,9 @@ def build(hide=(), take=False):
         walk_zmin=-4.2, walk_zmax=2.9, scale_x=0.0,
         spawns={'street_crime': (3.35, 2.2), 'blue_note_back': (-3.6, -5.2), 'start': (0.0, 1.5)},
         hotspots={
-            'bar': ('bar', (-2.75, 0.15), 'left'),
-            'register': ('register and tab book', (-2.75, 1.25), 'left'),
-            'rack': ('drying rack', (-2.75, -0.75), 'left'),
+            'bar': ('bar', (-1.95, 0.15), 'left'),
+            'register': ('register and tab book', (-1.95, 1.25), 'left'),
+            'rack': ('drying rack', (-1.95, -0.75), 'left'),
             'mirror': ('mirror', None, 'left'),
             'bottles': ('bottles', None, 'left'),
             'front_door': ('front door', (3.4, 2.2), 'right'),
@@ -367,7 +367,7 @@ def build(hide=(), take=False):
             'poster': ("Danny's poster", (2.3, -3.95), 'up'),
             'jukebox': ('jukebox', (3.3, 1.2), 'right'),
             'chairs': ('chairs on tables', None, 'up'),
-            'stool': ('stool', (-2.6, -3.0), 'left'),
+            'stool': ('stool', (-1.45, -2.7), 'left'),
             'back_door': ('door to the back', (-3.7, -5.4), 'up'),
         },
         hotspot_shapes={
