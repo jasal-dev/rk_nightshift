@@ -30,6 +30,15 @@ ROOMS = {
                           name='Stardust roof', reflection=0.18),
     'stardust_roof_dark': dict(node='StardustRoofDark', script='res://scripts/rooms/stardust_roof_dark.gd',
                                name='Stardust roof', reflection=0.1),
+    'fletcher_bridge': dict(node='FletcherBridge', script='res://scripts/rooms/fletcher_bridge.gd',
+                            name='Fletcher Drive bridge', reflection=0.2),
+    'river_channel': dict(node='RiverChannel', script='res://scripts/rooms/river_channel.gd',
+                          name='LA River channel', reflection=0.12),
+    'glass_house': dict(node='GlassHouse', script='res://scripts/rooms/glass_house.gd', name='Glendower Avenue',
+                        reflection=0.12),
+    'crane_garage': dict(node='CraneGarage', script='res://scripts/rooms/crane_garage.gd', name="Crane's garage",
+                         reflection=0.1),
+    'night_lab': dict(node='NightLab', script='res://scripts/rooms/night_lab.gd', name='Crime lab, night intake'),
 }
 
 

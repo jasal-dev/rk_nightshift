@@ -134,6 +134,46 @@ CAST = {
                  pants=(84, 68, 54), hair=(224, 222, 216), hairgrey=(224, 222, 216), brow=(210, 206, 200),
                  stubble=(196, 186, 180), skin=(206, 160, 140), skin_dk=(178, 132, 116), shoe=(110, 40, 40),
                  sock=(140, 136, 130))),
+    # Case 4. Calvin "Preacher" Odom: sixties, grey beard, olive Army field jacket, watch cap off, cargo trousers, boots
+    'preacher': (dict(hair='full', beard=True, stubble=False, coatlen=0.12, cop=False),
+                 dict(coat=(78, 82, 56), coat_dk=(60, 64, 42), lining=(70, 72, 52), shirt=(110, 104, 92),
+                      pants=(58, 60, 50), hair=(150, 148, 144), hairgrey=(176, 174, 170), brow=(120, 116, 112),
+                      skin=(96, 64, 48), skin_dk=(78, 52, 40), lips=(96, 60, 52), shoe=(36, 30, 24))),
+    # Officer Brian Doss: Northeast patrol, thirties, patrol cap, navy uniform jacket, a cop's belt
+    'doss': (dict(hair='cap', stubble=False, coatlen=0.06),
+             dict(coat=(28, 34, 52), coat_dk=(20, 24, 38), lining=(24, 28, 40), shirt=(36, 44, 66), pants=(26, 30, 44),
+                  hair=(110, 80, 50), hairgrey=(110, 80, 50), brow=(110, 80, 50), skin=(212, 168, 140),
+                  skin_dk=(184, 140, 116), lips=(180, 120, 106), cap=(24, 28, 42))),
+    # Courtney Vail: thirties, dark blonde bun, headset, black puffer jacket over a green cocktail dress, dark tights
+    'courtney': (dict(hair='bun', stubble=False, coatlen=0.2, headset=True, cop=False),
+                 dict(coat=(24, 24, 28), coat_dk=(16, 16, 20), lining=(30, 90, 70), shirt=(30, 96, 74), pants=(34, 30, 34),
+                      hair=(170, 138, 90), hairgrey=(170, 138, 90), brow=(120, 96, 66), skin=(222, 182, 158),
+                      skin_dk=(196, 154, 132), lips=(176, 80, 86), shoe=(20, 18, 20))),
+    # Andre Mitchell: nineteen, the red Starline Valet vest over a white shirt, black trousers
+    'andre': (dict(hair='short_crop', stubble=False, coatlen=0.04, sleeves='shirt', cop=False),
+              dict(coat=(150, 30, 36), coat_dk=(110, 22, 26), lining=(120, 26, 30), shirt=(220, 220, 214),
+                   pants=(26, 26, 30), hair=(20, 18, 18), hairgrey=(20, 18, 18), brow=(20, 18, 18), skin=(98, 64, 46),
+                   skin_dk=(80, 52, 38), lips=(96, 60, 52), shoe=(18, 16, 16))),
+    # Elliot Crane: forties, a navy robe over suit trousers and a white undershirt, barefoot in loafers' absence: slippers
+    'crane': (dict(hair='full', stubble=True, coatlen=0.52, cop=False),
+              dict(coat=(36, 42, 66), coat_dk=(26, 30, 50), lining=(44, 50, 76), shirt=(226, 224, 218), pants=(44, 44, 50),
+                   hair=(70, 52, 38), hairgrey=(110, 100, 92), brow=(64, 48, 36), stubble=(170, 134, 112),
+                   skin=(214, 170, 146), skin_dk=(186, 142, 120), lips=(176, 116, 104), shoe=(70, 54, 44))),
+    # Ike Feld: thirties, grey hoodie with the hood up, behind the night window
+    'ike': (dict(hair='hood', stubble=True, coatlen=0.02, cop=False),
+            dict(coat=(96, 98, 104), coat_dk=(76, 78, 84), lining=(70, 72, 78), shirt=(40, 40, 46), pants=(50, 54, 66),
+                 hair=(40, 30, 24), hairgrey=(40, 30, 24), brow=(44, 32, 26), stubble=(150, 116, 96),
+                 skin=(206, 166, 140), skin_dk=(178, 138, 116))),
+    # Owen Tate: twenty-four, the Chomp jacket (black with yellow), jeans. Seen only lying on the apron, face away.
+    'owen': (dict(hair='full', stubble=False, coatlen=0.04, blink=1.0, cop=False),
+             dict(coat=(30, 30, 30), coat_dk=(240, 196, 30), lining=(240, 196, 30), shirt=(240, 196, 30),
+                  pants=(54, 66, 90), hair=(46, 32, 24), hairgrey=(46, 32, 24), brow=(46, 32, 24),
+                  skin=(200, 156, 128), skin_dk=(172, 130, 106), shoe=(200, 200, 204))),
+    # caterers at the glass house: white jackets, black trousers
+    'caterer': (dict(hair='short_crop', stubble=False, coatlen=0.06, cop=False),
+                dict(coat=(226, 224, 218), coat_dk=(200, 198, 192), lining=(220, 218, 212), shirt=(230, 230, 226),
+                     pants=(24, 24, 28), hair=(30, 24, 20), hairgrey=(30, 24, 20), skin=(176, 128, 100),
+                     skin_dk=(150, 106, 82))),
 }
 
 

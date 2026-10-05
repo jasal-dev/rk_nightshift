@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_receipt.png" id="ov_board_receipt"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_gus.png" id="ov_board_gus"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_brenner.png" id="ov_board_brenner"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_owen.png" id="ov_board_owen"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_phone.png" id="ov_board_phone"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_invite.png" id="ov_board_invite"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_fg_desk.png" id="occ_fg_desk"]
 
 [node name="SquadRoom" type="Node2D"]
@@ -34,7 +37,7 @@ position = Vector2(528, 578)
 [node name="Board_envelope" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_envelope")
 centered = false
-position = Vector2(630, 425)
+position = Vector2(631, 425)
 
 [node name="Board_kenji" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_kenji")
@@ -54,7 +57,22 @@ position = Vector2(680, 420)
 [node name="Board_brenner" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_brenner")
 centered = false
-position = Vector2(630, 402)
+position = Vector2(631, 402)
+
+[node name="Board_owen" type="Sprite2D" parent="."]
+texture = ExtResource("ov_board_owen")
+centered = false
+position = Vector2(629, 413)
+
+[node name="Board_phone" type="Sprite2D" parent="."]
+texture = ExtResource("ov_board_phone")
+centered = false
+position = Vector2(643, 361)
+
+[node name="Board_invite" type="Sprite2D" parent="."]
+texture = ExtResource("ov_board_invite")
+centered = false
+position = Vector2(640, 357)
 
 [node name="WalkArea" type="Polygon2D" parent="."]
 color = Color(0.2, 0.9, 0.4, 0.3)

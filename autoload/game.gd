@@ -32,6 +32,13 @@ const ITEMS := {
 	"star_earring": {"name": "gold star earring", "desc": "A little gold star, five points, the post bent back. Torn out of somebody's ear."},
 	"fake_oscar": {"name": "the \"Oscar\"", "desc": ""},
 	"brenner_card": {"name": "Walter Brenner's card", "desc": ""},
+	# Case 4
+	"lens_shard": {"name": "sliver of headlight", "desc": "A sliver of clear plastic with a curved edge, from the crushed box on Owen's bike."},
+	"lens_piece": {"name": "half a headlight", "desc": ""},
+	"danny_phone": {"name": "Danny's phone", "desc": "A phone in a cracked black case, river water still in it. A half-peeled Blue Note sticker, and white tape: \"D.R. IF FOUND CALL THE BLUE NOTE.\""},
+	"valet_ticket": {"name": "valet ticket No. 47", "desc": ""},
+	"pryce_invite": {"name": "Pryce's invitation", "desc": ""},
+	"lab_receipt": {"name": "lab evidence receipt", "desc": ""},
 }
 
 ## Notebook clues: facts Ray writes down, as [case, line]. Each is a flag of the same name (set with
@@ -95,6 +102,47 @@ const CLUES := {
 	"clue_fiat": [3, "Charlie: Pearl's yellow Fiat was in the alley around one."],
 	"clue_shouting": [3, "Charlie: around 1:30, Gus shouting \"How long?\" on the roof. Then nothing."],
 	"clue_block_empty": [3, "Charlie: Brenner said the block would be empty by Christmas, \"the jazz club too\"."],
+	# Case 4
+	"clue_preacher_story": [4, "Preacher: found the bike on the bridge after two, light blinking, carried it down so it wouldn't be stripped."],
+	"clue_bang": [4, "Preacher: a bang around two, no brakes. A car door a long while later. A car leaving slow."],
+	"clue_no_brakes": [4, "No skid marks on the bridge. The driver never braked."],
+	"clue_glass_bridge": [4, "Headlight plastic in the gutter at the east end."],
+	"clue_scupper": [4, "The bridge drains into the channel. The big pieces went down the grate."],
+	"clue_reeds_tip": [4, "Preacher: everything off the bridge ends in the reeds under the drain."],
+	"clue_hit_by_car": [4, "Both legs broken at bumper height, from behind. A car, not a beating."],
+	"clue_tod_owen": [4, "Died between 1:45 and 2:30."],
+	"clue_moved": [4, "Scrapes from the bank barely bled. He was dead when somebody slid him down."],
+	"clue_headlight_glass": [4, "Headlight plastic in his hair."],
+	"clue_paint": [4, "Blue-gray paint flakes in the bike's crushed rack."],
+	"clue_nursing": [4, "A nursing textbook in his delivery box."],
+	"clue_phone_left": [4, "Preacher carried the bike down and left a $900 phone on the handlebars."],
+	"clue_last_drop": [4, "Owen's last drop-off: Glendower Ave, Los Feliz, 1:50."],
+	"clue_one_star": [4, "One star: \"Threatened that someone would get killed.\""],
+	"clue_trip_paused": [4, "Chomp: no movement on Fletcher Drive from 2:04."],
+	"clue_drag_marks": [4, "Heel marks down the east bank from the fence gap to Owen."],
+	"clue_bike_stairs": [4, "One tire line and boot prints down the stairs."],
+	"clue_two_tracks": [4, "The bike came down the stairs with Preacher. Owen came down the bank with somebody else."],
+	"clue_audi": [4, "The headlight piece: four rings, part 4K0, blue-gray paint. An Audi."],
+	"clue_danny_phone": [4, "Danny's phone, in the reeds under the Fletcher Drive bridge."],
+	"clue_big_man": [4, "Preacher: Tuesday after three, a big man in an old cop's coat threw something small and black off the bridge from a long gray car."],
+	"clue_host": [4, "The fundraiser was Harlan Pryce's, at a Pryce Development house, for Councilmember Haskell."],
+	"clue_warning": [4, "Owen warned a drunk guest not to drive. Courtney took it as a threat."],
+	"clue_crane_drunk": [4, "Gate camera, 1:51: a drunk guest takes his own keys. \"Mind your business, delivery boy.\""],
+	"clue_gate_clip": [4, "Gate camera, 1:55: a blue-gray Audi follows Owen downhill, both headlights intact."],
+	"clue_headlights_intact": [4, "Both headlights were whole at 1:55."],
+	"clue_courtney_alibi": [4, "Courtney locked the gate from inside at 2:38. She never left."],
+	"clue_plate": [4, "Plate 8KXD392."],
+	"clue_pryce_driver": [4, "Andre: Pryce left at eleven in a gray Lincoln. His driver's a big old ex-cop."],
+	"clue_curb_scrape": [4, "Blue-gray paint on the curb by the gate."],
+	"clue_render": [4, "The invitation's drawing puts a lobby where the Blue Note is."],
+	"clue_crane_id": [4, "8KXD392 is Elliot Crane, Haskell's chief of staff, Mount Washington."],
+	"clue_crane_story": [4, "Crane: took a car service home; the Audi was in the garage all night."],
+	"clue_tarp_new": [4, "The tarp is new tonight. $19.99."],
+	"clue_washing": [4, "Somebody's been washing the car for two hours."],
+	"clue_loafers": [4, "Crane's loafers: soaked, river mud in the stitching, reed seed on the heel."],
+	"clue_crane_calls": [4, "Missed calls on Crane's phone: Ted at 2:31 and 2:48, Harlan Pryce at 3:05."],
+	"clue_yellow_paint": [4, "Chomp yellow in the Audi's grille."],
+	"clue_lens_match": [4, "Both headlight pieces fit Crane's broken headlight."],
 }
 
 var flags: Dictionary = {}
@@ -124,6 +172,8 @@ func flag(key: String) -> bool:
 
 func current_case() -> int:
 	## The case Ray is working: each one starts when Otis's call ends the one before.
+	if flag("case3_done"):
+		return 4
 	if flag("case2_done"):
 		return 3
 	return 2 if flag("case1_done") else 1

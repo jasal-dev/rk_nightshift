@@ -7,6 +7,7 @@ extends CanvasLayer
 signal skip_requested
 signal choice_made(index: int)
 signal inventory_clicked(id: String, button: int)
+signal jigsaw_event(kind: String)   ## "wrong", "done" or "close" (see show_jigsaw)
 
 const FONT := preload("res://assets/fonts/DejaVuSansCondensed-Bold.ttf")
 const FONT_SIZE := 30
@@ -35,12 +36,17 @@ var phone: PanelContainer         ## text messages
 var phone_log: VBoxContainer
 var device: PanelContainer        ## a phone or car screen (Kenji's Glide app, the Prius head unit, ...)
 var paper: Control                ## a document or picture held up close (a letter, a card, the UV lamp's view)
+var jigsaw: Control              ## the fit-the-pieces close-up (Crane's headlight)
 var options: Array[String] = []   ## the options on screen (dialogue choices or device buttons), in choice_made order
 var _drive_lights: Array[Sprite2D] = []
 var _drive_drops: Array[Sprite2D] = []
 var _wiper: Line2D
 var _wiper_t := 0.0
 var _glow: Texture2D
+var _jig_pieces: Array[TextureRect] = []
+var _jig_drag: TextureRect
+var _jig_grab := Vector2.ZERO
+var _jig_press := Vector2.ZERO
 
 
 
@@ -423,6 +429,125 @@ func show_closeup(tex: Texture2D) -> void:
 	root.add_child(paper)
 	root.move_child(paper, 0)
 
+
+# --- fit-the-pieces close-up (Case 4's headlight) ---------------------------------------------
+## A picture with holes in it (bg) and loose pieces in a tray below. Drag a piece into its hole; click a piece to turn
+## it a quarter. A piece snaps in only in the right place the right way up; otherwise it slides back to the tray and
+## jigsaw_event("wrong") fires. jigsaw_event("done") when every piece is in, ("close") when the player steps back.
+## pieces: [{"tex": Texture2D, "target": Vector2 (the piece's centre in bg pixels), "turns": int (start quarter turns
+## away from upright)}].
+func show_jigsaw(bg: Texture2D, pieces: Array) -> void:
+	hide_jigsaw()
+	jigsaw = Control.new()
+	jigsaw.set_anchors_preset(Control.PRESET_FULL_RECT)
+	jigsaw.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(jigsaw)
+	root.move_child(jigsaw, 0)
+	var dim := ColorRect.new()
+	dim.color = Color(0, 0, 0, 0.8)
+	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	dim.mouse_filter = Control.MOUSE_FILTER_STOP           # the room behind can't be clicked
+	jigsaw.add_child(dim)
+	var origin := Vector2((SCREEN.x - bg.get_size().x) * 0.5, 30)
+	var pic := TextureRect.new()
+	pic.texture = bg
+	pic.position = origin
+	pic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	jigsaw.add_child(pic)
+	_jig_pieces.clear()
+	var tray_x := 560.0
+	for i in pieces.size():
+		var p: Dictionary = pieces[i]
+		var tex: Texture2D = p["tex"]
+		var r := TextureRect.new()
+		r.texture = tex
+		r.size = tex.get_size()
+		r.pivot_offset = r.size * 0.5
+		var home := Vector2(tray_x, 760 + (230 - r.size.y) * 0.5)
+		tray_x += r.size.x + 160
+		r.position = home
+		var turns := int(p.get("turns", 0))
+		r.rotation = turns * PI * 0.5
+		r.mouse_filter = Control.MOUSE_FILTER_STOP
+		r.set_meta("home", home)
+		r.set_meta("turns", turns)
+		r.set_meta("target", origin + Vector2(p["target"]) - r.size * 0.5)
+		r.set_meta("placed", false)
+		r.gui_input.connect(_on_jig_input.bind(r))
+		jigsaw.add_child(r)
+		_jig_pieces.append(r)
+	var hint := _make_label(Color(0.85, 0.8, 0.65))
+	hint.text = "Drag a piece into place. Click it to turn it."
+	hint.position = Vector2(80, 950)
+	jigsaw.add_child(hint)
+	var back := Button.new()
+	back.text = "Step back"
+	back.flat = true
+	back.focus_mode = Control.FOCUS_NONE
+	back.position = Vector2(1640, 990)
+	back.add_theme_color_override("font_color", Color(0.78, 0.82, 0.84))
+	back.add_theme_color_override("font_hover_color", Color(1, 0.85, 0.45))
+	back.pressed.connect(func(): jigsaw_event.emit("close"))
+	jigsaw.add_child(back)
+
+
+func hide_jigsaw() -> void:
+	if jigsaw:
+		jigsaw.queue_free()
+		jigsaw = null
+	_jig_pieces.clear()
+	_jig_drag = null
+
+
+func jigsaw_place(i: int) -> void:
+	## Put piece i in its place the right way up, as if the player had (used by the automated playthrough).
+	var r: TextureRect = _jig_pieces[i]
+	r.set_meta("turns", 0)
+	r.rotation = 0.0
+	r.global_position = r.get_meta("target")
+	_jig_drop(r)
+
+
+func _on_jig_input(event: InputEvent, r: TextureRect) -> void:
+	if r.get_meta("placed"):
+		return
+	var mb := event as InputEventMouseButton
+	if mb and mb.button_index == MOUSE_BUTTON_LEFT:
+		if mb.pressed:
+			_jig_drag = r
+			_jig_grab = r.get_global_mouse_position() - r.global_position
+			_jig_press = r.get_global_mouse_position()
+			r.move_to_front()
+		elif _jig_drag == r:
+			_jig_drag = null
+			if r.get_global_mouse_position().distance_to(_jig_press) < 8.0:
+				# a click: a quarter turn
+				r.set_meta("turns", (int(r.get_meta("turns")) + 1) % 4)
+				var t := create_tween()
+				t.tween_property(r, "rotation", r.rotation + PI * 0.5, 0.15)
+			else:
+				_jig_drop(r)
+	elif event is InputEventMouseMotion and _jig_drag == r:
+		r.global_position = r.get_global_mouse_position() - _jig_grab
+
+
+func _jig_drop(r: TextureRect) -> void:
+	var target: Vector2 = r.get_meta("target")
+	if r.global_position.distance_to(target) < 60.0 and int(r.get_meta("turns")) % 4 == 0:
+		r.global_position = target
+		r.set_meta("placed", true)
+		r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var t := create_tween()
+		t.tween_property(r, "modulate", Color(1.6, 1.6, 1.5), 0.12)
+		t.tween_property(r, "modulate", Color.WHITE, 0.3)
+		for p in _jig_pieces:
+			if not p.get_meta("placed"):
+				return
+		jigsaw_event.emit("done")
+	else:
+		var t := create_tween()
+		t.tween_property(r, "position", r.get_meta("home"), 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		jigsaw_event.emit("wrong")
 
 func hide_paper() -> void:
 	if paper:

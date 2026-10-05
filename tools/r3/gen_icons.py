@@ -48,6 +48,17 @@ def scene():
     S.mat('catalogue', (20, 20, 24), tex=tx.catalogue_cover(), texmode=1, spec=1.0, shin=60)
     S.mat('brenner', (236, 228, 206), tex=tx.brenner_card(), texmode=1, spec=0.2)
     S.mat('water', (120, 160, 200), spec=1.6, shin=90)
+    # Case 4
+    S.mat('lens', (200, 214, 226), spec=2.0, shin=120)
+    S.mat('chrome', (210, 212, 218), spec=1.8, shin=90)
+    S.mat('bluegray', (98, 112, 128), spec=0.8, shin=50)
+    S.mat('note_sticker', (30, 60, 150), spec=0.4)
+    S.mat('ticket', (236, 232, 214))
+    S.mat('ticket_red', (150, 30, 36))
+    S.mat('invite', (240, 236, 224), spec=0.2)
+    S.mat('invite_gold', (220, 180, 90), spec=1.2, shin=60)
+    S.mat('receipt_blue', (30, 50, 110))
+    S.mat('phone_blk', (20, 20, 22), spec=1.2, shin=80)
     return S
 
 
@@ -194,6 +205,46 @@ def build(item):
     elif item == 'brenner_card':
         S.wbox((0, 0, 0), (0.37, 0.22, 0.008), 'brenner', rnd=0.005)
         rot = Rz(-6) @ Rx(-22)
+    elif item == 'lens_shard':
+        for k in range(5):                                                                    # a curved sliver
+            a0, a1 = -0.6 + k * 0.24, -0.6 + (k + 1) * 0.24
+            S.cone((0.5 * math.cos(a0) - 0.42, 0.5 * math.sin(a0), 0), (0.5 * math.cos(a1) - 0.42, 0.5 * math.sin(a1), 0),
+                   0.07 - k * 0.011, 0.07 - (k + 1) * 0.011, 'lens')
+        rot = Rz(70) @ Rx(-20)
+    elif item == 'lens_piece':
+        S.wbox((0, 0, 0), (0.36, 0.2, 0.05), 'lens', rnd=0.08)
+        S.wbox((0.32, 0, 0.0), (0.24, 0.4, 0.07), 'lens', op=1, rot=Rz(28))                  # the broken side
+        S.wbox((-0.06, 0, -0.04), (0.22, 0.14, 0.02), 'chrome', rnd=0.05)
+        for k in range(2):
+            S.cyl((-0.22 + k * 0.1, 0.0, 0.052), (-0.22 + k * 0.1, 0.0, 0.056), 0.045, 'chrome')
+        S.wbox((-0.3, -0.1, 0.03), (0.05, 0.04, 0.03), 'bluegray', rnd=0.01)
+        rot = Rz(-10) @ Rx(-25)
+    elif item == 'danny_phone':
+        S.wbox((0, 0, 0), (0.18, 0.34, 0.03), 'phone_blk', rnd=0.04)
+        S.wbox((0, 0.12, 0.031), (0.12, 0.08, 0.002), 'note_sticker', rot=Rz(-8))               # the Blue Note sticker
+        S.wbox((0, -0.12, 0.031), (0.14, 0.04, 0.002), 'masking')                               # D.R. IF FOUND...
+        for k in range(3):
+            S.wbox((-0.08 + k * 0.08, -0.12, 0.034), (0.025, 0.012, 0.002), 'ink_dk')
+        S.sph((0.12, -0.28, 0.04), 0.03, 'water')
+        rot = Rz(-18) @ Rx(-20)
+    elif item == 'valet_ticket':
+        S.wbox((0, 0, 0), (0.18, 0.36, 0.006), 'ticket')
+        S.wbox((0, 0.3, 0.007), (0.18, 0.06, 0.002), 'ticket_red')
+        for k in range(4):
+            S.wbox((-0.02, 0.12 - k * 0.1, 0.008), (0.12 - (k % 2) * 0.03, 0.015, 0.002), 'ink_dk')
+        rot = Rz(14) @ Rx(-20)
+    elif item == 'pryce_invite':
+        S.wbox((0, 0, 0), (0.38, 0.26, 0.008), 'invite')
+        S.wbox((0, 0.14, 0.009), (0.28, 0.025, 0.002), 'invite_gold')
+        S.wbox((0, 0.04, 0.009), (0.2, 0.012, 0.002), 'ink_dk')
+        S.wbox((0, -0.08, 0.009), (0.24, 0.012, 0.002), 'ink_dk')
+        rot = Rz(-8) @ Rx(-24)
+    elif item == 'lab_receipt':
+        S.wbox((0, 0, 0), (0.26, 0.36, 0.006), 'paper')
+        S.wbox((0, 0.3, 0.007), (0.26, 0.05, 0.002), 'receipt_blue')
+        for k in range(5):
+            S.wbox((-0.04, 0.15 - k * 0.09, 0.008), (0.18 - (k % 2) * 0.05, 0.014, 0.002), 'ink_dk')
+        rot = Rz(-6) @ Rx(-20)
     S.transform(rot)
     S.light((-1.2, 1.6, 2.0), (255, 236, 210), power=7, range=10, soft=8)
     S.light((1.4, 0.6, -1.0), (140, 180, 255), power=4, range=10, shadow=False)
@@ -205,7 +256,8 @@ def main():
     for item in (sys.argv[1:] or ('key', 'case_file', 'coffee', 'dime', 'matchbook', 'gaff', 'envelope', 'notebook',
                                   'driver_card', 'norms_receipt', 'kenji_keys', 'card_slip', 'frozen_peas', 'sd_cards',
                                   'ride_receipt', 'gus_keys', 'uv_lamp', 'catalogue', 'star_earring', 'fake_oscar',
-                                  'brenner_card')):
+                                  'brenner_card', 'lens_shard', 'lens_piece', 'danny_phone', 'valet_ticket',
+                                  'pryce_invite', 'lab_receipt')):
         S = build(item)
         cam = Camera((0, 0, 5), (0, 0, 0), W=SIZE * SS, H=SIZE * SS, ortho=True, ortho_h=0.95)
         env = dict(sky=(60, 60, 70), bounce=(30, 26, 26), fog=0, reflections=False, vol_scale=0, grid=0.12, ao_scale=0.3)

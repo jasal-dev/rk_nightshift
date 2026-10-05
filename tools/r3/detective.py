@@ -48,6 +48,8 @@ def materials(S):
     S.mat('sock',     (60, 56, 58),    spec=0.02, shin=8,  namp=0.08, nscale=60)
     S.mat('pipe',     (70, 40, 24),    spec=0.5, shin=40)
     S.mat('umbrella', (22, 22, 26),    spec=0.4, shin=30, namp=0.05, nscale=60)
+    S.mat('glass_c',  (150, 160, 166), spec=1.6, shin=90, refl=0.3)
+    S.mat('water_c',  (120, 140, 150), spec=1.2, shin=90)
 
 
 COAT_LEN = 0.40  # how far the overcoat hangs below the hip joint (m): just above the knee
@@ -58,12 +60,15 @@ DEFAULT = dict(yaw=90, lean=0, cyaw=0, pyaw=0, sway=0, dx=0, breath=0, shrug=0,
                lsp=-2, lsa=9, le=12, lin=4, lw=0, lroll=0, lhand='relaxed',
                rsp=-2, rsa=9, re=12, rin=4, rw=0, rroll=0, rhand='relaxed',
                hp=0, hy=0, hr=0, mouth=0, blink=0, props=(), coatlen=COAT_LEN, coatswing=0,
-               stubble=True, hair='short', mustache=False, earring=None, noshoe=None, shoelen=1.0, cop=True)
+               stubble=True, hair='short', mustache=False, earring=None, noshoe=None, shoelen=1.0, cop=True,
+               beard=False, headset=False, sleeves='coat')
 # supporting cast only: stubble=False, hair = 'short' (receding) | 'full' | 'bun' | 'bun_pencil' | 'long' | 'cap'
 #   | 'long_side' (down over the left ear and cheek) | 'bald' (a fringe at the back) | 'derby' (bowler hat),
 # hr = head roll (degrees, + tilts toward the figure's left), mustache (a short toothbrush one),
 # earring = 'l' / 'r' (one gold stud), noshoe = 'l' / 'r' (that foot in its sock), shoelen (shoe length scale),
-# cop = False drops the badge and holster from the belt
+# cop = False drops the badge and holster from the belt, beard (a full one, in the hair colour), headset (a band over
+# the head and a mic at the mouth), sleeves = 'shirt' (shirtsleeves under a sleeveless vest or robe-less coat),
+# hair = 'hood' (a hoodie's hood up, in the coat colour)
 
 def leg_geo(pel, side, hp, abd, knee, fp):
     hip = pel.to((side * 0.092, -0.035, 0.0))
@@ -242,6 +247,18 @@ def build_head(S, h, p):
         S.decal(h, sk, 'stubble', [((0, 1, 0), -0.05), ((0, 0, -1), 0.03)], feather=0.012)
     if p['mustache']:
         S.ell(h, (0, -0.036, 0.09), (0.013, 0.0055, 0.006), 'hair', k=0.003)          # toothbrush mustache
+    if p['beard']:                                                                   # full, trimmed, under the lip
+        S.ell(h, (0, -0.075, 0.034), (0.064, 0.046, 0.066), 'hair', k=0.012, clip=h.plane((0, -1, 0), 0.058))
+        S.ell(h, (0, -0.036, 0.088), (0.02, 0.006, 0.008), 'hair', k=0.004)
+        for s in (1, -1):
+            S.ell(h, (s * 0.052, -0.04, 0.02), (0.014, 0.04, 0.04), 'hair', k=0.012)
+    if p['headset']:                                                                 # band over the top, mic at the mouth
+        pts = [h.to((0.072 * math.cos(a), 0.012 + 0.098 * math.sin(a), -0.01)) for a in np.linspace(0, math.pi, 9)]
+        for a, b in zip(pts, pts[1:]):
+            S.cyl(a, b, 0.006 * q, 'phone')
+        S.ell(h, (-0.074, -0.004, -0.004), (0.012, 0.028, 0.026), 'phone')
+        S.cyl(h.to((-0.074, -0.02, 0.01)), h.to((-0.035, -0.05, 0.085)), 0.0035 * q, 'phone')
+        S.sph(h.to((-0.032, -0.052, 0.088)), 0.008 * q, 'phone')
     if p['earring']:
         es = 1 if p['earring'] == 'l' else -1
         S.sph(h.to((es * 0.066, -0.032, -0.004)), 0.0075 * q, 'gold')                  # one gold stud
@@ -253,6 +270,9 @@ def build_head(S, h, p):
             S.ell(h, (s * 0.058, 0.0, -0.026), (0.013, 0.026, 0.04), 'hair', k=0.016)
         return
     S.decal(h, sk, 'hair', [((0, -1, 0.7), 0.004), ((0, -1, 0), -0.035)], feather=0.006)
+    if style == 'short_crop':                                                        # close-cropped, tight to the skull
+        S.ell(h, (0, 0.03, -0.014), (0.07, 0.082, 0.09), 'hair', k=0.004, clip=h.plane((0, 0.944, -0.33), 0.0))
+        return
     S.ell(h, (0, 0.05, -0.012), (0.069, 0.06, 0.09), 'hair', k=0.018)               # top mass
     S.ell(h, (0, 0.074, 0.03), (0.054, 0.032, 0.05), 'hair', k=0.022, rot=Rx(-12))  # front lift
     S.ell(h, (0, 0.012, -0.052), (0.066, 0.066, 0.054), 'hair', k=0.02)             # back
@@ -276,6 +296,9 @@ def build_head(S, h, p):
     elif style == 'derby':                                                           # a bowler hat
         S.ell(h, (0, 0.078, -0.008), (0.07, 0.052, 0.078), 'cap', k=0.006)
         S.tcyl(h, (0, 0.042, -0.008), (0.098, 0.106), (0.098, 0.106), 0.004, 'cap')
+    elif style == 'hood':                                                            # a hoodie's hood, up
+        S.ell(h, (0, 0.03, -0.018), (0.088, 0.104, 0.104), 'coat', k=0.01, clip=h.plane((0, 0, -1), -0.045))
+        S.ell(h, (0, -0.04, -0.03), (0.08, 0.06, 0.08), 'coat', k=0.02, clip=h.plane((0, 0, -1), -0.03))
     elif style == 'cap':                                                             # patrol cap
         S.ell(h, (0, 0.062, -0.006), (0.075, 0.042, 0.092), 'cap', k=0.01)
         S.box(h, (0, 0.05, 0.088), (0.06, 0.004, 0.035), 0.003, 'cap', rot=Rx(-12))
@@ -287,12 +310,14 @@ def build_arm(S, chest, side, sh, sp, sa, el, inward, wr, roll, hand, p, key):
     elbow = sh + 0.30 * (L @ A(0, -1, 0))
     Lf = L @ Ry(-s * inward) @ swing(el)
     wrist = elbow + 0.27 * (Lf @ A(0, -1, 0))
-    S.cone(sh, elbow, 0.064, 0.055, 'coat', k=0.03)
-    S.cone(elbow, wrist, 0.055, 0.05, 'coat', k=0.014)
-    S.sph(elbow + (L @ A(0, 0, -1)) * 0.012, 0.05, 'coat', k=0.03)                 # elbow bunching
+    sl = p['sleeves']
+    S.cone(sh, elbow, 0.064, 0.055, sl, k=0.03)
+    S.cone(elbow, wrist, 0.055, 0.05, sl, k=0.014)
+    S.sph(elbow + (L @ A(0, 0, -1)) * 0.012, 0.05, sl, k=0.03)                     # elbow bunching
     fd = Lf @ A(0, -1, 0)
-    S.cone(wrist - fd * 0.075, wrist - fd * 0.01, 0.055, 0.054, 'coat')            # sleeve end
-    S.cone(wrist - fd * 0.07, wrist - fd * 0.05, 0.058, 0.058, 'coat_dk')          # cuff strap
+    S.cone(wrist - fd * 0.075, wrist - fd * 0.01, 0.055, 0.054, sl)                # sleeve end
+    if sl == 'coat':
+        S.cone(wrist - fd * 0.07, wrist - fd * 0.05, 0.058, 0.058, 'coat_dk')      # cuff strap
     S.cone(wrist - fd * 0.03, wrist + fd * 0.004, 0.037, 0.036, 'shirt')            # shirt cuff
     if s == 1:
         S.cone(wrist + fd * 0.005, wrist + fd * 0.017, 0.031, 0.031, 'steel')       # watch
@@ -331,6 +356,23 @@ def build_arm(S, chest, side, sh, sp, sa, el, inward, wr, roll, hand, p, key):
         top = grip + chest.M @ A(0, 0.78, 0.02)
         S.cyl(grip - chest.M @ A(0, 0.08, 0), top, 0.008, 'umbrella')
         S.tcyl(Frame(top - chest.M @ A(0, 0.1, 0), chest.M), (0, 0, 0), (0.03, 0.03), (0.5, 0.5), 0.09, 'umbrella')
+    if ('glass', key) in props:                                                      # a tumbler of water
+        gf = Frame(grip + chest.M @ A(0, 0.02, 0.0), chest.M)
+        S.tcyl(gf, (0, 0, 0), (0.036, 0.036), (0.03, 0.03), 0.055, 'glass_c')
+        S.tcyl(gf, (0, -0.012, 0), (0.033, 0.033), (0.029, 0.029), 0.04, 'water_c')
+    if ('clipboard', key) in props:
+        cbf = Frame(grip + chest.M @ A(0, 0.03, 0.04), chest.M @ Rx(-60))
+        S.box(cbf, (0, 0, 0), (0.11, 0.15, 0.005), 0.004, 'card')
+        S.box(cbf, (0, -0.01, 0.006), (0.1, 0.13, 0.002), 0.001, 'paper')
+        S.box(cbf, (0, 0.14, 0.01), (0.03, 0.012, 0.008), 0.003, 'steel')
+    if ('book', key) in props:                                                       # a pocket Bible, open
+        bkf = Frame(grip + chest.M @ A(0, 0.02, 0.05), chest.M @ Rx(-50))
+        S.box(bkf, (0, 0, 0), (0.07, 0.05, 0.008), 0.003, 'leather')
+        S.box(bkf, (0, 0, 0.007), (0.066, 0.046, 0.004), 0.001, 'paper')
+    if ('phone', key) in props:                                                      # held out, screen lit
+        pf = Frame(grip + chest.M @ A(0, 0.04, 0.03), chest.M @ Rx(-70))
+        S.box(pf, (0, 0, 0), (0.036, 0.072, 0.005), 0.004, 'phone')
+        S.box(pf, (0, 0, 0.0052), (0.032, 0.066, 0.001), 0.0, 'screen')
     if ('badge', key) in props:
         bf = Frame(grip + chest.M @ A(0, 0.02, 0.03), chest.M)
         S.box(bf, (0, 0, 0), (0.04, 0.055, 0.007), 0.004, 'leather')

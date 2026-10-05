@@ -1,0 +1,220 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/rooms/river_channel.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/rooms/river_channel.png" id="bg"]
+[ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
+[ext_resource type="Texture2D" path="res://assets/rooms/river_channel_preacher.png" id="ov_preacher"]
+[ext_resource type="Texture2D" path="res://assets/rooms/river_channel_spot.png" id="ov_spot"]
+[ext_resource type="Texture2D" path="res://assets/rooms/river_channel_cart.png" id="occ_cart"]
+[ext_resource type="Texture2D" path="res://assets/rooms/river_channel_debris.png" id="occ_debris"]
+
+[node name="RiverChannel" type="Node2D"]
+script = ExtResource("script")
+room_id = "river_channel"
+room_name = "LA River channel"
+far_y = 766.3
+near_y = 1013.3
+far_scale = 0.414
+near_scale = 1.106
+reflection_strength = 0.12
+tint = Color(0.76, 0.78, 0.86, 1)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("bg")
+centered = false
+
+[node name="Spot" type="Sprite2D" parent="."]
+texture = ExtResource("ov_spot")
+centered = false
+position = Vector2(268, 0)
+
+[node name="WalkArea" type="Polygon2D" parent="."]
+color = Color(0.2, 0.9, 0.4, 0.3)
+polygon = PackedVector2Array(1914, 1031.7, 6, 1021.3, 6, 868.1, 419.6, 762, 603.1, 762.3, 645.1, 794.3, 700.9, 807.5, 1151.7, 808.6, 1207.4, 795.6, 1513.3, 778.6, 1576.9, 797.7, 1371.1, 797.2, 1484.1, 848.9, 1749.9, 849.7, 1914, 899)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Preacher" type="Sprite2D" parent="Actors"]
+texture = ExtResource("ov_preacher")
+centered = false
+position = Vector2(527, 783)
+offset = Vector2(-106, -129)
+
+[node name="Cart" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_cart")
+centered = false
+position = Vector2(311, 953)
+offset = Vector2(-56, -150)
+
+[node name="Debris" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_debris")
+centered = false
+position = Vector2(1465, 983)
+offset = Vector2(-138, -100)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle1" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(642.8, 775.8, 630.4, 778.7, 608.6, 780.9, 583.5, 781.7, 562.5, 780.8, 551.6, 778.6, 553.5, 775.6, 567.1, 772.7, 588.3, 770.8, 611.7, 770.1, 631.6, 770.8, 643.1, 772.9)
+
+[node name="Obstacle2" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(1543.1, 803.4, 1546.6, 806.2, 1539.4, 808.2, 1523.4, 808.9, 1503.1, 808.1, 1484.3, 806, 1472.3, 803.3, 1469.9, 800.6, 1477.5, 798.8, 1492.8, 798.2, 1512.1, 798.9, 1530.4, 800.8)
+
+[node name="Obstacle3" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(1604, 820.3, 1611.2, 825.2, 1600.4, 828.9, 1574.1, 830.2, 1539.9, 828.7, 1508.3, 824.9, 1488, 820, 1483.8, 815.3, 1495.8, 812.1, 1520.3, 811, 1551.5, 812.3, 1581.9, 815.6)
+
+[node name="Obstacle4" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(586.8, 756, 569, 759.5, 539, 762, 505.2, 763, 477.9, 761.9, 465, 759.3, 469.7, 755.8, 489.4, 752.6, 518.3, 750.3, 549, 749.6, 574.5, 750.4, 588.4, 752.8)
+
+[node name="Obstacle5" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(405.8, 953.8, 369.1, 967.5, 312.9, 978.1, 253.9, 982, 211.4, 977.6, 198.3, 966.7, 216.4, 953, 257.4, 940.4, 309.2, 931.8, 359.7, 929, 398, 932.2, 415.3, 941.1)
+
+[node name="Obstacle6" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(1587.1, 983.2, 1601.8, 1002.3, 1577.7, 1017.4, 1518.7, 1023, 1444, 1016.7, 1379.3, 1001.2, 1343.1, 982.1, 1341.4, 964.9, 1370.3, 953.4, 1420.9, 949.6, 1482.5, 953.9, 1542.6, 965.8)
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="fletcher_bridge" type="Marker2D" parent="Spawns"]
+position = Vector2(1504, 781)
+
+[node name="start" type="Marker2D" parent="Spawns"]
+position = Vector2(910, 862)
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="beam" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "beam"
+display_name = "Doss's spotlight"
+walk_to = Vector2(0, 0)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/beam"]
+polygon = PackedVector2Array(909.1, 590, 910.6, 28.8, 1047.5, 27.7, 1050.2, 589.9)
+
+[node name="willows" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "willows"
+display_name = "willows"
+walk_to = Vector2(0, 0)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/willows"]
+polygon = PackedVector2Array(777.8, 736.2, 779.1, 723.8, 790.7, 632.8, 799.3, 632.1, 854.7, 632.1, 1043, 632.3, 1099.4, 632.4, 1105.2, 633, 1116.8, 738.1, 1111, 750.5, 1108.8, 752.6, 1067, 784.2, 815.2, 781.7, 809.5, 775.9, 784.9, 748.2)
+
+[node name="water" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "water"
+display_name = "water"
+walk_to = Vector2(825, 851)
+face = "down"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/water"]
+polygon = PackedVector2Array(494.1, 975.2, 705.7, 819.6, 1145.2, 820.8, 1274.5, 979)
+
+[node name="east_bank" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "east_bank"
+display_name = "east bank"
+walk_to = Vector2(1547, 799)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/east_bank"]
+polygon = PackedVector2Array(1920, 898.3, 1598.6, 802.6, 1920, 469.6)
+
+[node name="stairs" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "stairs"
+display_name = "stairs"
+walk_to = Vector2(1504, 781)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/stairs"]
+polygon = PackedVector2Array(1492.1, 750, 1573.1, 666.6, 1872.3, 358.7, 1920, 312.5, 1920, 786.6, 1542.5, 788.1, 1492.7, 771)
+
+[node name="reeds" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "reeds"
+display_name = "reeds"
+walk_to = Vector2(998, 814)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/reeds"]
+polygon = PackedVector2Array(724.9, 805.5, 752, 648.6, 1116.9, 648.8, 1133.6, 806.6)
+
+[node name="drain_pipe" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "drain_pipe"
+display_name = "drain pipe"
+walk_to = Vector2(998, 814)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/drain_pipe"]
+polygon = PackedVector2Array(859, 625.1, 859.2, 583.8, 900.5, 583.8, 900.3, 625.1)
+
+[node name="tent" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "tent"
+display_name = "Preacher's tent"
+walk_to = Vector2(600, 769)
+face = "left"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/tent"]
+polygon = PackedVector2Array(436.4, 767.9, 521.4, 676.8, 521.9, 676.7, 557.7, 674.6, 562.2, 674.5, 597.9, 676.3, 633.6, 747.7, 621.7, 765.3, 618.5, 766.6, 594.5, 770.8, 521.3, 772.9, 515.8, 772.9, 438.4, 769.8)
+
+[node name="bike" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "bike"
+display_name = "e-bike"
+walk_to = Vector2(594, 787)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/bike"]
+polygon = PackedVector2Array(530.6, 727.7, 532.9, 695.8, 546.9, 694.3, 556.4, 694.1, 636.5, 698.1, 637.8, 699.4, 659.9, 749.1, 661.2, 758, 659.6, 766.9, 655.5, 774.6, 652.8, 777.2, 646.5, 782.8, 638.9, 785.6, 630.9, 785.3, 557.8, 782.4, 550.7, 779.1, 548.1, 776.5, 544.9, 773.2, 542.4, 770.6, 538.7, 762.8)
+
+[node name="phone" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "phone"
+display_name = "Owen's phone"
+walk_to = Vector2(610, 787)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/phone"]
+polygon = PackedVector2Array(619.5, 702.3, 619.8, 687.2, 631.9, 687.4, 631.6, 702.5)
+
+[node name="preacher" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "preacher"
+display_name = "Preacher"
+walk_to = Vector2(576, 792)
+face = "left"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/preacher"]
+polygon = PackedVector2Array(499.2, 790.5, 502.6, 649.3, 556.6, 649.3, 553.6, 790.6)
+
+[node name="owen" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "owen"
+display_name = "Owen"
+walk_to = Vector2(1407, 818)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/owen"]
+polygon = PackedVector2Array(1431.8, 821.6, 1488.4, 795.1, 1719, 795.6, 1636.5, 822.1)
+
+[node name="shah" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "shah"
+display_name = "Dr. Shah"
+walk_to = Vector2(1351, 792)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/shah"]
+polygon = PackedVector2Array(1469.3, 692.7, 1539.8, 692.8, 1543.4, 812.4, 1472.5, 812.2)

@@ -137,6 +137,7 @@ func change_room(id: String, from_room: String) -> void:
 	Game.select_item("")
 	ui.hide_device()
 	ui.hide_paper()
+	ui.hide_jigsaw()
 	if ui.fade_rect.color.a < 0.99:
 		await ui.fade_to(1.0, 0.35)
 	if player.get_parent():
@@ -332,6 +333,44 @@ func examine_item(id: String) -> void:
 		"ride_receipt":
 			await say("My photo of Kenji's screen. Wednesday, 1:10 a.m. Blue Note, Hollywood, to Pryce Tower, Century City.")
 			await say("Rider: Walt B. Billed to Pryce Development, on the business account. One star. \"Wet, rude, smelled like gun oil.\"")
+		"lens_piece":
+			await say("Half a headlight. Clear plastic, curved, chrome on the back.")
+			await say("Moulded into the plastic: four interlocking rings and a part number starting 4K0. A smear of blue-gray paint on the broken edge.")
+			await say("Four rings. An Audi. Blue-gray.")
+			clue("clue_audi")
+		"valet_ticket":
+			ui.show_paper("STARLINE VALET   No. 47", "Audi A6, blue-gray.  Plate 8KXD392.
+Name: CRANE
+In 7:40 PM     Out 1:55 AM",
+					"Guest insisted. Offered rideshare, declined.  - A.M.", Color(0.12, 0.2, 0.55))
+			await say("Number forty-seven. Crane. Out one fifty-five. \"Guest insisted. Offered rideshare, declined.\"")
+			ui.hide_paper()
+		"pryce_invite":
+			ui.show_paper("Harlan Pryce and Pryce Development", "request the pleasure of your company at an evening with
+Councilmember Ted Haskell, Council District 13.
+
+Hollywood Core: The Future Has a Skyline.")
+			await say("Harlan Pryce and Pryce Development request the pleasure of your company. An evening with Councilmember Ted Haskell.")
+			ui.hide_paper()
+			ui.show_closeup(Case4.INVITE_RENDER)
+			await say("It unfolds. A glass tower on Hollywood Boulevard, across from the Chinese Theatre.")
+			await say("They've drawn a lobby where the Blue Note is.")
+			clue("clue_render")
+			if Game.flag("clue_block_empty"):
+				await say("Empty by Christmas. The jazz club too.")
+			elif Game.flag("clue_eviction"):
+				await say("Same rezoning that's emptying Gus's block.")
+			elif Game.flag("saw_rezoning"):
+				await say("Same name as the notice outside the Blue Note.")
+			ui.hide_paper()
+		"lab_receipt":
+			ui.show_paper("LAPD Scientific Investigation Division", "EVIDENCE RECEIPT - NIGHT INTAKE
+Item 1. Cell phone, black case, Blue Note sticker.
+Recovered: LA River, below Fletcher Dr. bridge.
+Received: 4:46 AM",
+					"I. Feld", Color(0.12, 0.2, 0.55))
+			await say("Item one. Cell phone, black case, Blue Note sticker. Received by I. Feld.")
+			ui.hide_paper()
 		_:
 			await say(Game.ITEMS.get(id, {}).get("desc", "It's a %s." % Game.item_name(id)))
 
@@ -436,6 +475,23 @@ func device(title: String, tabs: Array, active: int, body: String, rows: Array) 
 	if idx < tabs.size() + rows.size():
 		return "row:%d" % (idx - tabs.size())
 	return "close"
+
+
+func jigsaw(bg: Texture2D, pieces: Array) -> bool:
+	## The fit-the-pieces close-up (GameUI.show_jigsaw). Returns true once every piece is in, with the picture still up
+	## (call ui.hide_jigsaw() when done talking about it), or false if the player stepped back.
+	ui.show_jigsaw(bg, pieces)
+	while true:
+		var kind: String = await ui.jigsaw_event
+		if kind == "wrong":
+			await say("Not like that.")
+		elif kind == "done":
+			await wait(0.6)
+			return true
+		else:
+			ui.hide_jigsaw()
+			return false
+	return false
 
 
 func choose(options: Array) -> int:

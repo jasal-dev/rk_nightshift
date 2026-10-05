@@ -1,0 +1,218 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/rooms/fletcher_bridge.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/rooms/fletcher_bridge.png" id="bg"]
+[ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
+[ext_resource type="Texture2D" path="res://assets/rooms/fletcher_bridge_preacher_car.png" id="ov_preacher_car"]
+[ext_resource type="Texture2D" path="res://assets/rooms/fletcher_bridge_beam_road.png" id="ov_beam_road"]
+[ext_resource type="Texture2D" path="res://assets/rooms/fletcher_bridge_beam_down.png" id="ov_beam_down"]
+[ext_resource type="Texture2D" path="res://assets/rooms/fletcher_bridge_raycar.png" id="occ_raycar"]
+[ext_resource type="Texture2D" path="res://assets/rooms/fletcher_bridge_busstop.png" id="occ_busstop"]
+
+[node name="FletcherBridge" type="Node2D"]
+script = ExtResource("script")
+room_id = "fletcher_bridge"
+room_name = "Fletcher Drive bridge"
+far_y = 532.2
+near_y = 995.4
+far_scale = 0.528
+near_scale = 1.09
+reflection_strength = 0.2
+tint = Color(0.8, 0.78, 0.86, 1)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("bg")
+centered = false
+
+[node name="Preacher_car" type="Sprite2D" parent="."]
+texture = ExtResource("ov_preacher_car")
+centered = false
+position = Vector2(999, 483)
+
+[node name="Beam_road" type="Sprite2D" parent="."]
+texture = ExtResource("ov_beam_road")
+centered = false
+position = Vector2(346, 542)
+
+[node name="Beam_down" type="Sprite2D" parent="."]
+texture = ExtResource("ov_beam_down")
+centered = false
+position = Vector2(1351, 536)
+
+[node name="WalkArea" type="Polygon2D" parent="."]
+color = Color(0.2, 0.9, 0.4, 0.3)
+polygon = PackedVector2Array(6, 529.7, 1588.9, 529.7, 1870.6, 527.2, 1914, 542, 1914, 1007.7, 6, 1007.7)
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Raycar" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_raycar")
+centered = false
+position = Vector2(71, 779)
+offset = Vector2(-71, -182)
+
+[node name="Busstop" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_busstop")
+centered = false
+position = Vector2(594, 1014)
+offset = Vector2(-234, -565)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle1" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(1162.1, 625.6, 1154.9, 645.8, 1116.9, 661.6, 1057.7, 667.7, 996.2, 661.6, 952.3, 645.8, 937.5, 625.6, 952.9, 607, 991.5, 594.3, 1043.1, 589.8, 1096.5, 594.3, 1139.8, 607)
+
+[node name="Obstacle2" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(1341.8, 625.6, 1342.1, 645.8, 1310.1, 661.6, 1253.1, 667.7, 1189.4, 661.6, 1139.5, 645.8, 1117.2, 625.6, 1125.6, 607, 1159.4, 594.3, 1209.4, 589.8, 1264.4, 594.3, 1312.5, 607)
+
+[node name="Obstacle3" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(1521.5, 625.6, 1529.4, 645.8, 1503.2, 661.6, 1448.5, 667.7, 1382.5, 661.6, 1326.7, 645.8, 1296.9, 625.6, 1298.3, 607, 1327.4, 594.3, 1375.7, 589.8, 1432.3, 594.3, 1485.3, 607)
+
+[node name="Obstacle4" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(-20.1, 849.8, -100.6, 891.6, -212.4, 925.6, -320.4, 938.8, -385.7, 925.6, -387.8, 891.6, -333.1, 849.8, -244.5, 812.3, -147.2, 787.3, -61.8, 778.7, -4.5, 787.3, 12.2, 812.3)
+
+[node name="Obstacle5" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(243.5, 849.8, 178.6, 891.6, 79.6, 925.6, -23.5, 938.8, -93.7, 925.6, -108.5, 891.6, -69.5, 849.8, 5.1, 812.3, 93, 787.3, 175.1, 778.7, 235.7, 787.3, 261.7, 812.3)
+
+[node name="Obstacle6" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(1590.6, 679.4, 1594.1, 686.7, 1586.4, 692.1, 1569.5, 694.1, 1548.1, 692.1, 1528.3, 686.7, 1515.7, 679.4, 1513.3, 672.3, 1521.3, 667.3, 1537.6, 665.4, 1557.9, 667.3, 1577.3, 672.3)
+
+[node name="Obstacle7" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(1196.8, 701.8, 1194.7, 710.3, 1181.7, 716.6, 1161.2, 719, 1139, 716.6, 1121.5, 710.3, 1113.5, 701.8, 1116.8, 693.6, 1130, 687.8, 1149.5, 685.7, 1170.5, 687.8, 1187.8, 693.6)
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="drive" type="Marker2D" parent="Spawns"]
+position = Vector2(534, 753)
+
+[node name="river_channel" type="Marker2D" parent="Spawns"]
+position = Vector2(1834, 535)
+
+[node name="glass_house" type="Marker2D" parent="Spawns"]
+position = Vector2(534, 753)
+
+[node name="crane_garage" type="Marker2D" parent="Spawns"]
+position = Vector2(534, 753)
+
+[node name="start" type="Marker2D" parent="Spawns"]
+position = Vector2(463, 854)
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="lamps" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "lamps"
+display_name = "lamp posts"
+walk_to = Vector2(0, 0)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/lamps"]
+polygon = PackedVector2Array(161, 35.2, 257.2, 35.2, 309, 406, 219.8, 406)
+
+[node name="railing" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "railing"
+display_name = "railing"
+walk_to = Vector2(523, 535)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/railing"]
+polygon = PackedVector2Array(0, 432.2, 640.8, 432.2, 647.2, 526.1, 0, 526.1)
+
+[node name="fence_gap" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "fence_gap"
+display_name = "gap in the fence"
+walk_to = Vector2(1647, 535)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/fence_gap"]
+polygon = PackedVector2Array(1576.9, 526.1, 1599.2, 361.5, 1680.2, 361.5, 1655.1, 526.1)
+
+[node name="stairs" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "stairs"
+display_name = "stairs"
+walk_to = Vector2(1834, 535)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/stairs"]
+polygon = PackedVector2Array(1743, 530.9, 1749.2, 432.2, 1873.4, 432.2, 1866.2, 530.9)
+
+[node name="road" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "road"
+display_name = "road"
+walk_to = Vector2(1529, 822)
+face = "down"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/road"]
+polygon = PackedVector2Array(1141.7, 713.8, 1842.4, 713.8, 1920, 763.8, 1920, 904.7, 1202.7, 904.7)
+
+[node name="gutter" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "gutter"
+display_name = "gutter"
+walk_to = Vector2(1564, 862)
+face = "down"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/gutter"]
+polygon = PackedVector2Array(1428, 904.7, 1722.7, 904.7, 1789.8, 971.4, 1469.2, 971.4)
+
+[node name="storm_drain" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "storm_drain"
+display_name = "storm drain"
+walk_to = Vector2(1748, 862)
+face = "down"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/storm_drain"]
+polygon = PackedVector2Array(1683.9, 909.4, 1875.7, 909.4, 1920, 930, 1920, 946.7, 1747.3, 946.7)
+
+[node name="car" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "car"
+display_name = "my car"
+walk_to = Vector2(534, 753)
+face = "left"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/car"]
+polygon = PackedVector2Array(0, 595.9, 223.8, 597.2, 406.6, 675.2, 411.5, 697.8, 420.2, 740.1, 422.9, 762.2, 305.2, 897.3, 183.3, 949.7, 0, 949.7)
+
+[node name="patrol_car" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "patrol_car"
+display_name = "patrol car"
+walk_to = Vector2(1117, 704)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/patrol_car"]
+polygon = PackedVector2Array(946, 623.2, 947.8, 560.1, 949.9, 526.9, 952, 516.7, 1006.2, 436.2, 1204.1, 430.9, 1228.6, 430.9, 1370.1, 436.2, 1434.5, 481.7, 1561.3, 572.4, 1560.5, 591, 1558.7, 623.2, 1556.3, 641.4, 1549.5, 644.9, 1470.8, 676.3, 1177.6, 678.5, 1030.9, 676.3, 946, 641.4)
+
+[node name="spotlight" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "spotlight"
+display_name = "spotlight"
+walk_to = Vector2(1507, 723)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/spotlight"]
+polygon = PackedVector2Array(1340.2, 568.5, 1343.9, 525.8, 1395, 525.8, 1390.9, 568.5)
+
+[node name="doss" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "doss"
+display_name = "Officer Doss"
+walk_to = Vector2(1590, 738)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/doss"]
+polygon = PackedVector2Array(1511.7, 691, 1539.2, 472.8, 1622.9, 472.8, 1591.4, 691)

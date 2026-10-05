@@ -162,6 +162,13 @@ def main():
         diff = np.clip((np.abs(img - img2).max(-1) - 0.01) / 0.03, 0, 1)
         overlays[tag] = (img.copy(), diff)
         img = img2
+    for tag in meta.get('exclusive_overlays', []):
+        # overlays that never show together (one person in two poses): cut each against the bare background, with every
+        # other overlay hidden, so one pose's sprite carries no pixels of the other
+        S2, _, _, _ = mod.build(hide=set(hidden) - {tag})
+        s2, _, v2 = S2.render(cam, env, a.room + '_only_' + tag)
+        img2, _ = composite(s2, v2, ss, exposure=a.exposure or meta.get('exposure', 1.0), grade=meta.get('grade'))
+        overlays[tag] = (img2, np.clip((np.abs(img2 - img).max(-1) - 0.01) / 0.03, 0, 1))
     occ_masks = {}
     if meta.get('occluders') and hidden:
         # occluders are cut from the background without any overlay prop in front of them
@@ -199,6 +206,9 @@ def main():
         for tag, mask in occ_masks.items():
             # same pixels as the background, so the cut-out is invisible until someone walks behind it
             ys, xs = np.nonzero(mask > 0)
+            if len(xs) == 0:
+                print('WARNING: occluder covers nothing on screen', tag)
+                continue
             x0, y0, x1, y1 = xs.min(), ys.min(), xs.max() + 1, ys.max() + 1
             rgba = np.zeros((y1 - y0, x1 - x0, 4), np.uint8)
             rgba[..., :3] = fin[y0:y1, x0:x1]

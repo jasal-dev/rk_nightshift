@@ -2,7 +2,7 @@
 
 A small point-and-click detective adventure built in **pure Godot 4** (no plugins), with pre-rendered 1080p art.
 It's present-day Los Angeles, after midnight and raining.
-It has three cases so far, and ends on the title card for Case 4.
+It has four cases so far, and ends on the title card for Case 5.
 
 - **Case 1: Dead Piano Player**, about 35 minutes: the squad room, the street outside the Blue Note, Pier 9 and
   Vance's office, eight items, six notebook clues, a drive and the deduction at the murder board.
@@ -13,6 +13,27 @@ It has three cases so far, and ends on the title card for Case 4.
 - **Case 3: Walk of Fame**, about 30 minutes: a memorabilia dealer dead at the foot of his roof stairs on Hollywood
   Boulevard, and his Oscar gone. Three rooms on foot (the shop, the back office, the roof, which stays dark until you
   find the sign's breaker), six items, 27 notebook clues, a UV lamp, and a confession in three steps.
+- **Case 4: Low Water**, about 30 minutes: a delivery rider dead in the LA River channel under the Fletcher Drive
+  bridge, and a veteran from the camp cuffed in the back of a patrol car. Four new places (the bridge, the channel
+  under it, the glass house in Los Feliz where the rider made his last delivery, and a garage in Mount Washington)
+  and the night window of the crime lab, six items, 40 notebook clues, a gate camera to watch, and a broken
+  headlight to fit back together.
+
+**Walkthrough (spoilers), Case 4:**
+
+1. *The bridge.* Talk to Preacher in the patrol car: "I've been somewhere", Baghdad, then "Assist, Protect, Defend".
+   Ask him everything. Look at the road and the gutter, use the storm drain. Take the stairs.
+2. *The channel.* Ask Shah everything (the scrapes come after "How did he die?"). Use the bike twice, look at
+   Owen's phone, then use it. Look at the east bank and the stairs (two sets of tracks). Back up the stairs.
+3. *The bridge.* Doss: "Uncuff him.", then "Put your spotlight on the reeds." Down the stairs: ask Preacher where
+   things end up, use the reeds (half a headlight, and Danny's phone), and show him the phone.
+4. *The glass house* (Ray's car). Courtney: "You reported the rider", then "Tell her about Owen", and watch all
+   five clips. Andre: "Who left drunk tonight?", then the ticket, and "Who left early?". Optional, and easy to miss:
+   use the box of gift bags, then read the invitation. Use the car: Otis runs the plate.
+5. *Crane's garage.* Ask Crane how he got home, then show him the valet ticket. Use the half headlight on the
+   broken headlight and fit both pieces (click a piece to turn it). Look at the loafers, then "You stopped."
+6. *The lab* (the street, then Room 214). Danny's phone in the tray. *Room 214:* the murder board: Elliot Crane,
+   the headlight fit and the valet ticket (or the gate camera clip).
 
 **Walkthrough (spoilers), Case 3:**
 
@@ -102,7 +123,8 @@ scenes/rooms/*.tscn       Room scenes: Background, WalkArea, Actors (+ walk-behi
 scripts/rooms/*.gd        Room logic: one interact() function per room
 scripts/case2.gd          Case 2's shared pieces: speech colours, the drives, the car menu between locations
 scripts/case3.gd          Case 3's shared pieces: speech colours, the drive in and the drive back
-tests/playthrough.tscn    Automated playthrough of Cases 1 to 3 (see "Testing")
+scripts/case4.gd          Case 4's shared pieces: speech colours, the drives, the car menu, Otis running the plate
+tests/playthrough.tscn    Automated playthrough of Cases 1 to 4 (see "Testing")
 assets/                   Generated room art, character sheets, light probes, item icons, cursors
 tools/                    Python generators for the art (Pillow + numpy)
 ```
@@ -135,12 +157,14 @@ main.clue("clue_id")                # write a Game.CLUES line in the notebook ("
 await main.narrate("Voice-over.")     # Ray speaking off-screen (drives, the murder board)
 await main.drive_begin(); await main.text_message("hi", false, "Maya"); await main.drive_end()
 await main.case_card("1:40 a.m.", "Case 2: Five Stars")   # title card between cases (click to go on)
-await main.end_case("2:45 a.m.", "Case 3: Walk of Fame", 2) # last card: the game ends here for now
+await main.end_case("4:50 a.m.", "Case 5: Last Call", 4)   # last card: the game ends here for now
 main.ui.show_board("Question?", "NAME\nCaption"); main.ui.set_board_pins(["card", ""], ["", "slot label"])
 var pick: String = await main.device("Glide Driver", ["Status", "Trips"], 0, "body text", ["row", "row"])
 main.ui.show_device("Title", [], 0, "body", ["row"], false); main.ui.hide_device()   # a screen that only shows
 main.ui.show_paper("Title", "typed text", "a handwritten note"); main.ui.hide_paper()  # a letter or card, held up
 main.ui.show_closeup(Case3.UV_WALL); main.ui.hide_paper()   # a full-screen picture (the UV lamp's view)
+var ok: bool = await main.jigsaw(Case4.HEADLIGHT, [{"tex": t, "target": Vector2(x, y), "turns": 1}])  # fit the pieces
+main.ui.hide_jigsaw()                                          # (after a true result: the picture stays up till then)
 main.voice("Line.", speaker_at("rosa"), Case2.ROSA_COLOR)   # speaker_at(): just above a hotspot
 await Case2.car_menu(main, room_id)  # Case 2: where to next (Norm's, Kenji's place, Room 214)
 Game.set_flag("x"); Game.flag("x"); Game.has_item("id"); Game.clues(Game.current_case())
@@ -166,12 +190,20 @@ People who stand in the walkable area and come and go by flag (Pearl, Park in th
 walk-behind props. The Stardust roof is two rooms on one set (`stardust_roof_dark.py` calls `stardust_roof.build(dark=True)`):
 the stairs go to the dark one until the sign's breaker is on.
 
+Case 4's cast is in `npc.CAST` as well: Preacher bronze, Doss steel blue, Courtney lilac, Andre mint, Crane cream, Ike
+lime. The rig gained a beard, a headset, a hood and shirtsleeves, and props (a glass, a clipboard, a Bible, a phone).
+Cars come from `tools/r3/cars.py` (a sedan or SUV in its own frame, a rear door that can stand open, a broken
+headlight). States that change mid-scene are overlays: Preacher in the patrol car or at his tent, Doss's spotlight on the
+road or on the reeds, the tarp over Crane's Audi, Crane standing or sitting on his step. The headlight fit is
+`ui.show_jigsaw()`: a picture with holes and loose pieces you drag in and click to turn (`tools/r3/gen_closeups.py`
+draws them and prints each piece's target).
+
 `prius_interior` is a close-up: the same 3D set as the overlook with the camera inside the car. Its room
 script sets `show_player = false`, so the detective isn't drawn, and its hotspots have no `walk_to`.
 
 ## Testing
 
-`tests/playthrough.tscn` plays all of Cases 1 to 3 at 8× speed through the game's own click handling,
+`tests/playthrough.tscn` plays all of Cases 1 to 4 at 8× speed through the game's own click handling,
 answering every dialogue and device screen by text, and checks the flags later cases depend on. From the
 project folder:
 
@@ -200,14 +232,15 @@ python render_room.py squad_room      # (add --preview for a fast low-res look)
 python gen_sprites.py                 # -> assets/characters/detective.png + detective_light.png + scripts/detective_anims.gd
 python light_probes.py street         # -> assets/rooms/street_light.json (render_room.py also does this)
 python gen_icons.py                   # -> assets/items/*.png (84x84)
-python gen_closeups.py                # -> assets/ui/uv_wall.png, uv_headshot.png (Case 3's UV lamp)
+python gen_closeups.py                # -> assets/ui/: the UV lamp's views, Pryce's invitation, the headlight fit
 python build_scenes.py                # -> scenes/rooms/*.tscn from out/*.json
 cd ..; python gen_art.py              # cursors, raindrop
 ```
 
 - `street.py`, `squad_room.py`, `pier9_dock.py`, `vance_office.py`, `mulholland_overlook.py`,
-  `prius_interior.py`, `norms_diner.py`, `kenji_apartment.py`, `stardust_shop.py`, `stardust_office.py` and
-  `stardust_roof.py` (with `stardust_roof_dark.py`) describe the sets: geometry, materials,
+  `prius_interior.py`, `norms_diner.py`, `kenji_apartment.py`, `stardust_shop.py`, `stardust_office.py`,
+  `stardust_roof.py` (with `stardust_roof_dark.py`), `fletcher_bridge.py`, `river_channel.py`, `glass_house.py`,
+  `crane_garage.py` and `night_lab.py` describe the sets: geometry, materials,
   lights, camera, and each hotspot's 3D walk-to point. `npc.py` places the supporting cast.
 - **Overlays** (`overlays=[...]` in `meta`) are props the game shows or hides by flag: the mug, the pins on
   the murder board, Devin's two poses. `render_room.py` takes them out of the set one at a time and cuts the

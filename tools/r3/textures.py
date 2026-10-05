@@ -771,6 +771,39 @@ def board_pins(kind, w=96, h=128):
         d.text((14, 62), 'LAPD (Ret.)', font=font('DejaVuSerif.ttf', 9), fill=(30, 50, 120, 255))
         d.text((14, 74), 'Pryce Development', font=font('DejaVuSerif.ttf', 8), fill=(30, 50, 120, 255))
         pins = ((w // 2, 44),)
+    elif kind == 'owen':
+        d.rectangle([6, 8, 58, 66], fill=(246, 246, 240, 255))                     # Polaroid of the fitted headlight
+        d.rectangle([10, 12, 54, 52], fill=(70, 82, 96, 255))
+        d.rounded_rectangle([14, 24, 50, 42], radius=6, fill=(190, 200, 210, 255))
+        for k in range(4):
+            d.ellipse([18 + k * 7, 29, 26 + k * 7, 37], outline=(250, 250, 250, 255))
+        d.line([24, 24, 30, 33, 26, 42], fill=(240, 240, 240, 255))               # the crack where the pieces join
+        d.rectangle([62, 14, 90, 70], fill=(236, 232, 214, 255))                    # valet ticket No. 47
+        d.rectangle([62, 14, 90, 22], fill=(150, 30, 36, 255))
+        d.text((66, 26), '47', font=font('DejaVuSans-Bold.ttf', 12), fill=(30, 30, 40, 255))
+        for i in range(3):
+            d.rectangle([66, 44 + i * 7, 86, 46 + i * 7], fill=(90, 90, 110, 255))
+        d.rectangle([16, 76, 80, 120], fill=(240, 196, 30, 255))                    # a Chomp receipt, yellow
+        for i in range(4):
+            d.rectangle([22, 84 + i * 8, 72 - (i % 2) * 12, 87 + i * 8], fill=(40, 34, 20, 255))
+        d.line([0, 6, w, h - 8], fill=(30, 30, 30, 255), width=3)                   # a line through the case
+        pins = ((32, 10), (76, 16), (48, 78))
+    elif kind == 'phone':
+        d.rectangle([10, 14, w - 10, h - 14], fill=(244, 244, 240, 255))           # the lab's evidence receipt
+        d.rectangle([10, 14, w - 10, 30], fill=(30, 50, 110, 255))
+        d.text((16, 36), 'ITEM 1', font=font('DejaVuSans-Bold.ttf', 11), fill=(30, 30, 40, 255))
+        for i in range(5):
+            d.rectangle([16, 56 + i * 9, w - 18 - (i % 3) * 10, 59 + i * 9], fill=(80, 80, 96, 255))
+        d.text((16, 100), 'I. Feld', font=font('DejaVuSerif-Italic.ttf', 11), fill=(30, 50, 120, 255))
+        pins = ((w // 2, 18),)
+    elif kind == 'invite':
+        d.rectangle([6, 20, w - 6, h - 20], fill=(236, 230, 214, 255))             # folded open on the watercolour
+        d.rectangle([10, 24, w - 10, 70], fill=(170, 200, 226, 255))
+        d.polygon([(44, 100), (70, 100), (66, 24), (48, 24)], fill=(110, 160, 200, 255))   # the tower
+        d.polygon([(14, 86), (40, 86), (36, 76), (18, 76)], fill=(70, 130, 110, 255))      # the theatre's pagoda
+        d.rectangle([38, 92, 76, 102], fill=(250, 220, 150, 255))                         # the lobby
+        d.line([w // 2, 20, w // 2, h - 20], fill=(200, 190, 170, 255), width=1)            # the fold
+        pins = ((w // 2, 24),)
     else:
         d.rectangle([14, 10, w - 14, h - 10], fill=(244, 244, 240, 255))
         d.rectangle([20, 16, w - 20, 34], fill=(30, 150, 134, 255))
@@ -1107,4 +1140,205 @@ def brenner_card(w=192, h=112, back=False):
     d.line([12, 52, w - 12, 52], fill=blue, width=1)
     d.text((12, 60), 'Security Consultant', font=font('DejaVuSerif.ttf', 11), fill=blue)
     d.text((12, 76), 'Pryce Development', font=font('DejaVuSerif-Bold.ttf', 11), fill=blue)
+    return img
+
+
+# ---------------------------------------------------------------- Case 4: Low Water
+def bike_lane(w=256, h=512):
+    """A painted bike-lane stencil, seen from above: a white bicycle over a chevron, on transparent ground."""
+    img = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
+    white = (226, 226, 220, 235)
+    cx = w // 2
+    for (x, y) in ((cx - 58, 150), (cx + 58, 150)):                    # wheels
+        d.ellipse([x - 40, y - 40, x + 40, y + 40], outline=white, width=9)
+    d.line([cx - 58, 150, cx - 10, 96, cx + 40, 96, cx + 58, 150], fill=white, width=8)
+    d.line([cx - 10, 96, cx + 4, 150, cx + 40, 96], fill=white, width=8)
+    d.line([cx - 16, 84, cx + 2, 84], fill=white, width=8)
+    d.line([cx + 40, 96, cx + 46, 74, cx + 62, 74], fill=white, width=7)
+    for k in range(2):                                                  # the chevrons
+        y = 280 + k * 70
+        d.line([cx - 70, y + 40, cx, y, cx + 70, y + 40], fill=white, width=16)
+    a = np.asarray(img).astype(float)
+    a[..., 3] *= 0.6 + 0.4 * noise(w, h, 10, 7)                         # worn paint
+    return Image.fromarray(a.astype(np.uint8), 'RGBA')
+
+
+def storm_grate(w=128, h=64):
+    """A curb-side storm drain grate: iron bars over black, with plastic glitter caught in them."""
+    img = Image.new('RGBA', (w, h), (8, 8, 10, 255)); d = ImageDraw.Draw(img)
+    for x in range(4, w, 12):
+        d.rectangle([x, 2, x + 5, h - 3], fill=(58, 54, 52, 255))
+    d.rectangle([0, 0, w - 1, h - 1], outline=(70, 66, 62, 255), width=4)
+    rng = random.Random(4)
+    for _ in range(14):
+        x, y = rng.randint(6, w - 6), rng.randint(6, h - 6)
+        d.rectangle([x, y, x + 2, y + 1], fill=(230, 236, 240, 255))
+    return img
+
+
+def channel_concrete(seed=101, w=256, h=256, algae=0.6):
+    """The river channel's poured concrete, slick with green algae toward the water, panel seams, stains."""
+    n = noise(w, h, 40, seed); n2 = noise(w, h, 6, seed + 1, 2)
+    a = np.ones((h, w, 3)) * np.array([112, 110, 102], float) * (0.85 + 0.2 * n[..., None]) * (0.9 + 0.15 * n2[..., None])
+    g = np.clip((noise(w, h, 50, seed + 2) - 0.5 + algae * 0.5) * 2.2, 0, 1)
+    a = a * (1 - g[..., None] * 0.7) + np.array([46, 66, 34]) * g[..., None] * 0.7
+    a[::128, :] *= 0.6; a[:, ::128] *= 0.6
+    return to_img(a)
+
+
+def graffiti_wall(seed=102, w=512, h=128):
+    """Faded tags on the channel wall."""
+    img = channel_concrete(seed, w, h, algae=0.2); d = ImageDraw.Draw(img)
+    rng = random.Random(seed)
+    for t, col in (('NV13', (150, 60, 140)), ('EVLA', (60, 120, 180)), ('RIP', (200, 200, 190)), ('KZ', (190, 90, 40))):
+        x, y = rng.randint(0, w - 160), rng.randint(10, h - 60)
+        d.text((x, y), t, font=font('DejaVuSans-Bold.ttf', rng.randint(34, 52)), fill=col + (140,))
+    return img
+
+
+def chomp_box(w=128, h=128):
+    """The yellow Chomp delivery box: a bite taken out of a circle, CHOMP under it."""
+    img = Image.new('RGBA', (w, h), (240, 196, 30, 255)); d = ImageDraw.Draw(img)
+    d.ellipse([34, 18, 94, 78], fill=(30, 26, 22, 255))
+    d.ellipse([74, 14, 104, 44], fill=(240, 196, 30, 255))
+    d.text((22, 86), 'CHOMP', font=font('DejaVuSans-Bold.ttf', 22), fill=(30, 26, 22, 255))
+    return img
+
+
+def tent_tarp(seed=103, w=256, h=256):
+    """A blue-grey tarp, faded, with grommets and creases."""
+    n = noise(w, h, 30, seed)
+    a = np.ones((h, w, 3)) * np.array([70, 92, 116], float) * (0.75 + 0.35 * n[..., None])
+    a[::64, :] *= 0.8
+    return to_img(a)
+
+
+def flag_folded(w=64, h=64):
+    img = Image.new('RGBA', (w, h), (30, 40, 90, 255)); d = ImageDraw.Draw(img)
+    for i in range(5):
+        d.ellipse([8 + i * 10, 10 + (i % 2) * 14, 13 + i * 10, 15 + (i % 2) * 14], fill=(230, 230, 230, 255))
+    return img
+
+
+def night_hills(seed=104, w=2048, h=384):
+    """Dark hills with scattered house lights and a freeway's ribbon of headlights along the bottom (emission in alpha)."""
+    rng = np.random.default_rng(seed)
+    a = np.zeros((h, w, 3)); em = np.zeros((h, w))
+    x = np.arange(w)
+    ridge = h * (0.35 + 0.18 * np.sin(x / w * 7.0 + 1.0) + 0.08 * np.sin(x / w * 23.0) + 0.05 * (noise(w, 1, 60, seed)[0] - 0.5))
+    yy = np.arange(h)[:, None]
+    hill = yy > ridge[None, :]
+    a[hill] = (16, 16, 20)
+    a[~hill] = 0
+    a += (~hill)[..., None] * (np.array([30, 22, 40])[None, None, :] + np.array([60, 34, 30])[None, None, :] * (yy / h)[..., None] * 1.6)
+    em[~hill] = 0.5
+    for _ in range(260):                                                # house lights on the slopes
+        px = rng.integers(0, w); py = int(ridge[px] + rng.integers(4, int(h - ridge[px]) - 20))
+        if py < h - 30:
+            c = (255, 190, 110) if rng.random() < 0.8 else (200, 220, 255)
+            a[py:py + 3, px:px + 4] = c; em[py:py + 3, px:px + 4] = rng.uniform(0.3, 0.8)
+    fy = h - 26                                                         # the freeway along the bottom
+    for k in range(0, w, 3):
+        if rng.random() < 0.6:
+            red = rng.random() < 0.5
+            a[fy + (0 if red else 5):fy + (2 if red else 7), k:k + 2] = (255, 40, 30) if red else (255, 240, 200)
+            em[fy + (0 if red else 5):fy + (2 if red else 7), k:k + 2] = 1.0
+    a[fy - 3:fy - 1, :] = (255, 150, 70); em[fy - 3:fy - 1, :] = 0.5     # sodium lamps
+    return to_img(a, em * 255)
+
+
+def haskell_easel(w=256, h=352):
+    """The easel sign at the gate: navy board, gold type, a little skyline."""
+    img = Image.new('RGBA', (w, h), (24, 34, 70, 255)); d = ImageDraw.Draw(img)
+    gold = (226, 190, 110, 255)
+    d.rectangle([8, 8, w - 9, h - 9], outline=gold, width=3)
+    d.text((24, 26), 'FRIENDS OF', font=font('DejaVuSerif.ttf', 26), fill=gold)
+    d.text((24, 58), 'TED HASKELL', font=font('DejaVuSerif-Bold.ttf', 32), fill=(240, 236, 226, 255))
+    d.line([24, 104, w - 24, 104], fill=gold, width=2)
+    for i, (x, bh) in enumerate(((40, 70), (70, 120), (104, 96), (140, 150), (176, 86), (204, 110))):
+        d.rectangle([x, 250 - bh, x + 24, 250], fill=(200, 210, 230, 255) if i == 3 else (120, 136, 170, 255))
+    d.text((24, 268), 'HOLLYWOOD CORE', font=font('DejaVuSans-Bold.ttf', 22), fill=gold)
+    d.text((24, 298), 'The future has a skyline.', font=font('DejaVuSerif-Italic.ttf', 18), fill=(220, 220, 230, 255))
+    return img
+
+
+def giftbag_side(w=192, h=96):
+    """A cardboard box of gift bags: navy bags with gold rope handles, 'HOLLYWOOD CORE' on the box."""
+    img = Image.new('RGBA', (w, h), (150, 116, 76, 255)); d = ImageDraw.Draw(img)
+    d.text((12, 36), 'HOLLYWOOD CORE', font=font('DejaVuSans-Bold.ttf', 18), fill=(40, 40, 70, 255))
+    d.line([0, 4, w, 4], fill=(110, 84, 54, 255), width=4)
+    return img
+
+
+def starline_podium(w=192, h=256):
+    img = Image.new('RGBA', (w, h), (20, 20, 24, 255)); d = ImageDraw.Draw(img)
+    d.rectangle([0, 0, w, 60], fill=(150, 30, 36, 255))
+    d.text((18, 12), 'STARLINE', font=font('DejaVuSans-Bold.ttf', 30), fill=(250, 240, 230, 255))
+    d.text((18, 80), 'VALET', font=font('DejaVuSans-Bold.ttf', 34), fill=(220, 210, 200, 255))
+    for i in range(5):
+        x, y = 30 + i * 30, 160
+        d.polygon([(x, y - 12), (x + 4, y - 3), (x + 13, y - 3), (x + 6, y + 3), (x + 9, y + 12), (x, y + 6),
+                   (x - 9, y + 12), (x - 6, y + 3), (x - 13, y - 3), (x - 4, y - 3)], fill=(220, 180, 80, 255))
+    return img
+
+
+def key_board(w=160, h=200):
+    """The valet's key board: a pegboard, rows of empty hooks, one fob left."""
+    img = Image.new('RGBA', (w, h), (120, 96, 66, 255)); d = ImageDraw.Draw(img)
+    for r in range(5):
+        for c in range(4):
+            x, y = 22 + c * 38, 24 + r * 36
+            d.ellipse([x - 3, y - 3, x + 3, y + 3], fill=(60, 50, 40, 255))
+            d.line([x, y, x, y + 8], fill=(180, 180, 186, 255), width=2)
+    d.rectangle([94, 152, 108, 176], fill=(20, 20, 24, 255))            # the Range Rover's fob
+    d.rectangle([94, 172, 108, 180], fill=(200, 200, 204, 255))
+    return img
+
+
+def tarp_blue(seed=107, w=256, h=256):
+    """A brand-new blue tarp: bright, still creased in squares from the package."""
+    a = np.ones((h, w, 3)) * np.array([30, 90, 190], float)
+    n = noise(w, h, 40, seed)
+    a *= (0.88 + 0.18 * n[..., None])
+    for k in range(0, w, 64):
+        a[:, k:k + 2] *= 0.72; a[k:k + 2, :] *= 0.72
+        a[:, k + 2:k + 4] *= 1.15; a[k + 2:k + 4, :] *= 1.15
+    return to_img(a)
+
+
+def newspaper(w=128, h=96):
+    img = Image.new('RGBA', (w, h), (214, 210, 196, 255)); d = ImageDraw.Draw(img)
+    d.text((6, 4), 'LOS ANGELES', font=font('DejaVuSerif-Bold.ttf', 12), fill=(30, 30, 30, 255))
+    for c in range(3):
+        for r in range(9):
+            d.line([6 + c * 40, 26 + r * 7, 40 + c * 40, 26 + r * 7], fill=(120, 118, 110, 255), width=2)
+    return img
+
+
+def lab_sign(w=256, h=128):
+    img = Image.new('RGBA', (w, h), (238, 236, 226, 255)); d = ImageDraw.Draw(img)
+    d.text((14, 10), 'NIGHT INTAKE', font=font('DejaVuSans-Bold.ttf', 28), fill=(160, 20, 20, 255))
+    d.text((14, 50), 'RING ONCE.', font=font('DejaVuSans-Bold.ttf', 20), fill=(30, 30, 30, 255))
+    d.text((14, 78), 'RINGING TWICE WILL NOT', font=font('DejaVuSans.ttf', 15), fill=(30, 30, 30, 255))
+    d.text((14, 98), 'MAKE IT FASTER.', font=font('DejaVuSans.ttf', 15), fill=(30, 30, 30, 255))
+    for (x, y) in ((4, 4), (w - 20, 4), (4, h - 14), (w - 20, h - 14)):              # tape
+        d.rectangle([x, y, x + 16, y + 10], fill=(220, 210, 160, 200))
+    return img
+
+
+def lab_monitor(kind, w=128, h=80):
+    img = Image.new('RGBA', (w, h), (8, 14, 20, 255)); d = ImageDraw.Draw(img)
+    rng = random.Random(len(kind))
+    if kind == 'graph':
+        pts = [(x, 40 + int(18 * math.sin(x / 9.0) + rng.uniform(-4, 4))) for x in range(0, w, 4)]
+        d.line(pts, fill=(90, 230, 140, 255), width=2)
+    else:
+        for i in range(8):
+            d.rectangle([6, 6 + i * 9, 20 + rng.randint(20, w - 30), 9 + i * 9], fill=(120, 190, 240, 255))
+    return img
+
+
+def dodgers_mug(w=64, h=64):
+    img = Image.new('RGBA', (w, h), (236, 236, 236, 255)); d = ImageDraw.Draw(img)
+    d.text((10, 20), 'LA', font=font('DejaVuSerif-BoldItalic.ttf', 24), fill=(20, 60, 150, 255))
     return img

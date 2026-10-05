@@ -1,5 +1,5 @@
 extends Node
-## Automated playthrough of Cases 1 to 3. Runs the real game (scenes/main.tscn) at high speed, clicks
+## Automated playthrough of Cases 1 to 4. Runs the real game (scenes/main.tscn) at high speed, clicks
 ## hotspots through Main's own action path, skips every line and picks dialogue options by text,
 ## then checks the flags the later cases depend on.
 ##
@@ -17,6 +17,7 @@ var _shots := {}         ## with `-- --shots`: screenshots of the drive, phone a
 
 
 var _user_save := ""     ## the player's own quicksave, put back when the test ends
+var _jig_solved := false
 
 
 func _ready() -> void:
@@ -32,15 +33,16 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if main == null:
 		return
-	if not _failed and Time.get_ticks_msec() - _step_started > 45000:
+	if not _failed and Time.get_ticks_msec() - _step_started > (150000 if "--shots" in OS.get_cmdline_user_args() else 45000):
 		_fail("stuck at '%s' (room %s, busy %s, speaking %s, choosing %s, waiting click %s, fade %.2f)" % [_step,
 				main.room.room_id if main.room else "-", main.busy, main._speaking, main._choosing,
 				main._waiting_click, main.ui.fade_rect.color.a])
 	if "--shots" in OS.get_cmdline_user_args():
 		for key in ["drive", "phone", "board", "device", "paper", "pier9_dock", "vance_office", "street",
 				"mulholland_overlook", "norms_diner", "kenji_apartment", "prius_interior", "stardust_shop",
-				"stardust_office", "stardust_roof", "stardust_roof_dark", "squad_room"]:
-			var ui_key: bool = key in ["drive", "phone", "board", "device", "paper"]
+				"stardust_office", "stardust_roof", "stardust_roof_dark", "fletcher_bridge", "river_channel", "glass_house",
+				"crane_garage", "night_lab", "squad_room", "jigsaw"]:
+			var ui_key: bool = key in ["drive", "phone", "board", "device", "paper", "jigsaw"]
 			var on: bool = (main.ui.get(key) != null) if ui_key \
 					else (main.room != null and main.room.room_id == key and not main.busy and main.ui.fade_rect.color.a < 0.01)
 			var n_case: int = Game.current_case()
@@ -54,6 +56,13 @@ func _process(_delta: float) -> void:
 				or main.ui.paper != null))
 	if main._choosing:
 		_answer()
+	if main.ui.jigsaw != null and not _jig_solved:
+		# the headlight fit: drop each piece into its place, the right way up
+		_jig_solved = true
+		for i in 2:
+			main.ui.jigsaw_place(i)
+	elif main.ui.jigsaw == null:
+		_jig_solved = false
 
 
 func _answer() -> void:
@@ -250,7 +259,13 @@ func _run() -> void:
 	await _case3()
 	if _failed:
 		return
-	print("PLAYTHROUGH OK - Cases 1 to 3 finished. Flags: ", Game.flags.keys())
+	print("Case 3 finished.")
+	main._waiting_click = false                         # the "Case 4: Low Water" card, then the drive
+	await expect_room("fletcher_bridge")
+	await _case4()
+	if _failed:
+		return
+	print("PLAYTHROUGH OK - Cases 1 to 4 finished. Flags: ", Game.flags.keys())
 	_quit(0)
 
 
@@ -488,5 +503,167 @@ func _case3() -> void:
 		await get_tree().process_frame
 	expect(["case3_deduced", "board_brenner_card", "case3_done"])
 	for n in ["Board_kenji", "Board_receipt", "Board_gus", "Board_brenner"]:
+		if not main.room.get_node(n).visible:
+			_fail("the board should show %s" % n)
+
+
+func _case4() -> void:
+	print("Case 4, scene 2: the Fletcher Drive bridge")
+	for id in ["gus_keys", "uv_lamp", "catalogue", "star_earring", "fake_oscar", "brenner_card"]:
+		if Game.has_item(id):
+			_fail("Case 3 items should stay behind: %s" % [Game.inventory])
+	expect(["case4_started", "met_doss"])
+	await act("car")                                    # not before Owen's phone
+	await act("doss", "use", "", ["What have you got?", "Who found him?", "Why's he in your car?", "Uncuff him.",
+			"That'll do."])                             # "On what, a feeling?"
+	await act("patrol_car", "use", "", ["Did you kill him?", "I've been somewhere.", "Hollywood Division, twenty-six years.",
+			"I've been somewhere.", "Baghdad, oh-three. Military Police.", "Semper Fidelis.", "I've been somewhere.",
+			"Baghdad, oh-three. Military Police.", "Assist, Protect, Defend.", "What happened tonight?",
+			"Did you hear anything?", "Did you see the boy?", "Why carry the bike all the way down?", "That'll do."])
+	await act("road", "look")
+	await act("gutter")
+	await act("storm_drain", "look")
+	await act("storm_drain")
+	await act("fence_gap", "look")
+	await act("railing", "look")
+	await act("lamps", "look")
+	await act("spotlight")                              # hands off the unit
+	expect(["preacher_trusts", "clue_preacher_story", "clue_bang", "clue_no_brakes", "clue_glass_bridge", "clue_scupper"])
+	await act("stairs")
+	await expect_room("river_channel")
+
+	print("Case 4, scene 3: the channel")
+	await act("shah", "use", "", ["How did he die?", "When?", "The scrapes on him.", "Anything else?", "Thanks, Anita."])
+	await act("bike")                                   # the paint and the sliver of headlight
+	await act("bike")                                   # the nursing textbook
+	await act("phone", "look")                          # a $900 phone left on the bike
+	await act("phone")                                  # the lock screen: Glendower, one star, 2:04
+	await act("reeds")                                  # too dark
+	await act("drain_pipe", "look")
+	await act("east_bank", "look")
+	await act("stairs", "look")                         # two sets of tracks
+	await act("owen", "look")
+	await act("tent", "look")
+	await act("water")
+	await act("willows", "look")
+	expect(["clue_hit_by_car", "clue_tod_owen", "clue_moved", "clue_headlight_glass", "clue_paint", "got_lens_shard",
+			"clue_nursing", "clue_phone_left", "clue_last_drop", "clue_one_star", "clue_trip_paused", "clue_drag_marks",
+			"clue_bike_stairs", "clue_two_tracks"])
+	if main.room.get_node("Actors/Preacher").visible or main.room.get_node("Spot").visible:
+		_fail("Preacher and the spotlight shouldn't be in the channel yet")
+	await act("stairs")
+	await expect_room("fletcher_bridge")
+	await act("doss", "use", "", ["Uncuff him."])
+	await act("doss", "use", "", ["Put your spotlight on the reeds."])
+	await act("patrol_car", "look")
+	expect(["preacher_freed", "channel_lit"])
+	# quick save / load round trip in a Case 4 room
+	Game.player_position = main.player.position
+	Game.save_game()
+	await main._load()
+	await expect_room("fletcher_bridge")
+	if main.room.get_node("Preacher_car").visible or main.room.get_node("Beam_road").visible \
+			or not main.room.get_node("Beam_down").visible:
+		_fail("after loading, the patrol car should be empty and the spotlight on the reeds")
+	await act("stairs")
+	await expect_room("river_channel")
+	if not main.room.get_node("Actors/Preacher").visible or not main.room.get_node("Spot").visible:
+		_fail("Preacher should be at his tent and the reeds lit")
+	await act("preacher", "use", "", ["Where does stuff end up, off that bridge?", "Will you be all right?",
+			"Take care, Preacher."])
+	await act("reeds")                                  # half a headlight, and Danny's phone
+	await act("preacher", "use", "danny_phone")         # the big man in the old cop's coat
+	await act("reeds")                                  # nothing else
+	expect(["clue_reeds_tip", "got_lens_piece", "clue_audi", "got_danny_phone", "clue_danny_phone", "clue_big_man"])
+	await act("stairs")
+	await expect_room("fletcher_bridge")
+	await act("car", "use", "", ["Glendower Avenue, Los Feliz"])
+	await expect_room("glass_house")
+
+	print("Case 4, scene 4: the glass house")
+	await act("courtney", "use", "", ["Whose party was it?", "You ordered from Chomp tonight.", "Who left drunk tonight?",
+			"You reported the rider.", "Tell her about Owen.", "1:49 AM  Front gate", "1:51 AM  Driveway",
+			"1:53 AM  Front gate", "1:55 AM  Front gate", "2:38 AM  Front gate", "Close", "Who left drunk tonight?",
+			"I'll let you work."])
+	await act("andre", "use", "", ["Who left drunk tonight?", "I need the ticket.", "Who's the last car?", "Who left early?",
+			"Thanks, Andre."])
+	await act("gift_bags", "look")
+	await act("gift_bags")                              # the optional seed: Pryce's invitation
+	await act("curb")
+	await act("easel", "look")
+	await act("valet_board", "look")
+	await act("gate_camera")
+	await act("van", "look")
+	await act("house", "look")
+	await act("city")
+	await _idle()
+	main.busy = true
+	await main.examine_item("pryce_invite")
+	await main.examine_item("valet_ticket")
+	main.busy = false
+	expect(["clue_host", "courtney_cam", "clue_warning", "clue_crane_drunk", "clue_gate_clip", "clue_headlights_intact",
+			"clue_plate", "clue_courtney_alibi", "got_valet_ticket", "clue_pryce_driver", "clue_curb_scrape",
+			"got_pryce_invite", "clue_render"])
+	await act("car", "use", "", ["Crane's house, Mount Washington"])    # Otis runs the plate first
+	expect(["clue_crane_id"])
+	await expect_room("crane_garage")
+
+	print("Case 4, scene 5: Crane's garage")
+	await act("street")                                 # not yet
+	await act("audi_tarp", "look")
+	await act("audi_tarp")                              # he wants a warrant
+	await act("crane", "use", "", ["Where were you tonight?", "How did you get home?", "Why the tarp?", "I'll wait."])
+	await act("hose", "look")
+	await act("loafers", "look")
+	await act("phone", "look")
+	await act("jacket", "look")
+	await act("house_door")
+	await act("crane", "use", "valet_ticket")          # step 1: he drove; the tarp comes off
+	if main.room.get_node("Tarp").visible:
+		_fail("the tarp should be off")
+	await act("grille")
+	await act("headlight", "use", "lens_piece")         # step 2: the headlight fit
+	await act("crane_step", "use", "", ["You stopped."])   # step 3, and Doss
+	expect(["clue_crane_story", "clue_tarp_new", "clue_washing", "clue_loafers", "clue_crane_calls", "crane_lie1_broken",
+			"tarp_off", "clue_yellow_paint", "clue_lens_match", "crane_lie2_broken", "crane_arrested"])
+	for n in ["Actors/Crane_stand", "Actors/Crane_step"]:
+		if main.room.get_node(n).visible:
+			_fail("%s should be gone after the arrest" % n)
+	Game.player_position = main.player.position
+	Game.save_game()
+	await main._load()
+	await expect_room("crane_garage")
+	if main.room.get_node("Tarp").visible or main.room.get_node("Actors/Crane_step").visible:
+		_fail("after loading, the tarp should stay off and Crane gone")
+	await act("street", "use", "", ["Room 214"])        # Maya, then the lab
+	await expect_room("night_lab")
+
+	print("Case 4, scene 6: the night lab")
+	await act("exit")                                   # not with Danny's phone
+	await act("ike")
+	await act("sign", "look")
+	await act("tray", "use", "danny_phone")
+	expect(["phone_at_lab"])
+	if Game.has_item("danny_phone") or not Game.has_item("lab_receipt"):
+		_fail("the phone should be with Ike and the receipt with Ray: %s" % [Game.inventory])
+	await _idle()
+	main.busy = true
+	await main.examine_item("lab_receipt")
+	main.busy = false
+	await act("exit")
+	await expect_room("squad_room")
+
+	print("Case 4, scene 7: the murder board")
+	await act("door")
+	await act("phone")
+	await act("clock")
+	await act("case_board", "use", "pryce_invite")      # "After Owen."
+	await act("case_board", "use", "valet_ticket", ["Calvin \"Preacher\" Odom.", "Courtney Vail, the customer.",
+			"Councilman Ted Haskell.", "Elliot Crane, Haskell's chief of staff.", "Half a headlight, an Audi part",
+			"Both headlight pieces fit Crane's Audi"])
+	while not main._waiting_click and not _failed:      # Doyle, then Otis: Sal. The Case 5 card.
+		await get_tree().process_frame
+	expect(["case4_deduced", "board_danny_phone", "board_pryce_invite", "case4_done"])
+	for n in ["Board_kenji", "Board_receipt", "Board_gus", "Board_brenner", "Board_owen", "Board_phone", "Board_invite"]:
 		if not main.room.get_node(n).visible:
 			_fail("the board should show %s" % n)
