@@ -7,7 +7,6 @@ import textures as tx
 
 def build(hide=()):
     S = Scene()
-    rng = random.Random(21)
     # ---------------------------------------------------------------- materials
     S.mat('floor', (150, 156, 170), tex=tx.hires(tx.linoleum(), 2), texmode=4, texmap=1, texscale=1.2, refl=0.0, spec=0.15, shin=30)
     S.mat('wall', (122, 128, 118), namp=0.05, nscale=2)
@@ -125,80 +124,124 @@ def build(hide=()):
         S.mat('board_empty', (214, 216, 208), tex=tx.board_pins('bare'), texmode=1, spec=0.2)
         S.wbox((-2.675, 1.66, BZ + 0.011), (0.425, 0.5, 0.003), 'board_empty')
 
-    # ---------------------------------------------------------------- back row desks with monitors
-    def desk(x0, z0, w=1.9, d=0.85, monitor=None, chair=True):
-        S.wboxr(x0, 0.74, z0, x0 + w, 0.78, z0 + d, 'desk')
-        S.wboxr(x0 + 0.04, 0.05, z0 + 0.05, x0 + 0.5, 0.74, z0 + d - 0.05, 'desk_metal')
-        S.wboxr(x0 + w - 0.06, 0.0, z0 + 0.05, x0 + w - 0.03, 0.74, z0 + d - 0.05, 'desk_metal')
-        if monitor is not None:
-            mx, mz = x0 + w * 0.55, z0 + 0.2
-            S.wboxr(mx - 0.32, 0.92, mz - 0.02, mx + 0.32, 1.3, mz + 0.02, 'plastic_dk')
-            S.wboxr(mx - 0.3, 0.94, mz + 0.02, mx + 0.3, 1.28, mz + 0.03, f'screen{monitor}')
-            S.cyl((mx, 0.78, mz), (mx, 0.95, mz), 0.025, 'plastic_dk')
-            S.wboxr(mx - 0.25, 0.78, mz + 0.3, mx + 0.25, 0.8, mz + 0.45, 'plastic_dk')
-        for k in range(rng.randint(1, 3)):
-            px = x0 + rng.uniform(0.1, w - 0.5)
-            S.wboxr(px, 0.78, z0 + 0.4, px + 0.3, 0.78 + 0.02 * (k + 1), z0 + 0.75, rng.choice(['paper', 'folder', 'folder_r']))
-        if chair:
-            cx, cz = x0 + w * 0.55, z0 + d + 0.35
-            S.wboxr(cx - 0.25, 0.42, cz - 0.25, cx + 0.25, 0.5, cz + 0.25, 'chair', rnd=0.03)
-            S.wboxr(cx - 0.24, 0.5, cz + 0.2, cx + 0.24, 1.05, cz + 0.26, 'chair', rnd=0.04)
-            S.cyl((cx, 0.08, cz), (cx, 0.42, cz), 0.03, 'chair')
-            S.wboxr(cx - 0.28, 0.04, cz - 0.03, cx + 0.28, 0.08, cz + 0.03, 'chair')
-    desk(-1.6, -3.3, monitor=0)
-    desk(0.5, -3.3, monitor=1)
-    desk(2.6, -3.3, monitor=3)
-    desk(-1.6, -2.45, monitor=None, chair=False)
-    desk(0.5, -2.45, monitor=4, chair=False)
+    # ---------------------------------------------------------------- desks: pairs pushed together face to face
+    # Each desk has its chair on the open side (s = +1: towards the camera, s = -1: towards the back wall) and its
+    # monitor near the shared edge, screen towards the chair. The two monitors of a pair sit apart in x.
+    def chair(cx, cz, s, yaw=0.0):
+        """Office chair at (cx, cz) for a desk on the -s side; its back is on the far side from the desk."""
+        f = Frame((cx, 0, cz), Ry(yaw))
+        S.box(f, (0, 0.46, 0), (0.25, 0.04, 0.25), 0.03, 'chair')
+        S.box(f, (0, 0.78, s * 0.23), (0.24, 0.27, 0.03), 0.04, 'chair')
+        S.cyl((cx, 0.08, cz), (cx, 0.42, cz), 0.03, 'chair')
+        S.box(f, (0, 0.06, 0), (0.28, 0.02, 0.03), 0.0, 'chair')
+        S.box(f, (0, 0.06, 0), (0.03, 0.02, 0.28), 0.0, 'chair')
 
-    # ---------------------------------------------------------------- the detective's desk (front left)
-    hx0, hz0 = -3.4, -0.1
-    with S.tag('desk'):
-        S.wboxr(hx0, 0.74, hz0, hx0 + 2.5, 0.79, hz0 + 1.1, 'desk')
-        S.wboxr(hx0 + 0.04, 0.03, hz0 + 0.05, hx0 + 0.55, 0.74, hz0 + 1.05, 'desk')     # drawer pedestal
-        S.wboxr(hx0 + 2.4, 0.0, hz0 + 0.05, hx0 + 2.46, 0.74, hz0 + 1.05, 'desk')
-        S.wboxr(hx0 + 0.6, 0.35, hz0 + 1.02, hx0 + 2.4, 0.74, hz0 + 1.06, 'desk')        # modesty panel
-        for y in (0.15, 0.4, 0.62):
-            S.wboxr(hx0 + 0.2, y, hz0 + 1.05, hx0 + 0.4, y + 0.03, hz0 + 1.08, 'brass')
-        S.wboxr(hx0 + 1.7, 0.79, hz0 + 0.55, hx0 + 2.3, 0.86, hz0 + 0.95, 'folder')          # file stack
-        S.wboxr(hx0 + 1.72, 0.86, hz0 + 0.57, hx0 + 2.28, 0.9, hz0 + 0.93, 'folder_r')
-    with S.tag('lamp'):
-        lx, lz = hx0 + 0.35, hz0 + 0.35
-        S.cyl((lx, 0.79, lz), (lx, 0.82, lz), 0.12, 'brass')
-        S.cyl((lx, 0.82, lz), (lx, 1.12, lz), 0.015, 'brass')
-        S.ell(WORLD, (lx + 0.05, 1.16, lz + 0.05), (0.2, 0.07, 0.1), 'lamp_shade', rot=Ry(-30))
-        S.ell(WORLD, (lx + 0.05, 1.11, lz + 0.05), (0.12, 0.02, 0.05), 'bulb', rot=Ry(-30))
-    with S.tag('typewriter'):
-        mx, mz = hx0 + 1.15, hz0 + 0.3
-        S.wbox((mx, 1.1, mz), (0.3, 0.2, 0.02), 'plastic_dk', rot=Ry(25))
-        S.wbox((mx + 0.009, 1.1, mz + 0.022), (0.28, 0.18, 0.005), 'screen2', rot=Ry(25))
-        S.cyl((mx, 0.79, mz), (mx, 0.92, mz), 0.025, 'plastic_dk')
-        S.wbox((mx + 0.1, 0.8, mz + 0.4), (0.24, 0.01, 0.08), 'plastic_dk', rot=Ry(15))
-    with S.tag('phone_list'):
-        S.mat('phone_list', (236, 236, 228), tex=tx.sign_board('HOLLYWOOD STN  x2186', (30, 30, 40), (236, 236, 228), 256, 64,
-              size=18), texmode=1, spec=0.6, shin=60)
-        S.wbox((hx0 + 1.72, 0.792, hz0 + 0.18), (0.11, 0.002, 0.075), 'phone_list', rot=Ry(-6))
-    with S.tag('phone'):
-        px, pz = hx0 + 2.05, hz0 + 0.25
-        S.wbox((px, 0.82, pz), (0.12, 0.03, 0.1), 'plastic_dk', rot=Ry(-10))
-        S.ell(WORLD, (px, 0.87, pz - 0.02), (0.11, 0.025, 0.03), 'plastic_dk')
+    GLOW = []                                         # (x, z, s): screens, for their glow lights
+
+    def monitor(mx, mz, s, scr, kb=True):
+        GLOW.append((mx, mz, s))
+        S.wboxr(mx - 0.32, 0.92, mz - 0.02, mx + 0.32, 1.3, mz + 0.02, 'plastic_dk')
+        if s > 0:
+            S.wboxr(mx - 0.3, 0.94, mz + 0.02, mx + 0.3, 1.28, mz + 0.03, scr)
+        else:
+            S.wboxr(mx - 0.3, 0.94, mz - 0.03, mx + 0.3, 1.28, mz - 0.02, scr)
+        S.cyl((mx, 0.78, mz), (mx, 0.95, mz), 0.025, 'plastic_dk')
+        S.wboxr(mx - 0.12, 0.78, mz - 0.08, mx + 0.12, 0.79, mz + 0.08, 'plastic_dk')
+        if kb:
+            k0, k1 = sorted((mz + s * 0.28, mz + s * 0.43))
+            S.wboxr(mx - 0.25, 0.78, k0, mx + 0.25, 0.8, k1, 'plastic_dk')
+
+    def desk(x0, z0, s, scr, w=1.6, d=0.8, mx_off=0.0, seat=True):
+        """A desk whose seat side is +z (s = 1) or -z (s = -1); returns the chair's floor point."""
+        rng = random.Random(f'{x0:.2f},{z0:.2f}')         # its own clutter, the same whichever props are hidden
+        z1 = z0 + d
+        zb, zf = (z0, z1) if s > 0 else (z1, z0)               # back (shared) edge, seat edge
+        S.wboxr(x0, 0.74, z0, x0 + w, 0.78, z1, 'desk')
+        S.wboxr(x0 + 0.04, 0.05, z0 + 0.05, x0 + 0.5, 0.74, z1 - 0.05, 'desk_metal')        # drawer pedestal
+        for y in (0.2, 0.45, 0.66):
+            a, b = sorted((zf - s * 0.05, zf - s * 0.03))
+            S.wboxr(x0 + 0.2, y, a, x0 + 0.34, y + 0.025, b, 'brass')
+        S.wboxr(x0 + w - 0.06, 0.0, z0 + 0.05, x0 + w - 0.03, 0.74, z1 - 0.05, 'desk_metal')
+        a, b = sorted((zb + s * 0.02, zb + s * 0.05))
+        S.wboxr(x0 + 0.5, 0.32, a, x0 + w - 0.06, 0.74, b, 'desk_metal')                    # modesty panel
+        mx = x0 + w * 0.5 + mx_off
+        monitor(mx, zb + s * 0.2, s, scr)
+        for k in range(rng.randint(1, 3)):
+            # papers on the side away from the monitor and keyboard
+            px = x0 + (rng.uniform(0.06, mx - x0 - 0.6) if mx_off > 0 else rng.uniform(mx - x0 + 0.3, w - 0.36))
+            a, b = sorted((zf - s * 0.05, zf - s * 0.4))
+            S.wboxr(px, 0.78, a, px + 0.3, 0.78 + 0.02 * (k + 1), b, rng.choice(['paper', 'folder', 'folder_r']))
+        cz = zf + s * 0.38
+        if seat:
+            chair(mx + rng.uniform(-0.08, 0.08), cz, s, yaw=rng.uniform(-12, 12))
+        return mx, cz
+
+    def pair(x0, z0, near, far, w=1.6, d=0.8):
+        """Two desks pushed together: the far one's seat faces the back wall, the near one's the camera."""
+        desk(x0, z0, -1, far, w, d, mx_off=0.3)
+        return desk(x0, z0 + d, 1, near, w, d, mx_off=-0.3)
+
+    BACK_Z = -3.25                                    # back clusters: desks from z -3.25 to -1.65
+    pair(-0.9, BACK_Z, 'screen0', 'screen3')          # back middle, in front of the radiator
+    pair(1.8, BACK_Z, 'screen1', 'screen4')           # back right
+    FRONT_Z = 0.75                                    # front clusters: far desk from z 0.75, near desk from 1.55
+    if 'fr_desks' not in hide:
+        with S.tag('fr_desks'):
+            desk(2.2, FRONT_Z, -1, 'screen3', mx_off=0.3)
+            desk(2.2, FRONT_Z + 0.8, 1, 'screen4', mx_off=-0.3, seat=False)
+    FR_CHAIR = (2.2 + 0.5 + 0.05, FRONT_Z + 1.6 + 0.4)
+    chair(FR_CHAIR[0], FR_CHAIR[1], 1, yaw=-8)    # not part of the walk-behind cut: the player only passes in front
+
+    # ---------------------------------------------------------------- the detective's desk (front left) and the one facing it
+    hx0, hz0, HW, HD = -3.95, FRONT_Z + 0.8, 2.4, 0.95       # his desk; his chair is on the camera side
+    if 'ray_desks' not in hide:
+        with S.tag('partner_desk'):
+            desk(hx0, FRONT_Z, -1, 'screen3', w=HW, mx_off=0.65)
+        with S.tag('desk'):
+            S.wboxr(hx0, 0.74, hz0, hx0 + HW, 0.79, hz0 + HD, 'desk')
+            S.wboxr(hx0 + 0.04, 0.03, hz0 + 0.05, hx0 + 0.55, 0.74, hz0 + HD - 0.05, 'desk')     # drawer pedestal
+            S.wboxr(hx0 + HW - 0.1, 0.0, hz0 + 0.05, hx0 + HW - 0.04, 0.74, hz0 + HD - 0.05, 'desk')
+            S.wboxr(hx0 + 0.6, 0.35, hz0 + 0.03, hx0 + HW - 0.1, 0.74, hz0 + 0.07, 'desk')     # modesty panel
+            for y in (0.15, 0.4, 0.62):
+                S.wboxr(hx0 + 0.2, y, hz0 + HD - 0.02, hx0 + 0.4, y + 0.03, hz0 + HD + 0.01, 'brass')
+            S.wboxr(hx0 + 1.7, 0.79, hz0 + 0.45, hx0 + 2.25, 0.86, hz0 + 0.8, 'folder')          # file stack
+            S.wboxr(hx0 + 1.72, 0.86, hz0 + 0.47, hx0 + 2.23, 0.9, hz0 + 0.78, 'folder_r')
+        with S.tag('lamp'):
+            lx, lz = hx0 + 0.35, hz0 + 0.35
+            S.cyl((lx, 0.79, lz), (lx, 0.82, lz), 0.12, 'brass')
+            S.cyl((lx, 0.82, lz), (lx, 1.12, lz), 0.015, 'brass')
+            S.ell(WORLD, (lx + 0.05, 1.16, lz + 0.05), (0.2, 0.07, 0.1), 'lamp_shade', rot=Ry(-30))
+            S.ell(WORLD, (lx + 0.05, 1.11, lz + 0.05), (0.12, 0.02, 0.05), 'bulb', rot=Ry(-30))
+        with S.tag('typewriter'):
+            mx, mz = hx0 + 1.15, hz0 + 0.25
+            S.wbox((mx, 1.1, mz), (0.3, 0.2, 0.02), 'plastic_dk', rot=Ry(-8))
+            S.wbox((mx + 0.003, 1.1, mz + 0.022), (0.28, 0.18, 0.005), 'screen2', rot=Ry(-8))
+            S.cyl((mx, 0.79, mz), (mx, 0.92, mz), 0.025, 'plastic_dk')
+            S.wbox((mx - 0.02, 0.8, mz + 0.42), (0.24, 0.01, 0.08), 'plastic_dk', rot=Ry(-5))
+        with S.tag('phone_list'):
+            S.mat('phone_list', (236, 236, 228), tex=tx.sign_board('HOLLYWOOD STN  x2186', (30, 30, 40), (236, 236, 228), 256, 64,
+                  size=18), texmode=1, spec=0.6, shin=60)
+            S.wbox((hx0 + 1.72, 0.792, hz0 + 0.2), (0.11, 0.002, 0.075), 'phone_list', rot=Ry(-6))
+        with S.tag('phone'):
+            px, pz = hx0 + 2.08, hz0 + 0.24
+            S.wbox((px, 0.82, pz), (0.12, 0.03, 0.1), 'plastic_dk', rot=Ry(-10))
+            S.ell(WORLD, (px, 0.87, pz - 0.02), (0.11, 0.025, 0.03), 'plastic_dk')
     if 'mug' not in hide:
         with S.tag('mug'):
-            mx2, mz2 = hx0 + 0.85, hz0 + 0.85
+            mx2, mz2 = hx0 + 1.55, hz0 + 0.72
             S.cyl((mx2, 0.79, mz2), (mx2, 0.9, mz2), 0.045, 'mug')
             S.cyl((mx2, 0.84, mz2), (mx2, 0.86, mz2), 0.047, 'mug_band')
             S.cyl((mx2, 0.893, mz2), (mx2, 0.9, mz2), 0.038, 'coffee')
             S.cone((mx2 + 0.045, 0.875, mz2), (mx2 + 0.07, 0.84, mz2), 0.012, 0.012, 'mug')
-    # his chair, pushed back
-    cx, cz = hx0 + 1.3, hz0 - 0.55
-    S.wboxr(cx - 0.27, 0.44, cz - 0.27, cx + 0.27, 0.52, cz + 0.27, 'chair', rnd=0.03)
-    S.wboxr(cx - 0.26, 0.52, cz - 0.32, cx + 0.26, 1.15, cz - 0.26, 'chair', rnd=0.04)
-    S.cyl((cx, 0.08, cz), (cx, 0.44, cz), 0.03, 'chair')
+    RAY_CHAIR = (hx0 + 1.1, hz0 + HD + 0.4)
+    chair(RAY_CHAIR[0], RAY_CHAIR[1], 1, yaw=14)              # his chair, rolled back a little from the desk
+    BASKET = (hx0 + HW + 0.3, hz0 + 0.6)
     with S.tag('wastebasket'):
-        S.tcyl(Frame((-0.55, 0.19, 1.35)), (0, 0, 0), (0.17, 0.17), (0.14, 0.14), 0.19, 'basket')
-        S.tcyl(Frame((-0.55, 0.24, 1.35)), (0, 0, 0), (0.155, 0.155), (0.13, 0.13), 0.19, 'basket', op=1)
-        S.ell(WORLD, (-0.55, 0.3, 1.35), (0.09, 0.07, 0.08), 'paper', k=0.03)
-        S.ell(WORLD, (-0.5, 0.33, 1.3), (0.06, 0.05, 0.06), 'paper', k=0.03)
+        bx, bz = BASKET
+        S.tcyl(Frame((bx, 0.19, bz)), (0, 0, 0), (0.17, 0.17), (0.14, 0.14), 0.19, 'basket')
+        S.tcyl(Frame((bx, 0.24, bz)), (0, 0, 0), (0.155, 0.155), (0.13, 0.13), 0.19, 'basket', op=1)
+        S.ell(WORLD, (bx, 0.3, bz), (0.09, 0.07, 0.08), 'paper', k=0.03)
+        S.ell(WORLD, (bx + 0.05, 0.33, bz - 0.05), (0.06, 0.05, 0.06), 'paper', k=0.03)
 
     # ---------------------------------------------------------------- left wall: door, coat rack
     with S.tag('door'):
@@ -209,16 +252,6 @@ def build(hide=()):
         S.wboxr(dx0 + 0.2, 1.25, Z0 - 0.12, dx1 - 0.2, 1.95, Z0 - 0.1, 'glass_door')
         S.sph((dx1 - 0.15, 1.0, Z0 - 0.08), 0.04, 'brass')
     S.wboxr(-4.75, 2.38, Z0, -4.25, 2.56, Z0 + 0.06, 'exit')
-    # foreground: partner's desk at the bottom right. The player walks behind it (see occluders).
-    if 'fg_desk' not in hide:
-        with S.tag('fg_desk'):
-            S.wboxr(1.9, 0.74, 3.2, 4.6, 0.79, 4.2, 'desk')
-            S.wboxr(1.95, 0.0, 3.25, 2.5, 0.74, 4.15, 'desk')
-            S.wboxr(4.45, 0.0, 3.25, 4.55, 0.74, 4.15, 'desk')
-            S.wbox((3.0, 1.1, 3.45), (0.3, 0.2, 0.02), 'plastic_dk', rot=Ry(-20))
-            S.wbox((2.99, 1.1, 3.48), (0.28, 0.18, 0.005), 'screen0', rot=Ry(160))
-            S.wboxr(3.6, 0.79, 3.5, 4.3, 0.95, 4.0, 'folder')
-            S.cyl((4.0, 0.95, 3.75), (4.0, 1.05, 3.75), 0.045, 'mug')
     with S.tag('coat_rack'):
         rx, rz = -5.6, Z0 + 0.6
         S.cyl((rx, 0, rz), (rx, 1.8, rz), 0.025, 'trim')
@@ -268,8 +301,8 @@ def build(hide=()):
             spot=((-0.6, -2.4, 4.6), 16, 30))              # cold light through the other window
     S.light((-4.5, 1.6, Z0 + 0.4), (200, 220, 210), power=1.5, range=5, vol=0.3, shadow=False)   # hallway glow
     S.light((-4.5, 2.4, Z0 + 0.3), (60, 255, 120), power=0.5, range=3, shadow=False)
-    for (x, z) in [(0.55 + 1.9 * 0.55, -3.0), (-1.6 + 1.9 * 0.55, -3.0), (0.5 + 1.9 * 0.55, -2.15), (hx0 + 1.15, hz0 + 0.5)]:
-        S.light((x, 1.1, z + 0.3), (110, 150, 220), power=0.6, range=3, shadow=False)
+    for (x, z, s) in GLOW + [(hx0 + 1.15, hz0 + 0.25, 1)]:
+        S.light((x, 1.1, z + s * 0.3), (110, 150, 220), power=0.6, range=3, shadow=False)
     S.light((4.5, 1.35, Z0 + 0.8), (255, 200, 140), power=0.5, range=2.5, shadow=False)
 
     cam = Camera((0.4, 3.4, 9.8), (-0.4, 0.85, -2.5), fov=38, W=3840, H=2160)
@@ -277,33 +310,39 @@ def build(hide=()):
                fog_max=60, vol_scale=4, vol_steps=48, reflections=True, grid=0.5, ao_scale=0.8)
     meta = dict(
         room='squad_room',
-        walk=[(-5.5, -3.9), (-3.55, -3.9), (-3.55, 1.25), (-0.8, 1.25), (-0.8, -1.35), (5.0, -1.35), (5.0, 2.9),
-              (1.3, 2.9), (1.3, 2.1), (-5.5, 2.1)],
-        walk_zmin=-3.9, walk_zmax=2.9, scale_x=-2.0,
-        spawns={'start': (-1.5, 1.75), 'street': (-4.5, -3.7)},
+        # the back clusters are cut out of the walk area (nobody squeezes between them and the wall); the front ones are
+        # walk-behind props with rectangular footprints, and the two chairs on the camera side are round obstacles
+        walk=[(-5.5, -3.9), (-1.15, -3.9), (-1.15, -0.9), (3.65, -0.9), (3.65, -3.9), (5.0, -3.9), (5.0, 3.4),
+              (-4.7, 3.4), (-5.5, 1.6)],
+        obstacles=[(hx0 - 0.05, FRONT_Z - 0.7, hx0 + HW + 0.05, hz0 + HD + 0.05), RAY_CHAIR + (0.3,), BASKET + (0.22,),
+                   (2.15, FRONT_Z - 0.7, 3.85, FRONT_Z + 1.65), FR_CHAIR + (0.3,)],
+        walk_zmin=-3.9, walk_zmax=3.4, scale_x=-2.0,
+        spawns={'start': (-1.1, 2.95), 'street': (-4.5, -3.7)},
         hotspots={
-            'desk': ('desk', (-2.2, 1.55), 'up'),
+            'desk': ('desk', (-2.1, 2.95), 'up'),
             'door': ('door', (-4.5, -3.75), 'up'),
             'coat_rack': ('coat rack', (-5.1, -3.3), 'left'),
             'case_board': ('murder board', None, 'up'),
-            'lamp': ('desk lamp', (-3.0, 1.5), 'up'),
-            'typewriter': ('computer', (-2.2, 1.55), 'up'),
-            'phone': ('desk phone', (-1.35, 1.5), 'up'),
-            'phone_list': ('phone list', (-1.6, 1.5), 'up'),
-            'mug': ('coffee mug', (-2.55, 1.5), 'up'),
+            'lamp': ('desk lamp', (-3.6, 3.0), 'up'),
+            'typewriter': ('computer', (-2.3, 2.95), 'up'),
+            'phone': ('desk phone', (-1.8, 2.95), 'up'),
+            'phone_list': ('phone list', (-2.0, 2.95), 'up'),
+            'mug': ('coffee mug', (-2.25, 2.95), 'up'),
             'clock': ('clock', None, 'up'),
             'window': ('window', None, 'up'),
             'radiator': ('radiator', None, 'up'),
-            'wastebasket': ('wastebasket', (-0.4, 1.8), 'up'),
+            'wastebasket': ('wastebasket', (-0.85, 2.6), 'left'),
             'cabinet': ('filing cabinet', (4.6, -1.0), 'right'),
-            'coffee_machine': ('coffee machine', (4.5, -1.3), 'up'),
+            'coffee_machine': ('coffee machine', (4.45, -3.55), 'up'),
         },
         hotspot_order=['window', 'radiator', 'clock', 'case_board', 'desk', 'door', 'coat_rack', 'typewriter', 'lamp',
                        'phone', 'phone_list', 'mug', 'wastebasket', 'cabinet', 'coffee_machine'],
         overlays=['board_empty', 'mug', 'board_envelope', 'board_kenji', 'board_receipt', 'board_gus', 'board_brenner',
                   'board_owen', 'board_phone', 'board_invite', 'board_walt', 'board_string'],
         # walk-behind props: tag -> (x, z) floor point; the player is drawn behind while further away than it
-        occluders={'fg_desk': (3.25, 3.2)},
+        occluders={'ray_desks': (hx0 + 1.2, hz0 + HD), 'fr_desks': (3.0, FRONT_Z + 1.6)},
+        # the mug stands on his desk, which is a walk-behind prop: sort it just in front so the desk doesn't cover it
+        overlay_bases={'mug': (hx0 + 1.55, hz0 + HD + 0.02)},
         char_fill=((236, 222, 200), 0.3),
         tint=(0.78, 0.74, 0.7),
         exposure=1.5,

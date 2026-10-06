@@ -15,16 +15,17 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_invite.png" id="ov_board_invite"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_walt.png" id="ov_board_walt"]
 [ext_resource type="Texture2D" path="res://assets/rooms/squad_room_board_string.png" id="ov_board_string"]
-[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_fg_desk.png" id="occ_fg_desk"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_ray_desks.png" id="occ_ray_desks"]
+[ext_resource type="Texture2D" path="res://assets/rooms/squad_room_fr_desks.png" id="occ_fr_desks"]
 
 [node name="SquadRoom" type="Node2D"]
 script = ExtResource("script")
 room_id = "squad_room"
 room_name = "Homicide, Room 214"
 far_y = 587.5
-near_y = 914.3
+near_y = 962.5
 far_scale = 0.647
-near_scale = 1.19
+near_scale = 1.269
 reflection_strength = 0.0
 tint = Color(0.78, 0.74, 0.7, 1)
 
@@ -37,15 +38,10 @@ texture = ExtResource("ov_board_empty")
 centered = false
 position = Vector2(629, 349)
 
-[node name="Mug" type="Sprite2D" parent="."]
-texture = ExtResource("ov_mug")
-centered = false
-position = Vector2(528, 578)
-
 [node name="Board_envelope" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_envelope")
 centered = false
-position = Vector2(634, 425)
+position = Vector2(633, 425)
 
 [node name="Board_kenji" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_kenji")
@@ -55,17 +51,17 @@ position = Vector2(624, 359)
 [node name="Board_receipt" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_receipt")
 centered = false
-position = Vector2(665, 435)
+position = Vector2(661, 435)
 
 [node name="Board_gus" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_gus")
 centered = false
-position = Vector2(683, 420)
+position = Vector2(643, 420)
 
 [node name="Board_brenner" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_brenner")
 centered = false
-position = Vector2(658, 403)
+position = Vector2(656, 403)
 
 [node name="Board_owen" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_owen")
@@ -75,12 +71,12 @@ position = Vector2(628, 413)
 [node name="Board_phone" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_phone")
 centered = false
-position = Vector2(643, 361)
+position = Vector2(642, 361)
 
 [node name="Board_invite" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_invite")
 centered = false
-position = Vector2(667, 357)
+position = Vector2(639, 357)
 
 [node name="Board_walt" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_walt")
@@ -90,25 +86,59 @@ position = Vector2(629, 399)
 [node name="Board_string" type="Sprite2D" parent="."]
 texture = ExtResource("ov_board_string")
 centered = false
-position = Vector2(629, 360)
+position = Vector2(629, 359)
 
 [node name="WalkArea" type="Polygon2D" parent="."]
 color = Color(0.2, 0.9, 0.4, 0.3)
-polygon = PackedVector2Array(6, 814.2, 416.8, 581.8, 625.4, 584.9, 387.3, 785.4, 849.3, 796.3, 896.2, 669.6, 1699.3, 684.4, 1914, 842.8, 1914, 953.4, 1247, 934.2, 1229.5, 865.1, 6, 833.2)
+polygon = PackedVector2Array(416.8, 581.8, 887.1, 588.9, 840.9, 686.5, 1525.6, 699.6, 1427.9, 597.1, 1584.3, 599.5, 1914, 842.8, 1914, 1005.5, 6, 946.6, 6, 845.2, 32.6, 799.1)
 
 [node name="Actors" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="FgDesk" type="Sprite2D" parent="Actors"]
-texture = ExtResource("occ_fg_desk")
+[node name="Mug" type="Sprite2D" parent="Actors"]
+texture = ExtResource("ov_mug")
 centered = false
-position = Vector2(1700, 977)
-offset = Vector2(-303, -253)
+position = Vector2(503, 879)
+offset = Vector2(-58, -251)
+
+[node name="RayDesks" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_ray_desks")
+centered = false
+position = Vector2(437, 876)
+offset = Vector2(-242, -288)
+
+[node name="FrDesks" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_fr_desks")
+centered = false
+position = Vector2(1580, 895)
+offset = Vector2(-217, -295)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle1" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(397.4, 720, 768, 727.8, 676.1, 886.7, 194.7, 873.5)
+
+[node name="Obstacle2" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(444.9, 911.1, 424.4, 924.5, 392.2, 934.2, 357.3, 937.1, 330, 932.3, 318.2, 921.4, 324.5, 907.6, 346.3, 894.8, 377.3, 886.1, 409.7, 883.6, 435.6, 887.8, 448.6, 897.7)
+
+[node name="Obstacle3" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(782.8, 857.3, 773.4, 865.7, 755.1, 871.6, 732.7, 873.4, 712.8, 870.5, 700.9, 863.7, 700.1, 855.1, 710.2, 847.1, 728.3, 841.6, 749.6, 840, 768.7, 842.6, 780.9, 848.9)
+
+[node name="Obstacle4" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(1330, 739.6, 1600.6, 745.3, 1761, 903.6, 1408.3, 894.1)
+
+[node name="Obstacle5" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(1618.3, 930.8, 1620.6, 945, 1604.3, 955.2, 1573.4, 958.3, 1537.1, 953.2, 1505.9, 941.7, 1488.5, 927.1, 1488.8, 913.6, 1505.8, 904.4, 1534.7, 901.8, 1568.5, 906.1, 1599, 916.6)
 
 [node name="Spawns" type="Node2D" parent="."]
 
 [node name="start" type="Marker2D" parent="Spawns"]
-position = Vector2(711, 826)
+position = Vector2(739, 924)
 
 [node name="street" type="Marker2D" parent="Spawns"]
 position = Vector2(516, 588)
@@ -159,11 +189,11 @@ polygon = PackedVector2Array(614, 585.2, 624, 340, 625.5, 339.6, 811.6, 340.5, 8
 script = ExtResource("hs")
 id = "desk"
 display_name = "desk"
-walk_to = Vector2(597, 810)
+walk_to = Vector2(533, 918)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/desk"]
-polygon = PackedVector2Array(420.9, 661.7, 487.1, 615.8, 860.2, 621.9, 860.3, 629.3, 854.8, 739.1, 833, 793.5, 823.1, 793.2, 439.3, 779.5, 421.5, 669.7)
+polygon = PackedVector2Array(196.1, 742.1, 287, 686.9, 706.2, 695.2, 706.5, 703.8, 701.8, 832.3, 664.1, 896.4, 652.6, 896.1, 223.2, 878.7, 197.1, 751.5)
 
 [node name="door" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
@@ -189,61 +219,61 @@ polygon = PackedVector2Array(373.8, 406.2, 374.8, 404.3, 380.6, 395.6, 381.9, 39
 script = ExtResource("hs")
 id = "typewriter"
 display_name = "computer"
-walk_to = Vector2(597, 810)
+walk_to = Vector2(492, 917)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/typewriter"]
-polygon = PackedVector2Array(593.9, 555.7, 688.4, 548.5, 689.7, 549.8, 691.8, 610.2, 684.3, 648.7, 604.4, 652.9, 596.8, 617.2)
+polygon = PackedVector2Array(384.5, 728, 410.8, 611.8, 414.8, 610, 516.7, 615.6, 520.9, 687.3, 486.2, 726.4, 472.3, 736.2, 384.8, 731.7)
 
 [node name="lamp" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "lamp"
 display_name = "desk lamp"
-walk_to = Vector2(462, 803)
+walk_to = Vector2(224, 914)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/lamp"]
-polygon = PackedVector2Array(488.2, 564.2, 513, 558.6, 555.8, 566.2, 557, 587.7, 539.1, 630.5, 521.9, 648.2, 502.5, 629.9, 489.6, 585.7)
+polygon = PackedVector2Array(276.9, 629.8, 310.3, 621.9, 355.9, 632.5, 358, 657.9, 339.9, 707.6, 320.2, 728.3, 296.9, 706.7, 279.2, 655.1)
 
 [node name="phone" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "phone"
 display_name = "desk phone"
-walk_to = Vector2(747, 810)
+walk_to = Vector2(594, 920)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/phone"]
-polygon = PackedVector2Array(762.2, 624.3, 767.9, 614.9, 769.6, 612.6, 803.5, 613.1, 808.3, 618.9, 808.4, 627.9, 798.1, 635.8, 762.4, 633.4)
+polygon = PackedVector2Array(608.8, 700.5, 616.7, 688.8, 619.7, 685.6, 659.6, 686.4, 665.8, 692.9, 666.2, 703.4, 650.7, 714.5, 609.3, 711.2)
 
 [node name="phone_list" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "phone_list"
 display_name = "phone list"
-walk_to = Vector2(703, 809)
+walk_to = Vector2(553, 919)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/phone_list"]
-polygon = PackedVector2Array(717, 628.6, 724.3, 622.8, 756.7, 624.2, 756.8, 624.8, 749.9, 630.7, 717, 629.2)
+polygon = PackedVector2Array(550.2, 706.1, 561.6, 697.9, 599.4, 700, 599.5, 700.7, 588.6, 708.9, 550.2, 706.8)
 
 [node name="mug" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "mug"
 display_name = "coffee mug"
-walk_to = Vector2(539, 805)
+walk_to = Vector2(502, 917)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/mug"]
-polygon = PackedVector2Array(565.3, 635.2, 572.2, 628.2, 579.8, 635.5, 586.3, 645.1, 580.7, 652.9, 573.8, 659.9, 566.2, 652.7, 565.5, 644.7, 565.3, 641.6)
+polygon = PackedVector2Array(501.9, 713.2, 510, 705, 519.1, 713.5, 526.8, 724.9, 520.3, 734, 512.2, 742.2, 503.1, 733.6, 502.2, 724.3, 502, 720.6)
 
 [node name="wastebasket" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "wastebasket"
 display_name = "wastebasket"
-walk_to = Vector2(909, 835)
-face = "up"
+walk_to = Vector2(803, 895)
+face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/wastebasket"]
-polygon = PackedVector2Array(856.3, 766.8, 859.2, 757.4, 866, 739.3, 919.4, 740.5, 922.2, 747.9, 922.5, 809.9, 917.2, 832.2, 857.2, 830.7)
+polygon = PackedVector2Array(700.3, 817.3, 703.6, 807.1, 716.7, 785.6, 774.4, 787, 777.9, 794.9, 779.6, 861.9, 767.9, 888.4, 702.8, 886.6)
 
 [node name="cabinet" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
@@ -259,7 +289,7 @@ polygon = PackedVector2Array(1670.5, 665, 1674.7, 620.2, 1679.2, 573, 1686.9, 49
 script = ExtResource("hs")
 id = "coffee_machine"
 display_name = "coffee machine"
-walk_to = Vector2(1630, 685)
+walk_to = Vector2(1532, 608)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/coffee_machine"]

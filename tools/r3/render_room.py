@@ -93,9 +93,14 @@ def export_meta(S, cam, meta, floor_y=0.1):
             samples.append((fy, (fy - hy) / SPRITE_PX))
         (fy0, s0), (fy1, s1) = samples
     obstacles = []
-    for (x, z, r) in meta.get('obstacles', []):
-        ring = [P((x + r * math.cos(a), floor_y, z + r * math.sin(a)))[:2]
-                for a in np.linspace(0, 2 * math.pi, 12, endpoint=False)]
+    for ob in meta.get('obstacles', []):
+        if len(ob) == 4:              # (x0, z0, x1, z1): a rectangular footprint
+            x0, z0, x1, z1 = ob
+            ring = [P((x, floor_y, z))[:2] for x, z in ((x0, z0), (x1, z0), (x1, z1), (x0, z1))]
+        else:                         # (x, z, r): a round one
+            x, z, r = ob
+            ring = [P((x + r * math.cos(a), floor_y, z + r * math.sin(a)))[:2]
+                    for a in np.linspace(0, 2 * math.pi, 12, endpoint=False)]
         obstacles.append([(round(px, 1), round(py, 1)) for px, py in ring])
     # overlays that stand on the floor (people) are y-sorted with the detective: their floor point, projected
     bases = {k: [round(v) for v in P((x, floor_y, z))[:2]] for k, (x, z) in meta.get('overlay_bases', {}).items()}

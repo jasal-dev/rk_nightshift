@@ -16,7 +16,7 @@ extends Room
 
 const DOYLE_COLOR := Color(0.7, 0.85, 1.0)
 const OTIS_COLOR := Color(1.0, 0.85, 0.5)
-const PHONE_AT := Vector2(1010, 560)
+const PHONE_AT := Vector2(860, 630)
 
 ## Murder board evidence cards: [id, card text, Ray's line when it's pinned wrongly ("" = correct)].
 ## An id is an inventory item or a notebook clue; only the ones Ray has found are offered.
@@ -32,7 +32,7 @@ const EVIDENCE := [
 	["matchbook", "Matchbook, 555-0147", "A phone number. Nina's, it turns out. Not a motive."],
 ]
 
-@onready var mug: Sprite2D = $Mug
+@onready var mug: Sprite2D = $Actors/Mug
 @onready var pin_envelope: Sprite2D = $Board_envelope
 @onready var pin_kenji: Sprite2D = $Board_kenji
 @onready var pin_receipt: Sprite2D = $Board_receipt

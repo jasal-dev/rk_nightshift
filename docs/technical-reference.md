@@ -335,7 +335,7 @@ metres, y up, and the floor is at y = 0 (points are projected at y = 0.1).
 | `exclusive_overlays` | `[tag, ...]` | Subset of `overlays` that never show together (two poses). |
 | `overlay_bases` | `{tag: (x, z)}` | Overlays that stand on the floor: placed under `Actors` and y-sorted with the detective at that floor point. |
 | `occluders` | `{tag: (x, z)}` | Walk-behind props and the floor point they stand on. |
-| `obstacles` | `[(x, z, r), ...]` | Round footprints pathfinding steers around (a 12-sided ring). |
+| `obstacles` | `[(x, z, r) or (x0, z0, x1, z1), ...]` | Footprints pathfinding steers around: round ones (a 12-sided ring) or floor rectangles. |
 | `screen` | `{walk, spawns, scale}` | Close-ups: walk polygon and spawns in pixels, `scale = ((y0, s0), (y1, s1))`. Also skips the light probes. |
 | `char_fill` | `((r, g, b), power)` | Soft fill light from the camera side for the detective, baked into the probes. |
 | `tint` | `(r, g, b)` | Detective colour when a room has no probes. |

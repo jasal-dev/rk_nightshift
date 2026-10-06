@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhqvioc28v86"
-path="res://.godot/imported/squad_room_fg_desk.png-fa1c3b2d24f6f8f6c33f3c4e041e91ff.ctex"
+uid="uid://cpgmaaswes8ao"
+path="res://.godot/imported/squad_room_fr_desks.png-8d596e66a43c69c0655fedbbfa56cf80.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rooms/squad_room_fg_desk.png"
-dest_files=["res://.godot/imported/squad_room_fg_desk.png-fa1c3b2d24f6f8f6c33f3c4e041e91ff.ctex"]
+source_file="res://assets/rooms/squad_room_fr_desks.png"
+dest_files=["res://.godot/imported/squad_room_fr_desks.png-8d596e66a43c69c0655fedbbfa56cf80.ctex"]
 
 [params]
 
