@@ -96,7 +96,8 @@ that's an exact 2×. The window opens at the largest 16:9 size that fits your sc
 | **F5** / **F9** | Quick save / quick load |
 | **F11** or **Alt+Enter** | Toggle fullscreen (remembered between sessions) |
 
-The game opens on the title screen: New Game, Load Game (the quicksave) and Settings (fullscreen, text speed).
+The game opens on the title screen: New Game, Load Game (the quicksave) and Settings (fullscreen, and text speed: Slow, Normal, Fast,
+or Manual, where each line waits for a click).
 
 **Walkthrough (spoilers), Case 1:**
 

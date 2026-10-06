@@ -1,7 +1,7 @@
 class_name TitleScreen
 extends Control
 ## The title screen (GameUI.show_title): the street the morning Sal died, empty but for the tape and the patrol car's
-## turning light bar, the neon logo, and New Game, Load Game and Settings. Emits `chosen` ("new" or "load").
+## turning light bar, RAY KESSLER in neon over NIGHTSHIFT, and New Game, Load Game and Settings. Emits `chosen` ("new" or "load").
 ## The settings panel emits `fullscreen_pressed` and `text_speed_chosen`; Main applies and remembers them.
 ## Art: tools/r3/title.py (the backdrop, via render_room.py) and tools/r3/gen_title.py (the logo).
 
@@ -16,7 +16,8 @@ const BAR_RED_AT := Vector2(8, 0)       ## overlay offsets, from tools/r3/out/ti
 const BAR_BLUE_AT := Vector2(0, 0)
 const LOGO := preload("res://assets/ui/title_logo.png")
 const LOGO_DIM := preload("res://assets/ui/title_logo_dim.png")
-const TEXT_SPEEDS := ["Slow", "Normal", "Fast"]
+const SUB := preload("res://assets/ui/title_sub.png")
+const TEXT_SPEEDS := ["Slow", "Normal", "Fast", "Manual"]   ## Main.TEXT_TIME; Manual waits for a click
 const CREAM := Color(0.85, 0.8, 0.7)
 const AMBER := Color(1, 0.85, 0.45)
 const BRASS := Color(0.55, 0.42, 0.28)
@@ -32,6 +33,7 @@ var _speed_buttons: Array[Button] = []
 var _bar_red: TextureRect
 var _bar_blue: TextureRect
 var _logo: TextureRect
+var _sub: TextureRect
 var _font: FontVariation
 var _blink := 0.0
 var _buzz_in := 2.0       ## seconds to the next buzz of the logo's failing tube
@@ -63,20 +65,24 @@ func _init(has_save: bool, text_speed: int) -> void:
 	pool.size = Vector2(1160, 640)
 	add_child(pool)
 
-	_logo = _rect(LOGO, Vector2((1920 - LOGO.get_width()) / 2.0, 34))
 	var add := CanvasItemMaterial.new()
 	add.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+	_logo = _rect(LOGO, Vector2((1920 - LOGO.get_width()) / 2.0, 6))
 	_logo.material = add
 	_logo.modulate.a = 0.0
 	add_child(_logo)
-	var sub := _label("FIVE CASES.  ONE NIGHT.", 30, CREAM.darkened(0.15))
-	sub.position = Vector2(0, 338)
-	sub.size = Vector2(1920, 40)
-	add_child(sub)
+	_sub = _rect(SUB, Vector2((1920 - SUB.get_width()) / 2.0, 246))
+	_sub.material = add
+	_sub.modulate.a = 0.0
+	add_child(_sub)
+	var tag := _label("FIVE CASES.  ONE NIGHT.", 28, CREAM.darkened(0.15))
+	tag.position = Vector2(0, 392)
+	tag.size = Vector2(1920, 40)
+	add_child(tag)
 
 	menu = VBoxContainer.new()
 	menu.add_theme_constant_override("separation", 4)
-	menu.position = Vector2(660, 500)
+	menu.position = Vector2(660, 530)
 	menu.size = Vector2(600, 0)
 	add_child(menu)
 	new_button = _button("NEW GAME", 46)
@@ -100,11 +106,15 @@ func _init(has_save: bool, text_speed: int) -> void:
 
 
 func _ready() -> void:
-	# the sign lights: a stutter, then on
+	# the signs light: a stutter, then on, the blue one a beat later
 	var t := create_tween()
 	for a in [0.5, 0.0, 0.8, 0.15, 1.0]:
 		t.tween_property(_logo, "modulate:a", a, 0.06)
 		t.tween_interval(0.08)
+	t.tween_interval(0.25)
+	for a in [0.7, 0.1, 1.0]:
+		t.tween_property(_sub, "modulate:a", a, 0.05)
+		t.tween_interval(0.07)
 
 
 func _process(delta: float) -> void:
@@ -169,8 +179,8 @@ func _settings_panel(text_speed: int) -> PanelContainer:
 	sb.content_margin_top = 28
 	sb.content_margin_bottom = 20
 	panel.add_theme_stylebox_override("panel", sb)
-	panel.position = Vector2(560, 470)
-	panel.custom_minimum_size = Vector2(800, 0)
+	panel.position = Vector2(470, 500)
+	panel.custom_minimum_size = Vector2(980, 0)
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 14)
 	panel.add_child(vb)
@@ -206,7 +216,7 @@ func _row(parent: Control, caption: String) -> HBoxContainer:
 	parent.add_child(row)
 	var l := _label(caption, 34, CREAM)
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	l.custom_minimum_size = Vector2(300, 0)
+	l.custom_minimum_size = Vector2(260, 0)
 	row.add_child(l)
 	return row
 

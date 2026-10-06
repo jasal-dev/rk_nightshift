@@ -24,11 +24,12 @@ var _choosing := false
 var _waiting_click := false
 var _load_requested := false
 var _on_title := false      ## the title screen is up and waiting for a choice
-var text_speed := 1         ## index into TEXT_TIME (Slow, Normal, Fast), set on the title screen's settings panel
+var text_speed := 1         ## index into TEXT_TIME (Slow, Normal, Fast, Manual), set on the title screen's settings panel
 
 
 const SETTINGS := "user://settings.cfg"
-const TEXT_TIME := [1.5, 1.0, 0.65]   ## how long lines stay up, per text speed
+const TEXT_TIME := [1.5, 1.0, 0.65, 1.0]   ## how long lines stay up, per text speed
+const MANUAL := 3                          ## the Manual text speed: a line stays up until a click
 
 
 func _ready() -> void:
@@ -470,15 +471,7 @@ func drive_end() -> void:
 func text_message(text: String, outgoing: bool, contact := "") -> void:
 	## A text on Ray's phone. Stays on screen until drive_end() or ui.hide_phone().
 	ui.show_phone_text(text, outgoing, contact)
-	_speaking = true
-	_skip = false
-	var t := 0.0
-	var duration := clampf(1.2 + text.length() * 0.05, 1.8, 5.0) * _text_time()
-	while t < duration and not _skip:
-		await get_tree().process_frame
-		t += get_process_delta_time()
-	_speaking = false
-	_skip = false
+	await _hold(clampf(1.2 + text.length() * 0.05, 1.8, 5.0))
 
 
 func say(text: String) -> void:
@@ -497,16 +490,27 @@ func voice(text: String, anchor: Vector2, color := Color(0.6, 0.85, 1.0)) -> voi
 func _show_text(text: String, anchor: Vector2, color: Color) -> void:
 	ui.set_hover("", Vector2.ZERO)
 	ui.show_speech(text, anchor, color)
+	await _hold(clampf(0.9 + text.length() * 0.055, 1.6, 6.5))
+	ui.hide_speech()
+
+
+func _hold(duration: float, skippable := true) -> void:
+	## Keep a line up for `duration` seconds, scaled by the text speed, or until a click (Space, Esc).
+	## With the Manual text speed it stays until a click. A line that isn't skippable stays at least that long.
 	_speaking = true
 	_skip = false
-	var duration := clampf(0.9 + text.length() * 0.055, 1.6, 6.5) * _text_time()
+	var manual := text_speed == MANUAL
+	var d := duration if manual else duration * _text_time()
 	var t := 0.0
-	while t < duration and not _skip:
+	while true:
+		if _skip and not skippable and t < d:
+			_skip = false
+		if _skip or (not manual and t >= d):
+			break
 		await get_tree().process_frame
 		t += get_process_delta_time()
 	_speaking = false
 	_skip = false
-	ui.hide_speech()
 
 
 func caption(text: String, color := PLAYER_COLOR, skippable := true) -> void:
@@ -514,15 +518,7 @@ func caption(text: String, color := PLAYER_COLOR, skippable := true) -> void:
 	## short (the take, the first time through).
 	ui.set_hover("", Vector2.ZERO)
 	ui.show_speech(text, Vector2(960, 1010), color)
-	_speaking = true
-	_skip = false
-	var duration := clampf(1.2 + text.length() * 0.06, 2.0, 7.0) * _text_time()
-	var t := 0.0
-	while t < duration and (not _skip or not skippable):
-		await get_tree().process_frame
-		t += get_process_delta_time()
-	_speaking = false
-	_skip = false
+	await _hold(clampf(1.2 + text.length() * 0.06, 2.0, 7.0), skippable)
 	ui.hide_speech()
 
 

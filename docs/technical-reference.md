@@ -71,7 +71,8 @@ Signals: `inventory_changed`, `item_selected(id)`.
 
 Loading restores the room and position but not mid-conversation state, so a save is only allowed when nothing
 is running (`Main.busy` is false). Settings are stored separately in `user://settings.cfg`:
-`[video] fullscreen` and `[text] speed` (0 slow, 1 normal, 2 fast; `Main.TEXT_TIME` scales how long lines stay up). On Windows, `user://` is `%APPDATA%\Godot\app_userdata\Nightshift\`.
+`[video] fullscreen` and `[text] speed` (0 slow, 1 normal, 2 fast, 3 manual; `Main.TEXT_TIME` scales how long lines stay up, and Manual
+keeps each line up until a click, see `Main._hold()`). On Windows, `user://` is `%APPDATA%\Godot\app_userdata\Nightshift\`.
 
 **Flag conventions.**
 
