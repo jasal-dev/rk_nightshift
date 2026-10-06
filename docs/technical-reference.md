@@ -63,15 +63,15 @@ project.godot ── autoload Game (autoload/game.gd)    flags, inventory, item 
 
 Signals: `inventory_changed`, `item_selected(id)`.
 
-**Saves.** One quicksave slot at `user://savegame.json` (F5 saves, F9 loads, also from the title card):
+**Saves.** One quicksave slot at `user://savegame.json` (F5 saves, F9 loads; the title screen's Load Game, or F9 there):
 
 ```json
 { "version": 1, "flags": {...}, "inventory": ["notebook", ...], "room": "street", "pos": [812.0, 944.0] }
 ```
 
 Loading restores the room and position but not mid-conversation state, so a save is only allowed when nothing
-is running (`Main.busy` is false). Window mode is stored separately in `user://settings.cfg`
-(`[video] fullscreen`). On Windows, `user://` is `%APPDATA%\Godot\app_userdata\Nightshift\`.
+is running (`Main.busy` is false). Settings are stored separately in `user://settings.cfg`:
+`[video] fullscreen` and `[text] speed` (0 slow, 1 normal, 2 fast; `Main.TEXT_TIME` scales how long lines stay up). On Windows, `user://` is `%APPDATA%\Godot\app_userdata\Nightshift\`.
 
 **Flag conventions.**
 
@@ -176,7 +176,8 @@ All UI is built in code in `scripts/ui.gd` (`class_name GameUI`), with DejaVu Sa
 | Speech | `show_speech`, `hide_speech` | `say`, `voice`, `narrate`. |
 | Toast | `toast(text, hold)` | Pickups, notebook, save/load. |
 | Choices | `show_choices`, `hide_choices`, `options`, signal `choice_made(i)` | Dialogue; also device buttons. |
-| Card | `show_card(lines, colors)`, `hide_card` | Title and case cards. |
+| Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings. `Main._title()` runs it at start and after THE END. |
+| Card | `show_card(lines, colors)`, `hide_card` | Case cards and the end card. |
 | Fade | `fade_rect`, `fade_to(alpha, time)` | Room changes, drives. |
 | Murder board | `show_board(question, caption)`, `set_board_question`, `set_board_pins(pins, labels)`, `hide_board` | Deductions. |
 | Drive | `show_drive`, `hide_drive` | Windshield, wipers, passing lights. |
@@ -269,6 +270,7 @@ detective.py (rig) + gen_sprites.py (poses) ──▶ assets/characters/detectiv
                                                 scripts/detective_anims.gd
 npc.py (CAST: the rig, recoloured and restyled) ──▶ baked into room sets
 cars.py ──▶ cars in sets      gen_icons.py ──▶ assets/items/*.png      gen_closeups.py ──▶ assets/ui/*.png
+title.py (street_crime, emptied) ──▶ render_room.py title      gen_title.py ──▶ assets/ui/title_logo*.png
 ```
 
 **Requirements.** Python 3 with numpy and Pillow (matplotlib only as a fallback source of DejaVu fonts), and the

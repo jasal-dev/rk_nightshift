@@ -96,6 +96,8 @@ that's an exact 2×. The window opens at the largest 16:9 size that fits your sc
 | **F5** / **F9** | Quick save / quick load |
 | **F11** or **Alt+Enter** | Toggle fullscreen (remembered between sessions) |
 
+The game opens on the title screen: New Game, Load Game (the quicksave) and Settings (fullscreen, text speed).
+
 **Walkthrough (spoilers), Case 1:**
 
 1. *Squad room.* Look at the desk lamp, then use it to get the key. Use the key on the filing cabinet
@@ -275,6 +277,8 @@ python gen_sprites.py                 # -> assets/characters/detective.png + det
 python light_probes.py street         # -> assets/rooms/street_light.json (render_room.py also does this)
 python gen_icons.py                   # -> assets/items/*.png (84x84)
 python gen_closeups.py                # -> assets/ui/: the UV lamp's views, Pryce's invitation, the headlight fit
+python render_room.py title           # -> assets/rooms/title*.png, the title screen's backdrop (the crime scene, emptied)
+python gen_title.py                   # -> assets/ui/title_logo.png + title_logo_dim.png, the neon logo
 python build_scenes.py                # -> scenes/rooms/*.tscn from out/*.json
 cd ..; python gen_art.py              # cursors, raindrop
 ```

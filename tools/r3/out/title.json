@@ -1,0 +1,43 @@
+{
+ "room": "title",
+ "hotspots": {},
+ "order": [],
+ "walk": [
+  [
+   0,
+   0
+  ],
+  [
+   1920,
+   0
+  ],
+  [
+   1920,
+   1080
+  ]
+ ],
+ "spawns": {},
+ "obstacles": [],
+ "overlay_bases": {},
+ "far_y": 0,
+ "far_scale": 1.0,
+ "near_y": 1080,
+ "near_scale": 1.0,
+ "tint": [
+  0.7,
+  0.72,
+  0.88
+ ],
+ "extra": {},
+ "overlays": {
+  "bar_red": [
+   8,
+   0
+  ],
+  "bar_blue": [
+   0,
+   0
+  ]
+ },
+ "occluders": {}
+}

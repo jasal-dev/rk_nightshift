@@ -5,6 +5,7 @@ extends Node
 ##
 ## Controls: left click = walk / use, right click = look,
 ## mouse to top edge (or Tab) = inventory, F5 = save, F9 = load, F11 / Alt+Enter = fullscreen.
+## The game opens on the title screen (TitleScreen): New Game, Load Game, Settings.
 
 const PlayerScene := preload("res://scenes/player.tscn")
 const PLAYER_COLOR := Color(0.93, 0.86, 0.68)
@@ -22,25 +23,29 @@ var _speaking := false
 var _choosing := false
 var _waiting_click := false
 var _load_requested := false
+var _on_title := false      ## the title screen is up and waiting for a choice
+var text_speed := 1         ## index into TEXT_TIME (Slow, Normal, Fast), set on the title screen's settings panel
 
 
 const SETTINGS := "user://settings.cfg"
+const TEXT_TIME := [1.5, 1.0, 0.65]   ## how long lines stay up, per text speed
 
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-	_apply_window_settings()
+	_apply_settings()
 	player = PlayerScene.instantiate()
 	ui.inventory_clicked.connect(_on_inventory_clicked)
 	_title()
 
 
 # --- window / fullscreen -----------------------------------------------------
-func _apply_window_settings() -> void:
+func _apply_settings() -> void:
 	## Art is 1920x1080 and scales (fractionally) to any window, e.g. exactly 2x on a 4K screen.
-	## F11 or Alt+Enter toggles fullscreen; the choice is remembered.
+	## F11 or Alt+Enter toggles fullscreen; the choice is remembered, and so is the text speed.
 	var cfg := ConfigFile.new()
 	cfg.load(SETTINGS)
+	text_speed = clampi(int(cfg.get_value("text", "speed", 1)), 0, TEXT_TIME.size() - 1)
 	if bool(cfg.get_value("video", "fullscreen", false)):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
@@ -70,16 +75,35 @@ func toggle_fullscreen() -> void:
 	cfg.save(SETTINGS)
 
 
+func set_text_speed(index: int) -> void:
+	text_speed = index
+	var cfg := ConfigFile.new()
+	cfg.load(SETTINGS)
+	cfg.set_value("text", "speed", index)
+	cfg.save(SETTINGS)
+
+
+func _text_time() -> float:
+	return float(TEXT_TIME[text_speed])
+
+
 # --- title / ending ---------------------------------------------------------
 func _title() -> void:
+	## The title screen, faded in from black (over whatever room is left behind after the end).
+	## New Game starts Case 1 in Room 214; Load Game (or F9) loads the quicksave.
 	busy = true
-	ui.fade_rect.color.a = 1.0
-	ui.show_card(["N I G H T S H I F T", "", "Case 1: Dead Piano Player", "", "",
-			"Click to begin" + ("   -   F9 to continue" if Game.has_save() else "")],
-			[Color(0.45, 0.75, 1.0), Color.WHITE, Color(0.8, 0.75, 0.65), Color.WHITE, Color.WHITE, Color(1, 0.85, 0.45)])
-	await wait_click()
-	ui.hide_card()
-	if _load_requested:
+	if ui.fade_rect.color.a < 0.99:
+		await ui.fade_to(1.0, 0.6)
+	var t := ui.show_title(Game.has_save(), text_speed)
+	t.fullscreen_pressed.connect(toggle_fullscreen)
+	t.text_speed_chosen.connect(set_text_speed)
+	await ui.fade_to(0.0, 0.8)
+	_on_title = true
+	var action: String = await t.chosen
+	_on_title = false
+	await ui.fade_to(1.0, 0.6)
+	ui.hide_title()
+	if action == "load":
 		await _load()
 		return
 	Game.reset()
@@ -108,7 +132,7 @@ func the_end() -> void:
 	busy = true
 	await ui.fade_to(1.0, 1.2)
 	ui.hide_scene()
-	ui.show_card(["N I G H T S H I F T", "", "THE END", "", "", "Thanks for playing", "", "Click to play again"],
+	ui.show_card(["N I G H T S H I F T", "", "THE END", "", "", "Thanks for playing", "", "Click to continue"],
 			[Color(0.45, 0.75, 1.0), Color.WHITE, Color(0.85, 0.8, 0.7), Color.WHITE, Color.WHITE,
 			Color(1, 0.85, 0.45), Color.WHITE, Color(0.6, 0.6, 0.6)])
 	await wait_click()
@@ -116,11 +140,7 @@ func the_end() -> void:
 	if _load_requested:
 		await _load()
 		return
-	Game.reset()
-	await change_room("squad_room", "start")
-	busy = true
-	await room.intro()
-	busy = false
+	await _title()
 
 
 func _load() -> void:
@@ -175,7 +195,8 @@ func _process(_delta: float) -> void:
 	var m := world.get_global_mouse_position()
 	var hover := ""
 	var hot := false
-	if room and not _speaking and not _choosing and ui.card.visible == false:
+	var busy_cursor := busy
+	if room and not _speaking and not _choosing and ui.card.visible == false and ui.title == null:
 		var inv_item := ui.item_under(m)
 		if inv_item != "":
 			hover = _hover_text(Game.item_name(inv_item))
@@ -186,7 +207,10 @@ func _process(_delta: float) -> void:
 				hover = _hover_text(hs.display_name)
 				hot = true
 	ui.set_hover("" if busy else hover, m)
-	ui.update_cursor(m, hot and not busy)
+	if ui.title:
+		hot = ui.title.is_hot(m)
+		busy_cursor = false
+	ui.update_cursor(m, hot and not busy_cursor)
 	ui.update_bar(m, room != null and not busy)
 
 
@@ -238,6 +262,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		if key.keycode == KEY_F11 or (key.keycode == KEY_ENTER and key.alt_pressed):
 			toggle_fullscreen()
 			return
+		if _on_title:
+			if key.keycode == KEY_F9 and Game.has_save():
+				ui.title.chosen.emit("load")
+			return
 		match key.keycode:
 			KEY_SPACE, KEY_PERIOD:
 				if _speaking:
@@ -256,7 +284,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_F9:
 				if not Game.has_save():
 					ui.toast("No saved game.")
-				elif _waiting_click:          # on the title / end card
+				elif _waiting_click:          # on a case card or the end card
 					_load_requested = true
 					_waiting_click = false
 				elif not busy and not _speaking and not _choosing:
@@ -445,7 +473,7 @@ func text_message(text: String, outgoing: bool, contact := "") -> void:
 	_speaking = true
 	_skip = false
 	var t := 0.0
-	var duration := clampf(1.2 + text.length() * 0.05, 1.8, 5.0)
+	var duration := clampf(1.2 + text.length() * 0.05, 1.8, 5.0) * _text_time()
 	while t < duration and not _skip:
 		await get_tree().process_frame
 		t += get_process_delta_time()
@@ -471,7 +499,7 @@ func _show_text(text: String, anchor: Vector2, color: Color) -> void:
 	ui.show_speech(text, anchor, color)
 	_speaking = true
 	_skip = false
-	var duration := clampf(0.9 + text.length() * 0.055, 1.6, 6.5)
+	var duration := clampf(0.9 + text.length() * 0.055, 1.6, 6.5) * _text_time()
 	var t := 0.0
 	while t < duration and not _skip:
 		await get_tree().process_frame
@@ -488,7 +516,7 @@ func caption(text: String, color := PLAYER_COLOR, skippable := true) -> void:
 	ui.show_speech(text, Vector2(960, 1010), color)
 	_speaking = true
 	_skip = false
-	var duration := clampf(1.2 + text.length() * 0.06, 2.0, 7.0)
+	var duration := clampf(1.2 + text.length() * 0.06, 2.0, 7.0) * _text_time()
 	var t := 0.0
 	while t < duration and (not _skip or not skippable):
 		await get_tree().process_frame

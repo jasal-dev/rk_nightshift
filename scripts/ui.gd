@@ -2,7 +2,7 @@ class_name GameUI
 extends CanvasLayer
 ## All on-screen UI, built in code so it is easy to read and change:
 ## hover label, speech text, inventory bar, dialogue choices, fades,
-## title/end cards and the in-viewport cursor.
+## the title screen, case/end cards and the in-viewport cursor.
 
 signal skip_requested
 signal choice_made(index: int)
@@ -27,6 +27,7 @@ var bar_items: HBoxContainer
 var choices_box: VBoxContainer
 var fade_rect: ColorRect
 var card: Control
+var title: TitleScreen            ## the title screen, while it's up (see show_title)
 var cursor: TextureRect
 var cursor_item: TextureRect
 var bar_pinned := false
@@ -759,6 +760,21 @@ func show_card(lines: Array, colors: Array = []) -> void:
 
 func hide_card() -> void:
 	card.visible = false
+
+
+func show_title(has_save: bool, text_speed: int) -> TitleScreen:
+	## The title screen, under the fade (so Main can fade it in and out) and the cursor.
+	hide_title()
+	title = TitleScreen.new(has_save, text_speed)
+	root.add_child(title)
+	root.move_child(title, fade_rect.get_index())
+	return title
+
+
+func hide_title() -> void:
+	if title:
+		title.queue_free()
+		title = null
 
 
 # --- murder board (deduction) ---------------------------------------------------

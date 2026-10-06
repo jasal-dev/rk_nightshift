@@ -44,8 +44,8 @@ func _process(_delta: float) -> void:
 				"mulholland_overlook", "norms_diner", "kenji_apartment", "prius_interior", "stardust_shop",
 				"stardust_office", "stardust_roof", "stardust_roof_dark", "fletcher_bridge", "river_channel", "glass_house",
 				"crane_garage", "night_lab", "squad_room", "jigsaw", "street_crime", "blue_note_bar", "blue_note_back",
-				"pier9_dawn", "pier9_sunrise", "piano", "scene_pic"]:
-			var ui_key: bool = key in ["drive", "phone", "board", "device", "paper", "jigsaw", "piano", "scene_pic"]
+				"pier9_dawn", "pier9_sunrise", "piano", "scene_pic", "title"]:
+			var ui_key: bool = key in ["drive", "phone", "board", "device", "paper", "jigsaw", "piano", "scene_pic", "title"]
 			var on: bool = (main.ui.get(key) != null) if ui_key \
 					else (main.room != null and main.room.room_id == key and not main.busy and main.ui.fade_rect.color.a < 0.01)
 			var n_case: int = Game.current_case()
@@ -184,11 +184,19 @@ func expect(flags: Array[String]) -> void:
 			_fail("flag '%s' not set" % f)
 
 
-func _run() -> void:
-	# title card -> new game
-	while not main._waiting_click:
+func _new_game() -> void:
+	## On the title screen: press New Game (Load Game is only enabled when there's a save).
+	while not main._on_title and not _failed:
 		await get_tree().process_frame
-	main._waiting_click = false
+	if main.ui.title.load_button.disabled == Game.has_save():
+		_fail("Load Game should be enabled exactly when there's a save")
+	while "--shots" in OS.get_cmdline_user_args() and int(_shots.get("title", 0)) <= 20 and not _failed:
+		await get_tree().process_frame
+	main.ui.title.new_button.pressed.emit()
+
+
+func _run() -> void:
+	await _new_game()
 	await expect_room("squad_room")
 	print("Scene 1: the squad room")
 	await act("lamp", "look")
@@ -914,5 +922,6 @@ func _ending(title: String, flags: Dictionary, inv: Array[String], drop: Array, 
 			_fail("only %s should be set, not %s" % [want, e])
 	if want != "ending_doyle_best" and Game.has_item("take_drive"):
 		_fail("the drive should have been handed over")
-	main._waiting_click = false                         # a new game starts in Room 214
+	main._waiting_click = false                         # back to the title screen, and a new game in Room 214
+	await _new_game()
 	await expect_room("squad_room")
