@@ -272,6 +272,21 @@ func _run() -> void:
 	Game.save_game()
 	await main._load()
 	await expect_room("pier9_dock")
+	# Esc: quicksave, back to the title screen, and Load Game picks up in the same room
+	await _idle()
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(Game.SAVE_PATH))
+	var esc := InputEventKey.new()
+	esc.keycode = KEY_ESCAPE
+	esc.pressed = true
+	main._unhandled_input(esc)
+	while not main._on_title and not _failed:
+		await get_tree().process_frame
+	if not Game.has_save() or main.ui.title.load_button.disabled:
+		_fail("Esc should quicksave before the title screen")
+	main.ui.title.load_button.pressed.emit()
+	await expect_room("pier9_dock")
+	if not Game.flag("got_envelope"):
+		_fail("loading the Esc save should keep the envelope")
 	await act("car")                                    # drive back
 	await expect_room("squad_room")
 

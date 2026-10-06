@@ -94,10 +94,11 @@ that's an exact 2×. The window opens at the largest 16:9 size that fits your sc
 | Click / Space | Skip a line of dialogue |
 | 1–9 | Pick a dialogue option |
 | **F5** / **F9** | Quick save / quick load |
+| **Esc** | Quick save and go back to the title screen (when nothing else is open) |
 | **F11** or **Alt+Enter** | Toggle fullscreen (remembered between sessions) |
 
-The game opens on the title screen: New Game, Load Game (the quicksave) and Settings (fullscreen, and text speed: Slow, Normal, Fast,
-or Manual, where each line waits for a click).
+The game opens on the title screen: New Game, Load Game (the quicksave), Settings (fullscreen, and text speed: Slow, Normal, Fast,
+or Manual, where each line waits for a click) and Exit, which quits the game.
 
 **Walkthrough (spoilers), Case 1:**
 

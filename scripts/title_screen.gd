@@ -1,7 +1,8 @@
 class_name TitleScreen
 extends Control
 ## The title screen (GameUI.show_title): the street the morning Sal died, empty but for the tape and the patrol car's
-## turning light bar, RAY KESSLER in neon over NIGHTSHIFT, and New Game, Load Game and Settings. Emits `chosen` ("new" or "load").
+## turning light bar, RAY KESSLER in neon over NIGHTSHIFT, and New Game, Load Game, Settings and Exit.
+## Emits `chosen` ("new", "load" or "quit").
 ## The settings panel emits `fullscreen_pressed` and `text_speed_chosen`; Main applies and remembers them.
 ## Art: tools/r3/title.py (the backdrop, via render_room.py) and tools/r3/gen_title.py (the logo).
 
@@ -26,6 +27,7 @@ const GREY := Color(0.5, 0.48, 0.45)
 var new_button: Button
 var load_button: Button
 var settings_button: Button
+var exit_button: Button
 var menu: VBoxContainer
 var settings: PanelContainer
 var _fullscreen_button: Button
@@ -88,18 +90,20 @@ func _init(has_save: bool, text_speed: int) -> void:
 	new_button = _button("NEW GAME", 46)
 	load_button = _button("LOAD GAME", 46)
 	settings_button = _button("SETTINGS", 46)
+	exit_button = _button("EXIT", 46)
 	load_button.disabled = not has_save
 	new_button.pressed.connect(func(): chosen.emit("new"))
 	load_button.pressed.connect(func(): chosen.emit("load"))
 	settings_button.pressed.connect(open_settings)
-	for b in [new_button, load_button, settings_button]:
+	exit_button.pressed.connect(func(): chosen.emit("quit"))
+	for b in [new_button, load_button, settings_button, exit_button]:
 		menu.add_child(b)
 
 	settings = _settings_panel(text_speed)
 	settings.visible = false
 	add_child(settings)
 
-	var help := _label("Left click to walk and use, right click to look.     F5 save    F9 load    F11 fullscreen", 22, GREY)
+	var help := _label("Left click to walk and use, right click to look.     F5 save    F9 load    Esc save and quit to title    F11 fullscreen", 22, GREY)
 	help.position = Vector2(0, 1020)
 	help.size = Vector2(1920, 30)
 	add_child(help)

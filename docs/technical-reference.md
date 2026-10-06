@@ -63,7 +63,7 @@ project.godot ── autoload Game (autoload/game.gd)    flags, inventory, item 
 
 Signals: `inventory_changed`, `item_selected(id)`.
 
-**Saves.** One quicksave slot at `user://savegame.json` (F5 saves, F9 loads; the title screen's Load Game, or F9 there):
+**Saves.** One quicksave slot at `user://savegame.json` (F5 saves, and so does Esc before it returns to the title; F9 loads, as does the title screen's Load Game, or F9 there):
 
 ```json
 { "version": 1, "flags": {...}, "inventory": ["notebook", ...], "room": "street", "pos": [812.0, 944.0] }
@@ -177,7 +177,7 @@ All UI is built in code in `scripts/ui.gd` (`class_name GameUI`), with DejaVu Sa
 | Speech | `show_speech`, `hide_speech` | `say`, `voice`, `narrate`. |
 | Toast | `toast(text, hold)` | Pickups, notebook, save/load. |
 | Choices | `show_choices`, `hide_choices`, `options`, signal `choice_made(i)` | Dialogue; also device buttons. |
-| Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings. `Main._title()` runs it at start and after THE END. |
+| Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings, Exit (quits). `Main._title()` runs it at start, after THE END, and on Esc in a room (`_save_to_title()` quicksaves first). |
 | Card | `show_card(lines, colors)`, `hide_card` | Case cards and the end card. |
 | Fade | `fade_rect`, `fade_to(alpha, time)` | Room changes, drives. |
 | Murder board | `show_board(question, caption)`, `set_board_question`, `set_board_pins(pins, labels)`, `hide_board` | Deductions. |

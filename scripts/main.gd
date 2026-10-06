@@ -4,8 +4,8 @@ extends Node
 ## scripting API (say, voice, choose, give, change_room, ...).
 ##
 ## Controls: left click = walk / use, right click = look,
-## mouse to top edge (or Tab) = inventory, F5 = save, F9 = load, F11 / Alt+Enter = fullscreen.
-## The game opens on the title screen (TitleScreen): New Game, Load Game, Settings.
+## mouse to top edge (or Tab) = inventory, F5 = save, F9 = load, F11 / Alt+Enter = fullscreen,
+## Esc = save and go back to the title screen (TitleScreen: New Game, Load Game, Settings, Exit).
 
 const PlayerScene := preload("res://scenes/player.tscn")
 const PLAYER_COLOR := Color(0.93, 0.86, 0.68)
@@ -91,7 +91,7 @@ func _text_time() -> float:
 # --- title / ending ---------------------------------------------------------
 func _title() -> void:
 	## The title screen, faded in from black (over whatever room is left behind after the end).
-	## New Game starts Case 1 in Room 214; Load Game (or F9) loads the quicksave.
+	## New Game starts Case 1 in Room 214; Load Game (or F9) loads the quicksave; Exit quits.
 	busy = true
 	if ui.fade_rect.color.a < 0.99:
 		await ui.fade_to(1.0, 0.6)
@@ -104,6 +104,9 @@ func _title() -> void:
 	_on_title = false
 	await ui.fade_to(1.0, 0.6)
 	ui.hide_title()
+	if action == "quit":
+		get_tree().quit()
+		return
 	if action == "load":
 		await _load()
 		return
@@ -140,6 +143,18 @@ func the_end() -> void:
 	ui.hide_card()
 	if _load_requested:
 		await _load()
+		return
+	await _title()
+
+
+func _save_to_title() -> void:
+	## Esc in a room: quicksave (the slot Load Game and F9 use), then back to the title screen.
+	## Stays in the room if the save fails, so nothing is lost.
+	_action_token += 1
+	player.stop()
+	Game.player_position = player.position
+	if not Game.save_game():
+		ui.toast("Could not save.")
 		return
 	await _title()
 
@@ -274,8 +289,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_ESCAPE:
 				if _speaking:
 					_skip = true
-				else:
+				elif Game.selected_item != "":
 					Game.select_item("")
+				elif not busy and not _choosing and not _waiting_click and room:
+					await _save_to_title()
 			KEY_TAB:
 				ui.bar_pinned = not ui.bar_pinned
 			KEY_F5:
