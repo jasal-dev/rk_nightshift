@@ -542,6 +542,33 @@ def device_screen(kind, w=128, h=96):
     d.rectangle([10, 66, w - 10, 70], fill=(60, 110, 200, 255))
     return img
 
+def keyed_scratch(text='RAT', w=384, h=96, seed=7):
+    """Letters gouged into car paint with a key: shaky single strokes, dark primer edges, a rust line in the groove.
+    Transparent around the strokes so the paint shows through."""
+    rng = random.Random(seed)
+    strokes = {'R': [[(0, 1), (0, 0), (0.62, 0.02), (0.7, 0.24), (0.55, 0.46), (0, 0.48)], [(0.22, 0.48), (0.75, 1)]],
+               'A': [[(0, 1), (0.4, 0), (0.8, 1)], [(0.16, 0.62), (0.66, 0.6)]],
+               'T': [[(-0.05, 0.02), (0.85, 0)], [(0.4, 0.0), (0.42, 1)]]}
+    img = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(img)
+    lw, lh, x0, y0 = w * 0.2, h * 0.7, w * 0.08, h * 0.15
+    lines = []
+    for i, ch in enumerate(text):
+        ox = x0 + i * w * 0.3
+        for st in strokes[ch]:
+            pts = []
+            for (a, b), (c, e) in zip(st, st[1:]):
+                for t in np.linspace(0, 1, 6)[:-1] if pts else np.linspace(0, 1, 6):
+                    x, y = a + (c - a) * t, b + (e - b) * t
+                    pts.append((ox + x * lw + (1 - y) * lh * 0.12 + rng.uniform(-1.5, 1.5), y0 + y * lh + rng.uniform(-1.5, 1.5)))
+            pts.append((pts[-1][0] + rng.uniform(4, 12), pts[-1][1] + rng.uniform(-3, 3)))       # the key skids on
+            lines.append(pts)
+    for pts in lines:
+        d.line(pts, fill=(88, 86, 84, 255), width=6, joint='curve')
+    for pts in lines:
+        d.line(pts, fill=(150, 78, 40, 255), width=2, joint='curve')
+    return img
+
+
 def glide_card(w=128, h=80):
     """Kenji's Glide driver card: teal band, photo, five stars."""
     img = Image.new('RGBA', (w, h), (236, 240, 238, 255)); d = ImageDraw.Draw(img)

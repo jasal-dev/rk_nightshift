@@ -74,7 +74,7 @@ Case 2 has 7 new inventory items and 23 notebook clues, 15 of them optional. "Re
 | clue\_dashcam | Dashcam unscrewed, cable coiled. Taken by someone who knows cameras. | Dashcam mount | Optional |
 | clue\_two\_cups | Two Norm's coffees. One drunk, one barely touched. | Cup holders | Optional |
 | clue\_empty\_case | Card case in the glovebox, JAN to DEC. Every slot empty. | Glovebox | Optional |
-| clue\_rat | RAT keyed into the driver's door. Weeks old. | Prius exterior | Optional |
+| clue\_rat | RAT keyed into the driver's side. Weeks old. | Prius exterior | Optional |
 | clue\_roommate\_norms | Rosa: Kenji was at Norm's with his roommate, "the one with the camera bag". They argued about cards. | Rosa | Yes |
 | clue\_heck\_alibi | Heck sat in the LAX queue from 11:00 to 1:38. Four cameras on the lot. | Heck | Optional |
 | clue\_side\_thing | Heck: Kenji was quitting "the side thing". It got somebody hurt. | Heck | Optional |
@@ -262,7 +262,7 @@ PARK: I'll ride down with the car. Call if you need a unit, Detective. I'll be i
 | Ignition | "Keys in the ignition. Engine running." | Puzzle 2.3 | Default | New |
 | Glovebox | "Locked. A Prius driver who locks his glovebox has something worth more than napkins." | Locked: "Locked." Open: "Empty case, empty year." | kenji\_keys: Puzzle 2.3 | New |
 | Back seat | "Back seat, passenger side. The seat belt's still buckled, and the floor mat's scuffed like somebody braced his feet." | "Whoever sat here wasn't a paying customer." | Default | New |
-| Prius door | "A white Prius. Half the cars in LA are white Priuses, and the other half are waiting for one." + "Somebody keyed RAT into the driver's door. There's rust in the scratch." | "Weeks old. Not tonight's work." Sets clue\_rat. | Default | New |
+| Prius door | "A white Prius. Half the cars in LA are white Priuses, and the other half are waiting for one." + "Somebody keyed RAT into the driver's side. There's rust in the scratch." | "Weeks old. Not tonight's work." Sets clue\_rat. | Default | New |
 | Ground | "Pale orange grit, the decomposed granite they pave these lots with. It gets into everything." Sets saw\_grit. | Same | Default | New |
 | Low wall | "Four million lights. From up here you can't tell which ones are on fire." | "It's a long way down. Kenji went the slow way." | Any item: "I'm not throwing evidence off Mulholland." | New |
 | Coroner's van | "Shah's van. It'll take him down the hill the slow way." | Same | Default | New |

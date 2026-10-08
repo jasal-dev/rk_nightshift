@@ -29,6 +29,8 @@ func _ready() -> void:
 	_step_started = Time.get_ticks_msec()
 	main = MainScene.instantiate()
 	add_child(main)
+	if main.text_speed == main.MANUAL:
+		main.text_speed = 1      # (not saved) with Manual, lines left unskipped for --shots would wait for a click forever
 	_run()
 
 

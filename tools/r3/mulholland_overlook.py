@@ -63,8 +63,7 @@ def build(hide=()):
     S.mat('chrome', (170, 170, 176), spec=1.6, shin=80, refl=0.5)
     S.mat('card', (220, 220, 220), tex=tx.glide_card(), texmode=1)
     S.mat('dome', (255, 230, 190), emis=(255, 220, 170), emis_mult=3)
-    S.mat('scratch', (214, 216, 214), tex=tx.sign_board('RAT', (120, 110, 100), (0, 0, 0), 192, 64, alpha_bg=0),
-          texmode=1, spec=1.3, shin=90, refl=0.3)
+    S.mat('scratch', (214, 216, 214), tex=tx.keyed_scratch('RAT'), texmode=1, spec=1.3, shin=90, refl=0.35)
     # cones, tape, the van, Ray's car
     S.mat('cone', (240, 100, 20), spec=0.4, shin=30)
     S.mat('cone_band', (230, 230, 220), spec=0.4)
@@ -113,14 +112,20 @@ def build(hide=()):
     box((0, 1.0, 0.35), (0.76, 0.52, 1.08), 'paint', op=1)                       # cabin well
     box((-0.9, 0.7, 0.07), (0.2, 0.27, 0.52), 'paint', op=1)                     # driver's door opening
     with S.tag('prius'):
-        box((0, 1.47, 0.32), (0.8, 0.025, 0.68), 'paint', rnd=0.02)                # roof
+        box((0, 1.47, 0.4), (0.8, 0.025, 0.76), 'paint', rnd=0.02)                 # roof
         box((-0.82, 1.2, -0.92), (0.04, 0.3, 0.035), 'paint', rot=Rx(-62))         # A pillars
         box((0.82, 1.2, -0.92), (0.04, 0.3, 0.035), 'paint', rot=Rx(-62))
         box((-0.83, 1.2, 0.63), (0.03, 0.28, 0.05), 'paint')                       # B pillars
         box((0.83, 1.2, 0.63), (0.03, 0.28, 0.05), 'paint')
         if 'windshield' not in hide:                                               # (the close-up looks out through it)
             box((0, 1.21, -0.93), (0.8, 0.012, 0.6), 'glass', rot=Rx(-28))         # windshield
-        box((0, 1.2, 1.55), (0.78, 0.012, 0.62), 'glass', rot=Rx(38))              # sloped hatch glass
+        # sloped hatch: glass from the roof's back edge down to the tail deck, C pillars closing the sides under it
+        (hy0, hz0), (hy1, hz1) = (1.46, 1.12), (0.93, 2.04)
+        hl, ha = math.hypot(hy0 - hy1, hz1 - hz0) / 2, math.degrees(math.atan2(hy0 - hy1, hz1 - hz0))
+        hc, hn = np.array([(hy0 + hy1) / 2, (hz0 + hz1) / 2]), np.array([math.cos(math.radians(ha)), math.sin(math.radians(ha))])
+        box((0, *hc), (0.74, 0.012, hl), 'glass', rot=Rx(ha))
+        for sx in (-0.82, 0.82):
+            box((sx, *(hc - 0.17 * hn)), (0.05, 0.17, hl), 'paint', rnd=0.03, rot=Rx(ha))
         box((0.84, 1.18, 0.35), (0.012, 0.25, 0.98), 'glass')                      # passenger-side windows
         box((-0.84, 1.18, 1.12), (0.012, 0.25, 0.45), 'glass')                     # rear driver-side window
         box((0, 0.66, 2.24), (0.8, 0.22, 0.04), 'paint', rnd=0.04)                 # Kamm tail
@@ -130,7 +135,7 @@ def build(hide=()):
         box((-0.6, 0.72, -2.24), (0.18, 0.05, 0.05), 'headlight', rot=Ry(10))
         box((0.6, 0.72, -2.24), (0.18, 0.05, 0.05), 'headlight', rot=Ry(-10))
         box((0, 0.36, 2.29), (0.7, 0.05, 0.03), 'trim')
-        box((-0.885, 0.62, 1.15), (0.4, 0.07, 0.01), 'scratch', rot=Ry(-90))                    # RAT, keyed into the paint
+        box((-0.881, 0.66, 1.1), (0.34, 0.085, 0.002), 'scratch', rot=Ry(-90))                 # RAT, keyed into the paint
         for (wx, wz) in ((-0.82, -1.45), (0.82, -1.45), (-0.82, 1.45), (0.82, 1.45)):
             wf = Frame(car_pt(wx, 0.32, wz), Ry(CAR_YAW) @ Rz(90))
             S.tcyl(wf, (0, 0, 0), (0.32, 0.32), (0.32, 0.32), 0.1, 'tire')
@@ -139,12 +144,12 @@ def build(hide=()):
     box((0, 0.46, 0.35), (0.76, 0.04, 1.08), 'interior')
     with S.tag('back_seat'):
         box((0, 0.58, 1.15), (0.74, 0.08, 0.28), 'seat', rnd=0.04)
-        box((0, 0.94, 1.44), (0.74, 0.36, 0.07), 'seat', rnd=0.05, rot=Rx(-12))
+        box((0, 0.88, 1.44), (0.74, 0.3, 0.07), 'seat', rnd=0.05, rot=Rx(-12))     # (top clears the hatch glass)
     for sx in (-0.38, 0.38):
         box((sx, 0.6, 0.12), (0.25, 0.08, 0.26), 'seat', rnd=0.05)
         box((sx, 0.94, 0.44), (0.25, 0.31, 0.07), 'seat', rnd=0.05, rot=Rx(-14))
         box((sx, 1.33, 0.5), (0.13, 0.06, 0.05), 'seat', rnd=0.03)
-    box((0, 1.43, 0.32), (0.76, 0.012, 0.66), 'headliner')
+    box((0, 1.43, 0.39), (0.76, 0.012, 0.73), 'headliner')
     box((0, 0.88, -0.98), (0.78, 0.14, 0.24), 'dash', rnd=0.04)
     with S.tag('head_unit'):
         box((0, 1.0, -0.74), (0.1, 0.065, 0.006), 'radio', rot=Rx(-18))

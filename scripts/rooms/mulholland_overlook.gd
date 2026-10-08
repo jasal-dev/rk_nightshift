@@ -61,7 +61,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 		"prius":
 			if verb == "look":
 				await main.say("A white Prius. Half the cars in LA are white Priuses, and the other half are waiting for one.")
-				await main.say("Somebody keyed RAT into the driver's door. There's rust in the scratch.")
+				await main.say("Somebody keyed RAT into the driver's side. There's rust in the scratch.")
 			elif item != "":
 				await default_response(verb, item)
 			else:

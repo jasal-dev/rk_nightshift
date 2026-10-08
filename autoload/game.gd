@@ -71,7 +71,7 @@ const CLUES := {
 	"clue_dashcam": [2, "Dashcam unscrewed, cable coiled. Taken by someone who knows cameras."],
 	"clue_two_cups": [2, "Two Norm's coffees. One drunk, one barely touched."],
 	"clue_empty_case": [2, "Card case in the glovebox, JAN to DEC. Every slot empty."],
-	"clue_rat": [2, "RAT keyed into the driver's door. Weeks old."],
+	"clue_rat": [2, "RAT keyed into the driver's side. Weeks old."],
 	"clue_roommate_norms": [2, "Rosa: Kenji was at Norm's with his roommate, \"the one with the camera bag\". They argued about cards."],
 	"clue_heck_alibi": [2, "Heck sat in the LAX queue from 11:00 to 1:38. Four cameras on the lot."],
 	"clue_side_thing": [2, "Heck: Kenji was quitting \"the side thing\". It got somebody hurt."],

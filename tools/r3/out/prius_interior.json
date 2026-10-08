@@ -301,6 +301,7 @@
   ]
  },
  "obstacles": [],
+ "overlay_bases": {},
  "far_y": 1046,
  "far_scale": 1.0,
  "near_y": 1076,
