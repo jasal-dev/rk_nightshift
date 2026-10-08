@@ -125,9 +125,9 @@ def build(hide=()):
         hc, hn = np.array([(hy0 + hy1) / 2, (hz0 + hz1) / 2]), np.array([math.cos(math.radians(ha)), math.sin(math.radians(ha))])
         box((0, *hc), (0.74, 0.012, hl), 'glass', rot=Rx(ha))
         for sx in (-0.82, 0.82):
-            box((sx, *(hc - 0.17 * hn)), (0.05, 0.17, hl), 'paint', rnd=0.03, rot=Rx(ha))
-        box((0.84, 1.18, 0.35), (0.012, 0.25, 0.98), 'glass')                      # passenger-side windows
-        box((-0.84, 1.18, 1.12), (0.012, 0.25, 0.45), 'glass')                     # rear driver-side window
+            box((sx, *(hc - 0.25 * hn)), (0.05, 0.25, hl), 'paint', rnd=0.03, rot=Rx(ha))
+        box((0.84, 1.18, 0.245), (0.012, 0.25, 0.875), 'glass')                    # passenger-side windows (to the C pillar)
+        box((-0.84, 1.18, 0.895), (0.012, 0.25, 0.225), 'glass')                   # rear driver-side window (to the C pillar)
         box((0, 0.66, 2.24), (0.8, 0.22, 0.04), 'paint', rnd=0.04)                 # Kamm tail
         box((-0.62, 0.78, 2.27), (0.16, 0.05, 0.02), 'taillight')
         box((0.62, 0.78, 2.27), (0.16, 0.05, 0.02), 'taillight')
