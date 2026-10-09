@@ -47,8 +47,8 @@ y_sort_enabled = true
 [node name="Preacher_car" type="Sprite2D" parent="Actors"]
 texture = ExtResource("ov_preacher_car")
 centered = false
-position = Vector2(1252, 665)
-offset = Vector2(-253, -181)
+position = Vector2(1253, 668)
+offset = Vector2(-254, -184)
 
 [node name="Raycar" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_raycar")

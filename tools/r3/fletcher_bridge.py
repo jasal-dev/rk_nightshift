@@ -302,7 +302,7 @@ def build(hide=()):
                        'spotlight', 'doss'],
         overlays=['preacher_car', 'beam_road', 'beam_down'],
         exclusive_overlays=['beam_road', 'beam_down'],
-        overlay_bases={'preacher_car': (CAR[0], CAR[1] + 0.95)},
+        overlay_bases={'preacher_car': (CAR[0], CAR[1] + 1.0)},       # just in front of the car's sprite
         occluders={'raycar': (RAYCAR[0], RAYCAR[1] - 0.95), 'busstop': (BUS[0], BUS[1]),
                    'patrol_car': (CAR[0], CAR[1] + 0.95), 'spotlight': (CAR[0], CAR[1] + 0.95),
                    'doss': (DOSS[0], DOSS[1] + 0.1)},
