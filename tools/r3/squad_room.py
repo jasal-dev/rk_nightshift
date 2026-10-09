@@ -49,7 +49,6 @@ def build(hide=()):
     S.mat('cooler_blue', (90, 130, 190), spec=0.8, shin=40, refl=0.1)
     S.mat('plant', (40, 60, 34), namp=0.3, nscale=10)
     S.mat('pot', (120, 60, 40))
-    S.mat('flag_red', (140, 30, 30)); S.mat('flag_blue', (30, 40, 90))
 
     X0, X1, Z0, ZB = -6.0, 5.8, -4.6, 9.0      # room extents (front wall omitted)
     WH = 3.7
@@ -85,9 +84,28 @@ def build(hide=()):
         S.cyl((-2.7, 2.85, Z0 + 0.05), (-2.7, 2.85, Z0 + 0.07), 0.21, 'clock_face')
         S.cyl((-2.7, 2.85, Z0 + 0.075), (-2.7, 3.01, Z0 + 0.075), 0.008, 'black')
         S.cyl((-2.7, 2.85, Z0 + 0.075), (-2.58, 2.87, Z0 + 0.075), 0.01, 'black')
-    # flag in corner
-    S.cyl((5.9, 0, Z0 + 0.4), (5.9, 2.5, Z0 + 0.4), 0.02, 'brass')
-    S.wbox((5.6, 2.1, Z0 + 0.42), (0.3, 0.3, 0.01), 'flag_blue', rot=Ry(20))
+    # the flag in the corner: an oak pole on a round base with a brass ball, and the Stars and Stripes hanging from it
+    # in vertical pleats, its fly sagging away from the pole. Each pleat is a thin box with its own slice of the flag.
+    FX, FZ, FTOP, HOIST, FLY, NP = 5.45, Z0 + 0.35, 2.4, 0.72, 1.25, 10
+    S.tcyl(Frame((FX, 0.03, FZ)), (0, 0, 0), (0.17, 0.17), (0.19, 0.19), 0.03, 'trim')
+    S.cyl((FX, 0.06, FZ), (FX, 2.46, FZ), 0.018, 'trim')
+    S.cyl((FX, 2.44, FZ), (FX, 2.47, FZ), 0.026, 'brass')
+    S.sph((FX, 2.51, FZ), 0.045, 'brass')
+    flag = tx.us_flag()
+    fw = flag.width / NP
+    px, pz = FX - 0.02, FZ
+    for i in range(NP):
+        S.mat(f'flag{i}', (220, 220, 220), tex=flag.crop((round(i * fw), 0, round((i + 1) * fw), flag.height)),
+              texmode=1, wrap=0.4, spec=0.1, shin=10)
+        yaw = 180 - 12 + (32 if i % 2 == 0 else -32)                 # zigzag pleats around a fly 12 deg off the wall
+        dx, dz = math.cos(math.radians(yaw)), math.sin(math.radians(yaw))
+        w = FLY / NP
+        top = FTOP - 0.12 * ((i + 0.5) / NP) ** 2                       # the fly end droops
+        cx, cz = px + dx * w / 2, pz + dz * w / 2
+        rot = Ry(math.degrees(math.atan2(-dz, dx)))
+        S.wbox((cx, top - HOIST / 2, cz), (w / 2 + 0.004, HOIST / 2, 0.004), f'flag{i}', rot=rot)
+        S.wbox((cx, top - HOIST - 0.015, cz), (w / 2 + 0.004, 0.015, 0.006), 'brass', rot=rot)    # gold fringe
+        px, pz = px + dx * w, pz + dz * w
 
     # ---------------------------------------------------------------- murder board (left back)
     with S.tag('case_board'):

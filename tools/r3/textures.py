@@ -1271,6 +1271,24 @@ def flag_folded(w=64, h=64):
     return img
 
 
+def us_flag(w=380, h=200):
+    """The Stars and Stripes, hoist on the left: 13 stripes, a blue canton with 50 stars in rows of 6 and 5."""
+    img = Image.new('RGBA', (w, h), (232, 228, 216, 255)); d = ImageDraw.Draw(img)
+    sh = h / 13
+    for i in range(0, 13, 2):
+        d.rectangle([0, round(i * sh), w, round((i + 1) * sh) - 1], fill=(170, 30, 42, 255))
+    cw, ch = round(w * 0.4), round(sh * 7)
+    d.rectangle([0, 0, cw - 1, ch - 1], fill=(36, 44, 96, 255))
+    r = max(1.2, h / 110)
+    for row in range(9):
+        cols = 6 if row % 2 == 0 else 5
+        for c in range(cols):
+            x = cw * (2 * c + 1 + (row % 2)) / 12
+            y = ch * (row + 1) / 10
+            d.ellipse([x - r, y - r, x + r, y + r], fill=(236, 234, 226, 255))
+    return img
+
+
 def night_hills(seed=104, w=2048, h=384):
     """Dark hills with scattered house lights and a freeway's ribbon of headlights along the bottom (emission in alpha)."""
     rng = np.random.default_rng(seed)
