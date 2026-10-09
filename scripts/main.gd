@@ -5,9 +5,10 @@ extends Node
 ##
 ## Controls: left click = walk / use, right click = look,
 ## mouse to top edge (or Tab) = inventory, F5 = save, F9 = load, F11 / Alt+Enter = fullscreen,
-## Esc = save and go back to the title screen (TitleScreen: New Game, Load Game, Settings, Exit).
+## Esc = save and go back to the title screen (TitleScreen: New Game, Load Game, Case 2 to 5, Settings, Exit).
 
 const PlayerScene := preload("res://scenes/player.tscn")
+const CaseStarts := preload("res://scripts/case_starts.gd")
 const PLAYER_COLOR := Color(0.93, 0.86, 0.68)
 
 var room: Room
@@ -91,7 +92,7 @@ func _text_time() -> float:
 # --- title / ending ---------------------------------------------------------
 func _title() -> void:
 	## The title screen, faded in from black (over whatever room is left behind after the end).
-	## New Game starts Case 1 in Room 214; Load Game (or F9) loads the quicksave; Exit quits.
+	## New Game starts Case 1 in Room 214; Case 2 to 5 jump to that case; Load Game (or F9) loads the quicksave; Exit quits.
 	busy = true
 	if ui.fade_rect.color.a < 0.99:
 		await ui.fade_to(1.0, 0.6)
@@ -110,6 +111,9 @@ func _title() -> void:
 	if action == "load":
 		await _load()
 		return
+	if action.begins_with("case"):
+		await jump_to_case(int(action.substr(4)))
+		return
 	Game.reset()
 	await change_room("squad_room", "start")
 	busy = true
@@ -118,9 +122,9 @@ func _title() -> void:
 	busy = false
 
 
-func case_card(time: String, title: String) -> void:
+func case_card(time: String, title: String) -> bool:
 	## Title card between two cases ("1:40 a.m.  Case 2: Five Stars"). Click to go on; F9 loads instead,
-	## which frees the calling room, so nothing after this runs in that case.
+	## which frees the calling room, so nothing after this runs in that case. Returns true when it loaded.
 	busy = true
 	await ui.fade_to(1.0, 1.2)
 	ui.show_card([time, "", title, "", "", "Click to continue"],
@@ -129,6 +133,43 @@ func case_card(time: String, title: String) -> void:
 	ui.hide_card()
 	if _load_requested:
 		await _load()
+		return true
+	return false
+
+
+func jump_to_case(n: int) -> void:
+	## The title screen's Case 2 to 5: start that case as if every case before it were fully solved, with every clue
+	## and board seed (so the best ending is still there), from the state a full playthrough has when that case's card
+	## comes up (scripts/case_starts.gd), then the card and the drive, as at the end of the case before.
+	## Nothing is saved until the player saves.
+	Game.reset()
+	var start: Dictionary = CaseStarts.STARTS[n]
+	Game.flags = (start["flags"] as Dictionary).duplicate(true)
+	Game.inventory.clear()
+	for id in start["inventory"]:
+		Game.inventory.append(String(id))
+	Game.inventory_changed.emit()
+	match n:
+		2:
+			if await case_card("1:40 a.m.", "Case 2: Five Stars"):
+				return
+			await Case2.drive_up(self)
+			await change_room("mulholland_overlook", "drive")
+		3:
+			if await case_card("2:45 a.m.", "Case 3: Walk of Fame"):
+				return
+			await Case3.drive_in(self)
+			await change_room("stardust_shop", "drive")
+		4:
+			if await case_card("3:50 a.m.", "Case 4: Low Water"):
+				return
+			await Case4.drive_in(self)
+			await change_room("fletcher_bridge", "drive")
+		5:
+			if await case_card("4:50 a.m.", "Case 5: Last Call"):
+				return
+			Case5.start(self)
+			await change_room("street_crime", "squad_room")
 
 
 func the_end() -> void:

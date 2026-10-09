@@ -158,7 +158,7 @@ it has one. Using one item on another always says "Those two don't go together."
 | `walk(to)`, `wait(seconds)`, `wait_click()` | |
 | `drive_begin()`, `drive_wait(s)`, `text_message(text, outgoing, contact)`, `drive_end()` | The rain-on-windshield transition. Follow `drive_end()` with `change_room()`. |
 | `change_room(id, from_room)` | Frees the calling room: nothing after it runs. Make it the last line. |
-| `case_card(time, title)` | Title card between cases. |
+| `case_card(time, title) -> bool` | Title card between cases. True if F9 loaded a save from it instead. |
 | `caption(text, color, skippable)` | A subtitle in the lower third (the take). `skippable = false` ignores clicks. |
 | `piano(notes, set_list) -> bool` | Danny's keyboard. True once the last five notes played spell `notes` by letter; false if the player stepped back. Hints after three and six wrong runs of five. |
 | `the_end()` | The last card after Case 5's credits; a new game starts after it (or F9 loads). |
@@ -179,7 +179,7 @@ All UI is built in code in `scripts/ui.gd` (`class_name GameUI`), with DejaVu Sa
 | Speech | `show_speech`, `hide_speech` | `say`, `voice`, `narrate`. |
 | Toast | `toast(text, hold)` | Pickups, notebook, save/load. |
 | Choices | `show_choices`, `hide_choices`, `options`, signal `choice_made(i)` | Dialogue; also device buttons. |
-| Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings, Exit (quits). `Main._title()` runs it at start, after THE END, and on Esc in a room (`_save_to_title()` quicksaves first). |
+| Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings, Exit (quits), and a SKIP TO row for Case 2 to 5 (`Main.jump_to_case(n)`). `Main._title()` runs it at start, after THE END, and on Esc in a room (`_save_to_title()` quicksaves first). |
 | Card | `show_card(lines, colors)`, `hide_card` | Case cards and the end card. |
 | Fade | `fade_rect`, `fade_to(alpha, time)` | Room changes, drives. |
 | Murder board | `show_board(question, caption)`, `set_board_question`, `set_board_pins(pins, labels)`, `hide_board` | Deductions. |
@@ -396,7 +396,15 @@ Godot_v4.7.2-stable_win64_console.exe --path . res://tests/playthrough.tscn -- -
 At the end of Case 5 the test snapshots the flags and inventory at sunrise and plays each ending from there (Ending
 B with Pryce's invitation taken off the board), checking that exactly one ending flag is set and the credits finish.
 The test saves and later restores the player's own quicksave, so running it doesn't destroy a real save. When a
-new case is added, extend `_run()` with its steps and add its rooms to the `--shots` list. Send the output to a
+new case is added, extend `_run()` with its steps and add its rooms to the `--shots` list.
+
+**Case jumps.** The title screen's Case 2 to 5 buttons (`Main.jump_to_case`) load the flags and inventory from
+`scripts/case_starts.gd`, then show the case card and run the drive, as at the end of the case before. That file is
+generated: `tests/capture_case_starts.tscn` runs the playthrough and snapshots the state as each case card comes up
+(every earlier case fully solved, with every clue and board seed, so the best ending stays reachable), failing if an
+earlier clue is missing. Re-run it whenever a case gains or renames a clue or flag. `tests/case_jumps.tscn` presses
+each button and checks the start room, the notebook, the board flags and the inventory, and that the quicksave is
+untouched. Send the output to a
 file rather than piping it through `tail`, and if a run hangs, stop Godot by process id, not by name, in case the
 editor is open.
 
@@ -428,7 +436,7 @@ case's murder board pick it up.
 5. Any board pin that should stay for later cases: an overlay in `squad_room.py` and a `board_*` flag.
 6. Lead the previous case's closing calls into the new one with `case_card()`. (The game now ends with
    Case 5's credits and `the_end()`.)
-7. Extend `tests/playthrough.gd`, update the README walkthrough, and add a `CLAUDE.md` line if there's a new rule.
+7. Extend `tests/playthrough.gd`, re-run `tests/capture_case_starts.tscn`, update the README walkthrough, and add a `CLAUDE.md` line if there's a new rule.
 
 ## 13. Leftovers and known stale bits
 

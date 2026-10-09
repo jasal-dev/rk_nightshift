@@ -1,8 +1,9 @@
 class_name TitleScreen
 extends Control
 ## The title screen (GameUI.show_title): the street the morning Sal died, empty but for the tape and the patrol car's
-## turning light bar, RAY KESSLER in neon over NIGHTSHIFT, and New Game, Load Game, Settings and Exit.
-## Emits `chosen` ("new", "load" or "quit").
+## turning light bar, RAY KESSLER in neon over NIGHTSHIFT, and New Game, Load Game, Settings and Exit, with a row
+## under them that skips to Case 2, 3, 4 or 5 (Main.jump_to_case).
+## Emits `chosen` ("new", "load", "case2" to "case5", or "quit").
 ## The settings panel emits `fullscreen_pressed` and `text_speed_chosen`; Main applies and remembers them.
 ## Art: tools/r3/title.py (the backdrop, via render_room.py) and tools/r3/gen_title.py (the logo).
 
@@ -28,6 +29,7 @@ var new_button: Button
 var load_button: Button
 var settings_button: Button
 var exit_button: Button
+var case_buttons: Array[Button] = []    ## Case 2 to Case 5, in order
 var menu: VBoxContainer
 var settings: PanelContainer
 var _fullscreen_button: Button
@@ -84,8 +86,8 @@ func _init(has_save: bool, text_speed: int) -> void:
 
 	menu = VBoxContainer.new()
 	menu.add_theme_constant_override("separation", 4)
-	menu.position = Vector2(660, 530)
-	menu.size = Vector2(600, 0)
+	menu.position = Vector2(560, 530)
+	menu.size = Vector2(800, 0)
 	add_child(menu)
 	new_button = _button("NEW GAME", 46)
 	load_button = _button("LOAD GAME", 46)
@@ -98,6 +100,7 @@ func _init(has_save: bool, text_speed: int) -> void:
 	exit_button.pressed.connect(func(): chosen.emit("quit"))
 	for b in [new_button, load_button, settings_button, exit_button]:
 		menu.add_child(b)
+	menu.add_child(_case_row())
 
 	settings = _settings_panel(text_speed)
 	settings.visible = false
@@ -212,6 +215,25 @@ func _settings_panel(text_speed: int) -> PanelContainer:
 	back.pressed.connect(close_settings)
 	vb.add_child(back)
 	return panel
+
+
+func _case_row() -> VBoxContainer:
+	## SKIP TO  CASE 2  CASE 3  CASE 4  CASE 5, smaller, a little below the main buttons.
+	var box := VBoxContainer.new()
+	var gap := Control.new()
+	gap.custom_minimum_size = Vector2(0, 18)
+	box.add_child(gap)
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 26)
+	box.add_child(row)
+	row.add_child(_label("SKIP TO", 26, GREY))
+	for n in [2, 3, 4, 5]:
+		var b := _button("CASE %d" % n, 30)
+		b.pressed.connect(func(): chosen.emit("case%d" % n))
+		case_buttons.append(b)
+		row.add_child(b)
+	return box
 
 
 func _row(parent: Control, caption: String) -> HBoxContainer:
