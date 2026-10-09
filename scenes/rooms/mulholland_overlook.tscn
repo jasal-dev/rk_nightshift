@@ -119,6 +119,16 @@ face = "up"
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/prius"]
 polygon = PackedVector2Array(882.5, 549.4, 885.5, 541.2, 936.9, 517.3, 945.2, 516.6, 985.6, 513.4, 1147.3, 500.8, 1267.2, 526.7, 1270.7, 529.8, 1377.9, 628.6, 1373.5, 710.9, 1326.2, 734.1, 1305.7, 738, 1146.1, 768.2, 1122.1, 772.7, 887.9, 675.6, 883.1, 611.8)
 
+[node name="scratch" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "scratch"
+display_name = "scratches"
+walk_to = Vector2(962, 777)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/scratch"]
+polygon = PackedVector2Array(1040, 663.1, 1040.4, 619.2, 1112.5, 647, 1111.5, 694.7)
+
 [node name="inside" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "inside"

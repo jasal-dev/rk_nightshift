@@ -287,6 +287,32 @@
    ],
    "face": "up"
   },
+  "scratch": {
+   "name": "scratches",
+   "polygon": [
+    [
+     1040.0,
+     663.1
+    ],
+    [
+     1040.4,
+     619.2
+    ],
+    [
+     1112.5,
+     647.0
+    ],
+    [
+     1111.5,
+     694.7
+    ]
+   ],
+   "walk_to": [
+    962,
+    777
+   ],
+   "face": "right"
+  },
   "ground": {
    "name": "ground",
    "polygon": [
@@ -530,6 +556,7 @@
   "car",
   "park",
   "prius",
+  "scratch",
   "inside",
   "shah",
   "kenji"

@@ -388,6 +388,8 @@ func _case2() -> void:
 		_fail("the detective should be back in view")
 	await act("prius", "look")
 	await act("prius")
+	await act("scratch", "look")
+	await act("scratch")
 	await act("ground", "look")
 	await act("wall", "use", "driver_card")
 	expect(["got_kenji_keys", "clue_empty_case", "got_receipt", "got_driver_card", "clue_dashcam", "clue_two_cups",

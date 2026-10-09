@@ -61,11 +61,22 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 		"prius":
 			if verb == "look":
 				await main.say("A white Prius. Half the cars in LA are white Priuses, and the other half are waiting for one.")
-				await main.say("Somebody keyed RAT into the driver's side. There's rust in the scratch.")
+				await main.say("He kept it clean, inside and out. Except for the back door.")
 			elif item != "":
 				await default_response(verb, item)
 			else:
-				await main.say("Weeks old. Not tonight's work.")
+				await main.say("Engine running, wipers going. The car hasn't heard the news.")
+
+		"scratch":
+			if verb == "look":
+				await main.say("Somebody keyed RAT into the back door. Big letters, right through the white.")
+			elif item != "":
+				await default_response(verb, item)
+			elif Game.flag("clue_rat"):
+				await main.say("Weeks-old rust. Whoever wrote it wasn't up here tonight. Or wasn't up here with a key.")
+			else:
+				await main.say("There's rust in the scratches. Weeks old. Not tonight's work.")
+				await main.say("But somebody thought Kenji was a rat, and wanted every rider to see it.")
 				main.clue("clue_rat")
 
 		"ground":
