@@ -237,17 +237,26 @@ func _hover_text(target: String) -> String:
 
 
 # --- input --------------------------------------------------------------------
+func _input(event: InputEvent) -> void:
+	## A click that ends a line or a card is taken before the GUI sees it: a close-up's backdrop (the jigsaw, the
+	## piano, a device screen) would otherwise swallow it, and with the Manual text speed the line would never end.
+	var mb := event as InputEventMouseButton
+	if not (mb and mb.pressed and mb.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT]):
+		return
+	if _waiting_click:
+		_waiting_click = false
+	elif _speaking:
+		_skip = true
+	else:
+		return
+	get_viewport().set_input_as_handled()
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
 	var key := event as InputEventKey
 	if mb and mb.pressed:
 		if not (mb.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT]):
-			return
-		if _waiting_click:
-			_waiting_click = false
-			return
-		if _speaking:
-			_skip = true
 			return
 		if busy or _choosing or room == null:
 			return

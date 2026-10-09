@@ -132,7 +132,9 @@ edges are straight segments that cross no polygon edge, and `AStar2D` finds the 
 **Click flow.** Left click on a hotspot runs `_run_action(hs, "use", item)`: walk to `walk_to` (cancelled if the
 player clicks elsewhere meanwhile), face, set `busy`, clear the selected item, `await room.interact(...)`, clear
 `busy`. Right click runs `"look"` without walking. Left click on empty floor walks there. While `busy` is true,
-clicks and hover are ignored; while a line is showing, a click skips it.
+clicks and hover are ignored; while a line is showing, a click skips it. That click (and the one that dismisses a case
+card) is taken in `Main._input`, before the GUI, so a close-up's backdrop (the jigsaw, the piano, a device screen)
+can't swallow it.
 
 **Inventory.** Right click on an item calls `Main.examine_item(id)`: special cases live in its `match`
 (`case_file`, `notebook`, `envelope`, `frozen_peas`, `ride_receipt`, `lens_piece`, `valet_ticket`, `pryce_invite`,
@@ -371,8 +373,9 @@ transmittance. `Room.light_at()` interpolates it bilinearly at the detective's f
 
 ## 11. Testing
 
-`tests/playthrough.tscn` runs the real main scene at 8× speed, clicks hotspots through `Main._run_action`, skips
-every line, answers choices and device screens by matching text, solves the jigsaw, and checks the flags later
+`tests/playthrough.tscn` runs the real main scene at 8× speed, clicks hotspots through `Main._run_action`, plays with
+the Manual text speed and ends every line with a real click pushed through the viewport (so an overlay that swallows
+clicks hangs the test), answers choices and device screens by matching text, solves the jigsaw, and checks the flags later
 cases depend on. It ends with `PLAYTHROUGH OK` and exit code 0, or names the step where it got stuck (a step gets
 45 s, or 150 s with `--shots`).
 

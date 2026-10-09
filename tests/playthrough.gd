@@ -20,6 +20,7 @@ var _user_save := ""     ## the player's own quicksave, put back when the test e
 var _jig_solved := false
 var _piano_keys: Array[String] = []    ## keys still to press on Danny's piano
 var _piano_done := false
+var _speak_frames := 0                 ## frames the current line has been up
 
 
 func _ready() -> void:
@@ -29,8 +30,7 @@ func _ready() -> void:
 	_step_started = Time.get_ticks_msec()
 	main = MainScene.instantiate()
 	add_child(main)
-	if main.text_speed == main.MANUAL:
-		main.text_speed = 1      # (not saved) with Manual, lines left unskipped for --shots would wait for a click forever
+	main.text_speed = main.MANUAL      # (not saved) every line waits for the test's click
 	_run()
 
 
@@ -64,9 +64,14 @@ func _process(_delta: float) -> void:
 				_shots[shot] = int(_shots.get(shot, 0)) + 1
 			if _shots.get(shot, 0) == 20:      # a few frames in, once fades and layout have settled
 				get_viewport().get_texture().get_image().save_png("user://shot_%s.png" % shot)
-	if main._speaking:
-		main._skip = not ("--shots" in OS.get_cmdline_user_args() and (main.ui.board != null or main.ui.device != null
-				or main.ui.paper != null))
+	# Every line is ended with a real click through the viewport, as a player would with the Manual text speed, so a
+	# close-up that swallows the click hangs the test. With --shots, lines over the board, a device screen, the jigsaw
+	# or a paper stay up until their screenshot is taken.
+	_speak_frames = _speak_frames + 1 if main._speaking else 0
+	var hold := "--shots" in OS.get_cmdline_user_args() and (main.ui.board != null or main.ui.device != null
+			or main.ui.jigsaw != null or main.ui.paper != null)
+	if main._speaking and _speak_frames >= (30 if hold else 1):
+		_click()
 	if main._choosing:
 		_answer()
 	if main.ui.jigsaw != null and not _jig_solved:
@@ -85,6 +90,17 @@ func _process(_delta: float) -> void:
 			main.ui.piano_press(_piano_keys.pop_front())
 	else:
 		_piano_done = false
+
+
+func _click() -> void:
+	## A left click in the middle of the screen, pressed and released, through the GUI like the player's.
+	for pressed in [true, false]:
+		var mb := InputEventMouseButton.new()
+		mb.button_index = MOUSE_BUTTON_LEFT
+		mb.pressed = pressed
+		mb.position = get_viewport().get_visible_rect().size * 0.5
+		mb.global_position = mb.position
+		get_viewport().push_input(mb, true)
 
 
 func _shot_state(key: String) -> String:
