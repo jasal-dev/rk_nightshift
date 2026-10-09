@@ -195,7 +195,9 @@ func _talk_to_doss() -> void:
 		if not Game.flag("channel_lit") and Game.flag("reeds_dark"):
 			opts.append("Put your spotlight on the reeds."); keys.append("spot")
 		opts.append("That'll do."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		await main.say(opts[c])
 		match keys[c]:
 			"got":
@@ -284,7 +286,9 @@ func _talk_to_preacher() -> void:
 		if not Game.flag("preacher_carry"):
 			opts.append("Why carry the bike all the way down?"); keys.append("carry")
 		opts.append("That'll do."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		await main.say(opts[c])
 		match keys[c]:
 			"story":

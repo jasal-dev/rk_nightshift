@@ -109,7 +109,9 @@ func _interrogate() -> void:
 		if Game.flag("clue_paid") and not Game.flag("heard_caller"):
 			opts.append("Anyone else asking about Danny?"); keys.append("anyone")
 		opts.append("I'll be going."); keys.append("leave")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		var k: String = keys[c]
 		await main.say(opts[c])
 		match k:

@@ -208,7 +208,9 @@ func _talk_to_shah() -> void:
 		if not Game.flag("clue_headlight_glass"):
 			opts.append("Anything else?"); keys.append("else")
 		opts.append("Thanks, Anita."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		await main.say(opts[c])
 		match keys[c]:
 			"how":
@@ -309,7 +311,9 @@ func _talk_to_preacher() -> void:
 		if not Game.flag("preacher_ok"):
 			opts.append("Will you be all right?"); keys.append("ok")
 		opts.append("Take care, Preacher."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		if keys[c] != "phone":
 			await main.say(opts[c])
 		match keys[c]:

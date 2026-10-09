@@ -211,7 +211,9 @@ func _talk_to_crane() -> void:
 		if Game.flag("crane_lie2_broken"):
 			opts.append("You stopped."); keys.append("stopped")
 		opts.append("I'll wait."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		var k: String = keys[c]
 		if k in ["where", "home", "tarp", "done"]:
 			await main.say(opts[c])

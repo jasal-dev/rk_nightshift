@@ -25,12 +25,25 @@ var _choosing := false
 var _waiting_click := false
 var _load_requested := false
 var _on_title := false      ## the title screen is up and waiting for a choice
+var _topic_menus := 0       ## topic menus shown in the current conversation (see topics())
 var text_speed := 1         ## index into TEXT_TIME (Slow, Normal, Fast, Manual), set on the title screen's settings panel
 
 
 const SETTINGS := "user://settings.cfg"
 const TEXT_TIME := [1.5, 1.0, 0.65, 1.0]   ## how long lines stay up, per text speed
 const MANUAL := 3                          ## the Manual text speed: a line stays up until a click
+const NOTHING_TO_ASK := [                  ## Ray, when he talks to someone with nothing left to ask (see topics())
+	"We've said all there is to say.",
+	"Nothing left to ask. Nothing I want the answer to, anyway.",
+	"I've had all the answers I'm getting here.",
+	"We've been over it. Twice would just be rude.",
+	"I've got nothing new. I'll come back when I do.",
+	"Asking again won't make the answers any better.",
+	"That well's dry.",
+	"Everything's been said. Some of it was even true.",
+	"No more questions. Not yet.",
+	"I know what I came to know.",
+]
 
 
 func _ready() -> void:
@@ -372,6 +385,7 @@ func _run_action(hs: Hotspot, verb: String, item: String, click: Vector2) -> voi
 		player.face_point(click)
 	busy = true
 	Game.select_item("")
+	_topic_menus = 0
 	await room.interact(hs, verb, item)
 	busy = false
 
@@ -662,6 +676,25 @@ func choose(options: Array) -> int:
 	ui.hide_choices()
 	_choosing = false
 	return idx
+
+
+func topics(options: Array) -> int:
+	## A conversation's topic menu, where the last option is the way out ("Thanks, Anita.") and asked topics drop out.
+	## Once only the way out is left, the menu isn't shown. If the conversation has only just started, Ray says he has
+	## nothing to ask and this returns -1: the caller returns at once, without its goodbye. Later in a conversation it
+	## returns the way out's index, as if the player had picked it.
+	_topic_menus += 1
+	var first := _topic_menus == 1
+	var last := options.size() - 1
+	var c := last
+	if last > 0:
+		c = await choose(options)
+	elif first:
+		await say(NOTHING_TO_ASK.pick_random())
+		c = -1
+	if c < 0 or c == last:
+		_topic_menus = 0
+	return c
 
 
 func give(item: String, animate := true) -> void:

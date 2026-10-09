@@ -180,7 +180,9 @@ func _brenner(line: String) -> void:
 
 
 func _talk_vance() -> void:
-	await _vance("Detective. You look like a man who hasn't slept, and has decided not to.")
+	if not Game.flag("vance5_hello"):
+		Game.set_flag("vance5_hello")
+		await _vance("Detective. You look like a man who hasn't slept, and has decided not to.")
 	while true:
 		var opts := []
 		var keys := []
@@ -191,7 +193,9 @@ func _talk_vance() -> void:
 		if not Game.flag("vance5_sight"):
 			opts.append("Stay out of sight."); keys.append("sight")
 		opts.append("I'm ready."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		match keys[c]:
 			"thanks":
 				Game.set_flag("vance5_thanks")

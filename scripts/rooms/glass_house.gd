@@ -179,7 +179,9 @@ func _talk_to_courtney() -> void:
 		if not Game.flag("courtney_drunk"):
 			opts.append("Who left drunk tonight?"); keys.append("drunk")
 		opts.append("I'll let you work."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		if keys[c] != "owen" and keys[c] != "cam":
 			await main.say(opts[c])
 		match keys[c]:
@@ -286,7 +288,9 @@ func _talk_to_andre() -> void:
 		if Game.flag("andre_drunk") and not Game.flag("got_valet_ticket"):
 			opts.append("I need the ticket."); keys.append("ticket")
 		opts.append("Thanks, Andre."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		await main.say(opts[c])
 		match keys[c]:
 			"drunk":

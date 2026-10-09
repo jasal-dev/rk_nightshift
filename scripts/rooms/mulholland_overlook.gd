@@ -135,7 +135,9 @@ func _talk_to_park() -> void:
 		if Game.flag("park_what") and Game.flag("clue_brielle_alibi") and not Game.flag("clue_walker"):
 			opts.append("Anything else from the couple?"); keys.append("couple")
 		opts.append("That'll do."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		await main.say(opts[c])
 		match keys[c]:
 			"what":
@@ -185,7 +187,9 @@ func _talk_to_shah() -> void:
 		if not Game.flag("shah_else"):
 			opts.append("Anything else?"); keys.append("else")
 		opts.append("Thanks, Anita."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		await main.say(opts[c])
 		match keys[c]:
 			"how":

@@ -259,7 +259,9 @@ func _talk_to_park() -> void:
 		if Game.flag("clue_eviction") and not Game.flag("clue_whitaker_alibi"):
 			opts.append("The developer's man."); keys.append("whitaker")
 		opts.append("That'll do."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		await main.say(opts[c])
 		match keys[c]:
 			"morty":
@@ -303,7 +305,9 @@ func _talk_to_morty() -> void:
 		if Game.flag("clue_morty_bought") and not Game.flag("clue_weight"):
 			opts.append("What does a real one weigh?"); keys.append("weight")
 		opts.append("Good night, Morty."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		if keys[c] != "bought":
 			await main.say(opts[c])
 		match keys[c]:
@@ -416,7 +420,9 @@ func _talk_to_pearl() -> void:
 		if Game.flag("pearl_lie2_broken") and Game.has_item("star_earring"):
 			opts.append("Gus didn't fall."); keys.append("step3")
 		opts.append("I'll be back."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		var k: String = keys[c]
 		if k in ["story", "years", "keys", "who", "done"]:
 			await main.say(opts[c])

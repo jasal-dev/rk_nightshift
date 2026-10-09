@@ -198,7 +198,9 @@ func _talk_mara() -> void:
 		if not Game.flag("clue_mara_beat"):
 			opts.append("What do you know about the block?"); keys.append("block")
 		opts.append("Goodnight."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		match keys[c]:
 			"working":
 				Game.set_flag("mara_working")
@@ -238,7 +240,9 @@ func _talk_park() -> void:
 		if not Game.flag("clue_tape_helper"):
 			opts.append("Danny's alley, Tuesday."); keys.append("alley")
 		opts.append("That'll do."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		match keys[c]:
 			"what":
 				Game.set_flag("park5_what")
@@ -298,7 +302,9 @@ func _talk_teo() -> void:
 		if not Game.flag("clue_knock_only"):
 			opts.append("Who knows the knock?"); keys.append("knock")
 		opts.append("Go home, Teo."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		match keys[c]:
 			"found":
 				Game.set_flag("teo_found")

@@ -216,7 +216,9 @@ func _talk_to_shah() -> void:
 		if not Game.flag("shah_palm"):
 			opts.append("Anything else?"); keys.append("else")
 		opts.append("Thanks, Anita."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		await main.say(opts[c])
 		match keys[c]:
 			"how":

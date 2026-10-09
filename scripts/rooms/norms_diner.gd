@@ -152,7 +152,9 @@ func _talk_to_rosa() -> void:
 		if Game.flag("rosa_paid") and not Game.flag("got_card_slip"):
 			opts.append("Can I see the card slip?"); keys.append("slip")
 		opts.append("Thanks, Rosa."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		await main.say(opts[c])
 		match keys[c]:
 			"paid":
@@ -215,7 +217,9 @@ func _talk_to_heck() -> void:
 			if not Game.flag("heck_roommate"):
 				opts.append("What about his roommate?"); keys.append("roommate")
 		opts.append("Never mind."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		await main.say(opts[c])
 		match keys[c]:
 			"kenji":

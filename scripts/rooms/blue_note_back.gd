@@ -199,7 +199,9 @@ func _talk_shah() -> void:
 		if not Game.flag("shah5_else"):
 			opts.append("Anything else?"); keys.append("else")
 		opts.append("Thanks, Anita."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		match keys[c]:
 			"how":
 				await main.say("How did he die?")
@@ -336,7 +338,9 @@ func _talk_nina() -> void:
 		if not Game.flag("clue_takes_app"):
 			opts.append("Did Danny record his sets?"); keys.append("sets")
 		opts.append("Stay with Dr. Shah."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		match keys[c]:
 			"tonight":
 				await main.say("What happened tonight?")

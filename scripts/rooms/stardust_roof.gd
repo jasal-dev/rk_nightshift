@@ -208,7 +208,9 @@ func _talk_to_charlie() -> void:
 		if Game.has_item("brenner_card") and not Game.flag("clue_block_empty"):
 			opts.append("Ever seen this man?"); keys.append("brenner")
 		opts.append("Good night, Charlie."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		if keys[c] != "brenner":
 			await main.say(opts[c])
 		match keys[c]:

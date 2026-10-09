@@ -219,7 +219,9 @@ func _talk_to_devin() -> void:
 		if Game.flag("devin_lie1_broken") and Game.flag("clue_gps"):
 			opts.append("His car never came back here."); keys.append("lie2")
 		opts.append("I'll be in touch."); keys.append("done")
-		var c: int = await main.choose(opts)
+		var c: int = await main.topics(opts)
+		if c < 0:
+			return
 		var k: String = keys[c]
 		if k != "lie1":
 			await main.say(opts[c])
