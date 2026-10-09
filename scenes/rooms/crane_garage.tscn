@@ -43,8 +43,8 @@ offset = Vector2(-158, -507)
 [node name="Crane_step" type="Sprite2D" parent="Actors"]
 texture = ExtResource("ov_crane_step")
 centered = false
-position = Vector2(1578, 941)
-offset = Vector2(-178, -393)
+position = Vector2(1605, 943)
+offset = Vector2(-227, -395)
 
 [node name="Obstacles" type="Node2D" parent="."]
 
@@ -180,7 +180,7 @@ walk_to = Vector2(1213, 956)
 face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/crane_step"]
-polygon = PackedVector2Array(1456.9, 957.6, 1477.4, 616.2, 1658.1, 620.3, 1629.9, 968.5)
+polygon = PackedVector2Array(1483.1, 959.2, 1504.7, 616.8, 1686.6, 621, 1657.2, 970.2)
 
 [node name="crane" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
