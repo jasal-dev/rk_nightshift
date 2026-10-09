@@ -306,6 +306,9 @@ grazing-angle pixels differ). On the RTX 4090 a 4K room render takes about 1 s a
    difference out as `<room>_<tag>.png`. The background ends up with no overlays in it.
 3. For each `exclusive_overlays` tag, cuts it against the bare background with every other overlay hidden, so two
    poses of one person don't carry each other's pixels.
+   For `overlay_bases` tags, above the person's floor line the sprite keeps only the person (where they are the
+   nearest surface): their reflections and light on the floor and walls behind them would otherwise draw over the
+   detective when he walks behind them. Below the line (their shadow and reflection in front) it is unchanged.
 4. For each `occluders` tag, re-renders depth without it and cuts out the pixels where it was the nearest surface.
    The cut-out uses the background's own pixels, so it is invisible until the detective walks behind it.
 5. Adds the vignette and grain (`finish()`), writes the PNGs and `out/<room>.json`, and bakes light probes
@@ -344,8 +347,8 @@ metres, y up, and the floor is at y = 0 (points are projected at y = 0.1).
 | `hotspot_order` | `[tag, ...]` | Scene order; later entries are on top when hotspots overlap. Tags not listed are dropped. |
 | `overlays` | `[tag, ...]` | Props cut out as sprites the game shows by flag. |
 | `exclusive_overlays` | `[tag, ...]` | Subset of `overlays` that never show together (two poses). |
-| `overlay_bases` | `{tag: (x, z)}` | Overlays that stand on the floor: placed under `Actors` and y-sorted with the detective at that floor point. |
-| `occluders` | `{tag: (x, z)}` | Walk-behind props and the floor point they stand on. |
+| `overlay_bases` | `{tag: (x, z)}` | Overlays that stand on the floor: placed under `Actors` and y-sorted with the detective at that floor point. Above that line the sprite is cut to the person only. |
+| `occluders` | `{tag: (x, z)}` | Walk-behind props and the floor point they stand on. The set must leave the tag out when it is in `hide` (`if 'tag' not in hide:`), or the cut-out is empty. |
 | `obstacles` | `[(x, z, r) or (x0, z0, x1, z1), ...]` | Footprints pathfinding steers around: round ones (a 12-sided ring) or floor rectangles. |
 | `screen` | `{walk, spawns, scale}` | Close-ups: walk polygon and spawns in pixels, `scale = ((y0, s0), (y1, s1))`. Also skips the light probes. |
 | `char_fill` | `((r, g, b), power)` | Soft fill light from the camera side for the detective, baked into the probes. |

@@ -293,9 +293,10 @@ def build(hide=()):
              (ox, 0.21, oz), yaw=180, scale=0.94, rot=Rz(90), tag='owen')
     with S.tag('owen'):
         S.box(WORLD, (ox + 0.7, 0.22, oz + 0.75), (0.24, 0.22, 0.2), 0.03, 'chomp', rot=Ry(-20))   # his yellow bag
-    npc.cast(S, 'shah', dict(npc.CROUCH, rsp=58, re=26, rin=24, lsp=40, le=70, lin=36, hp=30, hy=-6,
-                             props=(('torch', 'r'),)),
-             (SHAH[0], 0, SHAH[1]), yaw=-18, scale=0.95, tag='shah')
+    if 'shah' not in hide:
+        npc.cast(S, 'shah', dict(npc.CROUCH, rsp=58, re=26, rin=24, lsp=40, le=70, lin=36, hp=30, hy=-6,
+                                 props=(('torch', 'r'),)),
+                 (SHAH[0], 0, SHAH[1]), yaw=-18, scale=0.95, tag='shah')
     S.wbox((SHAH[0] - 0.9, 0.12, SHAH[1] - 0.2), (0.16, 0.12, 0.1), 'case', rnd=0.02)          # her kit
     S.fcyl((OWEN[0] - 0.5, 0.15, OWEN[1] + 1.0), 0.07, 0.15, 'lantern')
     S.light((OWEN[0] - 0.5, 0.6, OWEN[1] + 1.05), (255, 240, 220), power=4.5, range=7, soft=10)
@@ -326,7 +327,7 @@ def build(hide=()):
     cam = Camera((0.6, 2.2, 13.6), (0.3, 3.4, -5.0), fov=48, W=3840, H=2160)
     env = dict(sky=(26, 22, 38), bounce=(16, 14, 20), fog_col=(30, 26, 40), fog=0.03, fog_h0=0.0, fog_hf=0.08,
                fog_max=110, vol_scale=4, vol_steps=48, reflections=True, grid=0.7, ao_scale=1.2)
-    walk = [(-7.6, 7.2), (-7.6, -4.2), (-4.9, -4.2), (-3.4, -1.0), (-2.5, 0.0), (2.5, 0.0), (3.3, -1.0),
+    walk = [(-7.6, 7.2), (-7.6, -3.3), (-4.6, -3.3), (-3.4, -1.0), (-2.5, 0.0), (2.5, 0.0), (3.3, -1.0),
             (APRON - 0.4, -2.6), (APRON - 0.4, -0.9), (5.2, -0.9), (5.2, 2.3), (APRON - 0.4, 2.3), (APRON - 0.4, 7.2)]
     meta = dict(
         room='river_channel',
@@ -338,7 +339,7 @@ def build(hide=()):
             'shah': ('Dr. Shah', (SHAH[0] - 1.5, SHAH[1] - 0.9), 'right'),
             'bike': ('e-bike', (BIKE[0] + 0.3, -1.6), 'up'),
             'phone': ("Owen's phone", (BIKE[0] + 0.5, -1.6), 'up'),
-            'tent': ("Preacher's tent", (TENT[0] + 1.6, -3.4), 'left'),
+            'tent': ("Preacher's tent", (TENT[0] + 0.3, -2.9), 'up'),
             'preacher': ('Preacher', (PREACHER[0] + 0.9, -1.2), 'left'),
             'east_bank': ('east bank', (APRON - 0.8, -0.8), 'right'),
             'stairs': ('stairs', (APRON - 0.6, -2.4), 'right'),
@@ -369,7 +370,7 @@ def build(hide=()):
                        'preacher', 'owen', 'shah'],
         overlays=['preacher', 'spot'],
         overlay_bases={'preacher': PREACHER},
-        occluders={'cart': (-3.6, 5.9), 'debris': (3.4, 6.4)},
+        occluders={'cart': (-3.6, 5.9), 'debris': (3.4, 6.4), 'shah': (SHAH[0], SHAH[1] + 0.05)},
         obstacles=[(BIKE[0], BIKE[1], 0.6), (SHAH[0], SHAH[1], 0.4), (OWEN[0] + 0.8, OWEN[1], 0.6),
                    (TENT[0], TENT[1] + 0.6, 0.9), (-3.6, 5.9, 0.6), (3.4, 6.4, 0.7)],
         char_fill=((200, 196, 220), 0.2),

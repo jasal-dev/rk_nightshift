@@ -25,7 +25,7 @@ BENCH_X = 2.75                # the workbench's front edge
 BENCH_Z = (-5.2, -1.9)
 DOOR_Z = (-0.4, 0.6)           # the door up into the house, in the right wall
 CRANE_STAND = (1.7, 0.15)
-CRANE_STEP = (2.42, 0.1)
+CRANE_STEP = (2.85, 0.1)       # sitting on the upper step's edge (0.4 up), feet on the floor
 DRAIN = (0.7, -1.6)
 SLOPE = 6.0                   # how steeply the street climbs, left to right (degrees)
 BUCKET = (1.25, -0.6)
@@ -195,7 +195,7 @@ def build(hide=()):
     if 'crane_step' not in hide:
         npc.cast(S, 'crane', dict(npc.SEATED, lhp=70, lk=100, rhp=74, rk=96, lean=22, lsp=40, le=70, lin=40, rsp=38,
                                   re=74, rin=42, hp=26, hy=-10),
-                 (CRANE_STEP[0], 0.0, CRANE_STEP[1]), yaw=-90, scale=0.95, tag='crane_step')
+                 (CRANE_STEP[0], -0.08, CRANE_STEP[1]), yaw=-90, scale=0.95, tag='crane_step')
 
     # ---------------------------------------------------------------- outside: the steep street, the hill, the houses
     # a level concrete apron runs out from the door; the street beyond climbs left to right, dipping just below it

@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/glass_house_podium.png" id="occ_podium"]
 [ext_resource type="Texture2D" path="res://assets/rooms/glass_house_planter.png" id="occ_planter"]
 [ext_resource type="Texture2D" path="res://assets/rooms/glass_house_table.png" id="occ_table"]
+[ext_resource type="Texture2D" path="res://assets/rooms/glass_house_gift_bags.png" id="occ_gift_bags"]
+[ext_resource type="Texture2D" path="res://assets/rooms/glass_house_courtney.png" id="occ_courtney"]
+[ext_resource type="Texture2D" path="res://assets/rooms/glass_house_andre.png" id="occ_andre"]
+[ext_resource type="Texture2D" path="res://assets/rooms/glass_house_easel.png" id="occ_easel"]
 
 [node name="GlassHouse" type="Node2D"]
 script = ExtResource("script")
@@ -60,6 +64,30 @@ texture = ExtResource("occ_table")
 centered = false
 position = Vector2(759, 905)
 offset = Vector2(-70, -238)
+
+[node name="GiftBags" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_gift_bags")
+centered = false
+position = Vector2(1256, 786)
+offset = Vector2(-76, -94)
+
+[node name="Courtney" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_courtney")
+centered = false
+position = Vector2(1062, 798)
+offset = Vector2(-54, -240)
+
+[node name="Andre" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_andre")
+centered = false
+position = Vector2(832, 720)
+offset = Vector2(-73, -226)
+
+[node name="Easel" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_easel")
+centered = false
+position = Vector2(1587, 781)
+offset = Vector2(-73, -242)
 
 [node name="Obstacles" type="Node2D" parent="."]
 
@@ -119,7 +147,7 @@ walk_to = Vector2(0, 0)
 face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/city"]
-polygon = PackedVector2Array(1920, 1033.5, 1096.4, 1023.3, 1100.7, 468.1, 1920, 468.3)
+polygon = PackedVector2Array(1255, 456, 1672, 456, 1672, 700, 1255, 700)
 
 [node name="house" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")

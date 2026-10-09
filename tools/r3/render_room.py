@@ -180,6 +180,28 @@ def main():
         s2, _, v2 = S2.render(cam, env, a.room + '_only_' + tag)
         img2, _ = composite(s2, v2, ss, exposure=a.exposure or meta.get('exposure', 1.0), grade=meta.get('grade'))
         overlays[tag] = (img2, np.clip((np.abs(img2 - img).max(-1) - 0.01) / 0.03, 0, 1))
+    if meta.get('overlay_bases') and not a.preview:
+        # a y-sorted person's sprite covers the detective whenever he is behind them, so above their floor line it keeps
+        # only the person (where they are the nearest surface): their reflections and light on the floor and walls
+        # behind them would otherwise draw over him. Below the line (shadow, reflection in front) stays as it was.
+        P = lambda p: Camera(cam.pos, cam.target, cam.fov, cam.W, cam.H).project(p, OUTW, OUTH)
+        all_ov = set(meta.get('overlays', []))
+        flat = dict(env, vol_scale=0, reflections=False)
+        S2, _, _, _ = mod.build(hide=all_ov)
+        _, d_none, _ = S2.render(cam, flat, a.room + '_base_none')
+        d_none = np.nan_to_num(d_none, nan=1e6, posinf=1e6)
+        for tag, (bx, bz) in meta['overlay_bases'].items():
+            S2, _, _, _ = mod.build(hide=all_ov - {tag})
+            _, d_tag, _ = S2.render(cam, flat, a.room + '_base_' + tag)
+            d_tag = np.nan_to_num(d_tag, nan=1e6, posinf=1e6)
+            hit = (d_none - d_tag > np.maximum(0.03, 0.01 * d_tag)).astype(np.float32)
+            h, w = hit.shape
+            person = hit.reshape(h // ss, ss, w // ss, ss).mean((1, 3))
+            person = np.clip(person * 2.0, 0, 1)                    # a soft, slightly grown edge
+            by = P((bx, 0.1, bz))[1]
+            keep = np.maximum(person, (np.arange(person.shape[0])[:, None] >= by).astype(np.float32))
+            full, mask = overlays[tag]
+            overlays[tag] = (full, mask * keep)
     occ_masks = {}
     if meta.get('occluders') and hidden:
         # occluders are cut from the background without any overlay prop in front of them

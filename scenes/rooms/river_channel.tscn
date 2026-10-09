@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/river_channel_spot.png" id="ov_spot"]
 [ext_resource type="Texture2D" path="res://assets/rooms/river_channel_cart.png" id="occ_cart"]
 [ext_resource type="Texture2D" path="res://assets/rooms/river_channel_debris.png" id="occ_debris"]
+[ext_resource type="Texture2D" path="res://assets/rooms/river_channel_shah.png" id="occ_shah"]
 
 [node name="RiverChannel" type="Node2D"]
 script = ExtResource("script")
@@ -30,7 +31,7 @@ position = Vector2(268, 0)
 
 [node name="WalkArea" type="Polygon2D" parent="."]
 color = Color(0.2, 0.9, 0.4, 0.3)
-polygon = PackedVector2Array(1914, 1031.7, 6, 1021.3, 6, 868.1, 419.6, 762, 603.1, 762.3, 645.1, 794.3, 700.9, 807.5, 1151.7, 808.6, 1207.4, 795.6, 1513.3, 778.6, 1576.9, 797.7, 1371.1, 797.2, 1484.1, 848.9, 1749.9, 849.7, 1914, 899)
+polygon = PackedVector2Array(1914, 1031.7, 6, 1021.3, 6, 868.1, 389.8, 769.6, 604.6, 770.1, 645.1, 794.3, 700.9, 807.5, 1151.7, 808.6, 1207.4, 795.6, 1513.3, 778.6, 1576.9, 797.7, 1371.1, 797.2, 1484.1, 848.9, 1749.9, 849.7, 1914, 899)
 
 [node name="Actors" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -39,7 +40,7 @@ y_sort_enabled = true
 texture = ExtResource("ov_preacher")
 centered = false
 position = Vector2(527, 783)
-offset = Vector2(-106, -129)
+offset = Vector2(-106, -128)
 
 [node name="Cart" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_cart")
@@ -52,6 +53,12 @@ texture = ExtResource("occ_debris")
 centered = false
 position = Vector2(1465, 983)
 offset = Vector2(-138, -100)
+
+[node name="Shah" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_shah")
+centered = false
+position = Vector2(1510, 804)
+offset = Vector2(-28, -110)
 
 [node name="Obstacles" type="Node2D" parent="."]
 
@@ -163,8 +170,8 @@ polygon = PackedVector2Array(859, 625.1, 859.2, 583.8, 900.5, 583.8, 900.3, 625.
 script = ExtResource("hs")
 id = "tent"
 display_name = "Preacher's tent"
-walk_to = Vector2(600, 769)
-face = "left"
+walk_to = Vector2(493, 774)
+face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/tent"]
 polygon = PackedVector2Array(436.4, 767.9, 521.4, 676.8, 521.9, 676.7, 557.7, 674.6, 562.2, 674.5, 597.9, 676.3, 633.6, 747.7, 621.7, 765.3, 618.5, 766.6, 594.5, 770.8, 521.3, 772.9, 515.8, 772.9, 438.4, 769.8)

@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/fletcher_bridge_beam_down.png" id="ov_beam_down"]
 [ext_resource type="Texture2D" path="res://assets/rooms/fletcher_bridge_raycar.png" id="occ_raycar"]
 [ext_resource type="Texture2D" path="res://assets/rooms/fletcher_bridge_busstop.png" id="occ_busstop"]
+[ext_resource type="Texture2D" path="res://assets/rooms/fletcher_bridge_patrol_car.png" id="occ_patrol_car"]
+[ext_resource type="Texture2D" path="res://assets/rooms/fletcher_bridge_spotlight.png" id="occ_spotlight"]
+[ext_resource type="Texture2D" path="res://assets/rooms/fletcher_bridge_doss.png" id="occ_doss"]
 
 [node name="FletcherBridge" type="Node2D"]
 script = ExtResource("script")
@@ -23,11 +26,6 @@ tint = Color(0.8, 0.78, 0.86, 1)
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("bg")
 centered = false
-
-[node name="Preacher_car" type="Sprite2D" parent="."]
-texture = ExtResource("ov_preacher_car")
-centered = false
-position = Vector2(999, 483)
 
 [node name="Beam_road" type="Sprite2D" parent="."]
 texture = ExtResource("ov_beam_road")
@@ -46,6 +44,12 @@ polygon = PackedVector2Array(6, 529.7, 1588.9, 529.7, 1870.6, 527.2, 1914, 542, 
 [node name="Actors" type="Node2D" parent="."]
 y_sort_enabled = true
 
+[node name="Preacher_car" type="Sprite2D" parent="Actors"]
+texture = ExtResource("ov_preacher_car")
+centered = false
+position = Vector2(1252, 665)
+offset = Vector2(-253, -181)
+
 [node name="Raycar" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_raycar")
 centered = false
@@ -57,6 +61,24 @@ texture = ExtResource("occ_busstop")
 centered = false
 position = Vector2(594, 1014)
 offset = Vector2(-234, -565)
+
+[node name="PatrolCar" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_patrol_car")
+centered = false
+position = Vector2(1252, 665)
+offset = Vector2(-307, -234)
+
+[node name="Spotlight" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_spotlight")
+centered = false
+position = Vector2(1252, 665)
+offset = Vector2(85, -134)
+
+[node name="Doss" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_doss")
+centered = false
+position = Vector2(1558, 684)
+offset = Vector2(-29, -209)
 
 [node name="Obstacles" type="Node2D" parent="."]
 

@@ -2,10 +2,11 @@ extends Room
 ## The Fletcher Drive bridge over the LA River (Case 4, scene 2). Officer Doss and his patrol car, Preacher cuffed in
 ## the back seat. Puzzle 2.1: the motto (preacher_trusts). Puzzle 2.2: the road, the gutter and the storm drain
 ## (clue_scupper). Puzzle 2.3: uncuff him (clue_hit_by_car plus clue_two_tracks or clue_phone_left).
-## Puzzle 2.4: the spotlight on the reeds (channel_lit). The stairs go down to the channel; Ray's car opens the car
-## menu once Owen's phone has told him where he'd been. Preacher in the car and the spotlight's two aims are overlays.
+## Puzzle 2.4: the spotlight on the reeds (channel_lit), offered once Ray has seen them dark (reeds_dark). The stairs
+## go down to the channel; Ray's car opens the car menu once Owen's phone has told him where he'd been. Preacher in
+## the car and the spotlight's two aims are overlays.
 
-@onready var preacher_car: Sprite2D = $Preacher_car
+@onready var preacher_car: Sprite2D = $Actors/Preacher_car
 @onready var beam_road: Sprite2D = $Beam_road
 @onready var beam_down: Sprite2D = $Beam_down
 var _wander := 0
@@ -165,7 +166,7 @@ func _maybe_hint() -> void:
 	if Game.flag("clue_hit_by_car") and not Game.flag("preacher_freed"):
 		key = "hint_bridge_uncuff"
 		hint = "Shah says a car. Doss says a tent. Only one of them went to medical school."
-	elif Game.flag("clue_scupper") and not Game.flag("channel_lit"):
+	elif Game.flag("reeds_dark") and not Game.flag("channel_lit"):
 		key = "hint_bridge_spot"
 		hint = "Everything that went down that drain is in the reeds. Doss has a spotlight he's very proud of."
 	if key == "" or Game.flag(key):
@@ -191,7 +192,7 @@ func _talk_to_doss() -> void:
 			opts.append("Why's he in your car?"); keys.append("why")
 		if not Game.flag("preacher_freed"):
 			opts.append("Uncuff him."); keys.append("uncuff")
-		if not Game.flag("channel_lit") and (Game.flag("clue_scupper") or Game.flag("clue_reeds_tip")):
+		if not Game.flag("channel_lit") and Game.flag("reeds_dark"):
 			opts.append("Put your spotlight on the reeds."); keys.append("spot")
 		opts.append("That'll do."); keys.append("done")
 		var c: int = await main.choose(opts)

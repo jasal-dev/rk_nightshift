@@ -160,25 +160,27 @@ def build(hide=()):
     S.wboxr(GATE_X - 0.4, -0.2, CURB[1] + 0.15, 14, 0.0, 14, 'asphalt')                       # Glendower, steep, wet
 
     # ---------------------------------------------------------------- the easel and the gift bags
-    with S.tag('easel'):
-        ex, ez = EASEL
-        E = Frame((ex, 0, ez), Ry(-32))
-        for s in (-1, 1):
-            S.cyl(E.to((s * 0.32, 0, 0.12)), E.to((s * 0.24, 1.75, 0.0)), 0.022, 'easel')
-        S.cyl(E.to((0, 0, -0.4)), E.to((0, 1.65, 0.0)), 0.02, 'easel')
-        S.box(E, (0, 1.18, 0.05), (0.38, 0.52, 0.02), 0.0, 'easel_sign', rot=Rx(-6))
-        S.box(E, (0, 0.62, 0.1), (0.4, 0.02, 0.05), 0.0, 'easel')
-    with S.tag('gift_bags'):
-        bx, bz = BAGS
-        G = Frame((bx, 0, bz), Ry(-20))
-        S.box(G, (0, 0.2, 0), (0.42, 0.2, 0.28), 0.01, 'box')
-        S.box(G, (0, 0.2, 0.282), (0.4, 0.18, 0.002), 0.0, 'box_side')
-        for k in range(6):
-            x = -0.3 + (k % 3) * 0.3; z = -0.12 + (k // 3) * 0.24
-            S.box(G, (x, 0.42, z), (0.11, 0.14, 0.06), 0.005, 'bag', rot=Rz(rng.uniform(-8, 8)))
-            S.cyl(G.to((x - 0.05, 0.56, z)), G.to((x, 0.64, z)), 0.006, 'bag_handle')
-            S.cyl(G.to((x + 0.05, 0.56, z)), G.to((x, 0.64, z)), 0.006, 'bag_handle')
-        S.box(G, (0.42, 0.21, -0.29), (0.02, 0.2, 0.01), 0.0, 'box', rot=Ry(30))           # an open flap
+    if 'easel' not in hide:
+        with S.tag('easel'):
+            ex, ez = EASEL
+            E = Frame((ex, 0, ez), Ry(-32))
+            for s in (-1, 1):
+                S.cyl(E.to((s * 0.32, 0, 0.12)), E.to((s * 0.24, 1.75, 0.0)), 0.022, 'easel')
+            S.cyl(E.to((0, 0, -0.4)), E.to((0, 1.65, 0.0)), 0.02, 'easel')
+            S.box(E, (0, 1.18, 0.05), (0.38, 0.52, 0.02), 0.0, 'easel_sign', rot=Rx(-6))
+            S.box(E, (0, 0.62, 0.1), (0.4, 0.02, 0.05), 0.0, 'easel')
+    if 'gift_bags' not in hide:
+        with S.tag('gift_bags'):
+            bx, bz = BAGS
+            G = Frame((bx, 0, bz), Ry(-20))
+            S.box(G, (0, 0.2, 0), (0.42, 0.2, 0.28), 0.01, 'box')
+            S.box(G, (0, 0.2, 0.282), (0.4, 0.18, 0.002), 0.0, 'box_side')
+            for k in range(6):
+                x = -0.3 + (k % 3) * 0.3; z = -0.12 + (k // 3) * 0.24
+                S.box(G, (x, 0.42, z), (0.11, 0.14, 0.06), 0.005, 'bag', rot=Rz(rng.uniform(-8, 8)))
+                S.cyl(G.to((x - 0.05, 0.56, z)), G.to((x, 0.64, z)), 0.006, 'bag_handle')
+                S.cyl(G.to((x + 0.05, 0.56, z)), G.to((x, 0.64, z)), 0.006, 'bag_handle')
+            S.box(G, (0.42, 0.21, -0.29), (0.02, 0.2, 0.01), 0.0, 'box', rot=Ry(30))           # an open flap
 
     # ---------------------------------------------------------------- the valet podium, the key board, Andre, Courtney
     px, pz = PODIUM
@@ -196,13 +198,15 @@ def build(hide=()):
         S.cyl(K.to((-0.2, 0, 0)), K.to((-0.2, 1.6, 0)), 0.025, 'steel')
         S.cyl(K.to((0.2, 0, 0)), K.to((0.2, 1.6, 0)), 0.025, 'steel')
         S.box(K, (0, 1.3, 0.03), (0.3, 0.38, 0.015), 0.0, 'keyboard')
-    npc.cast(S, 'andre', dict(npc.STAND, props=(('umbrella', 'r'),), rsp=30, rsa=26, re=92, rin=18, lsp=6, le=20,
-                              hp=4, hy=10),
-             (ANDRE[0], 0, ANDRE[1]), yaw=14, scale=0.95, tag='andre')
+    if 'andre' not in hide:
+        npc.cast(S, 'andre', dict(npc.STAND, props=(('umbrella', 'r'),), rsp=30, rsa=26, re=92, rin=18, lsp=6, le=20,
+                                  hp=4, hy=10),
+                 (ANDRE[0], 0, ANDRE[1]), yaw=14, scale=0.95, tag='andre')
     S.light((COURTNEY[0] + 0.6, 2.6, COURTNEY[1] + 1.4), (255, 220, 180), power=1.2, range=4, soft=10)   # a garden lamp
-    npc.cast(S, 'courtney', dict(npc.STAND, props=(('clipboard', 'l'), ('phone', 'r')), lsp=34, le=92, lin=44,
-                                 rsp=40, re=74, rin=12, hp=6, hy=-26, hr=4, lhp=4, rhp=-6),
-             (COURTNEY[0], 0, COURTNEY[1]), yaw=-24, scale=0.92, tag='courtney')
+    if 'courtney' not in hide:
+        npc.cast(S, 'courtney', dict(npc.STAND, props=(('clipboard', 'l'), ('phone', 'r')), lsp=34, le=92, lin=44,
+                                     rsp=40, re=74, rin=12, hp=6, hy=-26, hr=4, lhp=4, rhp=-6),
+                 (COURTNEY[0], 0, COURTNEY[1]), yaw=-24, scale=0.92, tag='courtney')
 
     # ---------------------------------------------------------------- the catering van, doors open, and a caterer
     vx, vz = VAN
@@ -288,14 +292,16 @@ def build(hide=()):
                       (ANDRE[0] - 0.32, 1.78, ANDRE[1])],
             'curb': [(CURB[0] - 0.7, 0.0, CURB[1] - 0.25), (CURB[0] + 0.7, 0.0, CURB[1] - 0.25),
                      (CURB[0] + 0.7, 0.2, CURB[1] + 0.2), (CURB[0] - 0.7, 0.2, CURB[1] + 0.2)],
-            'city': [(EDGE_X + 6, -30, -60), (60, -30, -60), (60, 1.5, -60), (EDGE_X + 6, 1.5, -60)],
             'house': [(HX0, 0.0, HZ1), (HX1, 0.0, HZ1), (HX1, HY + HH + 0.3, HZ1), (HX0, HY + HH + 0.3, HZ1)],
         },
+        screen_shapes={'city': [(1255, 456), (1672, 456), (1672, 700), (1255, 700)]},   # the basin, right of the house
         hotspot_order=['city', 'house', 'van', 'curb', 'easel', 'gift_bags', 'gate_camera', 'valet_board', 'car', 'andre',
                        'courtney'],
         overlays=[],
         occluders={'tesla2': (-3.4, CARS_Z - 2.4), 'car': (-6.0, CARS_Z - 2.4), 'podium': (PODIUM[0], PODIUM[1] + 0.3), 'planter': (PLANTER[0], PLANTER[1] - 0.5),
-                   'table': (TABLE[0], TABLE[1])},
+                   'table': (TABLE[0], TABLE[1]), 'gift_bags': (BAGS[0], BAGS[1] + 0.3),
+                   'courtney': (COURTNEY[0], COURTNEY[1] + 0.05), 'andre': (ANDRE[0], ANDRE[1] + 0.05),
+                   'easel': (EASEL[0], EASEL[1] + 0.15)},
         obstacles=[(PODIUM[0], PODIUM[1], 0.45), (ANDRE[0], ANDRE[1], 0.3), (COURTNEY[0], COURTNEY[1], 0.3),
                    (KEYS[0], KEYS[1], 0.3), (EASEL[0], EASEL[1], 0.4), (BAGS[0], BAGS[1], 0.5),
                    (VAN[0] + 3.6, VAN[1] + 1.6, 0.35), (TABLE[0], TABLE[1], 0.5)],

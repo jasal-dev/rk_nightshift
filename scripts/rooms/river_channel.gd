@@ -118,6 +118,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 			if item != "":
 				await default_response(verb, item)
 			elif not Game.flag("channel_lit"):
+				Game.set_flag("reeds_dark")
 				if verb == "look":
 					await main.say("A reed island under the bridge, black as a closet. My flashlight makes it look worse.")
 				else:

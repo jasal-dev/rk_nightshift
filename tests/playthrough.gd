@@ -703,7 +703,7 @@ func _case4() -> void:
 	Game.save_game()
 	await main._load()
 	await expect_room("fletcher_bridge")
-	if main.room.get_node("Preacher_car").visible or main.room.get_node("Beam_road").visible \
+	if main.room.get_node("Actors/Preacher_car").visible or main.room.get_node("Beam_road").visible \
 			or not main.room.get_node("Beam_down").visible:
 		_fail("after loading, the patrol car should be empty and the spotlight on the reeds")
 	await act("stairs")

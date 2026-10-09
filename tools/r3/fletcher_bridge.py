@@ -201,16 +201,18 @@ def build(hide=()):
         S.wbox((x, 4.0, VZ + 7.05), (0.5, 0.12, 0.02), 'taillight' if k % 2 else 'headlite')
 
     # ---------------------------------------------------------------- Doss's patrol car, mid-span, and Preacher in back
-    cpt = cars.car(S, 'patrol', (CAR[0], 0.0, CAR[1]), -90, (34, 34, 38), L=4.95, W=1.9, H=1.62, tag='patrol_car',
+    CS = S if 'patrol_car' not in hide else Scene()                           # (hidden: still place the lights)
+    cpt = cars.car(CS, 'patrol', (CAR[0], 0.0, CAR[1]), -90, (34, 34, 38), L=4.95, W=1.9, H=1.62, tag='patrol_car',
                    rear_door_open=66, door_side=1, interior=True)
     F = Frame((CAR[0], 0.0, CAR[1]), Ry(-90))
-    with S.tag('patrol_car'):
-        for sx in (-1, 1):                                                      # white doors
-            S.box(F, (sx * 0.955, 0.6, -0.35), (0.012, 0.2, 0.62), 0.01, 'door_white')
-            S.box(F, (sx * 0.962, 0.6, -0.35), (0.004, 0.08, 0.4), 0.0, 'lapd', rot=Ry(sx * 90))
-        S.box(F, (0, 1.67, 0.1), (0.62, 0.05, 0.13), 0.02, 'cage')                # the light bar
-        for sx in (-1, 1):
-            S.box(F, (sx * 0.32, 1.7, 0.1), (0.26, 0.045, 0.11), 0.02, 'bar_red' if sx > 0 else 'bar_blue')
+    if 'patrol_car' not in hide:
+        with S.tag('patrol_car'):
+            for sx in (-1, 1):                                                  # white doors
+                S.box(F, (sx * 0.955, 0.6, -0.35), (0.012, 0.2, 0.62), 0.01, 'door_white')
+                S.box(F, (sx * 0.971, 0.6, -0.35), (0.4, 0.08, 0.003), 0.0, 'lapd', rot=Ry(sx * 90))
+            S.box(F, (0, 1.67, 0.1), (0.62, 0.05, 0.13), 0.02, 'cage')            # the light bar
+            for sx in (-1, 1):
+                S.box(F, (sx * 0.32, 1.7, 0.1), (0.26, 0.045, 0.11), 0.02, 'bar_red' if sx > 0 else 'bar_blue')
     S.light(cpt(0.4, 2.0, 0.1), (255, 40, 30), power=7, range=9, soft=10, vol=0.25)
     S.light(cpt(-0.4, 2.0, 0.1), (60, 100, 255), power=7, range=8, soft=10, vol=0.25)
     S.light(cpt(0, 0.6, 2.8), (255, 30, 20), power=0.6, range=3, shadow=False)          # tail glow
@@ -218,10 +220,11 @@ def build(hide=()):
             spot=((1, -0.12, 0), 25, 45))
     # the door spotlight on the passenger's A-pillar (toward Doss)
     sp = cpt(1.02, 1.15, -0.7)
-    with S.tag('spotlight'):
-        S.cyl(cpt(0.95, 1.0, -0.7), sp, 0.02, 'spot_dark')
-        S.cyl(sp, cpt(1.04, 1.18, -0.86), 0.09, 'spot_dark')
-        S.cyl(cpt(1.04, 1.18, -0.86), cpt(1.04, 1.18, -0.875), 0.08, 'spot_lamp')
+    if 'spotlight' not in hide:
+        with S.tag('spotlight'):
+            S.cyl(cpt(0.95, 1.0, -0.7), sp, 0.02, 'spot_dark')
+            S.cyl(sp, cpt(1.04, 1.18, -0.86), 0.09, 'spot_dark')
+            S.cyl(cpt(1.04, 1.18, -0.86), cpt(1.04, 1.18, -0.875), 0.08, 'spot_lamp')
     if 'beam_road' not in hide:                                                 # aimed at the road, ahead of the car
         S.light(cpt(1.06, 1.2, -1.0), (255, 250, 235), power=22, range=14, soft=10, vol=0.2,
                 spot=((1.0, -0.22, 0.3), 6, 13))
@@ -235,8 +238,9 @@ def build(hide=()):
                                      hp=4, blink=1.0, mouth=0.2),
                  cpt(0.4, 0.31, 0.95), yaw=62, scale=0.9, tag='preacher_car')
     # Officer Doss, leaning on his front fender, arms folded, very pleased
-    npc.cast(S, 'doss', dict(npc.ARMS_FOLDED, lean=-7, sway=2, hp=6, hy=12, lhp=2, rhp=-10, rk=10),
-             (DOSS[0], 0, DOSS[1]), yaw=-20, scale=0.96, tag='doss')
+    if 'doss' not in hide:
+        npc.cast(S, 'doss', dict(npc.ARMS_FOLDED, lean=-7, sway=2, hp=6, hy=12, lhp=2, rhp=-10, rk=10),
+                 (DOSS[0], 0, DOSS[1]), yaw=-20, scale=0.96, tag='doss')
 
     # ---------------------------------------------------------------- a Metro bus stop on the near sidewalk
     if 'busstop' not in hide:
@@ -298,7 +302,10 @@ def build(hide=()):
                        'spotlight', 'doss'],
         overlays=['preacher_car', 'beam_road', 'beam_down'],
         exclusive_overlays=['beam_road', 'beam_down'],
-        occluders={'raycar': (RAYCAR[0], RAYCAR[1] - 0.95), 'busstop': (BUS[0], BUS[1])},
+        overlay_bases={'preacher_car': (CAR[0], CAR[1] + 0.95)},
+        occluders={'raycar': (RAYCAR[0], RAYCAR[1] - 0.95), 'busstop': (BUS[0], BUS[1]),
+                   'patrol_car': (CAR[0], CAR[1] + 0.95), 'spotlight': (CAR[0], CAR[1] + 0.95),
+                   'doss': (DOSS[0], DOSS[1] + 0.1)},
         obstacles=[(CAR[0] - 1.6, CAR[1], 1.0), (CAR[0], CAR[1], 1.0), (CAR[0] + 1.6, CAR[1], 1.0),
                    (RAYCAR[0] - 0.9, RAYCAR[1], 0.95), (RAYCAR[0] + 0.7, RAYCAR[1], 0.95), (DOSS[0], DOSS[1], 0.3),
                    (cpt(1.6, 0, 1.0)[0] + 0.1, cpt(1.6, 0, 1.0)[2] + 0.1, 0.32)],
