@@ -337,7 +337,7 @@ ROSA: Twenty to one, about. Together. The roommate carried that bag out like the
 
 *Can I see the card slip?*
 
-Without norms\_receipt: ROSA: Which one, hon? I've run two hundred tonight. Give me a table and a time.
+Without norms\_receipt: ROSA: I know the booth, hon. The drawer doesn't. Two hundred merchant copies, stacked by the minute they rang up. "Around midnight" is forty of them. Bring me his check and I'll find it. (She has already named booth six by now, since this option needs "Who paid?", which needs clue\_roommate\_norms. What she lacks is the exact minute, which only the receipt has.)
 
 **Puzzle 3.3: The card slip.** Use norms\_receipt on Rosa (or ask with it in inventory):
 

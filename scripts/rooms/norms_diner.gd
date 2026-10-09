@@ -165,7 +165,8 @@ func _talk_to_rosa() -> void:
 				if Game.has_item("norms_receipt"):
 					await _card_slip()
 				else:
-					await _rosa("Which one, hon? I've run two hundred tonight. Give me a table and a time.")
+					await _rosa("I know the booth, hon. The drawer doesn't. Two hundred merchant copies, stacked by the minute they rang up.")
+					await _rosa("\"Around midnight\" is forty of them. Bring me his check and I'll find it.")
 			"done":
 				await _rosa("He tipped twenty percent on a two-dollar coffee, Detective. You get whoever did this.")
 				return
