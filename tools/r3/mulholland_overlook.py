@@ -33,7 +33,7 @@ def build(hide=()):
     rng = random.Random(41)
     # ---------------------------------------------------------------- materials
     S.mat('dirt', (255, 255, 255), tex=tx.hires(tx.decomposed_granite(), 2), texmode=4, texmap=1, texscale=5.0, refl=0.1,
-          ripple=0.05, spec=0.35, shin=40)
+          ripple=0.015, spec=0.35, shin=40)
     S.mat('puddle', (26, 24, 26), refl=0.92, ripple=0.08, spec=0.9, shin=120)
     S.mat('slope', (46, 38, 32), namp=0.4, nscale=3)
     S.mat('wall', (255, 255, 255), tex=tx.stone_wall(), texmode=4, texmap=1, texscale=1.6, refl=0.1, spec=0.3, shin=30)

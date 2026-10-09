@@ -30,6 +30,20 @@ def noise(w, h, scale, seed=0, octaves=4):
         tot += amp; amp *= 0.5
     return out / tot
 
+def noise_wrap(w, h, scale, seed=0, octaves=4):
+    """Like noise(), but it tiles seamlessly: white noise blurred in the frequency domain, which wraps by nature.
+    Use it for textures that repeat over a large surface (triplanar ground), where noise() leaves straight seams."""
+    rng = np.random.default_rng(seed)
+    fy, fx = np.fft.fftfreq(h)[:, None], np.fft.fftfreq(w)[None, :]
+    out = np.zeros((h, w))
+    amp, tot = 1.0, 0
+    for o in range(octaves):
+        sig = max(0.5, scale / (2 ** o) / 2.5)
+        n = np.real(np.fft.ifft2(np.fft.fft2(rng.random((h, w))) * np.exp(-2 * (np.pi * sig) ** 2 * (fx ** 2 + fy ** 2))))
+        out += np.clip(0.5 + (n - n.mean()) / (n.std() + 1e-9) * 0.18, 0, 1) * amp
+        tot += amp; amp *= 0.5
+    return out / tot
+
 def to_img(rgb, a=None):
     rgb = np.clip(rgb, 0, 255).astype(np.uint8)
     if a is None: a = np.full(rgb.shape[:2], 255, np.uint8)
@@ -487,10 +501,10 @@ def night_clouds(seed=82, w=1024, h=256):
     return to_img(rgb, np.clip(0.35 + 0.65 * glow * (0.6 + 0.6 * n), 0, 1) * 255)
 
 def decomposed_granite(seed=83, w=256, h=256):
-    """Pale orange crushed-granite pullout, wet: grit and darker damp patches."""
-    n = noise(w, h, 40, seed); g = np.random.default_rng(seed).random((h, w))
+    """Pale orange crushed-granite pullout, wet: grit and darker damp patches. Tiles seamlessly."""
+    n = noise_wrap(w, h, 40, seed); g = np.random.default_rng(seed).random((h, w))
     rgb = np.array([164, 118, 80], float)[None, None, :] * (0.72 + 0.4 * n[..., None]) * (0.85 + 0.25 * g[..., None])
-    damp = np.clip((noise(w, h, 70, seed + 1) - 0.5) * 3, 0, 1)
+    damp = np.clip((noise_wrap(w, h, 70, seed + 1) - 0.5) * 3, 0, 1)
     rgb = rgb * (1 - 0.35 * damp[..., None])
     return to_img(rgb)
 
