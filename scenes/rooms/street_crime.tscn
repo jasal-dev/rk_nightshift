@@ -67,7 +67,7 @@ offset = Vector2(-11, -865)
 texture = ExtResource("occ_car")
 centered = false
 position = Vector2(1708, 897)
-offset = Vector2(-26, -207)
+offset = Vector2(-33, -213)
 
 [node name="Patrol" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_patrol")
@@ -229,7 +229,7 @@ walk_to = Vector2(1912, 870)
 face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/car"]
-polygon = PackedVector2Array(1675.8, 861.8, 1676.8, 766.2, 1862.7, 688.3, 1920, 688.4, 1920, 999.2, 1907.1, 992.4)
+polygon = PackedVector2Array(1671.7, 808.6, 1671.9, 792.7, 1678.1, 776.4, 1761.6, 684.9, 1875.9, 683.9, 1920, 684.1, 1920, 990.6, 1817.8, 947.3, 1672.1, 869.6)
 
 [node name="patrol_car" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")

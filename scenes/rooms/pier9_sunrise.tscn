@@ -34,19 +34,19 @@ y_sort_enabled = true
 texture = ExtResource("ov_doyle")
 centered = false
 position = Vector2(449, 840)
-offset = Vector2(-370, -230)
+offset = Vector2(-302, -227)
 
 [node name="Okafor" type="Sprite2D" parent="Actors"]
 texture = ExtResource("ov_okafor")
 centered = false
 position = Vector2(464, 839)
-offset = Vector2(-385, -224)
+offset = Vector2(-243, -224)
 
 [node name="Mara" type="Sprite2D" parent="Actors"]
 texture = ExtResource("ov_mara")
 centered = false
 position = Vector2(453, 842)
-offset = Vector2(-374, -246)
+offset = Vector2(-258, -246)
 
 [node name="Barrel" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_barrel")
@@ -134,7 +134,7 @@ walk_to = Vector2(430, 848)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/car"]
-polygon = PackedVector2Array(0, 654.1, 197.9, 654.4, 366.2, 719.1, 366.9, 797.4, 202.7, 890.1, 184.2, 899.2, 0, 898.4)
+polygon = PackedVector2Array(0, 650.9, 220.1, 651.9, 364.6, 723.5, 366.6, 744.3, 369.9, 782.7, 370.1, 803.6, 266, 853.7, 159, 898.7, 0, 898)
 
 [node name="vance" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")

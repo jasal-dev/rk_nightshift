@@ -207,18 +207,11 @@ def build(hide=(), crime=False):
             S.ell(WORLD, (2.85, 7.55, 4.9), (0.25, 0.1, 0.45), 'lamp_head')
             S.ell(WORLD, (2.85, 7.47, 4.9), (0.18, 0.04, 0.32), 'lamp_glass')
 
-    # parked car (unmarked sedan) at the kerb, its back end just in frame at the bottom right
+    # Ray's car (the same sedan as at the glass house) at the kerb, its back end just in frame at the bottom right
     if 'car' not in hide:
         with S.tag('car'):
-            cx0, cx1, cz0, cz1 = 4.7, 9.25, 3.75, 5.55
-            S.wboxr(cx0, 0.32, cz0, cx1, 0.92, cz1, 'car_paint', rnd=0.12)
-            S.wboxr(cx0 + 1.1, 0.85, cz0 + 0.08, cx1 - 1.3, 1.42, cz1 - 0.08, 'car_paint', rnd=0.14)
-            S.wboxr(cx0 + 1.2, 0.95, cz0 + 0.04, cx1 - 1.4, 1.36, cz1 - 0.04, 'car_glass', rnd=0.08)
-            S.fcyl((cx0 + 0.85, 0.34, cz1 - 0.08), 0.34, 0.12, 'tire', axis='z')
-            S.fcyl((cx0 + 0.85, 0.34, cz1 + 0.04), 0.18, 0.02, 'chrome', axis='z')
-            S.wboxr(cx0 - 0.03, 0.62, cz0 + 0.2, cx0 + 0.02, 0.74, cz0 + 0.5, 'taillight')
-            S.wboxr(cx0 - 0.03, 0.62, cz1 - 0.5, cx0 + 0.02, 0.74, cz1 - 0.2, 'taillight')
-            S.wboxr(cx0 - 0.04, 0.4, cz0 + 0.65, cx0 + 0.01, 0.56, cz1 - 0.65, 'plate')
+            cars.car(S, 'ray', (7.1, 0.0, 4.65), -90, (34, 38, 44), L=4.8, W=1.88, H=1.42, lights=False,
+                     tag='car')
     if crime:
         crime_scene(S, hide)
     # ---------------------------------------------------------------- distance: palms, wires, skyline

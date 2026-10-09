@@ -172,18 +172,10 @@ def build(hide=(), time='night'):
         container(-10.0, 2.59, -10.0, 3)
         container(-9.0, 5.18, -10.4, 0)
 
-    # ---------------------------------------------------------------- Ray's car, parked at the left
+    # ---------------------------------------------------------------- Ray's car, parked at the left, nose to the right
     with S.tag('car'):
-        cx0, cx1, cz0, cz1 = -8.6, -4.35, 1.75, 3.55
-        S.wboxr(cx0, 0.32, cz0, cx1, 0.92, cz1, 'car_paint', rnd=0.12)
-        S.wboxr(cx0 + 1.2, 0.85, cz0 + 0.08, cx1 - 1.25, 1.42, cz1 - 0.08, 'car_paint', rnd=0.14)
-        S.wboxr(cx0 + 1.3, 0.95, cz0 + 0.04, cx1 - 1.35, 1.36, cz1 - 0.04, 'car_glass', rnd=0.08)
-        for wx in (cx0 + 0.85, cx1 - 0.8):
-            S.fcyl((wx, 0.34, cz1 - 0.08), 0.34, 0.12, 'tire', axis='z')
-            S.fcyl((wx, 0.34, cz1 + 0.04), 0.18, 0.02, 'chrome', axis='z')
-        S.wboxr(cx0 - 0.03, 0.62, cz0 + 0.2, cx0 + 0.02, 0.74, cz0 + 0.5, 'taillight')
-        S.wboxr(cx0 - 0.03, 0.62, cz1 - 0.5, cx0 + 0.02, 0.74, cz1 - 0.2, 'taillight')
-        S.wboxr(cx0 + 2.3, 0.75, cz1 - 0.01, cx0 + 2.55, 0.78, cz1 + 0.02, 'chrome')
+        cars.car(S, 'ray', (-6.75, 0.0, 2.65), -90, (34, 38, 44), L=4.8, W=1.88, H=1.42, lights=False,
+                 tag='car')
 
     # ---------------------------------------------------------------- the harbour beyond: crane, a ship, the lights
     with S.tag('crane'):
@@ -339,9 +331,9 @@ def dawn_extras(S, hide, time, EDGE):
         # Danny's box laid open on the hood of Ray's car, for Doyle (with her), the drive for Okafor, Mara's laptop
         if 'doyle' not in hide:
             with S.tag('doyle_box'):
-                S.wboxr(-4.95, 0.93, 2.2, -4.5, 1.08, 2.75, 'box')
+                S.wboxr(-4.95, 0.85, 2.2, -4.5, 1.0, 2.75, 'box')
                 for k in range(4):
-                    S.wbox((-5.35 + k * 0.02, 0.935, 2.0 + k * 0.28), (0.1, 0.004, 0.12), 'paper_w', rot=Ry(10 * k))
+                    S.wbox((-5.35 + k * 0.02, 0.855, 2.0 + k * 0.28), (0.1, 0.004, 0.12), 'paper_w', rot=Ry(10 * k))
             npc.cast(S, 'doyle', dict(npc.STAND, lsp=26, le=70, lin=40, rsp=24, re=74, rin=42, hp=12, hy=-30),
                      (DOYLE[0], 0.0, DOYLE[1]), yaw=-70, scale=0.95, tag='doyle')
         if 'okafor' not in hide:
@@ -349,8 +341,8 @@ def dawn_extras(S, hide, time, EDGE):
                                        hp=8, hy=20), (OKAFOR[0], 0.0, OKAFOR[1]), yaw=70, scale=0.94, tag='okafor')
         if 'mara' not in hide:
             with S.tag('mara_laptop'):
-                S.wbox((-4.75, 0.94, 2.55), (0.17, 0.01, 0.12), 'laptop', rot=Ry(-70))
-                S.wbox((-4.68, 1.05, 2.48), (0.17, 0.11, 0.008), 'laptop_lit', rot=Ry(-70) @ Rx(-12))
+                S.wbox((-4.75, 0.86, 2.55), (0.17, 0.01, 0.12), 'laptop', rot=Ry(-70))
+                S.wbox((-4.68, 0.97, 2.48), (0.17, 0.11, 0.008), 'laptop_lit', rot=Ry(-70) @ Rx(-12))
             npc.cast(S, 'mara', dict(npc.STAND, headset=True, lsp=30, le=74, lin=20, rsp=30, re=78, rin=22, hp=18,
                                      hy=-10), (MARA[0], 0.0, MARA[1]), yaw=-75, scale=0.94, tag='mara')
 

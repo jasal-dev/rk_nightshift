@@ -7,6 +7,7 @@ import numpy as np
 from scene3d import *
 import textures as tx
 import npc
+import cars
 
 CAR_O, CAR_YAW = (2.2, 0.0, 0.3), 25.0      # Kenji's Prius: floor centre and heading (nose toward the wall, a bit left)
 DOOR_OPEN = 65.0
@@ -231,14 +232,8 @@ def build(hide=()):
 
     # ---------------------------------------------------------------- Ray's car, parked at the left (nose to the wall)
     with S.tag('car'):
-        rx0, rx1, rz0, rz1 = -5.9, -4.1, -0.6, 4.0
-        S.wboxr(rx0, 0.32, rz0, rx1, 0.92, rz1, 'car_paint', rnd=0.12)
-        S.wboxr(rx0 + 0.08, 0.85, rz0 + 1.3, rx1 - 0.08, 1.42, rz1 - 1.1, 'car_paint', rnd=0.14)
-        S.wboxr(rx0 + 0.04, 0.95, rz0 + 1.4, rx1 - 0.04, 1.36, rz1 - 1.2, 'car_glass', rnd=0.08)
-        for wz in (rz0 + 0.85, rz1 - 0.85):
-            S.fcyl((rx1 - 0.08, 0.34, wz), 0.34, 0.12, 'tire', axis='x')
-        S.wboxr(rx0 + 0.2, 0.62, rz1 - 0.02, rx0 + 0.5, 0.74, rz1 + 0.03, 'taillight')
-        S.wboxr(rx1 - 0.5, 0.62, rz1 - 0.02, rx1 - 0.2, 0.74, rz1 + 0.03, 'taillight')
+        cars.car(S, 'ray', (-5.0, 0.0, 1.6), 0, (34, 38, 44), L=4.8, W=1.88, H=1.42, lights=False,
+                 tag='car')
 
     # ---------------------------------------------------------------- lights
     for sx in (-0.6, 0.6):                                                     # Prius headlights into the rain

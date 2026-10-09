@@ -248,7 +248,7 @@ def build(hide=()):
     # ---------------------------------------------------------------- Ray's car at the west end
     if 'raycar' not in hide:
         with S.tag('raycar'):
-            cars.car(S, 'ray', (RAYCAR[0], 0.0, RAYCAR[1]), -90, (34, 38, 44), L=4.8, W=1.82, H=1.42, lights=False,
+            cars.car(S, 'ray', (RAYCAR[0], 0.0, RAYCAR[1]), -90, (34, 38, 44), L=4.8, W=1.88, H=1.42, lights=False,
                      tag='car')
 
     S.sun((0.3, -1, -0.4), (80, 90, 130), power=0.45, shadow=False)
