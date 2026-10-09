@@ -312,6 +312,11 @@
   0.8
  ],
  "extra": {},
- "overlays": {},
+ "overlays": {
+  "visor_card": [
+   799,
+   336
+  ]
+ },
  "occluders": {}
 }

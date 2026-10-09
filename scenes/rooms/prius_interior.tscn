@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/rooms/prius_interior.gd" id="script"]
 [ext_resource type="Texture2D" path="res://assets/rooms/prius_interior.png" id="bg"]
 [ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
+[ext_resource type="Texture2D" path="res://assets/rooms/prius_interior_visor_card.png" id="ov_visor_card"]
 
 [node name="PriusInterior" type="Node2D"]
 script = ExtResource("script")
@@ -18,6 +19,11 @@ tint = Color(0.8, 0.76, 0.8, 1)
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("bg")
 centered = false
+
+[node name="Visor_card" type="Sprite2D" parent="."]
+texture = ExtResource("ov_visor_card")
+centered = false
+position = Vector2(799, 336)
 
 [node name="WalkArea" type="Polygon2D" parent="."]
 color = Color(0.2, 0.9, 0.4, 0.3)

@@ -176,7 +176,7 @@ All UI is built in code in `scripts/ui.gd` (`class_name GameUI`), with DejaVu Sa
 | --- | --- | --- |
 | Hover label, cursor, item cursor | `set_hover`, `update_cursor` | Hotspot and item names; "Use X with Y". |
 | Inventory bar (104 px, 84 px icons) | `update_bar`, `bar_pinned`, `item_under`, signal `inventory_clicked(id, button)` | Slides down at the top edge; Tab pins it. |
-| Speech | `show_speech`, `hide_speech` | `say`, `voice`, `narrate`. |
+| Speech | `show_speech`, `hide_speech` | `say`, `voice`, `narrate`. Drawn above the fade, so lines read on black (Case 2's doorstep). |
 | Toast | `toast(text, hold)` | Pickups, notebook, save/load. |
 | Choices | `show_choices`, `hide_choices`, `options`, signal `choice_made(i)` | Dialogue; also device buttons. |
 | Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings, Exit (quits), and a SKIP TO row for Case 2 to 5 (`Main.jump_to_case(n)`). `Main._title()` runs it at start, after THE END, and on Esc in a room (`_save_to_title()` quicksaves first). |
@@ -233,7 +233,7 @@ to 4 are constants in `Case2`, `Case3`, `Case4`.
 | `pier9_dock` | 1 | exterior, rain | `street`, `vance_office` | `hook` |
 | `vance_office` | 1 | interior | `pier9_dock` | |
 | `mulholland_overlook` | 2 | exterior | `drive`, `prius_interior` | |
-| `prius_interior` | 2 | close-up, no player | `mulholland_overlook` | |
+| `prius_interior` | 2 | close-up, no player | `mulholland_overlook` | `visor_card` |
 | `norms_diner` | 2 | interior | `drive`, `mulholland_overlook`, `kenji_apartment` | |
 | `kenji_apartment` | 2 | interior | `drive`, `mulholland_overlook`, `norms_diner` | `devin_fridge`, `devin_couch` (exclusive) |
 | `stardust_shop` | 3 | interior | `drive`, `squad_room`, `stardust_office` | `pearl_chair`, `pearl_stand`, `park`, `morty` |

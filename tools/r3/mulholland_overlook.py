@@ -180,7 +180,9 @@ def build(hide=()):
             S.cyl(car_pt(0.12 + 0.03 * k, 1.03, -0.86), car_pt(0.12 + 0.03 * k, 1.03, -0.8), 0.006, 'trim')
     with S.tag('visor'):
         box((-0.38, 1.4, -0.38), (0.2, 0.012, 0.09), 'dash_lt', rot=Rx(-60))
-        box((-0.38, 1.39, -0.36), (0.07, 0.008, 0.045), 'card', rot=Rx(-60) @ Rx(90))
+    if 'visor_card' not in hide:                                              # Kenji's driver card (Ray takes it)
+        with S.tag('visor_card'):
+            box((-0.38, 1.39, -0.36), (0.07, 0.008, 0.045), 'card', rot=Rx(-60) @ Rx(90))
     box((-0.05, 1.445, 0.2), (0.12, 0.008, 0.06), 'dome')
     # the open driver's door, hinged at its front edge
     hinge = np.array(car_pt(-0.88, 0, -0.45))

@@ -5,10 +5,18 @@ extends Room
 ## Puzzle 2.1: Kenji's Glide app (last trip 11:52, Heck's threat, and the optional ride receipt seed).
 ## Puzzle 2.2: the head unit's recent destinations (home, Norm's, here). Both together give clue_off_app.
 ## Puzzle 2.3: the ignition key only comes out after the screen has been read; it opens the glovebox.
+## Kenji's driver card on the sun visor is an overlay, gone once Ray takes it.
+
+@onready var visor_card: Sprite2D = $Visor_card
 
 
 func _init() -> void:
 	show_player = false
+
+
+func _ready() -> void:
+	super._ready()
+	visor_card.visible = not Game.flag("got_driver_card")
 
 
 func interact(hs: Hotspot, verb: String, item: String) -> void:
@@ -66,12 +74,14 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 		"visor":
 			if verb == "look":
-				await main.say("A card clipped to the visor.")
+				await main.say("A card clipped to the visor." if not Game.flag("got_driver_card")
+						else "Just the visor. Kenji's card is in my pocket.")
 			elif await _gloves(item):
 				if not Game.flag("got_driver_card"):
 					await main.player.play_action("use")
 					await main.say("Kenji's Glide card. Photo, plate number, four point nine eight stars.")
 					Game.set_flag("got_driver_card")
+					visor_card.visible = false
 					await main.give("driver_card", false)
 				else:
 					await main.say("Just the visor now. And a mirror I'd rather not look in.")

@@ -54,6 +54,7 @@ def build(hide=()):
         screen_shapes={'back_seat': [(1240, 950), (1920, 950), (1920, 1080), (1240, 1080)]},   # under Ray
         hotspot_order=['out', 'back_seat', 'door_pocket', 'kenji', 'glovebox', 'cups', 'head_unit', 'ignition',
                        'phone_mount', 'dashcam', 'visor'],
+        overlays=['visor_card'],                    # the driver card on the visor, gone once Ray takes it
         tint=(0.8, 0.76, 0.8),
         exposure=1.7,
     )

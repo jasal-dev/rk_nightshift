@@ -377,7 +377,11 @@ func _case2() -> void:
 	await act("ignition")
 	await act("glovebox", "use", "kenji_keys")
 	await act("door_pocket")
+	if not main.room.get_node("Visor_card").visible:
+		_fail("the driver card should be on the visor before Ray takes it")
 	await act("visor")
+	if main.room.get_node("Visor_card").visible:
+		_fail("the driver card should be gone from the visor once taken")
 	await act("dashcam")
 	await act("cups")
 	await act("back_seat", "look")
