@@ -164,7 +164,7 @@ def build(hide=()):
         S.wbox((X0 + 0.61, 0.85, -1.3), (0.32, 0.72, 0.01), 'jukebox', rot=Ry(90))
         S.cyl((X0 + 0.32, 1.6, -1.68), (X0 + 0.32, 1.6, -0.92), 0.28, 'black')
     with S.tag('door'):
-        S.wboxr(X0 - 0.3, 0, 0.0, X0 + 0.02, 2.4, 1.4, 'wall_teal', op=1)
+        S.wboxr(X0 - 0.3, 0, 0.0, X0 + 0.06, 2.4, 1.4, 'wall_teal', op=1)       # past the wainscot's face, or it skins over
         S.wboxr(X0 - 0.1, 0, 0.05, X0 - 0.04, 2.35, 1.35, 'frame')
         S.wbox((X0 - 0.02, 1.25, 0.7), (0.55, 1.0, 0.01), 'door_glass', rot=Ry(90))
         S.wboxr(X0 + 0.0, 1.0, 1.1, X0 + 0.06, 1.1, 1.25, 'chrome')
@@ -198,6 +198,7 @@ def build(hide=()):
     meta = dict(
         room='norms_diner',
         walk=[(-4.85, -1.2), (3.55, -1.2), (3.55, 3.8), (-4.85, 3.8)],
+        obstacles=[(X0, -1.75, X0 + 0.7, -0.85)],                                      # the jukebox
         walk_zmin=-1.2, walk_zmax=3.8, scale_x=0.0,
         spawns={'drive': (-4.5, 0.7), 'mulholland_overlook': (-4.5, 0.7), 'kenji_apartment': (-4.5, 0.7),
                 'start': (-2.0, 1.5)},
@@ -208,7 +209,7 @@ def build(hide=()):
             'booth6': ('booth 6', (3.4, 1.0), 'right'),
             'pie_case': ('pie case', (-3.3, -1.25), 'up'),
             'regulars': ('counter regulars', (-2.4, -1.25), 'up'),
-            'jukebox': ('jukebox', (-4.5, -1.0), 'left'),
+            'jukebox': ('jukebox', (-3.95, -1.0), 'left'),
             'window': ('window', (3.4, 2.6), 'right'),
             'door': ('door', (-4.6, 0.7), 'left'),
         },

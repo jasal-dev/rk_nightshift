@@ -26,6 +26,12 @@ polygon = PackedVector2Array(6, 814.9, 248.9, 698.6, 1384.9, 694.4, 1752, 958.7,
 [node name="Actors" type="Node2D" parent="."]
 y_sort_enabled = true
 
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle1" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(222.8, 683.2, 314.2, 682.8, 261.7, 709.3, 162.6, 709.6)
+
 [node name="Spawns" type="Node2D" parent="."]
 
 [node name="drive" type="Marker2D" parent="Spawns"]
@@ -60,13 +66,13 @@ walk_to = Vector2(147, 767)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/door"]
-polygon = PackedVector2Array(0, 386.5, 24, 386.1, 74.7, 386.1, 99.6, 754, 0, 799.8)
+polygon = PackedVector2Array(0, 386.5, 24, 386.1, 81.1, 386.1, 105.7, 754, 0, 802.9)
 
 [node name="jukebox" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "jukebox"
 display_name = "jukebox"
-walk_to = Vector2(285, 705)
+walk_to = Vector2(362, 704)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/jukebox"]
