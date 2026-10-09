@@ -492,10 +492,11 @@ func _case2() -> void:
 	await act("fridge", "look")
 	await act("freezer", "look")
 	await act("freezer")
-	await _idle()
-	main.busy = true
-	await main.examine_item("frozen_peas")              # the cards, a lawyer, and Park up the stairs
-	main.busy = false
+	await act("fridge", "use", "frozen_peas")           # not here: over the sink
+	if not Game.has_item("frozen_peas") or Game.flag("got_sd_cards"):
+		_fail("the peas should only open over the sink")
+	await act("sink", "look")
+	await act("sink", "use", "frozen_peas")             # the cards, a lawyer, and Park up the stairs
 	expect(["clue_peas_note", "got_peas", "got_sd_cards", "devin_arrested"])
 	if not Game.has_item("sd_cards") or Game.has_item("frozen_peas"):
 		_fail("the peas should have become the dashcam and cards: %s" % [Game.inventory])

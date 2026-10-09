@@ -223,6 +223,16 @@ face = "right"
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/dining"]
 polygon = PackedVector2Array(1140, 668.1, 1140.3, 658.5, 1165.1, 596.4, 1244.1, 596.4, 1377.5, 597.9, 1575.7, 644.5, 1616, 673, 1603.8, 782.5, 1590.9, 869, 1335.6, 944.2, 1238.7, 944.2, 1167.9, 880.1, 1166, 874, 1144.7, 805.4)
 
+[node name="sink" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "sink"
+display_name = "sink"
+walk_to = Vector2(1613, 706)
+face = "right"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/sink"]
+polygon = PackedVector2Array(1653.4, 566, 1653.8, 562.8, 1660.2, 550.6, 1730.4, 518.8, 1769.6, 513.2, 1771.9, 515.7, 1794.3, 580.6, 1798.1, 595.5, 1797.6, 599, 1717.8, 599)
+
 [node name="fridge" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "fridge"

@@ -54,8 +54,8 @@ Case 2 has 7 new inventory items and 23 notebook clues, 15 of them optional. "Re
 | norms\_receipt | Norm's receipt | Prius driver's door pocket | Use the door pocket | Unlocks Norm's; show to Rosa for the card slip |
 | kenji\_keys | Kenji's keys | Prius ignition | Use the ignition, after reading the car's GPS | Open the glovebox. Handed to Park when Ray leaves the overlook. |
 | card\_slip | Norm's card slip | Norm's register | Show the receipt to Rosa | Break Devin's alibi; deduction evidence |
-| frozen\_peas | bag of frozen peas | Apartment freezer | Use the freezer after Devin agrees to a search | Examine to open it |
-| sd\_cards | dashcam and memory cards | Inside the peas | Examine the peas | Deduction evidence |
+| frozen\_peas | bag of frozen peas | Apartment freezer | Use the freezer after Devin agrees to a search | Use on the sink to open it |
+| sd\_cards | dashcam and memory cards | Inside the peas | Use the peas on the sink | Deduction evidence |
 | ride\_receipt | photo of Kenji's screen | Ray's own phone | Open "Earlier this week" in Kenji's Glide app | Optional seed; pinned to the board |
 
 **Notebook clues**
@@ -504,7 +504,9 @@ If the player has the first-lie proof but not clue\_gps, Ray adds: "He's got a n
 - Look at the fridge: magnets, takeout menus, and a note in Kenji's hand: "D, your peas have been in here since July. Eat them or I'm tossing them. K." *(sets clue\_peas\_note)*
 - Look at the freezer: "Fresh finger marks in the frost, and a puddle under the door. Somebody opened this tonight with wet hands."
 - Use the freezer: "Ice trays, a bottle of vodka, and a bag of frozen peas taped shut. Nobody tapes peas." Gives frozen\_peas.
-- Examine the peas in the inventory:
+- Examine the peas in the inventory: "A bag of frozen peas, taped shut. Nobody tapes peas. Whatever's in there, I'll open it over the sink."
+- Use the peas on anything else in the apartment: "Not here. Whatever's in that bag, I'll open it over the sink."
+- Use the peas on the sink:
 
 *Ray tears the tape. Peas rattle into the sink. Underneath, a zip bag: a two-lens dashcam and a clear plastic case of memory cards, labeled in Kenji's handwriting, January to November.*
 
@@ -547,6 +549,7 @@ RAY: Eleven cards. Twenty-five hundred apiece. Twenty-seven thousand dollars, an
 | Photos on the wall | "Night shots of LA. Good ones. Freeway ramps, the Bowl, and the Mulholland overlook, from exactly where Kenji's car is parked." | Same | Default | New |
 | Fridge | Before consent: blocked by Devin. After: Puzzle 4.3 note. | Opens the freezer | Default | New |
 | Freezer | See Puzzle 4.3 | Gives frozen\_peas. After: "Ice and vodka. I'm on duty." | Default | New |
+| Sink | "A steel sink under the kitchen window. Clean. Cleaner than the rest of the place." | "I'm not here to do the dishes." With the peas in hand: "Good place to open a bag of peas." | Peas: Puzzle 4.3 | New |
 | Devin's door | "Closed. His room, his rules, until I've got paper." | Same | Default | New |
 | Front door | "Back down the stairs." | Car menu | Default | New |
 

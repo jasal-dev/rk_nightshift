@@ -223,10 +223,11 @@ def build(hide=()):
     S.wboxr(3.75, 0.95, ZB, X1, 1.5, ZB + 0.02, 'tile')
     S.wboxr(X1 - 0.62, 0, -2.2, X1, 0.9, 1.2, 'cabinet')                              # counter along the right wall
     S.wboxr(X1 - 0.65, 0.9, -2.2, X1, 0.95, 1.2, 'counter')
-    S.wboxr(X1 - 0.5, 0.88, -0.6, X1 - 0.1, 0.96, 0.1, 'steel', op=1)                  # sink
-    S.wboxr(X1 - 0.52, 0.86, -0.62, X1 - 0.08, 0.88, 0.12, 'steel')
-    S.cyl((X1 - 0.08, 0.95, -0.25), (X1 - 0.08, 1.25, -0.25), 0.015, 'steel')
-    S.cyl((X1 - 0.08, 1.25, -0.25), (X1 - 0.3, 1.22, -0.25), 0.012, 'steel')
+    with S.tag('sink'):
+        S.wboxr(X1 - 0.5, 0.88, -0.6, X1 - 0.1, 0.96, 0.1, 'steel', op=1)              # sink
+        S.wboxr(X1 - 0.52, 0.86, -0.62, X1 - 0.08, 0.88, 0.12, 'steel')
+        S.cyl((X1 - 0.08, 0.95, -0.25), (X1 - 0.08, 1.25, -0.25), 0.015, 'steel')
+        S.cyl((X1 - 0.08, 1.25, -0.25), (X1 - 0.3, 1.22, -0.25), 0.012, 'steel')
     S.wboxr(X1 - 0.35, 1.55, -2.2, X1, 2.3, 1.2, 'cabinet')                           # upper cabinets
     # kitchen window over the sink: blinds, street light outside
     S.wboxr(X1 - 0.05, 1.05, -0.9, X1 + 0.3, 1.5, 0.4, 'wall_k', op=1)
@@ -288,6 +289,7 @@ def build(hide=()):
             'dining': ('dining table', (0.6, 1.4), 'right'),
             'fridge': ('fridge', (3.3, -1.8), 'up'),
             'freezer': ('freezer', (3.3, -1.8), 'up'),
+            'sink': ('sink', (3.95, -0.25), 'right'),
             'devin_door': ("Devin's door", (2.35, -2.75), 'up'),
             'front_door': ('front door', (-3.8, -2.75), 'up'),
         },
@@ -300,7 +302,7 @@ def build(hide=()):
                        (cx - 1.35, 0.75, cz + 0.2)],
         },
         hotspot_order=['photos', 'front_door', 'devin_door', 'kenji_desk', 'certificate', 'pennant', 'dashcam_box',
-                       'camera_bag', 'sneakers', 'tv', 'dining', 'fridge', 'freezer', 'laptop', 'devin_couch', 'devin'],
+                       'camera_bag', 'sneakers', 'tv', 'dining', 'sink', 'fridge', 'freezer', 'laptop', 'devin_couch', 'devin'],
         overlays=['devin_fridge', 'devin_couch'],
         occluders={'couch': (cx + 0.45, cz + 1.0), 'table': (cx - 1.1, cz + 0.65), 'dining': (DINING[0], DINING[1] + 0.95)},
         obstacles=[(cx, cz - 0.6, 0.55), (cx, cz + 0.6, 0.55), (cx - 1.1, cz - 0.35, 0.4), (cx - 1.1, cz + 0.35, 0.4),

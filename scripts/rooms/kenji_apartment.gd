@@ -2,7 +2,7 @@ extends Room
 ## Kenji and Devin's apartment, Silver Lake (Case 2, scene 4). Break Devin's story, get his consent, find the cards.
 ## Puzzle 4.1: "home all night" falls to Norm's (the card slip, or Rosa's word).
 ## Puzzle 4.2: "he dropped me back here" falls to the car's GPS; Devin says search, and gets off the fridge.
-## Puzzle 4.3: the freezer: a bag of frozen peas, taped shut. Examining it (inventory) ends the scene:
+## Puzzle 4.3: the freezer: a bag of frozen peas, taped shut. Using it on the sink ends the scene:
 ## the dashcam and the cards, Devin asks for a lawyer, Park takes him down the stairs.
 ## Devin is part of the set in two poses (overlays): at the fridge until search_consent, then on the couch.
 
@@ -36,6 +36,9 @@ func on_enter(_from_room: String) -> void:
 func interact(hs: Hotspot, verb: String, item: String) -> void:
 	if not hs.id in ["freezer", "fridge", "devin", "devin_couch"]:
 		await _maybe_hint()
+	if item == "frozen_peas" and hs.id != "sink":
+		await main.say("Not here. Whatever's in that bag, I'll open it over the sink.")
+		return
 	match hs.id:
 		"devin", "devin_couch":
 			if verb == "look":
@@ -137,6 +140,18 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await default_response(verb, item)
 			else:
 				await _freezer()
+
+		"sink":
+			if verb == "look":
+				await main.say("A steel sink under the kitchen window. Clean. Cleaner than the rest of the place.")
+			elif item == "frozen_peas":
+				await open_peas()
+			elif item != "":
+				await default_response(verb, item)
+			elif Game.has_item("frozen_peas"):
+				await main.say("Good place to open a bag of peas.")
+			else:
+				await main.say("I'm not here to do the dishes.")
 
 		"tv":
 			if verb == "look":
@@ -284,7 +299,7 @@ func _freezer() -> void:
 
 
 func open_peas() -> void:
-	## Examining the peas (from the inventory). The cards, a lawyer, and Park up the stairs.
+	## The peas used on the sink. The cards, a lawyer, and Park up the stairs.
 	await main.player.play_action("use")
 	await main.say("Peas rattle into the sink. Underneath, a zip bag.")
 	await main.say("A two-lens dashcam, and a clear plastic case of memory cards, labeled in Kenji's handwriting. January to November.")

@@ -424,10 +424,9 @@ func examine_item(id: String) -> void:
 			await say("A Blue Note envelope, empty, singed. On the back in Danny's hand: '1 of 3.'")
 			await say("Whoever was paying Danny, they were on an installment plan.")
 		"frozen_peas":
+			await say(Game.ITEMS[id]["desc"])
 			if room.has_method("open_peas"):
-				await room.open_peas()
-			else:
-				await say(Game.ITEMS[id]["desc"])
+				await say("Whatever's in there, I'll open it over the sink.")
 		"ride_receipt":
 			await say("My photo of Kenji's screen. Wednesday, 1:10 a.m. Blue Note, Hollywood, to Pryce Tower, Century City.")
 			await say("Rider: Walt B. Billed to Pryce Development, on the business account. One star. \"Wet, rude, smelled like gun oil.\"")
