@@ -88,6 +88,17 @@ def car(S, name, origin, yaw, paint, L=4.9, W=1.86, H=1.45, kind='sedan', lights
     if interior:                                                  # a hollow cabin: glaze the cut planes
         for (pa, pb_) in (((0, belt, zf0), (0, rf - 0.02, c0)), ((0, belt, zb1), (0, rf - 0.02, c1))):
             slab(pa, pb_, hw - 0.12, 0.01, m('glass'))
+        # hollow the body under the windows too (else its top shows as a flat floor at the belt line), floor it,
+        # and put in the front seats
+        zc0, zc1 = zf0 + 0.15, zb1 - 0.15                       # the cabin, out to the foot of each window
+        box((0, (sill + 0.12 + belt + 0.05) / 2, (zc0 + zc1) / 2), (hw - 0.14, (belt + 0.05 - sill - 0.12) / 2,
+            (zc1 - zc0) / 2), m('interior'), op=1)
+        box((0, sill + 0.1, (zc0 + zc1) / 2), (hw - 0.14, 0.02, (zc1 - zc0) / 2), m('interior'))
+        box((0, belt - 0.08, (zc0 + c0 - 0.35) / 2), (hw - 0.14, 0.1, (c0 - 0.35 - zc0) / 2), m('trim'), rnd=0.03)  # dash
+        box((0, belt - 0.12, (zb1 + c1 + 0.1) / 2), (hw - 0.14, 0.04, (zb1 - c1 - 0.1) / 2), m('trim'))       # parcel shelf
+        for sx in (-1, 1):
+            box((sx * 0.4, sill + 0.24, c0 + 0.55), (0.24, 0.07, 0.25), m('seat'), rnd=0.04)
+            box((sx * 0.4, belt + 0.1, c0 + 0.85), (0.23, 0.33, 0.06), m('seat'), rnd=0.05, rot=Rx(-12))
     if kind == 'sedan':
         box((0, belt + 0.01, (zb1 + hl) / 2), (hw - 0.06, 0.03, (hl - zb1) / 2), m('paint'), rnd=0.03)   # trunk lid
     # lights, grille, bumpers
@@ -113,7 +124,8 @@ def car(S, name, origin, yaw, paint, L=4.9, W=1.86, H=1.45, kind='sedan', lights
         ds = door_side
         box((ds * hw, (sill + belt) / 2 + 0.05, cz + 0.55), (0.25, (belt - sill) / 2 + 0.02, 0.48), m('paint'), op=1)
         box((ds * (hw - 0.1), belt + gh / 2, cz + 0.55), (0.2, gh / 2 + 0.02, 0.48), m('paint'), op=1)
-        box((0, sill + 0.05, cz + 0.4), (hw - 0.15, 0.04, 0.9), m('interior'))
+        if not interior:
+            box((0, sill + 0.05, cz + 0.4), (hw - 0.15, 0.04, 0.9), m('interior'))
         box((0, sill + 0.2, cz + 0.75), (hw - 0.2, 0.08, 0.28), m('seat'), rnd=0.04)                  # back seat
         box((0, belt + 0.12, cz + 1.02), (hw - 0.2, 0.36, 0.07), m('seat'), rnd=0.05, rot=Rx(-12))
         box((0, belt + 0.18, cz - 0.05), (hw - 0.15, gh / 2 + 0.1, 0.03), m('trim'))                  # cage
