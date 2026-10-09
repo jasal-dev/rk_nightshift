@@ -151,7 +151,7 @@ it has one. Using one item on another always says "Those two don't go together."
 | `voice(text, anchor, color)` | Someone else speaks from `anchor` (room pixels). Use `speaker_at(id)` for people with a hotspot. |
 | `narrate(text)` | Ray's voice-over at the bottom of the screen. |
 | `choose(options) -> int` | Dialogue choices; keys 1 to 9 also pick. |
-| `topics(options) -> int` | A conversation's topic menu (asked topics drop out, the last option is the way out). With only the way out left it shows no menu: at the start of a talk Ray says one of `NOTHING_TO_ASK` and it returns -1 (the caller returns, skipping its goodbye); later it returns the way out. |
+| `topics(options) -> int` | A conversation's topic menu (asked topics drop out, the last option is the way out). If only the way out is left when a talk starts, no menu opens: Ray says one of `NOTHING_TO_ASK` and it returns -1 (the caller returns, skipping its goodbye). |
 | `device(title, tabs, active, body, rows) -> String` | Phone or car screen. Returns `"tab:i"`, `"row:i"` or `"close"`. |
 | `jigsaw(bg, pieces) -> bool` | Fit-the-pieces close-up. Each piece: `{tex, target: Vector2, turns}`. |
 | `give(item, animate := true)`, `take(item)` | Inventory with pickup animation and toast. |

@@ -680,18 +680,15 @@ func choose(options: Array) -> int:
 
 func topics(options: Array) -> int:
 	## A conversation's topic menu, where the last option is the way out ("Thanks, Anita.") and asked topics drop out.
-	## Once only the way out is left, the menu isn't shown. If the conversation has only just started, Ray says he has
-	## nothing to ask and this returns -1: the caller returns at once, without its goodbye. Later in a conversation it
-	## returns the way out's index, as if the player had picked it.
+	## If only the way out is left when a talk starts, no menu opens: Ray says he has nothing to ask and this returns
+	## -1, and the caller returns at once, without its goodbye. Later in a conversation the lone way out is still shown.
 	_topic_menus += 1
-	var first := _topic_menus == 1
 	var last := options.size() - 1
-	var c := last
-	if last > 0:
+	var c := -1
+	if last > 0 or _topic_menus > 1:
 		c = await choose(options)
-	elif first:
+	else:
 		await say(NOTHING_TO_ASK.pick_random())
-		c = -1
 	if c < 0 or c == last:
 		_topic_menus = 0
 	return c

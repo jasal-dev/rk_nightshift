@@ -345,12 +345,14 @@ func _case1() -> void:
 	await act("gun", "look")
 	await act("vance", "use", "case_file")
 	await act("ledger")
-	await act("vance", "use", "", ["Danny Reyes owed you money.", "Where were you Tuesday night?", "That's a .45."])
+	await act("vance", "use", "", ["Danny Reyes owed you money.", "Where were you Tuesday night?", "That's a .45.",
+			"I'll be going."])
 	await expect_room("pier9_dock")
 	await act("green_door")                             # Tiny waves him through now
 	await expect_room("vance_office")
 	await act("markers")
-	await act("vance", "use", "", ["Danny's marker says PAID.", "How did he pay you?", "Anyone else asking about Danny?"])
+	await act("vance", "use", "", ["Danny's marker says PAID.", "How did he pay you?", "Anyone else asking about Danny?",
+			"I'll be going."])
 	expect(["clue_alibi", "saw_paid", "clue_paid", "knows_envelope", "heard_caller"])
 	await expect_room("pier9_dock")
 
@@ -411,8 +413,9 @@ func _case2() -> void:
 	await act("phone_mount")                            # no gloves, no touching
 	await act("out")
 	await expect_room("mulholland_overlook")
-	await act("park", "use", "", ["What have we got?", "Who was his last passenger?", "Anything else from the couple?"])
-	await act("shah", "use", "", ["How did he die?", "When?", "Anything else?"])
+	await act("park", "use", "", ["What have we got?", "Who was his last passenger?", "Anything else from the couple?",
+			"That'll do."])
+	await act("shah", "use", "", ["How did he die?", "When?", "Anything else?", "Thanks, Anita."])
 	await act("shah")                                   # nothing left to ask: Ray says so, no menu
 	expect(["met_park", "gloved", "clue_cabin_camera", "clue_brielle_alibi", "clue_walker", "clue_ligature", "clue_tod"])
 	await act("car")                                    # not yet: the car still has things to tell
@@ -463,10 +466,10 @@ func _case2() -> void:
 	await act("coffee_pot")                             # Ray pours
 	await act("rosa", "use", "", ["I'm looking for a Glide driver. Kenji Ota."])
 	await act("rosa", "use", "driver_card")
-	await act("rosa", "use", "", ["Who paid?", "When did they leave?", "Can I see the card slip?"])
+	await act("rosa", "use", "", ["Who paid?", "When did they leave?", "Can I see the card slip?", "Thanks, Rosa."])
 	expect(["helped_rosa", "clue_roommate_norms", "got_card_slip"])
 	await act("heck", "use", "", ["Kenji Ota.", "\"I'll put you in the ground.\"", "Was Kenji into anything?",
-			"What about his roommate?"])
+			"What about his roommate?", "Never mind."])
 	await act("heck", "use", "driver_card")
 	await act("booth6")
 	expect(["clue_heck_alibi", "clue_side_thing", "clue_napkin"])
@@ -536,9 +539,9 @@ func _case3() -> void:
 	await act("window")
 	await act("chair")
 	await act("pearl", "use", "", ["What happened tonight?", "How long did you work for Gus?",
-			"Who has keys to the Oscar case?", "Who'd want the Oscar?"])
-	await act("park", "use", "", ["Who's the man in the bathrobe?", "Anything from the canvass?"])
-	await act("morty", "use", "", ["Who are you?", "You wanted the Oscar.", "Where were you tonight?"])
+			"Who has keys to the Oscar case?", "Who'd want the Oscar?", "I'll be back."])
+	await act("park", "use", "", ["Who's the man in the bathrobe?", "Anything from the canvass?", "That'll do."])
+	await act("morty", "use", "", ["Who are you?", "You wanted the Oscar.", "Where were you tonight?", "Good night, Morty."])
 	expect(["clue_register", "clue_pearl_story", "clue_keyholders", "clue_morty_offer", "clue_morty_alibi"])
 	await act("curtain")
 	await expect_room("stardust_office")
@@ -550,7 +553,8 @@ func _case3() -> void:
 	await act("darkness")
 	await act("roof_door")
 	await expect_room("stardust_office")
-	await act("shah", "use", "", ["How did he die?", "When?", "Did he fall, or was he helped?", "Anything else?"])
+	await act("shah", "use", "", ["How did he die?", "When?", "Did he fall, or was he helped?", "Anything else?",
+			"Thanks, Anita."])
 	expect(["got_gus_keys", "clue_tod_gus", "clue_pushed", "shah_palm"])
 	await act("drawer")                                 # locked
 	await act("desk")                                   # the eviction letter
@@ -574,8 +578,8 @@ func _case3() -> void:
 	await expect_room("stardust_shop")
 	await act("photo_wall", "use", "uv_lamp")
 	await act("certificate", "use", "catalogue")
-	await act("morty", "use", "", ["Calloway's sold No. 734.", "What does a real one weigh?"])
-	await act("park", "use", "", ["The developer's man."])
+	await act("morty", "use", "", ["Calloway's sold No. 734.", "What does a real one weigh?", "Good night, Morty."])
+	await act("park", "use", "", ["The developer's man.", "That'll do."])
 	await act("display_case", "use", "gus_keys")
 	expect(["clue_uv_fakes", "clue_same_serial", "clue_morty_bought", "clue_weight", "clue_whitaker_alibi"])
 	await act("curtain")
@@ -597,7 +601,7 @@ func _case3() -> void:
 	await act("glint")                                  # the gold star earring
 	await act("water_tank")                             # the "Oscar" floats
 	await act("charlie", "use", "", ["What did you see tonight?", "Did you hear anything?", "You knew Gus?",
-			"Ever seen this man?"])
+			"Ever seen this man?", "Good night, Charlie."])
 	expect(["clue_footprints", "clue_cigar", "got_star_earring", "got_fake_oscar", "clue_replica", "clue_fiat",
 			"clue_shouting", "clue_block_empty"])
 	if main.room.get_node("Earring").visible:
@@ -657,7 +661,7 @@ func _case4() -> void:
 	await act("patrol_car", "use", "", ["Did you kill him?", "I've been somewhere.", "Hollywood Division, twenty-six years.",
 			"I've been somewhere.", "Baghdad, oh-three. Military Police.", "Semper Fidelis.", "I've been somewhere.",
 			"Baghdad, oh-three. Military Police.", "Assist, Protect, Defend.", "What happened tonight?",
-			"Did you hear anything?", "Did you see the boy?", "Why carry the bike all the way down?"])
+			"Did you hear anything?", "Did you see the boy?", "Why carry the bike all the way down?", "That'll do."])
 	await act("road", "look")
 	await act("gutter")
 	await act("storm_drain", "look")
@@ -671,7 +675,7 @@ func _case4() -> void:
 	await expect_room("river_channel")
 
 	print("Case 4, scene 3: the channel")
-	await act("shah", "use", "", ["How did he die?", "When?", "The scrapes on him.", "Anything else?"])
+	await act("shah", "use", "", ["How did he die?", "When?", "The scrapes on him.", "Anything else?", "Thanks, Anita."])
 	await act("bike")                                   # the paint and the sliver of headlight
 	await act("bike")                                   # the nursing textbook
 	await act("phone", "look")                          # a $900 phone left on the bike
@@ -707,7 +711,8 @@ func _case4() -> void:
 	await expect_room("river_channel")
 	if not main.room.get_node("Actors/Preacher").visible or not main.room.get_node("Spot").visible:
 		_fail("Preacher should be at his tent and the reeds lit")
-	await act("preacher", "use", "", ["Where does stuff end up, off that bridge?", "Will you be all right?"])
+	await act("preacher", "use", "", ["Where does stuff end up, off that bridge?", "Will you be all right?",
+			"Take care, Preacher."])
 	await act("reeds")                                  # half a headlight, and Danny's phone
 	await act("preacher", "use", "danny_phone")         # the big man in the old cop's coat
 	await act("reeds")                                  # nothing else
@@ -722,7 +727,8 @@ func _case4() -> void:
 			"You reported the rider.", "Tell her about Owen.", "1:49 AM  Front gate", "1:51 AM  Driveway",
 			"1:53 AM  Front gate", "1:55 AM  Front gate", "2:38 AM  Front gate", "Close", "Who left drunk tonight?",
 			"I'll let you work."])
-	await act("andre", "use", "", ["Who left drunk tonight?", "I need the ticket.", "Who's the last car?", "Who left early?"])
+	await act("andre", "use", "", ["Who left drunk tonight?", "I need the ticket.", "Who's the last car?", "Who left early?",
+			"Thanks, Andre."])
 	await act("gift_bags", "look")
 	await act("gift_bags")                              # the optional seed: Pryce's invitation
 	await act("curb")
@@ -816,9 +822,10 @@ func _case5() -> void:
 	await act("precinct_door")                          # not yet: Sal first
 	await act("bar_door", "use", "", ["How do you know my name?"])     # Mara at the tape, and her card
 	expect(["got_reporter_card"])
-	await act("mara", "use", "", ["What are you working on?", "What do you know about the block?"])
-	await act("park", "use", "", ["What happened?", "Who cut him down?", "What's patrol calling it?", "Danny's alley, Tuesday."])
-	await act("teo", "use", "", ["You found him?", "The front door.", "Sal's habits.", "Who knows the knock?"])
+	await act("mara", "use", "", ["What are you working on?", "What do you know about the block?", "Goodnight."])
+	await act("park", "use", "", ["What happened?", "Who cut him down?", "What's patrol calling it?", "Danny's alley, Tuesday.",
+			"That'll do."])
+	await act("teo", "use", "", ["You found him?", "The front door.", "Sal's habits.", "Who knows the knock?", "Go home, Teo."])
 	await act("rezoning", "look")
 	await act("payphone")
 	await act("van", "look")
@@ -852,7 +859,7 @@ func _case5() -> void:
 	await expect_room("blue_note_back")
 
 	print("Case 5, scene 3: the back room")
-	await act("shah", "use", "", ["How did he die?", "When?", "Did he fight?", "Anything else?"])
+	await act("shah", "use", "", ["How did he die?", "When?", "Did he fight?", "Anything else?", "Thanks, Anita."])
 	await act("stool", "look")
 	await act("sal")
 	await act("locker")
@@ -868,7 +875,7 @@ func _case5() -> void:
 	if not main.room.get_node("Actors/Nina").visible or main.room.get_node("Cooler_shut").visible:
 		_fail("Nina should be out of the cooler, and the cooler open")
 	await act("nina", "use", "", ["What happened tonight?", "The man who called you.", "Can I see your phone?",
-			"What did Danny have?", "Where does the knock come from?", "Did Danny record his sets?"])
+			"What did Danny have?", "Where does the knock come from?", "Did Danny record his sets?", "Stay with Dr. Shah."])
 	await act("park")
 	expect(["clue_nina_heard", "clue_young_lady", "clue_nina_call", "clue_lisbon", "clue_knock_tune", "clue_takes_app"])
 	# quick save / load round trip in a Case 5 room
@@ -951,7 +958,7 @@ func _case5() -> void:
 	await act("bollard")                                # Tiny and Vance first
 	await act("tiny")
 	await act("radio")
-	await act("vance", "use", "", ["Thanks for coming.", "The man on the phone.", "Stay out of sight."])
+	await act("vance", "use", "", ["Thanks for coming.", "The man on the phone.", "Stay out of sight.", "I'm ready."])
 	await act("bollard", "use", "", ["Wednesday, ten past one.", "You called Nina Alvarez.", "Let's see what you've got, Walt."])
 	expect(["brenner_here", "brenner_lie1_broken"])
 	if not main.room.get_node("Lincoln").visible or not main.room.get_node("Actors/Brenner").visible:
