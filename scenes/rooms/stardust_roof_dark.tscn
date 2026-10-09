@@ -5,6 +5,8 @@
 [ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
 [ext_resource type="Texture2D" path="res://assets/rooms/stardust_roof_dark_vents.png" id="occ_vents"]
 [ext_resource type="Texture2D" path="res://assets/rooms/stardust_roof_dark_roof_door.png" id="occ_roof_door"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_roof_dark_lawn_chair.png" id="occ_lawn_chair"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_roof_dark_coffee_can.png" id="occ_coffee_can"]
 
 [node name="StardustRoofDark" type="Node2D"]
 script = ExtResource("script")
@@ -32,13 +34,25 @@ y_sort_enabled = true
 texture = ExtResource("occ_vents")
 centered = false
 position = Vector2(1381, 1003)
-offset = Vector2(-132, -323)
+offset = Vector2(-132, -251)
 
 [node name="RoofDoor" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_roof_door")
 centered = false
 position = Vector2(147, 880)
 offset = Vector2(-147, -405)
+
+[node name="LawnChair" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_lawn_chair")
+centered = false
+position = Vector2(407, 1008)
+offset = Vector2(-68, -219)
+
+[node name="CoffeeCan" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_coffee_can")
+centered = false
+position = Vector2(522, 978)
+offset = Vector2(-15, -51)
 
 [node name="Spawns" type="Node2D" parent="."]
 

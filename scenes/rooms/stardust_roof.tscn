@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/stardust_roof_earring.png" id="ov_earring"]
 [ext_resource type="Texture2D" path="res://assets/rooms/stardust_roof_vents.png" id="occ_vents"]
 [ext_resource type="Texture2D" path="res://assets/rooms/stardust_roof_roof_door.png" id="occ_roof_door"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_roof_lawn_chair.png" id="occ_lawn_chair"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_roof_coffee_can.png" id="occ_coffee_can"]
 
 [node name="StardustRoof" type="Node2D"]
 script = ExtResource("script")
@@ -44,7 +46,7 @@ y_sort_enabled = true
 texture = ExtResource("occ_vents")
 centered = false
 position = Vector2(1381, 1003)
-offset = Vector2(-132, -323)
+offset = Vector2(-132, -251)
 
 [node name="RoofDoor" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_roof_door")
@@ -52,11 +54,23 @@ centered = false
 position = Vector2(147, 880)
 offset = Vector2(-147, -405)
 
+[node name="LawnChair" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_lawn_chair")
+centered = false
+position = Vector2(407, 1008)
+offset = Vector2(-68, -219)
+
+[node name="CoffeeCan" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_coffee_can")
+centered = false
+position = Vector2(522, 978)
+offset = Vector2(-15, -51)
+
 [node name="Obstacles" type="Node2D" parent="."]
 
 [node name="Obstacle1" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
-polygon = PackedVector2Array(499.7, 981.7, 470.7, 1002.2, 424, 1017.6, 373.1, 1022.7, 334, 1015.7, 318.4, 999.2, 329.4, 978.4, 361.7, 959.4, 405.6, 946.6, 450.5, 942.6, 486.4, 948, 504.6, 962)
+polygon = PackedVector2Array(509.2, 981.9, 477.2, 1004.7, 425.2, 1022, 368.2, 1027.8, 324.5, 1019.9, 307.4, 1001.4, 320, 978.2, 356, 957.2, 404.7, 943.1, 454.3, 938.7, 493.9, 944.7, 514.3, 960.1)
 
 [node name="Spawns" type="Node2D" parent="."]
 
@@ -176,4 +190,4 @@ walk_to = Vector2(370, 911)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/glint"]
-polygon = PackedVector2Array(236, 910.8, 313.4, 912.1, 354.8, 921.9, 281.9, 920.6)
+polygon = PackedVector2Array(146.8, 983.9, 252.9, 907.5, 358, 909.3, 266.3, 986.2)

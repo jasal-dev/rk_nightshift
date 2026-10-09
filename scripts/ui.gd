@@ -24,7 +24,7 @@ var speech_label: Label
 var toast_label: Label
 var bar: PanelContainer
 var bar_items: HBoxContainer
-var choices_box: VBoxContainer
+var choices_box: GridContainer
 var fade_rect: ColorRect
 var card: Control
 var title: TitleScreen            ## the title screen, while it's up (see show_title)
@@ -99,10 +99,11 @@ func _ready() -> void:
 	bar_items.add_theme_constant_override("separation", 14)
 	hb.add_child(bar_items)
 
-	choices_box = VBoxContainer.new()
+	choices_box = GridContainer.new()
 	choices_box.position = Vector2(48, 780)
 	choices_box.size = Vector2(1824, 270)
-	choices_box.alignment = BoxContainer.ALIGNMENT_END
+	choices_box.add_theme_constant_override("v_separation", 0)
+	choices_box.add_theme_constant_override("h_separation", 24)
 	choices_box.visible = false
 	root.add_child(choices_box)
 
@@ -243,26 +244,79 @@ func toast(text: String, hold := 1.6) -> void:
 
 # --- dialogue choices -------------------------------------------------------
 func show_choices(opts: Array) -> void:
+	## The options grow upwards from the bottom of the screen. A long list (an evidence list under the murder board)
+	## goes into up to three columns, numbered down each column, and the font steps down until it fits.
 	for c in choices_box.get_children():
+		choices_box.remove_child(c)     # out of the grid now, so the old list doesn't size the new one
 		c.queue_free()
 	options.clear()
+	var texts: Array[String] = []
 	for i in opts.size():
 		options.append(String(opts[i]))
-		var b := Button.new()
-		b.text = "%d. %s" % [i + 1, opts[i]]
-		b.flat = true
-		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		b.focus_mode = Control.FOCUS_NONE
-		b.add_theme_color_override("font_color", Color(0.75, 0.68, 0.55))
-		b.add_theme_color_override("font_hover_color", Color(1, 0.85, 0.45))
-		b.add_theme_color_override("font_pressed_color", Color(1, 0.85, 0.45))
-		b.mouse_filter = Control.MOUSE_FILTER_STOP
-		b.pressed.connect(func(): choice_made.emit(i))
-		choices_box.add_child(b)
-	# grow upwards from the bottom of the screen when there are many options
-	choices_box.size = Vector2(1824, 46.0 * opts.size())
+		texts.append("%d. %s" % [i + 1, opts[i]])
+	var top := 640.0 if board != null else 60.0     # under the board's panel when it is up
+	var avail := 1050.0 - top
+	var fit := _choice_layout(texts, avail)
+	var font_size: int = fit[0]
+	var cols: int = fit[1]
+	var widths: Array = fit[2]
+	var rows := ceili(texts.size() / float(cols))
+	var row_h := ceilf(font_size * 1.53)
+	choices_box.columns = cols
+	for r in rows:
+		for c in cols:
+			var i := c * rows + r
+			if i >= texts.size():
+				var gap := Control.new()
+				gap.custom_minimum_size = Vector2(widths[c], row_h)
+				gap.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				choices_box.add_child(gap)
+				continue
+			var b := Button.new()
+			b.text = texts[i]
+			b.flat = true
+			b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			b.focus_mode = Control.FOCUS_NONE
+			b.clip_text = true
+			b.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+			b.custom_minimum_size = Vector2(widths[c], row_h)
+			b.add_theme_font_size_override("font_size", font_size)
+			b.add_theme_color_override("font_color", Color(0.75, 0.68, 0.55))
+			b.add_theme_color_override("font_hover_color", Color(1, 0.85, 0.45))
+			b.add_theme_color_override("font_pressed_color", Color(1, 0.85, 0.45))
+			b.mouse_filter = Control.MOUSE_FILTER_STOP
+			b.pressed.connect(func(): choice_made.emit(i))
+			choices_box.add_child(b)
+	choices_box.size = Vector2(1824, 0)
+	choices_box.size = Vector2(1824, choices_box.get_combined_minimum_size().y)
 	choices_box.position = Vector2(48, 1050 - choices_box.size.y)
 	choices_box.visible = true
+
+
+func _choice_layout(texts: Array[String], avail: float) -> Array:
+	## [font size, columns, column widths]: the biggest font, then the fewest columns, where the rows fit the height and
+	## each column is as wide as its widest option, the spare width shared out. Falls back to the smallest font in three
+	## equal columns (long options get an ellipsis).
+	for font_size: int in [FONT_SIZE, 26, 22]:
+		var row_h := ceilf(font_size * 1.53)
+		for cols: int in [1, 2, 3]:
+			var rows := ceili(texts.size() / float(cols))
+			if rows * row_h > avail:
+				continue
+			var widths: Array[float] = []
+			var total := 24.0 * (cols - 1)
+			for c in cols:
+				var widest := 0.0
+				for i in range(c * rows, mini((c + 1) * rows, texts.size())):
+					widest = maxf(widest, FONT.get_string_size(texts[i], HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x)
+				widths.append(widest + 16.0)
+				total += widest + 16.0
+			if total <= 1824.0:
+				for c in cols:
+					widths[c] += (1824.0 - total) / cols
+				return [font_size, cols, widths]
+	var w := (1824.0 - 48.0) / 3.0
+	return [22, 3, [w, w, w]]
 
 
 func hide_choices() -> void:

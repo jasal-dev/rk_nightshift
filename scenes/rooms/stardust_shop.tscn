@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_mannequin.png" id="occ_mannequin"]
 [ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_lowcase.png" id="occ_lowcase"]
 [ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_ropes.png" id="occ_ropes"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_display_case.png" id="occ_display_case"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_certificate.png" id="occ_certificate"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_chair.png" id="occ_chair"]
 
 [node name="StardustShop" type="Node2D"]
 script = ExtResource("script")
@@ -73,6 +76,24 @@ texture = ExtResource("occ_ropes")
 centered = false
 position = Vector2(1142, 785)
 offset = Vector2(-144, -173)
+
+[node name="DisplayCase" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_display_case")
+centered = false
+position = Vector2(1133, 764)
+offset = Vector2(-70, -362)
+
+[node name="Certificate" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_certificate")
+centered = false
+position = Vector2(1287, 761)
+offset = Vector2(-46, -264)
+
+[node name="Chair" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_chair")
+centered = false
+position = Vector2(624, 809)
+offset = Vector2(-59, -201)
 
 [node name="Obstacles" type="Node2D" parent="."]
 
@@ -186,7 +207,7 @@ polygon = PackedVector2Array(1241.8, 634.8, 1242, 628, 1252.3, 534.8, 1273.9, 50
 script = ExtResource("hs")
 id = "display_case"
 display_name = "display case"
-walk_to = Vector2(1147, 797)
+walk_to = Vector2(1163, 837)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/display_case"]

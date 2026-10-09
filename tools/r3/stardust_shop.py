@@ -239,48 +239,51 @@ def build(hide=()):
 
     # ---------------------------------------------------------------- the empty Oscar case
     cx, cz = CASE
-    with S.tag('display_case'):
-        S.wboxr(cx - 0.32, 0.0, cz - 0.32, cx + 0.32, 0.95, cz + 0.32, 'lacquer', rnd=0.015)   # pedestal
-        S.wboxr(cx - 0.36, 0.95, cz - 0.36, cx + 0.36, 1.0, cz + 0.36, 'brass', rnd=0.01)
-        S.wbox((cx, 0.62, cz + 0.325), (0.17, 0.05, 0.004), 'plate')                         # brass plate
-        S.wboxr(cx - 0.3, 1.0, cz - 0.3, cx + 0.3, 1.05, cz + 0.3, 'velvet')                  # velvet floor
-        S.wboxr(cx - 0.3, 1.05, cz - 0.3, cx + 0.3, 2.05, cz - 0.26, 'velvet')                # velvet back
-        S.wboxr(cx - 0.05, 1.05, cz - 0.255, cx + 0.05, 1.12, cz - 0.07, 'velvet_dk')        # the dented bed
-        S.ell(WORLD, (cx, 1.48, cz - 0.255), (0.06, 0.34, 0.006), 'velvet_dk')              # the statue's shadow
-        S.sph((cx, 1.86, cz - 0.255), 0.05, 'velvet_dk')
-        for (sx, sz) in ((-1, -1), (1, -1), (-1, 1), (1, 1)):
-            S.wboxr(cx + sx * 0.3 - 0.015, 1.0, cz + sz * 0.3 - 0.015, cx + sx * 0.3 + 0.015, 2.12,
-                    cz + sz * 0.3 + 0.015, 'brass')                                          # glass case corners
-        S.wboxr(cx - 0.32, 2.08, cz - 0.32, cx + 0.32, 2.14, cz + 0.32, 'brass')             # lid
-        S.wboxr(cx - 0.3, 1.0, cz + 0.295, cx + 0.3, 1.02, cz + 0.305, 'glass_edge')        # glints on the glass
-        S.wboxr(cx + 0.06, 1.1, cz + 0.3, cx + 0.08, 2.0, cz + 0.305, 'glass_edge')
-        S.wboxr(cx + 0.295, 1.1, cz - 0.2, cx + 0.305, 2.0, cz - 0.18, 'glass_edge')
+    if 'display_case' not in hide:
+        with S.tag('display_case'):
+            S.wboxr(cx - 0.32, 0.0, cz - 0.32, cx + 0.32, 0.95, cz + 0.32, 'lacquer', rnd=0.015)   # pedestal
+            S.wboxr(cx - 0.36, 0.95, cz - 0.36, cx + 0.36, 1.0, cz + 0.36, 'brass', rnd=0.01)
+            S.wbox((cx, 0.62, cz + 0.325), (0.17, 0.05, 0.004), 'plate')                         # brass plate
+            S.wboxr(cx - 0.3, 1.0, cz - 0.3, cx + 0.3, 1.05, cz + 0.3, 'velvet')                  # velvet floor
+            S.wboxr(cx - 0.3, 1.05, cz - 0.3, cx + 0.3, 2.05, cz - 0.26, 'velvet')                # velvet back
+            S.wboxr(cx - 0.05, 1.05, cz - 0.255, cx + 0.05, 1.12, cz - 0.07, 'velvet_dk')        # the dented bed
+            S.ell(WORLD, (cx, 1.48, cz - 0.255), (0.06, 0.34, 0.006), 'velvet_dk')              # the statue's shadow
+            S.sph((cx, 1.86, cz - 0.255), 0.05, 'velvet_dk')
+            for (sx, sz) in ((-1, -1), (1, -1), (-1, 1), (1, 1)):
+                S.wboxr(cx + sx * 0.3 - 0.015, 1.0, cz + sz * 0.3 - 0.015, cx + sx * 0.3 + 0.015, 2.12,
+                        cz + sz * 0.3 + 0.015, 'brass')                                          # glass case corners
+            S.wboxr(cx - 0.32, 2.08, cz - 0.32, cx + 0.32, 2.14, cz + 0.32, 'brass')             # lid
+            S.wboxr(cx - 0.3, 1.0, cz + 0.295, cx + 0.3, 1.02, cz + 0.305, 'glass_edge')        # glints on the glass
+            S.wboxr(cx + 0.06, 1.1, cz + 0.3, cx + 0.08, 2.0, cz + 0.305, 'glass_edge')
+            S.wboxr(cx + 0.295, 1.1, cz - 0.2, cx + 0.305, 2.0, cz - 0.18, 'glass_edge')
     S.light((cx, 3.2, cz + 0.4), (255, 236, 200), power=7, range=5, soft=10, vol=0.15,
             spot=((0, -1, -0.25), 14, 30))                                               # museum spot on the case
 
     # ---------------------------------------------------------------- the certificate on its easel
     ex, ez = EASEL
-    with S.tag('certificate'):
-        for (dx, dz) in ((-0.22, 0.12), (0.22, 0.12)):
-            S.cyl((ex + dx, 0.0, ez + dz), (ex + dx * 0.3, 1.6, ez - 0.05), 0.015, 'wood_dk')
-        S.cyl((ex, 0.0, ez - 0.35), (ex, 1.55, ez - 0.05), 0.015, 'wood_dk')
-        S.wboxr(ex - 0.26, 0.82, ez + 0.03, ex + 0.26, 0.86, ez + 0.12, 'wood_dk')
-        S.wbox((ex, 1.14, ez + 0.06), (0.21, 0.27, 0.015), 'gilt_frame', rot=Rx(-10))
-        S.wbox((ex, 1.14, ez + 0.077), (0.18, 0.24, 0.004), 'certificate', rot=Rx(-10))
+    if 'certificate' not in hide:
+        with S.tag('certificate'):
+            for (dx, dz) in ((-0.22, 0.12), (0.22, 0.12)):
+                S.cyl((ex + dx, 0.0, ez + dz), (ex + dx * 0.3, 1.6, ez - 0.05), 0.015, 'wood_dk')
+            S.cyl((ex, 0.0, ez - 0.35), (ex, 1.55, ez - 0.05), 0.015, 'wood_dk')
+            S.wboxr(ex - 0.26, 0.82, ez + 0.03, ex + 0.26, 0.86, ez + 0.12, 'wood_dk')
+            S.wbox((ex, 1.14, ez + 0.06), (0.21, 0.27, 0.015), 'gilt_frame', rot=Rx(-10))
+            S.wbox((ex, 1.14, ez + 0.077), (0.18, 0.24, 0.004), 'certificate', rot=Rx(-10))
 
     # ---------------------------------------------------------------- the director's chair
     chx, chz = CHAIR
-    with S.tag('chair'):
-        R = Ry(28)
-        F = Frame((chx, 0, chz), R)
-        for sx in (-1, 1):
-            S.cyl(F.to((sx * 0.26, 0.0, -0.22)), F.to((sx * 0.26, 0.5, 0.22)), 0.018, 'wood')    # crossed legs
-            S.cyl(F.to((sx * 0.26, 0.0, 0.22)), F.to((sx * 0.26, 0.5, -0.22)), 0.018, 'wood')
-            S.cyl(F.to((sx * 0.26, 0.5, -0.24)), F.to((sx * 0.26, 0.72, -0.24)), 0.016, 'wood')
-            S.cyl(F.to((sx * 0.26, 0.72, -0.24)), F.to((sx * 0.26, 0.72, 0.22)), 0.02, 'wood')     # arm rests
-            S.cyl(F.to((sx * 0.26, 0.5, -0.24)), F.to((sx * 0.27, 1.02, -0.27)), 0.016, 'wood')   # back posts
-        S.box(F, (0, 0.48, 0.0), (0.25, 0.012, 0.21), 0.004, 'canvas')
-        S.box(F, (0, 0.9, -0.265), (0.26, 0.09, 0.008), 0.002, 'chair_back', rot=Ry(180))
+    if 'chair' not in hide:
+        with S.tag('chair'):
+            R = Ry(28)
+            F = Frame((chx, 0, chz), R)
+            for sx in (-1, 1):
+                S.cyl(F.to((sx * 0.26, 0.0, -0.22)), F.to((sx * 0.26, 0.5, 0.22)), 0.018, 'wood')    # crossed legs
+                S.cyl(F.to((sx * 0.26, 0.0, 0.22)), F.to((sx * 0.26, 0.5, -0.22)), 0.018, 'wood')
+                S.cyl(F.to((sx * 0.26, 0.5, -0.24)), F.to((sx * 0.26, 0.72, -0.24)), 0.016, 'wood')
+                S.cyl(F.to((sx * 0.26, 0.72, -0.24)), F.to((sx * 0.26, 0.72, 0.22)), 0.02, 'wood')     # arm rests
+                S.cyl(F.to((sx * 0.26, 0.5, -0.24)), F.to((sx * 0.27, 1.02, -0.27)), 0.016, 'wood')   # back posts
+            S.box(F, (0, 0.48, 0.0), (0.25, 0.012, 0.21), 0.004, 'canvas')
+            S.box(F, (0, 0.9, -0.265), (0.26, 0.09, 0.008), 0.002, 'chair_back', rot=Ry(180))
 
     # ---------------------------------------------------------------- foreground: the jacket rack (left), a low case (right)
     if 'mannequin' not in hide:
@@ -411,7 +414,7 @@ def build(hide=()):
             'pearl_stand': ('Pearl', (-0.95, 1.2), 'right'),
             'park': ('Officer Park', (-0.55, -1.75), 'left'),
             'morty': ('Morty', (-0.3, -2.3), 'up'),
-            'display_case': ('display case', (cx, 0.35), 'up'),
+            'display_case': ('display case', (cx, 0.95), 'up'),
             'certificate': ('certificate', (ex + 0.1, 0.45), 'up'),
             'front_door': ('front door', (-0.3, -2.4), 'up'),
             'photo_wall': ('signed photos', (2.8, -2.1), 'up'),
@@ -436,7 +439,8 @@ def build(hide=()):
                        'certificate', 'display_case', 'chair', 'morty', 'park', 'pearl', 'pearl_stand'],
         overlays=['pearl_chair', 'pearl_stand', 'park', 'morty'],
         overlay_bases={'pearl_chair': (chx, chz + 0.35), 'pearl_stand': PEARL_UP, 'park': PARK},
-        occluders={'mannequin': (-3.0, 2.75), 'lowcase': (2.5, 2.95), 'ropes': (CASE[0], CASE[1] + 0.75)},
+        occluders={'mannequin': (-3.0, 2.75), 'lowcase': (2.5, 2.95), 'ropes': (CASE[0], CASE[1] + 0.75),
+                   'display_case': (cx, cz + 0.36), 'certificate': (ex, ez + 0.15), 'chair': (chx, chz + 0.3)},
         obstacles=[(cx, cz, 0.85), (ex, ez, 0.35), (chx, chz, 0.45), (PARK[0], PARK[1], 0.28), (-3.0, 2.75, 0.4)],
         char_fill=((236, 220, 200), 0.18),
         tint=(0.86, 0.78, 0.72),

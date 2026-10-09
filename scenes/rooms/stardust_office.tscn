@@ -90,7 +90,7 @@ polygon = PackedVector2Array(40.4, 442, 161.3, 424.4, 224.2, 417, 260.9, 412.7, 
 script = ExtResource("hs")
 id = "cabinet"
 display_name = "filing cabinet"
-walk_to = Vector2(510, 734)
+walk_to = Vector2(594, 740)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/cabinet"]
@@ -100,7 +100,7 @@ polygon = PackedVector2Array(363.9, 558.2, 402.7, 543.4, 499.5, 543.4, 500.6, 54
 script = ExtResource("hs")
 id = "phone"
 display_name = "cordless phone"
-walk_to = Vector2(510, 734)
+walk_to = Vector2(594, 740)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/phone"]
@@ -124,7 +124,7 @@ walk_to = Vector2(670, 721)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/drawer"]
-polygon = PackedVector2Array(621.4, 615.8, 622.3, 615.1, 739.5, 615.1, 739.8, 626, 739.2, 626.7, 621.9, 626.7)
+polygon = PackedVector2Array(585.6, 619.9, 586.4, 619.3, 622.3, 615.1, 739.5, 615.1, 778.1, 619.3, 779.9, 702.8, 779.5, 703.5, 589.3, 703.5)
 
 [node name="letter" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")

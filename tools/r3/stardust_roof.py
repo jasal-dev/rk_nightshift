@@ -157,22 +157,26 @@ def build(hide=(), dark=False):
             S.box(D, (0.5, 1.05, 0.0), (0.49, 1.04, 0.03), 0.0, 'door')
             S.wboxr(bx1 + 0.25, 0, DOOR[1] - 1.15, bx1 + 0.45, 0.1, DOOR[1] - 1.0, 'brick')
     S.light((bx1 + 0.6, 1.9, DOOR[1]), (255, 196, 130), power=1.8 if not dark else 2.4, range=4.5, soft=12, vol=0.2)
-    with S.tag('lawn_chair'):
-        cx, cz = CHAIR
-        F = Frame((cx, 0, cz), Ry(20))
-        for sx in (-1, 1):
-            S.cyl(F.to((sx * 0.28, 0.0, 0.3)), F.to((sx * 0.28, 0.38, -0.25)), 0.015, 'chair')
-            S.cyl(F.to((sx * 0.28, 0.0, -0.3)), F.to((sx * 0.28, 0.38, 0.25)), 0.015, 'chair')
-            S.cyl(F.to((sx * 0.28, 0.38, -0.25)), F.to((sx * 0.28, 0.95, -0.42)), 0.015, 'chair')
-            S.cyl(F.to((sx * 0.28, 0.55, 0.28)), F.to((sx * 0.28, 0.55, -0.3)), 0.016, 'chair')
-        for k in range(5):
-            S.box(F, (0, 0.38, -0.2 + k * 0.1), (0.27, 0.008, 0.03), 0.0, 'strap')
-            S.box(F, (0, 0.5 + k * 0.1, -0.3 - k * 0.025), (0.27, 0.03, 0.008), 0.0, 'strap', rot=Rx(-15))
-    with S.tag('coffee_can'):
-        S.fcyl((cx + 0.55, 0.13, cz - 0.15), 0.1, 0.13, 'can')
-        for k in range(5):
-            S.cyl((cx + 0.55 + rng.uniform(-0.05, 0.05), 0.26, cz - 0.15 + rng.uniform(-0.05, 0.05)),
-                  (cx + 0.55 + rng.uniform(-0.06, 0.06), 0.31, cz - 0.15 + rng.uniform(-0.06, 0.06)), 0.012, 'cigar')
+    cx, cz = CHAIR
+    if 'lawn_chair' not in hide:
+        with S.tag('lawn_chair'):
+            F = Frame((cx, 0, cz), Ry(20))
+            for sx in (-1, 1):
+                S.cyl(F.to((sx * 0.28, 0.0, 0.3)), F.to((sx * 0.28, 0.38, -0.25)), 0.015, 'chair')
+                S.cyl(F.to((sx * 0.28, 0.0, -0.3)), F.to((sx * 0.28, 0.38, 0.25)), 0.015, 'chair')
+                S.cyl(F.to((sx * 0.28, 0.38, -0.25)), F.to((sx * 0.28, 0.95, -0.42)), 0.015, 'chair')
+                S.cyl(F.to((sx * 0.28, 0.55, 0.28)), F.to((sx * 0.28, 0.55, -0.3)), 0.016, 'chair')
+            for k in range(5):
+                S.box(F, (0, 0.38, -0.2 + k * 0.1), (0.27, 0.008, 0.03), 0.0, 'strap')
+                S.box(F, (0, 0.5 + k * 0.1, -0.3 - k * 0.025), (0.27, 0.03, 0.008), 0.0, 'strap', rot=Rx(-15))
+    # the cigar ends are rolled before the hide check, so rng stays in step when the can is hidden
+    cigars = [((cx + 0.55 + rng.uniform(-0.05, 0.05), 0.26, cz - 0.15 + rng.uniform(-0.05, 0.05)),
+               (cx + 0.55 + rng.uniform(-0.06, 0.06), 0.31, cz - 0.15 + rng.uniform(-0.06, 0.06))) for k in range(5)]
+    if 'coffee_can' not in hide:
+        with S.tag('coffee_can'):
+            S.fcyl((cx + 0.55, 0.13, cz - 0.15), 0.1, 0.13, 'can')
+            for (c0, c1) in cigars:
+                S.cyl(c0, c1, 0.012, 'cigar')
     S.ell(WORLD, (cx + 0.1, 0.0, cz - 0.7), (0.3, 0.01, 0.18), 'puddle')
     S.cyl((cx + 0.02, 0.008, cz - 0.68), (cx + 0.14, 0.008, cz - 0.74), 0.013, 'cigar')                  # his last one
     S.sph((cx + 0.15, 0.008, cz - 0.745), 0.012, 'ash')
@@ -210,8 +214,8 @@ def build(hide=(), dark=False):
                 S.wboxr(1.68, 0.14 + k * 0.055, 4.76, 2.82, 0.16 + k * 0.055, 4.79, 'vent')
             S.fcyl((2.25, 0.77, 5.15), 0.28, 0.02, 'grate')                                 # the fan on top
             S.fcyl((2.25, 0.79, 5.15), 0.06, 0.02, 'vent')
-            S.cyl((4.8, 0.3, 4.5), (4.8, 0.3, -1.0), 0.06, 'rust')                             # a pipe along the parapet
             S.cyl((4.8, 0.3, 4.5), (3.9, 0.3, 4.5), 0.06, 'rust')
+    S.cyl((4.8, 0.3, 4.5), (4.8, 0.3, -1.0), 0.06, 'rust')         # a pipe along the parapet, behind Ray (not a walk-behind)
 
     # ---------------------------------------------------------------- next door: brick wall, the fire escape, Charlie
     S.wboxr(GAP, -12, ZF - 6, GAP + 4, 4.5, ZK + 4, 'brick')
@@ -285,8 +289,8 @@ def build(hide=(), dark=False):
         },
         hotspot_shapes={
             'gravel': [(-3.9, 0.0, -0.4), (-2.6, 0.0, -0.4), (-2.6, 0.0, 3.3), (-3.9, 0.0, 3.3)],
-            'glint': [(GLINT[0] - 0.22, 0.0, GLINT[1] - 0.22), (GLINT[0] + 0.22, 0.0, GLINT[1] - 0.22),
-                      (GLINT[0] + 0.22, 0.25, GLINT[1] + 0.22), (GLINT[0] - 0.22, 0.25, GLINT[1] + 0.22)],
+            'glint': [(GLINT[0] - 0.5, 0.0, GLINT[1] - 0.4), (GLINT[0] + 0.15, 0.0, GLINT[1] - 0.4),
+                      (GLINT[0] + 0.15, 0.0, GLINT[1] + 0.6), (GLINT[0] - 0.5, 0.0, GLINT[1] + 0.6)],
             'charlie': [(CHARLIE[0], 0.4, CHARLIE[1] - 0.45), (CHARLIE[0], 0.4, CHARLIE[1] + 0.45),
                         (CHARLIE[0], 2.5, CHARLIE[1] + 0.45), (CHARLIE[0], 2.5, CHARLIE[1] - 0.45)],
             'roof_edge': [(X1 - 0.1, 0.0, -2.6), (X1 + 0.3, 0.0, -2.6), (X1 + 0.3, 0.7, 1.6), (X1 - 0.1, 0.7, 1.6)],
@@ -295,8 +299,9 @@ def build(hide=(), dark=False):
         hotspot_order=['theatre', 'blue_note', 'neon', 'roof_edge', 'gravel', 'water_tank', 'lawn_chair', 'coffee_can',
                        'roof_door', 'charlie', 'glint'],
         overlays=['neon_u', 'earring'],
-        occluders={'vents': (2.25, 4.8), 'roof_door': (-4.95, 3.5)},
-        obstacles=[(CHAIR[0], CHAIR[1], 0.45)],
+        occluders={'vents': (2.25, 4.8), 'roof_door': (-4.95, 3.5), 'lawn_chair': (CHAIR[0] + 0.1, CHAIR[1] + 0.3),
+                   'coffee_can': (CHAIR[0] + 0.55, CHAIR[1] - 0.05)},
+        obstacles=[(CHAIR[0], CHAIR[1], 0.5)],
         char_fill=((220, 200, 210), 0.16),
         tint=(0.86, 0.66, 0.6),
         exposure=1.5,

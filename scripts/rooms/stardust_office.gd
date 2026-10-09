@@ -57,6 +57,8 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 		"desk":
 			if verb == "look":
 				await main.say("A rolltop desk under paper. A green lamp still burning.")
+			elif item == "gus_keys":
+				await _unlock_drawer()       # the keys work on the desk as well as on the drawers
 			elif item != "":
 				await default_response(verb, item)
 			elif not Game.flag("clue_eviction"):
@@ -83,10 +85,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 		"drawer":
 			if item == "gus_keys":
-				if Game.flag("got_uv_lamp"):
-					await main.say("Cigars and a loupe. He was a man of simple pleasures and complicated ones.")
-				else:
-					await _drawer()
+				await _unlock_drawer()
 			elif item != "":
 				await default_response(verb, item)
 			elif Game.flag("got_uv_lamp"):
@@ -325,6 +324,13 @@ func _phone() -> void:
 
 
 # --- Puzzle 3.3: the UV lamp --------------------------------------------------------------
+func _unlock_drawer() -> void:
+	if Game.flag("got_uv_lamp"):
+		await main.say("Cigars and a loupe. He was a man of simple pleasures and complicated ones.")
+	else:
+		await _drawer()
+
+
 func _drawer() -> void:
 	await main.player.play_action("use")
 	await main.say("A cigar box, a loupe, and a handheld UV lamp. Masking tape on it, in Gus's hand:")

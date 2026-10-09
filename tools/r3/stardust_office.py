@@ -100,11 +100,8 @@ def build(hide=()):
     # ---------------------------------------------------------------- Gus's rolltop desk and the green lamp
     dx, dz = DESK
     with S.tag('desk'):
-        for x in (dx - 0.72, dx + 0.42):                                                # pedestals with drawers
+        for x in (dx - 0.72, dx + 0.42):                                                # pedestals
             S.wboxr(x, 0, dz, x + 0.3, 0.74, dz + 0.68, 'wood', rnd=0.01)
-            for k in range(3):
-                S.wboxr(x + 0.03, 0.08 + k * 0.22, dz + 0.68, x + 0.27, 0.26 + k * 0.22, dz + 0.7, 'wood_dk')
-                S.sph((x + 0.15, 0.17 + k * 0.22, dz + 0.71), 0.012, 'brass')
         S.wboxr(dx - 0.76, 0.74, dz, dx + 0.76, 0.78, dz + 0.74, 'wood', rnd=0.01)       # writing surface
         S.wboxr(dx - 0.76, 0.78, dz, dx + 0.76, 1.3, dz + 0.24, 'wood_dk')              # hutch with pigeonholes
         for k in range(6):
@@ -121,7 +118,11 @@ def build(hide=()):
         S.wbox((dx + 0.42, 0.79, dz + 0.5), (0.11, 0.01, 0.14), 'catalogue', rot=Ry(12) @ Rx(-90))
     with S.tag('letter'):                                                               # on top, where he'd see it
         S.wbox((dx - 0.05, 0.81, dz + 0.5), (0.1, 0.13, 0.002), 'letter', rot=Ry(-8) @ Rx(-90))
-    with S.tag('drawer'):
+    with S.tag('drawer'):                                       # every drawer is one hotspot; Gus's keys open them
+        for x in (dx - 0.72, dx + 0.42):
+            for k in range(3):
+                S.wboxr(x + 0.03, 0.08 + k * 0.22, dz + 0.68, x + 0.27, 0.26 + k * 0.22, dz + 0.7, 'wood_dk')
+                S.sph((x + 0.15, 0.17 + k * 0.22, dz + 0.71), 0.012, 'brass')
         S.wboxr(dx - 0.42, 0.66, dz + 0.72, dx + 0.42, 0.74, dz + 0.745, 'wood_dk')     # the center drawer
         S.sph((dx, 0.7, dz + 0.75), 0.014, 'brass')
     with S.tag('lamp'):
@@ -321,8 +322,8 @@ def build(hide=()):
             'desk': ('desk', (dx, -1.5), 'up'),
             'drawer': ('desk drawer', (dx, -1.5), 'up'),
             'letter': ('eviction letter', (dx, -1.5), 'up'),
-            'phone': ('cordless phone', (-3.0, -1.2), 'left'),
-            'cabinet': ('filing cabinet', (-3.0, -1.2), 'left'),
+            'phone': ('cordless phone', (-2.4, -1.05), 'left'),
+            'cabinet': ('filing cabinet', (-2.4, -1.05), 'left'),
             'fuse_panel': ('fuse panel', (-0.7, -1.6), 'up'),
             'pearl_locker': ('PEARL locker', (0.7, -1.55), 'up'),
             'gus_locker': ('GUS locker', (0.25, -1.55), 'up'),
