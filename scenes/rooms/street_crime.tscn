@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/street_crime_streetlamp.png" id="occ_streetlamp"]
 [ext_resource type="Texture2D" path="res://assets/rooms/street_crime_car.png" id="occ_car"]
 [ext_resource type="Texture2D" path="res://assets/rooms/street_crime_patrol.png" id="occ_patrol"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_tape.png" id="occ_tape"]
 [ext_resource type="Texture2D" path="res://assets/rooms/street_crime_teo.png" id="occ_teo"]
 [ext_resource type="Texture2D" path="res://assets/rooms/street_crime_mara.png" id="occ_mara"]
 
@@ -49,7 +50,7 @@ y_sort_enabled = true
 texture = ExtResource("ov_park")
 centered = false
 position = Vector2(608, 807)
-offset = Vector2(-253, -307)
+offset = Vector2(-150, -242)
 
 [node name="Hydrant" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_hydrant")
@@ -74,6 +75,12 @@ texture = ExtResource("occ_patrol")
 centered = false
 position = Vector2(1263, 889)
 offset = Vector2(-386, -231)
+
+[node name="Tape" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_tape")
+centered = false
+position = Vector2(765, 860)
+offset = Vector2(-618, -116)
 
 [node name="Teo" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_teo")

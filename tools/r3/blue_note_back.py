@@ -5,8 +5,9 @@ under a gooseneck lamp with a cash box and a pile of mail. A row of six staff lo
 keys hanging from its lock. A water pipe runs the width of the room, a cut length of white clothesline hanging from it;
 under it a step stool on its side, well away from the pipe. Sal on the concrete under a gray sheet, one hand and a
 cardigan sleeve at its edge, and Dr. Shah kneeling beside him under her work light. To the left, past a stub of wall, the
-back hall: the steel door to the alley, the coat hooks with Sal's coat and a red umbrella dripping into a puddle, and the
-heavy white door of the walk-in cooler with a strip of light under it. The door back to the bar is in the right wall.
+back hall: the steel door to the alley, the coat hooks beside it with Sal's coat and a red umbrella dripping into a
+puddle, and the heavy white door of the walk-in cooler with a strip of light under it. Open, the door swings back toward
+us against the wall and shows the cooler: wire shelves of limes, lemons and milk, a keg, and the crate Nina sat on. The door back to the bar is in the right wall.
 
 Overlays: the cooler door, shut (cooler_shut; open and lit behind it once Nina is out), Nina in Ray's raincoat on a
 chair by the desk (nina), and Officer Park in the back hall (park), both y-sorted (overlay_bases)."""
@@ -27,7 +28,7 @@ STOOL = (1.8, -0.62)         # the step stool, on its side, four feet from where
 SHAH = (0.3, -2.0)
 DESK = (2.85, -2.9)           # the desk's centre, against the back wall at the right
 NINA = (1.5, -2.25)          # Nina on the desk chair, in Ray's raincoat and Shah's blanket
-PARK = (-3.75, -1.7)         # Park in the back hall, by the cooler
+PARK = (-4.35, 0.5)          # Park by the cooler's open door, clear of the coat hooks and the shelves inside
 LOCKERS_X = (-2.2, 0.4)       # six lockers along the back wall; Danny's is the fourth
 BAR_DOOR = (0.6, 1.6)         # the door to the bar (z), in the right wall
 FG_CRATES = (-3.2, 2.6)       # beer crates stacked near us, at the left
@@ -75,6 +76,11 @@ def build(hide=()):
     S.mat('puddle', (40, 40, 44), refl=0.8, spec=1.0, shin=100)
     S.mat('print', (70, 66, 60), refl=0.4, spec=0.8)
     S.mat('lime', (110, 170, 50), spec=0.5)
+    S.mat('lemon', (230, 200, 60), spec=0.5)
+    S.mat('milk', (236, 236, 230), spec=0.6, shin=40)
+    S.mat('gasket', (30, 32, 34), spec=0.3)
+    S.mat('knob', (170, 24, 24), spec=1.0, shin=60)
+    S.mat('wire', (170, 176, 180), spec=1.2, shin=60)
     S.mat('crate', (150, 116, 76), namp=0.2, nscale=20)
     S.mat('worklight', (240, 245, 255), emis=(240, 245, 255), emis_mult=6)
     S.mat('tripod', (30, 30, 34), spec=0.6)
@@ -225,44 +231,89 @@ def build(hide=()):
         S.wboxr(a1 - 0.18, 1.3, ZB + 0.08, a1 - 0.1, 1.42, ZB + 0.11, 'brass')               # the deadbolt
         S.wboxr(a0 + 0.2, 2.0, ZB + 0.08, a1 - 0.2, 2.06, ZB + 0.1, 'steel')
     with S.tag('hooks'):
-        hz = -3.4
-        S.wboxr(HALL_X - 0.14, 1.7, hz - 0.5, HALL_X - 0.12, 1.75, hz + 0.6, 'door_wood')
-        for k in range(4):
-            S.cyl((HALL_X - 0.13, 1.72, hz - 0.35 + k * 0.3), (HALL_X - 0.22, 1.76, hz - 0.35 + k * 0.3), 0.01, 'brass')
-        S.ell(WORLD, (HALL_X - 0.24, 1.3, hz - 0.35), (0.08, 0.42, 0.2), 'coat', k=0.04)   # Sal's coat
-        S.ell(WORLD, (HALL_X - 0.22, 1.66, hz - 0.35), (0.07, 0.1, 0.16), 'coat', k=0.04)
-        uz = hz + 0.25
-        S.cyl((HALL_X - 0.22, 1.72, uz), (HALL_X - 0.22, 1.62, uz), 0.012, 'umbrella')      # the red umbrella
-        S.cone((HALL_X - 0.24, 1.62, uz), (HALL_X - 0.26, 0.85, uz), 0.08, 0.02, 'umbrella', k=0.02)
-        S.cyl((HALL_X - 0.26, 0.85, uz), (HALL_X - 0.26, 0.75, uz), 0.006, 'steel')
-        S.ell(WORLD, (HALL_X - 0.4, 0.002, uz + 0.05), (0.32, 0.004, 0.24), 'puddle')
-        for k in range(7):                                                                    # small wet prints
-            t = k / 6
-            px = a1 + 0.1 + (X0 + 0.5 - a1 - 0.1) * t * 0.7 - 0.1 * (k % 2)
-            pz = ZB + 0.6 + (COOLER_Z[0] + 0.5 - ZB - 0.6) * t
-            S.ell(WORLD, (px, 0.003, pz), (0.05, 0.003, 0.1), 'print', rot=Ry(30))
+        hz = ZB + 0.02                                   # on the back wall, between the corner and the alley door
+        S.wboxr(X0 + 0.06, 1.7, ZB, a0 - 0.14, 1.76, hz, 'door_wood')
+        for x in (X0 + 0.2, X0 + 0.38, X0 + 0.56):
+            S.cyl((x, 1.73, hz), (x, 1.77, hz + 0.1), 0.01, 'brass')
+        cx = X0 + 0.2
+        S.ell(WORLD, (cx, 1.3, hz + 0.12), (0.2, 0.42, 0.07), 'coat', k=0.04)               # Sal's coat
+        S.ell(WORLD, (cx, 1.64, hz + 0.11), (0.16, 0.1, 0.06), 'coat', k=0.04)
+        ux = X0 + 0.56
+        S.cyl((ux, 1.77, hz + 0.1), (ux, 1.66, hz + 0.12), 0.012, 'umbrella')               # the red umbrella
+        S.cone((ux, 1.66, hz + 0.13), (ux, 0.85, hz + 0.16), 0.08, 0.02, 'umbrella', k=0.02)
+        S.cyl((ux, 0.85, hz + 0.16), (ux, 0.75, hz + 0.16), 0.006, 'steel')
+    S.ell(WORLD, (X0 + 0.6, 0.002, ZB + 0.4), (0.3, 0.004, 0.24), 'puddle')
+    for k in range(7):                                                                        # small wet prints
+        t = k / 6
+        px = a1 + 0.1 + (X0 + 0.5 - a1 - 0.1) * t * 0.7 - 0.1 * (k % 2)
+        pz = ZB + 0.6 + (COOLER_Z[0] + 0.5 - ZB - 0.6) * t
+        S.ell(WORLD, (px, 0.003, pz), (0.05, 0.003, 0.1), 'print', rot=Ry(30))
     c0, c1 = COOLER_Z
     with S.tag('cooler'):
-        S.wboxr(X0 - 0.02, 0.0, c0 - 0.12, X0 + 0.1, 2.3, c1 + 0.12, 'steel')               # frame
-        S.wboxr(X0 - 1.6, 0.0, c0, X0, 2.2, c1, 'cooler_in', op=1)
+        S.wboxr(X0 - 1.6, 0.0, c0, X0 + 0.05, 2.2, c1, 'cooler_in', op=1)                 # the doorway, through the wall
+        for (z0, z1) in ((c0 - 0.12, c0), (c1, c1 + 0.12)):                                  # the frame: jambs, header
+            S.wboxr(X0 - 0.02, 0.0, z0, X0 + 0.1, 2.3, z1, 'steel')
+        S.wboxr(X0 - 0.02, 2.2, c0 - 0.12, X0 + 0.1, 2.3, c1 + 0.12, 'steel')
         S.wboxr(X0 - 1.6, 0.0, c0 - 0.4, X0 - 0.1, 2.4, c0, 'cooler')                      # the box itself, behind
         S.wboxr(X0 - 1.6, 0.0, c1, X0 - 0.1, 2.4, c1 + 0.4, 'cooler')
         S.wboxr(X0 - 1.7, 0.0, c0 - 0.4, X0 - 1.6, 2.4, c1 + 0.4, 'cooler_in')
-        for y in (0.6, 1.2, 1.8):                                                          # shelves of limes, kegs
-            S.wboxr(X0 - 1.6, y, c0 + 0.02, X0 - 1.1, y + 0.03, c1 - 0.02, 'steel')
-            for k in range(6):
-                S.sph((X0 - 1.35 + 0.08 * (k % 3), y + 0.07, c0 + 0.25 + 0.18 * k), 0.05, 'lime')
-        S.tcyl(Frame((X0 - 0.75, 0.33, c0 + 0.4)), (0, 0, 0), (0.22, 0.22), (0.22, 0.22), 0.33, 'keg')
-        S.wboxr(X0 - 0.75, 0.0, c1 - 0.55, X0 - 0.35, 0.36, c1 - 0.15, 'crate')             # where she sat
-    S.light((X0 - 0.8, 2.1, (c0 + c1) / 2), (190, 220, 245), power=3.5, range=4, soft=10)
+        S.wboxr(X0 - 1.7, 2.2, c0 - 0.4, X0 - 0.1, 2.4, c1 + 0.4, 'cooler')                 # its ceiling
+        # wire shelving along the far side wall: that's the side we see through the door
+        sz0, sz1 = c0 + 0.02, c0 + 0.48
+        for x in (X0 - 1.5, X0 - 0.2):
+            for z in (sz0 + 0.02, sz1 - 0.02):
+                S.cyl((x, 0.0, z), (x, 2.0, z), 0.012, 'wire')
+        for y in (0.35, 0.85, 1.35, 1.85):
+            S.wboxr(X0 - 1.52, y, sz0, X0 - 0.18, y + 0.02, sz1, 'wire')
+        for k in range(4):                                                                  # limes, lemons, milk
+            x = X0 - 1.35 + k * 0.32
+            S.wboxr(x - 0.13, 0.37, sz0 + 0.05, x + 0.13, 0.55, sz1 - 0.05, 'crate', rnd=0.01)
+            for j in range(6):
+                S.sph((x - 0.08 + 0.08 * (j % 3), 0.58, sz0 + 0.14 + 0.16 * (j // 3)), 0.045,
+                      'lime' if k % 2 == 0 else 'lemon')
+            for j in range(3):
+                S.tcyl(Frame((x - 0.08 + 0.08 * j, 0.99, sz0 + 0.22)), (0, 0, 0), (0.035, 0.035), (0.035, 0.035),
+                       0.12, 'milk')
+            S.wboxr(x - 0.13, 1.37, sz0 + 0.06, x + 0.13, 1.6, sz1 - 0.06, f'case{k % 3}', rnd=0.01)
+            for j in range(5):
+                S.sph((x - 0.1 + 0.05 * j, 1.92, sz0 + 0.2 + 0.03 * (j % 2)), 0.045, 'lime')
+        S.tcyl(Frame((X0 - 1.25, 0.33, c1 - 0.35)), (0, 0, 0), (0.22, 0.22), (0.22, 0.22), 0.33, 'keg')
+        S.fcyl((X0 - 1.25, 0.68, c1 - 0.35), 0.06, 0.03, 'steel_dk')
+        S.wboxr(X0 - 0.75, 0.0, c0 + 0.6, X0 - 0.35, 0.36, c0 + 1.0, 'crate', rnd=0.01)       # where she sat
+        S.wbox((X0 - 0.52, 0.37, c0 + 0.78), (0.06, 0.004, 0.011), 'steel', rot=Ry(25))      # her paring knife
+        S.wbox((X0 - 0.62, 0.372, c0 + 0.83), (0.05, 0.008, 0.012), 'gasket', rot=Ry(25))
+        S.cyl((X0 - 0.75, 2.2, (c0 + c1) / 2), (X0 - 0.75, 2.16, (c0 + c1) / 2), 0.09, 'strip')  # its light
+    S.light((X0 - 0.8, 2.0, (c0 + c1) / 2), (190, 220, 245), power=3.5, range=4, soft=10)
+
+    def cooler_door(F):
+        """The walk-in's door in its own frame: hinged at the origin, its outer face toward local +x, running from the
+        hinge along local -z."""
+        w = c1 - c0
+        S.box(F, (0.06, 1.1, -w / 2), (0.06, 1.08, w / 2), 0.02, 'cooler')
+        S.box(F, (0.125, 0.2, -w / 2), (0.006, 0.17, w / 2 - 0.06), 0.004, 'steel')          # kick plate
+        for y in (0.75, 1.55):                                                             # pressed ribs
+            S.box(F, (0.122, y, -w / 2), (0.005, 0.015, w / 2 - 0.12), 0.004, 'cooler')
+        for y in (0.45, 1.75):                                                             # strap hinges
+            S.box(F, (0.13, y, -0.14), (0.015, 0.06, 0.16), 0.006, 'steel')
+            S.cyl(F.to((0.14, y - 0.09, 0.02)), F.to((0.14, y + 0.09, 0.02)), 0.025, 'steel')
+        S.box(F, (0.14, 1.08, -w + 0.2), (0.02, 0.1, 0.06), 0.008, 'steel')                 # the latch
+        S.box(F, (0.19, 1.08, -w + 0.3), (0.02, 0.025, 0.2), 0.01, 'steel')                 # its pull
+        S.box(F, (0.135, 1.36, -w + 0.14), (0.012, 0.04, 0.06), 0.004, 'steel')             # the hasp, open
+        S.box(F, (-0.004, 1.1, -w / 2), (0.004, 0.96, w / 2 - 0.12), 0.002, 'steel')          # the steel liner inside
+        for (c, h) in (((-0.01, 2.12, -w / 2), (0.01, 0.025, w / 2 - 0.03)),
+                       ((-0.01, 0.08, -w / 2), (0.01, 0.025, w / 2 - 0.03)),
+                       ((-0.01, 1.1, -0.04), (0.01, 1.04, 0.025)),
+                       ((-0.01, 1.1, -w + 0.04), (0.01, 1.04, 0.025))):
+            S.box(F, c, h, 0.006, 'gasket')                                                # the rubber seal
+        S.cyl(F.to((-0.005, 1.08, -w + 0.2)), F.to((-0.09, 1.08, -w + 0.2)), 0.012, 'steel')   # the inside release
+        S.sph(F.to((-0.1, 1.08, -w + 0.2)), 0.04, 'knob')
+
     if 'cooler_shut' not in hide:
         with S.tag('cooler_shut'):
-            S.wboxr(X0 + 0.02, 0.02, c0, X0 + 0.14, 2.18, c1, 'cooler', rnd=0.02)
-            S.wboxr(X0 + 0.14, 1.0, c1 - 0.32, X0 + 0.22, 1.16, c1 - 0.08, 'steel')        # the handle
-            S.wboxr(X0 + 0.14, 1.32, c1 - 0.2, X0 + 0.17, 1.4, c1 - 0.08, 'steel')         # the hasp, open
+            cooler_door(Frame((X0 + 0.02, 0.02, c1)))
             S.wboxr(X0 + 0.14, 0.0, c0 + 0.1, X0 + 0.2, 0.004, c1 - 0.1, 'strip')         # light under the door
     else:
-        S.wbox((X0 + 0.55, 1.1, c0 - 0.05), (0.06, 1.08, 0.72), 'cooler', rnd=0.02, rot=Ry(-70))   # standing open
+        cooler_door(Frame((X0 + 0.15, 0.02, c1 + 0.05), Ry(195)))         # standing open, swung back toward us
 
     # ---------------------------------------------------------------- the door to the bar (right wall, near us)
     b0, b1 = BAR_DOOR
@@ -314,7 +365,7 @@ def build(hide=()):
 
     def rect(x, z, w, h):
         return [(x - w, 0.0, z), (x + w, 0.0, z), (x + w, h, z), (x - w, h, z)]
-    walk = [(-4.8, 2.8), (-4.8, -0.8), (-4.65, -0.8), (-4.65, -3.55), (-2.85, -3.55), (-2.85, -0.8), (-2.15, -0.8),
+    walk = [(-4.8, 2.8), (-4.8, 0.35), (-4.55, 0.1), (-4.55, -3.55), (-2.85, -3.55), (-2.85, -0.8), (-2.15, -0.8),
             (-2.15, -3.45), (0.45, -3.45), (0.45, -2.6), (-0.15, -2.6), (-0.15, -0.45), (2.05, -0.45), (2.05, -2.05),
             (3.3, -2.05), (3.3, 2.8)]
     meta = dict(
@@ -331,10 +382,10 @@ def build(hide=()):
             'desk': ("Sal's desk", (2.6, -1.85), 'up'),
             'kegs': ('kegs and cases', None, 'up'),
             'alley_door': ('alley door', (-4.0, -3.3), 'up'),
-            'hooks': ('coat hooks', (-3.1, -3.0), 'right'),
+            'hooks': ('coat hooks', (-4.35, -3.25), 'up'),
             'cooler': ('walk-in cooler', (-4.4, -2.2), 'left'),
             'nina': ('Nina', (2.25, -1.6), 'left'),
-            'park': ('Officer Park', (-3.3, -1.0), 'left'),
+            'park': ('Officer Park', (-3.6, 0.65), 'left'),
             'bar_door': ('door to the bar', (3.15, 1.1), 'right'),
         },
         hotspot_shapes={

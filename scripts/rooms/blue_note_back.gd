@@ -188,9 +188,20 @@ func _shah(line: String) -> void:
 
 func _talk_shah() -> void:
 	while true:
-		var c: int = await main.choose(["How did he die?", "When?", "Did he fight?", "Anything else?", "Thanks, Anita."])
-		match c:
-			0:
+		var opts := []
+		var keys := []
+		if not Game.flag("clue_choke"):
+			opts.append("How did he die?"); keys.append("how")
+		if not Game.flag("clue_sal_tod"):
+			opts.append("When?"); keys.append("when")
+		if not Game.flag("clue_let_in"):
+			opts.append("Did he fight?"); keys.append("fight")
+		if not Game.flag("shah5_else"):
+			opts.append("Anything else?"); keys.append("else")
+		opts.append("Thanks, Anita."); keys.append("done")
+		var c: int = await main.choose(opts)
+		match keys[c]:
+			"how":
 				await main.say("How did he die?")
 				await _shah("Not the rope. The rope mark is a clean line with no bruising under it, no bleeding. He was dead when it went on.")
 				await _shah("But here, straight across the front of the throat, a band of bruising, and the small bones are cracked. A forearm. From behind.")
@@ -199,16 +210,17 @@ func _talk_shah() -> void:
 				await _shah("You never learned it. Whoever did this learned it before you could shave.")
 				main.clue("clue_choke")
 				await _staged()
-			1:
+			"when":
 				await main.say("When?")
 				await _shah("Between half past three and four. The back room's cold, so give me ten minutes either way.")
 				main.clue("clue_sal_tod")
-			2:
+			"fight":
 				await main.say("Did he fight?")
 				await _shah("No defensive wounds. Nothing under his nails. He turned his back on whoever it was.")
 				await _shah("Like your rideshare driver. You don't see it coming from someone you've let in.")
 				main.clue("clue_let_in")
-			3:
+			"else":
+				Game.set_flag("shah5_else")
 				await main.say("Anything else?")
 				await _shah("Whoever did this put a man on a pipe and made it look like his choice. That's somebody who's stood in a lot of rooms like this one, writing the word \"suicide.\"")
 			_:
@@ -309,11 +321,24 @@ func _talk_nina() -> void:
 		await main.say("Everybody wants to be told tonight.")
 		return
 	while true:
-		var c: int = await main.choose(["What happened tonight?", "The man who called you.", "Can I see your phone?",
-				"What did Danny have?", "Where does the knock come from?", "Did Danny record his sets?",
-				"Stay with Dr. Shah."])
-		match c:
-			0:
+		var opts := []
+		var keys := []
+		if not Game.flag("clue_nina_heard"):
+			opts.append("What happened tonight?"); keys.append("tonight")
+		if not Game.flag("clue_young_lady"):
+			opts.append("The man who called you."); keys.append("caller")
+		if not Game.flag("clue_nina_call"):
+			opts.append("Can I see your phone?"); keys.append("phone")
+		if not Game.flag("clue_lisbon"):
+			opts.append("What did Danny have?"); keys.append("danny")
+		if not Game.flag("clue_knock_tune"):
+			opts.append("Where does the knock come from?"); keys.append("knock")
+		if not Game.flag("clue_takes_app"):
+			opts.append("Did Danny record his sets?"); keys.append("sets")
+		opts.append("Stay with Dr. Shah."); keys.append("done")
+		var c: int = await main.choose(opts)
+		match keys[c]:
+			"tonight":
 				await main.say("What happened tonight?")
 				await _nina("A man called me before two. He said he was your partner, that you'd sent him to check on Sal, and Sal wouldn't open up. He needed the knock.")
 				await _nina("He was so calm. I gave it to him.")
@@ -325,12 +350,12 @@ func _talk_nina() -> void:
 				await _nina("Then they went in the back. Something fell. Then nothing for a long time. Then his shoes went right past the cooler door, slowly. Then the front door, a long way off.")
 				await _nina("Then Teo screaming. Then police. He said he was police, Ray. What was I supposed to do, come out to police?")
 				main.clue("clue_nina_heard")
-			1:
+			"caller":
 				await main.say("The man who called you.")
 				await _nina("Old. Calm. He called me \"young lady.\" Nobody's called me young lady since Catholic school.")
 				await _nina("And it came up on my phone as a police number. I checked it after. That's why I believed him.")
 				main.clue("clue_young_lady")
-			2:
+			"phone":
 				await main.say("Can I see your phone?")
 				await main.player.play_action("pickup")
 				main.ui.show_device("Nina's phone", ["Recent calls"], 0, "", ["1:52 AM  Incoming  (323) 555-0186   2 min",
@@ -340,18 +365,18 @@ func _talk_nina() -> void:
 				main.clue("clue_nina_call")
 				main.ui.hide_device()
 				await main.say("That number's a police line. I'd like to know whose.")
-			3:
+			"danny":
 				await main.say("What did Danny have?")
 				await _nina("He never told me. He said he'd found a song somebody would pay never to hear again. \"One of three, baby, and then Lisbon.\"")
 				await _nina("He'd never been anywhere. He'd never even been to San Diego.")
 				main.clue("clue_lisbon")
-			4:
+			"knock":
 				await main.say("Where does the knock come from?")
 				await _nina("A joke with Sal. Sal cut him off coffee at ten o'clock every night, and Danny said it made him play slow.")
 				await _nina("So he wrote Sal a little tune about what Sal served him instead. Five notes. He only ever played it after closing, when the room was empty and Sal was counting the till.")
 				await _nina("Sal laughed every single time. Nobody else ever heard it. Then it was how we knocked.")
 				main.clue("clue_knock_tune")
-			5:
+			"sets":
 				await main.say("Did Danny record his sets?")
 				await _nina("Every one. On his phone, on an app. He said one day he'd pick the good ones and make a record.")
 				main.clue("clue_takes_app")

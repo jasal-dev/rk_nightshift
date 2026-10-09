@@ -191,12 +191,20 @@ func _mara_first() -> void:
 
 func _talk_mara() -> void:
 	while true:
-		var c: int = await main.choose(["What are you working on?", "What do you know about the block?", "Goodnight."])
-		match c:
-			0:
+		var opts := []
+		var keys := []
+		if not Game.flag("mara_working"):
+			opts.append("What are you working on?"); keys.append("working")
+		if not Game.flag("clue_mara_beat"):
+			opts.append("What do you know about the block?"); keys.append("block")
+		opts.append("Goodnight."); keys.append("done")
+		var c: int = await main.choose(opts)
+		match keys[c]:
+			"working":
+				Game.set_flag("mara_working")
 				await main.say("What are you working on?")
 				await _mara("City Hall. Who pays for whose vote. It's like homicide, but nobody ever gets caught.")
-			1:
+			"block":
 				await main.say("What do you know about the block?")
 				await _mara("Hollywood Core. Pryce Development wants forty stories where this bar is. The council votes next Wednesday.")
 				await _mara("Ted Haskell's the swing vote, and nobody can find out which way he swings. I've been on it a year. Nobody will talk to me.")
@@ -219,25 +227,37 @@ func _talk_park() -> void:
 		Game.set_flag("park5_hello")
 		await _park("Detective. Third time tonight. They should give us a punch card.")
 	while true:
-		var c: int = await main.choose(["What happened?", "Who cut him down?", "What's patrol calling it?",
-				"Danny's alley, Tuesday.", "That'll do."])
-		match c:
-			0:
+		var opts := []
+		var keys := []
+		if not Game.flag("park5_what"):
+			opts.append("What happened?"); keys.append("what")
+		if not Game.flag("park5_cut"):
+			opts.append("Who cut him down?"); keys.append("cut")
+		if not Game.flag("clue_no_note"):
+			opts.append("What's patrol calling it?"); keys.append("patrol")
+		if not Game.flag("clue_tape_helper"):
+			opts.append("Danny's alley, Tuesday."); keys.append("alley")
+		opts.append("That'll do."); keys.append("done")
+		var c: int = await main.choose(opts)
+		match keys[c]:
+			"what":
+				Game.set_flag("park5_what")
 				await main.say("What happened?")
 				await _park("The porter found him at four thirty-one and called it in on the bar phone. I was two blocks away.")
 				await _park("He's in the back room. Dr. Shah's with him.")
-			1:
+			"cut":
+				Game.set_flag("park5_cut")
 				await main.say("Who cut him down?")
 				await _park("Me. To check for a pulse. There wasn't one.")
 				await _park("I'm sorry, Detective. Otis said you knew him.")
-			2:
+			"patrol":
 				await main.say("What's patrol calling it?")
 				await _park("The watch commander says suicide. Front door locked, back door locked, a man alone in his own bar with a rope.")
 				await main.say("A note?")
 				await _park("No note.")
 				await main.say("Sal wrote down every drink he poured for thirty years. And he didn't leave a note.")
 				main.clue("clue_no_note")
-			3:
+			"alley":
 				await main.say("Danny's alley, Tuesday.")
 				await _park("I held his tape. Midnight to four, in the rain.")
 				await main.say("Anybody hang around?")
@@ -267,26 +287,37 @@ func _talk_teo() -> void:
 		await main.say("I did.")
 		await _teo("He was scared after. He told me, \"Teo, I talked.\" Like it was a sin.")
 	while true:
-		var c: int = await main.choose(["You found him?", "The front door.", "Sal's habits.", "Who knows the knock?",
-				"Go home, Teo."])
-		match c:
-			0:
+		var opts := []
+		var keys := []
+		if not Game.flag("teo_found"):
+			opts.append("You found him?"); keys.append("found")
+		if not Game.flag("clue_latch"):
+			opts.append("The front door."); keys.append("door")
+		if not Game.flag("clue_tab_habit"):
+			opts.append("Sal's habits."); keys.append("habits")
+		if not Game.flag("clue_knock_only"):
+			opts.append("Who knows the knock?"); keys.append("knock")
+		opts.append("Go home, Teo."); keys.append("done")
+		var c: int = await main.choose(opts)
+		match keys[c]:
+			"found":
+				Game.set_flag("teo_found")
 				await main.say("You found him?")
 				await _teo("Four-thirty, like every morning. Nineteen years. We've been closed since Danny, but Sal said keep coming, we open again Saturday.")
 				await _teo("I let myself in, I take the chairs down, I go to the back for the mop. And he was...")
 				await _teo("I called 911 on the bar phone. Then I came out here. I haven't been able to go back in.")
-			1:
+			"door":
 				await main.say("The front door.")
 				await _teo("It was on the latch. Just the latch. Sal threw the deadbolt every night, and the chain, and he checked it twice.")
 				await _teo("Nineteen years, I never once came in on just the latch.")
 				await main.say("Somebody went out the front and pulled it shut behind him.")
 				main.clue("clue_latch")
-			2:
+			"habits":
 				await main.say("Sal's habits.")
 				await _teo("He wrote everything down. Every drink, in the book by the register. Even mine, and I don't drink.")
 				await _teo("\"Teo, water, four thirty-five,\" every morning. He used to say, \"If it isn't in the book, it didn't happen.\"")
 				main.clue("clue_tab_habit")
-			3:
+			"knock":
 				await main.say("Who knows the knock?")
 				await _teo("I don't knock. I have a key. Since Tuesday Sal only opened that door to Danny's knock.")
 				await _teo("He said, \"Teo, if anybody knocks it any other way, I'm not home.\"")

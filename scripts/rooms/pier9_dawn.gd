@@ -182,18 +182,30 @@ func _brenner(line: String) -> void:
 func _talk_vance() -> void:
 	await _vance("Detective. You look like a man who hasn't slept, and has decided not to.")
 	while true:
-		var c: int = await main.choose(["Thanks for coming.", "The man on the phone.", "Stay out of sight.", "I'm ready."])
-		match c:
-			0:
+		var opts := []
+		var keys := []
+		if not Game.flag("vance5_thanks"):
+			opts.append("Thanks for coming."); keys.append("thanks")
+		if not Game.flag("vance5_voice"):
+			opts.append("The man on the phone."); keys.append("voice")
+		if not Game.flag("vance5_sight"):
+			opts.append("Stay out of sight."); keys.append("sight")
+		opts.append("I'm ready."); keys.append("done")
+		var c: int = await main.choose(opts)
+		match keys[c]:
+			"thanks":
+				Game.set_flag("vance5_thanks")
 				await main.say("Thanks for coming.")
 				await _vance("Don't thank me. I don't like men who telephone and ask about my clients. It's bad manners and worse for business.")
-			1:
+			"voice":
+				Game.set_flag("vance5_voice")
 				await main.say("The man on the phone.")
 				if Game.flag("heard_caller"):
 					await _vance("You asked me that before. This morning I get to hear the voice twice.")
 				else:
 					await _vance("I'll know his voice. I never forget a voice I disliked.")
-			2:
+			"sight":
+				Game.set_flag("vance5_sight")
 				await main.say("Stay out of sight.")
 				await _vance("I've stayed out of sight for forty years, Detective. It's my one real talent.")
 				await _vance("And I keep my .45 for people who want to be romantic.")

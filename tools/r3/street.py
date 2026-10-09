@@ -324,8 +324,10 @@ def crime_scene(S, hide):
                for t in np.linspace(0, 1, n + 1)]
         for p0, p1 in zip(pts, pts[1:]):
             S.cyl(p0, p1, 0.014, 'tape')
-    with S.tag('tape'):
-        run((HYDRANT[0], 0.86, HYDRANT[1]), (LAMP[0] - 0.08, 1.02, LAMP[1]), n=12, sag=0.14)
+    if 'tape' not in hide:
+        with S.tag('tape'):                  # a walk-behind: Ray is behind it once he's on the bar's side
+            run((HYDRANT[0], 0.86, HYDRANT[1]), (LAMP[0] - 0.08, 1.02, LAMP[1]), n=12, sag=0.14)
+    with S.tag('tape_door'):
         run((-4.48, 0.75, 0.1), (-3.32, 1.95, 0.1), n=3, sag=0.0)
         run((-4.48, 1.95, 0.11), (-3.32, 0.75, 0.11), n=3, sag=0.0)
 
@@ -440,6 +442,7 @@ def crime_meta():
         overlay_bases={'park': PARK},
         exclusive_overlays=['bar_red', 'bar_blue'],
         occluders={'hydrant': HYDRANT, 'streetlamp': LAMP, 'car': (4.9, 3.75), 'patrol': (PATROL[0], PATROL[1] - 0.9),
+                   'tape': ((HYDRANT[0] + LAMP[0]) / 2, (HYDRANT[1] + LAMP[1]) / 2),
                    'teo': (T[0], T[1] + 0.1), 'mara': M},
         obstacles=[(HYDRANT[0], HYDRANT[1], 0.4), (LAMP[0], LAMP[1], 0.32), (T[0] + 0.15, T[1], 0.5), (P[0], P[1], 0.3)],
         char_fill=((190, 196, 230), 0.08),

@@ -26,6 +26,10 @@ BOOTH = (3.4, -5.25)            # the back booth's table
 DOOR_BACK = (-4.15, -3.25)      # the door to the back room (x extent), in the back wall
 FRONT_DOOR = (1.7, 2.7)         # the front door (z extent), in the right wall
 FG_TABLE = (-1.75, 2.85)        # a table near us, chairs up
+TABLES = ((-1.4, -2.3), (0.9, -2.7), (-0.9, 0.2), (1.5, -0.2))   # the tables on the floor, chairs up (walk-behinds)
+RACK_Z = -1.15                  # the drying rack on the bar, between two of the upturned stools
+STOOLS_UP = (2.05, 0.4, -0.45, -1.85, -2.75)   # stools turned up on the counter, clear of the register and the rack
+STOOL = (-1.95, -3.15)          # the one stool left down, at the far end
 PALM = (3.55, 3.35)             # a potted palm in the corner by the door
 
 
@@ -123,12 +127,13 @@ def build(hide=(), take=False):
     # ---------------------------------------------------------------- the bar, the back bar, the mirror, the bottles
     bx0, bx1 = BAR_X
     bz0, bz1 = BAR_Z
-    with S.tag('bar'):
-        S.wboxr(bx0, 0.0, bz0, bx1, 1.04, bz1, 'mahogany', rnd=0.02)
-        S.wboxr(bx0 - 0.05, 1.04, bz0 - 0.05, bx1 + 0.12, 1.1, bz1 + 0.05, 'mahogany', rnd=0.025)
-        S.cyl((bx1 + 0.16, 0.2, bz0), (bx1 + 0.16, 0.2, bz1), 0.025, 'brass')                   # the foot rail
-        for z in np.arange(bz0 + 0.3, bz1 - 0.95, 1.15):
-            S.wboxr(bx1 - 0.01, 0.12, z, bx1 + 0.01, 0.95, z + 0.9, 'mahogany_dk')            # panels, within the bar
+    if 'bar' not in hide:
+        with S.tag('bar'):                  # a walk-behind: Ray goes behind its far end on the way to the back
+            S.wboxr(bx0, 0.0, bz0, bx1, 1.04, bz1, 'mahogany', rnd=0.02)
+            S.wboxr(bx0 - 0.05, 1.04, bz0 - 0.05, bx1 + 0.12, 1.1, bz1 + 0.05, 'mahogany', rnd=0.025)
+            S.cyl((bx1 + 0.16, 0.2, bz0), (bx1 + 0.16, 0.2, bz1), 0.025, 'brass')                   # the foot rail
+            for z in np.arange(bz0 + 0.3, bz1 - 0.95, 1.15):
+                S.wboxr(bx1 - 0.01, 0.12, z, bx1 + 0.01, 0.95, z + 0.9, 'mahogany_dk')            # panels, within the bar
     with S.tag('bottles'):
         S.wboxr(X0, 0.0, bz0 - 0.2, X0 + 0.45, 0.95, bz1 - 0.05, 'mahogany_dk')                # back bar cabinet
         for y in (1.35, 1.85, 2.3):
@@ -156,11 +161,11 @@ def build(hide=(), take=False):
             S.wbox((bx0 + 0.32, 1.155, 1.02), (0.15, 0.002, 0.2), 'paper', rot=Ry(8))
     # the drying rack: every glass upside down and dry, but one still beaded
     with S.tag('rack'):
-        rz = -0.75
-        S.wboxr(bx0 + 0.05, 1.1, rz - 0.3, bx0 + 0.42, 1.12, rz + 0.3, 'rack')
+        rz = RACK_Z
+        S.wboxr(bx0 + 0.05, 1.1, rz - 0.26, bx0 + 0.42, 1.12, rz + 0.26, 'rack')
         for i in range(3):
             for j in range(4):
-                S.tcyl(Frame((bx0 + 0.12 + i * 0.12, 1.17, rz - 0.22 + j * 0.15)), (0, 0, 0), (0.035, 0.035),
+                S.tcyl(Frame((bx0 + 0.12 + i * 0.12, 1.17, rz - 0.195 + j * 0.13)), (0, 0, 0), (0.035, 0.035),
                        (0.03, 0.03), 0.05, 'glass_c')
     # the stools: pedestal stools turned up on the counter, base in the air, except the one at the far end
     def stool(x, z, up):
@@ -173,10 +178,13 @@ def build(hide=(), take=False):
             S.cyl((x, 0.0, z), (x, 0.71, z), 0.03, 'chrome')
             S.fcyl((x, 0.015, z), 0.2, 0.015, 'chrome')
             S.tcyl(Frame((x, 0.3, z)), (0, 0, 0), (0.15, 0.15), (0.15, 0.15), 0.008, 'chrome', shell=0.008)
-    for z in np.arange(bz1 - 0.5, bz0 + 1.2, -1.15):
-        stool((bx0 + bx1) / 2 + 0.02, z, True)
-    with S.tag('stool'):
-        stool(bx1 + 0.55, bz0 + 0.45, False)
+    if 'bar' not in hide:
+        with S.tag('bar'):
+            for z in STOOLS_UP:
+                stool((bx0 + bx1) / 2 + 0.02, z, True)
+    if 'stool' not in hide:
+        with S.tag('stool'):
+            stool(STOOL[0], STOOL[1], False)
 
     # Sal's work lights over the bar
     for z in (-2.8, -0.4, 1.9):
@@ -259,8 +267,11 @@ def build(hide=(), take=False):
         S.sph((X1 - 0.12, 1.98, z), 0.06, 'shade')
 
     # ---------------------------------------------------------------- the floor: tables with the chairs up on them
-    with S.tag('chairs'):
-        for (tx_, tz_) in ((-1.4, -2.3), (0.9, -2.7), (-0.9, 0.2), (1.5, -0.2)):
+    for n, (tx_, tz_) in enumerate(TABLES):
+        if f'table{n}' in hide:
+            rng.uniform(-0.3, 0.3); rng.uniform(-0.3, 0.3)               # keep the other tables' chairs where they were
+            continue
+        with S.tag(f'table{n}'):
             S.fcyl((tx_, 0.74, tz_), 0.42, 0.02, 'table')
             S.cyl((tx_, 0.0, tz_), (tx_, 0.72, tz_), 0.04, 'chrome')
             S.fcyl((tx_, 0.01, tz_), 0.24, 0.01, 'chrome')
@@ -317,8 +328,8 @@ def build(hide=(), take=False):
     with S.tag('jukebox'):
         jz = 1.05
         S.wboxr(X1 - 0.55, 0.0, jz - 0.35, X1 - 0.05, 1.25, jz + 0.35, 'mahogany', rnd=0.03)
-        S.wbox((X1 - 0.56, 0.75, jz), (0.005, 0.45, 0.28), 'jukebox', rot=Ry(-90))
-        S.fcyl((X1 - 0.3, 1.25, jz), 0.35, 0.25, 'mahogany', axis='z')
+        S.wbox((X1 - 0.56, 0.75, jz), (0.28, 0.45, 0.005), 'jukebox', rot=Ry(-90))      # the front, facing the room
+        S.fcyl((X1 - 0.3, 1.25, jz), 0.35, 0.25, 'mahogany', axis='x')            # the arched top, its lower half in the box
     if not take:
         S.light((X1 - 0.8, 0.9, 1.05), (255, 150, 90), power=0.6, range=2.5, shadow=False)
 
@@ -358,7 +369,7 @@ def build(hide=(), take=False):
         hotspots={
             'bar': ('bar', (-1.95, 0.15), 'left'),
             'register': ('register and tab book', (-1.95, 1.25), 'left'),
-            'rack': ('drying rack', (-1.95, -0.75), 'left'),
+            'rack': ('drying rack', (-1.95, RACK_Z), 'left'),
             'mirror': ('mirror', None, 'left'),
             'bottles': ('bottles', None, 'left'),
             'front_door': ('front door', (3.4, 2.2), 'right'),
@@ -375,14 +386,17 @@ def build(hide=(), take=False):
         hotspot_shapes={
             'register': [(BAR_X[0], 1.0, 1.0 - 0.35), (BAR_X[0], 1.0, 1.75), (BAR_X[0], 1.55, 1.75), (BAR_X[0], 1.55, 0.65),
                          (BAR_X[1] + 0.1, 1.0, 1.75), (BAR_X[1] + 0.1, 1.0, 0.65)],
-            'rack': [(BAR_X[0], 1.08, -1.1), (BAR_X[0], 1.08, -0.4), (BAR_X[1], 1.3, -0.4), (BAR_X[1], 1.3, -1.1)],
+            'rack': [(BAR_X[0], 1.08, RACK_Z - 0.32), (BAR_X[0], 1.08, RACK_Z + 0.32), (BAR_X[1], 1.3, RACK_Z + 0.32),
+                     (BAR_X[1], 1.3, RACK_Z - 0.32)],
+            'chairs': [p for (x, z) in TABLES for p in ((x - 0.45, 0.0, z), (x + 0.45, 0.0, z), (x - 0.45, 1.3, z),
+                                                        (x + 0.45, 1.3, z))],
         },
         hotspot_order=['mirror', 'bottles', 'bar', 'booths', 'back_booth', 'poster', 'piano', 'set_list', 'back_door',
                        'chairs', 'jukebox', 'front_door', 'stool', 'rack', 'register'],
         overlays=['ledger', 'setlist'],
-        occluders={'fg_table': FG_TABLE, 'palm': PALM},
-        obstacles=[FG_TABLE + (0.55,), (-1.4, -2.3, 0.55), (0.9, -2.7, 0.55), (-0.9, 0.2, 0.55), (1.5, -0.2, 0.55),
-                   (BAR_X[1] + 0.55, BAR_Z[0] + 0.45, 0.3)],
+        occluders=dict({'fg_table': FG_TABLE, 'palm': PALM, 'bar': ((BAR_X[0] + BAR_X[1]) / 2, BAR_Z[0]),
+                        'stool': STOOL}, **{f'table{n}': t for n, t in enumerate(TABLES)}),
+        obstacles=[FG_TABLE + (0.55,)] + [t + (0.55,) for t in TABLES] + [STOOL + (0.3,)],
         char_fill=((236, 214, 190), 0.22),
         tint=(0.86, 0.76, 0.7),
         exposure=1.9,
