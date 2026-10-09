@@ -271,7 +271,7 @@ sets, so they always match the pictures.
 
 ```
 cd tools/r3
-gcc -O3 -march=native -ffast-math -fopenmp r3.c -o r3 -lm   # once (Linux / MinGW)
+gcc -O3 -march=native -ffast-math -fopenmp r3.c -o r3 -lm -ldl   # once (Linux / MinGW)
 cl /O2 /fp:fast /openmp /arch:AVX2 r3.c /Fe:r3.exe            # or once with MSVC, from a VS x64 prompt
 python render_room.py street          # -> assets/rooms/street.png + out/street.json
 python render_room.py squad_room      # (add --preview for a fast low-res look)

@@ -281,6 +281,15 @@ title.py (street_crime, emptied) ──▶ render_room.py title      gen_title.p
 `r3.exe` with the VS 2019 Build Tools (`cl /O2 /fp:fast /openmp /arch:AVX2`). `scene3d.py` writes each render job
 to the temp folder (override with the `R3_TMP` environment variable) and runs `tools/r3/r3`.
 
+**GPU rendering.** `r3` runs its surface and volumetric passes on the GPU through OpenCL when it finds one
+(`tools/r3/r3_gpu.h` is the host side, `tools/r3/r3.cl` the kernels, built at run time from the folder `r3` sits in).
+`OpenCL.dll` comes with the graphics driver and is loaded dynamically, so no SDK is needed to build and `r3` falls back
+to the CPU (OpenMP) path when there is no GPU or the kernel fails. `R3_DEVICE=cpu` forces the CPU path, and
+`R3_DEVICE=gpu` makes a GPU failure an error instead of a fallback. Probe mode (`light_probes.py`) always runs on the
+CPU. `r3.cl` mirrors `r3.c` function by function, so a change to shading, SDFs or fog goes into both files. The two
+paths agree to within float rounding (PSNR 57 to 70 dB on glass house, street_crime and Blue Note bar; a few
+grazing-angle pixels differ). On the RTX 4090 a 4K room render takes about 1 s against 15 to 30 s on the CPU.
+
 **`render_room.py` options.**
 
 | Option | Effect |

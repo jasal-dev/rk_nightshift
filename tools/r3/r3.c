@@ -4,6 +4,8 @@
 // low-resolution volumetric (fog + light shafts) pass. Uniform grid acceleration.
 //
 // Usage: r3 scene.bin out_prefix
+// The surface and volumetric passes run on the GPU through OpenCL (r3_gpu.h, r3.cl) when one is available,
+// else on the CPU with OpenMP. Set R3_DEVICE=cpu or R3_DEVICE=gpu to force one (gpu fails rather than falling back).
 // Writes out_prefix.surf (float32 RGBA linear, W*H*4), out_prefix.depth (float32 W*H),
 // out_prefix.vol (float32 4 per pixel: inscatter rgb + transmittance at W/vs x H/vs).
 #include <stdio.h>
@@ -157,33 +159,55 @@ static void build_grid(float cs) {
     int nc = GX * GY * GZ;
     GSTART = calloc(nc, sizeof(int)); GCOUNT = calloc(nc, sizeof(int));
     float margin = cs;
+    // each prim's cell range (its bounding sphere grown by margin)
+    int *rng = malloc(sizeof(int) * 6 * (NP + 1));
+    for (int i = 0; i < NP; i++) {
+        Prim *p = &P[i]; int *g = rng + 6 * i;
+        float r = p->br + margin;
+        g[0] = (int)floorf((p->bc.x - r - GMIN.x) / cs); g[1] = (int)floorf((p->bc.x + r - GMIN.x) / cs);
+        g[2] = (int)floorf((p->bc.y - r - GMIN.y) / cs); g[3] = (int)floorf((p->bc.y + r - GMIN.y) / cs);
+        g[4] = (int)floorf((p->bc.z - r - GMIN.z) / cs); g[5] = (int)floorf((p->bc.z + r - GMIN.z) / cs);
+        if (g[0] < 0) g[0] = 0; if (g[2] < 0) g[2] = 0; if (g[4] < 0) g[4] = 0;
+        if (g[1] >= GX) g[1] = GX - 1; if (g[3] >= GY) g[3] = GY - 1; if (g[5] >= GZ) g[5] = GZ - 1;
+    }
     for (int pass = 0; pass < 2; pass++) {
         if (pass == 1) {
             int tot = 0;
             for (int c = 0; c < nc; c++) { GSTART[c] = tot; tot += GCOUNT[c]; GCOUNT[c] = 0; }
             GLIST = malloc(sizeof(int) * (tot + 1));
         }
-        for (int i = 0; i < NP; i++) {
-            Prim *p = &P[i];
-            float r = p->br + margin;
-            int x0 = (int)floorf((p->bc.x - r - GMIN.x) / cs), x1 = (int)floorf((p->bc.x + r - GMIN.x) / cs);
-            int y0 = (int)floorf((p->bc.y - r - GMIN.y) / cs), y1 = (int)floorf((p->bc.y + r - GMIN.y) / cs);
-            int z0 = (int)floorf((p->bc.z - r - GMIN.z) / cs), z1 = (int)floorf((p->bc.z + r - GMIN.z) / cs);
-            if (x0 < 0) x0 = 0; if (y0 < 0) y0 = 0; if (z0 < 0) z0 = 0;
-            if (x1 >= GX) x1 = GX - 1; if (y1 >= GY) y1 = GY - 1; if (z1 >= GZ) z1 = GZ - 1;
-            for (int z = z0; z <= z1; z++) for (int y = y0; y <= y1; y++) for (int x = x0; x <= x1; x++) {
-                // sphere vs cell box test
-                v3 cmin = V(GMIN.x + x * cs, GMIN.y + y * cs, GMIN.z + z * cs);
-                float dx = fmaxf(fmaxf(cmin.x - p->bc.x, 0), p->bc.x - (cmin.x + cs));
-                float dy = fmaxf(fmaxf(cmin.y - p->bc.y, 0), p->bc.y - (cmin.y + cs));
-                float dz = fmaxf(fmaxf(cmin.z - p->bc.z, 0), p->bc.z - (cmin.z + cs));
-                if (dx * dx + dy * dy + dz * dz > r * r) continue;
-                int c = (z * GY + y) * GX + x;
-                if (pass == 1) GLIST[GSTART[c] + GCOUNT[c]] = i;
-                GCOUNT[c]++;
+        // threads own z slices, so no two touch the same cell, and each cell still lists its prims in order
+        int z;
+        #pragma omp parallel for schedule(dynamic, 1)
+        for (z = 0; z < GZ; z++)
+            for (int i = 0; i < NP; i++) {
+                Prim *p = &P[i]; const int *g = rng + 6 * i;
+                if (z < g[4] || z > g[5]) continue;
+                float r = p->br + margin;
+                float czmin = GMIN.z + z * cs;
+                float dz = fmaxf(fmaxf(czmin - p->bc.z, 0), p->bc.z - (czmin + cs));
+                for (int y = g[2]; y <= g[3]; y++) {
+                    float cymin = GMIN.y + y * cs;
+                    float dy = fmaxf(fmaxf(cymin - p->bc.y, 0), p->bc.y - (cymin + cs));
+                    float q = r * r - dy * dy - dz * dz;
+                    if (q < 0) continue;
+                    // only the cells near the sphere's chord through this row (one spare cell each side)
+                    float sx = sqrtf(q);
+                    int x0 = (int)floorf((p->bc.x - sx - GMIN.x) / cs) - 1, x1 = (int)floorf((p->bc.x + sx - GMIN.x) / cs) + 1;
+                    if (x0 < g[0]) x0 = g[0]; if (x1 > g[1]) x1 = g[1];
+                    for (int x = x0; x <= x1; x++) {
+                        // sphere vs cell box test
+                        v3 cmin = V(GMIN.x + x * cs, cymin, czmin);
+                        float dx = fmaxf(fmaxf(cmin.x - p->bc.x, 0), p->bc.x - (cmin.x + cs));
+                        if (dx * dx + dy * dy + dz * dz > r * r) continue;
+                        int c = (z * GY + y) * GX + x;
+                        if (pass == 1) GLIST[GSTART[c] + GCOUNT[c]] = i;
+                        GCOUNT[c]++;
+                    }
+                }
             }
-        }
     }
+    free(rng);
 }
 
 static int g_prim;
@@ -488,6 +512,8 @@ static void run_probes(const char *path, const char *outp, int vsteps) {
     f = fopen(outp, "wb"); fwrite(out, 4, (size_t)n * stride, f); fclose(f);
 }
 
+#include "r3_gpu.h"
+
 // ---------------------------------------------------------------- main
 int main(int argc, char **argv) {
     FILE *f = fopen(argv[1], "rb");
@@ -560,10 +586,22 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    // ---- surface pass
     int n = W * H;
     float *S = calloc((size_t)n * 4, 4), *DEP = malloc((size_t)n * 4);
+    int volw = VS > 0 ? W / VS : 0, volh = VS > 0 ? H / VS : 0;
+    float *VO = (VS > 0 && FOGD > 0) ? calloc((size_t)volw * volh * 4, 4) : NULL;
+    const char *dev = getenv("R3_DEVICE");
+    int gpu_done = 0;
+    if (!dev || strcmp(dev, "cpu") != 0) {
+        gpu_done = gpu_render(argv[0], S, DEP, VO, VSTEPS) == 0;
+        if (!gpu_done && dev && strcmp(dev, "gpu") == 0) return 8;
+        if (!gpu_done) fprintf(stderr, "r3: rendering on the CPU instead\n");
+    }
+    char nm[1024];
     int y;
+    if (gpu_done) goto write_out;
+
+    // ---- surface pass
     #pragma omp parallel for schedule(dynamic, 1)
     for (y = 0; y < H; y++)
         for (int x = 0; x < W; x++) {
@@ -579,14 +617,10 @@ int main(int argc, char **argv) {
                 DEP[i] = FOGMAX;
             }
         }
-    char nm[1024];
-    snprintf(nm, sizeof nm, "%s.surf", argv[2]); f = fopen(nm, "wb"); fwrite(S, 4, (size_t)n * 4, f); fclose(f);
-    snprintf(nm, sizeof nm, "%s.depth", argv[2]); f = fopen(nm, "wb"); fwrite(DEP, 4, n, f); fclose(f);
 
     // ---- volumetric pass (low res)
-    if (VS > 0 && FOGD > 0) {
-        int vw = W / VS, vh = H / VS;
-        float *VO = calloc((size_t)vw * vh * 4, 4);
+    if (VO) {
+        int vw = volw, vh = volh;
         #pragma omp parallel for schedule(dynamic, 1)
         for (y = 0; y < vh; y++)
             for (int x = 0; x < vw; x++) {
@@ -626,7 +660,11 @@ int main(int argc, char **argv) {
                 int i = y * vw + x;
                 VO[i * 4] = acc.x; VO[i * 4 + 1] = acc.y; VO[i * 4 + 2] = acc.z; VO[i * 4 + 3] = Tr;
             }
-        snprintf(nm, sizeof nm, "%s.vol", argv[2]); f = fopen(nm, "wb"); fwrite(VO, 4, (size_t)vw * vh * 4, f); fclose(f);
     }
+
+write_out:
+    snprintf(nm, sizeof nm, "%s.surf", argv[2]); f = fopen(nm, "wb"); fwrite(S, 4, (size_t)n * 4, f); fclose(f);
+    snprintf(nm, sizeof nm, "%s.depth", argv[2]); f = fopen(nm, "wb"); fwrite(DEP, 4, n, f); fclose(f);
+    if (VO) { snprintf(nm, sizeof nm, "%s.vol", argv[2]); f = fopen(nm, "wb"); fwrite(VO, 4, (size_t)volw * volh * 4, f); fclose(f); }
     return 0;
 }
