@@ -214,7 +214,8 @@ def build(hide=()):
         },
         hotspot_shapes={'rosa': [(ROSA[0] - 0.32, 0.9, ROSA[2] + 0.1), (ROSA[0] + 0.32, 0.9, ROSA[2] + 0.1),
                                  (ROSA[0] + 0.32, 1.72, ROSA[2] + 0.1), (ROSA[0] - 0.32, 1.72, ROSA[2] + 0.1)],
-                        'booth6': [(3.9, 0.7, tz6 - 0.5), (5.7, 0.7, tz6 - 0.5), (5.7, 0.9, tz6 + 0.5), (3.9, 0.9, tz6 + 0.5)]},
+                        # the whole booth, benches and table: the tabletop alone is edge-on from here
+                        'booth6': [(x, y, z) for x in (3.75, X1) for y in (0.0, 1.05) for z in (tz6 - 1.13, tz6 + 1.13)]},
         hotspot_order=['window', 'door', 'jukebox', 'pie_case', 'regulars', 'rosa', 'coffee_pot', 'heck', 'booth6'],
         char_fill=((255, 226, 200), 0.18),
         tint=(0.95, 0.85, 0.75),

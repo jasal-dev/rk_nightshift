@@ -130,4 +130,4 @@ walk_to = Vector2(1471, 774)
 face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/booth6"]
-polygon = PackedVector2Array(1525.2, 659.1, 1597.5, 658.5, 1916.1, 657.4, 1809.3, 658.2)
+polygon = PackedVector2Array(1461.7, 743.3, 1467.7, 589.2, 1772.4, 588.5, 1920, 626.9, 1920, 849.4, 1614.1, 851.1)
