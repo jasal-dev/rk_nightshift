@@ -70,12 +70,6 @@ func _ready() -> void:
 	hover_label = _make_label(Color(0.95, 0.92, 0.8))
 	root.add_child(hover_label)
 
-	speech_label = _make_label(Color(1, 1, 1))
-	speech_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	speech_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	speech_label.visible = false
-	root.add_child(speech_label)
-
 	toast_label = _make_label(Color(0.9, 0.85, 0.6))
 	toast_label.position = Vector2(24, 1020)
 	root.add_child(toast_label)
@@ -117,6 +111,13 @@ func _ready() -> void:
 	fade_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
 	fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.add_child(fade_rect)
+
+	# speech sits above the fade, so a line spoken in the dark (Devin through his door) can be read on black
+	speech_label = _make_label(Color(1, 1, 1))
+	speech_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	speech_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	speech_label.visible = false
+	root.add_child(speech_label)
 
 	card = Control.new()
 	card.set_anchors_preset(Control.PRESET_FULL_RECT)
