@@ -391,7 +391,16 @@ cases depend on. It ends with `PLAYTHROUGH OK` and exit code 0, or names the ste
 ```
 Godot_v4.7.2-stable_win64_console.exe --headless --path . res://tests/playthrough.tscn
 Godot_v4.7.2-stable_win64_console.exe --path . res://tests/playthrough.tscn -- --shots   # screenshots to user://
+Godot_v4.7.2-stable_win64_console.exe --headless --path . res://tests/playthrough.tscn -- --case 3   # Case 3 only
 ```
+
+`--case N` runs `_caseN()` alone. Case 1 starts with New Game and stops when its case card comes up; Cases 2 to 5
+press the title's SKIP TO button (so they start from `scripts/case_starts.gd`, see "Case jumps" below) and stop
+when the next card comes up, or after the endings for Case 5. One case takes 20 to 35 s (Case 5, with its four
+endings, about 75 s) against about 3 minutes for the full run. Run only the case a change touches; run the full
+playthrough when a change touches several cases, shared code (`main.gd`, `ui.gd`, `game.gd`, `room.gd`,
+`hotspot.gd`, `player.gd`, the shaders, the playthrough's helpers) or a case's clues or flags, since the later cases
+start from the captured state.
 
 At the end of Case 5 the test snapshots the flags and inventory at sunrise and plays each ending from there (Ending
 B with Pryce's invitation taken off the board), checking that exactly one ending flag is set and the credits finish.

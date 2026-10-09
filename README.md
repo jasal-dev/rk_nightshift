@@ -156,7 +156,7 @@ scripts/case2.gd          Case 2's shared pieces: speech colours, the drives, th
 scripts/case3.gd          Case 3's shared pieces: speech colours, the drive in and the drive back
 scripts/case4.gd          Case 4's shared pieces: speech colours, the drives, the car menu, Otis running the plate
 scripts/case5.gd          Case 5's shared pieces: speech colours, Ray's phone, the take, the drives, the credits
-tests/playthrough.tscn    Automated playthrough of all five cases and the four endings (see "Testing")
+tests/playthrough.tscn    Automated playthrough of all five cases and the four endings, or one with --case N (see "Testing")
 tests/case_jumps.tscn     Checks the title screen's Case 2 to 5 buttons
 assets/                   Generated room art, character sheets, light probes, item icons, cursors
 tools/                    Python generators for the art (Pillow + numpy)
@@ -256,9 +256,15 @@ plays each of the four endings from the same sunrise. From the project folder:
 
 ```
 Godot_v4.7.2-stable_win64_console.exe --headless --path . res://tests/playthrough.tscn
+Godot_v4.7.2-stable_win64_console.exe --headless --path . res://tests/playthrough.tscn -- --case 3
 ```
 
 It prints each action and ends with `PLAYTHROUGH OK` (exit code 0), or says where it got stuck.
+`-- --case N` plays only Case N: Cases 2 to 5 start from the title screen's SKIP TO state, and the run stops when
+that case is solved (Case 5 after its four endings). One case takes about 20 to 35 s (Case 5 about 75 s), the full
+run about 3 minutes. **Run only the case a change touches.** Run the full playthrough when a change touches several
+cases or shared code (`main.gd`, `ui.gd`, `game.gd`, `room.gd`, `hotspot.gd`, `player.gd`, the shaders, the
+playthrough itself) or a case's clues or flags (then re-run `tests/capture_case_starts.tscn` too).
 Add `-- --shots` (and leave out `--headless`) to also save screenshots of each room, the drives, the phone,
 the device screens and the boards to `user://`.
 

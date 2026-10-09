@@ -4,9 +4,13 @@ extends Node
 ## then checks the flags the later cases depend on.
 ##
 ## Godot_v4.7_console.exe --headless --path . res://tests/playthrough.tscn
+## Godot_v4.7_console.exe --headless --path . res://tests/playthrough.tscn -- --case 3   # just Case 3
+## With --case N, Cases 2 to 5 start from the title screen's SKIP TO button (scripts/case_starts.gd) and the run
+## stops when that case is solved (Case 5: after its four endings).
 ## Exit code 0 = the case can be finished; 1 = something went wrong (see the output).
 
 const MainScene := preload("res://scenes/main.tscn")
+const FIRST_ROOMS := {2: "mulholland_overlook", 3: "stardust_shop", 4: "fletcher_bridge", 5: "street_crime"}   ## where --case N starts
 
 var main: Node
 var _choices: Array[String] = []
@@ -213,7 +217,83 @@ func _new_game() -> void:
 	main.ui.title.new_button.pressed.emit()
 
 
+func _only_case() -> int:
+	## The case after --case on the command line, or 0 for the full run.
+	var args := OS.get_cmdline_user_args()
+	var i := args.find("--case")
+	if i < 0:
+		return 0
+	var n := int(args[i + 1]) if i + 1 < args.size() else 0
+	if n < 1 or n > 5:
+		_fail("--case wants a case number from 1 to 5")
+	return n
+
+
 func _run() -> void:
+	var only := _only_case()
+	if _failed:
+		return
+	if only == 0:
+		await _full_run()
+		return
+	if only == 1:
+		await _case1()
+	else:
+		# the title screen's SKIP TO button for that case: its card, then its first room
+		while not main._on_title and not _failed:
+			await get_tree().process_frame
+		_step = "jump to Case %d" % only
+		_step_started = Time.get_ticks_msec()
+		main.ui.title.case_buttons[only - 2].pressed.emit()
+		while not main._waiting_click and not _failed:
+			await get_tree().process_frame
+		main._waiting_click = false
+		await expect_room(String(FIRST_ROOMS[only]))
+		match only:
+			2: await _case2()
+			3: await _case3()
+			4: await _case4()
+			5: await _case5()
+	if _failed:
+		return
+	print("PLAYTHROUGH OK - Case %d finished." % only)
+	_quit(0)
+
+
+func _full_run() -> void:
+	await _case1()
+	if _failed:
+		return
+	main._waiting_click = false                         # the "Case 2: Five Stars" card
+	await expect_room("mulholland_overlook")
+	if Game.has_item("envelope") or not Game.has_item("notebook"):
+		_fail("Case 1 items should stay on the desk, the notebook should come along: %s" % [Game.inventory])
+	await _case2()
+	if _failed:
+		return
+	print("Case 2 finished.")
+	main._waiting_click = false                         # the "Case 3: Walk of Fame" card, then the drive
+	await expect_room("stardust_shop")
+	await _case3()
+	if _failed:
+		return
+	print("Case 3 finished.")
+	main._waiting_click = false                         # the "Case 4: Low Water" card, then the drive
+	await expect_room("fletcher_bridge")
+	await _case4()
+	if _failed:
+		return
+	print("Case 4 finished.")
+	main._waiting_click = false                         # the "Case 5: Last Call" card, then across the street
+	await expect_room("street_crime")
+	await _case5()
+	if _failed:
+		return
+	print("PLAYTHROUGH OK - all five cases and four endings finished.")
+	_quit(0)
+
+
+func _case1() -> void:
 	await _new_game()
 	await expect_room("squad_room")
 	print("Scene 1: the squad room")
@@ -321,33 +401,6 @@ func _run() -> void:
 	if _failed:
 		return
 	print("Case 1 finished.")
-	main._waiting_click = false                         # the "Case 2: Five Stars" card
-	await expect_room("mulholland_overlook")
-	if Game.has_item("envelope") or not Game.has_item("notebook"):
-		_fail("Case 1 items should stay on the desk, the notebook should come along: %s" % [Game.inventory])
-	await _case2()
-	if _failed:
-		return
-	print("Case 2 finished.")
-	main._waiting_click = false                         # the "Case 3: Walk of Fame" card, then the drive
-	await expect_room("stardust_shop")
-	await _case3()
-	if _failed:
-		return
-	print("Case 3 finished.")
-	main._waiting_click = false                         # the "Case 4: Low Water" card, then the drive
-	await expect_room("fletcher_bridge")
-	await _case4()
-	if _failed:
-		return
-	print("Case 4 finished.")
-	main._waiting_click = false                         # the "Case 5: Last Call" card, then across the street
-	await expect_room("street_crime")
-	await _case5()
-	if _failed:
-		return
-	print("PLAYTHROUGH OK - all five cases and four endings finished.")
-	_quit(0)
 
 
 func _case2() -> void:
