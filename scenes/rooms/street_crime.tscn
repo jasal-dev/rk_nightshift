@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/street_crime_tape.png" id="occ_tape"]
 [ext_resource type="Texture2D" path="res://assets/rooms/street_crime_teo.png" id="occ_teo"]
 [ext_resource type="Texture2D" path="res://assets/rooms/street_crime_mara.png" id="occ_mara"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_bucket.png" id="occ_bucket"]
 
 [node name="StreetCrime" type="Node2D"]
 script = ExtResource("script")
@@ -94,6 +95,12 @@ centered = false
 position = Vector2(778, 887)
 offset = Vector2(-64, -254)
 
+[node name="Bucket" type="Sprite2D" parent="Actors"]
+texture = ExtResource("occ_bucket")
+centered = false
+position = Vector2(325, 851)
+offset = Vector2(-18, -199)
+
 [node name="Obstacles" type="Node2D" parent="."]
 
 [node name="Obstacle1" type="Polygon2D" parent="Obstacles"]
@@ -110,7 +117,7 @@ polygon = PackedVector2Array(644.3, 806.8, 635.2, 810.4, 618.3, 813, 598.3, 814,
 
 [node name="Obstacle4" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
-polygon = PackedVector2Array(379.6, 844.6, 365.8, 849.1, 344.2, 852.5, 320.7, 853.7, 302, 852.3, 293.5, 848.8, 297.2, 844.3, 311.6, 839.9, 332.8, 836.8, 355.1, 835.7, 373.1, 836.9, 382.1, 840.2)
+polygon = PackedVector2Array(385, 843.1, 365.8, 849.4, 335.4, 854.2, 302.2, 855.8, 276.1, 853.9, 264.5, 849, 270.2, 842.7, 290.7, 836.6, 320.2, 832.4, 351.1, 830.9, 375.8, 832.6, 388.4, 837)
 
 [node name="Spawns" type="Node2D" parent="."]
 
@@ -262,8 +269,8 @@ polygon = PackedVector2Array(567.1, 581.9, 645.7, 581.9, 646.7, 800.7, 568.3, 80
 script = ExtResource("hs")
 id = "teo"
 display_name = "Teo"
-walk_to = Vector2(369, 843)
-face = "down"
+walk_to = Vector2(444, 843)
+face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/teo"]
 polygon = PackedVector2Array(180.5, 658.3, 325, 658.6, 326.8, 854.6, 182.7, 854)

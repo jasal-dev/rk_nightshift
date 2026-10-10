@@ -379,11 +379,12 @@ def crime_scene(S, hide):
             S.wboxr(tx_ - 0.2, 0.15, tz_ - 0.17, tx_ + 0.2, TEO_Y + 0.49, tz_ + 0.17, 'crate', rnd=0.02)
         npc.cast(S, 'teo', dict(npc.SEATED, lhp=78, lk=98, rhp=80, rk=102, lean=26, lsp=44, le=88, lin=36, rsp=44,
                                 re=92, rin=40, hp=24, hy=10), (tx_, TEO_Y, tz_ - 0.02), yaw=70, scale=0.97, tag='teo')
-    with S.tag('bucket'):
-        bkx, bkz = BUCKET
-        S.tcyl(Frame((bkx, 0.32, bkz)), (0, 0, 0), (0.2, 0.2), (0.16, 0.16), 0.17, 'bucket')
-        S.cyl((bkx, 0.3, bkz), (bkx - 0.3, 1.45, bkz - 0.5), 0.015, 'mop_pole')
-        S.ell(WORLD, (bkx, 0.47, bkz), (0.14, 0.05, 0.14), 'mop')
+    if 'bucket' not in hide:
+        with S.tag('bucket'):                # a walk-behind
+            bkx, bkz = BUCKET
+            S.tcyl(Frame((bkx, 0.32, bkz)), (0, 0, 0), (0.2, 0.2), (0.16, 0.16), 0.17, 'bucket')
+            S.cyl((bkx, 0.3, bkz), (bkx - 0.3, 1.45, bkz - 0.25), 0.015, 'mop_pole')
+            S.ell(WORLD, (bkx, 0.47, bkz), (0.14, 0.05, 0.14), 'mop')
 
     # Mara Quist at the tape, notebook dry under her coat, looking past it at the Blue Note's door
     if 'mara' not in hide:
@@ -428,7 +429,7 @@ def crime_meta():
             'patrol_car': ('patrol car', (1.6, 2.35), 'down'),
             'tape': ('crime tape', None, 'up'),
             'park': ('Officer Park', (-2.0, 1.45), 'left'),
-            'teo': ('Teo', (-4.1, 2.35), 'down'),
+            'teo': ('Teo', (-3.55, 2.35), 'left'),
             'mara': ('Mara Quist', (-0.3, 2.35), 'down'),
             'flares': ('road flares', None, 'down'),
         },
@@ -447,8 +448,8 @@ def crime_meta():
         exclusive_overlays=['bar_red', 'bar_blue'],
         occluders={'hydrant': HYDRANT, 'streetlamp': LAMP, 'car': (4.9, 3.75), 'patrol': (PATROL[0], PATROL[1] - 0.9),
                    'tape': ((HYDRANT[0] + LAMP[0]) / 2, (HYDRANT[1] + LAMP[1]) / 2),
-                   'teo': (T[0], T[1] + 0.1), 'mara': M},
-        obstacles=[(HYDRANT[0], HYDRANT[1], 0.4), (LAMP[0], LAMP[1], 0.2), (P[0], P[1], 0.3), (BUCKET[0], BUCKET[1], 0.3)],
+                   'teo': (T[0], T[1] + 0.1), 'mara': M, 'bucket': (BUCKET[0], BUCKET[1] + 0.22)},
+        obstacles=[(HYDRANT[0], HYDRANT[1], 0.4), (LAMP[0], LAMP[1], 0.2), (P[0], P[1], 0.3), (BUCKET[0] - 0.1, BUCKET[1] - 0.05, 0.42)],
         char_fill=((190, 196, 230), 0.08),
         tint=(0.7, 0.72, 0.88),
     )
