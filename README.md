@@ -211,8 +211,9 @@ Game.set_flag("x"); Game.flag("x"); Game.has_item("id"); Game.clues(Game.current
 `main.device()` shows a phone or car screen (Kenji's Glide app, the Prius dashboard) with tabs, tappable
 rows and a Close button, and returns `"tab:<i>"`, `"row:<i>"` or `"close"`. The screen stays up while Ray
 talks about what he tapped, so a room script runs it in a loop and calls `ui.hide_device()` when done.
-Notebook clues are tagged with their case (`Game.CLUES[id] = [case, line]`); the notebook shows the current
-case's, and each case's murder board only offers its own cards.
+Notebook clues are tagged with their case (`Game.CLUES[id] = [case, line]`). A click on the notebook opens it on
+screen at the current case's page (earlier cases a page turn back, unread notes highlighted), and each case's murder
+board only offers its own cards.
 
 Tiny and Vance are part of their rooms' 3D sets (`tools/r3/npc.py` poses the detective's rig,
 recolours it and bakes it into the background), so they don't animate; they talk with

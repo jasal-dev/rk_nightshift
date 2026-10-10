@@ -158,6 +158,7 @@ func jump_to_case(n: int) -> void:
 	Game.reset()
 	var start: Dictionary = CaseStarts.STARTS[n]
 	Game.flags = (start["flags"] as Dictionary).duplicate(true)
+	Game.set_flag("notebook_seen", Game.clues())      # the earlier cases' notes aren't news
 	Game.inventory.clear()
 	for id in start["inventory"]:
 		Game.inventory.append(String(id))
@@ -350,7 +351,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				if _speaking:
 					_skip = true
 			KEY_ESCAPE:
-				if _speaking:
+				if ui.notebook:
+					ui.notebook_closed.emit()     # puts the notebook away; never the quicksave and title
+				elif _speaking:
 					_skip = true
 				elif Game.selected_item != "":
 					Game.select_item("")
@@ -399,7 +402,12 @@ func _on_inventory_clicked(id: String, button: int) -> void:
 		await examine_item(id)
 		busy = false
 	elif button == MOUSE_BUTTON_LEFT:
-		if Game.selected_item == "":
+		if id == "notebook" and Game.selected_item == "":
+			# nothing in the game takes the notebook, so a left click opens it too
+			busy = true
+			await read_notebook()
+			busy = false
+		elif Game.selected_item == "":
 			Game.select_item(id)
 		elif Game.selected_item == id:
 			Game.select_item("")
@@ -425,15 +433,7 @@ func examine_item(id: String) -> void:
 			await say("Sal sees everything. That's his job.")
 			Game.set_flag("read_file")
 		"notebook":
-			var lines := Game.clues(Game.current_case())
-			if lines.is_empty():
-				await say("My notebook. A fresh page. The night is young." if Game.current_case() > 1
-						else "My notebook. Empty so far. The night is young.")
-				return
-			player.face("down")
-			await player.play_action("notebook")
-			for c in lines:
-				await say(Game.clue_text(c))
+			await read_notebook()
 		"envelope":
 			await say("A Blue Note envelope, empty, singed. On the back in Danny's hand: '1 of 3.'")
 			await say("Whoever was paying Danny, they were on an installment plan.")
@@ -504,6 +504,28 @@ Received: 4:46 AM",
 			await say(Game.ITEMS.get(id, {}).get("desc", "It's a %s." % Game.item_name(id)))
 
 
+func read_notebook() -> void:
+	## The notebook, open on screen (GameUI.show_notebook) at the current case, with the earlier cases a page turn back.
+	## Notes the player hasn't seen yet are marked new; every note counts as seen once the book is closed
+	## (the "notebook_seen" flag holds their ids).
+	var seen: Array = Game.flags.get("notebook_seen", [])
+	var sections: Array = []
+	var current := Game.current_case()
+	for n in range(1, current + 1):
+		var ids := Game.clues(n)
+		if ids.is_empty() and n < current:
+			continue
+		var notes: Array = []
+		for id in ids:
+			notes.append([Game.clue_text(id), not seen.has(id)])
+		sections.append({"title": Game.CASE_TITLES[n], "notes": notes, "current": n == current})
+	ui.set_hover("", Vector2.ZERO)
+	ui.show_notebook(sections)
+	await ui.notebook_closed
+	ui.hide_notebook()
+	Game.set_flag("notebook_seen", Game.clues())
+
+
 # --- scripting API used by room scripts -----------------------------------------
 func clue(id: String) -> void:
 	## Ray writes a fact in his notebook (a flag with the clue's id, see Game.CLUES).
@@ -512,7 +534,7 @@ func clue(id: String) -> void:
 	Game.set_flag(id)
 	if not Game.flag("notebook_hint"):
 		Game.set_flag("notebook_hint")
-		ui.toast("Notebook updated. Right-click the notebook in the inventory to read it.", 3.5)
+		ui.toast("Notebook updated. Click the notebook in the inventory to read it.", 3.5)
 	else:
 		ui.toast("Notebook updated.")
 

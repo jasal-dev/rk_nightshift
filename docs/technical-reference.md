@@ -141,7 +141,9 @@ can't swallow it.
 `lab_receipt`, and Case 5's `ray_phone`, `reporter_card`, `tab_book`, `set_list`, `danny_box`, `take_drive`,
 `brenner_38`), everything else says `ITEMS[id].desc`. Ray's phone is `Case5.phone()`: Texts and Calls (Ike, the take,
 the text to Brenner), and at sunrise the choice of where the drive goes. `frozen_peas` delegates to the room's `open_peas()` when
-it has one. Using one item on another always says "Those two don't go together."
+it has one. Using one item on another always says "Those two don't go together." The notebook is `Main.read_notebook()` (a left click
+opens it too): the open book on screen, at the current case's page, with earlier cases a page turn back. Notes whose ids
+aren't in the `notebook_seen` flag yet are highlighted and marked NEW; closing the book puts every clue id in it.
 
 **Scripting API.** Everything a room script needs, beyond the README's summary:
 
@@ -191,6 +193,7 @@ All UI is built in code in `scripts/ui.gd` (`class_name GameUI`), with DejaVu Sa
 | Jigsaw | `show_jigsaw(bg, pieces)`, `hide_jigsaw`, `jigsaw_place(i)`, signal `jigsaw_event(kind)` | Crane's headlight. |
 | Scene still | `show_scene(tex, dim, caption)`, `hide_scene`, `show_endcard(tex, text)` | The take, the 1:30 call remembered, the end cards. |
 | Piano | `show_piano(set_list)`, `hide_piano`, `piano_press(key)`, signal `piano_event(letter)` | Danny's piano (Case 5). |
+| Notebook | `show_notebook(sections)`, `hide_notebook`, `notebook_page_turn(step)`, signal `notebook_closed` | Ray's notebook, open: two ruled pages, each case from a fresh page under `Game.CASE_TITLES[n]`, overflow onto further pages. Close, Esc (handled in `Main`, before the quicksave-and-title), a right click or a click outside closes it. |
 
 `show_device(..., accent, lcd)` with `lcd = true` is the desk phone's green call log. `change_room()` hides the
 device, paper, jigsaw, piano and scene still, so a close-up never leaks into the next room.

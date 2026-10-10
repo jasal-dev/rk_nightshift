@@ -50,8 +50,8 @@ func _process(_delta: float) -> void:
 				"mulholland_overlook", "norms_diner", "kenji_apartment", "prius_interior", "stardust_shop",
 				"stardust_office", "stardust_roof", "stardust_roof_dark", "fletcher_bridge", "river_channel", "glass_house",
 				"crane_garage", "night_lab", "squad_room", "jigsaw", "street_crime", "blue_note_bar", "blue_note_back",
-				"pier9_dawn", "pier9_sunrise", "piano", "scene_pic", "title"]:
-			var ui_key: bool = key in ["drive", "phone", "board", "device", "paper", "jigsaw", "piano", "scene_pic", "title"]
+				"pier9_dawn", "pier9_sunrise", "piano", "scene_pic", "title", "notebook"]:
+			var ui_key: bool = key in ["drive", "phone", "board", "device", "paper", "jigsaw", "piano", "scene_pic", "title", "notebook"]
 			var on: bool = (main.ui.get(key) != null) if ui_key \
 					else (main.room != null and main.room.room_id == key and not main.busy and main.ui.fade_rect.color.a < 0.01)
 			var n_case: int = Game.current_case()
@@ -194,6 +194,63 @@ func act(hotspot: String, verb := "use", item := "", answers: Array[String] = []
 		_fail("answers left over: %s" % [_choices])
 
 
+func read_notebook() -> void:
+	## Clicks the notebook in the inventory and reads every page: each case so far under its title, every note on it,
+	## the ones not seen before marked NEW, the current case's spread first. Then Esc, which puts the book away and
+	## must not quicksave and go back to the title screen.
+	await _idle()
+	if _failed:
+		return
+	_step = "read the notebook  [%s]" % main.room.room_id
+	_step_started = Time.get_ticks_msec()
+	print("  ", _step)
+	var seen: Array = Game.flags.get("notebook_seen", [])
+	var unseen := 0
+	for id in Game.clues():
+		if not seen.has(id):
+			unseen += 1
+	main._on_inventory_clicked("notebook", MOUSE_BUTTON_LEFT)
+	for i in (25 if "--shots" in OS.get_cmdline_user_args() else 3):
+		await get_tree().process_frame
+	var ui: GameUI = main.ui
+	if ui.notebook == null:
+		_fail("a click on the notebook should open it")
+		return
+	var first: Array = ui._nb_spreads[ui._nb_spread]
+	if not bool(first[0]["current"]):
+		_fail("the notebook should open at the current case")
+	var text := ""
+	var news := 0
+	ui.notebook_page_turn(-ui._nb_spreads.size())
+	for s in ui._nb_spreads.size():
+		await get_tree().process_frame
+		for l: Label in ui.notebook.find_children("*", "Label", true, false):
+			text += l.text + "\n"
+			news += 1 if l.text == "NEW" else 0
+		ui.notebook_page_turn(1)
+	for n in range(1, Game.current_case() + 1):
+		if not Game.clues(n).is_empty() and not text.contains(String(Game.CASE_TITLES[n])):
+			_fail("the notebook should have a page for %s" % Game.CASE_TITLES[n])
+		for id in Game.clues(n):
+			if not text.contains(Game.clue_text(id)):
+				_fail("the notebook should say: %s" % Game.clue_text(id))
+	if news != unseen:
+		_fail("the notebook should mark %d notes new, not %d" % [unseen, news])
+	print("    %d notes on %d spreads, %d new" % [Game.clues().size(), ui._nb_spreads.size(), news])
+	var esc := InputEventKey.new()
+	esc.keycode = KEY_ESCAPE
+	esc.pressed = true
+	get_viewport().push_input(esc)
+	for i in 3:
+		await get_tree().process_frame
+	if ui.notebook != null or main.busy:
+		_fail("Esc should close the notebook")
+	if main._on_title or ui.title != null:
+		_fail("Esc on the notebook should not go back to the title screen")
+	if (Game.flags.get("notebook_seen", []) as Array).size() != Game.clues().size():
+		_fail("every note should count as seen once the notebook is closed")
+
+
 func expect_room(id: String) -> void:
 	await _idle()
 	if main.room.room_id != id:
@@ -304,8 +361,8 @@ func _case1() -> void:
 	await _idle()
 	main.busy = true
 	await main.examine_item("case_file")
-	await main.examine_item("notebook")
 	main.busy = false
+	await read_notebook()
 	await act("phone")                                  # Doyle's voicemail
 	await act("mug")
 	await act("wastebasket", "use", "coffee")
@@ -794,6 +851,7 @@ func _case4() -> void:
 	main.busy = false
 	await act("exit")
 	await expect_room("squad_room")
+	await read_notebook()                               # Case 4's notes run over two pages, the earlier cases a turn back
 
 	print("Case 4, scene 7: the murder board")
 	await act("door")

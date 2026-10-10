@@ -9,6 +9,7 @@ signal choice_made(index: int)
 signal inventory_clicked(id: String, button: int)
 signal jigsaw_event(kind: String)   ## "wrong", "done" or "close" (see show_jigsaw)
 signal piano_event(key: String)     ## a key's letter ("C" .. "G", "C#" ...) or "close" (see show_piano)
+signal notebook_closed              ## the open notebook was put away (see show_notebook)
 
 const FONT := preload("res://assets/fonts/DejaVuSansCondensed-Bold.ttf")
 const FONT_SIZE := 30
@@ -41,6 +42,7 @@ var paper: Control                ## a document or picture held up close (a lett
 var jigsaw: Control              ## the fit-the-pieces close-up (Crane's headlight)
 var scene_pic: Control            ## a full-screen still under the speech (Case 5: the take, the 1:30 call, the end cards)
 var piano: Control                ## Danny's keyboard close-up (Case 5)
+var notebook: Control             ## Ray's notebook, open (see show_notebook)
 var _piano_keys := {}             ## key name ("C4", "C#4" ...) -> its ColorRect
 var _piano_flash: Label
 var options: Array[String] = []   ## the options on screen (dialogue choices or device buttons), in choice_made order
@@ -789,6 +791,208 @@ func hide_paper() -> void:
 		paper.queue_free()
 		paper = null
 
+
+# --- the notebook ---------------------------------------------------------------------------------
+## Ray's notebook, open on the desk: two ruled pages in his ink. Each case starts on a fresh page under its title and
+## runs on to the next page when it fills one. It opens on the current case; the corner arrows turn back to the cases
+## before. A note the player hasn't read yet is marked with a highlighter and NEW in the margin. Close, Esc (see Main),
+## a right click or a click outside the book emit notebook_closed.
+## sections: [{"title": String, "notes": [[text, new: bool], ...], "current": bool}], oldest case first.
+const NB_BOOK := Rect2(190, 50, 1540, 950)
+const NB_SIZE := 26           ## note font size
+const NB_RULE := 40.0         ## ruled line spacing; each line of a note sits on one
+const NB_TOP := 150.0         ## where the rules start, under the page's heading
+const NB_LINES := 17          ## rules on a page
+const NB_TEXT_W := 600.0
+const NB_INK := Color(0.1, 0.14, 0.34)
+var _nb_spreads: Array = []   ## the pages in pairs (see _nb_pages)
+var _nb_spread := 0
+
+
+func show_notebook(sections: Array) -> void:
+	hide_notebook()
+	var pages := _nb_pages(sections)
+	var first := 0
+	for i in pages.size():
+		if bool(pages[i]["current"]):
+			first = i
+			break
+	for i in range(0, pages.size(), 2):
+		_nb_spreads.append(pages.slice(i, i + 2))
+	notebook = Control.new()
+	notebook.set_anchors_preset(Control.PRESET_FULL_RECT)
+	notebook.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(notebook)
+	root.move_child(notebook, 0)
+	var dim := ColorRect.new()
+	dim.color = Color(0, 0, 0, 0.7)
+	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	dim.mouse_filter = Control.MOUSE_FILTER_STOP           # a click outside the book closes it
+	dim.gui_input.connect(_on_nb_outside)
+	notebook.add_child(dim)
+	var close := _nb_button("Close", Vector2(NB_BOOK.end.x - 110, NB_BOOK.end.y + 12), func(): notebook_closed.emit())
+	close.add_theme_color_override("font_color", Color(0.78, 0.82, 0.84))
+	close.add_theme_color_override("font_hover_color", Color(1, 0.85, 0.45))
+	notebook.add_child(close)
+	_nb_show(first / 2)
+
+
+func _nb_pages(sections: Array) -> Array:
+	## Lays the notes out on pages: [{"title", "cont": bool, "current": bool, "notes": [[text, new, first rule]]}].
+	var pages: Array = []
+	for s: Dictionary in sections:
+		var page := {"title": s["title"], "cont": false, "current": s["current"], "notes": []}
+		pages.append(page)
+		var notes: Array = s["notes"]
+		if notes.is_empty():
+			page["notes"].append(["Nothing yet. The night is young.", false, 0, "blank"])
+		var rule := 0
+		for n: Array in notes:
+			var lines := _nb_line_count(String(n[0]))
+			if rule > 0 and rule + lines > NB_LINES:
+				page = {"title": s["title"], "cont": true, "current": s["current"], "notes": []}
+				pages.append(page)
+				rule = 0
+			page["notes"].append([n[0], n[1], rule])
+			rule += lines
+	return pages
+
+
+func _nb_line_count(text: String) -> int:
+	var h := FONT.get_multiline_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, NB_TEXT_W, NB_SIZE).y
+	return maxi(1, roundi(h / FONT.get_height(NB_SIZE)))
+
+
+func _nb_show(spread: int) -> void:
+	## Draws one spread (two pages) of the open book, in place of the one before.
+	_nb_spread = clampi(spread, 0, _nb_spreads.size() - 1)
+	var old := notebook.get_node_or_null("Book")
+	if old:
+		notebook.remove_child(old)
+		old.queue_free()
+	var book := Control.new()
+	book.name = "Book"
+	book.position = NB_BOOK.position
+	book.size = NB_BOOK.size
+	book.mouse_filter = Control.MOUSE_FILTER_STOP
+	book.gui_input.connect(_on_nb_book)
+	notebook.add_child(book)
+	book.add_child(_card_panel(Rect2(Vector2.ZERO, NB_BOOK.size), Color(0.2, 0.11, 0.07), Color(0.12, 0.06, 0.04), 4))
+	var pw := (NB_BOOK.size.x - 36) * 0.5
+	var ph := NB_BOOK.size.y - 36
+	var pages: Array = _nb_spreads[_nb_spread]
+	for side in 2:
+		var sheet := ColorRect.new()
+		sheet.color = Color(0.94, 0.91, 0.82)
+		sheet.position = Vector2(18 + side * pw, 18)
+		sheet.size = Vector2(pw, ph)
+		sheet.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		book.add_child(sheet)
+		for i in NB_LINES:                                   # blue rules
+			_nb_rect(sheet, Rect2(0, NB_TOP + (i + 1) * NB_RULE - 4, pw, 2), Color(0.45, 0.6, 0.8, 0.45))
+		_nb_rect(sheet, Rect2(76, 0, 2, ph), Color(0.8, 0.3, 0.3, 0.6))                          # red margin
+		_nb_rect(sheet, Rect2(pw - 26 if side == 0 else 0, 0, 26, ph), Color(0, 0, 0, 0.16))      # the gutter
+		if side < pages.size():
+			_nb_page(sheet, pages[side], _nb_spread * 2 + side + 1)
+	if _nb_spread > 0:
+		book.add_child(_nb_button("◀", Vector2(44, ph - 40), func(): _nb_show(_nb_spread - 1)))
+	if _nb_spread < _nb_spreads.size() - 1:
+		book.add_child(_nb_button("▶", Vector2(NB_BOOK.size.x - 84, ph - 40), func(): _nb_show(_nb_spread + 1)))
+
+
+func _nb_page(sheet: Control, page: Dictionary, number: int) -> void:
+	var cont := bool(page["cont"])
+	var head := Label.new()
+	head.text = String(page["title"]) + (" (cont.)" if cont else "")
+	head.position = Vector2(96, 62 if cont else 54)
+	head.add_theme_font_size_override("font_size", 26 if cont else 36)
+	head.add_theme_color_override("font_color", Color(NB_INK, 0.6) if cont else NB_INK)
+	head.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	sheet.add_child(head)
+	var lh := FONT.get_height(NB_SIZE)
+	for n: Array in page["notes"]:
+		var lines := _nb_line_count(String(n[0]))
+		var y := NB_TOP + int(n[2]) * NB_RULE + 4
+		var new := bool(n[1])
+		if new:
+			_nb_rect(sheet, Rect2(90, y + 2, NB_TEXT_W + 12, lines * NB_RULE - 6), Color(1.0, 0.92, 0.25, 0.5))
+		var tag := Label.new()                              # NEW in red, or a bullet, in the margin at each note
+		tag.text = "NEW" if new else "•"
+		tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		tag.position = Vector2(8, y + (6 if new else 0))
+		tag.size = Vector2(64, 30)
+		tag.add_theme_font_size_override("font_size", 20 if new else NB_SIZE)
+		tag.add_theme_color_override("font_color", Color(0.72, 0.1, 0.08) if new else NB_INK)
+		tag.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		tag.visible = n.size() < 4                          # not on an empty page's line
+		sheet.add_child(tag)
+		var l := Label.new()
+		l.text = String(n[0])
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		l.position = Vector2(96, y)
+		l.size = Vector2(NB_TEXT_W, lines * NB_RULE)
+		l.add_theme_font_size_override("font_size", NB_SIZE)
+		l.add_theme_constant_override("line_spacing", int(NB_RULE - lh))
+		l.add_theme_color_override("font_color", NB_INK)
+		l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		sheet.add_child(l)
+	var num := Label.new()
+	num.text = str(number)
+	num.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	num.position = Vector2(0, sheet.size.y - 46)
+	num.size = Vector2(sheet.size.x, 30)
+	num.add_theme_font_size_override("font_size", 20)
+	num.add_theme_color_override("font_color", Color(NB_INK, 0.5))
+	num.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	sheet.add_child(num)
+
+
+func _nb_rect(parent: Control, r: Rect2, col: Color) -> void:
+	var c := ColorRect.new()
+	c.color = col
+	c.position = r.position
+	c.size = r.size
+	c.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(c)
+
+
+func _nb_button(text: String, at: Vector2, on_press: Callable) -> Button:
+	var b := Button.new()
+	b.text = text
+	b.flat = true
+	b.focus_mode = Control.FOCUS_NONE
+	b.position = at
+	b.add_theme_color_override("font_color", NB_INK)
+	b.add_theme_color_override("font_hover_color", Color(0.75, 0.3, 0.1))
+	b.add_theme_color_override("font_pressed_color", Color(0.75, 0.3, 0.1))
+	b.mouse_filter = Control.MOUSE_FILTER_STOP
+	b.pressed.connect(on_press)
+	return b
+
+
+func notebook_page_turn(step: int) -> void:
+	## Turn to the next (1) or previous (-1) spread, as the corner arrows do. Also used by the automated playthrough.
+	if notebook:
+		_nb_show(_nb_spread + step)
+
+
+func _on_nb_outside(event: InputEvent) -> void:
+	var mb := event as InputEventMouseButton
+	if mb and mb.pressed and mb.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT]:
+		notebook_closed.emit()
+
+
+func _on_nb_book(event: InputEvent) -> void:
+	var mb := event as InputEventMouseButton
+	if mb and mb.pressed and mb.button_index == MOUSE_BUTTON_RIGHT:
+		notebook_closed.emit()
+
+
+func hide_notebook() -> void:
+	if notebook:
+		notebook.queue_free()
+		notebook = null
+	_nb_spreads.clear()
 
 # --- fades and cards --------------------------------------------------------
 func fade_to(alpha: float, time := 0.5) -> void:

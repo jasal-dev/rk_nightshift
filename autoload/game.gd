@@ -49,6 +49,15 @@ const ITEMS := {
 	"brenner_38": {"name": "Brenner's .38", "desc": ""},
 }
 
+## Each case's title, as on its card and at the top of its notebook page.
+const CASE_TITLES := {
+	1: "Case 1: Dead Piano Player",
+	2: "Case 2: Five Stars",
+	3: "Case 3: Walk of Fame",
+	4: "Case 4: Low Water",
+	5: "Case 5: Last Call",
+}
+
 ## Notebook clues: facts Ray writes down, as [case, line]. Each is a flag of the same name (set with
 ## Main.clue()), and each can be pinned as evidence on that case's murder board.
 const CLUES := {
