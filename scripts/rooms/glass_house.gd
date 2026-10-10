@@ -4,6 +4,11 @@ extends Room
 ## keys, the Audi following Owen out, Courtney locking up). Andre's valet ticket No. 47. The optional seed: Pryce's
 ## invitation in the box of gift bags. Puzzle 4.2: with a plate, Ray's car rings Otis before the car menu opens.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"courtney": "talk", "andre": "talk", "car": "drive", "gift_bags": "take"
+}
+
 const OWEN_COLOR := Color(0.95, 0.82, 0.4)        ## Owen, on the gate camera
 const CAM_AT := Vector2(1536, 330)                 ## lines from a clip on the gate camera app
 

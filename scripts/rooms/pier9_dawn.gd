@@ -6,6 +6,12 @@ extends Room
 ## arrested either way; then Tiny's answer (tiny_told) and the sun comes up (pier9_sunrise).
 ## Overlays: the Lincoln, Brenner (standing, gun drawn, cuffed over the hood), the phone and his coffee on the bollard.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"tiny": "talk", "vance": "talk", "brenner": "talk", "brenner_cuffed": "talk", "barrel": "look", "crane": "look",
+	"warehouse_sign": "look", "car": "drive"
+}
+
 const TINY_COLOR := Color(0.86, 0.74, 0.56)
 const VANCE_COLOR := Color(0.78, 0.74, 0.9)
 

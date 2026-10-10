@@ -5,6 +5,11 @@ extends Room
 ## Scene 6: after Vance mentions the envelope, fish it out of the burn barrel with the boat hook.
 ## The car drives back to the squad room once Ray has the envelope.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"tiny": "talk", "green_door": "knock", "crane": "look", "warehouse_sign": "look", "car": "drive", "piling": "take"
+}
+
 const TINY_COLOR := Color(0.86, 0.74, 0.56)
 const VANCE_COLOR := Color(0.78, 0.74, 0.9)
 const TINY_AT := Vector2(1240, 610)

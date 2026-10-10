@@ -6,6 +6,12 @@ extends Room
 ## the dashcam and the cards, Devin asks for a lawyer, Park takes him down the stairs.
 ## Devin is part of the set in two poses (overlays): at the fridge until search_consent, then on the couch.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"devin": "talk", "devin_couch": "talk", "dashcam_box": "look", "certificate": "look", "pennant": "look",
+	"photos": "look", "devin_door": "look", "front_door": "go", "fridge": "open", "freezer": "open"
+}
+
 @onready var devin_fridge: Sprite2D = $Devin_fridge
 @onready var devin_couch: Sprite2D = $Devin_couch
 var _wander := 0         ## actions after consent without opening the freezer (a hint after a few)

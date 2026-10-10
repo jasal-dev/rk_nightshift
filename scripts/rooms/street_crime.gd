@@ -6,6 +6,12 @@ extends Room
 ## Park goes into the back room once Nina is out (an overlay here and there); the patrol car's light bar turns
 ## (two overlays, red and blue).
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"bar_door": "go", "tape": "go", "mara": "talk", "park": "talk", "teo": "talk", "precinct_door": "go",
+	"car": "drive", "patrol_car": "look", "flares": "look", "neon": "look"
+}
+
 const PARK_COLOR := Color(1.0, 0.78, 0.56)
 
 @onready var park: Sprite2D = $Actors/Park

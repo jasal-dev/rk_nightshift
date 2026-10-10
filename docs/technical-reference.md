@@ -110,7 +110,13 @@ Hooks for room scripts:
 | `intro()` | Once, when a new game starts in this room (the squad room). |
 | `interact(hs, verb, item)` | Every click on a hotspot. `verb` is `"look"` or `"use"`, `item` is the used item id or `""`. Fall back to `await default_response(verb, item)`. |
 
-Helpers: `hotspot(id)`, `hotspots()`, `hotspot_at(p)` (topmost enabled one; later children win, so
+**Verbs under the cursor.** A room script lists its hotspots' left-click verbs in `const VERBS := {id: verb}`
+(`talk`, `go`, `drive`, `take`, `open`, `knock`, `play`, `search`, `use`, or `look`); unlisted hotspots are `use`.
+`verb_for(hs)` reads it. The verb is only a label for `"use"`, except `look`: that marks a look-only hotspot, where
+a left click looks (no walking) and a right click does nothing. Mark a hotspot `look` when its `interact()` says the
+same thing for both verbs.
+
+Helpers: `hotspot(id)`, `hotspots()`, `verb_for(hs)`, `hotspot_at(p)` (topmost enabled one; later children win, so
 `hotspot_order` in the set decides overlap), `speaker_at(id)` (just above a hotspot, for `main.voice()`),
 `spawn_point(from)`, `light_at(p)`, `scale_at(y)`, `is_walkable(p)`, `clamp_to_walkable(p)`, `find_path(a, b)`.
 
@@ -131,7 +137,10 @@ edges are straight segments that cross no polygon edge, and `AStar2D` finds the 
 
 **Click flow.** Left click on a hotspot runs `_run_action(hs, "use", item)`: walk to `walk_to` (cancelled if the
 player clicks elsewhere meanwhile), face, set `busy`, clear the selected item, `await room.interact(...)`, clear
-`busy`. Right click runs `"look"` without walking. Left click on empty floor walks there. While `busy` is true,
+`busy`. Right click runs `"look"` without walking. On a look-only hotspot (`verb_for(hs) == "look"`) a left click
+runs `"look"` and a right click does nothing. The hover shows the hotspot's name above the cursor and the two
+buttons' verbs below it, left click to the lower left and right click to the lower right (`UI.set_hover`); while an
+item is held they read Use and Put away. Left click on empty floor walks there. While `busy` is true,
 clicks and hover are ignored; while a line is showing, a click skips it. That click (and the one that dismisses a case
 card) is taken in `Main._input`, before the GUI, so a close-up's backdrop (the jigsaw, the piano, a device screen)
 can't swallow it.
@@ -431,7 +440,7 @@ editor is open.
 1. Write `tools/r3/<room>.py` with `build(hide=())` and its `meta` (section 9).
 2. `python render_room.py <room> --preview` until it looks right, then a full render.
 3. Add it to `ROOMS` in `build_scenes.py` and run `python build_scenes.py`.
-4. Write `scripts/rooms/<room>.gd` (`extends Room`, `interact()`, overlay sync in `_ready()`).
+4. Write `scripts/rooms/<room>.gd` (`extends Room`, `interact()`, `VERBS`, overlay sync in `_ready()`).
 5. Add the arrival facing to `Main.change_room()` if it shouldn't be `"right"`.
 6. Hook it up with `await main.change_room("<room>", room_id)` from wherever you enter it.
 

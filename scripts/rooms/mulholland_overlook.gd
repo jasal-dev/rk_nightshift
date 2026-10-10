@@ -5,6 +5,11 @@ extends Room
 ## The open door leads into the car (prius_interior.gd: the Glide app, the car's screen, the glovebox).
 ## Leaving needs gloves, Brielle's alibi and clue_off_app; Ray's car then opens the car menu.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"kenji": "search", "shah": "talk", "park": "talk", "inside": "go", "sign": "look", "car": "drive"
+}
+
 
 func _ready() -> void:
 	super._ready()

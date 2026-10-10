@@ -18,9 +18,12 @@ const CURSOR_HOT := preload("res://assets/ui/cursor_hot.png")
 const SCREEN := Vector2(1920, 1080)
 const BAR_H := 104
 const ICON := 84
+const VERB_SIZE := 24
 
 var theme_res: Theme
 var hover_label: Label
+var verb_left: Label               ## under the cursor: what a left click does (see Main._process)
+var verb_right: Label              ## and what a right click does
 var speech_label: Label
 var toast_label: Label
 var bar: PanelContainer
@@ -71,6 +74,12 @@ func _ready() -> void:
 
 	hover_label = _make_label(Color(0.95, 0.92, 0.8))
 	root.add_child(hover_label)
+	verb_left = _make_label(Color(1, 0.85, 0.45))
+	verb_left.add_theme_font_size_override("font_size", VERB_SIZE)
+	root.add_child(verb_left)
+	verb_right = _make_label(Color(0.75, 0.82, 0.9))
+	verb_right.add_theme_font_size_override("font_size", VERB_SIZE)
+	root.add_child(verb_right)
 
 	toast_label = _make_label(Color(0.9, 0.85, 0.6))
 	toast_label.position = Vector2(24, 1020)
@@ -161,12 +170,21 @@ func update_cursor(p: Vector2, hot: bool) -> void:
 	cursor_item.position = p + Vector2(12, 12)
 
 
-func set_hover(text: String, p: Vector2) -> void:
+func set_hover(text: String, p: Vector2, left := "", right := "") -> void:
+	## The name above the cursor; below it, the left-click verb to the lower left and the right-click verb to the
+	## lower right ("" hides one). Both drop below the held item's icon when there is one.
 	hover_label.text = text
+	verb_left.text = "" if text == "" else left.left(1).to_upper() + left.substr(1)
+	verb_right.text = "" if text == "" else right.left(1).to_upper() + right.substr(1)
 	if text == "":
 		return
 	var w := FONT.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE).x
 	hover_label.position = Vector2(clampf(p.x - w * 0.5, 12, SCREEN.x - 12 - w), clampf(p.y - 72, BAR_H + 6, SCREEN.y - 60))
+	var y := clampf(p.y + (12.0 + ICON if cursor_item.visible else 22.0), 0, SCREEN.y - 44)
+	var wl := FONT.get_string_size(verb_left.text, HORIZONTAL_ALIGNMENT_LEFT, -1, VERB_SIZE).x
+	var wr := FONT.get_string_size(verb_right.text, HORIZONTAL_ALIGNMENT_LEFT, -1, VERB_SIZE).x
+	verb_left.position = Vector2(clampf(p.x - 14 - wl, 12, SCREEN.x - 12 - wl - wr - 28), y)
+	verb_right.position = Vector2(clampf(p.x + 14, 12 + wl + 28, SCREEN.x - 12 - wr), y)
 
 
 func update_bar(mouse: Vector2, allowed: bool) -> void:

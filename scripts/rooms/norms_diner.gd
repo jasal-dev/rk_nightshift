@@ -6,6 +6,11 @@ extends Room
 ## Heck (optional): his threat on Kenji's phone, his LAX queue alibi, and "the side thing".
 ## The door opens the car menu.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"rosa": "talk", "heck": "talk", "window": "look", "door": "go"
+}
+
 
 func on_enter(from_room: String) -> void:
 	if not Game.flag("been_to_norms"):

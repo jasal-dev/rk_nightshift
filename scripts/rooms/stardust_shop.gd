@@ -6,6 +6,11 @@ extends Room
 ## her headshots, then the floating "Oscar", then the earring), Park takes her out, and the front door leads back to
 ## Room 214. Pearl, Park and Morty are overlays (Pearl in the chair, then standing for the cuffs).
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"pearl": "talk", "pearl_stand": "talk", "park": "talk", "morty": "talk", "front_door": "go", "curtain": "go"
+}
+
 @onready var pearl_chair: Sprite2D = $Actors/Pearl_chair
 @onready var pearl_stand: Sprite2D = $Actors/Pearl_stand
 @onready var park: Sprite2D = $Actors/Park

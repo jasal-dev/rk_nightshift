@@ -6,6 +6,12 @@ extends Room
 ## the UV lamp. Puzzle 3.4: Pearl's locker (headshots, the practice signatures, the gold pen under UV).
 ## Puzzle 3.5: the fuse panel's ROOF SIGN override (sign_on); until then the stairs lead to the dark roof.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"gus": "search", "shah": "talk", "stairs": "go", "curtain": "go", "drawer": "open", "cabinet": "open",
+	"gus_locker": "open", "pearl_locker": "open"
+}
+
 @onready var sign_glow: Sprite2D = $Sign_glow
 var _wander := 0
 

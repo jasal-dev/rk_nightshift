@@ -5,6 +5,13 @@ extends Room
 ## leaves the pier live; the bollard or Ray's phone brings the choice back. Then the last scene, Maya's text, and the
 ## credits (Case5.credits). Doyle, Okafor and Mara are overlays.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"tiny": "talk", "vance": "talk", "doyle": "talk", "okafor": "talk", "mara": "talk", "water": "look",
+	"lincoln": "look", "car": "look", "barrel": "look", "piling": "look", "crane": "look", "containers": "look",
+	"warehouse_sign": "look", "radio": "look"
+}
+
 const TINY_COLOR := Color(0.86, 0.74, 0.56)
 const VANCE_COLOR := Color(0.78, 0.74, 0.9)
 

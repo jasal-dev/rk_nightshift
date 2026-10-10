@@ -5,6 +5,11 @@ extends Room
 ## clue_trip_paused). Puzzle 3.3: two sets of tracks (clue_two_tracks). Puzzle 3.4: the reeds, dark until Doss's
 ## spotlight is on them: half a headlight, and Danny Reyes's phone. Preacher stands at his tent once he's freed.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"owen": "search", "shah": "talk", "preacher": "talk", "stairs": "go"
+}
+
 @onready var preacher: Sprite2D = $Actors/Preacher
 @onready var spot: Sprite2D = $Spot
 var _wander := 0

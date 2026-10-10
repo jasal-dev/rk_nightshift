@@ -5,6 +5,12 @@ extends Room
 ## Puzzle 3.3: talking Nina out of the walk-in (nina_out); then her phone shows the 1:52 call (clue_nina_call), the
 ## gate to Room 214. Nina, Park (in the hall once Nina is out) and the cooler door are overlays.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"sal": "search", "shah": "talk", "nina": "talk", "park": "talk", "bar_door": "go", "locker": "open",
+	"alley_door": "open", "hooks": "take", "cooler": "open"
+}
+
 @onready var nina: Sprite2D = $Actors/Nina
 @onready var park: Sprite2D = $Actors/Park
 @onready var cooler: Sprite2D = $Cooler_shut

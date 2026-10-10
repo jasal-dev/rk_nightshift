@@ -3,6 +3,12 @@ extends Room
 ## Puzzle: dumpster -> matchbook (number) ; dime + payphone -> Nina gives the knock ;
 ## knock on the bar door -> Sal names Vance ; the car drives to Pier 9 (scene 3).
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"precinct_door": "go", "bar_door": "knock", "car": "drive", "neon": "look", "alley": "look", "streetlamp": "look",
+	"hydrant": "look", "billboard": "look", "precinct_sign": "look"
+}
+
 const SAL_COLOR := Color(1.0, 0.62, 0.72)
 const NINA_COLOR := Color(0.75, 0.9, 0.7)
 

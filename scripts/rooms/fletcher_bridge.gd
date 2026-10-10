@@ -6,6 +6,11 @@ extends Room
 ## go down to the channel; Ray's car opens the car menu once Owen's phone has told him where he'd been. Preacher in
 ## the car and the spotlight's two aims are overlays.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"doss": "talk", "patrol_car": "talk", "stairs": "go", "fence_gap": "go", "car": "drive"
+}
+
 @onready var preacher_car: Sprite2D = $Actors/Preacher_car
 @onready var beam_road: Sprite2D = $Beam_road
 @onready var beam_down: Sprite2D = $Beam_down

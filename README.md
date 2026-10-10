@@ -87,8 +87,8 @@ that's an exact 2×. The window opens at the largest 16:9 size that fits your sc
 
 | Input | Action |
 |---|---|
-| Left click | Walk / use / talk to a hotspot |
-| Right click | Look at a hotspot (or examine an item in the inventory) |
+| Left click | Walk, or the hotspot's action (talk, go, take, use, ...); the lower left of the cursor names it |
+| Right click | Look at a hotspot (or examine an item in the inventory); the lower right of the cursor says Look when there's more to see than the left click shows |
 | Mouse at top edge, or **Tab** | Show the inventory bar |
 | Click an item, then a hotspot | Use the item on it (right click or Esc to put it away) |
 | Click / Space | Skip a line of dialogue |
@@ -175,7 +175,8 @@ the file formats, the room map, how a case is put together, and checklists for a
    walk-behind cut-outs, `tools/r3/out/<room>.json` and the light probes.
 3. Add the room to `ROOMS` in `build_scenes.py` and run it to generate `scenes/rooms/<room>.tscn`. Don't edit the
    `.tscn` by hand: it gets regenerated.
-4. Write `scripts/rooms/<room>.gd`, which `extends Room` and implements `interact(hs, verb, item)` with a `match hs.id:`.
+4. Write `scripts/rooms/<room>.gd`, which `extends Room` and implements `interact(hs, verb, item)` with a `match hs.id:`, and lists
+   its hotspots' left-click verbs in `const VERBS` (talk, go, take, ..., or look for look-only things).
 5. Go there with `await main.change_room("<room>", room_id)`.
 
 `docs/technical-reference.md` lists every `meta` key and has checklists for new items, clues and cases.

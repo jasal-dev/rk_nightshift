@@ -4,6 +4,11 @@ extends Room
 ## the money, the envelope and the man who telephoned. Using the Reyes file on Vance points a stuck
 ## player at the wall.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"vance": "talk", "door": "go", "boat_photo": "look", "heater": "look"
+}
+
 const VANCE_COLOR := Color(0.78, 0.74, 0.9)
 const VANCE_AT := Vector2(1259, 440)
 

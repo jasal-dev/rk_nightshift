@@ -2,6 +2,8 @@ extends Room
 ## The crime lab's night intake window at Cal State LA (Case 4, scene 6). Ray hands Danny Reyes's phone to Ike Feld,
 ## and only to Ike, and gets a receipt (phone_at_lab). The door goes on to Room 214.
 
+const VERBS := {"ike": "talk", "exit": "go"}   ## left-click verbs shown under the cursor (Room.verb_for)
+
 
 func on_enter(_from_room: String) -> void:
 	if Game.flag("case4_done"):

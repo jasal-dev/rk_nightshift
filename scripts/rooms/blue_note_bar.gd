@@ -4,6 +4,12 @@ extends Room
 ## password hint (clue_takes_hint); then Puzzle 5.2, the knock played on the keys: D, E, C, A, F (knows_password).
 ## Calling Ike from here plays the take (Case5.take). The tab book and the set list are overlays, gone once taken.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"mirror": "look", "booths": "look", "chairs": "look", "front_door": "go", "back_door": "go", "register": "open",
+	"set_list": "take", "piano": "play"
+}
+
 @onready var ledger: Sprite2D = $Ledger
 @onready var setlist: Sprite2D = $Setlist
 var _back_hint := false

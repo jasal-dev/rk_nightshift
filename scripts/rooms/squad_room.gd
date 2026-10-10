@@ -14,6 +14,11 @@ extends Room
 ## calls. Back with the take: the last deduction, Danny's box, Harbor Marine and Otis's car, and the text to Walt.
 ## The board keeps its pins between cases (overlays shown by flag); once Danny's box is packed its middle is bare.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"clock": "look", "door": "go", "mug": "take", "cabinet": "open"
+}
+
 const DOYLE_COLOR := Color(0.7, 0.85, 1.0)
 const OTIS_COLOR := Color(1.0, 0.85, 0.5)
 const PHONE_AT := Vector2(860, 630)

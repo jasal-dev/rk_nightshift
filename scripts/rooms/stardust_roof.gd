@@ -4,6 +4,11 @@ extends Room
 ## Puzzle 4.1: the heel prints, Gus's cigar, and the glint by the door (the gold star earring).
 ## Puzzle 4.2: the water tank: the "Oscar" floats (fake_oscar, clue_replica).
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"charlie": "talk", "roof_door": "go", "glint": "take"
+}
+
 @onready var neon_u: Sprite2D = $Neon_u
 @onready var earring: Sprite2D = $Earring
 var _flicker_t := 0.0

@@ -5,6 +5,11 @@ extends Room
 ## Puzzle 5.2: the tarp, the hose, the loafers, his phone and the grille, any time. The street opens the car menu after.
 ## The tarp and Crane's two poses are overlays.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"crane": "talk", "crane_step": "talk", "street": "go", "house_door": "go"
+}
+
 const PIECES := [Vector2(433.5, 350.5), Vector2(650.5, 421.5)]   ## the two pieces' places in the close-up (gen_closeups.py)
 
 @onready var tarp: Sprite2D = $Tarp

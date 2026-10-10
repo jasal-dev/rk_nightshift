@@ -2,6 +2,8 @@ extends Room
 ## The Stardust roof before the sign is back on (Case 3, scene 4, dark state): the sign's timer switched it off at one.
 ## Almost black; only the darkness and the door back down respond. The breaker is on the fuse panel in the office.
 
+const VERBS := {"roof_door": "go"}   ## left-click verbs shown under the cursor (Room.verb_for)
+
 
 func _ready() -> void:
 	super._ready()

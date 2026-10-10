@@ -154,6 +154,15 @@ func hotspot(id: String) -> Hotspot:
 	return null
 
 
+func verb_for(hs: Hotspot) -> String:
+	## What a left click does to a hotspot, shown under the cursor: "talk", "go", "drive", "take", "open", "knock",
+	## "play", "search", "use", or "look" for a look-only hotspot (left click looks, right click does nothing).
+	## Room scripts list theirs in a `const VERBS := {hotspot id: verb}`; anything not listed is "use".
+	## Right click is always "look", except on a look-only hotspot.
+	var verbs: Dictionary = get_script().get_script_constant_map().get("VERBS", {})
+	return String(verbs.get(hs.id, "use"))
+
+
 func spawn_point(from_room: String) -> Vector2:
 	var spawns := get_node_or_null("Spawns")
 	if spawns:

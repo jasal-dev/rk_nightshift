@@ -7,6 +7,11 @@ extends Room
 ## Puzzle 2.3: the ignition key only comes out after the screen has been read; it opens the glovebox.
 ## Kenji's driver card on the sun visor is an overlay, gone once Ray takes it.
 
+## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
+const VERBS := {
+	"kenji": "search", "out": "go", "glovebox": "open"
+}
+
 @onready var visor_card: Sprite2D = $Visor_card
 
 

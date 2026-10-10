@@ -3,7 +3,8 @@ extends Node
 ## clicks into walk / look / use actions, and gives room scripts a small
 ## scripting API (say, voice, choose, give, change_room, ...).
 ##
-## Controls: left click = walk / use, right click = look,
+## Controls: left click = walk / the hotspot's verb (talk, go, take, ... or look on a look-only hotspot),
+## right click = look (nothing on a look-only hotspot); both are shown under the cursor (Room.verb_for),
 ## mouse to top edge (or Tab) = inventory, F5 = save, F9 = load, F11 / Alt+Enter = fullscreen,
 ## Esc = save and go back to the title screen (TitleScreen: New Game, Load Game, Case 2 to 5, Settings, Exit).
 
@@ -131,7 +132,7 @@ func _title() -> void:
 	await change_room("squad_room", "start")
 	busy = true
 	await room.intro()
-	ui.toast("Right click to look, left click to use.", 3.5)
+	ui.toast("Left click to act, right click to look. The cursor shows which.", 4.0)
 	busy = false
 
 
@@ -265,6 +266,8 @@ func change_room(id: String, from_room: String) -> void:
 func _process(_delta: float) -> void:
 	var m := world.get_global_mouse_position()
 	var hover := ""
+	var left := ""
+	var right := ""
 	var hot := false
 	var busy_cursor := busy
 	if room and not _speaking and not _choosing and ui.card.visible == false and ui.title == null:
@@ -272,12 +275,27 @@ func _process(_delta: float) -> void:
 		if inv_item != "":
 			hover = _hover_text(Game.item_name(inv_item))
 			hot = true
+			if Game.selected_item == inv_item:
+				left = "put away"
+			elif Game.selected_item != "":
+				left = "use"
+			else:
+				left = "read" if inv_item == "notebook" else "use"
+			right = "look"
 		elif not ui.is_over_bar(m):
 			var hs := room.hotspot_at(m)
 			if hs:
 				hover = _hover_text(hs.display_name)
 				hot = true
-	ui.set_hover("" if busy else hover, m)
+				if Game.selected_item != "":
+					left = "use"
+					right = "put away"
+				else:
+					left = room.verb_for(hs)
+					right = "" if left == "look" else "look"
+	if busy:
+		hover = ""
+	ui.set_hover(hover, m, left, right)
 	if ui.title:
 		hot = ui.title.is_hot(m)
 		busy_cursor = false
@@ -320,7 +338,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if mb.button_index == MOUSE_BUTTON_RIGHT:
 			if Game.selected_item != "":
 				Game.select_item("")
-			elif hs:
+			elif hs and room.verb_for(hs) != "look":
 				_run_action(hs, "look", "", p)
 			return
 		if Game.selected_item != "":
@@ -329,7 +347,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				Game.select_item("")
 		elif hs:
-			_run_action(hs, "use", "", p)
+			_run_action(hs, "look" if room.verb_for(hs) == "look" else "use", "", p)
 		else:
 			_action_token += 1
 			player.walk_to(room.clamp_to_walkable(p))
