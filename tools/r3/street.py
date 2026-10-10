@@ -410,26 +410,26 @@ def crime_meta():
         tape += [(x, y - 0.1, z), (x, y + 0.1, z)]
     return dict(
         room='street_crime',
-        # the sidewalk inside the tape is the scene: Ray keeps to the strip in front of it (and the curb), and to
-        # the precinct's end past the streetlamp. The Blue Note's door takes him under the tape and inside.
-        walk=[(-8.8, 2.95), (3.6, 2.95), (3.6, 0.6), (9.6, 0.6), (9.6, 1.25), (7.2, 1.25), (7.2, 3.45), (-8.8, 3.45)],
+        # Ray works the scene from inside the tape: the sidewalk behind it, and round the streetlamp (where the tape
+        # ends) to the precinct's end. He never crosses it; Teo and Mara, outside it, he talks to across it.
+        walk=[(-8.8, 0.6), (9.6, 0.6), (9.6, 1.25), (7.2, 1.25), (7.2, 3.45), (3.6, 3.45), (3.6, 2.5), (-8.8, 2.5)],
         walk_zmin=0.6, walk_zmax=3.3, scale_x=0.0,
-        spawns={'squad_room': (5.7, 1.3), 'blue_note_bar': (-3.9, 3.1), 'start': (5.7, 1.3), 'drive': (5.7, 1.3)},
+        spawns={'squad_room': (5.7, 1.3), 'blue_note_bar': (-3.9, 1.05), 'start': (5.7, 1.3), 'drive': (5.7, 1.3)},
         hotspots={
-            'bar_door': ('Blue Note door', (-3.75, 3.05), 'up'),
+            'bar_door': ('Blue Note door', (-3.9, 0.85), 'up'),
             'neon': ('neon sign', None, 'up'),
-            'payphone': ('payphone', (-1.25, 3.05), 'up'),
-            'trash_can': ('dumpster', (0.2, 3.05), 'up'),
+            'payphone': ('payphone', (-1.25, 1.55), 'up'),
+            'trash_can': ('dumpster', (0.2, 0.75), 'up'),
             'alley': ('alley', None, 'up'),
             'van': ("coroner's van", None, 'up'),
             'precinct_door': ('precinct', (5.7, 1.0), 'up'),
-            'rezoning': ('notice', (-4.0, 3.1), 'up'),
+            'rezoning': ('notice', (-4.7, 0.9), 'up'),
             'car': ('car', (6.6, 3.0), 'right'),
-            'patrol_car': ('patrol car', (1.6, 3.0), 'down'),
+            'patrol_car': ('patrol car', (1.6, 2.35), 'down'),
             'tape': ('crime tape', None, 'up'),
-            'park': ('Officer Park', (-2.4, 3.05), 'up'),
-            'teo': ('Teo', (-3.75, 3.15), 'left'),
-            'mara': ('Mara Quist', (-1.75, 3.2), 'right'),
+            'park': ('Officer Park', (-2.0, 1.45), 'left'),
+            'teo': ('Teo', (-4.1, 2.35), 'down'),
+            'mara': ('Mara Quist', (-0.3, 2.35), 'down'),
             'flares': ('road flares', None, 'down'),
         },
         hotspot_shapes={'alley': [(-1.9, 0, 0), (1.0, 0, 0), (1.0, 6.0, 0), (-1.9, 6.0, 0)],
@@ -448,7 +448,7 @@ def crime_meta():
         occluders={'hydrant': HYDRANT, 'streetlamp': LAMP, 'car': (4.9, 3.75), 'patrol': (PATROL[0], PATROL[1] - 0.9),
                    'tape': ((HYDRANT[0] + LAMP[0]) / 2, (HYDRANT[1] + LAMP[1]) / 2),
                    'teo': (T[0], T[1] + 0.1), 'mara': M},
-        obstacles=[(HYDRANT[0], HYDRANT[1], 0.4), (LAMP[0], LAMP[1], 0.2), (M[0], M[1], 0.3), (T[0] + 0.15, T[1], 0.45)],
+        obstacles=[(HYDRANT[0], HYDRANT[1], 0.4), (LAMP[0], LAMP[1], 0.2), (P[0], P[1], 0.3), (BUCKET[0], BUCKET[1], 0.3)],
         char_fill=((190, 196, 230), 0.08),
         tint=(0.7, 0.72, 0.88),
     )
