@@ -251,7 +251,7 @@ def build(hide=()):
                  (fx + 0.02, 0, fz + 0.62), yaw=-14, scale=0.96, tag='devin_fridge')
     if 'devin_couch' not in hide:
         npc.cast(S, 'devin', dict(npc.SEATED, lsp=20, le=60, lin=30, rsp=22, re=64, rin=30, lean=14, hp=8),
-                 (cx - 0.05, 0.02, cz + 0.45), yaw=-90, scale=0.96, tag='devin_couch')
+                 (cx - 0.02, 0.02, cz + 0.05), yaw=-90, scale=0.96, tag='devin_couch')
 
     # ---------------------------------------------------------------- lights
     S.light((lx, 1.5, lz), (255, 200, 140), power=4.0, range=8, shadow=False, vol=0.15)             # floor lamp
@@ -296,14 +296,15 @@ def build(hide=()):
         hotspot_shapes={
             'devin': [(fx - 0.32, 0.0, fz + 0.75), (fx + 0.36, 0.0, fz + 0.75), (fx + 0.36, 1.78, fz + 0.75),
                       (fx - 0.32, 1.78, fz + 0.75)],
-            'devin_couch': [(cx - 0.5, 0.45, cz + 0.5), (cx + 0.3, 0.45, cz + 0.5), (cx + 0.3, 1.45, cz + 0.5),
-                            (cx - 0.5, 1.45, cz + 0.5)],
+            'devin_couch': [(cx - 0.5, 0.45, cz + 0.1), (cx + 0.3, 0.45, cz + 0.1), (cx + 0.3, 1.45, cz + 0.1),
+                            (cx - 0.5, 1.45, cz + 0.1)],
             'laptop': [(cx - 1.35, 0.42, cz + 0.45), (cx - 0.95, 0.42, cz + 0.45), (cx - 0.95, 0.75, cz + 0.2),
                        (cx - 1.35, 0.75, cz + 0.2)],
         },
         hotspot_order=['photos', 'front_door', 'devin_door', 'kenji_desk', 'certificate', 'pennant', 'dashcam_box',
                        'camera_bag', 'sneakers', 'tv', 'dining', 'sink', 'fridge', 'freezer', 'laptop', 'devin_couch', 'devin'],
         overlays=['devin_fridge', 'devin_couch'],
+        overlay_bases={'devin_couch': (cx + 0.45, cz + 1.02)},         # just in front of the couch's sprite
         occluders={'couch': (cx + 0.45, cz + 1.0), 'table': (cx - 1.1, cz + 0.65), 'dining': (DINING[0], DINING[1] + 0.95)},
         obstacles=[(cx, cz - 0.6, 0.55), (cx, cz + 0.6, 0.55), (cx - 1.1, cz - 0.35, 0.4), (cx - 1.1, cz + 0.35, 0.4),
                    (DINING[0] - 0.45, DINING[1], 0.7), (DINING[0] + 0.45, DINING[1], 0.7), (DINING[0] + 1.05, DINING[1] + 0.1, 0.3),

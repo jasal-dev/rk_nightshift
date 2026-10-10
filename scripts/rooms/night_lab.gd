@@ -96,7 +96,11 @@ func _case5() -> void:
 	await _ike("I meant cops.")
 	await main.say("So did I.")
 	Game.set_flag("got_take_drive")
-	await main.give("take_drive")
+	# Ike slides them out through the tray: Ray takes them at the window, not off the floor
+	await main.walk(hotspot("tray").walk_to)
+	main.player.face("up")
+	await main.player.play_action("use")
+	await main.give("take_drive", false)
 	await main.give("danny_phone", false)
 	await Case5.drive_to_pier(main)
 	await main.change_room("pier9_dawn", "drive")

@@ -99,7 +99,7 @@ y_sort_enabled = true
 texture = ExtResource("ov_mug")
 centered = false
 position = Vector2(503, 879)
-offset = Vector2(-58, -251)
+offset = Vector2(-4, -220)
 
 [node name="RayDesks" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_ray_desks")
@@ -117,7 +117,7 @@ offset = Vector2(-217, -295)
 
 [node name="Obstacle1" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
-polygon = PackedVector2Array(397.4, 720, 768, 727.8, 676.1, 886.7, 194.7, 873.5)
+polygon = PackedVector2Array(361, 719.3, 805.7, 728.6, 725.3, 888.1, 147.6, 872.2)
 
 [node name="Obstacle2" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
@@ -125,11 +125,11 @@ polygon = PackedVector2Array(444.9, 911.1, 424.4, 924.5, 392.2, 934.2, 357.3, 93
 
 [node name="Obstacle3" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
-polygon = PackedVector2Array(782.8, 857.3, 773.4, 865.7, 755.1, 871.6, 732.7, 873.4, 712.8, 870.5, 700.9, 863.7, 700.1, 855.1, 710.2, 847.1, 728.3, 841.6, 749.6, 840, 768.7, 842.6, 780.9, 848.9)
+polygon = PackedVector2Array(797.9, 857.7, 785.3, 869.1, 760.2, 877.4, 729.5, 879.8, 702.1, 875.8, 685.9, 866.5, 685.1, 854.7, 699.1, 843.8, 723.7, 836.4, 752.4, 834.2, 778.4, 837.8, 795.1, 846.3)
 
 [node name="Obstacle4" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
-polygon = PackedVector2Array(1330, 739.6, 1600.6, 745.3, 1761, 903.6, 1408.3, 894.1)
+polygon = PackedVector2Array(1290.7, 738.8, 1640.9, 746.1, 1813.7, 905.1, 1357.3, 892.7)
 
 [node name="Obstacle5" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
@@ -253,7 +253,7 @@ walk_to = Vector2(553, 919)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/phone_list"]
-polygon = PackedVector2Array(550.2, 706.1, 561.6, 697.9, 599.4, 700, 599.5, 700.7, 588.6, 708.9, 550.2, 706.8)
+polygon = PackedVector2Array(565.4, 712.6, 579.6, 702.1, 626.8, 704.6, 626.8, 705.4, 613.6, 716, 565.5, 713.3)
 
 [node name="mug" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")

@@ -294,7 +294,8 @@ def build(hide=(), crime=False):
 
 # ---------------------------------------------------------------- Case 5: the crime scene at 4:52 a.m.
 PARK = (-2.7, 0.95)           # Officer Park at the Blue Note's door (an overlay)
-TEO = (-4.35, 2.55)           # Teo on a milk crate by the hydrant, his mop bucket beside him
+TEO = (-4.85, 2.95)           # Teo on a milk crate by the hydrant, outside the tape, facing along the sidewalk
+BUCKET = (-4.3, 2.4)          # his mop bucket, left inside the tape by the door
 TEO_Y = -0.02                 # the rig's floor level, so he sits on the crate's top (0.47) instead of above it
 MARA = (-0.95, 3.6)           # Mara Quist in the street at the tape
 PATROL = (2.15, 4.5)          # the patrol car at the curb in front of the precinct, nose to the left
@@ -377,16 +378,17 @@ def crime_scene(S, hide):
         with S.tag('teo'):
             S.wboxr(tx_ - 0.2, 0.15, tz_ - 0.17, tx_ + 0.2, 0.47, tz_ + 0.17, 'crate', rnd=0.02)
         npc.cast(S, 'teo', dict(npc.SEATED, lhp=78, lk=98, rhp=80, rk=102, lean=26, lsp=44, le=88, lin=36, rsp=44,
-                                re=92, rin=40, hp=24, hy=10), (tx_, TEO_Y, tz_ - 0.02), yaw=24, scale=0.97, tag='teo')
+                                re=92, rin=40, hp=24, hy=10), (tx_, TEO_Y, tz_ - 0.02), yaw=70, scale=0.97, tag='teo')
     with S.tag('bucket'):
-        S.tcyl(Frame((tx_ + 0.55, 0.32, tz_ + 0.05)), (0, 0, 0), (0.2, 0.2), (0.16, 0.16), 0.17, 'bucket')
-        S.cyl((tx_ + 0.55, 0.3, tz_ + 0.05), (tx_ + 0.25, 1.45, tz_ - 0.45), 0.015, 'mop_pole')
-        S.ell(WORLD, (tx_ + 0.55, 0.47, tz_ + 0.05), (0.14, 0.05, 0.14), 'mop')
+        bkx, bkz = BUCKET
+        S.tcyl(Frame((bkx, 0.32, bkz)), (0, 0, 0), (0.2, 0.2), (0.16, 0.16), 0.17, 'bucket')
+        S.cyl((bkx, 0.3, bkz), (bkx - 0.3, 1.45, bkz - 0.5), 0.015, 'mop_pole')
+        S.ell(WORLD, (bkx, 0.47, bkz), (0.14, 0.05, 0.14), 'mop')
 
-    # Mara Quist at the tape, notebook dry under her coat
+    # Mara Quist at the tape, notebook dry under her coat, looking past it at the Blue Note's door
     if 'mara' not in hide:
         npc.cast(S, 'mara', dict(npc.STAND, props=(('notebook', 'l'), ('pen', 'r')), lsp=34, le=78, lin=40, rsp=28,
-                                 re=86, rin=40, hp=6, hy=-8, lhp=4, rhp=-6), (MARA[0], 0.0, MARA[1]), yaw=38,
+                                 re=86, rin=40, hp=6, hy=-8, lhp=4, rhp=-6), (MARA[0], 0.0, MARA[1]), yaw=-110,
                  scale=0.94, tag='mara')
 
     # Officer Park at the door, in her rain cape (overlay: she goes into the back room once Nina is out)
@@ -408,24 +410,26 @@ def crime_meta():
         tape += [(x, y - 0.1, z), (x, y + 0.1, z)]
     return dict(
         room='street_crime',
-        walk=[(-8.8, 0.6), (9.6, 0.6), (9.6, 1.25), (7.2, 1.25), (7.2, 3.3), (-8.8, 3.3)],
+        # the sidewalk inside the tape is the scene: Ray keeps to the strip in front of it (and the curb), and to
+        # the precinct's end past the streetlamp. The Blue Note's door takes him under the tape and inside.
+        walk=[(-8.8, 2.95), (3.6, 2.95), (3.6, 0.6), (9.6, 0.6), (9.6, 1.25), (7.2, 1.25), (7.2, 3.45), (-8.8, 3.45)],
         walk_zmin=0.6, walk_zmax=3.3, scale_x=0.0,
-        spawns={'squad_room': (5.7, 1.3), 'blue_note_bar': (-3.9, 1.05), 'start': (5.7, 1.3), 'drive': (5.7, 1.3)},
+        spawns={'squad_room': (5.7, 1.3), 'blue_note_bar': (-3.9, 3.1), 'start': (5.7, 1.3), 'drive': (5.7, 1.3)},
         hotspots={
-            'bar_door': ('Blue Note door', (-3.9, 0.85), 'up'),
+            'bar_door': ('Blue Note door', (-3.75, 3.05), 'up'),
             'neon': ('neon sign', None, 'up'),
-            'payphone': ('payphone', (-1.25, 1.55), 'up'),
-            'trash_can': ('dumpster', (0.2, 0.75), 'up'),
+            'payphone': ('payphone', (-1.25, 3.05), 'up'),
+            'trash_can': ('dumpster', (0.2, 3.05), 'up'),
             'alley': ('alley', None, 'up'),
             'van': ("coroner's van", None, 'up'),
             'precinct_door': ('precinct', (5.7, 1.0), 'up'),
-            'rezoning': ('notice', (-4.7, 0.9), 'up'),
+            'rezoning': ('notice', (-4.0, 3.1), 'up'),
             'car': ('car', (6.6, 3.0), 'right'),
             'patrol_car': ('patrol car', (1.6, 3.0), 'down'),
             'tape': ('crime tape', None, 'up'),
-            'park': ('Officer Park', (-2.0, 1.45), 'left'),
-            'teo': ('Teo', (-3.5, 2.75), 'left'),
-            'mara': ('Mara Quist', (-0.95, 2.95), 'down'),
+            'park': ('Officer Park', (-2.4, 3.05), 'up'),
+            'teo': ('Teo', (-3.75, 3.15), 'left'),
+            'mara': ('Mara Quist', (-1.75, 3.2), 'right'),
             'flares': ('road flares', None, 'down'),
         },
         hotspot_shapes={'alley': [(-1.9, 0, 0), (1.0, 0, 0), (1.0, 6.0, 0), (-1.9, 6.0, 0)],
@@ -444,7 +448,7 @@ def crime_meta():
         occluders={'hydrant': HYDRANT, 'streetlamp': LAMP, 'car': (4.9, 3.75), 'patrol': (PATROL[0], PATROL[1] - 0.9),
                    'tape': ((HYDRANT[0] + LAMP[0]) / 2, (HYDRANT[1] + LAMP[1]) / 2),
                    'teo': (T[0], T[1] + 0.1), 'mara': M},
-        obstacles=[(HYDRANT[0], HYDRANT[1], 0.4), (LAMP[0], LAMP[1], 0.32), (T[0] + 0.15, T[1], 0.5), (P[0], P[1], 0.3)],
+        obstacles=[(HYDRANT[0], HYDRANT[1], 0.4), (LAMP[0], LAMP[1], 0.2), (M[0], M[1], 0.3), (T[0] + 0.15, T[1], 0.45)],
         char_fill=((190, 196, 230), 0.08),
         tint=(0.7, 0.72, 0.88),
     )

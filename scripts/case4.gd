@@ -36,6 +36,11 @@ static func drive_in(main: Node) -> void:
 	await main.drive_end()
 
 
+static func car_verb() -> String:
+	## The car's left-click verb: with a plate to run, the car is the radio before it is a ride.
+	return "use radio" if Game.flag("clue_plate") and not Game.flag("clue_crane_id") else "drive"
+
+
 static func car_menu(main: Node, here: String) -> void:
 	## Where to next. Otis runs the plate first if Ray has one; Room 214 opens once Crane is in custody, by way of the lab.
 	if Game.flag("clue_plate") and not Game.flag("clue_crane_id"):

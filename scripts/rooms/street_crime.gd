@@ -8,7 +8,7 @@ extends Room
 
 ## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
 const VERBS := {
-	"bar_door": "go", "tape": "go", "mara": "talk", "park": "talk", "teo": "talk", "precinct_door": "go",
+	"bar_door": "go", "tape": "look", "mara": "talk", "park": "talk", "teo": "talk", "precinct_door": "go",
 	"car": "drive", "patrol_car": "look", "flares": "look", "neon": "look"
 }
 
@@ -51,19 +51,20 @@ func on_enter(from_room: String) -> void:
 func interact(hs: Hotspot, verb: String, item: String) -> void:
 	await _maybe_hint(hs.id)
 	match hs.id:
-		"bar_door", "tape":
+		"tape":
+			if item != "":
+				await default_response(verb, item)
+			else:
+				await main.say("Yellow tape from the lamp to the hydrant. It keeps out everyone who'd behave anyway.")
+
+		"bar_door":
 			if verb == "look":
-				if hs.id == "tape":
-					await main.say("Yellow tape from the lamp to the hydrant. It keeps out everyone who'd behave anyway.")
-				else:
-					await main.say("The door I talked through. It's open now. That's worse.")
+				await main.say("The door I talked through. It's open now. That's worse.")
 			elif item != "":
 				await default_response(verb, item)
 			elif not Game.flag("got_reporter_card"):
 				await _mara_first()
 			else:
-				if hs.id == "tape":
-					await main.say("I duck under it.")
 				await main.change_room("blue_note_bar", "street_crime")
 
 		"mara":
@@ -175,7 +176,7 @@ func _mara(line: String) -> void:
 func _mara_first() -> void:
 	## Plays the first time Ray heads for the Blue Note.
 	await main.walk(hotspot("mara").walk_to)
-	main.player.face("down")
+	main.player.face(hotspot("mara").face)
 	await _mara("Detective Kessler? Mara Quist, the Times. I heard it on the scanner. Same bar as the piano player Tuesday. Is that a pattern?")
 	await main.say("It's a bar. People keep dying near it.")
 	await _mara("That's what a pattern is.")

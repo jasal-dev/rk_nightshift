@@ -563,7 +563,7 @@ func _case2() -> void:
 	Game.save_game()
 	await main._load()
 	await expect_room("kenji_apartment")
-	if main.room.get_node("Devin_couch").visible or main.room.get_node("Devin_fridge").visible:
+	if main.room.get_node("Actors/Devin_couch").visible or main.room.get_node("Devin_fridge").visible:
 		_fail("Devin should be gone after the arrest")
 	await act("front_door", "use", "", ["Room 214"])    # the drive back, and Maya
 	await expect_room("squad_room")

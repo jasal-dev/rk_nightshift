@@ -267,8 +267,8 @@ def build(hide=()):
         room='fletcher_bridge',
         walk=walk,
         walk_zmin=ZF + 0.6, walk_zmax=3.4, scale_x=0.0,
-        spawns={'drive': (RAYCAR[0] + 3.0, 0.6), 'river_channel': (STAIRS[0], ZF + 0.7), 'glass_house': (RAYCAR[0] + 3.0, 0.6),
-                'crane_garage': (RAYCAR[0] + 3.0, 0.6), 'start': (-3.0, 2.0)},
+        spawns={'drive': (RAYCAR[0] + 2.5, 0.6), 'river_channel': (STAIRS[0], ZF + 0.7), 'glass_house': (RAYCAR[0] + 2.5, 0.6),
+                'crane_garage': (RAYCAR[0] + 2.5, 0.6), 'start': (-3.0, 2.0)},
         hotspots={
             'doss': ('Officer Doss', (DOSS[0] - 0.2, 0.35), 'up'),
             'patrol_car': ('patrol car', (cpt(1.75, 0, 1.2)[0], cpt(1.75, 0, 1.2)[2]), 'up'),
@@ -280,7 +280,7 @@ def build(hide=()):
             'railing': ('railing', (-4.8, ZF + 0.7), 'up'),
             'stairs': ('stairs', (STAIRS[0], ZF + 0.7), 'up'),
             'lamps': ('lamp posts', None, 'up'),
-            'car': ('my car', (RAYCAR[0] + 3.0, 0.6), 'left'),
+            'car': ('my car', (RAYCAR[0] + 2.5, 0.6), 'left'),
         },
         hotspot_shapes={
             'road': [(1.4, 0.0, -0.3), (6.8, 0.0, -0.3), (6.8, 0.0, 2.4), (1.4, 0.0, 2.4)],

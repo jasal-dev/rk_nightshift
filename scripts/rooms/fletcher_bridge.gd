@@ -38,6 +38,10 @@ func on_enter(from_room: String) -> void:
 		await main.say("She usually is.")
 
 
+func verb_for(hs: Hotspot) -> String:
+	return Case4.car_verb() if hs.id == "car" else super.verb_for(hs)
+
+
 func interact(hs: Hotspot, verb: String, item: String) -> void:
 	if not hs.id in ["doss", "patrol_car"]:
 		await _maybe_hint()

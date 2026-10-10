@@ -286,6 +286,8 @@ def build(hide=()):
             'car': ('my car', (-6.0, 3.2), 'up'),
         },
         hotspot_shapes={
+            'valet_board': [K.to((-0.3, 0.92, 0.05)), K.to((0.3, 0.92, 0.05)), K.to((0.3, 1.68, 0.05)),
+                            K.to((-0.3, 1.68, 0.05))],                    # the pegboard itself, not its posts
             'courtney': [(COURTNEY[0] - 0.32, 0.0, COURTNEY[1]), (COURTNEY[0] + 0.32, 0.0, COURTNEY[1]),
                          (COURTNEY[0] + 0.32, 1.72, COURTNEY[1]), (COURTNEY[0] - 0.32, 1.72, COURTNEY[1])],
             'andre': [(ANDRE[0] - 0.32, 0.0, ANDRE[1]), (ANDRE[0] + 0.32, 0.0, ANDRE[1]), (ANDRE[0] + 0.32, 1.78, ANDRE[1]),

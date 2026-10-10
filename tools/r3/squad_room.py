@@ -239,7 +239,8 @@ def build(hide=()):
         with S.tag('phone_list'):
             S.mat('phone_list', (236, 236, 228), tex=tx.sign_board('HOLLYWOOD STN  x2186', (30, 30, 40), (236, 236, 228), 256, 64,
                   size=18), texmode=1, spec=0.6, shin=60)
-            S.wbox((hx0 + 1.72, 0.792, hz0 + 0.2), (0.11, 0.002, 0.075), 'phone_list', rot=Ry(-6))
+            # on top of the file stack, white on the red folder, where it can be seen from across the room
+            S.wbox((hx0 + 1.97, 0.902, hz0 + 0.625), (0.13, 0.002, 0.09), 'phone_list', rot=Ry(-6))
         with S.tag('phone'):
             px, pz = hx0 + 2.08, hz0 + 0.24
             S.wbox((px, 0.82, pz), (0.12, 0.03, 0.1), 'plastic_dk', rot=Ry(-10))
@@ -332,8 +333,9 @@ def build(hide=()):
         # walk-behind props with rectangular footprints, and the two chairs on the camera side are round obstacles
         walk=[(-5.5, -3.9), (-1.15, -3.9), (-1.15, -0.9), (3.65, -0.9), (3.65, -3.9), (5.0, -3.9), (5.0, 3.4),
               (-4.7, 3.4), (-5.5, 1.6)],
-        obstacles=[(hx0 - 0.05, FRONT_Z - 0.7, hx0 + HW + 0.05, hz0 + HD + 0.05), RAY_CHAIR + (0.3,), BASKET + (0.22,),
-                   (2.15, FRONT_Z - 0.7, 3.85, FRONT_Z + 1.65), FR_CHAIR + (0.3,)],
+        # the desk footprints have a body's width of margin at the sides, so walking past them doesn't clip into them
+        obstacles=[(hx0 - 0.3, FRONT_Z - 0.7, hx0 + HW + 0.3, hz0 + HD + 0.05), RAY_CHAIR + (0.3,), BASKET + (0.3,),
+                   (1.9, FRONT_Z - 0.7, 4.1, FRONT_Z + 1.65), FR_CHAIR + (0.3,)],
         walk_zmin=-3.9, walk_zmax=3.4, scale_x=-2.0,
         spawns={'start': (-1.1, 2.95), 'street': (-4.5, -3.7)},
         hotspots={

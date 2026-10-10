@@ -13,7 +13,7 @@ const VERBS := {
 }
 
 @onready var devin_fridge: Sprite2D = $Devin_fridge
-@onready var devin_couch: Sprite2D = $Devin_couch
+@onready var devin_couch: Sprite2D = $Actors/Devin_couch
 var _wander := 0         ## actions after consent without opening the freezer (a hint after a few)
 
 

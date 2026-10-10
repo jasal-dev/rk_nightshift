@@ -27,6 +27,10 @@ func on_enter(_from_room: String) -> void:
 		await main.say("Los Feliz. Up here the rain falls on a better class of people.")
 
 
+func verb_for(hs: Hotspot) -> String:
+	return Case4.car_verb() if hs.id == "car" else super.verb_for(hs)
+
+
 func interact(hs: Hotspot, verb: String, item: String) -> void:
 	if not hs.id in ["courtney", "andre"]:
 		await _maybe_hint()

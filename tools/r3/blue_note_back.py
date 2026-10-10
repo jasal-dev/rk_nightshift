@@ -143,13 +143,14 @@ def build(hide=()):
     # Dr. Shah, kneeling at the sheet, and her work light on its tripod
     npc.cast(S, 'shah', dict(npc.CROUCH, lean=34, rsp=66, re=22, rin=10, lsp=40, le=70, lin=30, hp=30, hy=8),
              (SHAH[0], 0.0, SHAH[1]), yaw=-8, scale=0.92, tag='shah')
-    with S.tag('worklight'):
-        S.cyl((-0.6, 0.0, 0.3), (-0.6, 1.9, 0.3), 0.02, 'tripod')
-        for a in range(3):
-            ang = a * 2.1
-            S.cyl((-0.6, 0.6, 0.3), (-0.6 + 0.35 * math.cos(ang), 0.0, 0.3 + 0.35 * math.sin(ang)), 0.012, 'tripod')
-        S.wbox((-0.6, 1.98, 0.3), (0.14, 0.1, 0.05), 'tripod', rot=Ry(-40) @ Rx(-35))
-        S.wbox((-0.56, 1.95, 0.25), (0.11, 0.07, 0.01), 'worklight', rot=Ry(-40) @ Rx(-35))
+    if 'worklight' not in hide:
+        with S.tag('worklight'):                     # a walk-behind
+            S.cyl((-0.6, 0.0, 0.3), (-0.6, 1.9, 0.3), 0.02, 'tripod')
+            for a in range(3):
+                ang = a * 2.1
+                S.cyl((-0.6, 0.6, 0.3), (-0.6 + 0.35 * math.cos(ang), 0.0, 0.3 + 0.35 * math.sin(ang)), 0.012, 'tripod')
+            S.wbox((-0.6, 1.98, 0.3), (0.14, 0.1, 0.05), 'tripod', rot=Ry(-40) @ Rx(-35))
+            S.wbox((-0.56, 1.95, 0.25), (0.11, 0.07, 0.01), 'worklight', rot=Ry(-40) @ Rx(-35))
     S.light((-0.5, 1.9, 0.2), (236, 242, 255), power=16, range=8, soft=8, vol=0.25, volshadow=True,
             spot=((0.55, -0.65, -0.55), 28, 52))
 
@@ -366,7 +367,7 @@ def build(hide=()):
     def rect(x, z, w, h):
         return [(x - w, 0.0, z), (x + w, 0.0, z), (x + w, h, z), (x - w, h, z)]
     walk = [(-4.8, 2.8), (-4.8, 0.35), (-4.55, 0.1), (-4.55, -3.55), (-2.85, -3.55), (-2.85, -0.8), (-2.15, -0.8),
-            (-2.15, -3.45), (0.45, -3.45), (0.45, -2.6), (-0.15, -2.6), (-0.15, -0.45), (2.05, -0.45), (2.05, -2.05),
+            (-2.15, -3.2), (0.45, -3.2), (0.45, -2.6), (-0.15, -2.6), (-0.15, -0.45), (2.05, -0.45), (2.05, -2.05),
             (3.3, -2.05), (3.3, 2.8)]
     meta = dict(
         room='blue_note_back',
@@ -378,7 +379,7 @@ def build(hide=()):
             'shah': ('Dr. Shah', (-0.5, -1.55), 'right'),
             'pipe': ('pipe and rope', None, 'up'),
             'stool': ('step stool', (2.4, -0.15), 'left'),
-            'locker': ("Danny's locker", (-0.5, -3.2), 'up'),
+            'locker': ("Danny's locker", (-1.1, -2.75), 'up'),         # clear of its open door and the work light
             'desk': ("Sal's desk", (2.6, -1.85), 'up'),
             'kegs': ('kegs and cases', None, 'up'),
             'alley_door': ('alley door', (-4.0, -3.3), 'up'),
@@ -403,9 +404,10 @@ def build(hide=()):
         hotspot_order=['pipe', 'kegs', 'locker', 'alley_door', 'hooks', 'cooler', 'desk', 'bar_door', 'stool', 'sal',
                        'shah', 'nina', 'park'],
         overlays=['nina', 'park', 'cooler_shut'],
-        occluders={'fg_crates': (FG_CRATES[0] - 0.2, FG_CRATES[1] - 0.3), 'fg_truck': (FG_TRUCK[0], FG_TRUCK[1] - 0.35)},
+        occluders={'fg_crates': (FG_CRATES[0] - 0.2, FG_CRATES[1] - 0.3), 'fg_truck': (FG_TRUCK[0], FG_TRUCK[1] - 0.35),
+                   'worklight': (-0.6, 0.5)},
         overlay_bases={'nina': (NINA[0], NINA[1] + 0.25), 'park': PARK},
-        obstacles=[(FG_CRATES[0] - 0.2, FG_CRATES[1] - 0.1, 0.5), (FG_TRUCK[0], FG_TRUCK[1] - 0.1, 0.4), (SHAH[0], SHAH[1] + 0.05, 0.42), (STOOL[0], STOOL[1], 0.35), (-0.6, 0.3, 0.3), (PARK[0], PARK[1], 0.3)],
+        obstacles=[(FG_CRATES[0] - 0.2, FG_CRATES[1] - 0.1, 0.5), (FG_TRUCK[0], FG_TRUCK[1] - 0.1, 0.4), (SHAH[0], SHAH[1] + 0.05, 0.42), (STOOL[0], STOOL[1], 0.35), (-0.6, 0.3, 0.5), (PARK[0], PARK[1], 0.3)],
         char_fill=((230, 230, 236), 0.2),
         tint=(0.86, 0.86, 0.84),
         exposure=1.7,

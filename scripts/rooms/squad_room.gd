@@ -1132,6 +1132,8 @@ func _phone_list(verb: String) -> void:
 
 func _remember() -> void:
 	## Puzzle 4.3: the 1:30 call, replayed. The player picks the line that matters.
+	await main.say("The lieutenant's line, at one fifty-two. And at one-thirty I was on it, telling her everything.")
+	await main.say("I close my eyes and play the call back.")
 	main.ui.show_scene(null, 0.0, "1:30 a.m.")
 	await main.narrate("One-thirty. Rain on the window. Her voice on the line, one floor up.")
 	while true:

@@ -113,16 +113,16 @@ polygon = PackedVector2Array(1196.8, 701.8, 1194.7, 710.3, 1181.7, 716.6, 1161.2
 [node name="Spawns" type="Node2D" parent="."]
 
 [node name="drive" type="Marker2D" parent="Spawns"]
-position = Vector2(534, 753)
+position = Vector2(463, 753)
 
 [node name="river_channel" type="Marker2D" parent="Spawns"]
 position = Vector2(1834, 535)
 
 [node name="glass_house" type="Marker2D" parent="Spawns"]
-position = Vector2(534, 753)
+position = Vector2(463, 753)
 
 [node name="crane_garage" type="Marker2D" parent="Spawns"]
-position = Vector2(534, 753)
+position = Vector2(463, 753)
 
 [node name="start" type="Marker2D" parent="Spawns"]
 position = Vector2(463, 854)
@@ -203,7 +203,7 @@ polygon = PackedVector2Array(1683.9, 909.4, 1875.7, 909.4, 1920, 930, 1920, 946.
 script = ExtResource("hs")
 id = "car"
 display_name = "my car"
-walk_to = Vector2(534, 753)
+walk_to = Vector2(463, 753)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/car"]

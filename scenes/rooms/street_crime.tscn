@@ -32,7 +32,7 @@ centered = false
 [node name="Bar_red" type="Sprite2D" parent="."]
 texture = ExtResource("ov_bar_red")
 centered = false
-position = Vector2(8, 0)
+position = Vector2(15, 0)
 
 [node name="Bar_blue" type="Sprite2D" parent="."]
 texture = ExtResource("ov_bar_blue")
@@ -41,7 +41,7 @@ position = Vector2(0, 0)
 
 [node name="WalkArea" type="Polygon2D" parent="."]
 color = Color(0.2, 0.9, 0.4, 0.3)
-polygon = PackedVector2Array(6, 796.6, 1914, 803.1, 1914, 818.7, 1857.7, 818.5, 1914, 838.8, 1914, 880.8, 6, 872.5)
+polygon = PackedVector2Array(6, 860.5, 1460.4, 866.6, 1375.1, 801.3, 1914, 803.1, 1914, 818.7, 1857.7, 818.5, 1914, 838.8, 1914, 886.3, 6, 877.9)
 
 [node name="Actors" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -85,14 +85,14 @@ offset = Vector2(-618, -116)
 [node name="Teo" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_teo")
 centered = false
-position = Vector2(317, 852)
-offset = Vector2(-36, -168)
+position = Vector2(219, 865)
+offset = Vector2(-35, -178)
 
 [node name="Mara" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_mara")
 centered = false
 position = Vector2(778, 887)
-offset = Vector2(-42, -254)
+offset = Vector2(-64, -254)
 
 [node name="Obstacles" type="Node2D" parent="."]
 
@@ -102,15 +102,15 @@ polygon = PackedVector2Array(190.3, 854.7, 167.9, 861.1, 135.3, 865.9, 101.7, 86
 
 [node name="Obstacle2" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
-polygon = PackedVector2Array(1461.1, 864.9, 1461.9, 870.3, 1449.5, 874.4, 1427.1, 875.8, 1401.1, 874.2, 1379, 870, 1366.8, 864.5, 1367.5, 859.3, 1380.2, 855.5, 1401.6, 854.3, 1426.2, 855.7, 1447.9, 859.6)
+polygon = PackedVector2Array(1443.4, 864.8, 1443.7, 868.2, 1435.9, 870.7, 1422.1, 871.6, 1406, 870.6, 1392.2, 868, 1384.5, 864.6, 1384.7, 861.3, 1392.7, 858.9, 1406.2, 858.1, 1421.7, 859, 1435.3, 861.5)
 
 [node name="Obstacle3" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
-polygon = PackedVector2Array(413.2, 849.3, 390.5, 857.2, 353.8, 863, 313.4, 865.1, 281.4, 862.7, 267.2, 856.6, 274, 848.8, 298.7, 841.3, 334.1, 836.1, 371.2, 834.3, 401.1, 836.4, 416.7, 841.8)
+polygon = PackedVector2Array(825.1, 887.1, 816.3, 892.8, 796.9, 897.1, 772, 898.6, 749, 896.9, 734.4, 892.5, 731.9, 886.7, 741.8, 881.1, 761.1, 877.2, 784.6, 875.9, 806.5, 877.4, 821.4, 881.5)
 
 [node name="Obstacle4" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
-polygon = PackedVector2Array(644.3, 806.8, 635.2, 810.4, 618.3, 813, 598.3, 814, 580.9, 812.9, 570.8, 810.2, 570.8, 806.6, 580.5, 803.1, 597.1, 800.6, 616.3, 799.8, 633.1, 800.8, 643.4, 803.3)
+polygon = PackedVector2Array(312.4, 861.8, 289.1, 869.3, 253.4, 875, 215.3, 877, 186.2, 874.7, 174.5, 868.8, 182.8, 861.2, 207.7, 854, 242.1, 849, 277.2, 847.2, 304.7, 849.2, 317.7, 854.4)
 
 [node name="Spawns" type="Node2D" parent="."]
 
@@ -118,7 +118,7 @@ polygon = PackedVector2Array(644.3, 806.8, 635.2, 810.4, 618.3, 813, 598.3, 814,
 position = Vector2(1667, 819)
 
 [node name="blue_note_bar" type="Marker2D" parent="Spawns"]
-position = Vector2(457, 809)
+position = Vector2(354, 867)
 
 [node name="start" type="Marker2D" parent="Spawns"]
 position = Vector2(1667, 819)
@@ -162,7 +162,7 @@ polygon = PackedVector2Array(61.1, 308.2, 115.3, 224.5, 117.5, 222.2, 505.2, 220
 script = ExtResource("hs")
 id = "trash_can"
 display_name = "dumpster"
-walk_to = Vector2(964, 803)
+walk_to = Vector2(959, 868)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/trash_can"]
@@ -182,7 +182,7 @@ polygon = PackedVector2Array(1424.1, 760.3, 1426.1, 457.4, 1472.1, 452.4, 1757.5
 script = ExtResource("hs")
 id = "bar_door"
 display_name = "Blue Note door"
-walk_to = Vector2(465, 804)
+walk_to = Vector2(379, 865)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/bar_door"]
@@ -192,7 +192,7 @@ polygon = PackedVector2Array(425.2, 516.9, 486, 510.5, 612.3, 510.5, 613.5, 748.
 script = ExtResource("hs")
 id = "rezoning"
 display_name = "notice"
-walk_to = Vector2(366, 805)
+walk_to = Vector2(339, 867)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/rezoning"]
@@ -202,7 +202,7 @@ polygon = PackedVector2Array(375.5, 607.4, 430.1, 607.5, 430.7, 677.3, 376, 677.
 script = ExtResource("hs")
 id = "payphone"
 display_name = "payphone"
-walk_to = Vector2(775, 822)
+walk_to = Vector2(745, 867)
 face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/payphone"]
@@ -252,8 +252,8 @@ polygon = PackedVector2Array(877.4, 903.5, 884.2, 830.5, 886.2, 820.6, 904, 765.
 script = ExtResource("hs")
 id = "park"
 display_name = "Officer Park"
-walk_to = Vector2(681, 819)
-face = "left"
+walk_to = Vector2(576, 866)
+face = "up"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/park"]
 polygon = PackedVector2Array(567.1, 581.9, 645.7, 581.9, 646.7, 800.7, 568.3, 800.4)
@@ -262,18 +262,18 @@ polygon = PackedVector2Array(567.1, 581.9, 645.7, 581.9, 646.7, 800.7, 568.3, 80
 script = ExtResource("hs")
 id = "teo"
 display_name = "Teo"
-walk_to = Vector2(431, 856)
+walk_to = Vector2(373, 869)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/teo"]
-polygon = PackedVector2Array(279.1, 653, 418.7, 653.2, 420.1, 842.4, 280.9, 841.8)
+polygon = PackedVector2Array(180.5, 658.3, 325, 658.6, 326.8, 854.6, 182.7, 854)
 
 [node name="mara" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "mara"
 display_name = "Mara Quist"
-walk_to = Vector2(791, 864)
-face = "down"
+walk_to = Vector2(667, 872)
+face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/mara"]
 polygon = PackedVector2Array(731.1, 631.9, 824.6, 632.1, 825.1, 902.6, 732, 902.1)

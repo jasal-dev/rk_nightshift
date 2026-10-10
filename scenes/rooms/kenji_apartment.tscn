@@ -29,17 +29,18 @@ texture = ExtResource("ov_devin_fridge")
 centered = false
 position = Vector2(1301, 336)
 
-[node name="Devin_couch" type="Sprite2D" parent="."]
-texture = ExtResource("ov_devin_couch")
-centered = false
-position = Vector2(395, 410)
-
 [node name="WalkArea" type="Polygon2D" parent="."]
 color = Color(0.2, 0.9, 0.4, 0.3)
 polygon = PackedVector2Array(494.3, 588.6, 1296.4, 588.6, 1327.6, 623.8, 1518.5, 623.8, 1914, 916.9, 1914, 956, 6, 956, 6, 899.4, 132.1, 808.3, 152.6, 808.3, 220.6, 757.9, 183.1, 757.9, 361.5, 632.1, 440.8, 632.1)
 
 [node name="Actors" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="Devin_couch" type="Sprite2D" parent="Actors"]
+texture = ExtResource("ov_devin_couch")
+centered = false
+position = Vector2(645, 752)
+offset = Vector2(-154, -342)
 
 [node name="Couch" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_couch")
@@ -271,7 +272,7 @@ walk_to = Vector2(761, 741)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/devin_couch"]
-polygon = PackedVector2Array(481.5, 488.1, 625.9, 488.1, 635.5, 660.3, 495.1, 660.3)
+polygon = PackedVector2Array(504.3, 474.8, 641.8, 474.8, 650.5, 639.5, 516.6, 639.5)
 
 [node name="devin" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")

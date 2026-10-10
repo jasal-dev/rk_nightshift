@@ -331,7 +331,8 @@ def dawn_extras(S, hide, time, EDGE):
         # Danny's box laid open on the hood of Ray's car, for Doyle (with her), the drive for Okafor, Mara's laptop
         if 'doyle' not in hide:
             with S.tag('doyle_box'):
-                S.wboxr(-4.95, 0.85, 2.2, -4.5, 1.0, 2.75, 'box')
+                S.wboxr(-4.95, 0.88, 2.2, -4.5, 1.12, 2.75, 'box')                  # sitting on the hood, not in it
+                S.wboxr(-4.92, 0.94, 2.23, -4.53, 1.14, 2.72, 'box', op=1)          # open: no lid
                 for k in range(4):
                     S.wbox((-5.35 + k * 0.02, 0.855, 2.0 + k * 0.28), (0.1, 0.004, 0.12), 'paper_w', rot=Ry(10 * k))
             npc.cast(S, 'doyle', dict(npc.STAND, lsp=26, le=70, lin=40, rsp=24, re=74, rin=42, hp=12, hy=-30),
