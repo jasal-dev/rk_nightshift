@@ -296,7 +296,7 @@ def build(hide=(), crime=False):
 PARK = (-2.7, 0.95)           # Officer Park at the Blue Note's door (an overlay)
 TEO = (-4.85, 2.95)           # Teo on a milk crate by the hydrant, outside the tape, facing along the sidewalk
 BUCKET = (-4.3, 2.4)          # his mop bucket, left inside the tape by the door
-TEO_Y = -0.02                 # the rig's floor level, so he sits on the crate's top (0.47) instead of above it
+TEO_Y = 0.15                  # the rig's floor level: his shoes on the sidewalk (0.15), seated on the crate's top (0.64)
 MARA = (-0.95, 3.6)           # Mara Quist in the street at the tape
 PATROL = (2.15, 4.5)          # the patrol car at the curb in front of the precinct, nose to the left
 HYDRANT, LAMP = (-5.6, 2.75), (3.3, 2.9)
@@ -376,7 +376,7 @@ def crime_scene(S, hide):
     tx_, tz_ = TEO
     if 'teo' not in hide:
         with S.tag('teo'):
-            S.wboxr(tx_ - 0.2, 0.15, tz_ - 0.17, tx_ + 0.2, 0.47, tz_ + 0.17, 'crate', rnd=0.02)
+            S.wboxr(tx_ - 0.2, 0.15, tz_ - 0.17, tx_ + 0.2, TEO_Y + 0.49, tz_ + 0.17, 'crate', rnd=0.02)
         npc.cast(S, 'teo', dict(npc.SEATED, lhp=78, lk=98, rhp=80, rk=102, lean=26, lsp=44, le=88, lin=36, rsp=44,
                                 re=92, rin=40, hp=24, hy=10), (tx_, TEO_Y, tz_ - 0.02), yaw=70, scale=0.97, tag='teo')
     with S.tag('bucket'):

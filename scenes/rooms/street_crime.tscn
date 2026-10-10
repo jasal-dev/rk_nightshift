@@ -32,7 +32,7 @@ centered = false
 [node name="Bar_red" type="Sprite2D" parent="."]
 texture = ExtResource("ov_bar_red")
 centered = false
-position = Vector2(15, 0)
+position = Vector2(9, 0)
 
 [node name="Bar_blue" type="Sprite2D" parent="."]
 texture = ExtResource("ov_bar_blue")
@@ -86,7 +86,7 @@ offset = Vector2(-618, -116)
 texture = ExtResource("occ_teo")
 centered = false
 position = Vector2(219, 865)
-offset = Vector2(-35, -178)
+offset = Vector2(-35, -203)
 
 [node name="Mara" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_mara")
