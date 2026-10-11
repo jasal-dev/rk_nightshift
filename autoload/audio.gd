@@ -28,7 +28,7 @@ const SOUND_CREDITS := [
 	"\"urban_night_rain_1\" by nkroher\nfreesound.org/s/232198 · CC BY 4.0",
 	"\"Footsteps ground\" by emilgasi\nfreesound.org/s/685287 · CC0",
 ]
-const AMBIENCE := {"rain": ["res://assets/sounds/rain.wav", -2.0]}    ## id: [file, level in dB]
+const AMBIENCE := {"rain": ["res://assets/sounds/rain.wav", 0.0]}    ## id: [file, level in dB]
 const SETTINGS := "user://settings.cfg"     ## the same file as Main.SETTINGS
 const FADE := 2.5                           ## default crossfade, seconds
 const SILENT_DB := -60.0
