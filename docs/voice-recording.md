@@ -136,5 +136,35 @@ flutter are the post-processing in `render_variant()` (none of the cast uses the
 
 ## Proposed, awaiting a pick
 
-Nobody at the moment: every Case 1 character is cast. New characters go here with their A/B/C recipes (from `CASTING`)
-until the user picks.
+Every speaker in Cases 2 to 5, proposed 2026-10-11 and rendered by `gen_voice.py --casting-rest` into
+`tools/tts/out/casting_rest/` (presets and the line used are in `CASTING_REST`; `all_caseN.wav` plays a case's
+characters). When the user picks, copy the preset into `SPEAKERS`, move the row to the cast table, tag the
+character's `voice()` calls with their id (phone lines `phone = true`) and voice their lines. Danny, Pryce and Haskell
+are heard only on the take (a recording); Brielle only in a phone video; Owen only on the gate camera.
+
+| Speaker | Case | Who | Lines | A | B | C |
+| --- | --- | --- | --- | --- | --- | --- |
+| `shah` | 2 | Dr. Anita Shah, coroner's investigator (Cases 2-5): forties, brisk, exact, fond of Ray | ~49 | af_nicole, speed 1 | af_sarah 60% + af_aoede 40%, speed 1 | bf_emma, speed 1 (British) |
+| `park` | 2 | Officer Lena Park, Hollywood patrol (Cases 2, 3, 5): early twenties, very thorough, knows the internet | ~38 | af_bella, speed 1.05 | af_nova, speed 1.05 | af_sky, speed 1 |
+| `rosa` | 2 | Rosa, waitress at Norm's: sixties, pencil in her bun, calls everyone "hon" | ~19 | af_sarah, -2 semitones, speed 0.95, warmth 2 | af_jessica, -1.5 semitones, speed 0.95 | af_aoede 50% + af_nicole 50%, -2.5 semitones, speed 0.92, grit 1.5 |
+| `heck` | 2 | Hector "Heck" Dominguez, rival Glide driver: forties, three phones, loud, then scared | ~13 | am_puck, speed 1.05 | am_eric, speed 1.05 | am_echo 60% + am_puck 40%, speed 1.05 |
+| `devin` | 2 | Devin Clark, Kenji's roommate, photographer: late twenties, soft-spoken, plausible. The killer | ~21 | am_echo, speed 0.95 | am_michael, +1 semitones, speed 0.92 | am_puck, speed 0.9 |
+| `brielle` | 2 | Brielle V., drunk influencer, Kenji's last fare (a video on Park's phone) | ~2 | af_sky, speed 1.05 | af_jessica, speed 1.05 | af_nova, speed 1 |
+| `cabbie` | 2 | A cab driver at Norm's counter (two lines) | ~2 | am_eric, -1 semitones, speed 0.92 | am_michael, -1.5 semitones, speed 0.92 | am_puck, -2 semitones, speed 0.92, grit 1.5 |
+| `pearl` | 3 | Pearl Danvers, Gus's assistant, actress: 34, warm, quick, a very good crier. The killer | ~32 | af_bella, speed 1 | af_aoede, speed 1 | af_river, speed 1 |
+| `morty` | 3 | Morty Kahn, rival collector: seventies, bathrobe and loafers, grieving, defensive | ~20 | am_michael, -2.5 semitones, speed 0.85, flutter 0.1 | am_santa 50% + am_eric 50%, -1 semitones, speed 0.88 | bm_lewis, -2 semitones, speed 0.85 (British) |
+| `charlie` | 3 | Desmond "Charlie" Pike, Chaplin on the boulevard for thirty years: theatrical, kind, nosy | ~18 | bm_fable, speed 1 (British) | am_puck, speed 1 | bm_daniel, speed 0.95 (British) |
+| `preacher` | 4 | Calvin "Preacher" Odom: sixties, Army, First Cavalry; formal, scriptural, sharp | ~35 | am_echo, -2.5 semitones, speed 0.85, warmth 3 | am_michael 50% + am_fenrir 50%, -2 semitones, speed 0.85, grit 1.5 | am_eric, -3 semitones, speed 0.82, warmth 4, flutter 0.08 |
+| `doss` | 4 | Officer Brian Doss, Northeast patrol: thirties, cheerful, lazy, wants to be done by five | ~18 | am_puck, speed 1.05 | am_eric, speed 1 | am_echo, speed 1.05 |
+| `courtney` | 4 | Courtney Vail, event planner: thirties, headset, adrenaline and cold brew | ~19 | af_nova, speed 1.1 | af_jessica, speed 1.1 | af_alloy, speed 1.1 |
+| `andre` | 4 | Andre Mitchell, valet: nineteen, afraid of losing the job, honest | ~11 | am_puck, +1 semitones, speed 1.05 | am_echo, +1.5 semitones, speed 1.05 | am_eric, +1 semitones, speed 1 |
+| `crane` | 4 | Elliot Crane, Haskell's chief of staff: forties, lawyerly, still a little drunk, frightened. The killer | ~24 | am_michael, speed 0.95 | am_eric 60% + am_michael 40%, speed 0.95 | am_echo, -1 semitones, speed 0.92 |
+| `ike` | 4 | Ike Feld, night tech at the crime lab (Cases 4-5): thirties, hoodie, dry, curious | ~35 | am_eric, speed 1 | am_puck, speed 0.95 | am_echo, speed 1 |
+| `owen` | 4 | Owen Tate, delivery rider, 24 (heard only on the gate camera clips) | ~3 | am_puck, +0.5 semitones, speed 0.92 | am_echo, +1 semitones, speed 0.92 | am_eric, +1 semitones, speed 0.92 |
+| `teo` | 5 | Teodoro "Teo" Alcaraz, the Blue Note's porter: sixties, gentle, shaken, precise about habits | ~12 | am_eric, -2 semitones, speed 0.88 | am_michael, -1.5 semitones, speed 0.85, warmth 2 | am_echo, -2 semitones, speed 0.85, warmth 3 |
+| `mara` | 5 | Mara Quist, Los Angeles Times metro reporter: forties, persistent, fair, unimpressed | ~15 | af_river, speed 1 | af_nicole, speed 0.95 | af_alloy, speed 1 |
+| `brenner` | 5 | Walter "Walt" Brenner, LAPD retired, Doyle's training officer: sixties, big, avuncular. The killer | ~50 | am_echo, -3 semitones, speed 0.88, warmth 3 | am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2 | am_michael, -3 semitones, speed 0.86, grit 1.5 |
+| `okafor` | 5 | Deputy DA Helen Okafor (Ending C): forties, raincoat over gym clothes, precise | ~5 | af_aoede, speed 0.95 | af_sarah, speed 0.95 | bf_isabella, speed 0.95 (British) |
+| `danny` | 5 | Danny Reyes, the piano player, 34 (heard only on the take) | ~2 | am_echo, speed 1 | am_puck, speed 0.95 | am_michael, +1 semitones, speed 1 |
+| `pryce` | 5 | Harlan Pryce, developer (heard only on the take): smooth, used to being obeyed | ~5 | bm_lewis, speed 0.95 (British) | am_michael, -1 semitones, speed 0.92 | am_eric 50% + am_michael 50%, -1.5 semitones, speed 0.92, warmth 2 |
+| `haskell` | 5 | Councilman Ted Haskell (heard only on the take): nervous, wants to go home | ~3 | am_eric, speed 1.05 | am_echo, speed 1.05 | am_puck, -1 semitones, speed 1 |

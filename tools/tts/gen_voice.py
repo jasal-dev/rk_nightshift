@@ -280,6 +280,188 @@ def _describe(preset):
     return ", ".join(parts)
 
 
+# --- casting the rest: everyone in Cases 2 to 5 (--casting-rest) -----------------------------------------------------
+## character: (case, who (docs/caseN-script.md), lines in the game (about), a line as in the game, {A/B/C: preset}).
+## Kept clear of the cast's voices (onyx/fenrir, af_kore, af_heart, am_santa, am_adam -3, bm_george, am_liam), or only
+## in blends and at other pitches. "lang": "b" for British voices.
+CASTING_REST = {
+    "shah": (2, "Dr. Anita Shah, coroner's investigator (Cases 2-5): forties, brisk, exact, fond of Ray", 49,
+             "I do bodies, Ray, not bookkeeping.", {
+                 "A": {"blend": {"af_nicole": 1.0}, "speed": 1.0},
+                 "B": {"blend": {"af_sarah": 0.6, "af_aoede": 0.4}, "speed": 1.0},
+                 "C": {"blend": {"bf_emma": 1.0}, "speed": 1.0, "lang": "b"},
+             }),
+    "park": (2, "Officer Lena Park, Hollywood patrol (Cases 2, 3, 5): early twenties, very thorough, knows the internet", 38,
+             "Kenji Ota, twenty-nine, Silver Lake address. Drives for Glide. Four point nine eight stars, which is higher than my mom.", {
+                 "A": {"blend": {"af_bella": 1.0}, "speed": 1.05},
+                 "B": {"blend": {"af_nova": 1.0}, "speed": 1.05},
+                 "C": {"blend": {"af_sky": 1.0}, "speed": 1.0},
+             }),
+    "rosa": (2, "Rosa, waitress at Norm's: sixties, pencil in her bun, calls everyone \"hon\"", 19,
+             "Well. A cop who pours. Now I've seen everything. Put that down before you get ideas, hon. What do you need?", {
+                 "A": {"blend": {"af_sarah": 1.0}, "semitones": -2.0, "speed": 0.95, "warmth": 2.0},
+                 "B": {"blend": {"af_jessica": 1.0}, "semitones": -1.5, "speed": 0.95},
+                 "C": {"blend": {"af_aoede": 0.5, "af_nicole": 0.5}, "semitones": -2.5, "speed": 0.92, "grit": 1.5},
+             }),
+    "heck": (2, "Hector \"Heck\" Dominguez, rival Glide driver: forties, three phones, loud, then scared", 13,
+             "If you're a rider, I'm on break. If you're a cop, I'm on break harder.", {
+                 "A": {"blend": {"am_puck": 1.0}, "speed": 1.05},
+                 "B": {"blend": {"am_eric": 1.0}, "speed": 1.05},
+                 "C": {"blend": {"am_echo": 0.6, "am_puck": 0.4}, "speed": 1.05},
+             }),
+    "devin": (2, "Devin Clark, Kenji's roommate, photographer: late twenties, soft-spoken, plausible. The killer", 21,
+              "Dinner. Like six? Then he went out for his shift. I've been home all night, editing. I was asleep by eleven.", {
+                  "A": {"blend": {"am_echo": 1.0}, "speed": 0.95},
+                  "B": {"blend": {"am_michael": 1.0}, "semitones": 1.0, "speed": 0.92},
+                  "C": {"blend": {"am_puck": 1.0}, "speed": 0.9},
+              }),
+    "brielle": (2, "Brielle V., drunk influencer, Kenji's last fare (a video on Park's phone)", 2,
+                "My Glide driver has a camera pointed at the back seat? Like, at me?", {
+                    "A": {"blend": {"af_sky": 1.0}, "speed": 1.05},
+                    "B": {"blend": {"af_jessica": 1.0}, "speed": 1.05},
+                    "C": {"blend": {"af_nova": 1.0}, "speed": 1.0},
+                }),
+    "cabbie": (2, "A cab driver at Norm's counter (two lines)", 2,
+               "Thanks, detective.", {
+                   "A": {"blend": {"am_eric": 1.0}, "semitones": -1.0},
+                   "B": {"blend": {"am_michael": 1.0}, "semitones": -1.5},
+                   "C": {"blend": {"am_puck": 1.0}, "semitones": -2.0, "grit": 1.5},
+               }),
+    "pearl": (3, "Pearl Danvers, Gus's assistant, actress: 34, warm, quick, a very good crier. The killer", 32,
+              "Are you the detective? They keep saying \"the detective's coming,\" like it's a casting call.", {
+                  "A": {"blend": {"af_bella": 1.0}, "speed": 1.0},
+                  "B": {"blend": {"af_aoede": 1.0}, "speed": 1.0},
+                  "C": {"blend": {"af_river": 1.0}, "speed": 1.0},
+              }),
+    "morty": (3, "Morty Kahn, rival collector: seventies, bathrobe and loafers, grieving, defensive", 20,
+              "Wanted it? In March I offered him two hundred fifty thousand dollars. Cash. He said he'd be buried with it.", {
+                  "A": {"blend": {"am_michael": 1.0}, "semitones": -2.5, "speed": 0.85, "fry": 0.1},
+                  "B": {"blend": {"am_santa": 0.5, "am_eric": 0.5}, "semitones": -1.0, "speed": 0.88},
+                  "C": {"blend": {"bm_lewis": 1.0}, "semitones": -2.0, "speed": 0.85, "lang": "b"},
+              }),
+    "charlie": (3, "Desmond \"Charlie\" Pike, Chaplin on the boulevard for thirty years: theatrical, kind, nosy", 18,
+                "Ah! Lights, at last! Are you the man in charge? You look like the man in charge of being tired.", {
+                    "A": {"blend": {"bm_fable": 1.0}, "speed": 1.0, "lang": "b"},
+                    "B": {"blend": {"am_puck": 1.0}, "speed": 1.0},
+                    "C": {"blend": {"bm_daniel": 1.0}, "speed": 0.95, "lang": "b"},
+                }),
+    "preacher": (4, "Calvin \"Preacher\" Odom: sixties, Army, First Cavalry; formal, scriptural, sharp", 35,
+                 "That young man says I killed a boy for a bicycle. I told him I'd speak to somebody who's been somewhere.", {
+                     "A": {"blend": {"am_echo": 1.0}, "semitones": -2.5, "speed": 0.85, "warmth": 3.0},
+                     "B": {"blend": {"am_michael": 0.5, "am_fenrir": 0.5}, "semitones": -2.0, "speed": 0.85, "grit": 1.5},
+                     "C": {"blend": {"am_eric": 1.0}, "semitones": -3.0, "speed": 0.82, "warmth": 4.0, "fry": 0.08},
+                 }),
+    "doss": (4, "Officer Brian Doss, Northeast patrol: thirties, cheerful, lazy, wants to be done by five", 18,
+             "Detective! Brian Doss, Northeast. Sorry to drag you out. Honestly, it's a wrap. Kid's bike, guy's tent. Coroner's just being thorough.", {
+                 "A": {"blend": {"am_puck": 1.0}, "speed": 1.05},
+                 "B": {"blend": {"am_eric": 1.0}, "speed": 1.0},
+                 "C": {"blend": {"am_echo": 1.0}, "speed": 1.05},
+             }),
+    "courtney": (4, "Courtney Vail, event planner: thirties, headset, adrenaline and cold brew", 19,
+                 "A fundraiser for Councilmember Haskell. Two hundred guests, a string quartet, and a man who gave a forty-minute speech about density.", {
+                     "A": {"blend": {"af_nova": 1.0}, "speed": 1.1},
+                     "B": {"blend": {"af_jessica": 1.0}, "speed": 1.1},
+                     "C": {"blend": {"af_alloy": 1.0}, "speed": 1.1},
+                 }),
+    "andre": (4, "Andre Mitchell, valet: nineteen, afraid of losing the job, honest", 11,
+              "I'm not supposed to say. I'm not supposed to give keys to drunk guests. It's policy. I could lose the job.", {
+                  "A": {"blend": {"am_puck": 1.0}, "semitones": 1.0, "speed": 1.05},
+                  "B": {"blend": {"am_echo": 1.0}, "semitones": 1.5, "speed": 1.05},
+                  "C": {"blend": {"am_eric": 1.0}, "semitones": 1.0, "speed": 1.0},
+              }),
+    "crane": (4, "Elliot Crane, Haskell's chief of staff: forties, lawyerly, still a little drunk, frightened. The killer", 24,
+              "That's my property, Detective. I'd like a warrant before you undress my car.", {
+                  "A": {"blend": {"am_michael": 1.0}, "speed": 0.95},
+                  "B": {"blend": {"am_eric": 0.6, "am_michael": 0.4}, "speed": 0.95},
+                  "C": {"blend": {"am_echo": 1.0}, "semitones": -1.0, "speed": 0.92},
+              }),
+    "ike": (4, "Ike Feld, night tech at the crime lab (Cases 4-5): thirties, hoodie, dry, curious", 35,
+            "Kessler. You only come here when it's weird.", {
+                "A": {"blend": {"am_eric": 1.0}, "speed": 1.0},
+                "B": {"blend": {"am_puck": 1.0}, "speed": 0.95},
+                "C": {"blend": {"am_echo": 1.0}, "speed": 1.0},
+            }),
+    "owen": (4, "Owen Tate, delivery rider, 24 (heard only on the gate camera clips)", 3,
+             "Hey, man. You can't drive like that.", {
+                 "A": {"blend": {"am_puck": 1.0}, "semitones": 0.5},
+                 "B": {"blend": {"am_echo": 1.0}, "semitones": 1.0},
+                 "C": {"blend": {"am_eric": 1.0}, "semitones": 1.0},
+             }),
+    "teo": (5, "Teodoro \"Teo\" Alcaraz, the Blue Note's porter: sixties, gentle, shaken, precise about habits", 12,
+            "Nineteen years, I never once came in on just the latch.", {
+                "A": {"blend": {"am_eric": 1.0}, "semitones": -2.0, "speed": 0.88},
+                "B": {"blend": {"am_michael": 1.0}, "semitones": -1.5, "speed": 0.85, "warmth": 2.0},
+                "C": {"blend": {"am_echo": 1.0}, "semitones": -2.0, "speed": 0.85, "warmth": 3.0},
+            }),
+    "mara": (5, "Mara Quist, Los Angeles Times metro reporter: forties, persistent, fair, unimpressed", 15,
+             "Detective Kessler? Mara Quist, the Times. I heard it on the scanner. Same bar as the piano player Tuesday. Is that a pattern?", {
+                 "A": {"blend": {"af_river": 1.0}, "speed": 1.0},
+                 "B": {"blend": {"af_nicole": 1.0}, "speed": 0.95},
+                 "C": {"blend": {"af_alloy": 1.0}, "speed": 1.0},
+             }),
+    "brenner": (5, "Walter \"Walt\" Brenner, LAPD retired, Doyle's training officer: sixties, big, avuncular. The killer", 50,
+                "Forty years of night shifts, son. You learn what people need at this hour. Coffee, and somebody to tell them to go home.", {
+                    "A": {"blend": {"am_echo": 1.0}, "semitones": -3.0, "speed": 0.88, "warmth": 3.0},
+                    "B": {"blend": {"am_eric": 0.5, "am_santa": 0.5}, "semitones": -2.0, "speed": 0.88, "warmth": 2.0},
+                    "C": {"blend": {"am_michael": 1.0}, "semitones": -3.0, "speed": 0.86, "grit": 1.5},
+                }),
+    "okafor": (5, "Deputy DA Helen Okafor (Ending C): forties, raincoat over gym clothes, precise", 5,
+               "You understand this goes through every desk in your building. Including your lieutenant's.", {
+                   "A": {"blend": {"af_aoede": 1.0}, "speed": 0.95},
+                   "B": {"blend": {"af_sarah": 1.0}, "speed": 0.95},
+                   "C": {"blend": {"bf_isabella": 1.0}, "speed": 0.95, "lang": "b"},
+               }),
+    "danny": (5, "Danny Reyes, the piano player, 34 (heard only on the take)", 2,
+              "Sal, I'm taking five.", {
+                  "A": {"blend": {"am_echo": 1.0}, "speed": 1.0},
+                  "B": {"blend": {"am_puck": 1.0}, "speed": 0.95},
+                  "C": {"blend": {"am_michael": 1.0}, "semitones": 1.0, "speed": 1.0},
+              }),
+    "pryce": (5, "Harlan Pryce, developer (heard only on the take): smooth, used to being obeyed", 5,
+              "Mr. Reyes and I have an arrangement. Eight thousand on Monday, sixteen to come, and he forgets what he heard.", {
+                  "A": {"blend": {"bm_lewis": 1.0}, "speed": 0.95, "lang": "b"},
+                  "B": {"blend": {"am_michael": 1.0}, "semitones": -1.0, "speed": 0.92},
+                  "C": {"blend": {"am_eric": 0.5, "am_michael": 0.5}, "semitones": -1.5, "speed": 0.92, "warmth": 2.0},
+              }),
+    "haskell": (5, "Councilman Ted Haskell (heard only on the take): nervous, wants to go home", 3,
+                "Elliot says the hearing will be packed. The neighborhood groups, the jazz people...", {
+                    "A": {"blend": {"am_eric": 1.0}, "speed": 1.05},
+                    "B": {"blend": {"am_echo": 1.0}, "speed": 1.05},
+                    "C": {"blend": {"am_puck": 1.0}, "semitones": -1.0, "speed": 1.0},
+                }),
+}
+
+
+def casting_rest(pipes):
+    ## tools/tts/out/casting_rest/<character>/{A,B,C,compare}.wav, all_case2.wav ... all_case5.wav (every character of
+    ## that case, A, B, C each), and README.md.
+    base = os.path.join(ROOT, "tools", "tts", "out", "casting_rest")
+    gap = np.zeros(int(RATE * 0.8), np.float32)
+    per_case = {}
+    rows = ["| Character | Case | Who | Lines | Line used | A | B | C |", "| --- | --- | --- | --- | --- | --- | --- | --- |"]
+    for who, (case, desc, count, line, options) in CASTING_REST.items():
+        out = os.path.join(base, who)
+        os.makedirs(out, exist_ok=True)
+        takes = []
+        for name, preset in options.items():
+            audio = render_variant(pipes[preset.get("lang", "a")], preset, line)
+            sf.write(os.path.join(out, "%s.wav" % name), audio, RATE, subtype="PCM_16")
+            takes.append(audio)
+        both = np.concatenate([np.concatenate([t, gap]) for t in takes])
+        sf.write(os.path.join(out, "compare.wav"), both, RATE, subtype="PCM_16")
+        per_case.setdefault(case, []).extend([both, gap])
+        rows.append("| **%s** | %d | %s | ~%d | \"%s\" | %s |" % (who, case, desc, count, line,
+                                                                 " | ".join(_describe(p) for p in options.values())))
+    for case, parts in per_case.items():
+        sf.write(os.path.join(base, "all_case%d.wav" % case), np.concatenate(parts), RATE, subtype="PCM_16")
+    with open(os.path.join(base, "README.md"), "w", encoding="utf-8", newline="\n") as f:
+        f.write("# Voice casting, Cases 2 to 5\n\nEach character's line in three voices. `<character>/compare.wav` plays A, B"
+                " and C in order; `all_caseN.wav` plays every character first met in that case, in the order below. Lines"
+                " are a count of their lines in the game. Phone lines get the phone filter in the game, not here.\n\n"
+                + "\n".join(rows) + "\n")
+    print("wrote", base)
+
+
 CALL = re.compile(r'(?<![\w.])(?:main\.)?(say|narrate)\(')
 VOICE_CALL = re.compile(r'(?<![\w.])(?:main\.)?voice\(')
 STRING = re.compile(r'"((?:[^"\\]|\\.)*)"')
@@ -379,6 +561,9 @@ def main():
     pipe = KPipeline(lang_code="a")      # American English
     if "--casting" in sys.argv:
         casting({"a": pipe, "b": KPipeline(lang_code="b")})
+        return
+    if "--casting-rest" in sys.argv:
+        casting_rest({"a": pipe, "b": KPipeline(lang_code="b")})
         return
     if "--variants" in sys.argv:
         variants(pipe)
