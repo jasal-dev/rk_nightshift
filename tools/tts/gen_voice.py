@@ -6,6 +6,8 @@
                                                                      # a script's literal main.say() lines, as JSON
                                                                      # rows for lines.json
     tools/tts/.venv/Scripts/python tools/tts/gen_voice.py --compare  # every candidate, into tools/tts/out/<voice>/
+    tools/tts/.venv/Scripts/python tools/tts/gen_voice.py --casting  # three voices for each other Case 1 character
+                                                                     # (CASTING), into tools/tts/out/casting_case1/
     tools/tts/.venv/Scripts/python tools/tts/gen_voice.py --variants # older, rougher takes on am_onyx (VARIANTS),
                                                                      # into tools/tts/out/onyx_variants/
 
@@ -183,6 +185,87 @@ def variants(pipe):
     print("wrote", base, "(compare_lineN.wav: onyx, then", ", ".join(VARIANTS), ")")
 
 
+# --- casting: three proposals per character, one line each (--casting) --------------------------------------------
+## character: (who, from docs/case1-script.md; line as in the game; {A/B/C: preset}). Presets as in VARIANTS; "lang": "b" for British voices.
+CASTING = {
+    "doyle": ("Lt. Maureen Doyle, Ray's boss, voicemail and phone: clipped, political, not unkind",
+              "It's a gambling debt and a .38 in an alley, it's not the Black Dahlia. Get me a name by Friday.", {
+                  "A": {"blend": {"af_sarah": 1.0}, "speed": 1.0},
+                  "B": {"blend": {"af_kore": 1.0}, "speed": 0.95},
+                  "C": {"blend": {"af_nicole": 0.7, "af_sarah": 0.3}, "semitones": -1.0, "speed": 0.95},
+              }),
+    "nina": ("Nina Alvarez, Danny's girlfriend, on the payphone: guarded, grieving, quick",
+             "Friends of Danny knock like Danny played. Two slow, three fast.", {
+                 "A": {"blend": {"af_heart": 1.0}, "speed": 0.95},
+                 "B": {"blend": {"af_bella": 1.0}, "speed": 0.92},
+                 "C": {"blend": {"af_sky": 1.0}, "speed": 0.9},
+             }),
+    "sal": ("Sal Moretti, the Blue Note's bartender, through the door: gravel, short sentences, scared and hiding it",
+            "Danny didn't have friends. He had a piano and a tab.", {
+                "A": {"blend": {"am_santa": 1.0}, "speed": 0.9},
+                "B": {"blend": {"am_eric": 1.0}, "semitones": -1.5, "speed": 0.88, "warmth": 3.0},
+                "C": {"blend": {"am_michael": 0.6, "am_santa": 0.4}, "semitones": -1.0, "speed": 0.88, "grit": 2.0,
+                      "fry": 0.1},
+            }),
+    "tiny": ("\"Tiny\" Ruiz, Vance's doorman at Pier 9: enormous, soft-spoken, misses Danny's playing",
+             "Knock on that door and you'll be knocking with your teeth.", {
+                 "A": {"blend": {"am_adam": 1.0}, "semitones": -3.0, "speed": 0.85},
+                 "B": {"blend": {"am_echo": 1.0}, "semitones": -2.5, "speed": 0.85, "warmth": 4.0},
+                 "C": {"blend": {"am_liam": 1.0}, "semitones": -3.5, "speed": 0.8, "warmth": 5.0, "grit": 2.0},
+             }),
+    "vance": ("Vance, the loan shark: sixties, cardigan over a shoulder holster, courteous and cold",
+              "Sit, if you like. The chair is uncomfortable. I bought it that way.", {
+                  "A": {"blend": {"bm_george": 1.0}, "speed": 0.88, "lang": "b"},
+                  "B": {"blend": {"am_michael": 1.0}, "semitones": -2.0, "speed": 0.85, "warmth": 3.0},
+                  "C": {"blend": {"bm_fable": 0.6, "bm_lewis": 0.4}, "semitones": -1.0, "speed": 0.88, "lang": "b"},
+              }),
+    "otis": ("Sgt. Otis Bell, on the desk phone: warm, funny, tired",
+             "Ray, it's Otis. Hope I'm not interrupting your social life.", {
+                 "A": {"blend": {"am_eric": 1.0}, "speed": 1.0},
+                 "B": {"blend": {"am_liam": 1.0}, "speed": 1.0},
+                 "C": {"blend": {"am_echo": 1.0}, "speed": 0.95},
+             }),
+}
+
+
+def casting(pipes):
+    ## tools/tts/out/casting_case1/<character>/{A,B,C}.wav, <character>/compare.wav (A, B, C), all.wav (everyone),
+    ## and README.md describing each proposal.
+    base = os.path.join(ROOT, "tools", "tts", "out", "casting_case1")
+    gap = np.zeros(int(RATE * 0.8), np.float32)
+    everyone = []
+    rows = ["| Character | Line | A | B | C |", "| --- | --- | --- | --- | --- |"]
+    for who, (desc, line, options) in CASTING.items():
+        out = os.path.join(base, who)
+        os.makedirs(out, exist_ok=True)
+        takes = []
+        for name, preset in options.items():
+            audio = render_variant(pipes[preset.get("lang", "a")], preset, line)
+            sf.write(os.path.join(out, "%s.wav" % name), audio, RATE, subtype="PCM_16")
+            takes.append(audio)
+        both = np.concatenate([np.concatenate([t, gap]) for t in takes])
+        sf.write(os.path.join(out, "compare.wav"), both, RATE, subtype="PCM_16")
+        everyone += [both, gap]
+        rows.append("| **%s**: %s | \"%s\" | %s |" % (who, desc, line, " | ".join(_describe(p) for p in options.values())))
+    sf.write(os.path.join(base, "all.wav"), np.concatenate(everyone), RATE, subtype="PCM_16")
+    with open(os.path.join(base, "README.md"), "w", encoding="utf-8", newline="\n") as f:
+        f.write("# Case 1 voice casting\n\nEach character's line in three voices. `<character>/compare.wav` plays A, B and"
+                " C in order; `all.wav` plays every character's A, B, C in the order below.\n\n" + "\n".join(rows) + "\n")
+    print("wrote", base)
+
+
+def _describe(preset):
+    parts = [" + ".join("%s %d%%" % (v, round(w * 100)) if len(preset["blend"]) > 1 else v
+                        for v, w in preset["blend"].items())]
+    if preset.get("semitones"):
+        parts.append("%+g semitones" % preset["semitones"])
+    parts.append("speed %g" % preset.get("speed", SPEED))
+    for k, label in (("warmth", "warmth"), ("grit", "grit"), ("fry", "flutter")):
+        if preset.get(k):
+            parts.append("%s %g" % (label, preset[k]))
+    return ", ".join(parts)
+
+
 CALL = re.compile(r'(?<![\w.])(?:main\.)?(say|narrate)\(')
 STRING = re.compile(r'"((?:[^"\\]|\\.)*)"')
 
@@ -251,6 +334,9 @@ def main():
         list_says(sys.argv[sys.argv.index("--list") + 1])
         return
     pipe = KPipeline(lang_code="a")      # American English
+    if "--casting" in sys.argv:
+        casting({"a": pipe, "b": KPipeline(lang_code="b")})
+        return
     if "--variants" in sys.argv:
         variants(pipe)
         return
