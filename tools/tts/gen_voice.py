@@ -13,9 +13,9 @@ Setup (once): py -3.12 -m venv tools/tts/.venv, then in it: pip install torch --
 https://download.pytorch.org/whl/cpu; pip install kokoro soundfile. The venv and tools/tts/out/ aren't in git.
 
 Kokoro (hexgrad/Kokoro-82M) is Apache-2.0, weights and code, so its output can go in a game that's sold.
-Each line is a clip assets/voice/<speaker>/<id>.wav, id = the first 12 hex digits of sha1("<speaker>|<text>"), so
+Each line is a clip assets/voice/<speaker>/<id>.ogg, id = the first 12 hex digits of sha1("<speaker>|<text>"), so
 the game finds it from the text alone (Audio.voice_clip) and a changed line simply has no clip until it's re-rendered.
-assets/voice/lines.json lists them. Clips are mono 24 kHz 16-bit, levelled to about -18 dBFS RMS (roughly -16 LUFS
+assets/voice/lines.json lists them. Clips are mono 24 kHz Ogg Vorbis, levelled to about -18 dBFS RMS (roughly -16 LUFS
 for speech) with peaks under -1 dBFS.
 """
 import hashlib
@@ -33,7 +33,7 @@ VOICE = "am_onyx"          ## the base for the candidate comparisons (--compare,
 CANDIDATES = ["am_onyx", "am_fenrir", "am_michael"]
 SPEED = 0.92               ## a touch slow: tired, a quarter past midnight
 RATE = 24000
-LINES_FILE = os.path.join(ROOT, "tools", "tts", "lines.json")    ## [[speaker, text], ...], text exactly as in the game
+LINES_FILE = os.path.join(ROOT, "tools", "tts", "lines.json")    ## [[speaker, text, where?], ...], text exactly as shown
 MANIFEST = os.path.join(ROOT, "assets", "voice", "lines.json")
 ## The cast: speaker id (as Main passes it; Main.say() is "ray") -> the VARIANTS preset that is their voice.
 SPEAKERS = {"ray": "2_blend"}
@@ -41,10 +41,34 @@ SPEAKERS = {"ray": "2_blend"}
 
 def load_lines():
     with open(LINES_FILE, encoding="utf-8") as f:
-        return [(str(sp), str(t)) for sp, t in json.load(f)]
+        return [(str(row[0]), str(row[1])) for row in json.load(f)]     # row[2], if any: where the line is
 
 
 LINES = load_lines()
+
+
+## Spoken forms: game text -> what the voice should say, for numbers and names the text-to-speech gets wrong. Only the
+## audio changes; the clip's id still comes from the game text. Longer keys first where they overlap.
+PRONOUNCE = {
+    "555-0147": "five five five, oh one four seven",
+    "$8,000": "eight thousand dollars",
+    ".38": "thirty-eight",
+    ".45": "forty-five",
+    "Room 214": "Room two-fourteen",
+    "6400 block": "sixty-four hundred block",
+    "the 110": "the one-ten",
+    "The 110": "The one-ten",
+    "1 of 3": "one of three",
+    "Reyes, 34.": "Reyes, thirty-four.",
+}
+ACRONYMS = {"LAPD", "DA", "IA", "ID", "TV", "UV", "GPS", "ER"}    ## all-caps words said letter by letter
+
+
+def spoken(text):
+    for k in sorted(PRONOUNCE, key=len, reverse=True):
+        text = text.replace(k, PRONOUNCE[k])
+    # signs and stamps written in capitals (BLUE NOTE, PAID, HOMICIDE) are words, not letters to spell out
+    return re.sub(r"\b[A-Z]{2,}\b", lambda m: m.group(0) if m.group(0) in ACRONYMS else m.group(0).capitalize(), text)
 
 
 def line_id(speaker, text):
@@ -117,7 +141,7 @@ def render_variant(pipe, preset, text):
     voice = sum(w * pipe.load_voice(v) for v, w in preset["blend"].items())
     factor = 2 ** (-preset.get("semitones", 0.0) / 12)          # pitch down = play the take longer
     speed = preset.get("speed", SPEED) * factor                  # so render it that much faster first
-    audio = np.concatenate([np.asarray(a, dtype=np.float32) for _, _, a in pipe(text, voice=voice, speed=speed)])
+    audio = np.concatenate([np.asarray(a, dtype=np.float32) for _, _, a in pipe(spoken(text), voice=voice, speed=speed)])
     if factor != 1.0:
         audio = _resample(audio, factor)
     if preset.get("warmth"):
@@ -159,18 +183,67 @@ def variants(pipe):
     print("wrote", base, "(compare_lineN.wav: onyx, then", ", ".join(VARIANTS), ")")
 
 
-SAY = re.compile(r'main\.say\(\s*"((?:[^"\\]|\\.)*)"\s*\)')
+CALL = re.compile(r'(?<![\w.])(?:main\.)?(say|narrate)\(')
+STRING = re.compile(r'"((?:[^"\\]|\\.)*)"')
+
+
+def _calls(src):
+    ## (line number, function, argument source) for every say( / narrate( call, the argument up to its closing paren.
+    func = ""
+    starts = [0]
+    for line in src.split("\n"):
+        starts.append(starts[-1] + len(line) + 1)
+    for m in CALL.finditer(src):
+        line_start = src.rfind("\n", 0, m.start()) + 1
+        if src[:m.start()].endswith("func ") or "#" in src[line_start:m.start()]:    # a definition or a comment
+            continue
+        i, depth, in_str = m.end(), 1, False
+        while i < len(src) and depth:
+            ch = src[i]
+            if in_str:
+                if ch == "\\":
+                    i += 1
+                elif ch == '"':
+                    in_str = False
+            elif ch == '"':
+                in_str = True
+            elif ch in "([{":
+                depth += 1
+            elif ch in ")]}":
+                depth -= 1
+            i += 1
+        line_no = next(n for n in range(len(starts)) if starts[n + 1] > m.start())
+        head = src[:m.start()]
+        fm = list(re.finditer(r'^(?:static )?func (\w+)', head, re.M))
+        func = fm[-1].group(1) if fm else ""
+        yield line_no + 1, func, src[m.end():i - 1]
 
 
 def list_says(path):
-    ## The lines a script gives Main.say() as one plain string literal, in order, once each. Lines built at run time,
-    ## picked with `"a" if x else "b"` or passed through a variable aren't found; add those by hand.
+    ## Ray's lines in a script: every say() and narrate() argument's string literals, so `"a" if x else "b"` and
+    ## `["a", "b"].pick_random()` give each text. Strings handed to another call inside the argument (a flag name) are
+    ## skipped. Calls whose text is built at run time (a variable, `%`, `+`) are printed to stderr with their line and
+    ## function, to be read and added by hand. stdout: rows for lines.json, ["ray", text, "<file>:<line> <function>"].
+    src = open(path, encoding="utf-8").read()
     found = []
-    for m in SAY.finditer(open(path, encoding="utf-8").read()):
-        text = json.loads('"%s"' % m.group(1))
-        if text not in found:
-            found.append(text)
-    print("[\n" + ",\n".join("\t" + json.dumps(["ray", t], ensure_ascii=False) for t in found) + "\n]")
+    for line_no, func, arg in _calls(src):
+        texts = []
+        for m in STRING.finditer(arg):
+            before = arg[:m.start()].rstrip()
+            if re.search(r'(\w\(|[\w\])]\[)$', before):    # an argument to another call (Game.flag("x")) or a key (d["k"])
+                continue
+            texts.append(json.loads('"%s"' % m.group(1)))
+        bare = STRING.sub('""', arg)
+        dynamic = not texts or re.search(r'%|\+|\b(?!if\b|else\b|and\b|or\b|not\b|pick_random\b)[A-Za-z_]\w*\s*(?:\[|$)', bare)
+        if dynamic:
+            sys.stderr.write("by hand: %s:%d %s(): %s\n" % (path, line_no, func, " ".join(arg.split())))
+            continue
+        for t in texts:
+            if all(t != f[0] for f in found):
+                found.append((t, line_no, func))
+    where = os.path.basename(path)
+    print("[\n" + ",\n".join("\t" + json.dumps(["ray", t, "%s:%d %s" % (where, n, f)], ensure_ascii=False)
+                             for t, n, f in found) + "\n]")
 
 
 def main():
@@ -198,19 +271,20 @@ def main():
             sys.exit("no voice cast for speaker '%s' (SPEAKERS; see docs/voice-recording.md)" % speaker)
         preset = SPEAKERS[speaker]
         lid = line_id(speaker, text)
-        rel = "assets/voice/%s/%s.wav" % (speaker, lid)
+        rel = "assets/voice/%s/%s.ogg" % (speaker, lid)
         path = os.path.join(ROOT, rel)
         os.makedirs(os.path.dirname(path), exist_ok=True)
         if force or not os.path.exists(path):
-            sf.write(path, render_variant(pipe, VARIANTS[preset], text), RATE, subtype="PCM_16")
+            sf.write(path, render_variant(pipe, VARIANTS[preset], text), RATE, format="OGG", subtype="VORBIS")
             made += 1
         manifest[lid] = {"speaker": speaker, "text": text, "file": "res://" + rel, "voice": "kokoro:" + preset}
-    # clips no line points at any more (its text changed, or it went): remove them and their .import files
+    # clips no line points at any more (its text changed, it went, or an older format): remove them and their .import
     stale = 0
+    used = {m["file"] for m in manifest.values()}
     for speaker in SPEAKERS:
         folder = os.path.join(ROOT, "assets", "voice", speaker)
         for name in os.listdir(folder) if os.path.isdir(folder) else []:
-            if name.endswith(".wav") and name[:-4] not in manifest:
+            if name.endswith((".wav", ".ogg")) and "res://assets/voice/%s/%s" % (speaker, name) not in used:
                 for f in (name, name + ".import"):
                     if os.path.exists(os.path.join(folder, f)):
                         os.remove(os.path.join(folder, f))

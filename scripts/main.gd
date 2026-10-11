@@ -594,7 +594,7 @@ func clue(id: String) -> void:
 
 func narrate(text: String) -> void:
 	## Ray's voice-over, for scenes where he isn't on screen (the drive, the murder board).
-	await _show_text(text, Vector2(960, 1000), PLAYER_COLOR)
+	await _show_text(text, Vector2(960, 1000), PLAYER_COLOR, "ray")
 
 
 func drive_begin() -> void:

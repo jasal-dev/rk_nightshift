@@ -41,6 +41,7 @@ var music_volume := 0.8         ## 0..1, linear, the Music bus
 var effects_volume := 0.8       ## 0..1, linear, the SFX bus (footsteps and ambience)
 var voice_volume := 0.8         ## 0..1, linear, the Voice bus
 var _voice: AudioStreamPlayer
+var unvoiced: Array[String] = []   ## lines asked for that have no clip, in order (tests/playthrough.gd)
 var _voice_lines := {}          ## id: res:// path, from VOICE_LINES
 var _music: Crossfader
 var _ambience: Crossfader
@@ -157,9 +158,13 @@ static func line_id(speaker: String, text: String) -> String:
 
 
 func voice_clip(speaker: String, text: String) -> AudioStream:
-	## The recorded clip for this exact line, or null.
+	## The recorded clip for this exact line, or null (and the line goes on `unvoiced`, which the playthrough checks).
 	var path: String = _voice_lines.get(line_id(speaker, text), "")
-	return load(path) as AudioStream if path != "" and ResourceLoader.exists(path) else null
+	if path != "" and ResourceLoader.exists(path):
+		return load(path) as AudioStream
+	if not unvoiced.has(text):
+		unvoiced.append(text)
+	return null
 
 
 func speak(clip: AudioStream) -> void:

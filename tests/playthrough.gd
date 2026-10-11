@@ -307,6 +307,15 @@ func _new_game() -> void:
 	main.ui.title.new_button.pressed.emit()
 
 
+func _check_voiced(n: int) -> void:
+	## Every line Ray said in a fully voiced case had a clip (docs/voice-recording.md). Lines that are only sound
+	## effects in asterisks ("*knock knock*") are never voiced.
+	var missing := Audio.unvoiced.filter(func(t: String): return not (t.begins_with("*") and t.ends_with("*")))
+	if not missing.is_empty():
+		_fail("Case %d lines without a voice clip (add them to tools/tts/lines.json):\n  %s" % [n, "\n  ".join(missing)])
+	Audio.unvoiced.clear()
+
+
 func _only_case() -> int:
 	## The case after --case on the command line, or 0 for the full run.
 	var args := OS.get_cmdline_user_args()
@@ -333,6 +342,7 @@ func _run() -> void:
 		return
 	if only == 1:
 		await _case1()
+		_check_voiced(1)
 	else:
 		# the title screen's SKIP TO button for that case: its card, then its first room
 		while not main._on_title and not _failed:
@@ -357,6 +367,7 @@ func _run() -> void:
 
 func _full_run() -> void:
 	await _case1()
+	_check_voiced(1)
 	if _failed:
 		return
 	main._waiting_click = false                         # the "Case 2: Five Stars" card

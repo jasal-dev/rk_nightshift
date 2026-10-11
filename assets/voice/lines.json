@@ -1,26 +1,1466 @@
 {
+	"1f03de4b853d": {
+		"speaker": "ray",
+		"text": "Room 214. The coffee's still bad, and Danny's still in the middle of the board.",
+		"file": "res://assets/voice/ray/1f03de4b853d.ogg",
+		"voice": "kokoro:2_blend"
+	},
 	"453d5cd57f2c": {
 		"speaker": "ray",
 		"text": "Quarter past midnight. The squad room is mine again.",
-		"file": "res://assets/voice/ray/453d5cd57f2c.wav",
+		"file": "res://assets/voice/ray/453d5cd57f2c.ogg",
 		"voice": "kokoro:2_blend"
 	},
 	"429ec3f4868d": {
 		"speaker": "ray",
 		"text": "Danny Reyes. Two nights cold, and the lieutenant wants it closed by Friday.",
-		"file": "res://assets/voice/ray/429ec3f4868d.wav",
+		"file": "res://assets/voice/ray/429ec3f4868d.ogg",
 		"voice": "kokoro:2_blend"
 	},
 	"1c61912ca76f": {
 		"speaker": "ray",
 		"text": "First, the file. I locked it away like a careful man.",
-		"file": "res://assets/voice/ray/1c61912ca76f.wav",
+		"file": "res://assets/voice/ray/1c61912ca76f.ogg",
 		"voice": "kokoro:2_blend"
 	},
 	"5e348cced2a6": {
 		"speaker": "ray",
 		"text": "Then I hid the key like a paranoid one.",
-		"file": "res://assets/voice/ray/5e348cced2a6.wav",
+		"file": "res://assets/voice/ray/5e348cced2a6.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"536ba99a8620": {
+		"speaker": "ray",
+		"text": "HOMICIDE. Room 214.",
+		"file": "res://assets/voice/ray/536ba99a8620.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"1b1ee504066c": {
+		"speaker": "ray",
+		"text": "HOMICIDE. Room 214. Home sweet home.",
+		"file": "res://assets/voice/ray/1b1ee504066c.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"35ccb80a63c8": {
+		"speaker": "ray",
+		"text": "The door's not locked. My problems are.",
+		"file": "res://assets/voice/ray/35ccb80a63c8.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e50f45004811": {
+		"speaker": "ray",
+		"text": "Not yet. Danny's waiting on the board.",
+		"file": "res://assets/voice/ray/e50f45004811.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"4fbdccbda633": {
+		"speaker": "ray",
+		"text": "Not without the Reyes file.",
+		"file": "res://assets/voice/ray/4fbdccbda633.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e51bbc49f05e": {
+		"speaker": "ray",
+		"text": "Let's go see what the Blue Note didn't see.",
+		"file": "res://assets/voice/ray/e51bbc49f05e.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"ddd7e03905ae": {
+		"speaker": "ray",
+		"text": "My raincoat. Twenty years old and it still leaks at the collar.",
+		"file": "res://assets/voice/ray/ddd7e03905ae.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"2c90610bf78d": {
+		"speaker": "ray",
+		"text": "It's raining out. I'll be wet either way.",
+		"file": "res://assets/voice/ray/2c90610bf78d.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"78179ea5932d": {
+		"speaker": "ray",
+		"text": "Danny's in the middle. Everything I know is on that board, and it isn't enough.",
+		"file": "res://assets/voice/ray/78179ea5932d.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"221b6aed00ea": {
+		"speaker": "ray",
+		"text": "Danny, the envelope, and a question mark. It's a start.",
+		"file": "res://assets/voice/ray/221b6aed00ea.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"7820ea2db3d6": {
+		"speaker": "ray",
+		"text": "Pinning that up won't solve anything.",
+		"file": "res://assets/voice/ray/7820ea2db3d6.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"522ec13b7632": {
+		"speaker": "ray",
+		"text": "The murder board. Every case up there has a name. Most have a face.",
+		"file": "res://assets/voice/ray/522ec13b7632.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"6614ee83f0b8": {
+		"speaker": "ray",
+		"text": "Reyes is the one in the middle. String leads to the Blue Note.",
+		"file": "res://assets/voice/ray/6614ee83f0b8.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"79a671c44c6c": {
+		"speaker": "ray",
+		"text": "Green banker's lamp. Older than half the squad.",
+		"file": "res://assets/voice/ray/79a671c44c6c.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"d31fc009b212": {
+		"speaker": "ray",
+		"text": "The base sits a little crooked.",
+		"file": "res://assets/voice/ray/d31fc009b212.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"d2f6b273bbd7": {
+		"speaker": "ray",
+		"text": "Old habit. Tape a key under the lamp base, where nobody looks.",
+		"file": "res://assets/voice/ray/d2f6b273bbd7.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"8d63c8ca03b4": {
+		"speaker": "ray",
+		"text": "Nothing else under there but dust.",
+		"file": "res://assets/voice/ray/8d63c8ca03b4.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e9e8bef71f4a": {
+		"speaker": "ray",
+		"text": "Department computer. It takes four passwords to tell me nothing.",
+		"file": "res://assets/voice/ray/e9e8bef71f4a.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"1570bfeee9cb": {
+		"speaker": "ray",
+		"text": "Reyes, Daniel. No priors, no warrants, no next of kin who'll pick up.",
+		"file": "res://assets/voice/ray/1570bfeee9cb.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"21295a014d24": {
+		"speaker": "ray",
+		"text": "The report can wait. The report can always wait.",
+		"file": "res://assets/voice/ray/21295a014d24.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"81a65eb47937": {
+		"speaker": "ray",
+		"text": "The desk phone. It only rings when someone's dead.",
+		"file": "res://assets/voice/ray/81a65eb47937.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"c8b769d633cc": {
+		"speaker": "ray",
+		"text": "The message light is blinking.",
+		"file": "res://assets/voice/ray/c8b769d633cc.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5f7c60bcd81b": {
+		"speaker": "ray",
+		"text": "Not until I know what I'm telling her.",
+		"file": "res://assets/voice/ray/5f7c60bcd81b.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"c77350b14797": {
+		"speaker": "ray",
+		"text": "Nobody I want to call at this hour.",
+		"file": "res://assets/voice/ray/c77350b14797.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"19ee29b6365b": {
+		"speaker": "ray",
+		"text": "My coffee. Made at six. It's past midnight now.",
+		"file": "res://assets/voice/ray/19ee29b6365b.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"1f66d412c8cb": {
+		"speaker": "ray",
+		"text": "Waste not.",
+		"file": "res://assets/voice/ray/1f66d412c8cb.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"a340a03cb276": {
+		"speaker": "ray",
+		"text": "My desk. Government issue, scarred by three chiefs and a budget freeze.",
+		"file": "res://assets/voice/ray/a340a03cb276.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"c2293fce2a6d": {
+		"speaker": "ray",
+		"text": "Old reports and older sandwiches. Nothing for Reyes.",
+		"file": "res://assets/voice/ray/c2293fce2a6d.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"c97a68d8a411": {
+		"speaker": "ray",
+		"text": "Down the hatch. Somebody else's hatch.",
+		"file": "res://assets/voice/ray/c97a68d8a411.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"cc60ec9da188": {
+		"speaker": "ray",
+		"text": "Well. There's a dime at the bottom of the mug.",
+		"file": "res://assets/voice/ray/cc60ec9da188.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"bd9a2c6f952a": {
+		"speaker": "ray",
+		"text": "The wastebasket. Where most of my theories end up.",
+		"file": "res://assets/voice/ray/bd9a2c6f952a.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"84f2c2341186": {
+		"speaker": "ray",
+		"text": "I'm not digging through that again.",
+		"file": "res://assets/voice/ray/84f2c2341186.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b612624dc3ce": {
+		"speaker": "ray",
+		"text": "Second drawer. Reyes, Daniel.",
+		"file": "res://assets/voice/ray/b612624dc3ce.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"7fe80f184643": {
+		"speaker": "ray",
+		"text": "I should read it before I go anywhere. Right-click it in the inventory.",
+		"file": "res://assets/voice/ray/7fe80f184643.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"340f5b515ff3": {
+		"speaker": "ray",
+		"text": "Open files and closed cases. Should be the other way around.",
+		"file": "res://assets/voice/ray/340f5b515ff3.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"62140af7456a": {
+		"speaker": "ray",
+		"text": "The filing cabinet. Locked. I keep the key somewhere clever.",
+		"file": "res://assets/voice/ray/62140af7456a.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"6d39dbd64dab": {
+		"speaker": "ray",
+		"text": "I've got what I need from it.",
+		"file": "res://assets/voice/ray/6d39dbd64dab.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"7e386c8a44e1": {
+		"speaker": "ray",
+		"text": "Locked. I'm the one who locked it, too.",
+		"file": "res://assets/voice/ray/7e386c8a44e1.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"529ebab255c1": {
+		"speaker": "ray",
+		"text": "Four million people out there. One of them killed Danny Reyes.",
+		"file": "res://assets/voice/ray/529ebab255c1.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5d85dd605ab5": {
+		"speaker": "ray",
+		"text": "Painted shut. The blinds are the only thing in here that opens.",
+		"file": "res://assets/voice/ray/5d85dd605ab5.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"3a1a9ca267d9": {
+		"speaker": "ray",
+		"text": "One twenty-five. The city's second shift is half over and I've got one envelope to show for it.",
+		"file": "res://assets/voice/ray/3a1a9ca267d9.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"694531f2208f": {
+		"speaker": "ray",
+		"text": "Twelve-fifteen. The city's second shift.",
+		"file": "res://assets/voice/ray/694531f2208f.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"21b2b23c44d3": {
+		"speaker": "ray",
+		"text": "It clanks all night, like a drunk in the cells.",
+		"file": "res://assets/voice/ray/21b2b23c44d3.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"03ed99b25a46": {
+		"speaker": "ray",
+		"text": "Hot enough to brand a man. I'll pass.",
+		"file": "res://assets/voice/ray/03ed99b25a46.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"7ced0218740d": {
+		"speaker": "ray",
+		"text": "Reheating it won't make it coffee.",
+		"file": "res://assets/voice/ray/7ced0218740d.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e1cc7cbacccf": {
+		"speaker": "ray",
+		"text": "The squad's coffee machine. It makes something brown and hot. Usually.",
+		"file": "res://assets/voice/ray/e1cc7cbacccf.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"a1e25cdbcc67": {
+		"speaker": "ray",
+		"text": "Out of filters since March. Nobody's filed the requisition.",
+		"file": "res://assets/voice/ray/a1e25cdbcc67.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"04f87ff4c9a4": {
+		"speaker": "ray",
+		"text": "My cell is in my coat. My coat is wet. We all have problems.",
+		"file": "res://assets/voice/ray/04f87ff4c9a4.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"637afde9b802": {
+		"speaker": "ray",
+		"text": "Let me go over the file once more.",
+		"file": "res://assets/voice/ray/637afde9b802.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"8865ee514673": {
+		"speaker": "ray",
+		"text": "Two nights, one bullet, one piano player. Why?",
+		"file": "res://assets/voice/ray/8865ee514673.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"76533bd2572f": {
+		"speaker": "ray",
+		"text": "Vance doesn't shoot paying customers, and Danny had paid.",
+		"file": "res://assets/voice/ray/76533bd2572f.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e71f1a8080df": {
+		"speaker": "ray",
+		"text": "I haven't proved that. Doyle would love it if I had.",
+		"file": "res://assets/voice/ray/e71f1a8080df.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"c276ae66ac59": {
+		"speaker": "ray",
+		"text": "A robber who leaves the wallet. Worst robber in Hollywood.",
+		"file": "res://assets/voice/ray/c276ae66ac59.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"28690ae504e9": {
+		"speaker": "ray",
+		"text": "Not what he owed. What he had.",
+		"file": "res://assets/voice/ray/28690ae504e9.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"306a8a6f51ff": {
+		"speaker": "ray",
+		"text": "Think, Ray. What did the killer leave behind, and what did he take? And who still owed Danny?",
+		"file": "res://assets/voice/ray/306a8a6f51ff.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"a7efee4d3955": {
+		"speaker": "ray",
+		"text": "Danny wasn't killed for what he owed. He was killed for what he had.",
+		"file": "res://assets/voice/ray/a7efee4d3955.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"6b06dc3662d0": {
+		"speaker": "ray",
+		"text": "Somebody paid a broke piano player eight grand and promised two more. Then they stopped paying.",
+		"file": "res://assets/voice/ray/6b06dc3662d0.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5ac705191906": {
+		"speaker": "ray",
+		"text": "Case stays open. I should tell the lieutenant. She'll want to hear it's not closed.",
+		"file": "res://assets/voice/ray/5ac705191906.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"c241edb6922a": {
+		"speaker": "ray",
+		"text": "She won't like hearing it.",
+		"file": "res://assets/voice/ray/c241edb6922a.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"46eccbe0a008": {
+		"speaker": "ray",
+		"text": "It's Kessler. Reyes isn't a debt killing.",
+		"file": "res://assets/voice/ray/46eccbe0a008.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"660d1bcc4d3a": {
+		"speaker": "ray",
+		"text": "Danny paid Vance off in full the afternoon he died. Eight thousand, cash.",
+		"file": "res://assets/voice/ray/660d1bcc4d3a.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"533c64e64530": {
+		"speaker": "ray",
+		"text": "Vance was on his boat on Catalina.",
+		"file": "res://assets/voice/ray/533c64e64530.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"23875c5ddf8d": {
+		"speaker": "ray",
+		"text": "Sal Moretti. The bartender.",
+		"file": "res://assets/voice/ray/23875c5ddf8d.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"a790ff852cfe": {
+		"speaker": "ray",
+		"text": "He talks through his door if you knock right. Danny's knock. His girl, Nina, gave it to me.",
+		"file": "res://assets/voice/ray/a790ff852cfe.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"c78c1f1b6706": {
+		"speaker": "ray",
+		"text": "It's a motive. Somebody gave a broke man eight grand, and he was expecting more.",
+		"file": "res://assets/voice/ray/c78c1f1b6706.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b00082f79240": {
+		"speaker": "ray",
+		"text": "Wasting the night. That's what nights are for.",
+		"file": "res://assets/voice/ray/b00082f79240.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"c7e97e5ce6bf": {
+		"speaker": "ray",
+		"text": "You're interrupting Danny Reyes.",
+		"file": "res://assets/voice/ray/c7e97e5ce6bf.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"0a147dd8f115": {
+		"speaker": "ray",
+		"text": "On my way.",
+		"file": "res://assets/voice/ray/0a147dd8f115.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5b9dbb8d14e2": {
+		"speaker": "ray",
+		"text": "I've got a coat. It leaks.",
+		"file": "res://assets/voice/ray/5b9dbb8d14e2.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"2e8a94598442": {
+		"speaker": "ray",
+		"text": "That says he had money. What says there was more coming, and what the killer wanted instead?",
+		"file": "res://assets/voice/ray/2e8a94598442.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e645cf3c9435": {
+		"speaker": "ray",
+		"text": "The gun tells me how. I need why.",
+		"file": "res://assets/voice/ray/e645cf3c9435.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"d16213b60863": {
+		"speaker": "ray",
+		"text": "That clears Vance. It doesn't tell me why Danny died.",
+		"file": "res://assets/voice/ray/d16213b60863.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"a26ee00798ba": {
+		"speaker": "ray",
+		"text": "That's how I got through a door, not why he's dead.",
+		"file": "res://assets/voice/ray/a26ee00798ba.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"d8862493f7a0": {
+		"speaker": "ray",
+		"text": "That's where I went, not what I found.",
+		"file": "res://assets/voice/ray/d8862493f7a0.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"7c42f745aaa5": {
+		"speaker": "ray",
+		"text": "A phone number. Nina's, it turns out. Not a motive.",
+		"file": "res://assets/voice/ray/7c42f745aaa5.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"f6b54971afe3": {
+		"speaker": "ray",
+		"text": "Rain. Of course it's raining.",
+		"file": "res://assets/voice/ray/f6b54971afe3.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"0807fcea05dc": {
+		"speaker": "ray",
+		"text": "The Blue Note's across the street. Lights are off, but somebody's home.",
+		"file": "res://assets/voice/ray/0807fcea05dc.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"d31398df1a88": {
+		"speaker": "ray",
+		"text": "The precinct. Coffee's worse than the company.",
+		"file": "res://assets/voice/ray/d31398df1a88.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"761d3bbeff52": {
+		"speaker": "ray",
+		"text": "The Blue Note. Door's locked. The light inside says somebody's home.",
+		"file": "res://assets/voice/ray/761d3bbeff52.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b9b6233d5728": {
+		"speaker": "ray",
+		"text": "I'd rather knock.",
+		"file": "res://assets/voice/ray/b9b6233d5728.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"ba010ac13ba9": {
+		"speaker": "ray",
+		"text": "Sal's said all he's going to say.",
+		"file": "res://assets/voice/ray/ba010ac13ba9.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"a65163ddc067": {
+		"speaker": "ray",
+		"text": "Nothing. Whoever's in there isn't expecting company. Not my kind.",
+		"file": "res://assets/voice/ray/a65163ddc067.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"d3eb8cd958d6": {
+		"speaker": "ray",
+		"text": "BLUE NOTE. Live jazz Thursdays. Dead piano player Tuesday.",
+		"file": "res://assets/voice/ray/d3eb8cd958d6.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"db221fa79a15": {
+		"speaker": "ray",
+		"text": "NOTICE OF PUBLIC HEARING. Zone change, 6400 block. Applicant: Pryce Development.",
+		"file": "res://assets/voice/ray/db221fa79a15.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5344c6b7ad62": {
+		"speaker": "ray",
+		"text": "Somebody wants to build something. In this town somebody always does.",
+		"file": "res://assets/voice/ray/5344c6b7ad62.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5dcbf5a01f1e": {
+		"speaker": "ray",
+		"text": "A dime's no good without a number to call.",
+		"file": "res://assets/voice/ray/5dcbf5a01f1e.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"f46c9db25fd7": {
+		"speaker": "ray",
+		"text": "It takes dimes. Only dimes.",
+		"file": "res://assets/voice/ray/f46c9db25fd7.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"ed7b6ef82ac6": {
+		"speaker": "ray",
+		"text": "The last payphone in Hollywood. Somebody keeps paying the bill on it, and I'd like to know why.",
+		"file": "res://assets/voice/ray/ed7b6ef82ac6.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e4e1e9f89aa2": {
+		"speaker": "ray",
+		"text": "A payphone. Ten cents buys you thirty seconds of somebody's attention.",
+		"file": "res://assets/voice/ray/e4e1e9f89aa2.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"a21f7dbb2bc5": {
+		"speaker": "ray",
+		"text": "I've made my call.",
+		"file": "res://assets/voice/ray/a21f7dbb2bc5.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"aec72a159f95": {
+		"speaker": "ray",
+		"text": "Dial tone. It wants a dime.",
+		"file": "res://assets/voice/ray/aec72a159f95.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"6883f7e26950": {
+		"speaker": "ray",
+		"text": "There's always loose change back in the squad room. Usually at the bottom of something.",
+		"file": "res://assets/voice/ray/6883f7e26950.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"3e490c282f8e": {
+		"speaker": "ray",
+		"text": "A dumpster at the mouth of the alley, where they found Danny.",
+		"file": "res://assets/voice/ray/3e490c282f8e.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"3ece56c8d6fa": {
+		"speaker": "ray",
+		"text": "Something blue is caught under the lid.",
+		"file": "res://assets/voice/ray/3ece56c8d6fa.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"70f9162acf25": {
+		"speaker": "ray",
+		"text": "A matchbook from the Blue Note. Wet, but readable.",
+		"file": "res://assets/voice/ray/70f9162acf25.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"9b6060d43adb": {
+		"speaker": "ray",
+		"text": "There's a phone number written inside. In a hurry.",
+		"file": "res://assets/voice/ray/9b6060d43adb.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"d8e5dd6f6795": {
+		"speaker": "ray",
+		"text": "Just garbage now. The uniforms missed the good stuff.",
+		"file": "res://assets/voice/ray/d8e5dd6f6795.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"c6ee3cbad4c0": {
+		"speaker": "ray",
+		"text": "Where Danny Reyes stopped being a piano player and started being a case.",
+		"file": "res://assets/voice/ray/c6ee3cbad4c0.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"7683c94ad0eb": {
+		"speaker": "ray",
+		"text": "Sodium light. Makes everybody look guilty. Saves time.",
+		"file": "res://assets/voice/ray/7683c94ad0eb.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"8f57ad93776f": {
+		"speaker": "ray",
+		"text": "My car. Unmarked, if you don't count the dents.",
+		"file": "res://assets/voice/ray/8f57ad93776f.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"7c226b5299a5": {
+		"speaker": "ray",
+		"text": "Not leaving until I've talked to Sal.",
+		"file": "res://assets/voice/ray/7c226b5299a5.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"3cf91f7b9b1d": {
+		"speaker": "ray",
+		"text": "Pier 9. San Pedro. Forty minutes if the 110 behaves.",
+		"file": "res://assets/voice/ray/3cf91f7b9b1d.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5d2f7a5607b0": {
+		"speaker": "ray",
+		"text": "A fire hydrant. Ticket bait.",
+		"file": "res://assets/voice/ray/5d2f7a5607b0.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"64809b0765a2": {
+		"speaker": "ray",
+		"text": "SUNSET INJURY LAW. In this town even the lawyers work the night shift.",
+		"file": "res://assets/voice/ray/64809b0765a2.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b8ec0bc3d991": {
+		"speaker": "ray",
+		"text": "POLICE. They put it in big letters in case anyone forgets.",
+		"file": "res://assets/voice/ray/b8ec0bc3d991.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5a07a9c198cb": {
+		"speaker": "ray",
+		"text": "Lights on, chairs up, one silhouette at the bar. Closed, they'd tell you.",
+		"file": "res://assets/voice/ray/5a07a9c198cb.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"762a06663a50": {
+		"speaker": "ray",
+		"text": "Tapping on the glass gets you a look, not an answer.",
+		"file": "res://assets/voice/ray/762a06663a50.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e23d847a28e3": {
+		"speaker": "ray",
+		"text": "555-0147...",
+		"file": "res://assets/voice/ray/e23d847a28e3.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"79cc5be60f60": {
+		"speaker": "ray",
+		"text": "Is this Sal?",
+		"file": "res://assets/voice/ray/79cc5be60f60.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"a9411044d67f": {
+		"speaker": "ray",
+		"text": "I'm calling about Danny Reyes.",
+		"file": "res://assets/voice/ray/a9411044d67f.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"de4fe818fa4c": {
+		"speaker": "ray",
+		"text": "Wrong number. Sorry.",
+		"file": "res://assets/voice/ray/de4fe818fa4c.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"6a5d3e9edb36": {
+		"speaker": "ray",
+		"text": "There goes my dime. I'll need another one.",
+		"file": "res://assets/voice/ray/6a5d3e9edb36.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"09cbe9d54718": {
+		"speaker": "ray",
+		"text": "...Actually, I won't. I'm not paying twice for that kind of manners.",
+		"file": "res://assets/voice/ray/09cbe9d54718.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"64132517cde5": {
+		"speaker": "ray",
+		"text": "Who am I talking to?",
+		"file": "res://assets/voice/ray/64132517cde5.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"41d90b35a638": {
+		"speaker": "ray",
+		"text": "I'm sorry, Nina. Ray Kessler. I work Homicide.",
+		"file": "res://assets/voice/ray/41d90b35a638.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e29a2f03e5c1": {
+		"speaker": "ray",
+		"text": "How do I get Sal to open the door?",
+		"file": "res://assets/voice/ray/e29a2f03e5c1.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"614f196711da": {
+		"speaker": "ray",
+		"text": "Two slow, three fast. Like a piano man.",
+		"file": "res://assets/voice/ray/614f196711da.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"83ea18e71b26": {
+		"speaker": "ray",
+		"text": "Never mind.",
+		"file": "res://assets/voice/ray/83ea18e71b26.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"df647dbdd7b7": {
+		"speaker": "ray",
+		"text": "The phone coughs my dime back up. Small mercies.",
+		"file": "res://assets/voice/ray/df647dbdd7b7.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"1f94a104db7a": {
+		"speaker": "ray",
+		"text": "Police. Open the door, Sal.",
+		"file": "res://assets/voice/ray/1f94a104db7a.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5bb51cca7397": {
+		"speaker": "ray",
+		"text": "A friend of Danny's.",
+		"file": "res://assets/voice/ray/5bb51cca7397.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"9fff9f24c48c": {
+		"speaker": "ray",
+		"text": "Did you see who shot him?",
+		"file": "res://assets/voice/ray/9fff9f24c48c.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"484f5a41b52a": {
+		"speaker": "ray",
+		"text": "You told the uniforms you didn't hear anything.",
+		"file": "res://assets/voice/ray/484f5a41b52a.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"8c6e3618df86": {
+		"speaker": "ray",
+		"text": "Who did Danny owe money to?",
+		"file": "res://assets/voice/ray/8c6e3618df86.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5244a32d64fc": {
+		"speaker": "ray",
+		"text": "Where do I find Vance?",
+		"file": "res://assets/voice/ray/5244a32d64fc.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"16d2be7ee99e": {
+		"speaker": "ray",
+		"text": "Pier 9. Vance. Green door.",
+		"file": "res://assets/voice/ray/16d2be7ee99e.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"016a287ce3ab": {
+		"speaker": "ray",
+		"text": "Sal saw something after all. They always do.",
+		"file": "res://assets/voice/ray/016a287ce3ab.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"000fe765531b": {
+		"speaker": "ray",
+		"text": "The 110 at one in the morning. Trucks, cabs, and people who don't want to go home.",
+		"file": "res://assets/voice/ray/000fe765531b.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b2b828cbed01": {
+		"speaker": "ray",
+		"text": "She's got her mother's timing. And my hours.",
+		"file": "res://assets/voice/ray/b2b828cbed01.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"65c46266ea8a": {
+		"speaker": "ray",
+		"text": "Pier 9. The ocean smells like diesel and money.",
+		"file": "res://assets/voice/ray/65c46266ea8a.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"1425a989ad06": {
+		"speaker": "ray",
+		"text": "Green door. And a man the size of the door in front of it.",
+		"file": "res://assets/voice/ray/1425a989ad06.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"667cc8944b7e": {
+		"speaker": "ray",
+		"text": "Tiny burns the trash every night. Lucky for me it rains every night too.",
+		"file": "res://assets/voice/ray/667cc8944b7e.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"d8604d137016": {
+		"speaker": "ray",
+		"text": "A steel door, painted green a long time ago. Sal was right.",
+		"file": "res://assets/voice/ray/d8604d137016.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e3c6b8fde123": {
+		"speaker": "ray",
+		"text": "Tiny waves me through.",
+		"file": "res://assets/voice/ray/e3c6b8fde123.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"7f796adb4f95": {
+		"speaker": "ray",
+		"text": "A transistor radio. Somebody's playing Monk. Danny played it better, I'd bet.",
+		"file": "res://assets/voice/ray/7f796adb4f95.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"f11cc5724878": {
+		"speaker": "ray",
+		"text": "Not my radio. Not my music, either, these days.",
+		"file": "res://assets/voice/ray/f11cc5724878.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"ccd35de3add4": {
+		"speaker": "ray",
+		"text": "A burn barrel. The rain's winning; it only smolders.",
+		"file": "res://assets/voice/ray/ccd35de3add4.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b2870e26b15e": {
+		"speaker": "ray",
+		"text": "Nothing in there I want. Yet.",
+		"file": "res://assets/voice/ray/b2870e26b15e.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"8be9ee4e6529": {
+		"speaker": "ray",
+		"text": "Nothing else in there but fish heads.",
+		"file": "res://assets/voice/ray/8be9ee4e6529.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"ca327751ed00": {
+		"speaker": "ray",
+		"text": "Warming my hands over Vance's garbage isn't detective work.",
+		"file": "res://assets/voice/ray/ca327751ed00.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"ddb571e9c02b": {
+		"speaker": "ray",
+		"text": "Wet ash, fish heads, and whatever Tiny had for dinner. Not with my hand.",
+		"file": "res://assets/voice/ray/ddb571e9c02b.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"27a9b5dd5399": {
+		"speaker": "ray",
+		"text": "I need something with reach.",
+		"file": "res://assets/voice/ray/27a9b5dd5399.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"fa5ecdc3bf33": {
+		"speaker": "ray",
+		"text": "A boat hook hung on a piling. Every pier has one, and they're never where they belong.",
+		"file": "res://assets/voice/ray/fa5ecdc3bf33.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"4c21ee6e601b": {
+		"speaker": "ray",
+		"text": "A piling with a nail in it. The boat hook's with me.",
+		"file": "res://assets/voice/ray/4c21ee6e601b.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"69a14a2d39ce": {
+		"speaker": "ray",
+		"text": "Back on its nail.",
+		"file": "res://assets/voice/ray/69a14a2d39ce.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"929d6b3c7784": {
+		"speaker": "ray",
+		"text": "I've already got the hook.",
+		"file": "res://assets/voice/ray/929d6b3c7784.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"ba13e0f831ed": {
+		"speaker": "ray",
+		"text": "Forty-foot boxes from Busan and Shenzhen. Anything can be in them, and usually is.",
+		"file": "res://assets/voice/ray/ba13e0f831ed.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b393b291a194": {
+		"speaker": "ray",
+		"text": "Sealed. Customs gets the fun.",
+		"file": "res://assets/voice/ray/b393b291a194.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"4eb0a8db44b6": {
+		"speaker": "ray",
+		"text": "A gantry crane, blinking red at the top like it's got somewhere to be.",
+		"file": "res://assets/voice/ray/4eb0a8db44b6.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"8d4c174800a6": {
+		"speaker": "ray",
+		"text": "HARBOR MARINE SALVAGE. They salvage people, mostly.",
+		"file": "res://assets/voice/ray/8d4c174800a6.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"3a461cc0a65f": {
+		"speaker": "ray",
+		"text": "I might need that. The harbor doesn't.",
+		"file": "res://assets/voice/ray/3a461cc0a65f.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"729a0f64caa7": {
+		"speaker": "ray",
+		"text": "Black water. Whatever goes in here doesn't come back up. Not in this harbor.",
+		"file": "res://assets/voice/ray/729a0f64caa7.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"813aceb54495": {
+		"speaker": "ray",
+		"text": "Not tonight.",
+		"file": "res://assets/voice/ray/813aceb54495.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"4c359cdc9992": {
+		"speaker": "ray",
+		"text": "Still dented. Now wet and dented.",
+		"file": "res://assets/voice/ray/4c359cdc9992.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"33b7d79c1188": {
+		"speaker": "ray",
+		"text": "Not until I've talked to Vance.",
+		"file": "res://assets/voice/ray/33b7d79c1188.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"802fc2f639c9": {
+		"speaker": "ray",
+		"text": "Not without that envelope.",
+		"file": "res://assets/voice/ray/802fc2f639c9.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e4d3ce6b86d1": {
+		"speaker": "ray",
+		"text": "Back to the board. Danny's got a new piece of paper on it.",
+		"file": "res://assets/voice/ray/e4d3ce6b86d1.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5e903b042a7f": {
+		"speaker": "ray",
+		"text": "Six-five, maybe more. Built like a vending machine.",
+		"file": "res://assets/voice/ray/5e903b042a7f.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"72fdb9104c6d": {
+		"speaker": "ray",
+		"text": "There's a Blue Note cocktail napkin folded in his breast pocket.",
+		"file": "res://assets/voice/ray/72fdb9104c6d.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"7d78c07c4a64": {
+		"speaker": "ray",
+		"text": "He's seen it. Once was enough.",
+		"file": "res://assets/voice/ray/7d78c07c4a64.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"893f2353888b": {
+		"speaker": "ray",
+		"text": "He's not going to read it.",
+		"file": "res://assets/voice/ray/893f2353888b.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"4797ba439ed8": {
+		"speaker": "ray",
+		"text": "Tiny doesn't look like a man who takes tips.",
+		"file": "res://assets/voice/ray/4797ba439ed8.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"cf674d84123c": {
+		"speaker": "ray",
+		"text": "Five minutes, he said. Tiny looks like a man who counts.",
+		"file": "res://assets/voice/ray/cf674d84123c.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b32a00d41f1f": {
+		"speaker": "ray",
+		"text": "I didn't see a sign.",
+		"file": "res://assets/voice/ray/b32a00d41f1f.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"fece3ed136b9": {
+		"speaker": "ray",
+		"text": "I need to see Vance.",
+		"file": "res://assets/voice/ray/fece3ed136b9.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"c019d98d6096": {
+		"speaker": "ray",
+		"text": "LAPD.",
+		"file": "res://assets/voice/ray/c019d98d6096.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"d07bd61e7d1a": {
+		"speaker": "ray",
+		"text": "Nice radio.",
+		"file": "res://assets/voice/ray/d07bd61e7d1a.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"d6abd52363c3": {
+		"speaker": "ray",
+		"text": "You drink at the Blue Note.",
+		"file": "res://assets/voice/ray/d6abd52363c3.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"4d81a9cc5ee7": {
+		"speaker": "ray",
+		"text": "That's why I'm here.",
+		"file": "res://assets/voice/ray/4d81a9cc5ee7.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"51ed491adee1": {
+		"speaker": "ray",
+		"text": "People who've been here before. People who knock like they've been here before.",
+		"file": "res://assets/voice/ray/51ed491adee1.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"80f0c0ada39c": {
+		"speaker": "ray",
+		"text": "Badges don't move him. Maybe something from the Blue Note would.",
+		"file": "res://assets/voice/ray/80f0c0ada39c.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5898f8749b69": {
+		"speaker": "ray",
+		"text": "Danny knocked on Sal's door. He must have knocked on this one too.",
+		"file": "res://assets/voice/ray/5898f8749b69.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"aa71aa686167": {
+		"speaker": "ray",
+		"text": "Blue Note envelope. Singed at one corner, soaked through, but the back survived.",
+		"file": "res://assets/voice/ray/aa71aa686167.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"ec44a5bfcea9": {
+		"speaker": "ray",
+		"text": "Danny's handwriting. Two words. \"1 of 3.\"",
+		"file": "res://assets/voice/ray/ec44a5bfcea9.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e729075c438e": {
+		"speaker": "ray",
+		"text": "One of three. One of three what?",
+		"file": "res://assets/voice/ray/e729075c438e.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e5c6cc14ceba": {
+		"speaker": "ray",
+		"text": "You'll hear it.",
+		"file": "res://assets/voice/ray/e5c6cc14ceba.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"8e21cf95e822": {
+		"speaker": "ray",
+		"text": "Sixties. Cardigan, reading glasses, shoulder holster. A grandfather who forecloses.",
+		"file": "res://assets/voice/ray/8e21cf95e822.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"20b776a582c1": {
+		"speaker": "ray",
+		"text": "Close range. A .38. Wallet left on him.",
+		"file": "res://assets/voice/ray/20b776a582c1.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b850a170bbc7": {
+		"speaker": "ray",
+		"text": "And his phone was gone.",
+		"file": "res://assets/voice/ray/b850a170bbc7.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"8de7613e003c": {
+		"speaker": "ray",
+		"text": "IOUs. Dozens of them, pinned in rows like butterflies.",
+		"file": "res://assets/voice/ray/8de7613e003c.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"f8868703c183": {
+		"speaker": "ray",
+		"text": "Reyes, D. $8,000. Stamped PAID in red, dated Tuesday.",
+		"file": "res://assets/voice/ray/f8868703c183.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"dee042085243": {
+		"speaker": "ray",
+		"text": "Danny's is the only one stamped PAID. The only one.",
+		"file": "res://assets/voice/ray/dee042085243.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"27d21b909874": {
+		"speaker": "ray",
+		"text": "A Colt .45 on the blotter, next to a cup of tea. A man of contrasts.",
+		"file": "res://assets/voice/ray/27d21b909874.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"8b00c0a82267": {
+		"speaker": "ray",
+		"text": "Touching a loan shark's gun in his own office is the kind of thing they carve on your headstone.",
+		"file": "res://assets/voice/ray/8b00c0a82267.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b64679c7a260": {
+		"speaker": "ray",
+		"text": "Chamomile. The man sleeps fine.",
+		"file": "res://assets/voice/ray/b64679c7a260.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e30486bf5146": {
+		"speaker": "ray",
+		"text": "I'll pass.",
+		"file": "res://assets/voice/ray/e30486bf5146.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"42633041fafc": {
+		"speaker": "ray",
+		"text": "A green ledger. Vance's real business. He'd sooner give me a kidney.",
+		"file": "res://assets/voice/ray/42633041fafc.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"7acb67e9eede": {
+		"speaker": "ray",
+		"text": "A sport fisher called Second Chance. Loan sharks all have the same sense of humor.",
+		"file": "res://assets/voice/ray/7acb67e9eede.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"08210324e822": {
+		"speaker": "ray",
+		"text": "Green banker's lamp. Same as mine. We buy from the same catalog, and that's all we share.",
+		"file": "res://assets/voice/ray/08210324e822.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"d23ae9169f86": {
+		"speaker": "ray",
+		"text": "No key under this one. I checked.",
+		"file": "res://assets/voice/ray/d23ae9169f86.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"8ff6d69554dd": {
+		"speaker": "ray",
+		"text": "Glowing orange. It's the warmest thing in the room, Vance included.",
+		"file": "res://assets/voice/ray/8ff6d69554dd.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b6845c1a2bb8": {
+		"speaker": "ray",
+		"text": "Back to the rain.",
+		"file": "res://assets/voice/ray/b6845c1a2bb8.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"fa8d25be359f": {
+		"speaker": "ray",
+		"text": "He's dead.",
+		"file": "res://assets/voice/ray/fa8d25be359f.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"7e0102c26240": {
+		"speaker": "ray",
+		"text": "I will.",
+		"file": "res://assets/voice/ray/7e0102c26240.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"6f9005fadfb9": {
+		"speaker": "ray",
+		"text": "Third row, fourth from the left. Reyes, D. Eight thousand. Stamped PAID, Tuesday's date.",
+		"file": "res://assets/voice/ray/6f9005fadfb9.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"6836fce14dee": {
+		"speaker": "ray",
+		"text": "Eight grand. From a man who played for tips.",
+		"file": "res://assets/voice/ray/6836fce14dee.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"a5d284a1ded5": {
+		"speaker": "ray",
+		"text": "More from where?",
+		"file": "res://assets/voice/ray/a5d284a1ded5.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"1b8a1c45771a": {
+		"speaker": "ray",
+		"text": "Paid in full Tuesday afternoon. Dead by Tuesday midnight.",
+		"file": "res://assets/voice/ray/1b8a1c45771a.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"1667a4851b4e": {
+		"speaker": "ray",
+		"text": "Where's the envelope now?",
+		"file": "res://assets/voice/ray/1667a4851b4e.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"a2020161deb1": {
+		"speaker": "ray",
+		"text": "Name?",
+		"file": "res://assets/voice/ray/a2020161deb1.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"d135f5da96cd": {
+		"speaker": "ray",
+		"text": "What did you tell him?",
+		"file": "res://assets/voice/ray/d135f5da96cd.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"78ea3def064a": {
+		"speaker": "ray",
+		"text": "Danny Reyes owed you money.",
+		"file": "res://assets/voice/ray/78ea3def064a.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"c9cb42a827b6": {
+		"speaker": "ray",
+		"text": "Where were you Tuesday night?",
+		"file": "res://assets/voice/ray/c9cb42a827b6.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"451a02ad7229": {
+		"speaker": "ray",
+		"text": "That's a .45.",
+		"file": "res://assets/voice/ray/451a02ad7229.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"babb7e5ee015": {
+		"speaker": "ray",
+		"text": "Danny's marker says PAID.",
+		"file": "res://assets/voice/ray/babb7e5ee015.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b4177cf9e7bf": {
+		"speaker": "ray",
+		"text": "How did he pay you?",
+		"file": "res://assets/voice/ray/b4177cf9e7bf.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"2194d73a4cd9": {
+		"speaker": "ray",
+		"text": "Anyone else asking about Danny?",
+		"file": "res://assets/voice/ray/2194d73a4cd9.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"e22204baa0f1": {
+		"speaker": "ray",
+		"text": "I'll be going.",
+		"file": "res://assets/voice/ray/e22204baa0f1.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"962444b41beb": {
+		"speaker": "ray",
+		"text": "Those two don't go together.",
+		"file": "res://assets/voice/ray/962444b41beb.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"ec8d3bc3ef6c": {
+		"speaker": "ray",
+		"text": "Daniel 'Danny' Reyes, 34. Piano player at the Blue Note.",
+		"file": "res://assets/voice/ray/ec8d3bc3ef6c.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"619408a3da63": {
+		"speaker": "ray",
+		"text": "Found in the alley next to the club, two nights ago. Wallet still on him.",
+		"file": "res://assets/voice/ray/619408a3da63.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5f8c0ea8a826": {
+		"speaker": "ray",
+		"text": "One shot, a .38, close enough to leave powder on his shirt.",
+		"file": "res://assets/voice/ray/5f8c0ea8a826.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"f2ddac7deacf": {
+		"speaker": "ray",
+		"text": "No phone. A musician without a phone. The uniforms looked everywhere but the right place.",
+		"file": "res://assets/voice/ray/f2ddac7deacf.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"de41c6f26f40": {
+		"speaker": "ray",
+		"text": "The bartender, Sal Moretti, told the uniforms he saw nothing.",
+		"file": "res://assets/voice/ray/de41c6f26f40.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b812679c6727": {
+		"speaker": "ray",
+		"text": "Sal sees everything. That's his job.",
+		"file": "res://assets/voice/ray/b812679c6727.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"ff8d7a5d82ae": {
+		"speaker": "ray",
+		"text": "A Blue Note envelope, empty, singed. On the back in Danny's hand: '1 of 3.'",
+		"file": "res://assets/voice/ray/ff8d7a5d82ae.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"333d3bed7fda": {
+		"speaker": "ray",
+		"text": "Whoever was paying Danny, they were on an installment plan.",
+		"file": "res://assets/voice/ray/333d3bed7fda.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"f84fb9018324": {
+		"speaker": "ray",
+		"text": "A small brass key. Opens the filing cabinet.",
+		"file": "res://assets/voice/ray/f84fb9018324.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"b4465377b3a5": {
+		"speaker": "ray",
+		"text": "Stone cold. Something rattles at the bottom of the mug.",
+		"file": "res://assets/voice/ray/b4465377b3a5.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"8ce08b16c7fe": {
+		"speaker": "ray",
+		"text": "Ten cents. The price of a phone call in this town.",
+		"file": "res://assets/voice/ray/8ce08b16c7fe.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5b28a23f33fd": {
+		"speaker": "ray",
+		"text": "Blue Note matches. Someone wrote a number inside: 555-0147.",
+		"file": "res://assets/voice/ray/5b28a23f33fd.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"74fa58b147a0": {
+		"speaker": "ray",
+		"text": "A boat hook. Six feet of pole and a bad attitude at the end.",
+		"file": "res://assets/voice/ray/74fa58b147a0.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"413fd91ff588": {
+		"speaker": "ray",
+		"text": "That won't work.",
+		"file": "res://assets/voice/ray/413fd91ff588.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"5d5735488ce5": {
+		"speaker": "ray",
+		"text": "I don't think so.",
+		"file": "res://assets/voice/ray/5d5735488ce5.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"c59c983f9e30": {
+		"speaker": "ray",
+		"text": "No.",
+		"file": "res://assets/voice/ray/c59c983f9e30.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"a1488d2e0c68": {
+		"speaker": "ray",
+		"text": "Nothing special.",
+		"file": "res://assets/voice/ray/a1488d2e0c68.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"6c7f1b682764": {
+		"speaker": "ray",
+		"text": "Seen better. Seen worse.",
+		"file": "res://assets/voice/ray/6c7f1b682764.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"cec3fff2ee0d": {
+		"speaker": "ray",
+		"text": "I can't do anything with that.",
+		"file": "res://assets/voice/ray/cec3fff2ee0d.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"46cfaff25072": {
+		"speaker": "ray",
+		"text": "Leave it.",
+		"file": "res://assets/voice/ray/46cfaff25072.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"224250fea508": {
+		"speaker": "ray",
+		"text": "We've said all there is to say.",
+		"file": "res://assets/voice/ray/224250fea508.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"6bec93b476b3": {
+		"speaker": "ray",
+		"text": "Nothing left to ask. Nothing I want the answer to, anyway.",
+		"file": "res://assets/voice/ray/6bec93b476b3.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"48e8cad7dd07": {
+		"speaker": "ray",
+		"text": "I've had all the answers I'm getting here.",
+		"file": "res://assets/voice/ray/48e8cad7dd07.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"8340eda2cbf5": {
+		"speaker": "ray",
+		"text": "We've been over it. Twice would just be rude.",
+		"file": "res://assets/voice/ray/8340eda2cbf5.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"912ea1b8ffe6": {
+		"speaker": "ray",
+		"text": "I've got nothing new. I'll come back when I do.",
+		"file": "res://assets/voice/ray/912ea1b8ffe6.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"46d9d4761c79": {
+		"speaker": "ray",
+		"text": "Asking again won't make the answers any better.",
+		"file": "res://assets/voice/ray/46d9d4761c79.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"46aa6a105842": {
+		"speaker": "ray",
+		"text": "That well's dry.",
+		"file": "res://assets/voice/ray/46aa6a105842.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"d9ba72b5318a": {
+		"speaker": "ray",
+		"text": "Everything's been said. Some of it was even true.",
+		"file": "res://assets/voice/ray/d9ba72b5318a.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"8c426c63660c": {
+		"speaker": "ray",
+		"text": "No more questions. Not yet.",
+		"file": "res://assets/voice/ray/8c426c63660c.ogg",
+		"voice": "kokoro:2_blend"
+	},
+	"c1bf57e9e9a1": {
+		"speaker": "ray",
+		"text": "I know what I came to know.",
+		"file": "res://assets/voice/ray/c1bf57e9e9a1.ogg",
 		"voice": "kokoro:2_blend"
 	}
 }
