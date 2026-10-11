@@ -133,6 +133,13 @@ flutter are the post-processing in `render_variant()` (none of the cast uses the
 | `tiny` | "Tiny" Ruiz: Vance's doorman at Pier 9; enormous, soft-spoken, misses Danny's playing | `am_adam` | 0.85 | -3 | none | `SPEAKERS["tiny"]` (was `CASTING["tiny"]` A) | 2026-10-11, over a lowered `am_echo` (B) and a lowered gritty `am_liam` (C) | Case 1, all 18 lines |
 | `vance` | Vance: loan shark, sixties, cardigan over a shoulder holster; courteous and cold. British, by the user's choice | `bm_george` (British English, `"lang": "b"`) | 0.88 | 0 | none | `SPEAKERS["vance"]` (was `CASTING["vance"]` A) | 2026-10-11, over a lowered `am_michael` (B) and a `bm_fable`/`bm_lewis` mix (C) | Case 1, all 31 lines (his office, and through the green door) |
 | `doyle` | Lt. Maureen Doyle: Ray's boss, voicemail and phone; clipped, political, not unkind | `af_kore` | 0.95 | 0 | phone-line filter in the game on her phone lines (picked 2026-10-11), not baked in | `SPEAKERS["doyle"]` (was `CASTING["doyle"]` B) | 2026-10-11, over `af_sarah` (A) and an `af_nicole`/`af_sarah` mix (C) | Case 1, all 11 lines (voicemail and the 1:30 call) |
+| `shah` | Dr. Anita Shah, coroner's investigator (Cases 2-5): forties, brisk, exact, fond of Ray | `bf_emma` (British English, `"lang": "b"`) | 1 | 0 | none | `SPEAKERS["shah"]` (was `CASTING_REST["shah"]` C) | 2026-10-11, over A and B | not yet (~49 lines, Case 2 on) |
+| `park` | Officer Lena Park, Hollywood patrol (Cases 2, 3, 5): early twenties, very thorough, knows the internet | `af_bella` | 1.05 | 0 | none | `SPEAKERS["park"]` (was `CASTING_REST["park"]` A) | 2026-10-11, over B and C | not yet (~38 lines, Case 2 on) |
+| `rosa` | Rosa, waitress at Norm's: sixties, pencil in her bun, calls everyone "hon" | `af_jessica` | 0.95 | -1.5 | none | `SPEAKERS["rosa"]` (was `CASTING_REST["rosa"]` B) | 2026-10-11, over A and C | not yet (~19 lines, Case 2 on) |
+| `heck` | Hector "Heck" Dominguez, rival Glide driver: forties, three phones, loud, then scared | `am_echo` 60% + `am_puck` 40% | 1.05 | 0 | none | `SPEAKERS["heck"]` (was `CASTING_REST["heck"]` C) | 2026-10-11, over A and B | not yet (~13 lines, Case 2 on) |
+| `devin` | Devin Clark, Kenji's roommate, photographer: late twenties, soft-spoken, plausible. The killer | `am_puck` | 0.9 | 0 | none | `SPEAKERS["devin"]` (was `CASTING_REST["devin"]` C) | 2026-10-11, over A and B | not yet (~21 lines, Case 2 on) |
+| `brielle` | Brielle V., drunk influencer, Kenji's last fare (a video on Park's phone) | `af_jessica` | 1.05 | 0 | none | `SPEAKERS["brielle"]` (was `CASTING_REST["brielle"]` B) | 2026-10-11, over A and C | not yet (~2 lines, Case 2 on) |
+| `cabbie` | A cab driver at Norm's counter (two lines) | `am_michael` | 0.92 | -1.5 | none | `SPEAKERS["cabbie"]` (was `CASTING_REST["cabbie"]` B) | 2026-10-11, over A and C | not yet (~2 lines, Case 2 on) |
 
 ## Proposed, awaiting a pick
 
@@ -144,13 +151,6 @@ are heard only on the take (a recording); Brielle only in a phone video; Owen on
 
 | Speaker | Case | Who | Lines | A | B | C |
 | --- | --- | --- | --- | --- | --- | --- |
-| `shah` | 2 | Dr. Anita Shah, coroner's investigator (Cases 2-5): forties, brisk, exact, fond of Ray | ~49 | af_nicole, speed 1 | af_sarah 60% + af_aoede 40%, speed 1 | bf_emma, speed 1 (British) |
-| `park` | 2 | Officer Lena Park, Hollywood patrol (Cases 2, 3, 5): early twenties, very thorough, knows the internet | ~38 | af_bella, speed 1.05 | af_nova, speed 1.05 | af_sky, speed 1 |
-| `rosa` | 2 | Rosa, waitress at Norm's: sixties, pencil in her bun, calls everyone "hon" | ~19 | af_sarah, -2 semitones, speed 0.95, warmth 2 | af_jessica, -1.5 semitones, speed 0.95 | af_aoede 50% + af_nicole 50%, -2.5 semitones, speed 0.92, grit 1.5 |
-| `heck` | 2 | Hector "Heck" Dominguez, rival Glide driver: forties, three phones, loud, then scared | ~13 | am_puck, speed 1.05 | am_eric, speed 1.05 | am_echo 60% + am_puck 40%, speed 1.05 |
-| `devin` | 2 | Devin Clark, Kenji's roommate, photographer: late twenties, soft-spoken, plausible. The killer | ~21 | am_echo, speed 0.95 | am_michael, +1 semitones, speed 0.92 | am_puck, speed 0.9 |
-| `brielle` | 2 | Brielle V., drunk influencer, Kenji's last fare (a video on Park's phone) | ~2 | af_sky, speed 1.05 | af_jessica, speed 1.05 | af_nova, speed 1 |
-| `cabbie` | 2 | A cab driver at Norm's counter (two lines) | ~2 | am_eric, -1 semitones, speed 0.92 | am_michael, -1.5 semitones, speed 0.92 | am_puck, -2 semitones, speed 0.92, grit 1.5 |
 | `pearl` | 3 | Pearl Danvers, Gus's assistant, actress: 34, warm, quick, a very good crier. The killer | ~32 | af_bella, speed 1 | af_aoede, speed 1 | af_river, speed 1 |
 | `morty` | 3 | Morty Kahn, rival collector: seventies, bathrobe and loafers, grieving, defensive | ~20 | am_michael, -2.5 semitones, speed 0.85, flutter 0.1 | am_santa 50% + am_eric 50%, -1 semitones, speed 0.88 | bm_lewis, -2 semitones, speed 0.85 (British) |
 | `charlie` | 3 | Desmond "Charlie" Pike, Chaplin on the boulevard for thirty years: theatrical, kind, nosy | ~18 | bm_fable, speed 1 (British) | am_puck, speed 1 | bm_daniel, speed 0.95 (British) |

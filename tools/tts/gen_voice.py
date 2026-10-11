@@ -49,6 +49,14 @@ SPEAKERS = {
     "tiny":  {"blend": {"am_adam": 1.0}, "semitones": -3.0, "speed": 0.85, "from": "CASTING tiny A"},
     "vance": {"blend": {"bm_george": 1.0}, "speed": 0.88, "lang": "b", "from": "CASTING vance A"},
     "otis":  {"blend": {"am_liam": 1.0}, "speed": 1.0, "from": "CASTING otis B"},
+    # Cases 2-5, picked 2026-10-11, not voiced yet
+    "shah":  {"blend": {"bf_emma": 1.0}, "speed": 1.0, "lang": "b", "from": "CASTING_REST shah C"},
+    "park":  {"blend": {"af_bella": 1.0}, "speed": 1.05, "from": "CASTING_REST park A"},
+    "rosa":  {"blend": {"af_jessica": 1.0}, "semitones": -1.5, "speed": 0.95, "from": "CASTING_REST rosa B"},
+    "heck":  {"blend": {"am_echo": 0.6, "am_puck": 0.4}, "speed": 1.05, "from": "CASTING_REST heck C"},
+    "devin": {"blend": {"am_puck": 1.0}, "speed": 0.9, "from": "CASTING_REST devin C"},
+    "brielle": {"blend": {"af_jessica": 1.0}, "speed": 1.05, "from": "CASTING_REST brielle B"},
+    "cabbie": {"blend": {"am_michael": 1.0}, "semitones": -1.5, "from": "CASTING_REST cabbie B"},
 }
 
 
