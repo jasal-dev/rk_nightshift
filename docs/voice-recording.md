@@ -150,21 +150,23 @@ flutter are the post-processing in `render_variant()` (none of the cast uses the
 | `crane` | Elliot Crane, Haskell's chief of staff: forties, lawyerly, still a little drunk, frightened. The killer | `am_michael` | 0.95 | 0 | none | `SPEAKERS["crane"]` (was `CASTING_REST["crane"]` A) | 2026-10-11, over B and C | not yet (~24 lines, Case 4 on) |
 | `ike` | Ike Feld, night tech at the crime lab (Cases 4-5): thirties, hoodie, dry, curious | `am_echo` | 1 | 0 | none | `SPEAKERS["ike"]` (was `CASTING_REST["ike"]` C) | 2026-10-11, over A and B | not yet (~35 lines, Case 4 on) |
 | `owen` | Owen Tate, delivery rider, 24 (heard only on the gate camera clips) | `am_eric` | 0.92 | 1 | none | `SPEAKERS["owen"]` (was `CASTING_REST["owen"]` C) | 2026-10-11, over A and B | not yet (~3 lines, Case 4 on) |
+| `teo` | Teodoro "Teo" Alcaraz, the Blue Note's porter: sixties, gentle, shaken, precise about habits | `am_michael` | 0.85 | -1.5 | warmth 2 | `SPEAKERS["teo"]` (was `CASTING_REST["teo"]` B) | 2026-10-11, over A and C | not yet (~12 lines, Case 5 on) |
+| `mara` | Mara Quist, Los Angeles Times metro reporter: forties, persistent, fair, unimpressed | `af_river` | 1 | 0 | none | `SPEAKERS["mara"]` (was `CASTING_REST["mara"]` A) | 2026-10-11, over B and C | not yet (~15 lines, Case 5 on) |
+| `brenner` | Walter "Walt" Brenner, LAPD retired, Doyle's training officer: sixties, big, avuncular. The killer | `am_eric` 50% + `am_santa` 50% | 0.88 | -2 | warmth 2 | `SPEAKERS["brenner"]` (was `CASTING_REST["brenner"]` B) | 2026-10-11, over A and C | not yet (~50 lines, Case 5 on) |
+| `okafor` | Deputy DA Helen Okafor (Ending C): forties, raincoat over gym clothes, precise | `af_aoede` | 0.95 | 0 | none | `SPEAKERS["okafor"]` (was `CASTING_REST["okafor"]` A) | 2026-10-11, over B and C | not yet (~5 lines, Case 5 on) |
+| `danny` | Danny Reyes, the piano player, 34 (heard only on the take) | `am_michael` | 1 | 1 | none | `SPEAKERS["danny"]` (was `CASTING_REST["danny"]` C) | 2026-10-11, over A and B | not yet (~2 lines, Case 5 on) |
+| `pryce` | Harlan Pryce, developer (heard only on the take): smooth, used to being obeyed | `am_eric` 50% + `am_michael` 50% | 0.92 | -1.5 | warmth 2 | `SPEAKERS["pryce"]` (was `CASTING_REST["pryce"]` C) | 2026-10-11, over A and B | not yet (~5 lines, Case 5 on) |
+| `haskell` | Councilman Ted Haskell (heard only on the take): nervous, wants to go home | `am_eric` | 1.05 | 0 | none | `SPEAKERS["haskell"]` (was `CASTING_REST["haskell"]` A) | 2026-10-11, over B and C | not yet (~3 lines, Case 5 on) |
 
 ## Proposed, awaiting a pick
 
-Every speaker in Cases 2 to 5, proposed 2026-10-11 and rendered by `gen_voice.py --casting-rest` into
-`tools/tts/out/casting_rest/` (presets and the line used are in `CASTING_REST`; `all_caseN.wav` plays a case's
-characters). When the user picks, copy the preset into `SPEAKERS`, move the row to the cast table, tag the
-character's `voice()` calls with their id (phone lines `phone = true`) and voice their lines. Danny, Pryce and Haskell
-are heard only on the take (a recording); Brielle only in a phone video; Owen only on the gate camera.
+None: every speaking character in the game is cast (2026-10-11). The A/B/C proposals stay in `CASTING` and
+`CASTING_REST` in the generator, and their samples in `tools/tts/out/casting_case1/` and `casting_rest/`. A new
+character gets three proposals there and a row here until the user picks.
 
-| Speaker | Case | Who | Lines | A | B | C |
-| --- | --- | --- | --- | --- | --- | --- |
-| `teo` | 5 | Teodoro "Teo" Alcaraz, the Blue Note's porter: sixties, gentle, shaken, precise about habits | ~12 | am_eric, -2 semitones, speed 0.88 | am_michael, -1.5 semitones, speed 0.85, warmth 2 | am_echo, -2 semitones, speed 0.85, warmth 3 |
-| `mara` | 5 | Mara Quist, Los Angeles Times metro reporter: forties, persistent, fair, unimpressed | ~15 | af_river, speed 1 | af_nicole, speed 0.95 | af_alloy, speed 1 |
-| `brenner` | 5 | Walter "Walt" Brenner, LAPD retired, Doyle's training officer: sixties, big, avuncular. The killer | ~50 | am_echo, -3 semitones, speed 0.88, warmth 3 | am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2 | am_michael, -3 semitones, speed 0.86, grit 1.5 |
-| `okafor` | 5 | Deputy DA Helen Okafor (Ending C): forties, raincoat over gym clothes, precise | ~5 | af_aoede, speed 0.95 | af_sarah, speed 0.95 | bf_isabella, speed 0.95 (British) |
-| `danny` | 5 | Danny Reyes, the piano player, 34 (heard only on the take) | ~2 | am_echo, speed 1 | am_puck, speed 0.95 | am_michael, +1 semitones, speed 1 |
-| `pryce` | 5 | Harlan Pryce, developer (heard only on the take): smooth, used to being obeyed | ~5 | bm_lewis, speed 0.95 (British) | am_michael, -1 semitones, speed 0.92 | am_eric 50% + am_michael 50%, -1.5 semitones, speed 0.92, warmth 2 |
-| `haskell` | 5 | Councilman Ted Haskell (heard only on the take): nervous, wants to go home | ~3 | am_eric, speed 1.05 | am_echo, speed 1.05 | am_puck, -1 semitones, speed 1 |
+## Unvoiced by design
+
+- Maya, Ray's daughter: only text messages on his phone (`Main.text_message()`), read on screen.
+- Sound effects written as text (`"*knock knock*"`, `"*click*"`, `"*RIIING*"`) and silences (`"..."`).
+- Stage directions inside a line (`"(muffled)"`, `"(pages turning)"`): the line is voiced, the direction isn't.
+- People who never speak: Kenji, Gus and Sal's body, Owen on the river bank, Trent Whitaker, the IA sergeant.

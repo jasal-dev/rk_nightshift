@@ -67,6 +67,13 @@ SPEAKERS = {
     "crane": {"blend": {"am_michael": 1.0}, "speed": 0.95, "from": "CASTING_REST crane A"},
     "ike":   {"blend": {"am_echo": 1.0}, "speed": 1.0, "from": "CASTING_REST ike C"},
     "owen":  {"blend": {"am_eric": 1.0}, "semitones": 1.0, "from": "CASTING_REST owen C"},
+    "teo":   {"blend": {"am_michael": 1.0}, "semitones": -1.5, "speed": 0.85, "warmth": 2.0, "from": "CASTING_REST teo B"},
+    "mara":  {"blend": {"af_river": 1.0}, "speed": 1.0, "from": "CASTING_REST mara A"},
+    "brenner": {"blend": {"am_eric": 0.5, "am_santa": 0.5}, "semitones": -2.0, "speed": 0.88, "warmth": 2.0, "from": "CASTING_REST brenner B"},
+    "okafor": {"blend": {"af_aoede": 1.0}, "speed": 0.95, "from": "CASTING_REST okafor A"},
+    "danny": {"blend": {"am_michael": 1.0}, "semitones": 1.0, "speed": 1.0, "from": "CASTING_REST danny C"},
+    "pryce": {"blend": {"am_eric": 0.5, "am_michael": 0.5}, "semitones": -1.5, "speed": 0.92, "warmth": 2.0, "from": "CASTING_REST pryce C"},
+    "haskell": {"blend": {"am_eric": 1.0}, "speed": 1.05, "from": "CASTING_REST haskell A"},
 }
 
 
