@@ -3,7 +3,8 @@
     python tools/sounds/make_loops.py
 
 assets/sounds/rain.wav       232198 urban_night_rain_1: the whole take, its last 1.5 s crossfaded into its start so it
-                             loops without a seam. Mono, 16-bit, 44.1 kHz.
+                             loops without a seam, brought up to -28 dBFS RMS (the take is quiet, -34) with its few
+                             loud drops softly limited to stay under -1 dBFS. Mono, 16-bit, 44.1 kHz.
 assets/sounds/footsteps.wav  685287 footsteps-ground: the first eight steps (0.38 s to 4.75 s), which are evenly paced
                              (one every 0.546 s), with a 10 ms fade at each end so the loop doesn't click. The player
                              plays it a little faster to match Ray's walk (Player.STEP_PITCH). Mono, 16-bit, 48 kHz.
@@ -48,6 +49,10 @@ def rain():
     t = np.linspace(0, np.pi / 2, fade, dtype=np.float32)
     body = x[: len(x) - fade].copy()
     body[:fade] = body[:fade] * np.sin(t) + x[len(x) - fade:] * np.cos(t)    # equal power: no dip in the hiss
+    body *= 10 ** (-28 / 20) / np.sqrt(np.mean(body ** 2))
+    knee, ceiling = 0.6, 0.89      # peaks stay under -1 dBFS
+    over = np.abs(body) > knee
+    body[over] = np.sign(body[over]) * (knee + (ceiling - knee) * np.tanh((np.abs(body[over]) - knee) / (ceiling - knee)))
     write(os.path.join(OUT, "rain.wav"), body, sr)
 
 

@@ -13,7 +13,7 @@ const RELIGHT := preload("res://shaders/relight.gdshader")
 @export var walk_speed := 186.0  ## pixels per second at scale 1.0
 const STEPS := preload("res://assets/sounds/footsteps.wav")   ## a loop of eight steps (tools/sounds/make_loops.py)
 const STEP_PITCH := 1.09    ## its steps are 0.546 s apart; the walk cycle is two steps a second (12 frames at 12 fps)
-const STEP_DB := -3.0
+const STEP_DB := -1.0
 
 var facing := "right"           ## right / left / up / down
 var talking := false
