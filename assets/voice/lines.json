@@ -1582,5 +1582,395 @@
 		"text": "Sal's scared, Detective. Don't make me sorry I told you.",
 		"file": "res://assets/voice/nina/59e9037eec98.ogg",
 		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"be7bd63586ca": {
+		"speaker": "sal",
+		"text": "...Danny's knock. Who is this?",
+		"file": "res://assets/voice/sal/be7bd63586ca.ogg",
+		"voice": "kokoro: am_santa, speed 0.9"
+	},
+	"3e89b88c24f2": {
+		"speaker": "sal",
+		"text": "Cops don't know that knock. Somebody gave it to you.",
+		"file": "res://assets/voice/sal/3e89b88c24f2.ogg",
+		"voice": "kokoro: am_santa, speed 0.9"
+	},
+	"198fe94e9ae6": {
+		"speaker": "sal",
+		"text": "Door stays shut. Talk through it.",
+		"file": "res://assets/voice/sal/198fe94e9ae6.ogg",
+		"voice": "kokoro: am_santa, speed 0.9"
+	},
+	"bdf4bb7faf39": {
+		"speaker": "sal",
+		"text": "Danny didn't have friends. He had a piano and a tab.",
+		"file": "res://assets/voice/sal/bdf4bb7faf39.ogg",
+		"voice": "kokoro: am_santa, speed 0.9"
+	},
+	"bb2849ec5d4b": {
+		"speaker": "sal",
+		"text": "I was counting the till. One shot. When I looked out the back, there was only Danny and the rain.",
+		"file": "res://assets/voice/sal/bb2849ec5d4b.ogg",
+		"voice": "kokoro: am_santa, speed 0.9"
+	},
+	"a1da25c9ce95": {
+		"speaker": "sal",
+		"text": "I told the uniforms what they wanted to write down.",
+		"file": "res://assets/voice/sal/a1da25c9ce95.ogg",
+		"voice": "kokoro: am_santa, speed 0.9"
+	},
+	"664c54b9f674": {
+		"speaker": "sal",
+		"text": "A man named Vance. Vance doesn't send letters, if you follow me.",
+		"file": "res://assets/voice/sal/664c54b9f674.ogg",
+		"voice": "kokoro: am_santa, speed 0.9"
+	},
+	"75627df2e153": {
+		"speaker": "sal",
+		"text": "Pier 9. Warehouse with the green door.",
+		"file": "res://assets/voice/sal/75627df2e153.ogg",
+		"voice": "kokoro: am_santa, speed 0.9"
+	},
+	"88e9e6694b8a": {
+		"speaker": "sal",
+		"text": "Who gave you the knock?",
+		"file": "res://assets/voice/sal/88e9e6694b8a.ogg",
+		"voice": "kokoro: am_santa, speed 0.9"
+	},
+	"01cb45f31808": {
+		"speaker": "sal",
+		"text": "Nina. Had to be.",
+		"file": "res://assets/voice/sal/01cb45f31808.ogg",
+		"voice": "kokoro: am_santa, speed 0.9"
+	},
+	"7a25f4cfcfd4": {
+		"speaker": "sal",
+		"text": "Three people alive know that knock now. Her, me, and you. Keep it that way.",
+		"file": "res://assets/voice/sal/7a25f4cfcfd4.ogg",
+		"voice": "kokoro: am_santa, speed 0.9"
+	},
+	"59ccc44aa855": {
+		"speaker": "sal",
+		"text": "And you didn't hear it from me. You never heard me at all.",
+		"file": "res://assets/voice/sal/59ccc44aa855.ogg",
+		"voice": "kokoro: am_santa, speed 0.9"
+	},
+	"93739503432b": {
+		"speaker": "tiny",
+		"text": "Knock on that door and you'll be knocking with your teeth.",
+		"file": "res://assets/voice/tiny/93739503432b.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"a29969a68575": {
+		"speaker": "tiny",
+		"text": "Bring that back when you're done.",
+		"file": "res://assets/voice/tiny/a29969a68575.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"bde9f6aa3af8": {
+		"speaker": "tiny",
+		"text": "You find who did Danny, you come tell me.",
+		"file": "res://assets/voice/tiny/bde9f6aa3af8.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"00651987e88a": {
+		"speaker": "tiny",
+		"text": "Boat hook's on the piling. Bring it back after.",
+		"file": "res://assets/voice/tiny/00651987e88a.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"a873faf2b9c9": {
+		"speaker": "tiny",
+		"text": "We're closed.",
+		"file": "res://assets/voice/tiny/a873faf2b9c9.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"f6ef3d9f0f76": {
+		"speaker": "tiny",
+		"text": "I'm the sign.",
+		"file": "res://assets/voice/tiny/f6ef3d9f0f76.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"9467a9195b86": {
+		"speaker": "tiny",
+		"text": "Mr. Vance doesn't see people at night. Mr. Vance doesn't see people in the day, either.",
+		"file": "res://assets/voice/tiny/9467a9195b86.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"a57f9a08b96d": {
+		"speaker": "tiny",
+		"text": "A badge gets you a lawyer, not a door. Come back with paper.",
+		"file": "res://assets/voice/tiny/a57f9a08b96d.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"fc52ba1a618d": {
+		"speaker": "tiny",
+		"text": "KJAZZ. Only station that still plays piano after midnight.",
+		"file": "res://assets/voice/tiny/fc52ba1a618d.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"536f11c7c55f": {
+		"speaker": "tiny",
+		"text": "Used to be I didn't need a radio for that.",
+		"file": "res://assets/voice/tiny/536f11c7c55f.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"33e8e44d10cc": {
+		"speaker": "tiny",
+		"text": "Thursdays. Kid used to play 'Round Midnight' for me without me asking.",
+		"file": "res://assets/voice/tiny/33e8e44d10cc.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"767882fad012": {
+		"speaker": "tiny",
+		"text": "Danny. Somebody put him down in that alley like a dog.",
+		"file": "res://assets/voice/tiny/767882fad012.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"613fb7dab53c": {
+		"speaker": "tiny",
+		"text": "Still can't let you in. Mr. Vance only opens up for people who've been here before.",
+		"file": "res://assets/voice/tiny/613fb7dab53c.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"d4c3cc0d54b7": {
+		"speaker": "tiny",
+		"text": "...That's Danny's knock. He came every Tuesday to pay.",
+		"file": "res://assets/voice/tiny/d4c3cc0d54b7.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"daee02efb80e": {
+		"speaker": "tiny",
+		"text": "Knocked like that every time, like he was playing it.",
+		"file": "res://assets/voice/tiny/daee02efb80e.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"1b56d086368b": {
+		"speaker": "tiny",
+		"text": "(low) Five minutes.",
+		"file": "res://assets/voice/tiny/1b56d086368b.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"9e89f1079972": {
+		"speaker": "tiny",
+		"text": "Friend of Danny's, Mr. Vance.",
+		"file": "res://assets/voice/tiny/9e89f1079972.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"cb1a259abdb6": {
+		"speaker": "tiny",
+		"text": "Detective. You find who did Danny, you come tell me. I want to hear it from somebody.",
+		"file": "res://assets/voice/tiny/cb1a259abdb6.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"baabe9f550a6": {
+		"speaker": "vance",
+		"text": "Detective. Tiny tells me you're a friend of Danny's. Tiny is sentimental. I'm not.",
+		"file": "res://assets/voice/vance/baabe9f550a6.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"e544a1acebed": {
+		"speaker": "vance",
+		"text": "Sit, if you like. The chair is uncomfortable. I bought it that way.",
+		"file": "res://assets/voice/vance/e544a1acebed.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"909b901e6495": {
+		"speaker": "vance",
+		"text": "If I'd had him shot, they'd have taken the wallet. It saves my people the trouble of sending flowers.",
+		"file": "res://assets/voice/vance/909b901e6495.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"833eef17d610": {
+		"speaker": "vance",
+		"text": "Was it? Interesting. Not to me.",
+		"file": "res://assets/voice/vance/833eef17d610.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"c05864332421": {
+		"speaker": "vance",
+		"text": "Look at my wall, Detective. I keep better records than your department.",
+		"file": "res://assets/voice/vance/c05864332421.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"4cb796b3ff6f": {
+		"speaker": "vance",
+		"text": "That's it. One of three. Sounds like a man with a payment plan.",
+		"file": "res://assets/voice/vance/4cb796b3ff6f.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"46c2148066c5": {
+		"speaker": "vance",
+		"text": "I don't pawn, Detective.",
+		"file": "res://assets/voice/vance/46c2148066c5.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"b62de673202f": {
+		"speaker": "vance",
+		"text": "Hands, Detective.",
+		"file": "res://assets/voice/vance/b62de673202f.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"9dd56ee96f20": {
+		"speaker": "vance",
+		"text": "Half this city owes me money, Detective. The other half owes the bank. I'm friendlier.",
+		"file": "res://assets/voice/vance/9dd56ee96f20.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"da8c11a9b152": {
+		"speaker": "vance",
+		"text": "I read the papers. Dead men are bad for business. Think about that.",
+		"file": "res://assets/voice/vance/da8c11a9b152.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"ea4c823ddfc0": {
+		"speaker": "vance",
+		"text": "On my boat in Avalon harbor. I lost four hundred dollars at cards to a dentist from Torrance.",
+		"file": "res://assets/voice/vance/ea4c823ddfc0.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"4f29115728bd": {
+		"speaker": "vance",
+		"text": "Harbor patrol logged me in at six and out Wednesday at noon. Check it.",
+		"file": "res://assets/voice/vance/4f29115728bd.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"1cdc0c2ad5e1": {
+		"speaker": "vance",
+		"text": "I know. That's why I told you.",
+		"file": "res://assets/voice/vance/1cdc0c2ad5e1.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"710d1355e986": {
+		"speaker": "vance",
+		"text": "It is. Your piano player was shot with a .38, if the Times is right.",
+		"file": "res://assets/voice/vance/710d1355e986.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"66618bd2bf77": {
+		"speaker": "vance",
+		"text": "I've never owned a revolver. They're for people who want to be romantic about it.",
+		"file": "res://assets/voice/vance/66618bd2bf77.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"95b5237119c1": {
+		"speaker": "vance",
+		"text": "Dead men don't pay, Detective. Danny paid. All of it, Tuesday afternoon, in cash.",
+		"file": "res://assets/voice/vance/95b5237119c1.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"a8139503d68c": {
+		"speaker": "vance",
+		"text": "I asked him the same thing. He smiled, which was new.",
+		"file": "res://assets/voice/vance/a8139503d68c.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"e3dd9f4e2792": {
+		"speaker": "vance",
+		"text": "Said he'd come into some money and there was more where it came from.",
+		"file": "res://assets/voice/vance/e3dd9f4e2792.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"ae5d4213d583": {
+		"speaker": "vance",
+		"text": "I don't ask where money comes from. Only where it's going.",
+		"file": "res://assets/voice/vance/ae5d4213d583.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"3abd7da43f43": {
+		"speaker": "vance",
+		"text": "In a Blue Note envelope, like a boy bringing his allowance.",
+		"file": "res://assets/voice/vance/3abd7da43f43.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"581f34483675": {
+		"speaker": "vance",
+		"text": "He'd written something on the back. I didn't read it. I'm not his diary.",
+		"file": "res://assets/voice/vance/581f34483675.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"bc6ee949c174": {
+		"speaker": "vance",
+		"text": "Tiny burns the trash every night. If it's anywhere, it's in the barrel.",
+		"file": "res://assets/voice/vance/bc6ee949c174.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"83fffd24eb0e": {
+		"speaker": "vance",
+		"text": "You're the second this week. Yesterday a man telephoned.",
+		"file": "res://assets/voice/vance/83fffd24eb0e.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"1323b87c4743": {
+		"speaker": "vance",
+		"text": "Wanted to know if Danny had paid me, and in what.",
+		"file": "res://assets/voice/vance/1323b87c4743.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"2e19f71abe1c": {
+		"speaker": "vance",
+		"text": "He didn't offer one. He talked like a cop who'd stopped being one.",
+		"file": "res://assets/voice/vance/2e19f71abe1c.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"2504dc8e0cf9": {
+		"speaker": "vance",
+		"text": "You'd know the type better than I would.",
+		"file": "res://assets/voice/vance/2504dc8e0cf9.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"a7d720c3606f": {
+		"speaker": "vance",
+		"text": "What I'm telling you. Less, actually. I liked his voice less.",
+		"file": "res://assets/voice/vance/a7d720c3606f.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"42e1eed2676a": {
+		"speaker": "vance",
+		"text": "Detective. Whoever did Danny, it wasn't for my eight thousand. He'd already paid it.",
+		"file": "res://assets/voice/vance/42e1eed2676a.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"3ddf76780dfe": {
+		"speaker": "vance",
+		"text": "Find out who he was expecting to pay him.",
+		"file": "res://assets/voice/vance/3ddf76780dfe.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"be86d4493ebc": {
+		"speaker": "vance",
+		"text": "Tiny will see you out. Come back when you've got a better question.",
+		"file": "res://assets/voice/vance/be86d4493ebc.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"32c027a7d082": {
+		"speaker": "vance",
+		"text": "Tiny? Who is it?",
+		"file": "res://assets/voice/vance/32c027a7d082.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"370f57c1c4ad": {
+		"speaker": "otis",
+		"text": "Ray, it's Otis. Hope I'm not interrupting your social life.",
+		"file": "res://assets/voice/otis/370f57c1c4ad.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"0a1e01295857": {
+		"speaker": "otis",
+		"text": "Danny'll keep. I've got a rideshare driver dead behind the wheel up at the Mulholland overlook.",
+		"file": "res://assets/voice/otis/0a1e01295857.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"dd3648a7cfe1": {
+		"speaker": "otis",
+		"text": "Engine still running. Patrol's holding it for you.",
+		"file": "res://assets/voice/otis/dd3648a7cfe1.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"cf6c54122b68": {
+		"speaker": "otis",
+		"text": "Bring a coat. It's windy up there.",
+		"file": "res://assets/voice/otis/cf6c54122b68.ogg",
+		"voice": "kokoro: am_liam, speed 1"
 	}
 }

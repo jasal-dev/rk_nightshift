@@ -210,7 +210,7 @@ func _talk_to_sal() -> void:
 	await main.player.play_action("use")
 	await main.say("*knock... knock... knockknockknock*")
 	await main.wait(0.9)
-	await main.voice("...Danny's knock. Who is this?", door, SAL_COLOR)
+	await main.voice("...Danny's knock. Who is this?", door, SAL_COLOR, "sal")
 	var asked := []
 	while true:
 		var opts := []
@@ -228,27 +228,27 @@ func _talk_to_sal() -> void:
 		match k:
 			"cop":
 				await main.say("Police. Open the door, Sal.")
-				await main.voice("Cops don't know that knock. Somebody gave it to you.", door, SAL_COLOR)
-				await main.voice("Door stays shut. Talk through it.", door, SAL_COLOR)
+				await main.voice("Cops don't know that knock. Somebody gave it to you.", door, SAL_COLOR, "sal")
+				await main.voice("Door stays shut. Talk through it.", door, SAL_COLOR, "sal")
 			"friend":
 				await main.say("A friend of Danny's.")
-				await main.voice("Danny didn't have friends. He had a piano and a tab.", door, SAL_COLOR)
+				await main.voice("Danny didn't have friends. He had a piano and a tab.", door, SAL_COLOR, "sal")
 			"saw":
 				await main.say("Did you see who shot him?")
-				await main.voice("I was counting the till. One shot. When I looked out the back, there was only Danny and the rain.", door, SAL_COLOR)
+				await main.voice("I was counting the till. One shot. When I looked out the back, there was only Danny and the rain.", door, SAL_COLOR, "sal")
 				await main.say("You told the uniforms you didn't hear anything.")
-				await main.voice("I told the uniforms what they wanted to write down.", door, SAL_COLOR)
+				await main.voice("I told the uniforms what they wanted to write down.", door, SAL_COLOR, "sal")
 			"owed":
 				await main.say("Who did Danny owe money to?")
-				await main.voice("...", door, SAL_COLOR)
-				await main.voice("A man named Vance. Vance doesn't send letters, if you follow me.", door, SAL_COLOR)
+				await main.voice("...", door, SAL_COLOR, "sal")
+				await main.voice("A man named Vance. Vance doesn't send letters, if you follow me.", door, SAL_COLOR, "sal")
 				await main.say("Where do I find Vance?")
-				await main.voice("Pier 9. Warehouse with the green door.", door, SAL_COLOR)
-				await main.voice("Who gave you the knock?", door, SAL_COLOR)
+				await main.voice("Pier 9. Warehouse with the green door.", door, SAL_COLOR, "sal")
+				await main.voice("Who gave you the knock?", door, SAL_COLOR, "sal")
 				await main.wait(0.5)
-				await main.voice("Nina. Had to be.", door, SAL_COLOR)
-				await main.voice("Three people alive know that knock now. Her, me, and you. Keep it that way.", door, SAL_COLOR)
-				await main.voice("And you didn't hear it from me. You never heard me at all.", door, SAL_COLOR)
+				await main.voice("Nina. Had to be.", door, SAL_COLOR, "sal")
+				await main.voice("Three people alive know that knock now. Her, me, and you. Keep it that way.", door, SAL_COLOR, "sal")
+				await main.voice("And you didn't hear it from me. You never heard me at all.", door, SAL_COLOR, "sal")
 				await main.player.play_action("notebook")
 				await main.say("Pier 9. Vance. Green door.")
 				Game.set_flag("talked_to_sal")

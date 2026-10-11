@@ -81,14 +81,14 @@ static func car_menu(main: Node, here: String) -> void:
 static func plate_call(main: Node) -> void:
 	## Puzzle 4.2: Otis runs 8KXD392.
 	await main.player.play_action("use")
-	await main.voice("Room 214. The night is young and so am I.", CALL_AT, OTIS_COLOR)
+	await main.voice("Room 214. The night is young and so am I.", CALL_AT, OTIS_COLOR, "otis", true)
 	await main.say("Run a plate for me. Eight, K, X, D, three, nine, two. Blue-gray Audi.")
-	await main.voice("Registered to an Elliot Crane, Mount Washington. Crane, Crane... Ray, that's Councilman Haskell's chief of staff.", CALL_AT, OTIS_COLOR)
-	await main.voice("He's on the news every time Haskell won't comment.", CALL_AT, OTIS_COLOR)
+	await main.voice("Registered to an Elliot Crane, Mount Washington. Crane, Crane... Ray, that's Councilman Haskell's chief of staff.", CALL_AT, OTIS_COLOR, "otis", true)
+	await main.voice("He's on the news every time Haskell won't comment.", CALL_AT, OTIS_COLOR, "otis", true)
 	await main.say("He's about to be on it again.")
-	await main.voice("You're about to ruin a whole lot of mornings.", CALL_AT, OTIS_COLOR)
+	await main.voice("You're about to ruin a whole lot of mornings.", CALL_AT, OTIS_COLOR, "otis", true)
 	await main.say("Owen Tate's mother's already up. Send Doss to meet me there. Tell him to bring his cuffs. He's had them on the wrong man all night.")
-	await main.voice("I'll put it nicer.", CALL_AT, OTIS_COLOR)
+	await main.voice("I'll put it nicer.", CALL_AT, OTIS_COLOR, "otis", true)
 	main.clue("clue_crane_id")
 
 

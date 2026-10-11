@@ -56,7 +56,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.say("Tiny waves me through.")
 				await main.change_room("vance_office", "pier9_dock")
 			elif not Game.flag("tiny_softened"):
-				await main.voice("Knock on that door and you'll be knocking with your teeth.", TINY_AT, TINY_COLOR)
+				await main.voice("Knock on that door and you'll be knocking with your teeth.", TINY_AT, TINY_COLOR, "tiny")
 				await main.walk(main.player.position + Vector2(-90, 40))
 				await _failed()
 			else:
@@ -109,7 +109,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.player.play_action("pickup")
 				await main.give("gaff", false)
 				_sync()
-				await main.voice("Bring that back when you're done.", TINY_AT, TINY_COLOR)
+				await main.voice("Bring that back when you're done.", TINY_AT, TINY_COLOR, "tiny")
 
 		"containers":
 			if verb == "look":
@@ -177,12 +177,12 @@ func _tiny(verb: String, item: String) -> void:
 			await default_response(verb, item)
 			return
 	if Game.flag("got_envelope"):
-		await main.voice("You find who did Danny, you come tell me.", TINY_AT, TINY_COLOR)
+		await main.voice("You find who did Danny, you come tell me.", TINY_AT, TINY_COLOR, "tiny")
 	elif Game.flag("knows_envelope"):
 		if Game.has_item("gaff"):
-			await main.voice("Bring that back when you're done.", TINY_AT, TINY_COLOR)
+			await main.voice("Bring that back when you're done.", TINY_AT, TINY_COLOR, "tiny")
 		else:
-			await main.voice("Boat hook's on the piling. Bring it back after.", TINY_AT, TINY_COLOR)
+			await main.voice("Boat hook's on the piling. Bring it back after.", TINY_AT, TINY_COLOR, "tiny")
 	elif Game.flag("in_vance_office"):
 		await main.say("Five minutes, he said. Tiny looks like a man who counts.")
 	else:
@@ -192,25 +192,25 @@ func _tiny(verb: String, item: String) -> void:
 func _talk_to_tiny() -> void:
 	if not Game.flag("met_tiny"):
 		Game.set_flag("met_tiny")
-		await main.voice("We're closed.", TINY_AT, TINY_COLOR)
+		await main.voice("We're closed.", TINY_AT, TINY_COLOR, "tiny")
 		await main.say("I didn't see a sign.")
-		await main.voice("I'm the sign.", TINY_AT, TINY_COLOR)
+		await main.voice("I'm the sign.", TINY_AT, TINY_COLOR, "tiny")
 	while true:
 		var c: int = await main.choose(["I need to see Vance.", "LAPD.", "Nice radio.", "Never mind."])
 		match c:
 			0:
 				await main.say("I need to see Vance.")
-				await main.voice("Mr. Vance doesn't see people at night. Mr. Vance doesn't see people in the day, either.", TINY_AT, TINY_COLOR)
+				await main.voice("Mr. Vance doesn't see people at night. Mr. Vance doesn't see people in the day, either.", TINY_AT, TINY_COLOR, "tiny")
 			1:
 				await main.say("LAPD.")
 				await main.player.play_action("badge")
-				await main.voice("A badge gets you a lawyer, not a door. Come back with paper.", TINY_AT, TINY_COLOR)
+				await main.voice("A badge gets you a lawyer, not a door. Come back with paper.", TINY_AT, TINY_COLOR, "tiny")
 				await _failed()
 			2:
 				await main.say("Nice radio.")
-				await main.voice("KJAZZ. Only station that still plays piano after midnight.", TINY_AT, TINY_COLOR)
+				await main.voice("KJAZZ. Only station that still plays piano after midnight.", TINY_AT, TINY_COLOR, "tiny")
 				await main.wait(0.4)
-				await main.voice("Used to be I didn't need a radio for that.", TINY_AT, TINY_COLOR)
+				await main.voice("Used to be I didn't need a radio for that.", TINY_AT, TINY_COLOR, "tiny")
 			3:
 				await main.say("Never mind.")
 				return
@@ -220,10 +220,10 @@ func _show_matchbook() -> void:
 	await main.player.play_action("use")
 	await main.say("You drink at the Blue Note.")
 	await main.wait(1.2)
-	await main.voice("Thursdays. Kid used to play 'Round Midnight' for me without me asking.", TINY_AT, TINY_COLOR)
-	await main.voice("Danny. Somebody put him down in that alley like a dog.", TINY_AT, TINY_COLOR)
+	await main.voice("Thursdays. Kid used to play 'Round Midnight' for me without me asking.", TINY_AT, TINY_COLOR, "tiny")
+	await main.voice("Danny. Somebody put him down in that alley like a dog.", TINY_AT, TINY_COLOR, "tiny")
 	await main.say("That's why I'm here.")
-	await main.voice("Still can't let you in. Mr. Vance only opens up for people who've been here before.", TINY_AT, TINY_COLOR)
+	await main.voice("Still can't let you in. Mr. Vance only opens up for people who've been here before.", TINY_AT, TINY_COLOR, "tiny")
 	await main.say("People who've been here before. People who knock like they've been here before.")
 	Game.set_flag("tiny_softened")
 
@@ -248,11 +248,11 @@ func _knock() -> void:
 	await main.player.play_action("use")
 	await main.say("*knock... knock... knockknockknock*")
 	await main.wait(0.8)
-	await main.voice("...That's Danny's knock. He came every Tuesday to pay.", TINY_AT, TINY_COLOR)
-	await main.voice("Knocked like that every time, like he was playing it.", TINY_AT, TINY_COLOR)
-	await main.voice("Tiny? Who is it?", DOOR_AT, VANCE_COLOR)
-	await main.voice("(low) Five minutes.", TINY_AT, TINY_COLOR)
-	await main.voice("Friend of Danny's, Mr. Vance.", TINY_AT, TINY_COLOR)
+	await main.voice("...That's Danny's knock. He came every Tuesday to pay.", TINY_AT, TINY_COLOR, "tiny")
+	await main.voice("Knocked like that every time, like he was playing it.", TINY_AT, TINY_COLOR, "tiny")
+	await main.voice("Tiny? Who is it?", DOOR_AT, VANCE_COLOR, "vance")
+	await main.voice("(low) Five minutes.", TINY_AT, TINY_COLOR, "tiny")
+	await main.voice("Friend of Danny's, Mr. Vance.", TINY_AT, TINY_COLOR, "tiny")
 	Game.set_flag("in_vance_office")
 	await main.change_room("vance_office", "pier9_dock")
 
@@ -272,5 +272,5 @@ func _fish_envelope() -> void:
 	await main.player.play_action("use")
 	main.take("gaff")
 	_sync()
-	await main.voice("Detective. You find who did Danny, you come tell me. I want to hear it from somebody.", TINY_AT, TINY_COLOR)
+	await main.voice("Detective. You find who did Danny, you come tell me. I want to hear it from somebody.", TINY_AT, TINY_COLOR, "tiny")
 	await main.say("You'll hear it.")

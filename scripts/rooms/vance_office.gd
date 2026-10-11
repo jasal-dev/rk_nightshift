@@ -16,8 +16,8 @@ const VANCE_AT := Vector2(1259, 440)
 func on_enter(from_room: String) -> void:
 	if from_room == "pier9_dock" and not Game.flag("met_vance"):
 		Game.set_flag("met_vance")
-		await main.voice("Detective. Tiny tells me you're a friend of Danny's. Tiny is sentimental. I'm not.", VANCE_AT, VANCE_COLOR)
-		await main.voice("Sit, if you like. The chair is uncomfortable. I bought it that way.", VANCE_AT, VANCE_COLOR)
+		await main.voice("Detective. Tiny tells me you're a friend of Danny's. Tiny is sentimental. I'm not.", VANCE_AT, VANCE_COLOR, "vance")
+		await main.voice("Sit, if you like. The chair is uncomfortable. I bought it that way.", VANCE_AT, VANCE_COLOR, "vance")
 
 
 func interact(hs: Hotspot, verb: String, item: String) -> void:
@@ -27,15 +27,15 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.say("Sixties. Cardigan, reading glasses, shoulder holster. A grandfather who forecloses.")
 			elif item == "case_file":
 				await main.say("Close range. A .38. Wallet left on him.")
-				await main.voice("If I'd had him shot, they'd have taken the wallet. It saves my people the trouble of sending flowers.", VANCE_AT, VANCE_COLOR)
+				await main.voice("If I'd had him shot, they'd have taken the wallet. It saves my people the trouble of sending flowers.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.say("And his phone was gone.")
-				await main.voice("Was it? Interesting. Not to me.", VANCE_AT, VANCE_COLOR)
+				await main.voice("Was it? Interesting. Not to me.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.wait(0.4)
-				await main.voice("Look at my wall, Detective. I keep better records than your department.", VANCE_AT, VANCE_COLOR)
+				await main.voice("Look at my wall, Detective. I keep better records than your department.", VANCE_AT, VANCE_COLOR, "vance")
 			elif item == "envelope":
-				await main.voice("That's it. One of three. Sounds like a man with a payment plan.", VANCE_AT, VANCE_COLOR)
+				await main.voice("That's it. One of three. Sounds like a man with a payment plan.", VANCE_AT, VANCE_COLOR, "vance")
 			elif item != "":
-				await main.voice("I don't pawn, Detective.", VANCE_AT, VANCE_COLOR)
+				await main.voice("I don't pawn, Detective.", VANCE_AT, VANCE_COLOR, "vance")
 			else:
 				await _interrogate()
 
@@ -70,7 +70,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 			if verb == "look":
 				await main.say("A green ledger. Vance's real business. He'd sooner give me a kidney.")
 			else:
-				await main.voice("Hands, Detective.", VANCE_AT, VANCE_COLOR)
+				await main.voice("Hands, Detective.", VANCE_AT, VANCE_COLOR, "vance")
 
 		"boat_photo":
 			await main.say("A sport fisher called Second Chance. Loan sharks all have the same sense of humor.")
@@ -122,51 +122,51 @@ func _interrogate() -> void:
 		match k:
 			"owed":
 				Game.set_flag("asked_owed")
-				await main.voice("Half this city owes me money, Detective. The other half owes the bank. I'm friendlier.", VANCE_AT, VANCE_COLOR)
+				await main.voice("Half this city owes me money, Detective. The other half owes the bank. I'm friendlier.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.say("He's dead.")
-				await main.voice("I read the papers. Dead men are bad for business. Think about that.", VANCE_AT, VANCE_COLOR)
+				await main.voice("I read the papers. Dead men are bad for business. Think about that.", VANCE_AT, VANCE_COLOR, "vance")
 			"where":
-				await main.voice("On my boat in Avalon harbor. I lost four hundred dollars at cards to a dentist from Torrance.", VANCE_AT, VANCE_COLOR)
-				await main.voice("Harbor patrol logged me in at six and out Wednesday at noon. Check it.", VANCE_AT, VANCE_COLOR)
+				await main.voice("On my boat in Avalon harbor. I lost four hundred dollars at cards to a dentist from Torrance.", VANCE_AT, VANCE_COLOR, "vance")
+				await main.voice("Harbor patrol logged me in at six and out Wednesday at noon. Check it.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.say("I will.")
-				await main.voice("I know. That's why I told you.", VANCE_AT, VANCE_COLOR)
+				await main.voice("I know. That's why I told you.", VANCE_AT, VANCE_COLOR, "vance")
 				main.clue("clue_alibi")
 			"gun":
 				Game.set_flag("asked_gun")
-				await main.voice("It is. Your piano player was shot with a .38, if the Times is right.", VANCE_AT, VANCE_COLOR)
-				await main.voice("I've never owned a revolver. They're for people who want to be romantic about it.", VANCE_AT, VANCE_COLOR)
+				await main.voice("It is. Your piano player was shot with a .38, if the Times is right.", VANCE_AT, VANCE_COLOR, "vance")
+				await main.voice("I've never owned a revolver. They're for people who want to be romantic about it.", VANCE_AT, VANCE_COLOR, "vance")
 			"paid":
 				await main.say("Third row, fourth from the left. Reyes, D. Eight thousand. Stamped PAID, Tuesday's date.")
 				await main.wait(0.6)
-				await main.voice("Dead men don't pay, Detective. Danny paid. All of it, Tuesday afternoon, in cash.", VANCE_AT, VANCE_COLOR)
+				await main.voice("Dead men don't pay, Detective. Danny paid. All of it, Tuesday afternoon, in cash.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.say("Eight grand. From a man who played for tips.")
-				await main.voice("I asked him the same thing. He smiled, which was new.", VANCE_AT, VANCE_COLOR)
-				await main.voice("Said he'd come into some money and there was more where it came from.", VANCE_AT, VANCE_COLOR)
+				await main.voice("I asked him the same thing. He smiled, which was new.", VANCE_AT, VANCE_COLOR, "vance")
+				await main.voice("Said he'd come into some money and there was more where it came from.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.say("More from where?")
-				await main.voice("I don't ask where money comes from. Only where it's going.", VANCE_AT, VANCE_COLOR)
+				await main.voice("I don't ask where money comes from. Only where it's going.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.player.play_action("notebook")
 				await main.say("Paid in full Tuesday afternoon. Dead by Tuesday midnight.")
 				main.clue("clue_paid")
 			"how":
-				await main.voice("In a Blue Note envelope, like a boy bringing his allowance.", VANCE_AT, VANCE_COLOR)
-				await main.voice("He'd written something on the back. I didn't read it. I'm not his diary.", VANCE_AT, VANCE_COLOR)
+				await main.voice("In a Blue Note envelope, like a boy bringing his allowance.", VANCE_AT, VANCE_COLOR, "vance")
+				await main.voice("He'd written something on the back. I didn't read it. I'm not his diary.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.say("Where's the envelope now?")
-				await main.voice("Tiny burns the trash every night. If it's anywhere, it's in the barrel.", VANCE_AT, VANCE_COLOR)
+				await main.voice("Tiny burns the trash every night. If it's anywhere, it's in the barrel.", VANCE_AT, VANCE_COLOR, "vance")
 				Game.set_flag("knows_envelope")
 			"anyone":
-				await main.voice("You're the second this week. Yesterday a man telephoned.", VANCE_AT, VANCE_COLOR)
-				await main.voice("Wanted to know if Danny had paid me, and in what.", VANCE_AT, VANCE_COLOR)
+				await main.voice("You're the second this week. Yesterday a man telephoned.", VANCE_AT, VANCE_COLOR, "vance")
+				await main.voice("Wanted to know if Danny had paid me, and in what.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.say("Name?")
-				await main.voice("He didn't offer one. He talked like a cop who'd stopped being one.", VANCE_AT, VANCE_COLOR)
-				await main.voice("You'd know the type better than I would.", VANCE_AT, VANCE_COLOR)
+				await main.voice("He didn't offer one. He talked like a cop who'd stopped being one.", VANCE_AT, VANCE_COLOR, "vance")
+				await main.voice("You'd know the type better than I would.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.say("What did you tell him?")
-				await main.voice("What I'm telling you. Less, actually. I liked his voice less.", VANCE_AT, VANCE_COLOR)
+				await main.voice("What I'm telling you. Less, actually. I liked his voice less.", VANCE_AT, VANCE_COLOR, "vance")
 				Game.set_flag("heard_caller")
 			"leave":
 				if Game.flag("knows_envelope"):
-					await main.voice("Detective. Whoever did Danny, it wasn't for my eight thousand. He'd already paid it.", VANCE_AT, VANCE_COLOR)
-					await main.voice("Find out who he was expecting to pay him.", VANCE_AT, VANCE_COLOR)
+					await main.voice("Detective. Whoever did Danny, it wasn't for my eight thousand. He'd already paid it.", VANCE_AT, VANCE_COLOR, "vance")
+					await main.voice("Find out who he was expecting to pay him.", VANCE_AT, VANCE_COLOR, "vance")
 				else:
-					await main.voice("Tiny will see you out. Come back when you've got a better question.", VANCE_AT, VANCE_COLOR)
+					await main.voice("Tiny will see you out. Come back when you've got a better question.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.change_room("pier9_dock", "vance_office")
 				return

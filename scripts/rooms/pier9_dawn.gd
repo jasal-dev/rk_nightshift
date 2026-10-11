@@ -174,11 +174,11 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 
 func _tiny(line: String) -> void:
-	await main.voice(line, speaker_at("tiny"), TINY_COLOR)
+	await main.voice(line, speaker_at("tiny"), TINY_COLOR, "tiny")
 
 
 func _vance(line: String) -> void:
-	await main.voice(line, speaker_at("vance"), VANCE_COLOR)
+	await main.voice(line, speaker_at("vance"), VANCE_COLOR, "vance")
 
 
 func _brenner(line: String) -> void:

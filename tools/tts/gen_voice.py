@@ -45,6 +45,10 @@ SPEAKERS = {
     "ray":   {"blend": {"am_onyx": 0.7, "am_fenrir": 0.3}, "speed": 0.9, "from": "VARIANTS 2_blend"},
     "doyle": {"blend": {"af_kore": 1.0}, "speed": 0.95, "from": "CASTING doyle B"},
     "nina":  {"blend": {"af_heart": 1.0}, "speed": 0.95, "from": "CASTING nina A"},
+    "sal":   {"blend": {"am_santa": 1.0}, "speed": 0.9, "from": "CASTING sal A"},
+    "tiny":  {"blend": {"am_adam": 1.0}, "semitones": -3.0, "speed": 0.85, "from": "CASTING tiny A"},
+    "vance": {"blend": {"bm_george": 1.0}, "speed": 0.88, "lang": "b", "from": "CASTING vance A"},
+    "otis":  {"blend": {"am_liam": 1.0}, "speed": 1.0, "from": "CASTING otis B"},
 }
 
 
@@ -69,6 +73,7 @@ PRONOUNCE = {
     "The 110": "The one-ten",
     "1 of 3": "one of three",
     "Reyes, 34.": "Reyes, thirty-four.",
+    "KJAZZ": "K-Jazz",
 }
 ACRONYMS = {"LAPD", "DA", "IA", "ID", "TV", "UV", "GPS", "ER"}    ## all-caps words said letter by letter
 
@@ -388,6 +393,7 @@ def main():
             print("wrote", out)
         return
     force = "--force" in sys.argv
+    pipes = {"a": pipe}         ## American English; British voices ("lang": "b") get their own
     manifest = {}
     made = 0
     for speaker, text in LINES:
@@ -399,7 +405,10 @@ def main():
         path = os.path.join(ROOT, rel)
         os.makedirs(os.path.dirname(path), exist_ok=True)
         if force or not os.path.exists(path):
-            sf.write(path, render_variant(pipe, preset, text), RATE, format="OGG", subtype="VORBIS")
+            lang = preset.get("lang", "a")
+            if lang not in pipes:
+                pipes[lang] = KPipeline(lang_code=lang)
+            sf.write(path, render_variant(pipes[lang], preset, text), RATE, format="OGG", subtype="VORBIS")
             made += 1
         manifest[lid] = {"speaker": speaker, "text": text, "file": "res://" + rel, "voice": "kokoro: " + _describe(preset)}
     # clips no line points at any more (its text changed, it went, or an older format): remove them and their .import

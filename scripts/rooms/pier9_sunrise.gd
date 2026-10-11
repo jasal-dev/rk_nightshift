@@ -64,12 +64,12 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 			if verb == "look":
 				await main.say("Tiny, the radio turned up. He hasn't looked away from the water.")
 			else:
-				await main.voice("Nobody plays it like Danny.", speaker_at("tiny"), TINY_COLOR)
+				await main.voice("Nobody plays it like Danny.", speaker_at("tiny"), TINY_COLOR, "tiny")
 		"vance":
 			if verb == "look":
 				await main.say("Vance in his doorway, finishing his tea, watching the morning like it owes him money.")
 			else:
-				await main.voice("Go home, Detective. Even I'm going home.", speaker_at("vance"), VANCE_COLOR)
+				await main.voice("Go home, Detective. Even I'm going home.", speaker_at("vance"), VANCE_COLOR, "vance")
 		"lincoln":
 			await main.say("Brenner's Lincoln, waiting for the lab's tow truck. It'll be the cleanest thing in the impound lot.")
 		"car":
