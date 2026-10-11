@@ -153,22 +153,22 @@ func _phone_call() -> void:
 	main.take("dime")
 	await main.say("555-0147...")
 	await main.wait(0.6)
-	await main.voice("...Yeah?", phone_pos, NINA_COLOR)
+	await main.voice("...Yeah?", phone_pos, NINA_COLOR, "nina", true)
 	var asked := false      # past "I'm calling about Danny Reyes"
 	while true:
 		if not asked:
 			var c: int = await main.choose(["Is this Sal?", "I'm calling about Danny Reyes.", "Wrong number. Sorry."])
 			if c == 0:
 				await main.say("Is this Sal?")
-				await main.voice("Sal don't take calls. Who's asking?", phone_pos, NINA_COLOR)
+				await main.voice("Sal don't take calls. Who's asking?", phone_pos, NINA_COLOR, "nina", true)
 			elif c == 1:
 				await main.say("I'm calling about Danny Reyes.")
-				await main.voice("...Danny was a good kid. Owed the wrong people.", phone_pos, NINA_COLOR)
-				await main.voice("You a friend of his?", phone_pos, NINA_COLOR)
+				await main.voice("...Danny was a good kid. Owed the wrong people.", phone_pos, NINA_COLOR, "nina", true)
+				await main.voice("You a friend of his?", phone_pos, NINA_COLOR, "nina", true)
 				asked = true
 			else:
 				await main.say("Wrong number. Sorry.")
-				await main.voice("*click*", phone_pos, NINA_COLOR)
+				await main.voice("*click*", phone_pos, NINA_COLOR, "nina", true)
 				await main.say("There goes my dime. I'll need another one.")
 				await main.say("...Actually, I won't. I'm not paying twice for that kind of manners.")
 				break
@@ -180,24 +180,24 @@ func _phone_call() -> void:
 			var pick: String = opts[c]
 			if pick == "Who am I talking to?":
 				await main.say("Who am I talking to?")
-				await main.voice("Nina. I wait tables at the Note. Waited.", phone_pos, NINA_COLOR)
-				await main.voice("I was his girl. Whatever that means now.", phone_pos, NINA_COLOR)
+				await main.voice("Nina. I wait tables at the Note. Waited.", phone_pos, NINA_COLOR, "nina", true)
+				await main.voice("I was his girl. Whatever that means now.", phone_pos, NINA_COLOR, "nina", true)
 				await main.say("I'm sorry, Nina. Ray Kessler. I work Homicide.")
-				await main.voice("Then you're two days late, Ray Kessler.", phone_pos, NINA_COLOR)
+				await main.voice("Then you're two days late, Ray Kessler.", phone_pos, NINA_COLOR, "nina", true)
 				Game.set_flag("met_nina")
 			elif pick == "How do I get Sal to open the door?":
 				await main.say("How do I get Sal to open the door?")
-				await main.voice("Friends of Danny knock like Danny played. Two slow, three fast.", phone_pos, NINA_COLOR)
+				await main.voice("Friends of Danny knock like Danny played. Two slow, three fast.", phone_pos, NINA_COLOR, "nina", true)
 				if Game.flag("met_nina"):
-					await main.voice("Sal's scared, Detective. Don't make me sorry I told you.", phone_pos, NINA_COLOR)
-				await main.voice("*click*", phone_pos, NINA_COLOR)
+					await main.voice("Sal's scared, Detective. Don't make me sorry I told you.", phone_pos, NINA_COLOR, "nina", true)
+				await main.voice("*click*", phone_pos, NINA_COLOR, "nina", true)
 				Game.set_flag("knows_knock")
 				await main.say("Two slow, three fast. Like a piano man.")
 				main.clue("clue_knock")
 				break
 			else:
 				await main.say("Never mind.")
-				await main.voice("*click*", phone_pos, NINA_COLOR)
+				await main.voice("*click*", phone_pos, NINA_COLOR, "nina", true)
 				break
 	if not Game.flag("knows_knock"):
 		# the call can't be lost: the phone coughs the dime back up

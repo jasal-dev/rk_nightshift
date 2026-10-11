@@ -18,7 +18,7 @@ voice is cast (the table below), keep using it for every new line.
 - `Main.say()` and `Main.narrate()` (his voice-over on the drives and the board) are Ray (`"ray"`). Other characters
   speak through `Main.voice(text, anchor, color, speaker)`: the last argument is their speaker id (`"doyle"`), and a
   call without one is text only. Pass the id on every call for a cast character, voiced or not yet (all of Doyle's
-  calls already do), so later batches only need clips. `caption()` is text only.
+  and Nina's calls already do), so later batches only need clips. `caption()` is text only.
 - A line heard over a telephone passes `phone = true` as well (`main.voice(text, PHONE_AT, DOYLE_COLOR, "doyle", true)`):
   the game plays its clip through the Phone bus (`Audio._add_phone_bus()`: 350 to 3,200 Hz, a touch of overdrive,
   +10 dB, limited at -1 dBFS). The clips themselves are clean, so the same character can speak in person (Doyle on the pier in Case 5)
@@ -27,7 +27,7 @@ voice is cast (the table below), keep using it for every new line.
   brackets (`"(muffled) Thanks, Walt."`) are dropped from what the voice says, but the id still uses the full text.
 - Lines that are only a sound written as text, in asterisks (`"*knock knock*"`), are never voiced.
 - Every line asked for by a cast speaker that has no clip goes on `Audio.unvoiced`. The playthrough fails if any such
-  line in Case 1 (fully voiced for Ray and Doyle) has no clip; extend `_check_voiced()` in `tests/playthrough.gd` to
+  line in Case 1 (fully voiced for Ray, Doyle and Nina) has no clip; extend `_check_voiced()` in `tests/playthrough.gd` to
   each case you finish.
 
 ## Files
@@ -127,6 +127,7 @@ flutter are the post-processing in `render_variant()` (none of the cast uses the
 | Speaker | Who | Kokoro voice | Speed | Semitones | Processing | Preset in code | Picked | Voiced |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `ray` | Det. Ray Kessler: LAPD Homicide, twenty-six years on the job, tired, hard-boiled | `am_onyx` 70% + `am_fenrir` 30% (style vectors mixed) | 0.9 | 0 | none | `SPEAKERS["ray"]` (was `VARIANTS["2_blend"]`) | 2026-10-11, over plain onyx and four rougher variants | Case 1, all 244 lines (Room 214's Case 2 to 5 lines not yet) |
+| `nina` | Nina Alvarez: Danny's girlfriend, on the payphone in Case 1, in the Blue Note's cooler in Case 5; guarded, grieving, quick | `af_heart` | 0.95 | 0 | phone-line filter in the game on her payphone lines; in person clean | `SPEAKERS["nina"]` (was `CASTING["nina"]` A) | 2026-10-11, over `af_bella` (B) and `af_sky` (C) | Case 1, all 9 lines (the payphone call) |
 | `doyle` | Lt. Maureen Doyle: Ray's boss, voicemail and phone; clipped, political, not unkind | `af_kore` | 0.95 | 0 | phone-line filter in the game on her phone lines (picked 2026-10-11), not baked in | `SPEAKERS["doyle"]` (was `CASTING["doyle"]` B) | 2026-10-11, over `af_sarah` (A) and an `af_nicole`/`af_sarah` mix (C) | Case 1, all 11 lines (voicemail and the 1:30 call) |
 
 ## Proposed, awaiting a pick
@@ -136,7 +137,6 @@ voiced in the game: their `voice()` calls don't pass a speaker id yet.
 
 | Speaker | Who | A | B | C |
 | --- | --- | --- | --- | --- |
-| `nina` | Nina Alvarez, Danny's girlfriend, on the payphone: guarded, grieving, quick | `af_heart`, speed 0.95 | `af_bella`, speed 0.92 | `af_sky`, speed 0.9 |
 | `sal` | Sal Moretti, the Blue Note's bartender, through the door: gravel, short sentences, scared | `am_santa`, speed 0.9 | `am_eric`, -1.5 semitones, speed 0.88, warmth 3 | `am_michael` 60% + `am_santa` 40%, -1 semitone, speed 0.88, grit 2, flutter 0.1 |
 | `tiny` | "Tiny" Ruiz, Vance's doorman at Pier 9: enormous, soft-spoken | `am_adam`, -3 semitones, speed 0.85 | `am_echo`, -2.5 semitones, speed 0.85, warmth 4 | `am_liam`, -3.5 semitones, speed 0.8, warmth 5, grit 2 |
 | `vance` | Vance, the loan shark: sixties, cardigan over a shoulder holster, courteous and cold | `bm_george` (British), speed 0.88 | `am_michael`, -2 semitones, speed 0.85, warmth 3 | `bm_fable` 60% + `bm_lewis` 40% (British), -1 semitone, speed 0.88 |

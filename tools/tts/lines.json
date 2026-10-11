@@ -253,5 +253,14 @@
 	["doyle", "(muffled) Thanks, Walt. Black is fine.", "squad_room.gd:460 _call_doyle"],
 	["doyle", "Sorry. Ray, I have the captain on Friday and a dead piano player who paid his bills.", "squad_room.gd:461 _call_doyle"],
 	["doyle", "That's not a lead, that's a eulogy.", "squad_room.gd:462 _call_doyle"],
-	["doyle", "Then write it up. And stop wasting the night on one case. Otis has a stack. *click*", "squad_room.gd:464 _call_doyle"]
+	["doyle", "Then write it up. And stop wasting the night on one case. Otis has a stack. *click*", "squad_room.gd:464 _call_doyle"],
+	["nina", "...Yeah?", "street.gd:156 _phone_call"],
+	["nina", "Sal don't take calls. Who's asking?", "street.gd:163 _phone_call"],
+	["nina", "...Danny was a good kid. Owed the wrong people.", "street.gd:166 _phone_call"],
+	["nina", "You a friend of his?", "street.gd:167 _phone_call"],
+	["nina", "Nina. I wait tables at the Note. Waited.", "street.gd:183 _phone_call"],
+	["nina", "I was his girl. Whatever that means now.", "street.gd:184 _phone_call"],
+	["nina", "Then you're two days late, Ray Kessler.", "street.gd:186 _phone_call"],
+	["nina", "Friends of Danny knock like Danny played. Two slow, three fast.", "street.gd:190 _phone_call"],
+	["nina", "Sal's scared, Detective. Don't make me sorry I told you.", "street.gd:192 _phone_call"]
 ]

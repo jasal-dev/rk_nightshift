@@ -1528,5 +1528,59 @@
 		"text": "Then write it up. And stop wasting the night on one case. Otis has a stack. *click*",
 		"file": "res://assets/voice/doyle/a14603aa373c.ogg",
 		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"0f692bf98a80": {
+		"speaker": "nina",
+		"text": "...Yeah?",
+		"file": "res://assets/voice/nina/0f692bf98a80.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"bf1e7c6378e2": {
+		"speaker": "nina",
+		"text": "Sal don't take calls. Who's asking?",
+		"file": "res://assets/voice/nina/bf1e7c6378e2.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"2e09c29b92db": {
+		"speaker": "nina",
+		"text": "...Danny was a good kid. Owed the wrong people.",
+		"file": "res://assets/voice/nina/2e09c29b92db.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"fe2dc5deff76": {
+		"speaker": "nina",
+		"text": "You a friend of his?",
+		"file": "res://assets/voice/nina/fe2dc5deff76.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"e4f05eba53e1": {
+		"speaker": "nina",
+		"text": "Nina. I wait tables at the Note. Waited.",
+		"file": "res://assets/voice/nina/e4f05eba53e1.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"922ac762465e": {
+		"speaker": "nina",
+		"text": "I was his girl. Whatever that means now.",
+		"file": "res://assets/voice/nina/922ac762465e.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"65f78d7b6cbd": {
+		"speaker": "nina",
+		"text": "Then you're two days late, Ray Kessler.",
+		"file": "res://assets/voice/nina/65f78d7b6cbd.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"22148b9c6555": {
+		"speaker": "nina",
+		"text": "Friends of Danny knock like Danny played. Two slow, three fast.",
+		"file": "res://assets/voice/nina/22148b9c6555.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"59e9037eec98": {
+		"speaker": "nina",
+		"text": "Sal's scared, Detective. Don't make me sorry I told you.",
+		"file": "res://assets/voice/nina/59e9037eec98.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
 	}
 }

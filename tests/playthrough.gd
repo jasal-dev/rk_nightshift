@@ -308,7 +308,7 @@ func _new_game() -> void:
 
 
 func _check_voiced(n: int) -> void:
-	## Every line a cast speaker (Ray, and Doyle on the phone) said in a fully voiced case had a clip
+	## Every line a cast speaker (Ray, Doyle and Nina) said in a fully voiced case had a clip
 	## (docs/voice-recording.md). Lines that are only sound effects in asterisks ("*knock knock*") are never voiced.
 	var missing := Audio.unvoiced.filter(func(t: String): return not (t.begins_with("*") and t.ends_with("*")))
 	if not missing.is_empty():

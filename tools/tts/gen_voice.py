@@ -44,6 +44,7 @@ MANIFEST = os.path.join(ROOT, "assets", "voice", "lines.json")
 SPEAKERS = {
     "ray":   {"blend": {"am_onyx": 0.7, "am_fenrir": 0.3}, "speed": 0.9, "from": "VARIANTS 2_blend"},
     "doyle": {"blend": {"af_kore": 1.0}, "speed": 0.95, "from": "CASTING doyle B"},
+    "nina":  {"blend": {"af_heart": 1.0}, "speed": 0.95, "from": "CASTING nina A"},
 }
 
 
@@ -344,7 +345,7 @@ def list_says(path, speaker="ray"):
     calls = _calls(src)
     if speaker != "ray":
         calls = [(n, f, _split_first(a)[0]) for n, f, a in _calls(src, VOICE_CALL)
-                 if re.search(r',\s*"%s"\s*$' % re.escape(speaker), _split_first(a)[1])]
+                 if re.search(r',\s*"%s"\s*(,\s*\w+\s*)?$' % re.escape(speaker), _split_first(a)[1])]   # [, phone]
     for line_no, func, arg in calls:
         texts = []
         for m in STRING.finditer(arg):

@@ -257,7 +257,7 @@ func _staged() -> void:
 # --- Puzzle 3.3: who's in the cooler ---------------------------------------------------------------------------------
 func _nina(line: String) -> void:
 	var at := speaker_at("nina") if Game.flag("nina_out") else speaker_at("cooler")
-	await main.voice(line, at, Case5.NINA_COLOR)
+	await main.voice(line, at, Case5.NINA_COLOR, "nina")
 
 
 func _cooler() -> void:
