@@ -638,20 +638,20 @@ func say(text: String) -> void:
 	player.set_talking(false)
 
 
-func voice(text: String, anchor: Vector2, color := Color(0.6, 0.85, 1.0), speaker := "") -> void:
+func voice(text: String, anchor: Vector2, color := Color(0.6, 0.85, 1.0), speaker := "", phone := false) -> void:
 	## Someone off-screen or unseen speaks from `anchor` (room coordinates). With a cast `speaker` ("doyle"), the line
-	## plays its recorded clip if it has one (docs/voice-recording.md).
-	await _show_text(text, anchor, color, speaker)
+	## plays its recorded clip if it has one (docs/voice-recording.md); `phone` plays it through the phone-line filter.
+	await _show_text(text, anchor, color, speaker, phone)
 
 
-func _show_text(text: String, anchor: Vector2, color: Color, speaker := "") -> void:
+func _show_text(text: String, anchor: Vector2, color: Color, speaker := "", phone := false) -> void:
 	## With a speaker whose line has a recorded clip (Audio.voice_clip), the clip plays and the line stays up at least
 	## as long as it; a click cuts both. Lines without a clip are text only.
 	ui.set_hover("", Vector2.ZERO)
 	ui.show_speech(text, anchor, color)
 	var clip: AudioStream = Audio.voice_clip(speaker, text) if speaker != "" else null
 	if clip:
-		Audio.speak(clip)
+		Audio.speak(clip, phone)
 	await _hold(clampf(0.9 + text.length() * 0.055, 1.6, 6.5), true, clip.get_length() + 0.25 if clip else 0.0)
 	if clip:
 		Audio.stop_voice()

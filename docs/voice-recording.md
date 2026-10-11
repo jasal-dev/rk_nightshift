@@ -19,6 +19,10 @@ voice is cast (the table below), keep using it for every new line.
   speak through `Main.voice(text, anchor, color, speaker)`: the last argument is their speaker id (`"doyle"`), and a
   call without one is text only. Pass the id on every call for a cast character, voiced or not yet (all of Doyle's
   calls already do), so later batches only need clips. `caption()` is text only.
+- A line heard over a telephone passes `phone = true` as well (`main.voice(text, PHONE_AT, DOYLE_COLOR, "doyle", true)`):
+  the game plays its clip through the Phone bus (`Audio._add_phone_bus()`: 350 to 3,200 Hz, a touch of overdrive,
+  +4 dB). The clips themselves are clean, so the same character can speak in person (Doyle on the pier in Case 5)
+  with the same voice. Use it for anyone on the phone: Nina on the payphone, Otis on the desk phone.
 - Stage directions inside a line aren't spoken: sounds in asterisks (`"*beep* Ray, it's Doyle."`) and asides in
   brackets (`"(muffled) Thanks, Walt."`) are dropped from what the voice says, but the id still uses the full text.
 - Lines that are only a sound written as text, in asterisks (`"*knock knock*"`), are never voiced.
@@ -123,7 +127,7 @@ flutter are the post-processing in `render_variant()` (none of the cast uses the
 | Speaker | Who | Kokoro voice | Speed | Semitones | Processing | Preset in code | Picked | Voiced |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `ray` | Det. Ray Kessler: LAPD Homicide, twenty-six years on the job, tired, hard-boiled | `am_onyx` 70% + `am_fenrir` 30% (style vectors mixed) | 0.9 | 0 | none | `SPEAKERS["ray"]` (was `VARIANTS["2_blend"]`) | 2026-10-11, over plain onyx and four rougher variants | Case 1, all 244 lines (Room 214's Case 2 to 5 lines not yet) |
-| `doyle` | Lt. Maureen Doyle: Ray's boss, voicemail and phone; clipped, political, not unkind | `af_kore` | 0.95 | 0 | none (a phone-line filter was offered, not asked for) | `SPEAKERS["doyle"]` (was `CASTING["doyle"]` B) | 2026-10-11, over `af_sarah` (A) and an `af_nicole`/`af_sarah` mix (C) | Case 1, all 11 lines (voicemail and the 1:30 call) |
+| `doyle` | Lt. Maureen Doyle: Ray's boss, voicemail and phone; clipped, political, not unkind | `af_kore` | 0.95 | 0 | phone-line filter in the game on her phone lines (picked 2026-10-11), not baked in | `SPEAKERS["doyle"]` (was `CASTING["doyle"]` B) | 2026-10-11, over `af_sarah` (A) and an `af_nicole`/`af_sarah` mix (C) | Case 1, all 11 lines (voicemail and the 1:30 call) |
 
 ## Proposed, awaiting a pick
 

@@ -99,6 +99,7 @@ func _ready() -> void:
 			var i := AudioServer.bus_count - 1
 			AudioServer.set_bus_name(i, bus)
 			AudioServer.set_bus_send(i, "Master")
+	_add_phone_bus()
 	_music = Crossfader.new(self, "Music")
 	_ambience = Crossfader.new(self, "SFX")
 	_voice = AudioStreamPlayer.new()
@@ -167,14 +168,39 @@ func voice_clip(speaker: String, text: String) -> AudioStream:
 	return null
 
 
-func speak(clip: AudioStream) -> void:
-	## Play a spoken line on the Voice bus, cutting off the one before.
+func speak(clip: AudioStream, phone := false) -> void:
+	## Play a spoken line on the Voice bus, cutting off the one before; `phone` sends it through the Phone bus first.
+	_voice.bus = "Phone" if phone else "Voice"
 	_voice.stream = clip
 	_voice.play()
 
 
 func stop_voice() -> void:
 	_voice.stop()
+
+
+func _add_phone_bus() -> void:
+	## Phone > Voice: a telephone line. Only 350 to 3,200 Hz gets through (steep filters), a touch of overdrive for the
+	## cheap earpiece, and a lift to make up for what the filters take away. Main.voice(..., phone = true) uses it.
+	if AudioServer.get_bus_index("Phone") >= 0:
+		return
+	AudioServer.add_bus()
+	var i := AudioServer.bus_count - 1
+	AudioServer.set_bus_name(i, "Phone")
+	AudioServer.set_bus_send(i, "Voice")
+	var hp := AudioEffectHighPassFilter.new()
+	hp.cutoff_hz = 350.0
+	hp.db = AudioEffectFilter.FILTER_24DB
+	var lp := AudioEffectLowPassFilter.new()
+	lp.cutoff_hz = 3200.0
+	lp.db = AudioEffectFilter.FILTER_24DB
+	var grit := AudioEffectDistortion.new()
+	grit.mode = AudioEffectDistortion.MODE_OVERDRIVE
+	grit.drive = 0.2
+	var lift := AudioEffectAmplify.new()
+	lift.volume_db = 4.0
+	for e: AudioEffect in [hp, lp, grit, lift]:
+		AudioServer.add_bus_effect(i, e)
 
 
 func set_voice_volume(v: float) -> void:
