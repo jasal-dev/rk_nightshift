@@ -60,6 +60,13 @@ SPEAKERS = {
     "pearl": {"blend": {"af_bella": 1.0}, "speed": 1.0, "from": "CASTING_REST pearl A"},
     "morty": {"blend": {"am_michael": 1.0}, "semitones": -2.5, "speed": 0.85, "fry": 0.1, "from": "CASTING_REST morty A"},
     "charlie": {"blend": {"bm_daniel": 1.0}, "speed": 0.95, "lang": "b", "from": "CASTING_REST charlie C"},
+    "preacher": {"blend": {"am_eric": 1.0}, "semitones": -3.0, "speed": 0.82, "warmth": 4.0, "fry": 0.08, "from": "CASTING_REST preacher C"},
+    "doss":  {"blend": {"am_puck": 1.0}, "speed": 1.05, "from": "CASTING_REST doss A"},
+    "courtney": {"blend": {"af_nova": 1.0}, "speed": 1.1, "from": "CASTING_REST courtney A"},
+    "andre": {"blend": {"am_puck": 1.0}, "semitones": 1.0, "speed": 1.05, "from": "CASTING_REST andre A"},
+    "crane": {"blend": {"am_michael": 1.0}, "speed": 0.95, "from": "CASTING_REST crane A"},
+    "ike":   {"blend": {"am_echo": 1.0}, "speed": 1.0, "from": "CASTING_REST ike C"},
+    "owen":  {"blend": {"am_eric": 1.0}, "semitones": 1.0, "from": "CASTING_REST owen C"},
 }
 
 

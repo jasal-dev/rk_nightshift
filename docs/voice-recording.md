@@ -143,6 +143,13 @@ flutter are the post-processing in `render_variant()` (none of the cast uses the
 | `pearl` | Pearl Danvers, Gus's assistant, actress: 34, warm, quick, a very good crier. The killer | `af_bella` | 1 | 0 | none | `SPEAKERS["pearl"]` (was `CASTING_REST["pearl"]` A) | 2026-10-11, over B and C | not yet (~32 lines, Case 3 on) |
 | `morty` | Morty Kahn, rival collector: seventies, bathrobe and loafers, grieving, defensive | `am_michael` | 0.85 | -2.5 | flutter 0.1 | `SPEAKERS["morty"]` (was `CASTING_REST["morty"]` A) | 2026-10-11, over B and C | not yet (~20 lines, Case 3 on) |
 | `charlie` | Desmond "Charlie" Pike, Chaplin on the boulevard for thirty years: theatrical, kind, nosy | `bm_daniel` (British English, `"lang": "b"`) | 0.95 | 0 | none | `SPEAKERS["charlie"]` (was `CASTING_REST["charlie"]` C) | 2026-10-11, over A and B | not yet (~18 lines, Case 3 on) |
+| `preacher` | Calvin "Preacher" Odom: sixties, Army, First Cavalry; formal, scriptural, sharp | `am_eric` | 0.82 | -3 | warmth 4, flutter 0.08 | `SPEAKERS["preacher"]` (was `CASTING_REST["preacher"]` C) | 2026-10-11, over A and B | not yet (~35 lines, Case 4 on) |
+| `doss` | Officer Brian Doss, Northeast patrol: thirties, cheerful, lazy, wants to be done by five | `am_puck` | 1.05 | 0 | none | `SPEAKERS["doss"]` (was `CASTING_REST["doss"]` A) | 2026-10-11, over B and C | not yet (~18 lines, Case 4 on) |
+| `courtney` | Courtney Vail, event planner: thirties, headset, adrenaline and cold brew | `af_nova` | 1.1 | 0 | none | `SPEAKERS["courtney"]` (was `CASTING_REST["courtney"]` A) | 2026-10-11, over B and C | not yet (~19 lines, Case 4 on) |
+| `andre` | Andre Mitchell, valet: nineteen, afraid of losing the job, honest | `am_puck` | 1.05 | 1 | none | `SPEAKERS["andre"]` (was `CASTING_REST["andre"]` A) | 2026-10-11, over B and C | not yet (~11 lines, Case 4 on) |
+| `crane` | Elliot Crane, Haskell's chief of staff: forties, lawyerly, still a little drunk, frightened. The killer | `am_michael` | 0.95 | 0 | none | `SPEAKERS["crane"]` (was `CASTING_REST["crane"]` A) | 2026-10-11, over B and C | not yet (~24 lines, Case 4 on) |
+| `ike` | Ike Feld, night tech at the crime lab (Cases 4-5): thirties, hoodie, dry, curious | `am_echo` | 1 | 0 | none | `SPEAKERS["ike"]` (was `CASTING_REST["ike"]` C) | 2026-10-11, over A and B | not yet (~35 lines, Case 4 on) |
+| `owen` | Owen Tate, delivery rider, 24 (heard only on the gate camera clips) | `am_eric` | 0.92 | 1 | none | `SPEAKERS["owen"]` (was `CASTING_REST["owen"]` C) | 2026-10-11, over A and B | not yet (~3 lines, Case 4 on) |
 
 ## Proposed, awaiting a pick
 
@@ -154,13 +161,6 @@ are heard only on the take (a recording); Brielle only in a phone video; Owen on
 
 | Speaker | Case | Who | Lines | A | B | C |
 | --- | --- | --- | --- | --- | --- | --- |
-| `preacher` | 4 | Calvin "Preacher" Odom: sixties, Army, First Cavalry; formal, scriptural, sharp | ~35 | am_echo, -2.5 semitones, speed 0.85, warmth 3 | am_michael 50% + am_fenrir 50%, -2 semitones, speed 0.85, grit 1.5 | am_eric, -3 semitones, speed 0.82, warmth 4, flutter 0.08 |
-| `doss` | 4 | Officer Brian Doss, Northeast patrol: thirties, cheerful, lazy, wants to be done by five | ~18 | am_puck, speed 1.05 | am_eric, speed 1 | am_echo, speed 1.05 |
-| `courtney` | 4 | Courtney Vail, event planner: thirties, headset, adrenaline and cold brew | ~19 | af_nova, speed 1.1 | af_jessica, speed 1.1 | af_alloy, speed 1.1 |
-| `andre` | 4 | Andre Mitchell, valet: nineteen, afraid of losing the job, honest | ~11 | am_puck, +1 semitones, speed 1.05 | am_echo, +1.5 semitones, speed 1.05 | am_eric, +1 semitones, speed 1 |
-| `crane` | 4 | Elliot Crane, Haskell's chief of staff: forties, lawyerly, still a little drunk, frightened. The killer | ~24 | am_michael, speed 0.95 | am_eric 60% + am_michael 40%, speed 0.95 | am_echo, -1 semitones, speed 0.92 |
-| `ike` | 4 | Ike Feld, night tech at the crime lab (Cases 4-5): thirties, hoodie, dry, curious | ~35 | am_eric, speed 1 | am_puck, speed 0.95 | am_echo, speed 1 |
-| `owen` | 4 | Owen Tate, delivery rider, 24 (heard only on the gate camera clips) | ~3 | am_puck, +0.5 semitones, speed 0.92 | am_echo, +1 semitones, speed 0.92 | am_eric, +1 semitones, speed 0.92 |
 | `teo` | 5 | Teodoro "Teo" Alcaraz, the Blue Note's porter: sixties, gentle, shaken, precise about habits | ~12 | am_eric, -2 semitones, speed 0.88 | am_michael, -1.5 semitones, speed 0.85, warmth 2 | am_echo, -2 semitones, speed 0.85, warmth 3 |
 | `mara` | 5 | Mara Quist, Los Angeles Times metro reporter: forties, persistent, fair, unimpressed | ~15 | af_river, speed 1 | af_nicole, speed 0.95 | af_alloy, speed 1 |
 | `brenner` | 5 | Walter "Walt" Brenner, LAPD retired, Doyle's training officer: sixties, big, avuncular. The killer | ~50 | am_echo, -3 semitones, speed 0.88, warmth 3 | am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2 | am_michael, -3 semitones, speed 0.86, grit 1.5 |
