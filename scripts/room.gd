@@ -29,6 +29,7 @@ extends Node2D
 var main: Node            ## set by Main; gives access to say(), choose(), change_room() ...
 var player: Player
 var show_player := true   ## false for close-ups (inside Kenji's car): the detective isn't drawn
+var rainy := false        ## set by add_rain(): Main plays the rain ambience here (Audio.ambience)
 
 var _light := PackedFloat32Array()   ## light probe grid, 16 floats per cell (see light_at)
 var _light_cell := 32.0
@@ -252,6 +253,7 @@ func find_path(from: Vector2, to: Vector2) -> PackedVector2Array:
 func add_rain(amount := 500, slant := -0.1) -> void:
 	## Screen-wide rain in front of everything (outdoor rooms call this from _ready).
 	## slant: sideways drift per unit of fall (wind).
+	rainy = true
 	var rain := CPUParticles2D.new()
 	rain.name = "Rain"
 	rain.texture = preload("res://assets/rooms/raindrop.png")

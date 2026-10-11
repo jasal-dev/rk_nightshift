@@ -53,8 +53,20 @@ project.godot ── autoload Game (autoload/game.gd)    flags, inventory, item 
 crossfades and does nothing when that track is already on. `CASE_TRACKS` maps cases to tracks: 1 sleepless,
 2 november, 3 entenca, 4 echoofsadness, 5 rainyday (Case 5, the endings, end cards, end credits and the title screen).
 Main calls it on the title screen, at each case card (`case_card`, the next case's track) and on every room change
-(the current case's track), so new game, Skip to Case N and loading a save all land on the right track. The Voice and
-SFX buses exist but are empty. The end credits close with the music attributions (`GameUI.show_music_credits`).
+(the current case's track), so new game, Skip to Case N and loading a save all land on the right track. The end
+credits close with the music and sound attributions (`GameUI.show_music_credits`).
+
+### Sound effects
+
+On the SFX bus (the Effects volume). `Audio.ambience("rain")` crossfades the rain loop (`assets/sounds/rain.wav`) in
+every room that calls `Room.add_rain()` (it sets `Room.rainy`; Main switches the ambience in `change_room`), on the
+title screen and on the drives; it carries on between two rainy rooms and fades out in a dry one. Ray's footsteps
+(`assets/sounds/footsteps.wav`, eight steps) loop while `Player` walks and stop with a 0.1 s fade when he stops,
+pitched up by `Player.STEP_PITCH` to his two steps a second. Both loops are cut from the Freesound originals in
+`sounds/` (not in git; `sounds/.gdignore` keeps Godot out) by `tools/sounds/make_loops.py`, and loop through their
+import settings (`edit/loop_mode=2`). Every sound's source and licence is in `assets/sounds/LICENSES.md`; only
+licences that allow selling the game (CC0, CC BY, bought), and CC BY ones go in `Audio.SOUND_CREDITS`. The Voice bus
+is still empty.
 
 ## 2. Game state, flags and saves
 
@@ -81,7 +93,7 @@ Signals: `inventory_changed`, `item_selected(id)`.
 
 Loading restores the room and position but not mid-conversation state, so a save is only allowed when nothing
 is running (`Main.busy` is false). Settings are stored separately in `user://settings.cfg`:
-`[video] fullscreen`, `[audio] music` (Music bus volume, 0 to 1, set by `Audio.set_music_volume`) and `[text] speed` (0 slow, 1 normal, 2 fast, 3 manual; `Main.TEXT_TIME` scales how long lines stay up, and Manual
+`[video] fullscreen`, `[audio] music` and `[audio] effects` (Music and SFX bus volumes, 0 to 1, set by `Audio.set_music_volume` and `set_effects_volume`) and `[text] speed` (0 slow, 1 normal, 2 fast, 3 manual; `Main.TEXT_TIME` scales how long lines stay up, and Manual
 keeps each line up until a click, see `Main._hold()`). On Windows, `user://` is `%APPDATA%\Godot\app_userdata\Nightshift\`.
 
 **Flag conventions.**

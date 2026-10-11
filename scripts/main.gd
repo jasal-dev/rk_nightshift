@@ -132,6 +132,7 @@ func _title() -> void:
 	if ui.fade_rect.color.a < 0.99:
 		await ui.fade_to(1.0, 0.6)
 	Audio.music(Audio.TITLE_TRACK)
+	Audio.ambience("rain")           # rain on the title backdrop
 	var t := ui.show_title(Game.has_save(), text_speed)
 	t.fullscreen_pressed.connect(toggle_fullscreen)
 	t.text_speed_chosen.connect(set_text_speed)
@@ -281,6 +282,7 @@ func change_room(id: String, from_room: String) -> void:
 			_: player.face("right")
 	Game.current_room = id
 	Audio.music(Audio.case_track(Game.current_case()))    # nothing changes inside a case; this catches new game and load
+	Audio.ambience("rain" if room.rainy else "")
 	await ui.fade_to(0.0, 0.45)
 	await room.on_enter(from_room)
 	busy = false
@@ -598,6 +600,7 @@ func narrate(text: String) -> void:
 func drive_begin() -> void:
 	## Cut to the rain-on-windshield transition. Follow with narrate()/text_message(), then drive_end().
 	busy = true
+	Audio.ambience("rain")           # rain on the windshield
 	await ui.fade_to(1.0, 0.6)
 	ui.show_drive()
 	await ui.fade_to(0.0, 0.6)

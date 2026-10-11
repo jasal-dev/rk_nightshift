@@ -1,9 +1,10 @@
 class_name SettingsPanel
 extends PanelContainer
-## SETTINGS: fullscreen, text speed and music volume, then BACK. The title screen shows it in place of its menu,
+## SETTINGS: fullscreen, text speed, music and effects volume, then BACK. The title screen shows it in place of its menu,
 ## and the cog at the right end of the inventory bar opens it over a room (GameUI.open_settings, the game paused).
-## Emits `fullscreen_pressed` and `text_speed_chosen`, which Main applies and remembers; the Music volume slider goes
-## straight to the Audio autoload, which remembers it. BACK (or Esc, handled by whoever shows it) emits `closed`.
+## Emits `fullscreen_pressed` and `text_speed_chosen`, which Main applies and remembers; the Music and Effects volume
+## sliders go straight to the Audio autoload, which remembers them. BACK (or Esc, handled by whoever shows it) emits
+## `closed`.
 ## Styled with the title screen's building blocks (TitleScreen.menu_button and the rest).
 
 signal fullscreen_pressed
@@ -13,9 +14,9 @@ signal closed
 const TEXT_SPEEDS := ["Slow", "Normal", "Fast", "Manual"]   ## Main.TEXT_TIME; Manual waits for a click
 
 var music_slider: HSlider
+var effects_slider: HSlider
 var _fullscreen_button: Button
 var _speed_buttons: Array[Button] = []
-var _volume_label: Label
 
 
 func _init(text_speed: int) -> void:
@@ -43,21 +44,28 @@ func _init(text_speed: int) -> void:
 		row.add_child(b)
 	set_text_speed(text_speed)
 
-	row = TitleScreen.menu_row(vb, "Music volume")
-	music_slider = TitleScreen.menu_slider()
-	music_slider.value = roundf(Audio.music_volume * 100.0)
-	row.add_child(music_slider)
-	_volume_label = TitleScreen.menu_label("%d%%" % int(music_slider.value), 34, TitleScreen.AMBER)
-	_volume_label.custom_minimum_size = Vector2(120, 0)
-	_volume_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	row.add_child(_volume_label)
-	music_slider.value_changed.connect(func(v: float):
-		_volume_label.text = "%d%%" % int(v)
-		Audio.set_music_volume(v / 100.0))
+	music_slider = _volume_row(vb, "Music volume", Audio.music_volume, Audio.set_music_volume)
+	effects_slider = _volume_row(vb, "Effects volume", Audio.effects_volume, Audio.set_effects_volume)
 
 	var back := TitleScreen.menu_button("BACK", 38)
 	back.pressed.connect(func(): closed.emit())
 	vb.add_child(back)
+
+
+func _volume_row(parent: Control, caption: String, value: float, apply: Callable) -> HSlider:
+	## A 0 to 100% slider with its value beside it; `apply` gets 0..1.
+	var row := TitleScreen.menu_row(parent, caption)
+	var slider := TitleScreen.menu_slider()
+	slider.value = roundf(value * 100.0)
+	row.add_child(slider)
+	var label := TitleScreen.menu_label("%d%%" % int(slider.value), 34, TitleScreen.AMBER)
+	label.custom_minimum_size = Vector2(120, 0)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	row.add_child(label)
+	slider.value_changed.connect(func(v: float):
+		label.text = "%d%%" % int(v)
+		apply.call(v / 100.0))
+	return slider
 
 
 func _process(_delta: float) -> void:

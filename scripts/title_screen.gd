@@ -39,6 +39,7 @@ var _bar_red: TextureRect
 var _bar_blue: TextureRect
 var _logo: TextureRect
 var _sub: TextureRect
+var _tag: Label
 static var _font: FontVariation
 var _blink := 0.0
 var _buzz_in := 2.0       ## seconds to the next buzz of the logo's failing tube
@@ -77,10 +78,10 @@ func _init(has_save: bool, text_speed: int) -> void:
 	_sub.material = add
 	_sub.modulate.a = 0.0
 	add_child(_sub)
-	var tag := menu_label("FIVE CASES.  ONE NIGHT.", 28, CREAM.darkened(0.15))
-	tag.position = Vector2(0, 392)
-	tag.size = Vector2(1920, 40)
-	add_child(tag)
+	_tag = menu_label("FIVE CASES.  ONE NIGHT.", 28, CREAM.darkened(0.15))
+	_tag.position = Vector2(0, 392)
+	_tag.size = Vector2(1920, 40)
+	add_child(_tag)
 
 	menu = VBoxContainer.new()
 	menu.add_theme_constant_override("separation", 4)
@@ -168,13 +169,15 @@ func close_settings() -> void:
 
 func open_credits() -> void:
 	menu.visible = false
-	_help.visible = false     # the credits run down to where it is
+	for c: CanvasItem in [_help, _sub, _tag]:     # the credits fill the screen under RAY KESSLER
+		c.visible = false
 	credits.visible = true
 
 
 func close_credits() -> void:
 	credits.visible = false
-	_help.visible = true
+	for c: CanvasItem in [_help, _sub, _tag]:
+		c.visible = true
 	menu.visible = true
 
 
@@ -203,10 +206,10 @@ static func menu_font() -> FontVariation:
 
 
 func _credits_panel() -> PanelContainer:
-	## The music attributions (Audio.MUSIC_CREDITS), where the menu is.
+	## The music and sound attributions (Audio.MUSIC_CREDITS, Audio.SOUND_CREDITS), under the logo.
 	var panel := PanelContainer.new()
 	style_panel(panel)
-	panel.position = Vector2(190, 450)
+	panel.position = Vector2(190, 262)
 	panel.custom_minimum_size = Vector2(1540, 0)
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 14)
@@ -220,23 +223,25 @@ func _credits_panel() -> PanelContainer:
 
 
 static func music_credits(font: Font, head_font: Font, font_size: int, col: Color, head_col: Color) -> VBoxContainer:
-	## MUSIC over the five attributions, two to a row, each block as written (line breaks kept).
-	## Also the last of the end credits (GameUI.show_music_credits).
+	## MUSIC over the five attributions and SOUND over the Freesound ones, two to a row, each block as written (line
+	## breaks kept). Also the last of the end credits (GameUI.show_music_credits).
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 16)
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	box.add_child(_text_label("MUSIC", head_font, font_size, head_col))
-	var row: HBoxContainer = null
-	for i in Audio.MUSIC_CREDITS.size():
-		if i % 2 == 0:
-			row = HBoxContainer.new()
-			row.alignment = BoxContainer.ALIGNMENT_CENTER
-			row.add_theme_constant_override("separation", 60)
-			row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			box.add_child(row)
-		var l := _text_label(String(Audio.MUSIC_CREDITS[i]), font, font_size, col)
-		l.custom_minimum_size = Vector2(640, 0)
-		row.add_child(l)
+	for section: Array in [["MUSIC", Audio.MUSIC_CREDITS], ["SOUND", Audio.SOUND_CREDITS]]:
+		box.add_child(_text_label(String(section[0]), head_font, font_size, head_col))
+		var blocks: Array = section[1]
+		var row: HBoxContainer = null
+		for i in blocks.size():
+			if i % 2 == 0:
+				row = HBoxContainer.new()
+				row.alignment = BoxContainer.ALIGNMENT_CENTER
+				row.add_theme_constant_override("separation", 60)
+				row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				box.add_child(row)
+			var l := _text_label(String(blocks[i]), font, font_size, col)
+			l.custom_minimum_size = Vector2(640, 0)
+			row.add_child(l)
 	return box
 
 
@@ -293,7 +298,7 @@ static func menu_slider() -> HSlider:
 	s.max_value = 100
 	s.step = 5
 	s.focus_mode = Control.FOCUS_NONE
-	s.custom_minimum_size = Vector2(420, 40)
+	s.custom_minimum_size = Vector2(360, 40)
 	s.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	var track := StyleBoxFlat.new()
 	track.bg_color = Color(BRASS, 0.55)
@@ -322,7 +327,7 @@ static func menu_row(parent: Control, caption: String) -> HBoxContainer:
 	parent.add_child(row)
 	var l := menu_label(caption, 34, CREAM)
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	l.custom_minimum_size = Vector2(260, 0)
+	l.custom_minimum_size = Vector2(330, 0)
 	row.add_child(l)
 	return row
 

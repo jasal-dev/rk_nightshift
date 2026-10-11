@@ -11,6 +11,9 @@ const LIGHT_SHEET := preload("res://assets/characters/detective_light.png")
 const RELIGHT := preload("res://shaders/relight.gdshader")
 
 @export var walk_speed := 186.0  ## pixels per second at scale 1.0
+const STEPS := preload("res://assets/sounds/footsteps.wav")   ## a loop of eight steps (tools/sounds/make_loops.py)
+const STEP_PITCH := 1.09    ## its steps are 0.546 s apart; the walk cycle is two steps a second (12 frames at 12 fps)
+const STEP_DB := -3.0
 
 var facing := "right"           ## right / left / up / down
 var talking := false
@@ -23,6 +26,8 @@ var _mat: ShaderMaterial
 var _reflection: AnimatedSprite2D
 var _shadow: Sprite2D
 var _lit_at := Vector2.INF
+var _steps: AudioStreamPlayer
+var _steps_tween: Tween
 
 
 func _ready() -> void:
@@ -57,6 +62,12 @@ func _ready() -> void:
 	_reflection.visible = false
 	add_child(_reflection)
 	move_child(_reflection, 0)
+	_steps = AudioStreamPlayer.new()
+	_steps.name = "Steps"
+	_steps.stream = STEPS
+	_steps.bus = "SFX"
+	_steps.pitch_scale = STEP_PITCH
+	add_child(_steps)
 	_play_idle()
 
 
@@ -159,6 +170,7 @@ func _process(delta: float) -> void:
 		if _reflection.animation != sprite.animation:
 			_reflection.animation = sprite.animation
 		_reflection.frame = sprite.frame
+	_update_steps()
 	if _path.is_empty():
 		return
 	var target := _path[0]
@@ -177,6 +189,24 @@ func _process(delta: float) -> void:
 	_face_vector(to)
 	_play("walk_" + facing)
 	_update_scale()
+
+
+func _update_steps() -> void:
+	## Footsteps loop while he walks and stop (a quick fade) the moment he stops. Leaving the tree stops them too.
+	var walking := not _path.is_empty() and is_visible_in_tree()
+	var on := _steps.playing and _steps_tween == null
+	if walking and not on:
+		if _steps_tween:
+			_steps_tween.kill()
+			_steps_tween = null
+		_steps.volume_db = STEP_DB
+		_steps.play()
+	elif not walking and on:
+		_steps_tween = create_tween()
+		_steps_tween.tween_property(_steps, "volume_db", -40.0, 0.1)
+		_steps_tween.tween_callback(func():
+			_steps.stop()
+			_steps_tween = null)
 
 
 func _update_scale() -> void:

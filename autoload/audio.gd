@@ -1,11 +1,14 @@
 extends Node
-## Music (and, later, voice and effects). One track per case, looping, kept playing across room changes;
-## `music()` crossfades to another track and does nothing when that track is already on.
+## Music, ambience and effects. One music track per case, looping, kept playing across room changes; `music()`
+## crossfades to another track and does nothing when that track is already on. `ambience()` does the same for the
+## background loop (rain in the rooms that show rain, on the title screen and on the drives), so it carries on between
+## two rainy rooms and fades out going into a dry one. Footsteps are the player's own (Player, on the SFX bus).
 ## Main switches tracks on the title screen, at each case card and on every room change (new game, Skip to Case N,
 ## loading a save), so whatever path got Ray into a case, its track is playing.
-## Buses: Master > Music, Voice, SFX (made here, so there's no bus layout file to keep in sync). Voice and SFX are
-## empty until there is something to play on them. The Music volume is set on the title screen's settings panel and
-## kept in user://settings.cfg with the other settings.
+## Buses: Master > Music, Voice, SFX (made here, so there's no bus layout file to keep in sync). Voice is empty until
+## there is something to play on it. The Music and Effects (SFX) volumes are set on the title screen's settings panel
+## and kept in user://settings.cfg with the other settings.
+## Sound sources and licences: assets/sounds/LICENSES.md (the loops are cut by tools/sounds/make_loops.py).
 
 const TRACK_PATH := "res://assets/music/bensound-%s.mp3"
 const TITLE_TRACK := "rainyday"
@@ -20,15 +23,66 @@ const MUSIC_CREDITS := [
 	"Music: Bensound.com/royalty-free-music\nLicense code: GZGCSGJPOTTD5QOA\nArtist: Dreamt",
 	"Music by https://www.bensound.com\nLicense code: FXE0HMJQCIWEMGOG\nArtist: Yunior Arronte",
 ]
+## Freesound sounds, shown under SOUND after the music (assets/sounds/LICENSES.md has the full list).
+const SOUND_CREDITS := [
+	"\"urban_night_rain_1\" by nkroher\nfreesound.org/s/232198 · CC BY 4.0",
+	"\"Footsteps ground\" by emilgasi\nfreesound.org/s/685287 · CC0",
+]
+const AMBIENCE := {"rain": ["res://assets/sounds/rain.wav", -6.0]}    ## id: [file, level in dB]
 const SETTINGS := "user://settings.cfg"     ## the same file as Main.SETTINGS
 const FADE := 2.5                           ## default crossfade, seconds
 const SILENT_DB := -60.0
 
-var track := ""                 ## the track playing (or fading in), "" for none
+var track := ""                 ## the music track playing (or fading in), "" for none
+var ambient := ""               ## the ambience playing, "" for none
 var music_volume := 0.8         ## 0..1, linear, the Music bus
-var _players: Array[AudioStreamPlayer] = []
-var _active := 0                ## index of the player with the current track
-var _tweens: Array = [null, null]
+var effects_volume := 0.8       ## 0..1, linear, the SFX bus (footsteps and ambience)
+var _music: Crossfader
+var _ambience: Crossfader
+
+
+class Crossfader:
+	## Two players on one bus: the new sound fades in on one while the old one fades out on the other.
+	var players: Array[AudioStreamPlayer] = []
+	var active := 0
+	var tweens: Array = [null, null]
+	var owner: Node
+
+	func _init(parent: Node, bus: String) -> void:
+		owner = parent
+		for i in 2:
+			var p := AudioStreamPlayer.new()
+			p.bus = bus
+			p.volume_db = SILENT_DB
+			parent.add_child(p)
+			players.append(p)
+
+	func play(stream: AudioStream, level_db: float, fade: float) -> void:
+		## Fade out what's on (if anything), then fade `stream` in to `level_db`; a null stream just fades out.
+		_fade(active, SILENT_DB, fade, true)
+		if stream == null:
+			return
+		active = 1 - active
+		var p := players[active]
+		p.stream = stream
+		p.volume_db = SILENT_DB
+		p.play()
+		_fade(active, level_db, fade, false)    # kills any fade-out still running on this player
+
+	func _fade(i: int, to_db: float, time: float, stop_after: bool) -> void:
+		## Fade player i in linear amplitude (so a crossfade doesn't dip), then stop it if asked.
+		if tweens[i]:
+			(tweens[i] as Tween).kill()
+		var p := players[i]
+		if not p.playing:
+			return
+		var from := db_to_linear(p.volume_db)
+		var to := db_to_linear(to_db)
+		var t := owner.create_tween()
+		t.tween_method(func(a: float): p.volume_db = linear_to_db(maxf(a, 0.001)), from, to, maxf(time, 0.01))
+		if stop_after:
+			t.tween_callback(p.stop)
+		tweens[i] = t
 
 
 func _ready() -> void:
@@ -39,15 +93,12 @@ func _ready() -> void:
 			var i := AudioServer.bus_count - 1
 			AudioServer.set_bus_name(i, bus)
 			AudioServer.set_bus_send(i, "Master")
-	for i in 2:
-		var p := AudioStreamPlayer.new()
-		p.bus = "Music"
-		p.volume_db = SILENT_DB
-		add_child(p)
-		_players.append(p)
+	_music = Crossfader.new(self, "Music")
+	_ambience = Crossfader.new(self, "SFX")
 	var cfg := ConfigFile.new()
 	cfg.load(SETTINGS)
-	_apply_volume(clampf(float(cfg.get_value("audio", "music", music_volume)), 0.0, 1.0))
+	music_volume = _apply_volume("Music", float(cfg.get_value("audio", "music", music_volume)))
+	effects_volume = _apply_volume("SFX", float(cfg.get_value("audio", "effects", effects_volume)))
 
 
 static func case_track(n: int) -> String:
@@ -59,54 +110,55 @@ static func track_path(id: String) -> String:
 
 
 func music(id: String, fade := FADE) -> void:
-	## Crossfade to track `id` (a key of CASE_TRACKS' values, e.g. "rainyday"); "" fades the music out.
+	## Crossfade to track `id` (one of CASE_TRACKS' values, e.g. "rainyday"); "" fades the music out.
 	if id == track:
 		return
 	track = id
-	_fade(_active, SILENT_DB, fade, true)
-	if id == "":
-		return
-	_active = 1 - _active
-	var p := _players[_active]
-	var stream := load(track_path(id)) as AudioStreamMP3
-	stream.loop = true
-	p.stream = stream
-	p.volume_db = SILENT_DB
-	p.play()
-	_fade(_active, 0.0, fade, false)    # kills any fade-out still running on this player
+	var stream: AudioStreamMP3 = null
+	if id != "":
+		stream = load(track_path(id)) as AudioStreamMP3
+		stream.loop = true
+	_music.play(stream, 0.0, fade)
 
 
 func stop_music(fade := FADE) -> void:
 	music("", fade)
 
 
+func ambience(id: String, fade := 1.5) -> void:
+	## Crossfade to the background loop `id` (a key of AMBIENCE, e.g. "rain"); "" fades it out.
+	if id == ambient:
+		return
+	ambient = id
+	if id == "":
+		_ambience.play(null, SILENT_DB, fade)
+		return
+	var a: Array = AMBIENCE[id]
+	_ambience.play(load(String(a[0])), float(a[1]), fade)
+
+
 func set_music_volume(v: float) -> void:
 	## From the settings slider (0..1); remembered in user://settings.cfg.
-	_apply_volume(clampf(v, 0.0, 1.0))
+	music_volume = _apply_volume("Music", v)
+	_save("music", music_volume)
+
+
+func set_effects_volume(v: float) -> void:
+	## From the settings slider (0..1); remembered in user://settings.cfg.
+	effects_volume = _apply_volume("SFX", v)
+	_save("effects", effects_volume)
+
+
+func _save(key: String, v: float) -> void:
 	var cfg := ConfigFile.new()
 	cfg.load(SETTINGS)
-	cfg.set_value("audio", "music", music_volume)
+	cfg.set_value("audio", key, v)
 	cfg.save(SETTINGS)
 
 
-func _apply_volume(v: float) -> void:
-	music_volume = v
-	var bus := AudioServer.get_bus_index("Music")
+func _apply_volume(bus_name: String, v: float) -> float:
+	v = clampf(v, 0.0, 1.0)
+	var bus := AudioServer.get_bus_index(bus_name)
 	AudioServer.set_bus_volume_db(bus, linear_to_db(v) if v > 0.0 else SILENT_DB)
 	AudioServer.set_bus_mute(bus, v <= 0.0)
-
-
-func _fade(i: int, to_db: float, time: float, stop_after: bool) -> void:
-	## Fade player i in linear amplitude (so a crossfade doesn't dip), then stop it if asked.
-	if _tweens[i]:
-		(_tweens[i] as Tween).kill()
-	var p := _players[i]
-	if not p.playing:
-		return
-	var from := db_to_linear(p.volume_db)
-	var to := db_to_linear(to_db)
-	var t := create_tween()
-	t.tween_method(func(a: float): p.volume_db = linear_to_db(maxf(a, 0.001)), from, to, maxf(time, 0.01))
-	if stop_after:
-		t.tween_callback(p.stop)
-	_tweens[i] = t
+	return v
