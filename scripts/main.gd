@@ -634,7 +634,7 @@ func say(text: String) -> void:
 	## The detective says a line. Await it.
 	player.set_talking(true)
 	var anchor := player.global_position - Vector2(0, player.height() + 12)
-	await _show_text(text, anchor, PLAYER_COLOR)
+	await _show_text(text, anchor, PLAYER_COLOR, "ray")
 	player.set_talking(false)
 
 
@@ -643,20 +643,28 @@ func voice(text: String, anchor: Vector2, color := Color(0.6, 0.85, 1.0)) -> voi
 	await _show_text(text, anchor, color)
 
 
-func _show_text(text: String, anchor: Vector2, color: Color) -> void:
+func _show_text(text: String, anchor: Vector2, color: Color, speaker := "") -> void:
+	## With a speaker whose line has a recorded clip (Audio.voice_clip), the clip plays and the line stays up at least
+	## as long as it; a click cuts both. Lines without a clip are text only.
 	ui.set_hover("", Vector2.ZERO)
 	ui.show_speech(text, anchor, color)
-	await _hold(clampf(0.9 + text.length() * 0.055, 1.6, 6.5))
+	var clip: AudioStream = Audio.voice_clip(speaker, text) if speaker != "" else null
+	if clip:
+		Audio.speak(clip)
+	await _hold(clampf(0.9 + text.length() * 0.055, 1.6, 6.5), true, clip.get_length() + 0.25 if clip else 0.0)
+	if clip:
+		Audio.stop_voice()
 	ui.hide_speech()
 
 
-func _hold(duration: float, skippable := true) -> void:
+func _hold(duration: float, skippable := true, at_least := 0.0) -> void:
 	## Keep a line up for `duration` seconds, scaled by the text speed, or until a click (Space, Esc).
 	## With the Manual text speed it stays until a click. A line that isn't skippable stays at least that long.
+	## `at_least` (seconds, not scaled) keeps a spoken line up until its clip has played.
 	_speaking = true
 	_skip = false
 	var manual := text_speed == MANUAL
-	var d := duration if manual else duration * _text_time()
+	var d := duration if manual else maxf(duration * _text_time(), at_least)
 	var t := 0.0
 	while true:
 		if _skip and not skippable and t < d:

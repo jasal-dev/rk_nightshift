@@ -14,6 +14,16 @@ The originals are in `sounds/` at the project root (not in git, and ignored by G
 | `assets/sounds/rain.wav` | `232198__nkroher__urban_night_rain_1.wav` (pack "RainInTheCity") | https://freesound.org/s/232198/ | nkroher | CC BY 4.0 (credit required) | 2026-10-11 |
 | `assets/sounds/footsteps.wav` | `685287__emilgasi__footsteps-ground.wav` | https://freesound.org/s/685287/ | emilgasi | CC0 (credited anyway) | 2026-10-11 |
 
+## Voice
+
+Spoken lines are made with text-to-speech, run locally: `tools/tts/gen_voice.py` writes `assets/voice/<speaker>/*.wav`
+and `assets/voice/lines.json`.
+
+| Tool | Source | Licence | Notes |
+| --- | --- | --- | --- |
+| Kokoro-82M (model weights and code), voice `am_onyx` | https://huggingface.co/hexgrad/Kokoro-82M | Apache-2.0 | The output may be used commercially; no credit required. |
+| misaki (Kokoro's text-to-phoneme) | https://github.com/hexgrad/misaki | Apache-2.0 | Used only to make the files. |
+
 ## Music
 
 Bensound licences, one per track; the licence codes are in `Audio.MUSIC_CREDITS` and shown in the credits.

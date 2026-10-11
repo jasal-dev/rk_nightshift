@@ -5,9 +5,10 @@ extends Node
 ## two rainy rooms and fades out going into a dry one. Footsteps are the player's own (Player, on the SFX bus).
 ## Main switches tracks on the title screen, at each case card and on every room change (new game, Skip to Case N,
 ## loading a save), so whatever path got Ray into a case, its track is playing.
-## Buses: Master > Music, Voice, SFX (made here, so there's no bus layout file to keep in sync). Voice is empty until
-## there is something to play on it. The Music and Effects (SFX) volumes are set on the title screen's settings panel
-## and kept in user://settings.cfg with the other settings.
+## Voice: spoken lines (`speak()`), recorded clips found by speaker and text (`voice_clip()`, assets/voice/lines.json,
+## made by tools/tts/gen_voice.py); Main plays one with each line that has one.
+## Buses: Master > Music, Voice, SFX (made here, so there's no bus layout file to keep in sync). The Music, Voice and
+## Effects (SFX) volumes are set on the settings panel and kept in user://settings.cfg with the other settings.
 ## Sound sources and licences: assets/sounds/LICENSES.md (the loops are cut by tools/sounds/make_loops.py).
 
 const TRACK_PATH := "res://assets/music/bensound-%s.mp3"
@@ -29,6 +30,7 @@ const SOUND_CREDITS := [
 	"\"Footsteps ground\" by emilgasi\nfreesound.org/s/685287 · CC0",
 ]
 const AMBIENCE := {"rain": ["res://assets/sounds/rain.wav", 0.0]}    ## id: [file, level in dB]
+const VOICE_LINES := "res://assets/voice/lines.json"     ## id: {speaker, text, file, voice}
 const SETTINGS := "user://settings.cfg"     ## the same file as Main.SETTINGS
 const FADE := 2.5                           ## default crossfade, seconds
 const SILENT_DB := -60.0
@@ -37,6 +39,9 @@ var track := ""                 ## the music track playing (or fading in), "" fo
 var ambient := ""               ## the ambience playing, "" for none
 var music_volume := 0.8         ## 0..1, linear, the Music bus
 var effects_volume := 0.8       ## 0..1, linear, the SFX bus (footsteps and ambience)
+var voice_volume := 0.8         ## 0..1, linear, the Voice bus
+var _voice: AudioStreamPlayer
+var _voice_lines := {}          ## id: res:// path, from VOICE_LINES
 var _music: Crossfader
 var _ambience: Crossfader
 
@@ -95,10 +100,19 @@ func _ready() -> void:
 			AudioServer.set_bus_send(i, "Master")
 	_music = Crossfader.new(self, "Music")
 	_ambience = Crossfader.new(self, "SFX")
+	_voice = AudioStreamPlayer.new()
+	_voice.bus = "Voice"
+	add_child(_voice)
+	if FileAccess.file_exists(VOICE_LINES):
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(VOICE_LINES))
+		if parsed is Dictionary:
+			for id: String in parsed:
+				_voice_lines[id] = String((parsed[id] as Dictionary).get("file", ""))
 	var cfg := ConfigFile.new()
 	cfg.load(SETTINGS)
 	music_volume = _apply_volume("Music", float(cfg.get_value("audio", "music", music_volume)))
 	effects_volume = _apply_volume("SFX", float(cfg.get_value("audio", "effects", effects_volume)))
+	voice_volume = _apply_volume("Voice", float(cfg.get_value("audio", "voice", voice_volume)))
 
 
 static func case_track(n: int) -> String:
@@ -135,6 +149,33 @@ func ambience(id: String, fade := 1.5) -> void:
 		return
 	var a: Array = AMBIENCE[id]
 	_ambience.play(load(String(a[0])), float(a[1]), fade)
+
+
+static func line_id(speaker: String, text: String) -> String:
+	## The clip id for a line: the first 12 hex digits of sha1("<speaker>|<text>") (as tools/tts/gen_voice.py).
+	return ("%s|%s" % [speaker, text]).sha1_text().substr(0, 12)
+
+
+func voice_clip(speaker: String, text: String) -> AudioStream:
+	## The recorded clip for this exact line, or null.
+	var path: String = _voice_lines.get(line_id(speaker, text), "")
+	return load(path) as AudioStream if path != "" and ResourceLoader.exists(path) else null
+
+
+func speak(clip: AudioStream) -> void:
+	## Play a spoken line on the Voice bus, cutting off the one before.
+	_voice.stream = clip
+	_voice.play()
+
+
+func stop_voice() -> void:
+	_voice.stop()
+
+
+func set_voice_volume(v: float) -> void:
+	## From the settings slider (0..1); remembered in user://settings.cfg.
+	voice_volume = _apply_volume("Voice", v)
+	_save("voice", voice_volume)
 
 
 func set_music_volume(v: float) -> void:

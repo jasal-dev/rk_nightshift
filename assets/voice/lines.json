@@ -1,0 +1,26 @@
+{
+	"453d5cd57f2c": {
+		"speaker": "ray",
+		"text": "Quarter past midnight. The squad room is mine again.",
+		"file": "res://assets/voice/ray/453d5cd57f2c.wav",
+		"voice": "kokoro:am_onyx"
+	},
+	"429ec3f4868d": {
+		"speaker": "ray",
+		"text": "Danny Reyes. Two nights cold, and the lieutenant wants it closed by Friday.",
+		"file": "res://assets/voice/ray/429ec3f4868d.wav",
+		"voice": "kokoro:am_onyx"
+	},
+	"1c61912ca76f": {
+		"speaker": "ray",
+		"text": "First, the file. I locked it away like a careful man.",
+		"file": "res://assets/voice/ray/1c61912ca76f.wav",
+		"voice": "kokoro:am_onyx"
+	},
+	"5e348cced2a6": {
+		"speaker": "ray",
+		"text": "Then I hid the key like a paranoid one.",
+		"file": "res://assets/voice/ray/5e348cced2a6.wav",
+		"voice": "kokoro:am_onyx"
+	}
+}

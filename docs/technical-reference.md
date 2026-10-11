@@ -65,8 +65,17 @@ title screen and on the drives; it carries on between two rainy rooms and fades 
 pitched up by `Player.STEP_PITCH` to his two steps a second. Both loops are cut from the Freesound originals in
 `sounds/` (not in git; `sounds/.gdignore` keeps Godot out) by `tools/sounds/make_loops.py`, and loop through their
 import settings (`edit/loop_mode=2`). Every sound's source and licence is in `assets/sounds/LICENSES.md`; only
-licences that allow selling the game (CC0, CC BY, bought), and CC BY ones go in `Audio.SOUND_CREDITS`. The Voice bus
-is still empty.
+licences that allow selling the game (CC0, CC BY, bought), and CC BY ones go in `Audio.SOUND_CREDITS`.
+
+### Voice (proof of concept)
+
+`Main.say()` looks up a recorded clip for the exact line (`Audio.voice_clip("ray", text)`: the id is the first 12 hex
+digits of sha1("ray|<text>"), mapped to a file in `assets/voice/lines.json`). With a clip, `Audio.speak()` plays it on
+the Voice bus and `_hold()` keeps the line up at least as long as the clip (Manual still waits for a click); a click
+cuts both. Lines without a clip behave as before, and an edited line just loses its clip until it is re-rendered.
+Clips come from `tools/tts/gen_voice.py` (Kokoro-82M, Apache-2.0, run locally from a venv in `tools/tts/.venv`; voice
+`am_onyx`; `--compare` renders the candidate voices into `tools/tts/out/`). So far only Ray's first four lines in
+`SquadRoom.intro()` are voiced.
 
 ## 2. Game state, flags and saves
 
@@ -93,7 +102,7 @@ Signals: `inventory_changed`, `item_selected(id)`.
 
 Loading restores the room and position but not mid-conversation state, so a save is only allowed when nothing
 is running (`Main.busy` is false). Settings are stored separately in `user://settings.cfg`:
-`[video] fullscreen`, `[audio] music` and `[audio] effects` (Music and SFX bus volumes, 0 to 1, set by `Audio.set_music_volume` and `set_effects_volume`) and `[text] speed` (0 slow, 1 normal, 2 fast, 3 manual; `Main.TEXT_TIME` scales how long lines stay up, and Manual
+`[video] fullscreen`, `[audio] music`, `voice` and `effects` (Music, Voice and SFX bus volumes, 0 to 1, set by `Audio.set_music_volume`, `set_voice_volume` and `set_effects_volume`) and `[text] speed` (0 slow, 1 normal, 2 fast, 3 manual; `Main.TEXT_TIME` scales how long lines stay up, and Manual
 keeps each line up until a click, see `Main._hold()`). On Windows, `user://` is `%APPDATA%\Godot\app_userdata\Nightshift\`.
 
 **Flag conventions.**

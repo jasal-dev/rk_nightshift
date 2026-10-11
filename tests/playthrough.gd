@@ -324,6 +324,8 @@ func _run() -> void:
 	for n in range(1, 6):
 		if not ResourceLoader.exists(Audio.track_path(Audio.case_track(n))):
 			_fail("Case %d's music is missing: %s" % [n, Audio.track_path(Audio.case_track(n))])
+	if Audio.voice_clip("ray", "Quarter past midnight. The squad room is mine again.") == null:
+		_fail("Ray's first line should have a voice clip (assets/voice/lines.json)")
 	if _failed:
 		return
 	if only == 0:

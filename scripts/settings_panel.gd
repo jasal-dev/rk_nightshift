@@ -1,10 +1,10 @@
 class_name SettingsPanel
 extends PanelContainer
-## SETTINGS: fullscreen, text speed, music and effects volume, then BACK. The title screen shows it in place of its menu,
-## and the cog at the right end of the inventory bar opens it over a room (GameUI.open_settings, the game paused).
-## Emits `fullscreen_pressed` and `text_speed_chosen`, which Main applies and remembers; the Music and Effects volume
-## sliders go straight to the Audio autoload, which remembers them. BACK (or Esc, handled by whoever shows it) emits
-## `closed`.
+## SETTINGS: fullscreen, text speed, music, voice and effects volume, then BACK. The title screen shows it in place of
+## its menu, and the cog at the right end of the inventory bar opens it over a room (GameUI.open_settings, the game
+## paused). Emits `fullscreen_pressed` and `text_speed_chosen`, which Main applies and remembers; the Music, Voice and
+## Effects volume sliders go straight to the Audio autoload, which remembers them. BACK (or Esc, handled by whoever shows
+## it) emits `closed`.
 ## Styled with the title screen's building blocks (TitleScreen.menu_button and the rest).
 
 signal fullscreen_pressed
@@ -15,6 +15,7 @@ const TEXT_SPEEDS := ["Slow", "Normal", "Fast", "Manual"]   ## Main.TEXT_TIME; M
 
 var music_slider: HSlider
 var effects_slider: HSlider
+var voice_slider: HSlider
 var _fullscreen_button: Button
 var _speed_buttons: Array[Button] = []
 
@@ -45,6 +46,7 @@ func _init(text_speed: int) -> void:
 	set_text_speed(text_speed)
 
 	music_slider = _volume_row(vb, "Music volume", Audio.music_volume, Audio.set_music_volume)
+	voice_slider = _volume_row(vb, "Voice volume", Audio.voice_volume, Audio.set_voice_volume)
 	effects_slider = _volume_row(vb, "Effects volume", Audio.effects_volume, Audio.set_effects_volume)
 
 	var back := TitleScreen.menu_button("BACK", 38)
