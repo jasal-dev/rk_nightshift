@@ -1,10 +1,11 @@
 """Cut the game's sound loops from the Freesound originals in sounds/ (not in git, see assets/sounds/LICENSES.md).
 
-    python tools/sounds/make_loops.py
+    tools/tts/.venv/Scripts/python tools/sounds/make_loops.py     (the rain is an .m4a: it needs PyAV, `pip install av`)
 
-assets/sounds/rain.wav       232198 urban_night_rain_1: the whole take, its last 1.5 s crossfaded into its start so it
-                             loops without a seam, brought up to -28 dBFS RMS (the take is quiet, -34) with its few
-                             loud drops softly limited to stay under -1 dBFS. Mono, 16-bit, 44.1 kHz.
+assets/sounds/rain.wav       695793 raining-in-my-house (mandaki, CC0): the whole take (13.2 s), its last 1.5 s
+                             crossfaded into its start so it loops without a seam, brought up to -28 dBFS RMS (the take
+                             is quiet, -33) with any loud drops softly limited to stay under -1 dBFS. Mono, 16-bit,
+                             44.1 kHz. (Until 2026-10-11 it was 232198 urban_night_rain_1 by nkroher, CC BY 4.0.)
 assets/sounds/footsteps.wav  685287 footsteps-ground: the first eight steps (0.38 s to 4.75 s), which are evenly paced
                              (one every 0.546 s), with a 10 ms fade at each end so the loop doesn't click. The player
                              plays it a little faster to match Ray's walk (Player.STEP_PITCH). Mono, 16-bit, 48 kHz.
@@ -34,6 +35,17 @@ def read(path):
     return x.reshape(-1, ch).mean(axis=1), sr
 
 
+def read_compressed(path):
+    ## Mono float samples and the rate of an .m4a/.mp3/.ogg, through PyAV (FFmpeg).
+    import av
+    with av.open(path) as c:
+        stream = c.streams.audio[0]
+        frames = [f.to_ndarray().astype(np.float32) for f in c.decode(stream)]
+        rate = stream.rate
+    x = np.concatenate(frames, axis=1)
+    return x.mean(axis=0), rate
+
+
 def write(path, x, sr):
     w = wave.open(path, "wb")
     w.setnchannels(1)
@@ -44,7 +56,7 @@ def write(path, x, sr):
 
 
 def rain():
-    x, sr = read(os.path.join(SRC, "rain", "232198__nkroher__urban_night_rain_1.wav"))
+    x, sr = read_compressed(os.path.join(SRC, "695793__mandaki__raining-in-my-house.m4a"))
     fade = int(sr * 1.5)
     t = np.linspace(0, np.pi / 2, fade, dtype=np.float32)
     body = x[: len(x) - fade].copy()

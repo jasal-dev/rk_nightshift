@@ -26,7 +26,7 @@ const MUSIC_CREDITS := [
 ]
 ## Freesound sounds, shown under SOUND after the music (assets/sounds/LICENSES.md has the full list).
 const SOUND_CREDITS := [
-	"\"urban_night_rain_1\" by nkroher\nfreesound.org/s/232198 · CC BY 4.0",
+	"\"Raining in my house\" by mandaki\nfreesound.org/s/695793 · CC0",
 	"\"Footsteps ground\" by emilgasi\nfreesound.org/s/685287 · CC0",
 ]
 const AMBIENCE := {"rain": ["res://assets/sounds/rain.wav", 0.0]}    ## id: [file, level in dB]
