@@ -57,6 +57,9 @@ SPEAKERS = {
     "devin": {"blend": {"am_puck": 1.0}, "speed": 0.9, "from": "CASTING_REST devin C"},
     "brielle": {"blend": {"af_jessica": 1.0}, "speed": 1.05, "from": "CASTING_REST brielle B"},
     "cabbie": {"blend": {"am_michael": 1.0}, "semitones": -1.5, "from": "CASTING_REST cabbie B"},
+    "pearl": {"blend": {"af_bella": 1.0}, "speed": 1.0, "from": "CASTING_REST pearl A"},
+    "morty": {"blend": {"am_michael": 1.0}, "semitones": -2.5, "speed": 0.85, "fry": 0.1, "from": "CASTING_REST morty A"},
+    "charlie": {"blend": {"bm_daniel": 1.0}, "speed": 0.95, "lang": "b", "from": "CASTING_REST charlie C"},
 }
 
 

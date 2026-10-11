@@ -140,6 +140,9 @@ flutter are the post-processing in `render_variant()` (none of the cast uses the
 | `devin` | Devin Clark, Kenji's roommate, photographer: late twenties, soft-spoken, plausible. The killer | `am_puck` | 0.9 | 0 | none | `SPEAKERS["devin"]` (was `CASTING_REST["devin"]` C) | 2026-10-11, over A and B | not yet (~21 lines, Case 2 on) |
 | `brielle` | Brielle V., drunk influencer, Kenji's last fare (a video on Park's phone) | `af_jessica` | 1.05 | 0 | none | `SPEAKERS["brielle"]` (was `CASTING_REST["brielle"]` B) | 2026-10-11, over A and C | not yet (~2 lines, Case 2 on) |
 | `cabbie` | A cab driver at Norm's counter (two lines) | `am_michael` | 0.92 | -1.5 | none | `SPEAKERS["cabbie"]` (was `CASTING_REST["cabbie"]` B) | 2026-10-11, over A and C | not yet (~2 lines, Case 2 on) |
+| `pearl` | Pearl Danvers, Gus's assistant, actress: 34, warm, quick, a very good crier. The killer | `af_bella` | 1 | 0 | none | `SPEAKERS["pearl"]` (was `CASTING_REST["pearl"]` A) | 2026-10-11, over B and C | not yet (~32 lines, Case 3 on) |
+| `morty` | Morty Kahn, rival collector: seventies, bathrobe and loafers, grieving, defensive | `am_michael` | 0.85 | -2.5 | flutter 0.1 | `SPEAKERS["morty"]` (was `CASTING_REST["morty"]` A) | 2026-10-11, over B and C | not yet (~20 lines, Case 3 on) |
+| `charlie` | Desmond "Charlie" Pike, Chaplin on the boulevard for thirty years: theatrical, kind, nosy | `bm_daniel` (British English, `"lang": "b"`) | 0.95 | 0 | none | `SPEAKERS["charlie"]` (was `CASTING_REST["charlie"]` C) | 2026-10-11, over A and B | not yet (~18 lines, Case 3 on) |
 
 ## Proposed, awaiting a pick
 
@@ -151,9 +154,6 @@ are heard only on the take (a recording); Brielle only in a phone video; Owen on
 
 | Speaker | Case | Who | Lines | A | B | C |
 | --- | --- | --- | --- | --- | --- | --- |
-| `pearl` | 3 | Pearl Danvers, Gus's assistant, actress: 34, warm, quick, a very good crier. The killer | ~32 | af_bella, speed 1 | af_aoede, speed 1 | af_river, speed 1 |
-| `morty` | 3 | Morty Kahn, rival collector: seventies, bathrobe and loafers, grieving, defensive | ~20 | am_michael, -2.5 semitones, speed 0.85, flutter 0.1 | am_santa 50% + am_eric 50%, -1 semitones, speed 0.88 | bm_lewis, -2 semitones, speed 0.85 (British) |
-| `charlie` | 3 | Desmond "Charlie" Pike, Chaplin on the boulevard for thirty years: theatrical, kind, nosy | ~18 | bm_fable, speed 1 (British) | am_puck, speed 1 | bm_daniel, speed 0.95 (British) |
 | `preacher` | 4 | Calvin "Preacher" Odom: sixties, Army, First Cavalry; formal, scriptural, sharp | ~35 | am_echo, -2.5 semitones, speed 0.85, warmth 3 | am_michael 50% + am_fenrir 50%, -2 semitones, speed 0.85, grit 1.5 | am_eric, -3 semitones, speed 0.82, warmth 4, flutter 0.08 |
 | `doss` | 4 | Officer Brian Doss, Northeast patrol: thirties, cheerful, lazy, wants to be done by five | ~18 | am_puck, speed 1.05 | am_eric, speed 1 | am_echo, speed 1.05 |
 | `courtney` | 4 | Courtney Vail, event planner: thirties, headset, adrenaline and cold brew | ~19 | af_nova, speed 1.1 | af_jessica, speed 1.1 | af_alloy, speed 1.1 |
