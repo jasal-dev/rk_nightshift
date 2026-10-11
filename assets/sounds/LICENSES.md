@@ -21,7 +21,7 @@ and `assets/voice/lines.json`.
 
 | Tool | Source | Licence | Notes |
 | --- | --- | --- | --- |
-| Kokoro-82M (model weights and code), voice `am_onyx` | https://huggingface.co/hexgrad/Kokoro-82M | Apache-2.0 | The output may be used commercially; no credit required. |
+| Kokoro-82M (model weights and code), voices `am_onyx` and `am_fenrir` | https://huggingface.co/hexgrad/Kokoro-82M | Apache-2.0 | The output may be used commercially; no credit required. |
 | misaki (Kokoro's text-to-phoneme) | https://github.com/hexgrad/misaki | Apache-2.0 | Used only to make the files. |
 
 ## Music

@@ -1,6 +1,10 @@
-"""Text-to-speech for Ray's lines (proof of concept): Kokoro-82M, run locally.
+"""Text-to-speech for spoken lines: Kokoro-82M, run locally. How to voice more lines: docs/voice-recording.md.
 
-    tools/tts/.venv/Scripts/python tools/tts/gen_voice.py            # the game's voice, into assets/voice/
+    tools/tts/.venv/Scripts/python tools/tts/gen_voice.py            # every line in tools/tts/lines.json that has no
+                                                                     # clip yet, into assets/voice/ (--force: all)
+    tools/tts/.venv/Scripts/python tools/tts/gen_voice.py --list scripts/rooms/squad_room.gd
+                                                                     # a script's literal main.say() lines, as JSON
+                                                                     # rows for lines.json
     tools/tts/.venv/Scripts/python tools/tts/gen_voice.py --compare  # every candidate, into tools/tts/out/<voice>/
     tools/tts/.venv/Scripts/python tools/tts/gen_voice.py --variants # older, rougher takes on am_onyx (VARIANTS),
                                                                      # into tools/tts/out/onyx_variants/
@@ -17,6 +21,7 @@ for speech) with peaks under -1 dBFS.
 import hashlib
 import json
 import os
+import re
 import sys
 
 import numpy as np
@@ -24,18 +29,22 @@ import soundfile as sf
 from kokoro import KPipeline
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", ".."))
-VOICE = "am_onyx"          ## Ray: the one wired into the game
+VOICE = "am_onyx"          ## the base for the candidate comparisons (--compare, --variants)
 CANDIDATES = ["am_onyx", "am_fenrir", "am_michael"]
 SPEED = 0.92               ## a touch slow: tired, a quarter past midnight
 RATE = 24000
+LINES_FILE = os.path.join(ROOT, "tools", "tts", "lines.json")    ## [[speaker, text], ...], text exactly as in the game
+MANIFEST = os.path.join(ROOT, "assets", "voice", "lines.json")
+## The cast: speaker id (as Main passes it; Main.say() is "ray") -> the VARIANTS preset that is their voice.
+SPEAKERS = {"ray": "2_blend"}
 
-## (speaker, text), exactly as the game shows them: Ray's first lines in the squad room (SquadRoom.intro()).
-LINES = [
-    ("ray", "Quarter past midnight. The squad room is mine again."),
-    ("ray", "Danny Reyes. Two nights cold, and the lieutenant wants it closed by Friday."),
-    ("ray", "First, the file. I locked it away like a careful man."),
-    ("ray", "Then I hid the key like a paranoid one."),
-]
+
+def load_lines():
+    with open(LINES_FILE, encoding="utf-8") as f:
+        return [(str(sp), str(t)) for sp, t in json.load(f)]
+
+
+LINES = load_lines()
 
 
 def line_id(speaker, text):
@@ -150,7 +159,24 @@ def variants(pipe):
     print("wrote", base, "(compare_lineN.wav: onyx, then", ", ".join(VARIANTS), ")")
 
 
+SAY = re.compile(r'main\.say\(\s*"((?:[^"\\]|\\.)*)"\s*\)')
+
+
+def list_says(path):
+    ## The lines a script gives Main.say() as one plain string literal, in order, once each. Lines built at run time,
+    ## picked with `"a" if x else "b"` or passed through a variable aren't found; add those by hand.
+    found = []
+    for m in SAY.finditer(open(path, encoding="utf-8").read()):
+        text = json.loads('"%s"' % m.group(1))
+        if text not in found:
+            found.append(text)
+    print("[\n" + ",\n".join("\t" + json.dumps(["ray", t], ensure_ascii=False) for t in found) + "\n]")
+
+
 def main():
+    if "--list" in sys.argv:
+        list_says(sys.argv[sys.argv.index("--list") + 1])
+        return
     pipe = KPipeline(lang_code="a")      # American English
     if "--variants" in sys.argv:
         variants(pipe)
@@ -164,17 +190,35 @@ def main():
                          render(pipe, voice, text), RATE, subtype="PCM_16")
             print("wrote", out)
         return
+    force = "--force" in sys.argv
     manifest = {}
+    made = 0
     for speaker, text in LINES:
+        if speaker not in SPEAKERS:
+            sys.exit("no voice cast for speaker '%s' (SPEAKERS; see docs/voice-recording.md)" % speaker)
+        preset = SPEAKERS[speaker]
         lid = line_id(speaker, text)
         rel = "assets/voice/%s/%s.wav" % (speaker, lid)
-        os.makedirs(os.path.join(ROOT, "assets", "voice", speaker), exist_ok=True)
-        sf.write(os.path.join(ROOT, rel), render(pipe, VOICE, text), RATE, subtype="PCM_16")
-        manifest[lid] = {"speaker": speaker, "text": text, "file": "res://" + rel, "voice": "kokoro:" + VOICE}
-    with open(os.path.join(ROOT, "assets", "voice", "lines.json"), "w", encoding="utf-8", newline="\n") as f:
+        path = os.path.join(ROOT, rel)
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        if force or not os.path.exists(path):
+            sf.write(path, render_variant(pipe, VARIANTS[preset], text), RATE, subtype="PCM_16")
+            made += 1
+        manifest[lid] = {"speaker": speaker, "text": text, "file": "res://" + rel, "voice": "kokoro:" + preset}
+    # clips no line points at any more (its text changed, or it went): remove them and their .import files
+    stale = 0
+    for speaker in SPEAKERS:
+        folder = os.path.join(ROOT, "assets", "voice", speaker)
+        for name in os.listdir(folder) if os.path.isdir(folder) else []:
+            if name.endswith(".wav") and name[:-4] not in manifest:
+                for f in (name, name + ".import"):
+                    if os.path.exists(os.path.join(folder, f)):
+                        os.remove(os.path.join(folder, f))
+                stale += 1
+    with open(MANIFEST, "w", encoding="utf-8", newline="\n") as f:
         json.dump(manifest, f, indent="\t", ensure_ascii=False)
         f.write("\n")
-    print("wrote %d clips" % len(manifest))
+    print("%d lines, %d rendered, %d stale clips removed" % (len(manifest), made, stale))
 
 
 if __name__ == "__main__":

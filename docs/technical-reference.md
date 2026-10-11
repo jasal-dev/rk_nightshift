@@ -73,8 +73,9 @@ licences that allow selling the game (CC0, CC BY, bought), and CC BY ones go in 
 digits of sha1("ray|<text>"), mapped to a file in `assets/voice/lines.json`). With a clip, `Audio.speak()` plays it on
 the Voice bus and `_hold()` keeps the line up at least as long as the clip (Manual still waits for a click); a click
 cuts both. Lines without a clip behave as before, and an edited line just loses its clip until it is re-rendered.
-Clips come from `tools/tts/gen_voice.py` (Kokoro-82M, Apache-2.0, run locally from a venv in `tools/tts/.venv`; voice
-`am_onyx`; `--compare` renders the candidate voices into `tools/tts/out/`). So far only Ray's first four lines in
+Clips come from `tools/tts/gen_voice.py` (Kokoro-82M, Apache-2.0, run locally from a venv in `tools/tts/.venv`; Ray's voice
+is the `2_blend` preset, am_onyx 0.7 + am_fenrir 0.3). Lines to voice are listed in `tools/tts/lines.json`; how to add
+more and cast new characters: `docs/voice-recording.md`. So far only Ray's first four lines in
 `SquadRoom.intro()` are voiced.
 
 ## 2. Game state, flags and saves
