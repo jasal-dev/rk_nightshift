@@ -111,11 +111,11 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 
 func _rosa(line: String) -> void:
-	await main.voice(line, speaker_at("rosa"), Case2.ROSA_COLOR)
+	await main.voice(line, speaker_at("rosa"), Case2.ROSA_COLOR, "rosa")
 
 
 func _heck(line: String) -> void:
-	await main.voice(line, speaker_at("heck"), Case2.HECK_COLOR)
+	await main.voice(line, speaker_at("heck"), Case2.HECK_COLOR, "heck")
 
 
 # --- Rosa -------------------------------------------------------------------------
@@ -127,9 +127,9 @@ func _pour() -> void:
 	await main.say("Coffee. Coffee.")
 	await main.player.play_action("use")
 	await main.say("You're asleep, you don't need coffee. Coffee.")
-	await main.voice("Thanks, officer.", speaker_at("regulars"), Case2.CABBIE_COLOR)
+	await main.voice("Thanks, officer.", speaker_at("regulars"), Case2.CABBIE_COLOR, "cabbie")
 	await main.say("Detective.")
-	await main.voice("Thanks, detective.", speaker_at("regulars"), Case2.CABBIE_COLOR)
+	await main.voice("Thanks, detective.", speaker_at("regulars"), Case2.CABBIE_COLOR, "cabbie")
 	await main.walk(hotspot("rosa").walk_to)
 	main.player.face("up")
 	await _rosa("Well. A cop who pours. Now I've seen everything. Put that down before you get ideas, hon. What do you need?")

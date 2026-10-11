@@ -308,7 +308,7 @@ func _new_game() -> void:
 
 
 func _check_voiced(n: int) -> void:
-	## Every line a cast speaker (Ray and everyone who speaks in Case 1) said in a fully voiced case had a clip
+	## Every line a cast speaker said in a fully voiced case (Cases 1 and 2) in a fully voiced case had a clip
 	## (docs/voice-recording.md). Lines that are only sound effects in asterisks ("*knock knock*") and silences ("...") are never voiced.
 	var spoken := RegEx.create_from_string("[A-Za-z0-9]")     # "..." (a silence) has nothing to say
 	var missing := Audio.unvoiced.filter(func(t: String):
@@ -357,7 +357,9 @@ func _run() -> void:
 		main._waiting_click = false
 		await expect_room(String(FIRST_ROOMS[only]))
 		match only:
-			2: await _case2()
+			2:
+				await _case2()
+				_check_voiced(2)
 			3: await _case3()
 			4: await _case4()
 			5: await _case5()
@@ -377,6 +379,7 @@ func _full_run() -> void:
 	if Game.has_item("envelope") or not Game.has_item("notebook"):
 		_fail("Case 1 items should stay on the desk, the notebook should come along: %s" % [Game.inventory])
 	await _case2()
+	_check_voiced(2)
 	if _failed:
 		return
 	print("Case 2 finished.")

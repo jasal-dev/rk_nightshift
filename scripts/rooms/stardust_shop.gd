@@ -178,7 +178,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 
 func _park(line: String) -> void:
-	await main.voice(line, speaker_at("park"), Case2.PARK_COLOR)
+	await main.voice(line, speaker_at("park"), Case2.PARK_COLOR, "park")
 
 
 func _pearl(line: String) -> void:

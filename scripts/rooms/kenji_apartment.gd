@@ -190,7 +190,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 func _devin(line: String) -> void:
 	var at := speaker_at("devin_couch" if Game.flag("search_consent") else "devin")
-	await main.voice(line, at, Case2.DEVIN_COLOR)
+	await main.voice(line, at, Case2.DEVIN_COLOR, "devin")
 
 
 func _maybe_hint() -> void:
@@ -324,8 +324,8 @@ func open_peas() -> void:
 	await main.say("Park, it's Kessler. Silver Lake. Come up the stairs.")
 	await main.wait(1.2)
 	var door := speaker_at("front_door")
-	await main.voice("I was taking the Ota car down the hill. Silver Lake was on the way.", door, Case2.PARK_COLOR)
-	await main.voice("Devin Clark? Stand up for me.", door, Case2.PARK_COLOR)
+	await main.voice("I was taking the Ota car down the hill. Silver Lake was on the way.", door, Case2.PARK_COLOR, "park")
+	await main.voice("Devin Clark? Stand up for me.", door, Case2.PARK_COLOR, "park")
 	await _devin("Can I take my bag?")
 	if Game.flag("clue_strap"):
 		await main.say("No. That one stays. The strap's going to meet Dr. Shah.")

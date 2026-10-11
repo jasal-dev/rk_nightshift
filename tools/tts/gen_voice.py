@@ -99,8 +99,17 @@ PRONOUNCE = {
     "1 of 3": "one of three",
     "Reyes, 34.": "Reyes, thirty-four.",
     "KJAZZ": "K-Jazz",
+    "Done with HH.": "Done with HushHush.",
+    "WEDDINGS_OCT": "Weddings October",
+    "Dodgers, 2020": "Dodgers, twenty twenty",
+    "since 1957": "since nineteen fifty-seven",
+    "11 × 2,500": "eleven times twenty-five hundred",
+    "50/50": "fifty-fifty",
+    "6:12 p.m.": "six-twelve p.m.",
+    "12:14 a.m.": "twelve-fourteen a.m.",
+    "1:10 a.m.": "one-ten a.m.",
 }
-ACRONYMS = {"LAPD", "DA", "IA", "ID", "TV", "UV", "GPS", "ER"}    ## all-caps words said letter by letter
+ACRONYMS = {"LAPD", "LA", "LAX", "DA", "IA", "ID", "TV", "UV", "GPS", "ER", "SD", "DUI", "CSI"}    ## all-caps words said letter by letter
 
 
 def spoken(text):
@@ -557,7 +566,10 @@ def list_says(path, speaker="ray"):
     calls = _calls(src)
     if speaker != "ray":
         calls = [(n, f, _split_first(a)[0]) for n, f, a in _calls(src, VOICE_CALL)
-                 if re.search(r',\s*"%s"\s*(,\s*\w+\s*)?$' % re.escape(speaker), _split_first(a)[1])]   # [, phone]
+                 if re.search(r',\s*"%s"\s*(,\s*\w+\s*)?$' % re.escape(speaker), _split_first(a)[1])]
+        # a room's helper for the character, `func _shah(line)`, called as _shah("...")
+        calls += list(_calls(src, re.compile(r'(?<![\w.])_%s\(' % re.escape(speaker))))
+        calls.sort()   # [, phone]
     for line_no, func, arg in calls:
         texts = []
         for m in STRING.finditer(arg):

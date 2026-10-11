@@ -83,9 +83,9 @@ static func doorstep(main: Node) -> void:
 	var door := Vector2(960, 560)
 	await main.narrate("*knock knock knock*")
 	await main.wait(0.8)
-	await main.voice("It's two in the morning.", door, DEVIN_COLOR)
+	await main.voice("It's two in the morning.", door, DEVIN_COLOR, "devin")
 	await main.narrate("Detective Kessler, LAPD. Does Kenji Ota live here?")
-	await main.voice("Yeah. He's driving. He drives nights. Why?", door, DEVIN_COLOR)
+	await main.voice("Yeah. He's driving. He drives nights. Why?", door, DEVIN_COLOR, "devin")
 	await main.narrate("May I come in?")
 
 

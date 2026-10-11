@@ -228,7 +228,7 @@ func _talk_mara() -> void:
 
 # --- Officer Park -------------------------------------------------------------------------------------------------
 func _park(line: String) -> void:
-	await main.voice(line, speaker_at("park"), PARK_COLOR)
+	await main.voice(line, speaker_at("park"), PARK_COLOR, "park")
 
 
 func _talk_park() -> void:

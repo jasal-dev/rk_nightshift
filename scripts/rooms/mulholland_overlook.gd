@@ -121,11 +121,11 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 
 func _park(line: String) -> void:
-	await main.voice(line, speaker_at("park"), Case2.PARK_COLOR)
+	await main.voice(line, speaker_at("park"), Case2.PARK_COLOR, "park")
 
 
 func _shah(line: String) -> void:
-	await main.voice(line, speaker_at("shah"), Case2.SHAH_COLOR)
+	await main.voice(line, speaker_at("shah"), Case2.SHAH_COLOR, "shah")
 
 
 # --- Officer Park -----------------------------------------------------------------
@@ -155,8 +155,8 @@ func _talk_to_park() -> void:
 				await _park("She posted this at eleven fifty-eight.")
 				main.ui.show_device("@brielle.v  -  11:58 PM", [], 0,
 						"Shaky selfie video, from the back seat of a car. Bad light, worse angle.", [], false, Case2.BRIELLE_COLOR)
-				await main.voice("My Glide driver has a camera pointed at the back seat? Like, at me?", Case2.BRIELLE_AT, Case2.BRIELLE_COLOR)
-				await main.voice("Reported. One star. Creep.", Case2.BRIELLE_AT, Case2.BRIELLE_COLOR)
+				await main.voice("My Glide driver has a camera pointed at the back seat? Like, at me?", Case2.BRIELLE_AT, Case2.BRIELLE_COLOR, "brielle", true)
+				await main.voice("Reported. One star. Creep.", Case2.BRIELLE_AT, Case2.BRIELLE_COLOR, "brielle", true)
 				main.ui.hide_device()
 				await _park("And she's been live since twelve-twenty. Hot tub, Hollywood Hills, thirty-one thousand people watching. She's doing karaoke now.")
 				await main.say("Thirty-one thousand witnesses. Best alibi I've ever seen, and I hated every second of it.")

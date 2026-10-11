@@ -172,7 +172,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await default_response(verb, item)
 			else:
 				await main.voice("The girlfriend was in the cooler the whole time, Detective. Hiding. That's not a great look.",
-						speaker_at("park"), Case2.PARK_COLOR)
+						speaker_at("park"), Case2.PARK_COLOR, "park")
 				await main.say("She was hiding from the man who did this. She's the only one in here with any sense.")
 
 		"bar_door":
@@ -189,7 +189,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 # --- Shah ------------------------------------------------------------------------------------------------------------
 func _shah(line: String) -> void:
-	await main.voice(line, speaker_at("shah"), Case2.SHAH_COLOR)
+	await main.voice(line, speaker_at("shah"), Case2.SHAH_COLOR, "shah")
 
 
 func _talk_shah() -> void:
