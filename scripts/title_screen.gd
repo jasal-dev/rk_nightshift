@@ -1,10 +1,11 @@
 class_name TitleScreen
 extends Control
 ## The title screen (GameUI.show_title): the street the morning Sal died, empty but for the tape and the patrol car's
-## turning light bar, RAY KESSLER in neon over NIGHTSHIFT, and New Game, Load Game, Settings and Exit, with a row
-## under them that skips to Case 2, 3, 4 or 5 (Main.jump_to_case).
+## turning light bar, RAY KESSLER in neon over NIGHTSHIFT, and New Game, Load Game, Settings, Credits and Exit, with a
+## row under them that skips to Case 2, 3, 4 or 5 (Main.jump_to_case).
 ## Emits `chosen` ("new", "load", "case2" to "case5", or "quit").
-## The settings panel emits `fullscreen_pressed` and `text_speed_chosen`; Main applies and remembers them.
+## The settings panel emits `fullscreen_pressed` and `text_speed_chosen`; Main applies and remembers them. Its Music
+## volume slider goes straight to the Audio autoload, which remembers it. Credits shows the music attributions.
 ## Art: tools/r3/title.py (the backdrop, via render_room.py) and tools/r3/gen_title.py (the logo).
 
 signal chosen(action: String)
@@ -28,12 +29,17 @@ const GREY := Color(0.5, 0.48, 0.45)
 var new_button: Button
 var load_button: Button
 var settings_button: Button
+var credits_button: Button
 var exit_button: Button
 var case_buttons: Array[Button] = []    ## Case 2 to Case 5, in order
 var menu: VBoxContainer
 var settings: PanelContainer
+var credits: PanelContainer
+var music_slider: HSlider
 var _fullscreen_button: Button
 var _speed_buttons: Array[Button] = []
+var _volume_label: Label
+var _help: Label
 var _bar_red: TextureRect
 var _bar_blue: TextureRect
 var _logo: TextureRect
@@ -92,24 +98,29 @@ func _init(has_save: bool, text_speed: int) -> void:
 	new_button = _button("NEW GAME", 46)
 	load_button = _button("LOAD GAME", 46)
 	settings_button = _button("SETTINGS", 46)
+	credits_button = _button("CREDITS", 46)
 	exit_button = _button("EXIT", 46)
 	load_button.disabled = not has_save
 	new_button.pressed.connect(func(): chosen.emit("new"))
 	load_button.pressed.connect(func(): chosen.emit("load"))
 	settings_button.pressed.connect(open_settings)
+	credits_button.pressed.connect(open_credits)
 	exit_button.pressed.connect(func(): chosen.emit("quit"))
-	for b in [new_button, load_button, settings_button, exit_button]:
+	for b in [new_button, load_button, settings_button, credits_button, exit_button]:
 		menu.add_child(b)
 	menu.add_child(_case_row())
 
 	settings = _settings_panel(text_speed)
 	settings.visible = false
 	add_child(settings)
+	credits = _credits_panel()
+	credits.visible = false
+	add_child(credits)
 
-	var help := _label("Left click to walk and use, right click to look.     F5 save    F9 load    Esc save and quit to title    F11 fullscreen", 22, GREY)
-	help.position = Vector2(0, 1020)
-	help.size = Vector2(1920, 30)
-	add_child(help)
+	_help = _label("Left click to walk and use, right click to look.     F5 save    F9 load    Esc save and quit to title    F11 fullscreen", 22, GREY)
+	_help.position = Vector2(0, 1020)
+	_help.size = Vector2(1920, 30)
+	add_child(_help)
 
 
 func _ready() -> void:
@@ -144,8 +155,11 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if settings.visible and event.is_pressed() and (event as InputEventKey).keycode == KEY_ESCAPE:
-		close_settings()
+	if event.is_pressed() and (event as InputEventKey).keycode == KEY_ESCAPE:
+		if settings.visible:
+			close_settings()
+		elif credits.visible:
+			close_credits()
 
 
 func open_settings() -> void:
@@ -155,6 +169,18 @@ func open_settings() -> void:
 
 func close_settings() -> void:
 	settings.visible = false
+	menu.visible = true
+
+
+func open_credits() -> void:
+	menu.visible = false
+	_help.visible = false     # the credits run down to where it is
+	credits.visible = true
+
+
+func close_credits() -> void:
+	credits.visible = false
+	_help.visible = true
 	menu.visible = true
 
 
@@ -176,16 +202,7 @@ func set_text_speed(index: int) -> void:
 
 # --- building blocks ------------------------------------------------------------
 func _settings_panel(text_speed: int) -> PanelContainer:
-	var panel := PanelContainer.new()
-	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color(0.06, 0.05, 0.08, 0.92)
-	sb.border_color = BRASS
-	sb.set_border_width_all(2)
-	sb.content_margin_left = 48
-	sb.content_margin_right = 48
-	sb.content_margin_top = 28
-	sb.content_margin_bottom = 20
-	panel.add_theme_stylebox_override("panel", sb)
+	var panel := _panel()
 	panel.position = Vector2(470, 500)
 	panel.custom_minimum_size = Vector2(980, 0)
 	var vb := VBoxContainer.new()
@@ -211,10 +228,73 @@ func _settings_panel(text_speed: int) -> PanelContainer:
 		row.add_child(b)
 	set_text_speed(text_speed)
 
+	row = _row(vb, "Music volume")
+	music_slider = _slider()
+	music_slider.value = roundf(Audio.music_volume * 100.0)
+	row.add_child(music_slider)
+	_volume_label = _label("%d%%" % int(music_slider.value), 34, AMBER)
+	_volume_label.custom_minimum_size = Vector2(120, 0)
+	_volume_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	row.add_child(_volume_label)
+	music_slider.value_changed.connect(func(v: float):
+		_volume_label.text = "%d%%" % int(v)
+		Audio.set_music_volume(v / 100.0))
+
 	var back := _button("BACK", 38)
 	back.pressed.connect(close_settings)
 	vb.add_child(back)
 	return panel
+
+
+func _credits_panel() -> PanelContainer:
+	## The music attributions (Audio.MUSIC_CREDITS), where the menu is.
+	var panel := _panel()
+	panel.position = Vector2(190, 450)
+	panel.custom_minimum_size = Vector2(1540, 0)
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 14)
+	panel.add_child(vb)
+	vb.add_child(_label("CREDITS", 34, BRASS))
+	vb.add_child(music_credits(GameUI.FONT, _font, 27, CREAM, GREY))
+	var back := _button("BACK", 38)
+	back.pressed.connect(close_credits)
+	vb.add_child(back)
+	return panel
+
+
+static func music_credits(font: Font, head_font: Font, font_size: int, col: Color, head_col: Color) -> VBoxContainer:
+	## MUSIC over the five attributions, two to a row, each block as written (line breaks kept).
+	## Also the last of the end credits (GameUI.show_music_credits).
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 16)
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(_text_label("MUSIC", head_font, font_size, head_col))
+	var row: HBoxContainer = null
+	for i in Audio.MUSIC_CREDITS.size():
+		if i % 2 == 0:
+			row = HBoxContainer.new()
+			row.alignment = BoxContainer.ALIGNMENT_CENTER
+			row.add_theme_constant_override("separation", 60)
+			row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			box.add_child(row)
+		var l := _text_label(String(Audio.MUSIC_CREDITS[i]), font, font_size, col)
+		l.custom_minimum_size = Vector2(640, 0)
+		row.add_child(l)
+	return box
+
+
+static func _text_label(text: String, font: Font, font_size: int, col: Color) -> Label:
+	var l := Label.new()
+	l.text = text
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	l.add_theme_font_override("font", font)
+	l.add_theme_font_size_override("font_size", font_size)
+	l.add_theme_color_override("font_color", col)
+	l.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+	l.add_theme_constant_override("outline_size", 6)
+	l.add_theme_constant_override("line_spacing", 4)
+	return l
 
 
 func _case_row() -> VBoxContainer:
@@ -234,6 +314,50 @@ func _case_row() -> VBoxContainer:
 		case_buttons.append(b)
 		row.add_child(b)
 	return box
+
+
+func _panel() -> PanelContainer:
+	var panel := PanelContainer.new()
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0.06, 0.05, 0.08, 0.92)
+	sb.border_color = BRASS
+	sb.set_border_width_all(2)
+	sb.content_margin_left = 48
+	sb.content_margin_right = 48
+	sb.content_margin_top = 28
+	sb.content_margin_bottom = 20
+	panel.add_theme_stylebox_override("panel", sb)
+	return panel
+
+
+func _slider() -> HSlider:
+	## 0 to 100 in steps of 5: a dim brass track, amber up to a cream knob.
+	var s := HSlider.new()
+	s.min_value = 0
+	s.max_value = 100
+	s.step = 5
+	s.focus_mode = Control.FOCUS_NONE
+	s.custom_minimum_size = Vector2(420, 40)
+	s.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	var track := StyleBoxFlat.new()
+	track.bg_color = Color(BRASS, 0.55)
+	track.content_margin_top = 4
+	track.content_margin_bottom = 4
+	track.set_corner_radius_all(3)
+	var fill := track.duplicate() as StyleBoxFlat
+	fill.bg_color = AMBER.darkened(0.2)
+	s.add_theme_stylebox_override("slider", track)
+	s.add_theme_stylebox_override("grabber_area", fill)
+	s.add_theme_stylebox_override("grabber_area_highlight", fill)
+	var knob := Image.create(28, 28, false, Image.FORMAT_RGBA8)
+	for y in 28:
+		for x in 28:
+			var d := Vector2(x - 13.5, y - 13.5).length()
+			knob.set_pixel(x, y, Color(AMBER if d > 10.0 else CREAM, clampf(13.5 - d, 0.0, 1.0)))
+	var tex := ImageTexture.create_from_image(knob)
+	s.add_theme_icon_override("grabber", tex)
+	s.add_theme_icon_override("grabber_highlight", tex)
+	return s
 
 
 func _row(parent: Control, caption: String) -> HBoxContainer:

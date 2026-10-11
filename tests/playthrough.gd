@@ -255,6 +255,8 @@ func expect_room(id: String) -> void:
 	await _idle()
 	if main.room.room_id != id:
 		_fail("expected to be in %s, but in %s" % [id, main.room.room_id])
+	if Audio.track != Audio.case_track(Game.current_case()):
+		_fail("Case %d should play '%s', not '%s'" % [Game.current_case(), Audio.case_track(Game.current_case()), Audio.track])
 
 
 func expect(flags: Array[String]) -> void:
@@ -269,6 +271,8 @@ func _new_game() -> void:
 		await get_tree().process_frame
 	if main.ui.title.load_button.disabled == Game.has_save():
 		_fail("Load Game should be enabled exactly when there's a save")
+	if Audio.track != Audio.TITLE_TRACK:
+		_fail("the title screen should play '%s', not '%s'" % [Audio.TITLE_TRACK, Audio.track])
 	while "--shots" in OS.get_cmdline_user_args() and int(_shots.get("title", 0)) <= 20 and not _failed:
 		await get_tree().process_frame
 	main.ui.title.new_button.pressed.emit()
@@ -288,6 +292,9 @@ func _only_case() -> int:
 
 func _run() -> void:
 	var only := _only_case()
+	for n in range(1, 6):
+		if not ResourceLoader.exists(Audio.track_path(Audio.case_track(n))):
+			_fail("Case %d's music is missing: %s" % [n, Audio.track_path(Audio.case_track(n))])
 	if _failed:
 		return
 	if only == 0:

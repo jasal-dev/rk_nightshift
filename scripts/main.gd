@@ -110,6 +110,7 @@ func _title() -> void:
 	busy = true
 	if ui.fade_rect.color.a < 0.99:
 		await ui.fade_to(1.0, 0.6)
+	Audio.music(Audio.TITLE_TRACK)
 	var t := ui.show_title(Game.has_save(), text_speed)
 	t.fullscreen_pressed.connect(toggle_fullscreen)
 	t.text_speed_chosen.connect(set_text_speed)
@@ -140,6 +141,7 @@ func case_card(time: String, title: String) -> bool:
 	## Title card between two cases ("1:40 a.m.  Case 2: Five Stars"). Click to go on; F9 loads instead,
 	## which frees the calling room, so nothing after this runs in that case. Returns true when it loaded.
 	busy = true
+	Audio.music(Audio.case_track(Game.current_case()), 3.0)    # the case before is done: its track gives way to the next
 	await ui.fade_to(1.0, 1.2)
 	ui.show_card([time, "", title, "", "", "Click to continue"],
 			[Color(0.45, 0.75, 1.0), Color.WHITE, Color(0.85, 0.8, 0.7), Color.WHITE, Color.WHITE, Color(0.6, 0.6, 0.6)])
@@ -257,6 +259,7 @@ func change_room(id: String, from_room: String) -> void:
 			"vance_office": player.face("down")
 			_: player.face("right")
 	Game.current_room = id
+	Audio.music(Audio.case_track(Game.current_case()))    # nothing changes inside a case; this catches new game and load
 	await ui.fade_to(0.0, 0.45)
 	await room.on_enter(from_room)
 	busy = false

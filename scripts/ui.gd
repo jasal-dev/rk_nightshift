@@ -804,6 +804,15 @@ func show_endcard(tex: Texture2D, text: String) -> void:
 	show_scene(tex, 0.5, text)
 
 
+## The last end card: the music attributions on black (the same block as the title screen's Credits).
+func show_music_credits() -> void:
+	show_scene(null)
+	var box := TitleScreen.music_credits(FONT, FONT, 32, Color(1, 0.92, 0.7), Color(0.45, 0.75, 1.0))
+	box.alignment = BoxContainer.ALIGNMENT_CENTER
+	box.set_anchors_preset(Control.PRESET_FULL_RECT)
+	scene_pic.add_child(box)
+
+
 func hide_paper() -> void:
 	if paper:
 		paper.queue_free()
