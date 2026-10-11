@@ -251,6 +251,35 @@ func read_notebook() -> void:
 		_fail("every note should count as seen once the notebook is closed")
 
 
+func settings_in_room() -> void:
+	## The inventory bar's cog opens the title screen's settings over the room, and the game pauses; Esc closes them
+	## (it must not quicksave and go back to the title screen) and the game goes on.
+	await _idle()
+	if _failed:
+		return
+	_step = "open the settings  [%s]" % main.room.room_id
+	_step_started = Time.get_ticks_msec()
+	print("  ", _step)
+	var ui: GameUI = main.ui
+	ui.settings_clicked.emit()
+	await get_tree().process_frame
+	if ui.settings == null or not get_tree().paused:
+		_fail("the cog should open the settings and pause the game")
+		return
+	if ui.settings.music_slider.value != roundf(Audio.music_volume * 100.0):
+		_fail("the settings' music slider should show the music volume")
+	var esc := InputEventKey.new()
+	esc.keycode = KEY_ESCAPE
+	esc.pressed = true
+	get_viewport().push_input(esc)
+	for i in 3:
+		await get_tree().process_frame
+	if ui.settings != null or get_tree().paused:
+		_fail("Esc should close the settings and unpause the game")
+	if main._on_title or ui.title != null:
+		_fail("Esc on the settings should not go back to the title screen")
+
+
 func expect_room(id: String) -> void:
 	await _idle()
 	if main.room.room_id != id:
@@ -370,6 +399,7 @@ func _case1() -> void:
 	await main.examine_item("case_file")
 	main.busy = false
 	await read_notebook()
+	await settings_in_room()
 	await act("phone")                                  # Doyle's voicemail
 	await act("mug")
 	await act("wastebasket", "use", "coffee")

@@ -4,8 +4,8 @@ extends Control
 ## turning light bar, RAY KESSLER in neon over NIGHTSHIFT, and New Game, Load Game, Settings, Credits and Exit, with a
 ## row under them that skips to Case 2, 3, 4 or 5 (Main.jump_to_case).
 ## Emits `chosen` ("new", "load", "case2" to "case5", or "quit").
-## The settings panel emits `fullscreen_pressed` and `text_speed_chosen`; Main applies and remembers them. Its Music
-## volume slider goes straight to the Audio autoload, which remembers it. Credits shows the music attributions.
+## Settings is a SettingsPanel (the same one the inventory bar's cog opens in a room); TitleScreen passes on its
+## `fullscreen_pressed` and `text_speed_chosen`, and Main applies and remembers them. Credits shows the music attributions.
 ## Art: tools/r3/title.py (the backdrop, via render_room.py) and tools/r3/gen_title.py (the logo).
 
 signal chosen(action: String)
@@ -20,7 +20,6 @@ const BAR_BLUE_AT := Vector2(0, 0)
 const LOGO := preload("res://assets/ui/title_logo.png")
 const LOGO_DIM := preload("res://assets/ui/title_logo_dim.png")
 const SUB := preload("res://assets/ui/title_sub.png")
-const TEXT_SPEEDS := ["Slow", "Normal", "Fast", "Manual"]   ## Main.TEXT_TIME; Manual waits for a click
 const CREAM := Color(0.85, 0.8, 0.7)
 const AMBER := Color(1, 0.85, 0.45)
 const BRASS := Color(0.55, 0.42, 0.28)
@@ -33,18 +32,14 @@ var credits_button: Button
 var exit_button: Button
 var case_buttons: Array[Button] = []    ## Case 2 to Case 5, in order
 var menu: VBoxContainer
-var settings: PanelContainer
+var settings: SettingsPanel
 var credits: PanelContainer
-var music_slider: HSlider
-var _fullscreen_button: Button
-var _speed_buttons: Array[Button] = []
-var _volume_label: Label
 var _help: Label
 var _bar_red: TextureRect
 var _bar_blue: TextureRect
 var _logo: TextureRect
 var _sub: TextureRect
-var _font: FontVariation
+static var _font: FontVariation
 var _blink := 0.0
 var _buzz_in := 2.0       ## seconds to the next buzz of the logo's failing tube
 
@@ -52,9 +47,6 @@ var _buzz_in := 2.0       ## seconds to the next buzz of the logo's failing tube
 func _init(has_save: bool, text_speed: int) -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP     # clicks off the buttons go nowhere
-	_font = FontVariation.new()
-	_font.base_font = GameUI.FONT
-	_font.spacing_glyph = 5
 
 	add_child(_rect(BG, Vector2.ZERO))
 	_bar_red = _rect(BAR_RED, BAR_RED_AT)
@@ -85,7 +77,7 @@ func _init(has_save: bool, text_speed: int) -> void:
 	_sub.material = add
 	_sub.modulate.a = 0.0
 	add_child(_sub)
-	var tag := _label("FIVE CASES.  ONE NIGHT.", 28, CREAM.darkened(0.15))
+	var tag := menu_label("FIVE CASES.  ONE NIGHT.", 28, CREAM.darkened(0.15))
 	tag.position = Vector2(0, 392)
 	tag.size = Vector2(1920, 40)
 	add_child(tag)
@@ -95,11 +87,11 @@ func _init(has_save: bool, text_speed: int) -> void:
 	menu.position = Vector2(560, 530)
 	menu.size = Vector2(800, 0)
 	add_child(menu)
-	new_button = _button("NEW GAME", 46)
-	load_button = _button("LOAD GAME", 46)
-	settings_button = _button("SETTINGS", 46)
-	credits_button = _button("CREDITS", 46)
-	exit_button = _button("EXIT", 46)
+	new_button = menu_button("NEW GAME", 46)
+	load_button = menu_button("LOAD GAME", 46)
+	settings_button = menu_button("SETTINGS", 46)
+	credits_button = menu_button("CREDITS", 46)
+	exit_button = menu_button("EXIT", 46)
 	load_button.disabled = not has_save
 	new_button.pressed.connect(func(): chosen.emit("new"))
 	load_button.pressed.connect(func(): chosen.emit("load"))
@@ -110,14 +102,18 @@ func _init(has_save: bool, text_speed: int) -> void:
 		menu.add_child(b)
 	menu.add_child(_case_row())
 
-	settings = _settings_panel(text_speed)
+	settings = SettingsPanel.new(text_speed)
+	settings.position = Vector2(470, 500)
 	settings.visible = false
+	settings.fullscreen_pressed.connect(func(): fullscreen_pressed.emit())
+	settings.text_speed_chosen.connect(func(i: int): text_speed_chosen.emit(i))
+	settings.closed.connect(close_settings)
 	add_child(settings)
 	credits = _credits_panel()
 	credits.visible = false
 	add_child(credits)
 
-	_help = _label("Left click to walk and use, right click to look.     F5 save    F9 load    Esc save and quit to title    F11 fullscreen", 22, GREY)
+	_help = menu_label("Left click to walk and use, right click to look.     F5 save    F9 load    Esc save and quit to title    F11 fullscreen", 22, GREY)
 	_help.position = Vector2(0, 1020)
 	_help.size = Vector2(1920, 30)
 	add_child(_help)
@@ -150,8 +146,6 @@ func _process(delta: float) -> void:
 			t.tween_interval(randf_range(0.03, 0.09))
 			t.tween_callback(func(): _logo.texture = LOGO)
 			t.tween_interval(randf_range(0.04, 0.16))
-	if settings.visible:
-		_fullscreen_button.text = "On" if _is_fullscreen() else "Off"    # F11 works here too
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -186,77 +180,40 @@ func close_credits() -> void:
 
 func is_hot(p: Vector2) -> bool:
 	## True when `p` (screen pixels) is over a button that takes a click (for the hot cursor).
-	for b in find_children("*", "Button", true, false):
+	return button_at(self, p)
+
+
+static func button_at(under: Control, p: Vector2) -> bool:
+	## True when `p` (screen pixels) is over a button under `under` that takes a click.
+	for b in under.find_children("*", "Button", true, false):
 		var btn := b as Button
 		if btn.is_visible_in_tree() and not btn.disabled and btn.get_global_rect().has_point(p):
 			return true
 	return false
 
 
-func set_text_speed(index: int) -> void:
-	for i in _speed_buttons.size():
-		var on := i == index
-		_speed_buttons[i].add_theme_color_override("font_color", AMBER if on else GREY)
-		_speed_buttons[i].add_theme_color_override("font_hover_color", AMBER if on else CREAM)
-
-
-# --- building blocks ------------------------------------------------------------
-func _settings_panel(text_speed: int) -> PanelContainer:
-	var panel := _panel()
-	panel.position = Vector2(470, 500)
-	panel.custom_minimum_size = Vector2(980, 0)
-	var vb := VBoxContainer.new()
-	vb.add_theme_constant_override("separation", 14)
-	panel.add_child(vb)
-	var head := _label("SETTINGS", 34, BRASS)
-	vb.add_child(head)
-
-	var row := _row(vb, "Fullscreen")
-	_fullscreen_button = _button("Off", 34)
-	_fullscreen_button.custom_minimum_size = Vector2(130, 0)
-	_fullscreen_button.pressed.connect(func(): fullscreen_pressed.emit())
-	row.add_child(_fullscreen_button)
-
-	row = _row(vb, "Text speed")
-	for i in TEXT_SPEEDS.size():
-		var b := _button(String(TEXT_SPEEDS[i]), 34)
-		b.custom_minimum_size = Vector2(130, 0)
-		b.pressed.connect(func():
-			set_text_speed(i)
-			text_speed_chosen.emit(i))
-		_speed_buttons.append(b)
-		row.add_child(b)
-	set_text_speed(text_speed)
-
-	row = _row(vb, "Music volume")
-	music_slider = _slider()
-	music_slider.value = roundf(Audio.music_volume * 100.0)
-	row.add_child(music_slider)
-	_volume_label = _label("%d%%" % int(music_slider.value), 34, AMBER)
-	_volume_label.custom_minimum_size = Vector2(120, 0)
-	_volume_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	row.add_child(_volume_label)
-	music_slider.value_changed.connect(func(v: float):
-		_volume_label.text = "%d%%" % int(v)
-		Audio.set_music_volume(v / 100.0))
-
-	var back := _button("BACK", 38)
-	back.pressed.connect(close_settings)
-	vb.add_child(back)
-	return panel
+# --- building blocks (SettingsPanel uses them too) -----------------------------------
+static func menu_font() -> FontVariation:
+	## The menu face: the UI font, letter-spaced.
+	if _font == null:
+		_font = FontVariation.new()
+		_font.base_font = GameUI.FONT
+		_font.spacing_glyph = 5
+	return _font
 
 
 func _credits_panel() -> PanelContainer:
 	## The music attributions (Audio.MUSIC_CREDITS), where the menu is.
-	var panel := _panel()
+	var panel := PanelContainer.new()
+	style_panel(panel)
 	panel.position = Vector2(190, 450)
 	panel.custom_minimum_size = Vector2(1540, 0)
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 14)
 	panel.add_child(vb)
-	vb.add_child(_label("CREDITS", 34, BRASS))
-	vb.add_child(music_credits(GameUI.FONT, _font, 27, CREAM, GREY))
-	var back := _button("BACK", 38)
+	vb.add_child(menu_label("CREDITS", 34, BRASS))
+	vb.add_child(music_credits(GameUI.FONT, menu_font(), 27, CREAM, GREY))
+	var back := menu_button("BACK", 38)
 	back.pressed.connect(close_credits)
 	vb.add_child(back)
 	return panel
@@ -307,17 +264,17 @@ func _case_row() -> VBoxContainer:
 	row.alignment = BoxContainer.ALIGNMENT_CENTER
 	row.add_theme_constant_override("separation", 26)
 	box.add_child(row)
-	row.add_child(_label("SKIP TO", 26, GREY))
+	row.add_child(menu_label("SKIP TO", 26, GREY))
 	for n in [2, 3, 4, 5]:
-		var b := _button("CASE %d" % n, 30)
+		var b := menu_button("CASE %d" % n, 30)
 		b.pressed.connect(func(): chosen.emit("case%d" % n))
 		case_buttons.append(b)
 		row.add_child(b)
 	return box
 
 
-func _panel() -> PanelContainer:
-	var panel := PanelContainer.new()
+static func style_panel(panel: PanelContainer) -> void:
+	## The menu's dark, brass-edged box.
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = Color(0.06, 0.05, 0.08, 0.92)
 	sb.border_color = BRASS
@@ -327,10 +284,9 @@ func _panel() -> PanelContainer:
 	sb.content_margin_top = 28
 	sb.content_margin_bottom = 20
 	panel.add_theme_stylebox_override("panel", sb)
-	return panel
 
 
-func _slider() -> HSlider:
+static func menu_slider() -> HSlider:
 	## 0 to 100 in steps of 5: a dim brass track, amber up to a cream knob.
 	var s := HSlider.new()
 	s.min_value = 0
@@ -360,24 +316,24 @@ func _slider() -> HSlider:
 	return s
 
 
-func _row(parent: Control, caption: String) -> HBoxContainer:
+static func menu_row(parent: Control, caption: String) -> HBoxContainer:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 10)
 	parent.add_child(row)
-	var l := _label(caption, 34, CREAM)
+	var l := menu_label(caption, 34, CREAM)
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	l.custom_minimum_size = Vector2(260, 0)
 	row.add_child(l)
 	return row
 
 
-func _button(text: String, font_size: int) -> Button:
+static func menu_button(text: String, font_size: int) -> Button:
 	var b := Button.new()
 	b.text = text
 	b.flat = true
 	b.focus_mode = Control.FOCUS_NONE
 	b.mouse_filter = Control.MOUSE_FILTER_STOP
-	b.add_theme_font_override("font", _font)
+	b.add_theme_font_override("font", menu_font())
 	b.add_theme_font_size_override("font_size", font_size)
 	b.add_theme_color_override("font_color", CREAM)
 	b.add_theme_color_override("font_hover_color", AMBER)
@@ -389,12 +345,12 @@ func _button(text: String, font_size: int) -> Button:
 	return b
 
 
-func _label(text: String, font_size: int, col: Color) -> Label:
+static func menu_label(text: String, font_size: int, col: Color) -> Label:
 	var l := Label.new()
 	l.text = text
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	l.add_theme_font_override("font", _font)
+	l.add_theme_font_override("font", menu_font())
 	l.add_theme_font_size_override("font_size", font_size)
 	l.add_theme_color_override("font_color", col)
 	l.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
@@ -449,7 +405,3 @@ func _rain() -> CPUParticles2D:
 	rain.scale_amount_max = 1.2
 	return rain
 
-
-func _is_fullscreen() -> bool:
-	var mode := DisplayServer.window_get_mode()
-	return mode == DisplayServer.WINDOW_MODE_FULLSCREEN or mode == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN

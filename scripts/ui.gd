@@ -1,8 +1,8 @@
 class_name GameUI
 extends CanvasLayer
 ## All on-screen UI, built in code so it is easy to read and change:
-## hover label, speech text, inventory bar, dialogue choices, fades,
-## the title screen, case/end cards and the in-viewport cursor.
+## hover label, speech text, inventory bar (with the settings cog at its right end), dialogue choices, fades,
+## the title screen, the in-game settings, case/end cards and the in-viewport cursor.
 
 signal skip_requested
 signal choice_made(index: int)
@@ -10,6 +10,7 @@ signal inventory_clicked(id: String, button: int)
 signal jigsaw_event(kind: String)   ## "wrong", "done" or "close" (see show_jigsaw)
 signal piano_event(key: String)     ## a key's letter ("C" .. "G", "C#" ...) or "close" (see show_piano)
 signal notebook_closed              ## the open notebook was put away (see show_notebook)
+signal settings_clicked             ## the cog at the right end of the inventory bar was clicked (see open_settings)
 
 const FONT := preload("res://assets/fonts/DejaVuSansCondensed-Bold.ttf")
 const FONT_SIZE := 30
@@ -28,6 +29,9 @@ var speech_label: Label
 var toast_label: Label
 var bar: PanelContainer
 var bar_items: HBoxContainer
+var cog: Control                  ## the settings cog, at the right end of the inventory bar
+var settings: SettingsPanel       ## the in-game settings, while open (see open_settings)
+var _settings_dim: ColorRect
 var choices_box: GridContainer
 var fade_rect: ColorRect
 var card: Control
@@ -92,6 +96,7 @@ func _ready() -> void:
 	sb.border_color = Color(0.55, 0.42, 0.28)
 	sb.border_width_bottom = 2
 	sb.content_margin_left = 24
+	sb.content_margin_right = 24
 	sb.content_margin_top = 9
 	sb.content_margin_bottom = 9
 	bar.add_theme_stylebox_override("panel", sb)
@@ -108,7 +113,20 @@ func _ready() -> void:
 	hb.add_child(title)
 	bar_items = HBoxContainer.new()
 	bar_items.add_theme_constant_override("separation", 14)
+	bar_items.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	hb.add_child(bar_items)
+	cog = Control.new()
+	cog.custom_minimum_size = Vector2(ICON, ICON)
+	cog.mouse_filter = Control.MOUSE_FILTER_STOP
+	cog.draw.connect(_draw_cog)
+	cog.mouse_entered.connect(cog.queue_redraw)
+	cog.mouse_exited.connect(cog.queue_redraw)
+	cog.gui_input.connect(func(event: InputEvent):
+		var mb := event as InputEventMouseButton
+		if mb and mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT:
+			settings_clicked.emit()
+			get_viewport().set_input_as_handled())
+	hb.add_child(cog)
 
 	choices_box = GridContainer.new()
 	choices_box.position = Vector2(48, 780)
@@ -212,6 +230,26 @@ func refresh_inventory() -> void:
 		slot.mouse_entered.connect(func(): slot.modulate = Color(1.3, 1.2, 0.9))
 		slot.mouse_exited.connect(func(): slot.modulate = Color.WHITE)
 		bar_items.add_child(slot)
+
+
+func is_over_cog(p: Vector2) -> bool:
+	return is_over_bar(p) and cog.get_global_rect().has_point(p)
+
+
+func _draw_cog() -> void:
+	## A brass cog (amber under the mouse), drawn rather than an icon: eight teeth round a ring.
+	var c := Vector2(ICON, ICON) * 0.5
+	var col := Color(1, 0.85, 0.45) if cog.get_global_rect().has_point(cog.get_global_mouse_position()) \
+			else Color(0.72, 0.56, 0.36)
+	var pts := PackedVector2Array()
+	var teeth := 8
+	for i in teeth:
+		var a := TAU * i / teeth
+		var w := TAU / teeth
+		for k in [[-0.5, 22.0], [-0.27, 22.0], [-0.17, 31.0], [0.17, 31.0], [0.27, 22.0]]:
+			pts.append(c + Vector2.from_angle(a + w * float(k[0])) * float(k[1]))
+	cog.draw_colored_polygon(pts, col)
+	cog.draw_circle(c, 10.0, Color(0.06, 0.05, 0.08))
 
 
 func item_under(p: Vector2) -> String:
@@ -1061,6 +1099,33 @@ func hide_title() -> void:
 	if title:
 		title.queue_free()
 		title = null
+
+
+# --- settings, in a room ---------------------------------------------------------------
+## The title screen's SettingsPanel, centred over the room on a dimmed screen that takes every click. Main pauses
+## the game while it is open and closes it on BACK or Esc.
+func open_settings(text_speed: int) -> SettingsPanel:
+	close_settings()
+	_settings_dim = ColorRect.new()
+	_settings_dim.color = Color(0, 0, 0, 0.55)
+	_settings_dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_settings_dim.mouse_filter = Control.MOUSE_FILTER_STOP
+	root.add_child(_settings_dim)
+	root.move_child(_settings_dim, cursor_item.get_index())
+	var center := CenterContainer.new()
+	center.set_anchors_preset(Control.PRESET_FULL_RECT)
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_settings_dim.add_child(center)
+	settings = SettingsPanel.new(text_speed)
+	center.add_child(settings)
+	return settings
+
+
+func close_settings() -> void:
+	if _settings_dim:
+		_settings_dim.queue_free()
+		_settings_dim = null
+		settings = null
 
 
 # --- murder board (deduction) ---------------------------------------------------

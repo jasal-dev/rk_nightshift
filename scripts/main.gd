@@ -5,7 +5,8 @@ extends Node
 ##
 ## Controls: left click = walk / the hotspot's verb (talk, go, take, ... or look on a look-only hotspot),
 ## right click = look (nothing on a look-only hotspot); both are shown under the cursor (Room.verb_for),
-## mouse to top edge (or Tab) = inventory, F5 = save, F9 = load, F11 / Alt+Enter = fullscreen,
+## mouse to top edge (or Tab) = inventory (its cog opens Settings, the game paused; Esc closes it), F5 = save,
+## F9 = load, F11 / Alt+Enter = fullscreen,
 ## Esc = save and go back to the title screen (TitleScreen: New Game, Load Game, Case 2 to 5, Settings, Exit).
 
 const PlayerScene := preload("res://scenes/player.tscn")
@@ -49,9 +50,13 @@ const NOTHING_TO_ASK := [                  ## Ray, when he talks to someone with
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	# the in-game settings pause the tree: the room and Ray stop, while Main and the UI keep the cursor and the panel going
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	world.process_mode = Node.PROCESS_MODE_PAUSABLE
 	_apply_settings()
 	player = PlayerScene.instantiate()
 	ui.inventory_clicked.connect(_on_inventory_clicked)
+	ui.settings_clicked.connect(open_settings)
 	_title()
 
 
@@ -97,6 +102,22 @@ func set_text_speed(index: int) -> void:
 	cfg.load(SETTINGS)
 	cfg.set_value("text", "speed", index)
 	cfg.save(SETTINGS)
+
+
+func open_settings() -> void:
+	## The inventory bar's cog: the title screen's settings over the room, the game paused until BACK or Esc.
+	if busy or _speaking or _choosing or room == null or ui.settings:
+		return
+	get_tree().paused = true
+	var s := ui.open_settings(text_speed)
+	s.fullscreen_pressed.connect(toggle_fullscreen)
+	s.text_speed_chosen.connect(set_text_speed)
+	s.closed.connect(close_settings)
+
+
+func close_settings() -> void:
+	ui.close_settings()
+	get_tree().paused = false
 
 
 func _text_time() -> float:
@@ -273,9 +294,12 @@ func _process(_delta: float) -> void:
 	var right := ""
 	var hot := false
 	var busy_cursor := busy
-	if room and not _speaking and not _choosing and ui.card.visible == false and ui.title == null:
+	if room and not _speaking and not _choosing and ui.card.visible == false and ui.title == null and ui.settings == null:
 		var inv_item := ui.item_under(m)
-		if inv_item != "":
+		if ui.is_over_cog(m):
+			hover = "Settings"
+			hot = true
+		elif inv_item != "":
 			hover = _hover_text(Game.item_name(inv_item))
 			hot = true
 			if Game.selected_item == inv_item:
@@ -302,8 +326,10 @@ func _process(_delta: float) -> void:
 	if ui.title:
 		hot = ui.title.is_hot(m)
 		busy_cursor = false
+	elif ui.settings:
+		hot = TitleScreen.button_at(ui.settings, m)
 	ui.update_cursor(m, hot and not busy_cursor)
-	ui.update_bar(m, room != null and not busy)
+	ui.update_bar(m, room != null and not busy and ui.settings == null)
 
 
 func _hover_text(target: String) -> String:
@@ -334,7 +360,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if mb and mb.pressed:
 		if not (mb.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT]):
 			return
-		if busy or _choosing or room == null:
+		if busy or _choosing or room == null or ui.settings:
 			return
 		var p: Vector2 = world.get_global_mouse_position()
 		var hs := room.hotspot_at(p)
@@ -362,6 +388,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		if key.keycode == KEY_F11 or (key.keycode == KEY_ENTER and key.alt_pressed):
 			toggle_fullscreen()
+			return
+		if ui.settings:
+			if key.keycode == KEY_ESCAPE:
+				close_settings()            # never the quicksave and title
 			return
 		if _on_title:
 			if key.keycode == KEY_F9 and Game.has_save():

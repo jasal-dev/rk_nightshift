@@ -197,11 +197,12 @@ All UI is built in code in `scripts/ui.gd` (`class_name GameUI`), with DejaVu Sa
 | Element | API | Used for |
 | --- | --- | --- |
 | Hover label, cursor, item cursor | `set_hover`, `update_cursor` | Hotspot and item names; "Use X with Y". |
-| Inventory bar (104 px, 84 px icons) | `update_bar`, `bar_pinned`, `item_under`, signal `inventory_clicked(id, button)` | Slides down at the top edge; Tab pins it. |
+| Inventory bar (104 px, 84 px icons) | `update_bar`, `bar_pinned`, `item_under`, `is_over_cog`, signals `inventory_clicked(id, button)`, `settings_clicked` | Slides down at the top edge; Tab pins it. The cog at its right end (drawn in `_draw_cog`) opens the settings. |
+| Settings, in a room | `open_settings(text_speed)`, `close_settings`, `settings` | The title screen's `SettingsPanel` (`scripts/settings_panel.gd`) centred on a dimmed screen. `Main.open_settings()` pauses the tree (Main and the UI run with `PROCESS_MODE_ALWAYS`, `World` is pausable); BACK or Esc closes it, and that Esc never quicksaves or goes to the title. |
 | Speech | `show_speech`, `hide_speech` | `say`, `voice`, `narrate`. Drawn above the fade, so lines read on black (Case 2's doorstep). |
 | Toast | `toast(text, hold)` | Pickups, notebook, save/load. |
 | Choices | `show_choices`, `hide_choices`, `options`, signal `choice_made(i)` | Dialogue; also device buttons. Long lists (the boards' evidence) go into up to three columns under the board, with a smaller font if needed. |
-| Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings (fullscreen, text speed, music volume), Credits (the music attributions, `Audio.MUSIC_CREDITS`), Exit (quits), and a SKIP TO row for Case 2 to 5 (`Main.jump_to_case(n)`). `Main._title()` runs it at start, after THE END, and on Esc in a room (`_save_to_title()` quicksaves first). |
+| Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings (a `SettingsPanel`: fullscreen, text speed, music volume), Credits (the music attributions, `Audio.MUSIC_CREDITS`), Exit (quits), and a SKIP TO row for Case 2 to 5 (`Main.jump_to_case(n)`). `Main._title()` runs it at start, after THE END, and on Esc in a room (`_save_to_title()` quicksaves first). |
 | Card | `show_card(lines, colors)`, `hide_card` | Case cards and the end card. |
 | Fade | `fade_rect`, `fade_to(alpha, time)` | Room changes, drives. |
 | Murder board | `show_board(question, caption)`, `set_board_question`, `set_board_pins(pins, labels)`, `hide_board` | Deductions. |
