@@ -308,8 +308,8 @@ func _new_game() -> void:
 
 
 func _check_voiced(n: int) -> void:
-	## Every line Ray said in a fully voiced case had a clip (docs/voice-recording.md). Lines that are only sound
-	## effects in asterisks ("*knock knock*") are never voiced.
+	## Every line a cast speaker (Ray, and Doyle on the phone) said in a fully voiced case had a clip
+	## (docs/voice-recording.md). Lines that are only sound effects in asterisks ("*knock knock*") are never voiced.
 	var missing := Audio.unvoiced.filter(func(t: String): return not (t.begins_with("*") and t.ends_with("*")))
 	if not missing.is_empty():
 		_fail("Case %d lines without a voice clip (add them to tools/tts/lines.json):\n  %s" % [n, "\n  ".join(missing)])

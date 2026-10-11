@@ -638,9 +638,10 @@ func say(text: String) -> void:
 	player.set_talking(false)
 
 
-func voice(text: String, anchor: Vector2, color := Color(0.6, 0.85, 1.0)) -> void:
-	## Someone off-screen or unseen speaks from `anchor` (room coordinates).
-	await _show_text(text, anchor, color)
+func voice(text: String, anchor: Vector2, color := Color(0.6, 0.85, 1.0), speaker := "") -> void:
+	## Someone off-screen or unseen speaks from `anchor` (room coordinates). With a cast `speaker` ("doyle"), the line
+	## plays its recorded clip if it has one (docs/voice-recording.md).
+	await _show_text(text, anchor, color, speaker)
 
 
 func _show_text(text: String, anchor: Vector2, color: Color, speaker := "") -> void:

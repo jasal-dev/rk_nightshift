@@ -101,7 +101,7 @@ func choose_ending() -> void:
 
 
 func _doyle(line: String) -> void:
-	await main.voice(line, speaker_at("doyle"), Case5.DOYLE_COLOR)
+	await main.voice(line, speaker_at("doyle"), Case5.DOYLE_COLOR, "doyle")
 
 
 func _doyle_ending() -> void:

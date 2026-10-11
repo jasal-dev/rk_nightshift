@@ -242,5 +242,16 @@
 	["ray", "That well's dry.", "main.gd NOTHING_TO_ASK topics"],
 	["ray", "Everything's been said. Some of it was even true.", "main.gd NOTHING_TO_ASK topics"],
 	["ray", "No more questions. Not yet.", "main.gd NOTHING_TO_ASK topics"],
-	["ray", "I know what I came to know.", "main.gd NOTHING_TO_ASK topics"]
+	["ray", "I know what I came to know.", "main.gd NOTHING_TO_ASK topics"],
+	["doyle", "*beep* Ray, it's Doyle. Eleven-forty. I've got the captain asking about Reyes.", "squad_room.gd:342 _voicemail"],
+	["doyle", "It's a gambling debt and a .38 in an alley, it's not the Black Dahlia. Get me a name by Friday.", "squad_room.gd:343 _voicemail"],
+	["doyle", "And answer your cell once in a while. *beep*", "squad_room.gd:345 _voicemail"],
+	["doyle", "Doyle.", "squad_room.gd:451 _call_doyle"],
+	["doyle", "Ray, it's one-thirty.", "squad_room.gd:453 _call_doyle"],
+	["doyle", "So the loan shark has a boat. Congratulations. Where'd you even get Vance?", "squad_room.gd:456 _call_doyle"],
+	["doyle", "Moretti told the uniforms he was blind and deaf.", "squad_room.gd:458 _call_doyle"],
+	["doyle", "(muffled) Thanks, Walt. Black is fine.", "squad_room.gd:460 _call_doyle"],
+	["doyle", "Sorry. Ray, I have the captain on Friday and a dead piano player who paid his bills.", "squad_room.gd:461 _call_doyle"],
+	["doyle", "That's not a lead, that's a eulogy.", "squad_room.gd:462 _call_doyle"],
+	["doyle", "Then write it up. And stop wasting the night on one case. Otis has a stack. *click*", "squad_room.gd:464 _call_doyle"]
 ]

@@ -37,8 +37,14 @@ SPEED = 0.92               ## a touch slow: tired, a quarter past midnight
 RATE = 24000
 LINES_FILE = os.path.join(ROOT, "tools", "tts", "lines.json")    ## [[speaker, text, where?], ...], text exactly as shown
 MANIFEST = os.path.join(ROOT, "assets", "voice", "lines.json")
-## The cast: speaker id (as Main passes it; Main.say() is "ray") -> the VARIANTS preset that is their voice.
-SPEAKERS = {"ray": "2_blend"}
+## The cast: speaker id (as Main passes it: say() and narrate() are "ray", voice(..., "doyle") is "doyle") -> their
+## voice, picked by the user by ear. Same keys as the presets below (VARIANTS); "from" says which proposal it was.
+## Keep this in step with the cast table in docs/voice-recording.md. Changing a voice means re-rendering its lines
+## (--force), so don't, unless the user asks.
+SPEAKERS = {
+    "ray":   {"blend": {"am_onyx": 0.7, "am_fenrir": 0.3}, "speed": 0.9, "from": "VARIANTS 2_blend"},
+    "doyle": {"blend": {"af_kore": 1.0}, "speed": 0.95, "from": "CASTING doyle B"},
+}
 
 
 def load_lines():
@@ -67,6 +73,8 @@ ACRONYMS = {"LAPD", "DA", "IA", "ID", "TV", "UV", "GPS", "ER"}    ## all-caps wo
 
 
 def spoken(text):
+    # stage directions aren't said: sounds in asterisks ("*beep*"), asides in brackets ("(muffled)")
+    text = " ".join(re.sub(r"\*[^*]*\*|\([^)]*\)", " ", text).split())
     for k in sorted(PRONOUNCE, key=len, reverse=True):
         text = text.replace(k, PRONOUNCE[k])
     # signs and stamps written in capitals (BLUE NOTE, PAID, HOMICIDE) are words, not letters to spell out
@@ -267,16 +275,17 @@ def _describe(preset):
 
 
 CALL = re.compile(r'(?<![\w.])(?:main\.)?(say|narrate)\(')
+VOICE_CALL = re.compile(r'(?<![\w.])(?:main\.)?voice\(')
 STRING = re.compile(r'"((?:[^"\\]|\\.)*)"')
 
 
-def _calls(src):
-    ## (line number, function, argument source) for every say( / narrate( call, the argument up to its closing paren.
+def _calls(src, call=CALL):
+    ## (line number, function, argument source) for every call `call` matches, the arguments up to the closing paren.
     func = ""
     starts = [0]
     for line in src.split("\n"):
         starts.append(starts[-1] + len(line) + 1)
-    for m in CALL.finditer(src):
+    for m in call.finditer(src):
         line_start = src.rfind("\n", 0, m.start()) + 1
         if src[:m.start()].endswith("func ") or "#" in src[line_start:m.start()]:    # a definition or a comment
             continue
@@ -302,14 +311,41 @@ def _calls(src):
         yield line_no + 1, func, src[m.end():i - 1]
 
 
-def list_says(path):
+def _split_first(arg):
+    ## (first argument, the rest) at the first comma outside brackets and strings.
+    depth, in_str, i = 0, False, 0
+    while i < len(arg):
+        ch = arg[i]
+        if in_str:
+            if ch == "\\":
+                i += 1
+            elif ch == '"':
+                in_str = False
+        elif ch == '"':
+            in_str = True
+        elif ch in "([{":
+            depth += 1
+        elif ch in ")]}":
+            depth -= 1
+        elif ch == "," and depth == 0:
+            return arg[:i], arg[i + 1:]
+        i += 1
+    return arg, ""
+
+
+def list_says(path, speaker="ray"):
     ## Ray's lines in a script: every say() and narrate() argument's string literals, so `"a" if x else "b"` and
     ## `["a", "b"].pick_random()` give each text. Strings handed to another call inside the argument (a flag name) are
     ## skipped. Calls whose text is built at run time (a variable, `%`, `+`) are printed to stderr with their line and
     ## function, to be read and added by hand. stdout: rows for lines.json, ["ray", text, "<file>:<line> <function>"].
+    ## With another speaker (--speaker doyle): the voice() calls that pass that speaker id as their last argument.
     src = open(path, encoding="utf-8").read()
     found = []
-    for line_no, func, arg in _calls(src):
+    calls = _calls(src)
+    if speaker != "ray":
+        calls = [(n, f, _split_first(a)[0]) for n, f, a in _calls(src, VOICE_CALL)
+                 if re.search(r',\s*"%s"\s*$' % re.escape(speaker), _split_first(a)[1])]
+    for line_no, func, arg in calls:
         texts = []
         for m in STRING.finditer(arg):
             before = arg[:m.start()].rstrip()
@@ -325,13 +361,14 @@ def list_says(path):
             if all(t != f[0] for f in found):
                 found.append((t, line_no, func))
     where = os.path.basename(path)
-    print("[\n" + ",\n".join("\t" + json.dumps(["ray", t, "%s:%d %s" % (where, n, f)], ensure_ascii=False)
+    print("[\n" + ",\n".join("\t" + json.dumps([speaker, t, "%s:%d %s" % (where, n, f)], ensure_ascii=False)
                              for t, n, f in found) + "\n]")
 
 
 def main():
     if "--list" in sys.argv:
-        list_says(sys.argv[sys.argv.index("--list") + 1])
+        speaker = sys.argv[sys.argv.index("--speaker") + 1] if "--speaker" in sys.argv else "ray"
+        list_says(sys.argv[sys.argv.index("--list") + 1], speaker)
         return
     pipe = KPipeline(lang_code="a")      # American English
     if "--casting" in sys.argv:
@@ -361,9 +398,9 @@ def main():
         path = os.path.join(ROOT, rel)
         os.makedirs(os.path.dirname(path), exist_ok=True)
         if force or not os.path.exists(path):
-            sf.write(path, render_variant(pipe, VARIANTS[preset], text), RATE, format="OGG", subtype="VORBIS")
+            sf.write(path, render_variant(pipe, preset, text), RATE, format="OGG", subtype="VORBIS")
             made += 1
-        manifest[lid] = {"speaker": speaker, "text": text, "file": "res://" + rel, "voice": "kokoro:" + preset}
+        manifest[lid] = {"speaker": speaker, "text": text, "file": "res://" + rel, "voice": "kokoro: " + _describe(preset)}
     # clips no line points at any more (its text changed, it went, or an older format): remove them and their .import
     stale = 0
     used = {m["file"] for m in manifest.values()}

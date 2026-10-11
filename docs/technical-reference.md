@@ -75,8 +75,9 @@ the Voice bus and `_hold()` keeps the line up at least as long as the clip (Manu
 cuts both. Lines without a clip behave as before, and an edited line just loses its clip until it is re-rendered.
 Clips come from `tools/tts/gen_voice.py` (Kokoro-82M, Apache-2.0, run locally from a venv in `tools/tts/.venv`; Ray's voice
 is the `2_blend` preset, am_onyx 0.7 + am_fenrir 0.3). Lines to voice are listed in `tools/tts/lines.json`; how to add
-more and cast new characters: `docs/voice-recording.md`. `Main.narrate()` is Ray too. So far
-every Ray line in Case 1 is voiced (Ogg Vorbis clips; spoken-form fixes in `PRONOUNCE`), and the playthrough checks it.
+more and cast new characters: `docs/voice-recording.md`. `Main.narrate()` is Ray too; other characters pass a speaker id to
+`Main.voice()` (Doyle: `"doyle"`). The cast and its settings: `docs/voice-recording.md`. So far every Ray and Doyle
+line in Case 1 is voiced (Ogg Vorbis clips; spoken-form fixes in `PRONOUNCE`), and the playthrough checks it.
 
 ## 2. Game state, flags and saves
 

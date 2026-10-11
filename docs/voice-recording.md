@@ -15,18 +15,22 @@ voice is cast (the table below), keep using it for every new line.
   whose text changes loses its clip (it goes back to text only) until it is re-rendered; nothing breaks.
 - With a clip, the line plays on the Voice bus and stays up at least as long as the clip; a click cuts both. The
   player sets the Voice volume in Settings.
-- `Main.say()` and `Main.narrate()` (his voice-over on the drives and the board) are Ray (`"ray"`). `voice()` (other
-  characters, phone calls) and `caption()` are text only; voicing them means passing a speaker id into
-  `Main._show_text()` the way `say()` does, and casting that speaker below.
+- `Main.say()` and `Main.narrate()` (his voice-over on the drives and the board) are Ray (`"ray"`). Other characters
+  speak through `Main.voice(text, anchor, color, speaker)`: the last argument is their speaker id (`"doyle"`), and a
+  call without one is text only. Pass the id on every call for a cast character, voiced or not yet (all of Doyle's
+  calls already do), so later batches only need clips. `caption()` is text only.
+- Stage directions inside a line aren't spoken: sounds in asterisks (`"*beep* Ray, it's Doyle."`) and asides in
+  brackets (`"(muffled) Thanks, Walt."`) are dropped from what the voice says, but the id still uses the full text.
 - Lines that are only a sound written as text, in asterisks (`"*knock knock*"`), are never voiced.
-- Every line asked for that has no clip goes on `Audio.unvoiced`. The playthrough fails if any Ray line in Case 1 (a
-  fully voiced case) has no clip; extend `_check_voiced()` in `tests/playthrough.gd` to each case you finish.
+- Every line asked for by a cast speaker that has no clip goes on `Audio.unvoiced`. The playthrough fails if any such
+  line in Case 1 (fully voiced for Ray and Doyle) has no clip; extend `_check_voiced()` in `tests/playthrough.gd` to
+  each case you finish.
 
 ## Files
 
 | File | What |
 | --- | --- |
-| `tools/tts/gen_voice.py` | The generator: the cast (`SPEAKERS`), the voice presets (`VARIANTS`), rendering, levelling, the manifest. |
+| `tools/tts/gen_voice.py` | The generator: the cast (`SPEAKERS`, the voices in use), the candidates (`CASTING`, `VARIANTS`), spoken-form fixes (`PRONOUNCE`), rendering, levelling, the manifest. |
 | `tools/tts/lines.json` | The lines to voice, `[["speaker", "text", "where"], ...]` ("where" is a note, e.g. `street.gd:35 on_enter`). You edit this. |
 | `assets/voice/lines.json` | The manifest the game reads. Written by the generator; don't edit it. |
 | `assets/voice/<speaker>/<id>.ogg` | The clips (mono, 24 kHz, Ogg Vorbis). Written by the generator. |
@@ -60,6 +64,8 @@ forbids commercial use (for example Coqui XTTS's CPML) or one that needs a cloud
    `Game.ITEMS`, `NOTHING_TO_ASK`, "Those two don't go together."), `scripts/room.gd` (`default_response()`), the
    evidence cards' lines in a room's `EVIDENCE` table, dialogue options a room repeats with `main.say(opts[c])`, and
    the shared case scripts (`scripts/case2.gd` … `case5.gd`: drives and car menus).
+   For another character, add `--speaker <id>`: it lists the `voice()` calls that pass that id, e.g.
+   `gen_voice.py --list scripts/rooms/squad_room.gd --speaker doyle`.
 2. **Add the rows** to `tools/tts/lines.json`, keeping the text byte for byte. Work in batches (a room or a scene) so
    the user can listen to each batch.
 3. **Render:** `tools/tts/.venv/Scripts/python tools/tts/gen_voice.py`. It renders only lines that have no clip yet,
@@ -75,10 +81,20 @@ forbids commercial use (for example Coqui XTTS's CPML) or one that needs a cloud
    as words unless they're in `ACRONYMS` (LAPD and the like), which are spelled out.
 6. **Test** (CLAUDE.md): clips and lines alone are assets, so run the case the lines belong to
    (`tests/playthrough.tscn -- --case N`). If you change `main.gd`, `ui.gd`, `audio.gd` or other shared code, run the
-   full playthrough. The playthrough checks that Ray's first line still has a clip, and that no Ray line in a fully
-   voiced case is missing one (`_check_voiced()`).
+   full playthrough. The playthrough checks that Ray's first line still has a clip, and that no cast speaker's line in
+   a fully voiced case is missing one (`_check_voiced()`).
 7. **Commit** `tools/tts/lines.json`, `assets/voice/` (the clips, their `.import` files and `lines.json`) and any script
    change. Don't commit `tools/tts/out/` or the venv.
+
+### Example: Doyle's Case 2 lines
+
+```
+tools/tts/.venv/Scripts/python tools/tts/gen_voice.py --list scripts/rooms/squad_room.gd --speaker doyle
+```
+
+Copy the rows whose "where" is `_calls2` into `tools/tts/lines.json`, run `gen_voice.py` (it renders only the new rows,
+in Doyle's cast voice from `SPEAKERS`), import, run `--case 2`, and add `_check_voiced(2)` once all of Case 2's cast
+lines are in. Nothing about her voice needs choosing again.
 
 ## When a line's text changes
 
@@ -87,20 +103,37 @@ new one rendered. If you forget, the game simply shows the new text without a vo
 
 ## Casting a new character
 
-1. Choose a speaker id (lower case, e.g. `nina`, `doyle`, `otis`) and wire it in the game: `Main.voice()` and
-   friends need a speaker argument passed to `_show_text()`, the way `say()` passes `"ray"`.
-2. Pick two or three Kokoro voices that fit (American English: `af_*` female, `am_*` male; British: `bf_*`, `bm_*`;
-   see the VOICES list in the Kokoro-82M repo). Render the character's first few lines with each
-   (`--compare` takes `CANDIDATES`; or add presets to `VARIANTS` and use `--variants`), and send the user a comparison.
-3. When the user picks, add the preset to `VARIANTS` if it isn't there, map the speaker to it in `SPEAKERS`, and add a
-   row to the cast table below.
+1. Choose a speaker id (lower case, e.g. `nina`, `sal`, `otis`) and pass it as the last argument of every
+   `main.voice()` call for that character (the colour constant tells you whose line it is: `NINA_COLOR`, `SAL_COLOR`).
+2. Pick three Kokoro voices that fit (American English: `af_*` female, `am_*` male; British: `bf_*`, `bm_*`, with
+   `"lang": "b"`; see the VOICES list in the Kokoro-82M repo) and the character's description in the case script
+   (`docs/case1-script.md` and so on). Add them to `CASTING` as A, B and C with one characterful line, run
+   `gen_voice.py --casting`, and send the user `tools/tts/out/casting_case1/all.wav` or the character's
+   `compare.wav`. Record the proposals under "Proposed, awaiting a pick" below.
+3. When the user picks, copy that preset into `SPEAKERS` exactly (with `"from"` naming the proposal), move the
+   character's row to the cast table with the date, and voice their lines.
 
 ## The cast
 
-| Speaker | Who | Preset | Settings | Chosen |
-| --- | --- | --- | --- | --- |
-| `ray` | Det. Ray Kessler: LAPD Homicide, twenty-six years on the job, tired, hard-boiled | `2_blend` | Kokoro style vectors `am_onyx` 0.7 + `am_fenrir` 0.3, speed 0.9, no post-processing; levelled to about -18 dBFS RMS, peaks under -1 dBFS | 2026-10-11, by the user, over plain onyx and four rougher variants |
+These are the voices in use. `SPEAKERS` in `tools/tts/gen_voice.py` holds the same settings as code; a re-run with
+them gives the same voice. All clips are levelled the same way (about -18 dBFS RMS, roughly -16 LUFS for speech, peaks
+under -1 dBFS, mono 24 kHz Ogg Vorbis). "Semitones" lowers the pitch without changing the pace; warmth, grit and
+flutter are the post-processing in `render_variant()` (none of the cast uses them yet).
 
-Voiced so far: every line Ray says in Case 1 (244 lines, about 15 minutes): Room 214 up to Otis's call, the street,
-Pier 9 and Vance's office, his item descriptions, default responses and NOTHING_TO_ASK lines, and his voice-over on
-the board and the drive south. Room 214's lines for Cases 2 to 5 aren't voiced yet.
+| Speaker | Who | Kokoro voice | Speed | Semitones | Processing | Preset in code | Picked | Voiced |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `ray` | Det. Ray Kessler: LAPD Homicide, twenty-six years on the job, tired, hard-boiled | `am_onyx` 70% + `am_fenrir` 30% (style vectors mixed) | 0.9 | 0 | none | `SPEAKERS["ray"]` (was `VARIANTS["2_blend"]`) | 2026-10-11, over plain onyx and four rougher variants | Case 1, all 244 lines (Room 214's Case 2 to 5 lines not yet) |
+| `doyle` | Lt. Maureen Doyle: Ray's boss, voicemail and phone; clipped, political, not unkind | `af_kore` | 0.95 | 0 | none (a phone-line filter was offered, not asked for) | `SPEAKERS["doyle"]` (was `CASTING["doyle"]` B) | 2026-10-11, over `af_sarah` (A) and an `af_nicole`/`af_sarah` mix (C) | Case 1, all 11 lines (voicemail and the 1:30 call) |
+
+## Proposed, awaiting a pick
+
+Rendered by `gen_voice.py --casting` (presets and the line used are in `CASTING`); the user hasn't chosen yet. Not
+voiced in the game: their `voice()` calls don't pass a speaker id yet.
+
+| Speaker | Who | A | B | C |
+| --- | --- | --- | --- | --- |
+| `nina` | Nina Alvarez, Danny's girlfriend, on the payphone: guarded, grieving, quick | `af_heart`, speed 0.95 | `af_bella`, speed 0.92 | `af_sky`, speed 0.9 |
+| `sal` | Sal Moretti, the Blue Note's bartender, through the door: gravel, short sentences, scared | `am_santa`, speed 0.9 | `am_eric`, -1.5 semitones, speed 0.88, warmth 3 | `am_michael` 60% + `am_santa` 40%, -1 semitone, speed 0.88, grit 2, flutter 0.1 |
+| `tiny` | "Tiny" Ruiz, Vance's doorman at Pier 9: enormous, soft-spoken | `am_adam`, -3 semitones, speed 0.85 | `am_echo`, -2.5 semitones, speed 0.85, warmth 4 | `am_liam`, -3.5 semitones, speed 0.8, warmth 5, grit 2 |
+| `vance` | Vance, the loan shark: sixties, cardigan over a shoulder holster, courteous and cold | `bm_george` (British), speed 0.88 | `am_michael`, -2 semitones, speed 0.85, warmth 3 | `bm_fable` 60% + `bm_lewis` 40% (British), -1 semitone, speed 0.88 |
+| `otis` | Sgt. Otis Bell, on the desk phone: warm, funny, tired | `am_eric`, speed 1.0 | `am_liam`, speed 1.0 | `am_echo`, speed 0.95 |
