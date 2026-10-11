@@ -181,7 +181,8 @@ func stop_voice() -> void:
 
 func _add_phone_bus() -> void:
 	## Phone > Voice: a telephone line. Only 350 to 3,200 Hz gets through (steep filters), a touch of overdrive for the
-	## cheap earpiece, and a lift to make up for what the filters take away. Main.voice(..., phone = true) uses it.
+	## cheap earpiece, and a 10 dB lift (a limiter at -1 dBFS catches the peaks) so it sits as loud as a clean voice.
+	## Main.voice(..., phone = true) uses it.
 	if AudioServer.get_bus_index("Phone") >= 0:
 		return
 	AudioServer.add_bus()
@@ -198,8 +199,10 @@ func _add_phone_bus() -> void:
 	grit.mode = AudioEffectDistortion.MODE_OVERDRIVE
 	grit.drive = 0.2
 	var lift := AudioEffectAmplify.new()
-	lift.volume_db = 4.0
-	for e: AudioEffect in [hp, lp, grit, lift]:
+	lift.volume_db = 10.0
+	var limit := AudioEffectHardLimiter.new()
+	limit.ceiling_db = -1.0
+	for e: AudioEffect in [hp, lp, grit, lift, limit]:
 		AudioServer.add_bus_effect(i, e)
 
 

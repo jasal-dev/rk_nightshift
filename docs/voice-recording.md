@@ -21,7 +21,7 @@ voice is cast (the table below), keep using it for every new line.
   calls already do), so later batches only need clips. `caption()` is text only.
 - A line heard over a telephone passes `phone = true` as well (`main.voice(text, PHONE_AT, DOYLE_COLOR, "doyle", true)`):
   the game plays its clip through the Phone bus (`Audio._add_phone_bus()`: 350 to 3,200 Hz, a touch of overdrive,
-  +4 dB). The clips themselves are clean, so the same character can speak in person (Doyle on the pier in Case 5)
+  +10 dB, limited at -1 dBFS). The clips themselves are clean, so the same character can speak in person (Doyle on the pier in Case 5)
   with the same voice. Use it for anyone on the phone: Nina on the payphone, Otis on the desk phone.
 - Stage directions inside a line aren't spoken: sounds in asterisks (`"*beep* Ray, it's Doyle."`) and asides in
   brackets (`"(muffled) Thanks, Walt."`) are dropped from what the voice says, but the id still uses the full text.

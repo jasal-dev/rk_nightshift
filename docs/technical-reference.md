@@ -77,7 +77,7 @@ Clips come from `tools/tts/gen_voice.py` (Kokoro-82M, Apache-2.0, run locally fr
 is the `2_blend` preset, am_onyx 0.7 + am_fenrir 0.3). Lines to voice are listed in `tools/tts/lines.json`; how to add
 more and cast new characters: `docs/voice-recording.md`. `Main.narrate()` is Ray too; other characters pass a speaker id to
 `Main.voice()` (Doyle: `"doyle"`), plus `phone = true` for lines heard over a telephone, which plays the clip through the
-Phone bus (Phone > Voice: band-limited to 350-3,200 Hz, light overdrive, +4 dB). The cast and its settings: `docs/voice-recording.md`. So far every Ray and Doyle
+Phone bus (Phone > Voice: band-limited to 350-3,200 Hz, light overdrive, +10 dB, limited at -1 dBFS). The cast and its settings: `docs/voice-recording.md`. So far every Ray and Doyle
 line in Case 1 is voiced (Ogg Vorbis clips; spoken-form fixes in `PRONOUNCE`), and the playthrough checks it.
 
 ## 2. Game state, flags and saves
