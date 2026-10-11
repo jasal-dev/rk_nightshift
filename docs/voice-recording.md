@@ -27,7 +27,7 @@ voice is cast (the table below), keep using it for every new line.
   brackets (`"(muffled) Thanks, Walt."`) are dropped from what the voice says, but the id still uses the full text.
 - Lines that are only a sound written as text, in asterisks (`"*knock knock*"`), are never voiced.
 - Every line asked for by a cast speaker that has no clip goes on `Audio.unvoiced`. The playthrough fails if any such
-  line in Cases 1 and 2 (fully voiced: every speaking character) has no clip; extend `_check_voiced()` in `tests/playthrough.gd` to
+  line in Cases 1 to 3 (fully voiced: every speaking character) has no clip; extend `_check_voiced()` in `tests/playthrough.gd` to
   each case you finish.
 
 ## Files
@@ -124,28 +124,28 @@ them gives the same voice. All clips are levelled the same way (about -18 dBFS R
 under -1 dBFS, mono 24 kHz Ogg Vorbis). "Semitones" lowers the pitch without changing the pace; warmth, grit and
 flutter are the post-processing in `render_variant()` (none of the cast uses them yet).
 
-Voiced so far: every spoken line in Cases 1 and 2 (662 lines, about 46 minutes). Brielle's phone video plays through
-the phone filter. Cases 3 to 5 are cast but not recorded.
+Voiced so far: every spoken line in Cases 1 to 3 (1,004 lines, about 74 minutes). Brielle's phone video plays
+through the phone filter. Cases 4 and 5 are cast but not recorded.
 
 | Speaker | Who | Kokoro voice | Speed | Semitones | Processing | Preset in code | Picked | Voiced |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `ray` | Det. Ray Kessler: LAPD Homicide, twenty-six years on the job, tired, hard-boiled | `am_onyx` 70% + `am_fenrir` 30% (style vectors mixed) | 0.9 | 0 | none | `SPEAKERS["ray"]` (was `VARIANTS["2_blend"]`) | 2026-10-11, over plain onyx and four rougher variants | Cases 1 and 2 (244 + 246 lines); Cases 3 to 5 not yet |
+| `ray` | Det. Ray Kessler: LAPD Homicide, twenty-six years on the job, tired, hard-boiled | `am_onyx` 70% + `am_fenrir` 30% (style vectors mixed) | 0.9 | 0 | none | `SPEAKERS["ray"]` (was `VARIANTS["2_blend"]`) | 2026-10-11, over plain onyx and four rougher variants | Cases 1 to 3 (244 + 246 + 238 lines); Cases 4 and 5 not yet |
 | `nina` | Nina Alvarez: Danny's girlfriend, on the payphone in Case 1, in the Blue Note's cooler in Case 5; guarded, grieving, quick | `af_heart` | 0.95 | 0 | phone-line filter in the game on her payphone lines; in person clean | `SPEAKERS["nina"]` (was `CASTING["nina"]` A) | 2026-10-11, over `af_bella` (B) and `af_sky` (C) | Case 1, all 9 lines (the payphone call) |
-| `otis` | Sgt. Otis Bell: the desk phone; warm, funny, tired | `am_liam` | 1.0 | 0 | phone-line filter in the game (all his lines are on the phone) | `SPEAKERS["otis"]` (was `CASTING["otis"]` B) | 2026-10-11, over `am_eric` (A) and `am_echo` (C) | Cases 1 and 2 (4 + 5 lines, the calls that start Cases 2 and 3) |
+| `otis` | Sgt. Otis Bell: the desk phone; warm, funny, tired | `am_liam` | 1.0 | 0 | phone-line filter in the game (all his lines are on the phone) | `SPEAKERS["otis"]` (was `CASTING["otis"]` B) | 2026-10-11, over `am_eric` (A) and `am_echo` (C) | Cases 1 to 3 (4 + 5 + 5 lines, the calls that start Cases 2, 3 and 4) |
 | `sal` | Sal Moretti: the Blue Note's bartender, through his door; gravel, short sentences, scared and hiding it | `am_santa` | 0.9 | 0 | none | `SPEAKERS["sal"]` (was `CASTING["sal"]` A) | 2026-10-11, over a lowered `am_eric` (B) and a gritty `am_michael`/`am_santa` mix (C) | Case 1, all 12 lines |
 | `tiny` | "Tiny" Ruiz: Vance's doorman at Pier 9; enormous, soft-spoken, misses Danny's playing | `am_adam` | 0.85 | -3 | none | `SPEAKERS["tiny"]` (was `CASTING["tiny"]` A) | 2026-10-11, over a lowered `am_echo` (B) and a lowered gritty `am_liam` (C) | Case 1, all 18 lines |
 | `vance` | Vance: loan shark, sixties, cardigan over a shoulder holster; courteous and cold. British, by the user's choice | `bm_george` (British English, `"lang": "b"`) | 0.88 | 0 | none | `SPEAKERS["vance"]` (was `CASTING["vance"]` A) | 2026-10-11, over a lowered `am_michael` (B) and a `bm_fable`/`bm_lewis` mix (C) | Case 1, all 31 lines (his office, and through the green door) |
-| `doyle` | Lt. Maureen Doyle: Ray's boss, voicemail and phone; clipped, political, not unkind | `af_kore` | 0.95 | 0 | phone-line filter in the game on her phone lines (picked 2026-10-11), not baked in | `SPEAKERS["doyle"]` (was `CASTING["doyle"]` B) | 2026-10-11, over `af_sarah` (A) and an `af_nicole`/`af_sarah` mix (C) | Cases 1 and 2 (11 + 3 lines) |
-| `shah` | Dr. Anita Shah, coroner's investigator (Cases 2-5): forties, brisk, exact, fond of Ray | `bf_emma` (British English, `"lang": "b"`) | 1 | 0 | none | `SPEAKERS["shah"]` (was `CASTING_REST["shah"]` C) | 2026-10-11, over A and B | Case 2, all 9 lines (the overlook); Cases 3 to 5 not yet |
-| `park` | Officer Lena Park, Hollywood patrol (Cases 2, 3, 5): early twenties, very thorough, knows the internet | `af_bella` | 1.05 | 0 | none | `SPEAKERS["park"]` (was `CASTING_REST["park"]` A) | 2026-10-11, over B and C | Case 2, all 13 lines (the overlook, Devin's door); Cases 3 and 5 not yet |
+| `doyle` | Lt. Maureen Doyle: Ray's boss, voicemail and phone; clipped, political, not unkind | `af_kore` | 0.95 | 0 | phone-line filter in the game on her phone lines (picked 2026-10-11), not baked in | `SPEAKERS["doyle"]` (was `CASTING["doyle"]` B) | 2026-10-11, over `af_sarah` (A) and an `af_nicole`/`af_sarah` mix (C) | Cases 1 to 3 (11 + 3 + 4 lines) |
+| `shah` | Dr. Anita Shah, coroner's investigator (Cases 2-5): forties, brisk, exact, fond of Ray | `bf_emma` (British English, `"lang": "b"`) | 1 | 0 | none | `SPEAKERS["shah"]` (was `CASTING_REST["shah"]` C) | 2026-10-11, over A and B | Cases 2 and 3 (9 + 13 lines); Cases 4 and 5 not yet |
+| `park` | Officer Lena Park, Hollywood patrol (Cases 2, 3, 5): early twenties, very thorough, knows the internet | `af_bella` | 1.05 | 0 | none | `SPEAKERS["park"]` (was `CASTING_REST["park"]` A) | 2026-10-11, over B and C | Cases 2 and 3 (13 + 12 lines); Case 5 not yet |
 | `rosa` | Rosa, waitress at Norm's: sixties, pencil in her bun, calls everyone "hon" | `af_jessica` | 0.95 | -1.5 | none | `SPEAKERS["rosa"]` (was `CASTING_REST["rosa"]` B) | 2026-10-11, over A and C | Case 2, all 19 lines |
 | `heck` | Hector "Heck" Dominguez, rival Glide driver: forties, three phones, loud, then scared | `am_echo` 60% + `am_puck` 40% | 1.05 | 0 | none | `SPEAKERS["heck"]` (was `CASTING_REST["heck"]` C) | 2026-10-11, over A and B | Case 2, all 13 lines |
 | `devin` | Devin Clark, Kenji's roommate, photographer: late twenties, soft-spoken, plausible. The killer | `am_puck` | 0.9 | 0 | none | `SPEAKERS["devin"]` (was `CASTING_REST["devin"]` C) | 2026-10-11, over A and B | Case 2, all 21 lines |
 | `brielle` | Brielle V., drunk influencer, Kenji's last fare (a video on Park's phone) | `af_jessica` | 1.05 | 0 | none | `SPEAKERS["brielle"]` (was `CASTING_REST["brielle"]` B) | 2026-10-11, over A and C | Case 2, both lines |
 | `cabbie` | A cab driver at Norm's counter (two lines) | `am_michael` | 0.92 | -1.5 | none | `SPEAKERS["cabbie"]` (was `CASTING_REST["cabbie"]` B) | 2026-10-11, over A and C | Case 2, both lines |
-| `pearl` | Pearl Danvers, Gus's assistant, actress: 34, warm, quick, a very good crier. The killer | `af_bella` | 1 | 0 | none | `SPEAKERS["pearl"]` (was `CASTING_REST["pearl"]` A) | 2026-10-11, over B and C | not yet (~32 lines, Case 3 on) |
-| `morty` | Morty Kahn, rival collector: seventies, bathrobe and loafers, grieving, defensive | `am_michael` | 0.85 | -2.5 | flutter 0.1 | `SPEAKERS["morty"]` (was `CASTING_REST["morty"]` A) | 2026-10-11, over B and C | not yet (~20 lines, Case 3 on) |
-| `charlie` | Desmond "Charlie" Pike, Chaplin on the boulevard for thirty years: theatrical, kind, nosy | `bm_daniel` (British English, `"lang": "b"`) | 0.95 | 0 | none | `SPEAKERS["charlie"]` (was `CASTING_REST["charlie"]` C) | 2026-10-11, over A and B | not yet (~18 lines, Case 3 on) |
+| `pearl` | Pearl Danvers, Gus's assistant, actress: 34, warm, quick, a very good crier. The killer | `af_bella` | 1 | 0 | none | `SPEAKERS["pearl"]` (was `CASTING_REST["pearl"]` A) | 2026-10-11, over B and C | Case 3, all 32 lines |
+| `morty` | Morty Kahn, rival collector: seventies, bathrobe and loafers, grieving, defensive | `am_michael` | 0.85 | -2.5 | flutter 0.1 | `SPEAKERS["morty"]` (was `CASTING_REST["morty"]` A) | 2026-10-11, over B and C | Case 3, all 20 lines |
+| `charlie` | Desmond "Charlie" Pike, Chaplin on the boulevard for thirty years: theatrical, kind, nosy | `bm_daniel` (British English, `"lang": "b"`) | 0.95 | 0 | none | `SPEAKERS["charlie"]` (was `CASTING_REST["charlie"]` C) | 2026-10-11, over A and B | Case 3, all 18 lines |
 | `preacher` | Calvin "Preacher" Odom: sixties, Army, First Cavalry; formal, scriptural, sharp | `am_eric` | 0.82 | -3 | warmth 4, flutter 0.08 | `SPEAKERS["preacher"]` (was `CASTING_REST["preacher"]` C) | 2026-10-11, over A and B | not yet (~35 lines, Case 4 on) |
 | `doss` | Officer Brian Doss, Northeast patrol: thirties, cheerful, lazy, wants to be done by five | `am_puck` | 1.05 | 0 | none | `SPEAKERS["doss"]` (was `CASTING_REST["doss"]` A) | 2026-10-11, over B and C | not yet (~18 lines, Case 4 on) |
 | `courtney` | Courtney Vail, event planner: thirties, headset, adrenaline and cold brew | `af_nova` | 1.1 | 0 | none | `SPEAKERS["courtney"]` (was `CASTING_REST["courtney"]` A) | 2026-10-11, over B and C | not yet (~19 lines, Case 4 on) |

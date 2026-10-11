@@ -182,11 +182,11 @@ func _park(line: String) -> void:
 
 
 func _pearl(line: String) -> void:
-	await main.voice(line, speaker_at("pearl_stand" if Game.flag("pearl_stands") else "pearl"), Case3.PEARL_COLOR)
+	await main.voice(line, speaker_at("pearl_stand" if Game.flag("pearl_stands") else "pearl"), Case3.PEARL_COLOR, "pearl")
 
 
 func _morty(line: String) -> void:
-	await main.voice(line, speaker_at("morty"), Case3.MORTY_COLOR)
+	await main.voice(line, speaker_at("morty"), Case3.MORTY_COLOR, "morty")
 
 
 func _maybe_hint() -> void:

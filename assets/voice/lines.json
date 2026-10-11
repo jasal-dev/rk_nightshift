@@ -3970,5 +3970,2057 @@
 		"text": "A two-lens dashcam and eleven memory cards, January to November, labeled in Kenji's hand.",
 		"file": "res://assets/voice/ray/d2b78fc1b0a0.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6e8d8f3799bf": {
+		"speaker": "ray",
+		"text": "Hollywood Boulevard. Twenty-seven hundred stars in the sidewalk, and everybody walks on them.",
+		"file": "res://assets/voice/ray/6e8d8f3799bf.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"cdf88ce2b50e": {
+		"speaker": "ray",
+		"text": "An old man, a staircase, and a missing Oscar. In this town the statue gets top billing.",
+		"file": "res://assets/voice/ray/cdf88ce2b50e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4a5679e9be60": {
+		"speaker": "ray",
+		"text": "Gus Lindqvist kept other people's dreams under glass for forty years. In the end the only real thing in his shop was him.",
+		"file": "res://assets/voice/ray/4a5679e9be60.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9f59c1f206ad": {
+		"speaker": "ray",
+		"text": "Gus's office. Everything he ever loved, filed under \"later.\"",
+		"file": "res://assets/voice/ray/9f59c1f206ad.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2bb1573cc099": {
+		"speaker": "ray",
+		"text": "You've been saying that for eleven years.",
+		"file": "res://assets/voice/ray/2bb1573cc099.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ca77325ad9f2": {
+		"speaker": "ray",
+		"text": "Gus Lindqvist. Seventy-one. One slipper on, one on the third step. He came down a lot faster than he went up.",
+		"file": "res://assets/voice/ray/ca77325ad9f2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"246e5ec3ef66": {
+		"speaker": "ray",
+		"text": "Shah's got him.",
+		"file": "res://assets/voice/ray/246e5ec3ef66.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"97b6330d2e3a": {
+		"speaker": "ray",
+		"text": "Dr. Shah. Second time tonight. We should stop meeting like this.",
+		"file": "res://assets/voice/ray/97b6330d2e3a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7e637589e240": {
+		"speaker": "ray",
+		"text": "A rolltop desk under paper. A green lamp still burning.",
+		"file": "res://assets/voice/ray/7e637589e240.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1011e5bb99ba": {
+		"speaker": "ray",
+		"text": "Bills, invoices, a racing form from 1997. I've taken everything that mattered.",
+		"file": "res://assets/voice/ray/1011e5bb99ba.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"02ee8c253913": {
+		"speaker": "ray",
+		"text": "Pryce's letter. Thirty days, and a week of them gone.",
+		"file": "res://assets/voice/ray/02ee8c253913.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e91571cc3e0f": {
+		"speaker": "ray",
+		"text": "Pryce's letter. I've kept the card.",
+		"file": "res://assets/voice/ray/e91571cc3e0f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a5dbd4de9769": {
+		"speaker": "ray",
+		"text": "Cigars and a loupe. He was a man of simple pleasures and complicated ones.",
+		"file": "res://assets/voice/ray/a5dbd4de9769.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f49d59ffb4bb": {
+		"speaker": "ray",
+		"text": "Locked. Gus kept the good stuff where his hands could find it.",
+		"file": "res://assets/voice/ray/f49d59ffb4bb.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7c210a3d8165": {
+		"speaker": "ray",
+		"text": "A cordless phone older than Officer Park.",
+		"file": "res://assets/voice/ray/7c210a3d8165.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fe292112f0f6": {
+		"speaker": "ray",
+		"text": "Provenance files, A to Z. Gus kept receipts the way other men keep grudges.",
+		"file": "res://assets/voice/ray/fe292112f0f6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f15a36b496cf": {
+		"speaker": "ray",
+		"text": "B for Brandt: a bill of sale from 1988, eleven thousand dollars. Gus did all right.",
+		"file": "res://assets/voice/ray/f15a36b496cf.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"04530831d100": {
+		"speaker": "ray",
+		"text": "Labels in Gus's capitals. The roof sign switches itself off at one.",
+		"file": "res://assets/voice/ray/04530831d100.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c22d9dd913b8": {
+		"speaker": "ray",
+		"text": "The sign's on. Let it burn.",
+		"file": "res://assets/voice/ray/c22d9dd913b8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"481abb04fa71": {
+		"speaker": "ray",
+		"text": "Gus switched the sign off at one every night to save money. Tonight Gus can afford it.",
+		"file": "res://assets/voice/ray/481abb04fa71.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9d6e398be56a": {
+		"speaker": "ray",
+		"text": "Red and gold, all the way down the stairs.",
+		"file": "res://assets/voice/ray/9d6e398be56a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ad20b9035f1b": {
+		"speaker": "ray",
+		"text": "PEARL, on masking tape. The door's ajar.",
+		"file": "res://assets/voice/ray/ad20b9035f1b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"406b1051f399": {
+		"speaker": "ray",
+		"text": "A coat, a spare pair of heels, a makeup bag. And an envelope: \"PEARL DANVERS, HEADSHOTS, 8 x 10\".",
+		"file": "res://assets/voice/ray/406b1051f399.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b31429b0b6c6": {
+		"speaker": "ray",
+		"text": "Twenty of them, signed, ready to hand out.",
+		"file": "res://assets/voice/ray/b31429b0b6c6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ea720cb2e684": {
+		"speaker": "ray",
+		"text": "She came back at two in the morning for her headshots. Here they are.",
+		"file": "res://assets/voice/ray/ea720cb2e684.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0137e5f565f3": {
+		"speaker": "ray",
+		"text": "Under the envelope, a legal pad. Somebody's written \"Lyle Brandt\" forty times in gold pen.",
+		"file": "res://assets/voice/ray/0137e5f565f3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"17ee77c51d4d": {
+		"speaker": "ray",
+		"text": "The first ones are bad. The last ten are perfect. And a gold paint pen, cap chewed.",
+		"file": "res://assets/voice/ray/17ee77c51d4d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2c40c5871fd2": {
+		"speaker": "ray",
+		"text": "Her headshots, a legal pad of somebody else's name, and a chewed gold pen.",
+		"file": "res://assets/voice/ray/2c40c5871fd2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0c62da3191f6": {
+		"speaker": "ray",
+		"text": "Nothing in here but Gus.",
+		"file": "res://assets/voice/ray/0c62da3191f6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"05ce75555ff7": {
+		"speaker": "ray",
+		"text": "GUS. A cardigan, an umbrella, and a photo of a younger Gus shaking hands with Lyle Brandt.",
+		"file": "res://assets/voice/ray/05ce75555ff7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c2620b90d273": {
+		"speaker": "ray",
+		"text": "Fourteen steep steps up to the roof. One slipper on the third.",
+		"file": "res://assets/voice/ray/c2620b90d273.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"cf2b23060287": {
+		"speaker": "ray",
+		"text": "Back to the shop.",
+		"file": "res://assets/voice/ray/cf2b23060287.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"bfcf34f494dc": {
+		"speaker": "ray",
+		"text": "Somebody pushed him.",
+		"file": "res://assets/voice/ray/bfcf34f494dc.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"79a03b403a62": {
+		"speaker": "ray",
+		"text": "Points.",
+		"file": "res://assets/voice/ray/79a03b403a62.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5dc61d10b97e": {
+		"speaker": "ray",
+		"text": "Bills, invoices, a racing form from 1997. And on top, where he'd want to see it every morning...",
+		"file": "res://assets/voice/ray/5dc61d10b97e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"239c3abfdaf8": {
+		"speaker": "ray",
+		"text": "Last Thursday. A week old. If Pryce wanted Gus gone, all they had to do was wait twenty-three days.",
+		"file": "res://assets/voice/ray/239c3abfdaf8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f29a23763bc6": {
+		"speaker": "ray",
+		"text": "Calloway's Auctions, Beverly Hills. \"Hollywood Legends, Fall Season.\" Came in today's mail, still in its plastic.",
+		"file": "res://assets/voice/ray/f29a23763bc6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"df060a3b1aca": {
+		"speaker": "ray",
+		"text": "A page turned down at the corner. Red ink, shaky capitals.",
+		"file": "res://assets/voice/ray/df060a3b1aca.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5c9f52c0a029": {
+		"speaker": "ray",
+		"text": "Gus found it tonight.",
+		"file": "res://assets/voice/ray/5c9f52c0a029.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1b8dc419daa5": {
+		"speaker": "ray",
+		"text": "Under the letter, a business card. Cream stock, raised blue type.",
+		"file": "res://assets/voice/ray/1b8dc419daa5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"793cdb901091": {
+		"speaker": "ray",
+		"text": "A cop's card, from a cop who isn't one anymore.",
+		"file": "res://assets/voice/ray/793cdb901091.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5e737c369b5c": {
+		"speaker": "ray",
+		"text": "Walter.",
+		"file": "res://assets/voice/ray/5e737c369b5c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9d4c2a31c598": {
+		"speaker": "ray",
+		"text": "Lot of Walts in this town.",
+		"file": "res://assets/voice/ray/9d4c2a31c598.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"cf4a98bbe4ef": {
+		"speaker": "ray",
+		"text": "He's polite about ugly. That's how you know he does it for a living.",
+		"file": "res://assets/voice/ray/cf4a98bbe4ef.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6ef043054799": {
+		"speaker": "ray",
+		"text": "Twelve-forty, Calloway's. Nobody answers an auction house at midnight, so he left a message.",
+		"file": "res://assets/voice/ray/6ef043054799.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3857682c9fda": {
+		"speaker": "ray",
+		"text": "Twelve fifty-two, Pearl. Three minutes.",
+		"file": "res://assets/voice/ray/3857682c9fda.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d2a404cff19d": {
+		"speaker": "ray",
+		"text": "She told me she went home at nine and came back at two-fifteen for her pictures. She left out the part where Gus called.",
+		"file": "res://assets/voice/ray/d2a404cff19d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fe4dc6e32201": {
+		"speaker": "ray",
+		"text": "Calloway's at twelve-forty. Pearl at twelve fifty-two.",
+		"file": "res://assets/voice/ray/fe4dc6e32201.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b8724e575f88": {
+		"speaker": "ray",
+		"text": "Morty, at four in the afternoon. A minute of arguing about something, I'd bet.",
+		"file": "res://assets/voice/ray/b8724e575f88.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d05f52178c1e": {
+		"speaker": "ray",
+		"text": "Pryce, eight seconds. Gus hung up on them.",
+		"file": "res://assets/voice/ray/d05f52178c1e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"09316f8f3dd5": {
+		"speaker": "ray",
+		"text": "A cigar box, a loupe, and a handheld UV lamp. Masking tape on it, in Gus's hand:",
+		"file": "res://assets/voice/ray/09316f8f3dd5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2329c67be469": {
+		"speaker": "ray",
+		"text": "\"Modern ink glows. Old ink doesn't. Trust nobody.\"",
+		"file": "res://assets/voice/ray/2329c67be469.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a528493bd5da": {
+		"speaker": "ray",
+		"text": "Trust nobody. He wrote it on a lamp, then trusted somebody.",
+		"file": "res://assets/voice/ray/a528493bd5da.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fffbd1fb108e": {
+		"speaker": "ray",
+		"text": "Nothing to compare it to yet.",
+		"file": "res://assets/voice/ray/fffbd1fb108e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a7edf6497709": {
+		"speaker": "ray",
+		"text": "Let me see what's in there first.",
+		"file": "res://assets/voice/ray/a7edf6497709.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"87f84c476c6f": {
+		"speaker": "ray",
+		"text": "Same gold. Same hand.",
+		"file": "res://assets/voice/ray/87f84c476c6f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"77482c2c749e": {
+		"speaker": "ray",
+		"text": "Her autograph on the headshots glows the same gold as Bogart's on the wall.",
+		"file": "res://assets/voice/ray/77482c2c749e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"abdfc4a45436": {
+		"speaker": "ray",
+		"text": "Same pen. Same hand, practicing.",
+		"file": "res://assets/voice/ray/abdfc4a45436.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"55f960ec1ac1": {
+		"speaker": "shah",
+		"text": "Look at that. You can be taught.",
+		"file": "res://assets/voice/shah/55f960ec1ac1.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"248cfd0e71a1": {
+		"speaker": "shah",
+		"text": "And look how long it took.",
+		"file": "res://assets/voice/shah/248cfd0e71a1.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"c9419751c1b5": {
+		"speaker": "shah",
+		"text": "Point that somewhere else, Ray.",
+		"file": "res://assets/voice/shah/c9419751c1b5.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"beac15e18716": {
+		"speaker": "shah",
+		"text": "Five points. That fits his palm. Bag it.",
+		"file": "res://assets/voice/shah/beac15e18716.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"73066332aaec": {
+		"speaker": "shah",
+		"text": "Backward down fourteen wooden stairs. Skull fracture at the bottom, neck too. He'd have been gone before he stopped moving.",
+		"file": "res://assets/voice/shah/73066332aaec.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"d74e1c53471a": {
+		"speaker": "shah",
+		"text": "Here. His keys were in his cardigan. I'm done with them.",
+		"file": "res://assets/voice/shah/d74e1c53471a.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"e5793c6f7e89": {
+		"speaker": "shah",
+		"text": "Between one-fifteen and one-forty-five. The roof door's been letting the rain in on him, so don't hold me to the minute.",
+		"file": "res://assets/voice/shah/e5793c6f7e89.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"459288e50b09": {
+		"speaker": "shah",
+		"text": "Old men fall. But old men fall forward, Ray, they grab for the rail. He went over backward.",
+		"file": "res://assets/voice/shah/459288e50b09.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"547e6ccaa048": {
+		"speaker": "shah",
+		"text": "Two fresh bruises on the breastbone, side by side. The heels of two hands. Small hands.",
+		"file": "res://assets/voice/shah/547e6ccaa048.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"7c78040c1ba0": {
+		"speaker": "shah",
+		"text": "Somebody put both hands on his chest and shoved. Facing him.",
+		"file": "res://assets/voice/shah/7c78040c1ba0.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"74fac45810a8": {
+		"speaker": "shah",
+		"text": "His right hand. Something scratched his palm, small and sharp, with points. And he smells of cigar.",
+		"file": "res://assets/voice/shah/74fac45810a8.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"b83482b860d0": {
+		"speaker": "shah",
+		"text": "Like a little star. I don't guess, Ray. I just notice.",
+		"file": "res://assets/voice/shah/b83482b860d0.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"985ce85b8067": {
+		"speaker": "shah",
+		"text": "He had a nice face. Find out who he made it at, last.",
+		"file": "res://assets/voice/shah/985ce85b8067.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"439f61cff36c": {
+		"speaker": "charlie",
+		"text": "Ah! Lights, at last! Are you the man in charge? You look like the man in charge of being tired.",
+		"file": "res://assets/voice/charlie/439f61cff36c.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"8bc1aedc6ab1": {
+		"speaker": "charlie",
+		"text": "Lyle! Oh, that's not Lyle. That's Lyle's understudy.",
+		"file": "res://assets/voice/charlie/8bc1aedc6ab1.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"075a4e1d5124": {
+		"speaker": "charlie",
+		"text": "On the boulevard, Charlie. To the IRS, Desmond Pike. Thirty-one years in the forecourt.",
+		"file": "res://assets/voice/charlie/075a4e1d5124.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"873e3dc4abbc": {
+		"speaker": "charlie",
+		"text": "I've been in more tourists' photographs than the Pope.",
+		"file": "res://assets/voice/charlie/873e3dc4abbc.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"8c9bb60cc3a9": {
+		"speaker": "charlie",
+		"text": "I came home at midnight. At one I came out for my pipe, as I do.",
+		"file": "res://assets/voice/charlie/8c9bb60cc3a9.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"889a4bd87398": {
+		"speaker": "charlie",
+		"text": "Pearl's little yellow Fiat was down in the alley, behind Gus's back door. I thought, he's working that poor girl late again.",
+		"file": "res://assets/voice/charlie/889a4bd87398.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"97dd45d40b2f": {
+		"speaker": "charlie",
+		"text": "My pipe keeps better time than the studio. One o'clock, one pipe. Like Gus and his cigar.",
+		"file": "res://assets/voice/charlie/97dd45d40b2f.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"453ff399a12f": {
+		"speaker": "charlie",
+		"text": "Half past one, perhaps. Gus, up here, shouting. \"How long? How long?\" Over and over.",
+		"file": "res://assets/voice/charlie/453ff399a12f.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"f18ddb10117e": {
+		"speaker": "charlie",
+		"text": "I couldn't hear who he was shouting at. The rain, and I'm seventy-three, and I'd gone inside. Then nothing. I thought, good, they've made up.",
+		"file": "res://assets/voice/charlie/f18ddb10117e.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"81f9ed84b383": {
+		"speaker": "charlie",
+		"text": "I should have come out.",
+		"file": "res://assets/voice/charlie/81f9ed84b383.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"58d2c39f62ce": {
+		"speaker": "charlie",
+		"text": "Thirty years. He sold me this derby. Told me it was Chaplin's own. It wasn't. He told me that too, after I'd paid.",
+		"file": "res://assets/voice/charlie/58d2c39f62ce.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"c50186025e1f": {
+		"speaker": "charlie",
+		"text": "He'd have hated this fuss.",
+		"file": "res://assets/voice/charlie/c50186025e1f.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"6c6b465a49b3": {
+		"speaker": "charlie",
+		"text": "Good night, Detective. Tell Pearl...",
+		"file": "res://assets/voice/charlie/6c6b465a49b3.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"59f50b2879b0": {
+		"speaker": "charlie",
+		"text": "No. Don't tell Pearl anything. She was always kind to me.",
+		"file": "res://assets/voice/charlie/59f50b2879b0.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"9286c5476bfb": {
+		"speaker": "charlie",
+		"text": "Him again? I told you. Big fellow, cop's shoes. Empty by Christmas.",
+		"file": "res://assets/voice/charlie/9286c5476bfb.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"e0540c6412bc": {
+		"speaker": "charlie",
+		"text": "Him. Big fellow, old raincoat, cop's shoes. Last Thursday he went door to door, handing those out like a priest with wafers.",
+		"file": "res://assets/voice/charlie/e0540c6412bc.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"8dbdfbbd11cf": {
+		"speaker": "charlie",
+		"text": "Said the whole block would be empty by Christmas. \"The jazz club too,\" he said. As if it were good news.",
+		"file": "res://assets/voice/charlie/8dbdfbbd11cf.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"4b46caff0267": {
+		"speaker": "charlie",
+		"text": "The Blue Note, round the corner. You can see the sign from here. Gus told him to go to hell. In Swedish, so it took longer.",
+		"file": "res://assets/voice/charlie/4b46caff0267.ogg",
+		"voice": "kokoro: bm_daniel, speed 0.95"
+	},
+	"765ccf0f6190": {
+		"speaker": "ray",
+		"text": "Can't see my own feet. There's a sign up here the size of a bus. It must have a switch.",
+		"file": "res://assets/voice/ray/765ccf0f6190.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"923e13f39d55": {
+		"speaker": "ray",
+		"text": "Lovely. Now the rain is purple.",
+		"file": "res://assets/voice/ray/923e13f39d55.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6172590e763a": {
+		"speaker": "ray",
+		"text": "Can't see my own feet. There's a sign up here the size of a bus. It must have a switch somewhere.",
+		"file": "res://assets/voice/ray/6172590e763a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d33c14c51489": {
+		"speaker": "ray",
+		"text": "I'm not walking around a roof blind. Gus already showed me how that ends.",
+		"file": "res://assets/voice/ray/d33c14c51489.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"df7ee86b7581": {
+		"speaker": "ray",
+		"text": "Back down to the office.",
+		"file": "res://assets/voice/ray/df7ee86b7581.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8a9e4b5e72e2": {
+		"speaker": "ray",
+		"text": "Gus's roof. A lawn chair, a coffee can of cigar ends, and the best seat on the boulevard.",
+		"file": "res://assets/voice/ray/8a9e4b5e72e2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"81cae882994a": {
+		"speaker": "ray",
+		"text": "Charlie Chaplin, smoking a pipe on a fire escape in the rain. Hollywood never closes.",
+		"file": "res://assets/voice/ray/81cae882994a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7aca96195494": {
+		"speaker": "ray",
+		"text": "S-T-A-R-D-U-S-T, six feet tall. The U's been flickering since the eighties. Gus said it was winking.",
+		"file": "res://assets/voice/ray/7aca96195494.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8924ed974bfa": {
+		"speaker": "ray",
+		"text": "I'll leave it on. Somebody should, tonight.",
+		"file": "res://assets/voice/ray/8924ed974bfa.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0cd77883ab33": {
+		"speaker": "ray",
+		"text": "An old wooden water tank on steel legs. Nobody's drunk out of it since the Rams left town the first time.",
+		"file": "res://assets/voice/ray/0cd77883ab33.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3c9f3e28579b": {
+		"speaker": "ray",
+		"text": "The ladder's wet, and somebody's scraped the rust off the hatch latch.",
+		"file": "res://assets/voice/ray/3c9f3e28579b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6bcda27a3fd0": {
+		"speaker": "ray",
+		"text": "Water and rust. Nothing else in there. I looked.",
+		"file": "res://assets/voice/ray/6bcda27a3fd0.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f8cb5d80f04c": {
+		"speaker": "ray",
+		"text": "Little heel prints in the wet gravel, pressed deep. From the roof door to the water tank, and back again.",
+		"file": "res://assets/voice/ray/f8cb5d80f04c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"96bbd5bc637c": {
+		"speaker": "ray",
+		"text": "Nobody walked to the edge.",
+		"file": "res://assets/voice/ray/96bbd5bc637c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"32e2301d9995": {
+		"speaker": "ray",
+		"text": "Something gold in the gravel.",
+		"file": "res://assets/voice/ray/32e2301d9995.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0108e8133494": {
+		"speaker": "ray",
+		"text": "Something gold, right at the top of the stairs. A little star, five points, the post bent back.",
+		"file": "res://assets/voice/ray/0108e8133494.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d6786183c272": {
+		"speaker": "ray",
+		"text": "Torn out of somebody's ear.",
+		"file": "res://assets/voice/ray/d6786183c272.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"81ba05839ee5": {
+		"speaker": "ray",
+		"text": "Shah said a little star.",
+		"file": "res://assets/voice/ray/81ba05839ee5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e579b0e2e4bb": {
+		"speaker": "ray",
+		"text": "Gus's chair. His cigar's in the puddle beside it, half smoked.",
+		"file": "res://assets/voice/ray/e579b0e2e4bb.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a4fd4080ca6b": {
+		"speaker": "ray",
+		"text": "He came up here to wait for somebody, and he didn't get to finish.",
+		"file": "res://assets/voice/ray/a4fd4080ca6b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a0d8c083b54f": {
+		"speaker": "ray",
+		"text": "I've been standing all night. I'll keep standing.",
+		"file": "res://assets/voice/ray/a0d8c083b54f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a4f5b486f0b7": {
+		"speaker": "ray",
+		"text": "Thirty years of cigar ends. Gus was a creature of habit. So was the person who knew where to find him.",
+		"file": "res://assets/voice/ray/a4f5b486f0b7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9fdc6bd52dd6": {
+		"speaker": "ray",
+		"text": "Empty by Christmas. The jazz club too.",
+		"file": "res://assets/voice/ray/9fdc6bd52dd6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"51a35536a3c9": {
+		"speaker": "ray",
+		"text": "Two roofs over, a blue neon sign: BLUE NOTE. From up here it's just around the corner.",
+		"file": "res://assets/voice/ray/51a35536a3c9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5edf3870a109": {
+		"speaker": "ray",
+		"text": "Everything's around the corner tonight.",
+		"file": "res://assets/voice/ray/5edf3870a109.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"42441e8dea2c": {
+		"speaker": "ray",
+		"text": "The pagoda roof across the street. Under it, a hundred years of hands and feet in cement, waiting for the tourists.",
+		"file": "res://assets/voice/ray/42441e8dea2c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f2df3701767b": {
+		"speaker": "ray",
+		"text": "Nothing goes off this roof tonight.",
+		"file": "res://assets/voice/ray/f2df3701767b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"bd215b984964": {
+		"speaker": "ray",
+		"text": "A long drop to a wet, empty alley. No yellow Fiat now.",
+		"file": "res://assets/voice/ray/bd215b984964.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e5ff3bf02b37": {
+		"speaker": "ray",
+		"text": "Gus didn't go off the edge. He went down the stairs.",
+		"file": "res://assets/voice/ray/e5ff3bf02b37.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f6a473a28be3": {
+		"speaker": "ray",
+		"text": "Neon light slides across black water a foot below the rim. Something floats face down in it, gold, like a drowned starlet.",
+		"file": "res://assets/voice/ray/f6a473a28be3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"63a8f110c2e0": {
+		"speaker": "ray",
+		"text": "Lyle Brandt. Best Supporting Actor, 1954. Floating.",
+		"file": "res://assets/voice/ray/63a8f110c2e0.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c62ac437a773": {
+		"speaker": "ray",
+		"text": "It comes up far too easily. Eight and a half pounds of metal doesn't float. This is resin, hollow as a promise.",
+		"file": "res://assets/voice/ray/c62ac437a773.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ccd2b6286e7f": {
+		"speaker": "ray",
+		"text": "Morty said they'd float in a bathtub.",
+		"file": "res://assets/voice/ray/ccd2b6286e7f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"60b6248f3ab8": {
+		"speaker": "ray",
+		"text": "No. 734 engraved on the base, and the cuts still shine. Somebody had this made.",
+		"file": "res://assets/voice/ray/60b6248f3ab8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7f0dfa113479": {
+		"speaker": "ray",
+		"text": "Nobody stole Lyle tonight. Lyle left three weeks ago.",
+		"file": "res://assets/voice/ray/7f0dfa113479.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e5cea052cbff": {
+		"speaker": "ray",
+		"text": "Somebody hid this one up here to make a robbery out of it, because nobody walks down Hollywood Boulevard at two in the morning with a gold statue under their arm.",
+		"file": "res://assets/voice/ray/e5cea052cbff.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3368588dd3ae": {
+		"speaker": "ray",
+		"text": "Not past forty cameras.",
+		"file": "res://assets/voice/ray/3368588dd3ae.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ed201ee52ea5": {
+		"speaker": "ray",
+		"text": "Detective Kessler. And you are?",
+		"file": "res://assets/voice/ray/ed201ee52ea5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ca942f8698a6": {
+		"speaker": "ray",
+		"text": "Around one.",
+		"file": "res://assets/voice/ray/ca942f8698a6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2fba113147ac": {
+		"speaker": "ray",
+		"text": "Ever seen this man?",
+		"file": "res://assets/voice/ray/2fba113147ac.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6aeafc4e6874": {
+		"speaker": "ray",
+		"text": "The jazz club.",
+		"file": "res://assets/voice/ray/6aeafc4e6874.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"71531bb0eea7": {
+		"speaker": "morty",
+		"text": "Is that... that's a prop. Give it here.",
+		"file": "res://assets/voice/morty/71531bb0eea7.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"d0654349ed8e": {
+		"speaker": "morty",
+		"text": "Two pounds. Gus would've known in a second.",
+		"file": "res://assets/voice/morty/d0654349ed8e.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"4f5770a5d9ea": {
+		"speaker": "morty",
+		"text": "Is it gone? Tell me it's not gone.",
+		"file": "res://assets/voice/morty/4f5770a5d9ea.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"404644013fb7": {
+		"speaker": "morty",
+		"text": "I'm not going anywhere, young lady. I've known Gus fifty years.",
+		"file": "res://assets/voice/morty/404644013fb7.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"895fdeaf5bce": {
+		"speaker": "morty",
+		"text": "Morty Kahn. Kahn's Collectibles, three doors down. Gus and I have been fighting over the same estate sales since Nixon.",
+		"file": "res://assets/voice/morty/895fdeaf5bce.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"d299ff38d6e3": {
+		"speaker": "morty",
+		"text": "Wanted it? In March I offered him two hundred fifty thousand dollars. Cash. He said he'd be buried with it.",
+		"file": "res://assets/voice/morty/d299ff38d6e3.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"e390d238b70d": {
+		"speaker": "morty",
+		"text": "Stubborn old Swede.",
+		"file": "res://assets/voice/morty/e390d238b70d.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"7ad40747ebcc": {
+		"speaker": "morty",
+		"text": "Upstairs, in my pajamas, losing a Kurosawa script to a dentist in Osaka. Look.",
+		"file": "res://assets/voice/morty/7ad40747ebcc.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"ef1c8afa3b22": {
+		"speaker": "morty",
+		"text": "Two hours of my life. I came down when I saw the lights.",
+		"file": "res://assets/voice/morty/ef1c8afa3b22.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"096212903716": {
+		"speaker": "morty",
+		"text": "Eight and a half pounds. Solid britannium, gold plate. You could stop a door with it.",
+		"file": "res://assets/voice/morty/096212903716.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"81a5c7404885": {
+		"speaker": "morty",
+		"text": "The props they sell on this boulevard are hollow resin, two pounds. They'd float in your bathtub.",
+		"file": "res://assets/voice/morty/81a5c7404885.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"7be64137f129": {
+		"speaker": "morty",
+		"text": "Find who did this. And whatever was in that case, I want to know what it was.",
+		"file": "res://assets/voice/morty/7be64137f129.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"8bcefb557994": {
+		"speaker": "morty",
+		"text": "It was me. All right? Me.",
+		"file": "res://assets/voice/morty/8bcefb557994.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"9e0c0af7cee9": {
+		"speaker": "morty",
+		"text": "A broker at Calloway's called. A collection selling quietly, no names. I wired a hundred and eighty thousand to something called Stardust Archive.",
+		"file": "res://assets/voice/morty/9e0c0af7cee9.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"d69b1161675d": {
+		"speaker": "morty",
+		"text": "I thought the eviction finally broke him. Too proud to sell to me to my face, so I let him not. I never said a word.",
+		"file": "res://assets/voice/morty/d69b1161675d.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"64cadbe92d8c": {
+		"speaker": "morty",
+		"text": "Fifty years, and I never said a word.",
+		"file": "res://assets/voice/morty/64cadbe92d8c.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"15cd8ba4fdfc": {
+		"speaker": "morty",
+		"text": "It's in my safe right now, Detective. It's real. I'd know.",
+		"file": "res://assets/voice/morty/15cd8ba4fdfc.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"c5d6a48b3d46": {
+		"speaker": "morty",
+		"text": "Gus? Gus thought email was a fad. The girl does it. Pearl. The website, the listings, everything with a screen.",
+		"file": "res://assets/voice/morty/c5d6a48b3d46.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"4cce8df381b7": {
+		"speaker": "morty",
+		"text": "Was it real? The one in the case?",
+		"file": "res://assets/voice/morty/4cce8df381b7.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"060dc4c43fe7": {
+		"speaker": "morty",
+		"text": "He said he'd be buried with it.",
+		"file": "res://assets/voice/morty/060dc4c43fe7.ogg",
+		"voice": "kokoro: am_michael, -2.5 semitones, speed 0.85, flutter 0.1"
+	},
+	"51a07c4ab17a": {
+		"speaker": "park",
+		"text": "Detective. Small city tonight.",
+		"file": "res://assets/voice/park/51a07c4ab17a.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"4bf6ae74015c": {
+		"speaker": "park",
+		"text": "Gus Lindqvist, seventy-one, the owner. He's in back, at the bottom of the roof stairs. Dr. Shah's with him.",
+		"file": "res://assets/voice/park/4bf6ae74015c.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"ccad4887c9c5": {
+		"speaker": "park",
+		"text": "The 911 call came in at two-nineteen from his assistant, Pearl Danvers. I got here at two twenty-six. The door was like that, and the case was empty.",
+		"file": "res://assets/voice/park/ccad4887c9c5.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"9dd72cc39709": {
+		"speaker": "park",
+		"text": "Morty Kahn. Owns the collectibles shop three doors down. He came out when he saw the lights.",
+		"file": "res://assets/voice/park/9dd72cc39709.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"71aed551c62f": {
+		"speaker": "park",
+		"text": "He keeps asking if \"it\" is gone. I don't think he means Mr. Lindqvist.",
+		"file": "res://assets/voice/park/71aed551c62f.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"c493fb8cca6e": {
+		"speaker": "park",
+		"text": "The boulevard's shut. There's a Charlie Chaplin who lives next door. He's out on his fire escape, and he says he'll only talk to \"the man in charge.\"",
+		"file": "res://assets/voice/park/c493fb8cca6e.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"2a38dff3e807": {
+		"speaker": "park",
+		"text": "Tonight it is. You can see his fire escape from Mr. Lindqvist's roof.",
+		"file": "res://assets/voice/park/2a38dff3e807.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"5fef14d8e428": {
+		"speaker": "park",
+		"text": "Already asked. Miss Danvers mentioned him. Pryce has a night security desk; the supervisor sent me stills in four minutes.",
+		"file": "res://assets/voice/park/5fef14d8e428.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"c9951ee2c383": {
+		"speaker": "park",
+		"text": "Whitaker's car went into the Pryce Tower garage in Century City at ten fifty-eight. He's on their elevator camera at three-oh-two a.m., still in his tie.",
+		"file": "res://assets/voice/park/c9951ee2c383.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"a9436cd798d4": {
+		"speaker": "park",
+		"text": "He said they \"always cooperate with the department.\" Like he'd said it before.",
+		"file": "res://assets/voice/park/a9436cd798d4.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"a4ed32dc901a": {
+		"speaker": "park",
+		"text": "I'll keep the door, Detective. Mr. Kahn keeps trying to come in.",
+		"file": "res://assets/voice/park/a4ed32dc901a.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"fddf7b2e5316": {
+		"speaker": "park",
+		"text": "Pearl Danvers. Stand up for me, please.",
+		"file": "res://assets/voice/park/fddf7b2e5316.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"25573b65b12a": {
+		"speaker": "pearl",
+		"text": "Those are Gus's. Please put them away.",
+		"file": "res://assets/voice/pearl/25573b65b12a.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"d10e2dd8964c": {
+		"speaker": "pearl",
+		"text": "Are you the detective? They keep saying \"the detective's coming,\" like it's a casting call.",
+		"file": "res://assets/voice/pearl/d10e2dd8964c.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"81508de34bc3": {
+		"speaker": "pearl",
+		"text": "Sorry. I'm sorry. I don't know what I'm saying.",
+		"file": "res://assets/voice/pearl/81508de34bc3.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"1d98b2383898": {
+		"speaker": "pearl",
+		"text": "Pearl. Gus calls me Pearlie.",
+		"file": "res://assets/voice/pearl/1d98b2383898.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"0efaaafa3c66": {
+		"speaker": "pearl",
+		"text": "Called.",
+		"file": "res://assets/voice/pearl/0efaaafa3c66.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"5e817c75a63d": {
+		"speaker": "pearl",
+		"text": "We closed at nine. I went home. I've got an audition at nine this morning, a pharmacy ad, \"concerned mom\", and I left my headshots in my locker.",
+		"file": "res://assets/voice/pearl/5e817c75a63d.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"dd4cce9d20cd": {
+		"speaker": "pearl",
+		"text": "So I came back. Two-fifteen, maybe? The door was smashed. Lyle was gone. And Gus was at the bottom of the stairs. I called 911.",
+		"file": "res://assets/voice/pearl/dd4cce9d20cd.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"025ab204ebe3": {
+		"speaker": "pearl",
+		"text": "You don't know casting directors.",
+		"file": "res://assets/voice/pearl/025ab204ebe3.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"18ffffa6f93f": {
+		"speaker": "pearl",
+		"text": "Six years. I came in to sell him a lobby card from my grandmother's attic, and he gave me a job instead. Said I had an eye.",
+		"file": "res://assets/voice/pearl/18ffffa6f93f.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"28698ac9c0c2": {
+		"speaker": "pearl",
+		"text": "He trusted me with everything.",
+		"file": "res://assets/voice/pearl/28698ac9c0c2.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"58e5e7eaf588": {
+		"speaker": "pearl",
+		"text": "Everything.",
+		"file": "res://assets/voice/pearl/58e5e7eaf588.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"684e625fc65d": {
+		"speaker": "pearl",
+		"text": "Gus has one. I have one. That's it. Gus didn't let anyone else near Lyle.",
+		"file": "res://assets/voice/pearl/684e625fc65d.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"56d76418ca1d": {
+		"speaker": "pearl",
+		"text": "Lyle Brandt. The Oscar. Gus called it by name. \"Morning, Lyle. Night, Lyle.\"",
+		"file": "res://assets/voice/pearl/56d76418ca1d.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"b74bf7b7ba00": {
+		"speaker": "pearl",
+		"text": "Everybody. Morty out there's been begging Gus for years. And the developer. Pryce.",
+		"file": "res://assets/voice/pearl/b74bf7b7ba00.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"4a886380b152": {
+		"speaker": "pearl",
+		"text": "Their man Whitaker was here yesterday yelling that Gus had thirty days. Gus told him to put it in writing, and he said it already was.",
+		"file": "res://assets/voice/pearl/4a886380b152.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"5fd06b0f24a2": {
+		"speaker": "pearl",
+		"text": "I'm not going anywhere.",
+		"file": "res://assets/voice/pearl/5fd06b0f24a2.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"88d9c6320e53": {
+		"speaker": "pearl",
+		"text": "Where would I go?",
+		"file": "res://assets/voice/pearl/88d9c6320e53.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"327d407a547f": {
+		"speaker": "pearl",
+		"text": "Okay. Okay! He called. He was upset, he'd seen something in a catalogue, he wasn't making sense. So I came in. At one.",
+		"file": "res://assets/voice/pearl/327d407a547f.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"c0f92d12b647": {
+		"speaker": "pearl",
+		"text": "We talked in the office, he calmed down, he went up for his cigar, and I went home. And at two he wasn't answering, so I came back, and...",
+		"file": "res://assets/voice/pearl/c0f92d12b647.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"802cdb53c497": {
+		"speaker": "pearl",
+		"text": "It was like that!",
+		"file": "res://assets/voice/pearl/802cdb53c497.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"2c182a31ea00": {
+		"speaker": "pearl",
+		"text": "You found him! Where was he?",
+		"file": "res://assets/voice/pearl/2c182a31ea00.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"09d97c285a55": {
+		"speaker": "pearl",
+		"text": "Yes. Okay. Yes. I sold things. I sold Lyle.",
+		"file": "res://assets/voice/pearl/09d97c285a55.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"165d622f5409": {
+		"speaker": "pearl",
+		"text": "But I didn't hurt him. When I got here at one, he was already at the bottom of the stairs. He'd fallen.",
+		"file": "res://assets/voice/pearl/165d622f5409.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"e25dd2bae18d": {
+		"speaker": "pearl",
+		"text": "He's seventy-one, he goes up there in the rain in his slippers. And I thought, they'll look at the case, and then they'll look at me, and I'll go to prison for a fall.",
+		"file": "res://assets/voice/pearl/e25dd2bae18d.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"8a74bbae9b43": {
+		"speaker": "pearl",
+		"text": "So I made it a robbery. That's all I did. I swear to God, that's all I did.",
+		"file": "res://assets/voice/pearl/8a74bbae9b43.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"9057569a4ba8": {
+		"speaker": "pearl",
+		"text": "He kept saying \"How long? How long?\" So I told him. Eighteen months. A Bogart letter first, for rent. Then the photos. Then Lyle.",
+		"file": "res://assets/voice/pearl/9057569a4ba8.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"87b1db98331c": {
+		"speaker": "pearl",
+		"text": "I'm good, you know? I'm good at being somebody else. It's the only thing I've ever been good at.",
+		"file": "res://assets/voice/pearl/87b1db98331c.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"a44a7c3b088d": {
+		"speaker": "pearl",
+		"text": "He said he'd call the police in the morning. He took my arm, and his hand caught my earring, and it tore, and it hurt, and I just...",
+		"file": "res://assets/voice/pearl/a44a7c3b088d.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"6eeec90ff0ce": {
+		"speaker": "pearl",
+		"text": "I put my hands on him. To get him off me. And then he wasn't there. He was just gone. Down the stairs. One slipper.",
+		"file": "res://assets/voice/pearl/6eeec90ff0ce.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"e88be7a699a1": {
+		"speaker": "pearl",
+		"text": "I'm thirty-four. I've died on four cop shows. Corpse number two. I've never had a line that wasn't a scream.",
+		"file": "res://assets/voice/pearl/e88be7a699a1.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"f6e9d339c414": {
+		"speaker": "pearl",
+		"text": "Was I any good tonight?",
+		"file": "res://assets/voice/pearl/f6e9d339c414.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"1b1f53df4e24": {
+		"speaker": "pearl",
+		"text": "Night, Lyle.",
+		"file": "res://assets/voice/pearl/1b1f53df4e24.ogg",
+		"voice": "kokoro: af_bella, speed 1"
+	},
+	"06dcea838231": {
+		"speaker": "ray",
+		"text": "Stardust Memorabilia. Sixty years of other people's dreams, sold by the square inch.",
+		"file": "res://assets/voice/ray/06dcea838231.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b1430739c146": {
+		"speaker": "ray",
+		"text": "It always is, after midnight.",
+		"file": "res://assets/voice/ray/b1430739c146.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3c056af87d60": {
+		"speaker": "ray",
+		"text": "Officer Park. Same rain cape, still in the neighborhood.",
+		"file": "res://assets/voice/ray/3c056af87d60.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"982ae02aceb8": {
+		"speaker": "ray",
+		"text": "She's holding the door, not the evidence.",
+		"file": "res://assets/voice/ray/982ae02aceb8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a74fe5e64a64": {
+		"speaker": "ray",
+		"text": "Bathrobe, loafers, no socks. He keeps looking past me at the empty case.",
+		"file": "res://assets/voice/ray/a74fe5e64a64.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"57fa13464c36": {
+		"speaker": "ray",
+		"text": "He's seen it. He's living it.",
+		"file": "res://assets/voice/ray/57fa13464c36.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a11a455f4840": {
+		"speaker": "ray",
+		"text": "An empty velvet bed shaped like a statue. A brass plate: \"Lyle Brandt. Best Supporting Actor, 1954. Harbor Lights.\"",
+		"file": "res://assets/voice/ray/a11a455f4840.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1ccf83b72585": {
+		"speaker": "ray",
+		"text": "The little brass key turns like butter. Same kind Pearl wears around her neck.",
+		"file": "res://assets/voice/ray/1ccf83b72585.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"49fac343f78e": {
+		"speaker": "ray",
+		"text": "The lock's clean. No scratches, no pry marks, and the glass is whole. Somebody opened this with a key.",
+		"file": "res://assets/voice/ray/49fac343f78e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a504a3fde273": {
+		"speaker": "ray",
+		"text": "Opened with a key. Lyle didn't let himself out.",
+		"file": "res://assets/voice/ray/a504a3fde273.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b5e6158d8608": {
+		"speaker": "ray",
+		"text": "\"Academy Award statuette, Best Supporting Actor, 1954. Lyle Brandt, Harbor Lights. Base serial No. 734. From the Brandt estate, 1988.\"",
+		"file": "res://assets/voice/ray/b5e6158d8608.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6236afc32cc4": {
+		"speaker": "ray",
+		"text": "The glass in the door is smashed. Most of it is out on the sidewalk, on the star of a TV cowboy nobody remembers.",
+		"file": "res://assets/voice/ray/6236afc32cc4.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e64e78b6af2c": {
+		"speaker": "ray",
+		"text": "Break into a shop and the glass lands inside. This glass went out.",
+		"file": "res://assets/voice/ray/e64e78b6af2c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"11f17402befb": {
+		"speaker": "ray",
+		"text": "Smashed. Rain's coming through the hole.",
+		"file": "res://assets/voice/ray/11f17402befb.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d72dc6b11747": {
+		"speaker": "ray",
+		"text": "Not yet. Gus is still at the bottom of the stairs.",
+		"file": "res://assets/voice/ray/d72dc6b11747.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f83d7f3e9a9f": {
+		"speaker": "ray",
+		"text": "Forty years of Hollywood, signed. Bogart, Monroe, Lyle Brandt, and a dozen faces only Gus remembered.",
+		"file": "res://assets/voice/ray/f83d7f3e9a9f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"76f078e8336e": {
+		"speaker": "ray",
+		"text": "Gus would've spotted a fake across the room. If he ever looked.",
+		"file": "res://assets/voice/ray/76f078e8336e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2001d4ede651": {
+		"speaker": "ray",
+		"text": "An old brass register. Drawer shut.",
+		"file": "res://assets/voice/ray/2001d4ede651.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5b877798d246": {
+		"speaker": "ray",
+		"text": "Two hundred twelve dollars and a roll of quarters. A thief who smashes a door and leaves the cash.",
+		"file": "res://assets/voice/ray/5b877798d246.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8e434304abce": {
+		"speaker": "ray",
+		"text": "STARDUST, stenciled on the canvas. Nobody's in it now.",
+		"file": "res://assets/voice/ray/8e434304abce.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"23a4109f3cf5": {
+		"speaker": "ray",
+		"text": "A black bird statuette tagged \"Not THE bird. A bird. $40.\" Gus had a sense of humor.",
+		"file": "res://assets/voice/ray/23a4109f3cf5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"253d1a44d89c": {
+		"speaker": "ray",
+		"text": "I've got enough birds.",
+		"file": "res://assets/voice/ray/253d1a44d89c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"64d3dd770c5f": {
+		"speaker": "ray",
+		"text": "The Chinese Theatre across the street, dark. The forecourt's handprints full of rain.",
+		"file": "res://assets/voice/ray/64d3dd770c5f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2410e7fc03e4": {
+		"speaker": "ray",
+		"text": "The back office.",
+		"file": "res://assets/voice/ray/2410e7fc03e4.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"766b6329694a": {
+		"speaker": "ray",
+		"text": "Glass out on the sidewalk. The case opened with a key. Nobody broke in here.",
+		"file": "res://assets/voice/ray/766b6329694a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d3b424dd1fce": {
+		"speaker": "ray",
+		"text": "Somebody with a key broke out, and wanted it to look the other way.",
+		"file": "res://assets/voice/ray/d3b424dd1fce.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"af52a33fdb55": {
+		"speaker": "ray",
+		"text": "One number, two statues. Only one of them was real.",
+		"file": "res://assets/voice/ray/af52a33fdb55.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a5fa78753445": {
+		"speaker": "ray",
+		"text": "Calloway's: \"Base serial No. 734. Sold by private treaty.\" Three weeks ago. Gus's certificate: No. 734.",
+		"file": "res://assets/voice/ray/a5fa78753445.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b56c787c1a5e": {
+		"speaker": "ray",
+		"text": "Every Oscar since 1949 has its own number, like a badge.",
+		"file": "res://assets/voice/ray/b56c787c1a5e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"85166b974d3e": {
+		"speaker": "ray",
+		"text": "One statue, two places. Either Calloway's sold a fake, or Gus was saying good night to one.",
+		"file": "res://assets/voice/ray/85166b974d3e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f307682cb811": {
+		"speaker": "ray",
+		"text": "And since 1950, winners sign a paper: if you sell it, the Academy gets first refusal for a dollar. Nobody sells one in public. That's why it went quiet.",
+		"file": "res://assets/voice/ray/f307682cb811.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2ff9c202ce07": {
+		"speaker": "ray",
+		"text": "Old ink sits dark under UV. Most of these do.",
+		"file": "res://assets/voice/ray/2ff9c202ce07.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"981b8b04120d": {
+		"speaker": "ray",
+		"text": "Three light up like a premiere: Lyle Brandt, Bogart, Monroe. All the same gold.",
+		"file": "res://assets/voice/ray/981b8b04120d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d9413bd77835": {
+		"speaker": "ray",
+		"text": "Modern paint pen, not old fountain ink. Good fakes, and new ones.",
+		"file": "res://assets/voice/ray/d9413bd77835.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"979d2e6bd079": {
+		"speaker": "ray",
+		"text": "That's never me.",
+		"file": "res://assets/voice/ray/979d2e6bd079.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"922461ccf87e": {
+		"speaker": "ray",
+		"text": "There's an eviction notice on Gus's desk from Pryce Development. Their man's Trent Whitaker. Where was he tonight?",
+		"file": "res://assets/voice/ray/922461ccf87e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"058a99a2430f": {
+		"speaker": "ray",
+		"text": "Four minutes. Nobody's that helpful at three in the morning.",
+		"file": "res://assets/voice/ray/058a99a2430f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"546e2961ded0": {
+		"speaker": "ray",
+		"text": "Calloway's private sales, three weeks ago. Lyle Brandt's Oscar, serial number 734. Somebody bought it, Morty.",
+		"file": "res://assets/voice/ray/546e2961ded0.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e93d4d9c258d": {
+		"speaker": "ray",
+		"text": "And you thought?",
+		"file": "res://assets/voice/ray/e93d4d9c258d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e2eb976c9a7b": {
+		"speaker": "ray",
+		"text": "Who handles the shop's email?",
+		"file": "res://assets/voice/ray/e2eb976c9a7b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"acf3714b91a1": {
+		"speaker": "ray",
+		"text": "The one in your safe is.",
+		"file": "res://assets/voice/ray/acf3714b91a1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f3a22a4509a8": {
+		"speaker": "ray",
+		"text": "Then you know what to do, Morty.",
+		"file": "res://assets/voice/ray/f3a22a4509a8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3d979556b80b": {
+		"speaker": "ray",
+		"text": "One gold star in her right ear. Under the hair, the left lobe's bare, torn and red.",
+		"file": "res://assets/voice/ray/3d979556b80b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b9533ffdd2cf": {
+		"speaker": "ray",
+		"text": "Pearl Danvers. Patrol blanket, hair down over one side of her face. An hour of crying and her mascara hasn't moved.",
+		"file": "res://assets/voice/ray/b9533ffdd2cf.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0600f6bf1798": {
+		"speaker": "ray",
+		"text": "She's had enough things shoved at her tonight.",
+		"file": "res://assets/voice/ray/0600f6bf1798.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"335f973d30fc": {
+		"speaker": "ray",
+		"text": "Ray Kessler. Take your time, Miss Danvers.",
+		"file": "res://assets/voice/ray/335f973d30fc.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0b67591732ca": {
+		"speaker": "ray",
+		"text": "Two in the morning, for headshots.",
+		"file": "res://assets/voice/ray/0b67591732ca.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e2ac60ee18a0": {
+		"speaker": "ray",
+		"text": "Lyle?",
+		"file": "res://assets/voice/ray/e2ac60ee18a0.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fc294a2b5f00": {
+		"speaker": "ray",
+		"text": "Gus called you at twelve fifty-two. Three minutes.",
+		"file": "res://assets/voice/ray/fc294a2b5f00.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"bd1f7726507d": {
+		"speaker": "ray",
+		"text": "You came back at two in the morning for your headshots. They're in your locker, Pearl. All twenty.",
+		"file": "res://assets/voice/ray/bd1f7726507d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c5685aa0ed63": {
+		"speaker": "ray",
+		"text": "And the door was smashed.",
+		"file": "res://assets/voice/ray/c5685aa0ed63.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5cb0c8f97ac9": {
+		"speaker": "ray",
+		"text": "Later.",
+		"file": "res://assets/voice/ray/5cb0c8f97ac9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"36ebf7c5df6a": {
+		"speaker": "ray",
+		"text": "She's seen him. She knows where he's been.",
+		"file": "res://assets/voice/ray/36ebf7c5df6a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5077585d4b66": {
+		"speaker": "ray",
+		"text": "Lyle was in the water tank on the roof. He floats, Pearl. Real ones don't.",
+		"file": "res://assets/voice/ray/5077585d4b66.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"76bf060a0128": {
+		"speaker": "ray",
+		"text": "The real one went through Calloway's three weeks ago. A buyer wired a hundred and eighty thousand dollars to \"Stardust Archive\". You run the shop's email.",
+		"file": "res://assets/voice/ray/76bf060a0128.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d0b82e86f832": {
+		"speaker": "ray",
+		"text": "The real one went through Calloway's three weeks ago.",
+		"file": "res://assets/voice/ray/d0b82e86f832.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"03b9b2fdd457": {
+		"speaker": "ray",
+		"text": "Nobody broke in. You opened the case with your key, broke the glass from the inside, and put Lyle where nobody would look.",
+		"file": "res://assets/voice/ray/03b9b2fdd457.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8b38265c4ef9": {
+		"speaker": "ray",
+		"text": "Because you couldn't carry him down the boulevard past every camera in Hollywood.",
+		"file": "res://assets/voice/ray/8b38265c4ef9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2d5421125ed0": {
+		"speaker": "ray",
+		"text": "That's a better story. It's still a story.",
+		"file": "res://assets/voice/ray/2d5421125ed0.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"65902181238f": {
+		"speaker": "ray",
+		"text": "She'll have a reason for that. Let her run out of reasons first.",
+		"file": "res://assets/voice/ray/65902181238f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5bd2bf0a564b": {
+		"speaker": "ray",
+		"text": "Gus didn't fall. He went down those stairs backward, with the heels of two small hands on his chest.",
+		"file": "res://assets/voice/ray/5bd2bf0a564b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3eb6a85d1bc0": {
+		"speaker": "ray",
+		"text": "And in his right palm there's a scratch shaped like a little star.",
+		"file": "res://assets/voice/ray/3eb6a85d1bc0.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"61e012693288": {
+		"speaker": "ray",
+		"text": "It was at the top of his stairs, Pearl. Push your hair back.",
+		"file": "res://assets/voice/ray/61e012693288.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c4ae040fffd0": {
+		"speaker": "ray",
+		"text": "Her left earlobe is torn and red.",
+		"file": "res://assets/voice/ray/c4ae040fffd0.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"29728bf08bd3": {
+		"speaker": "ray",
+		"text": "Gus thought so. For six years.",
+		"file": "res://assets/voice/ray/29728bf08bd3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5671f055884c": {
+		"speaker": "ray",
+		"text": "Forty years of fakes and favorites, and a note on a lamp that said trust nobody.",
+		"file": "res://assets/voice/ray/5671f055884c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6dbb4fe5374e": {
+		"speaker": "ray",
+		"text": "He trusted one person.",
+		"file": "res://assets/voice/ray/6dbb4fe5374e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b584d1ea741e": {
+		"speaker": "ray",
+		"text": "Who's the man in the bathrobe?",
+		"file": "res://assets/voice/ray/b584d1ea741e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0a0a0ad5a5e2": {
+		"speaker": "ray",
+		"text": "Anything from the canvass?",
+		"file": "res://assets/voice/ray/0a0a0ad5a5e2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3e2d78a7ab9c": {
+		"speaker": "ray",
+		"text": "The developer's man.",
+		"file": "res://assets/voice/ray/3e2d78a7ab9c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2eb4491f7e7b": {
+		"speaker": "ray",
+		"text": "You wanted the Oscar.",
+		"file": "res://assets/voice/ray/2eb4491f7e7b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3ca2fa17f6a5": {
+		"speaker": "ray",
+		"text": "Calloway's sold No. 734.",
+		"file": "res://assets/voice/ray/3ca2fa17f6a5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7251fd6f14b2": {
+		"speaker": "ray",
+		"text": "What does a real one weigh?",
+		"file": "res://assets/voice/ray/7251fd6f14b2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ea784bd1e153": {
+		"speaker": "ray",
+		"text": "Good night, Morty.",
+		"file": "res://assets/voice/ray/ea784bd1e153.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"209f141594c0": {
+		"speaker": "ray",
+		"text": "What happened tonight?",
+		"file": "res://assets/voice/ray/209f141594c0.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"10bfaad9aa5b": {
+		"speaker": "ray",
+		"text": "How long did you work for Gus?",
+		"file": "res://assets/voice/ray/10bfaad9aa5b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8f5bc6f5db39": {
+		"speaker": "ray",
+		"text": "Who has keys to the Oscar case?",
+		"file": "res://assets/voice/ray/8f5bc6f5db39.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"470a4300afc3": {
+		"speaker": "ray",
+		"text": "Who'd want the Oscar?",
+		"file": "res://assets/voice/ray/470a4300afc3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"dbce40e1522d": {
+		"speaker": "ray",
+		"text": "Gus called you at twelve fifty-two.",
+		"file": "res://assets/voice/ray/dbce40e1522d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f3c33fccc3f2": {
+		"speaker": "ray",
+		"text": "Your headshots are still in your locker.",
+		"file": "res://assets/voice/ray/f3c33fccc3f2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d38f86203271": {
+		"speaker": "ray",
+		"text": "Lyle was in the water tank.",
+		"file": "res://assets/voice/ray/d38f86203271.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"31c36a4a1dd2": {
+		"speaker": "ray",
+		"text": "Gus didn't fall.",
+		"file": "res://assets/voice/ray/31c36a4a1dd2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f3b3e08aa7d7": {
+		"speaker": "ray",
+		"text": "I'll be back.",
+		"file": "res://assets/voice/ray/f3b3e08aa7d7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fab11962227e": {
+		"speaker": "ray",
+		"text": "Did he fall, or was he helped?",
+		"file": "res://assets/voice/ray/fab11962227e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"17a67a2b7561": {
+		"speaker": "ray",
+		"text": "What did you see tonight?",
+		"file": "res://assets/voice/ray/17a67a2b7561.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f6e06a72dc56": {
+		"speaker": "ray",
+		"text": "Did you hear anything?",
+		"file": "res://assets/voice/ray/f6e06a72dc56.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e2b228356bb5": {
+		"speaker": "ray",
+		"text": "You knew Gus?",
+		"file": "res://assets/voice/ray/e2b228356bb5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"182a4fed9e7e": {
+		"speaker": "ray",
+		"text": "Good night, Charlie.",
+		"file": "res://assets/voice/ray/182a4fed9e7e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a4d3e87c9b55": {
+		"speaker": "ray",
+		"text": "She says he fell. Shah says he was pushed. Something of hers says where.",
+		"file": "res://assets/voice/ray/a4d3e87c9b55.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"519290f1809d": {
+		"speaker": "ray",
+		"text": "Her story keeps getting shorter. Lyle might shorten it more.",
+		"file": "res://assets/voice/ray/519290f1809d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fd7e915cb433": {
+		"speaker": "ray",
+		"text": "Out through the door. I wonder what came out of the case.",
+		"file": "res://assets/voice/ray/fd7e915cb433.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"590504d4ffb1": {
+		"speaker": "ray",
+		"text": "Calloway's has a number for Lyle. So does Gus.",
+		"file": "res://assets/voice/ray/590504d4ffb1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"73b5274f451d": {
+		"speaker": "ray",
+		"text": "He read that at midnight. Who'd you call, at midnight, with news like that?",
+		"file": "res://assets/voice/ray/73b5274f451d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"dad529c85a2c": {
+		"speaker": "ray",
+		"text": "Shah's got that look. The one where I haven't asked the right question.",
+		"file": "res://assets/voice/ray/dad529c85a2c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3c45c2ec0874": {
+		"speaker": "ray",
+		"text": "I've got what she hid and what she lost. Time to go downstairs and see what she says.",
+		"file": "res://assets/voice/ray/3c45c2ec0874.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1a89117be9e5": {
+		"speaker": "ray",
+		"text": "Her heels went to that tank and came back. People don't visit water tanks.",
+		"file": "res://assets/voice/ray/1a89117be9e5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8d2e663fb5c7": {
+		"speaker": "ray",
+		"text": "Room 214. Danny in the middle, Kenji in one corner. Gus gets the other.",
+		"file": "res://assets/voice/ray/8d2e663fb5c7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"472bb6999888": {
+		"speaker": "ray",
+		"text": "Not yet. Gus is waiting on the board.",
+		"file": "res://assets/voice/ray/472bb6999888.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b1b40e296333": {
+		"speaker": "ray",
+		"text": "Quarter to four. The hour when even the coffee gives up.",
+		"file": "res://assets/voice/ray/b1b40e296333.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6907325c0e8b": {
+		"speaker": "ray",
+		"text": "Danny in the middle, Kenji and Gus in the corners. Three faces, one night.",
+		"file": "res://assets/voice/ray/6907325c0e8b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c5b827268d06": {
+		"speaker": "ray",
+		"text": "Gus is closed. Danny isn't.",
+		"file": "res://assets/voice/ray/c5b827268d06.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"aec653cd7d15": {
+		"speaker": "ray",
+		"text": "After Gus.",
+		"file": "res://assets/voice/ray/aec653cd7d15.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"004cc6eb2173": {
+		"speaker": "ray",
+		"text": "Seventy-one years, fourteen stairs, and two small hands. Whose?",
+		"file": "res://assets/voice/ray/004cc6eb2173.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e5ff184295ef": {
+		"speaker": "ray",
+		"text": "Morty had the real Lyle in his safe. You don't kill a man over the copy.",
+		"file": "res://assets/voice/ray/e5ff184295ef.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"969ba86d22c9": {
+		"speaker": "ray",
+		"text": "Morty spent the night losing to a dentist in Osaka.",
+		"file": "res://assets/voice/ray/969ba86d22c9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2253845ca131": {
+		"speaker": "ray",
+		"text": "Morty wanted it. Wanting isn't pushing. And I never asked where he was.",
+		"file": "res://assets/voice/ray/2253845ca131.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ad4b985b5f6f": {
+		"speaker": "ray",
+		"text": "Whitaker was in a Century City elevator in his tie. And a letter with twenty-three days to run doesn't need a push.",
+		"file": "res://assets/voice/ray/ad4b985b5f6f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6eb4b2a90a9e": {
+		"speaker": "ray",
+		"text": "Pryce sent a letter. A letter isn't a pair of hands. I never checked where Whitaker was.",
+		"file": "res://assets/voice/ray/6eb4b2a90a9e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f4de1efbe75e": {
+		"speaker": "ray",
+		"text": "A burglar who breaks out, uses a key, leaves the cash and hides the loot on the roof? That's not a burglar. That's a stage manager.",
+		"file": "res://assets/voice/ray/f4de1efbe75e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1cde9aaf8411": {
+		"speaker": "ray",
+		"text": "Pearlie.",
+		"file": "res://assets/voice/ray/1cde9aaf8411.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8379c01c7250": {
+		"speaker": "ray",
+		"text": "Think, Ray. What was she doing behind his back, and what did she leave at the top of his stairs?",
+		"file": "res://assets/voice/ray/8379c01c7250.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9480559df0bd": {
+		"speaker": "ray",
+		"text": "Pearl Danvers. She sold him the fake, then she sold him the fall.",
+		"file": "res://assets/voice/ray/9480559df0bd.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2a2f2b999800": {
+		"speaker": "ray",
+		"text": "It was a fake. The killer wasn't.",
+		"file": "res://assets/voice/ray/2a2f2b999800.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3a1b4e90e1a5": {
+		"speaker": "ray",
+		"text": "Danny's still on the board.",
+		"file": "res://assets/voice/ray/3a1b4e90e1a5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4b5e440a3c6b": {
+		"speaker": "ray",
+		"text": "Hand him three. He likes numbers.",
+		"file": "res://assets/voice/ray/4b5e440a3c6b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"204ef7110a77": {
+		"speaker": "ray",
+		"text": "Six. Sure. This whole town's full of optimists.",
+		"file": "res://assets/voice/ray/204ef7110a77.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b77d6217180f": {
+		"speaker": "ray",
+		"text": "Ten to four.",
+		"file": "res://assets/voice/ray/b77d6217180f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"520951b59f61": {
+		"speaker": "ray",
+		"text": "There's good news?",
+		"file": "res://assets/voice/ray/520951b59f61.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c9a80f2bbd32": {
+		"speaker": "ray",
+		"text": "The river's dry this time of year.",
+		"file": "res://assets/voice/ray/c9a80f2bbd32.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6696b694b8a3": {
+		"speaker": "ray",
+		"text": "Then it's closed. Why call me?",
+		"file": "res://assets/voice/ray/6696b694b8a3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5db22d269c6b": {
+		"speaker": "doyle",
+		"text": "Ray. Otis says your Oscar turned up in a water tank.",
+		"file": "res://assets/voice/doyle/5db22d269c6b.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"0d01193a33e3": {
+		"speaker": "doyle",
+		"text": "The assistant? Hollywood. Everybody's auditioning. Anything on Reyes?",
+		"file": "res://assets/voice/doyle/0d01193a33e3.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"6b45d76010a1": {
+		"speaker": "doyle",
+		"text": "I see the captain at eight. I'd like to hand him one thing that's finished.",
+		"file": "res://assets/voice/doyle/6b45d76010a1.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"bb9335f1b245": {
+		"speaker": "doyle",
+		"text": "Go home at six, Ray. That's an order dressed up as advice. *click*",
+		"file": "res://assets/voice/doyle/bb9335f1b245.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"52462fbd352e": {
+		"speaker": "otis",
+		"text": "Ray. You want the good news or the river?",
+		"file": "res://assets/voice/otis/52462fbd352e.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"97298ad9855e": {
+		"speaker": "otis",
+		"text": "No. LA River, Elysian Valley, under the Fletcher Drive bridge. Delivery rider, twenty-four, Owen Tate. Down in the channel.",
+		"file": "res://assets/voice/otis/97298ad9855e.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"7008166b525a": {
+		"speaker": "otis",
+		"text": "That's how they saw him. Uniforms already cuffed a fella from the camp by the bridge. They call him Preacher. The kid's bike was at his tent.",
+		"file": "res://assets/voice/otis/7008166b525a.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"c5f700ceef57": {
+		"speaker": "otis",
+		"text": "Because the uniforms are happy. When uniforms are happy at four in the morning, somebody ought to check.",
+		"file": "res://assets/voice/otis/c5f700ceef57.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"ed7f2647599a": {
+		"speaker": "otis",
+		"text": "And Ray? Preacher's Army. He says he'll only talk to somebody who's been somewhere.",
+		"file": "res://assets/voice/otis/ed7f2647599a.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"c08b93e436b8": {
+		"speaker": "ray",
+		"text": "That's what she was doing. I need where she was.",
+		"file": "res://assets/voice/ray/c08b93e436b8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fa3f4c1b92f7": {
+		"speaker": "ray",
+		"text": "That's where she was. First, why.",
+		"file": "res://assets/voice/ray/fa3f4c1b92f7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"bb5cb51e2b99": {
+		"speaker": "ray",
+		"text": "That proves Lyle was sold. Who sold him?",
+		"file": "res://assets/voice/ray/bb5cb51e2b99.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4bb51da7a14a": {
+		"speaker": "ray",
+		"text": "Fakes on the wall. Whose hand?",
+		"file": "res://assets/voice/ray/4bb51da7a14a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f837fc0b2699": {
+		"speaker": "ray",
+		"text": "That's when he called her. I need why.",
+		"file": "res://assets/voice/ray/f837fc0b2699.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6040877d07fa": {
+		"speaker": "ray",
+		"text": "That's what she did after. I need the top of the stairs.",
+		"file": "res://assets/voice/ray/6040877d07fa.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"199465beffb6": {
+		"speaker": "ray",
+		"text": "That's how he went down. Whose hands?",
+		"file": "res://assets/voice/ray/199465beffb6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8edaae718831": {
+		"speaker": "ray",
+		"text": "Small heels. Half of Hollywood wears small heels.",
+		"file": "res://assets/voice/ray/8edaae718831.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7373d64c0df5": {
+		"speaker": "ray",
+		"text": "A torn ear. Torn where?",
+		"file": "res://assets/voice/ray/7373d64c0df5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f15cd034f1e1": {
+		"speaker": "ray",
+		"text": "That's Charlie's eyes and ears. I want something Pearl left behind.",
+		"file": "res://assets/voice/ray/f15cd034f1e1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"cce9cb6932fd": {
+		"speaker": "ray",
+		"text": "That proves the robbery was a show. I need who killed him.",
+		"file": "res://assets/voice/ray/cce9cb6932fd.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0eba374b6c02": {
+		"speaker": "ray",
+		"text": "That's a lie about her pictures. I'm pinning the truth about Gus.",
+		"file": "res://assets/voice/ray/0eba374b6c02.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"61c451a650ff": {
+		"speaker": "ray",
+		"text": "That's her story. It's had three drafts.",
+		"file": "res://assets/voice/ray/61c451a650ff.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"58fdfac53e2b": {
+		"speaker": "ray",
+		"text": "That's Pryce's business. This one was personal.",
+		"file": "res://assets/voice/ray/58fdfac53e2b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a09cc6554a9e": {
+		"speaker": "ray",
+		"text": "That's Morty. Morty didn't do it.",
+		"file": "res://assets/voice/ray/a09cc6554a9e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9eb9b2440a8c": {
+		"speaker": "ray",
+		"text": "That's when, and why he was up there. The board wants who.",
+		"file": "res://assets/voice/ray/9eb9b2440a8c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"515022b4faa6": {
+		"speaker": "ray",
+		"text": "That's a man who wanted Gus out. Gus went out another way.",
+		"file": "res://assets/voice/ray/515022b4faa6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e0214639f3cc": {
+		"speaker": "ray",
+		"text": "Gus's key ring. A door key, a desk key, and a little brass one, like the key Pearl wears.",
+		"file": "res://assets/voice/ray/e0214639f3cc.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3f9d2e4b1a54": {
+		"speaker": "ray",
+		"text": "A little gold star, five points, the post bent back. Torn out of somebody's ear.",
+		"file": "res://assets/voice/ray/3f9d2e4b1a54.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
 	}
 }

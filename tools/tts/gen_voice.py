@@ -108,8 +108,13 @@ PRONOUNCE = {
     "6:12 p.m.": "six-twelve p.m.",
     "12:14 a.m.": "twelve-fourteen a.m.",
     "1:10 a.m.": "one-ten a.m.",
+    "No. 734": "number seven thirty-four",
+    "number 734": "number seven thirty-four",
+    "8 x 10": "eight by ten",
+    "911": "nine one one",
+    "$40": "forty dollars",
 }
-ACRONYMS = {"LAPD", "LA", "LAX", "DA", "IA", "ID", "TV", "UV", "GPS", "ER", "SD", "DUI", "CSI"}    ## all-caps words said letter by letter
+ACRONYMS = {"LAPD", "LA", "LAX", "DA", "IA", "ID", "TV", "UV", "GPS", "ER", "SD", "DUI", "CSI", "IRS"}    ## all-caps words said letter by letter
 
 
 def spoken(text):
@@ -117,8 +122,28 @@ def spoken(text):
     text = " ".join(re.sub(r"\*[^*]*\*|\([^)]*\)", " ", text).split())
     for k in sorted(PRONOUNCE, key=len, reverse=True):
         text = text.replace(k, PRONOUNCE[k])
+    # years said the way people say them: 1954 is "nineteen fifty-four", 2011 "twenty eleven"
+    text = re.sub(r"(?<![\d$.,:])\b(19[0-9]{2}|20[0-2][0-9])\b(?![\d,.:]\d)", lambda m: _year(int(m.group(1))), text)
     # signs and stamps written in capitals (BLUE NOTE, PAID, HOMICIDE) are words, not letters to spell out
     return re.sub(r"\b[A-Z]{2,}\b", lambda m: m.group(0) if m.group(0) in ACRONYMS else m.group(0).capitalize(), text)
+
+
+_ONES = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen " \
+        "seventeen eighteen nineteen".split()
+_TENS = "_ _ twenty thirty forty fifty sixty seventy eighty ninety".split()
+
+
+def _two(n):
+    return _ONES[n] if n < 20 else _TENS[n // 10] + ("-" + _ONES[n % 10] if n % 10 else "")
+
+
+def _year(y):
+    hi, lo = divmod(y, 100)
+    if lo == 0:
+        return _two(hi) + " hundred"
+    if hi == 20 and lo < 10:
+        return "two thousand " + _ONES[lo]
+    return _two(hi) + " " + ("oh-" + _ONES[lo] if lo < 10 else _two(lo))
 
 
 def line_id(speaker, text):

@@ -78,7 +78,7 @@ is the `2_blend` preset, am_onyx 0.7 + am_fenrir 0.3). Lines to voice are listed
 more and cast new characters: `docs/voice-recording.md`. `Main.narrate()` is Ray too; other characters pass a speaker id to
 `Main.voice()` (Doyle: `"doyle"`), plus `phone = true` for lines heard over a telephone, which plays the clip through the
 Phone bus (Phone > Voice: band-limited to 350-3,200 Hz, light overdrive, +10 dB, limited at -1 dBFS). The cast and its settings: `docs/voice-recording.md`. So far every spoken line in
-Cases 1 and 2 is voiced (Ogg Vorbis clips; spoken-form fixes in `PRONOUNCE`), and the playthrough checks it.
+Cases 1 to 3 is voiced (Ogg Vorbis clips; spoken-form fixes in `PRONOUNCE`), and the playthrough checks it.
 
 ## 2. Game state, flags and saves
 

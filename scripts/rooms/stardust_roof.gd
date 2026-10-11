@@ -154,7 +154,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 
 func _charlie(line: String) -> void:
-	await main.voice(line, speaker_at("charlie"), Case3.CHARLIE_COLOR)
+	await main.voice(line, speaker_at("charlie"), Case3.CHARLIE_COLOR, "charlie")
 
 
 func _maybe_hint() -> void:
