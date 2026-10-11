@@ -268,7 +268,8 @@ run about 3 minutes. **Run only the case a change touches.** Run the full playth
 cases or shared code (`main.gd`, `ui.gd`, `game.gd`, `room.gd`, `hotspot.gd`, `player.gd`, the shaders, the
 playthrough itself) or a case's clues or flags (then re-run `tests/capture_case_starts.tscn` too).
 Add `-- --shots` (and leave out `--headless`) to also save screenshots of each room, the drives, the phone,
-the device screens and the boards to `user://`.
+the device screens and the boards to `user://`. The web page screenshots in `docs/screenshots/` come from
+`tests/action_shots.tscn` (in a window, about 3 minutes), which plays the same run and stops on the moments listed in its `SHOTS` table.
 
 The title screen's SKIP TO row starts Case 2, 3, 4 or 5 with every earlier case fully solved. Its starting states
 in `scripts/case_starts.gd` are captured from the playthrough by `tests/capture_case_starts.tscn`; re-run that after

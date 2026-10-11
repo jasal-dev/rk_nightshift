@@ -443,7 +443,14 @@ cases depend on. It ends with `PLAYTHROUGH OK` and exit code 0, or names the ste
 Godot_v4.7.2-stable_win64_console.exe --headless --path . res://tests/playthrough.tscn
 Godot_v4.7.2-stable_win64_console.exe --path . res://tests/playthrough.tscn -- --shots   # screenshots to user://
 Godot_v4.7.2-stable_win64_console.exe --headless --path . res://tests/playthrough.tscn -- --case 3   # Case 3 only
+Godot_v4.7.2-stable_win64_console.exe --path . res://tests/action_shots.tscn   # web page screenshots to docs/screenshots/
 ```
+
+`tests/action_shots.gd` extends the playthrough and saves 1920x1080 "action shots" for the web page to
+`docs/screenshots/` (a `.gdignore` keeps Godot from importing them). Its `SHOTS` table names each moment by room, case,
+a spoken line or menu option it contains, or an open close-up (`ui`); the moment is held (no click, no answer) until it is
+taken, with the cursor, hover text, toasts and inventory bar hidden. It also takes `--case N`, and `--log` prints every
+line, menu and close-up as it comes up, which is the easy way to pick new moments. Run it in a window, not headless.
 
 `--case N` runs `_caseN()` alone. Case 1 starts with New Game and stops when its case card comes up; Cases 2 to 5
 press the title's SKIP TO button (so they start from `scripts/case_starts.gd`, see "Case jumps" below) and stop

@@ -44,3 +44,6 @@ __pycache__/
 *.swp
 .DS_Store
 Thumbs.db
+
+# Web page screenshots (made by tests/action_shots.tscn, kept local)
+docs/screenshots/*.png
