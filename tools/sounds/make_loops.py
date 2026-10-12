@@ -13,6 +13,10 @@ assets/sounds/knock_right.wav  437589 3-knock-101 (WakaProduction2018, CC0): one
                              out as Danny's knock, two slow and three fast: knocks at 0, 0.6, 1.2, 1.36 and 1.52 s.
 assets/sounds/knock_wrong.wav  the same knock as an ordinary knock on a door, three even knocks 0.32 s apart.
                              Both mono, 16-bit, 44.1 kHz, peaks at -3 dBFS, each knock a touch different in level.
+assets/sounds/hang_up.wav    273213 hang-up-tone (E_Vice, CC0): the first second of the 24 s tone, a 5 ms fade in and
+                             a 0.3 s fade out, peak -6 dBFS.
+assets/sounds/text_tone.wav  636401 text-tone-5 (dVidrio02, CC0): the chime without its 0.26 s of leading silence or
+                             its long quiet tail (0.24 s to 1.5 s), a 0.2 s fade out, peak -3 dBFS.
 """
 import os
 import wave
@@ -110,9 +114,26 @@ def knocks():
     write(os.path.join(OUT, "knock_wrong.wav"), lay([0, 0.32, 0.64], [1.0, 0.9, 0.95]), sr)
 
 
+def _cut(x, sr, start, end, fade_in, fade_out, peak_db):
+    y = x[int(start * sr): int(end * sr)].copy()
+    a, b = int(fade_in * sr), int(fade_out * sr)
+    if a:
+        y[:a] *= np.linspace(0, 1, a, dtype=np.float32)
+    y[-b:] *= np.linspace(1, 0, b, dtype=np.float32)
+    return y * (10 ** (peak_db / 20) / float(np.abs(y).max()))
+
+
+def tones():
+    x, sr = read_compressed(os.path.join(SRC, "273213__e_vice__hang-up-tone.wav"))    # 32-bit float: PyAV reads it
+    write(os.path.join(OUT, "hang_up.wav"), _cut(x, sr, 0.0, 1.0, 0.005, 0.3, -6), sr)
+    x, sr = read_compressed(os.path.join(SRC, "636401__dvidrio02__text-tone-5.mp3"))
+    write(os.path.join(OUT, "text_tone.wav"), _cut(x, sr, 0.24, 1.5, 0.0, 0.2, -3), sr)
+
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     rain()
     footsteps()
     knocks()
+    tones()
     print("wrote", OUT)

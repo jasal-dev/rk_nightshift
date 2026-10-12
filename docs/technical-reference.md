@@ -70,7 +70,9 @@ licences that allow selling the game (CC0, CC BY, bought), and CC BY ones go in 
 One-shot effects are `Audio.sfx(id)` (ids and levels in `Audio.SFX`); `Main.say(text, sfx)` and `narrate(text, sfx)`
 play one with a line written as a sound and keep the line up for it. The knocks: `knock_wrong` (an ordinary knock: the
 Blue Note door before Ray knows the rhythm, Devin's door) and `knock_right` (Danny's knock, two slow and three fast: the
-Blue Note and Vance's green door), cut by `tools/sounds/make_loops.py` from one knock of Freesound 437589 (CC0).
+Blue Note and Vance's green door), cut by `tools/sounds/make_loops.py` from one knock of Freesound 437589 (CC0). A text arriving
+on Ray's phone (`Main.text_message`, not outgoing) plays `text_tone`; a phone line containing `"*click*"` is the caller
+hanging up, and `hang_up` (the first second of the hang-up tone) plays after their words, or with a bare `"*click*"`.
 
 ### Voice
 

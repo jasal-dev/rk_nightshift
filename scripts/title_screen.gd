@@ -223,24 +223,25 @@ func _credits_panel() -> PanelContainer:
 
 
 static func music_credits(font: Font, head_font: Font, font_size: int, col: Color, head_col: Color) -> VBoxContainer:
-	## MUSIC over the five attributions and SOUND over the Freesound ones, two to a row, each block as written (line
-	## breaks kept). Also the last of the end credits (GameUI.show_music_credits).
+	## MUSIC over the five attributions, two to a row, and SOUND over the Freesound ones, three to a row (they're
+	## short; a little smaller), each block as written (line breaks kept). Also the last of the end credits (GameUI.show_music_credits).
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 16)
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	for section: Array in [["MUSIC", Audio.MUSIC_CREDITS], ["SOUND", Audio.SOUND_CREDITS]]:
+	for section: Array in [["MUSIC", Audio.MUSIC_CREDITS, 2], ["SOUND", Audio.SOUND_CREDITS, 3]]:
 		box.add_child(_text_label(String(section[0]), head_font, font_size, head_col))
 		var blocks: Array = section[1]
+		var per_row: int = section[2]
 		var row: HBoxContainer = null
 		for i in blocks.size():
-			if i % 2 == 0:
+			if i % per_row == 0:
 				row = HBoxContainer.new()
 				row.alignment = BoxContainer.ALIGNMENT_CENTER
 				row.add_theme_constant_override("separation", 60)
 				row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 				box.add_child(row)
-			var l := _text_label(String(blocks[i]), font, font_size, col)
-			l.custom_minimum_size = Vector2(640, 0)
+			var l := _text_label(String(blocks[i]), font, font_size - (3 if per_row > 2 else 0), col)
+			l.custom_minimum_size = Vector2(1240.0 / per_row, 0)
 			row.add_child(l)
 	return box
 

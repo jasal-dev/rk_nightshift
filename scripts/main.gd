@@ -627,6 +627,8 @@ func drive_end() -> void:
 func text_message(text: String, outgoing: bool, contact := "") -> void:
 	## A text on Ray's phone. Stays on screen until drive_end() or ui.hide_phone().
 	ui.show_phone_text(text, outgoing, contact)
+	if not outgoing:
+		Audio.sfx("text_tone")
 	await _hold(clampf(1.2 + text.length() * 0.05, 1.8, 5.0))
 
 
@@ -648,7 +650,12 @@ func voice(text: String, anchor: Vector2, color := Color(0.6, 0.85, 1.0), speake
 func _show_text(text: String, anchor: Vector2, color: Color, speaker := "", phone := false, sfx := "") -> void:
 	## With a speaker whose line has a recorded clip (Audio.voice_clip), the clip plays and the line stays up at least
 	## as long as it; a click cuts both. Lines without a clip are text only. An `sfx` plays with the line and keeps it up
-	## for its length too (a click cuts the line, not the sound).
+	## for its length too (a click cuts the line, not the sound). A phone line with "*click*" in it is the caller hanging
+	## up: the hang-up tone plays after their words (or instead of them, for a bare "*click*").
+	var hang_up := phone and text.contains("*click*")
+	if hang_up and text.strip_edges() == "*click*":
+		sfx = "hang_up"
+		hang_up = false
 	ui.set_hover("", Vector2.ZERO)
 	ui.show_speech(text, anchor, color)
 	var clip: AudioStream = Audio.voice_clip(speaker, text) if speaker != "" else null
@@ -660,6 +667,8 @@ func _show_text(text: String, anchor: Vector2, color: Color, speaker := "", phon
 	await _hold(clampf(0.9 + text.length() * 0.055, 1.6, 6.5), true, at_least)
 	if clip:
 		Audio.stop_voice()
+	if hang_up:
+		Audio.sfx("hang_up")
 	ui.hide_speech()
 
 
