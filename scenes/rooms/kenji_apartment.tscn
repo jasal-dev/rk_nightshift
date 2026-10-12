@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
 [ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_devin_fridge.png" id="ov_devin_fridge"]
 [ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_devin_couch.png" id="ov_devin_couch"]
+[ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_park.png" id="ov_park"]
 [ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_couch.png" id="occ_couch"]
 [ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_table.png" id="occ_table"]
 [ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_dining.png" id="occ_dining"]
@@ -41,6 +42,12 @@ texture = ExtResource("ov_devin_couch")
 centered = false
 position = Vector2(645, 752)
 offset = Vector2(-154, -342)
+
+[node name="Park" type="Sprite2D" parent="Actors"]
+texture = ExtResource("ov_park")
+centered = false
+position = Vector2(455, 594)
+offset = Vector2(-49, -214)
 
 [node name="Couch" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_couch")

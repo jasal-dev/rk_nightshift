@@ -4,7 +4,8 @@ a camera bag on the hook by the door and wet sneakers on the mat. The round-corn
 Kenji's door stands open on his desk, a Dodgers pennant and a framed certificate; Devin's door is shut.
 
 Devin has two poses, both overlays the game shows or hides: leaning on the fridge, arms folded (until Ray gets his
-consent to search), then on the couch, staring at the dark TV."""
+consent to search), then on the couch, staring at the dark TV. Officer Park is a third overlay, just inside the front
+door, shown only while she comes up the stairs for Devin."""
 import math, random
 import numpy as np
 from scene3d import *
@@ -18,6 +19,7 @@ FD0, FD1 = -4.3, -3.3        # front door
 COUCH = (-2.05, -0.55)       # couch centre (x, z), facing the TV on the left wall
 DINING = (1.75, 1.35)        # dining table centre
 FRIDGE = (3.3, -3.0)         # fridge centre on the floor
+PARK = (-3.75, -2.75)        # Officer Park, on the mat just inside the front door (the arrest)
 
 
 def build(hide=()):
@@ -252,6 +254,9 @@ def build(hide=()):
     if 'devin_couch' not in hide:
         npc.cast(S, 'devin', dict(npc.SEATED, lsp=20, le=60, lin=30, rsp=22, re=64, rin=30, lean=14, hp=8),
                  (cx - 0.02, 0.02, cz + 0.05), yaw=-90, scale=0.96, tag='devin_couch')
+    if 'park' not in hide:
+        npc.cast(S, 'park', dict(npc.STAND, lsp=28, le=40, lin=24, rsp=4, re=18, hp=4, hy=12),
+                 (PARK[0], 0, PARK[1]), yaw=24, scale=0.94, tag='park')
 
     # ---------------------------------------------------------------- lights
     S.light((lx, 1.5, lz), (255, 200, 140), power=4.0, range=8, shadow=False, vol=0.15)             # floor lamp
@@ -303,8 +308,8 @@ def build(hide=()):
         },
         hotspot_order=['photos', 'front_door', 'devin_door', 'kenji_desk', 'certificate', 'pennant', 'dashcam_box',
                        'camera_bag', 'sneakers', 'tv', 'dining', 'sink', 'fridge', 'freezer', 'laptop', 'devin_couch', 'devin'],
-        overlays=['devin_fridge', 'devin_couch'],
-        overlay_bases={'devin_couch': (cx + 0.45, cz + 1.02)},         # just in front of the couch's sprite
+        overlays=['devin_fridge', 'devin_couch', 'park'],
+        overlay_bases={'devin_couch': (cx + 0.45, cz + 1.02), 'park': PARK},         # just in front of the couch's sprite
         occluders={'couch': (cx + 0.45, cz + 1.0), 'table': (cx - 1.1, cz + 0.65), 'dining': (DINING[0], DINING[1] + 0.95)},
         obstacles=[(cx, cz - 0.6, 0.55), (cx, cz + 0.6, 0.55), (cx - 1.1, cz - 0.35, 0.4), (cx - 1.1, cz + 0.35, 0.4),
                    (DINING[0] - 0.45, DINING[1], 0.7), (DINING[0] + 0.45, DINING[1], 0.7), (DINING[0] + 1.05, DINING[1] + 0.1, 0.3),

@@ -5,6 +5,7 @@ extends Room
 ## Puzzle 4.3: the freezer: a bag of frozen peas, taped shut. Using it on the sink ends the scene:
 ## the dashcam and the cards, Devin asks for a lawyer, Park takes him down the stairs.
 ## Devin is part of the set in two poses (overlays): at the fridge until search_consent, then on the couch.
+## Park is an overlay at the front door, shown only during the arrest.
 
 ## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
 const VERBS := {
@@ -14,6 +15,7 @@ const VERBS := {
 
 @onready var devin_fridge: Sprite2D = $Devin_fridge
 @onready var devin_couch: Sprite2D = $Actors/Devin_couch
+@onready var park: Sprite2D = $Actors/Park
 var _wander := 0         ## actions after consent without opening the freezer (a hint after a few)
 
 
@@ -25,6 +27,7 @@ func _ready() -> void:
 func _sync() -> void:
 	devin_fridge.visible = not Game.flag("search_consent")
 	devin_couch.visible = Game.flag("search_consent") and not Game.flag("devin_arrested")
+	park.visible = false
 	hotspot("devin").enabled = devin_fridge.visible
 	hotspot("devin_couch").enabled = devin_couch.visible
 
@@ -323,6 +326,9 @@ func open_peas() -> void:
 	await main.player.play_action("use")
 	await main.say("Park, it's Kessler. Silver Lake. Come up the stairs.")
 	await main.wait(1.2)
+	await main.ui.fade_to(1.0, 0.4)
+	park.visible = true
+	await main.ui.fade_to(0.0, 0.4)
 	var door := speaker_at("front_door")
 	await main.voice("I was taking the Ota car down the hill. Silver Lake was on the way.", door, Case2.PARK_COLOR, "park")
 	await main.voice("Devin Clark? Stand up for me.", door, Case2.PARK_COLOR, "park")
