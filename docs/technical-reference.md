@@ -67,6 +67,11 @@ pitched up by `Player.STEP_PITCH` to his two steps a second. Both loops are cut 
 import settings (`edit/loop_mode=2`). Every sound's source and licence is in `assets/sounds/LICENSES.md`; only
 licences that allow selling the game (CC0, CC BY, bought), and CC BY ones go in `Audio.SOUND_CREDITS`.
 
+One-shot effects are `Audio.sfx(id)` (ids and levels in `Audio.SFX`); `Main.say(text, sfx)` and `narrate(text, sfx)`
+play one with a line written as a sound and keep the line up for it. The knocks: `knock_wrong` (an ordinary knock: the
+Blue Note door before Ray knows the rhythm, Devin's door) and `knock_right` (Danny's knock, two slow and three fast: the
+Blue Note and Vance's green door), cut by `tools/sounds/make_loops.py` from one knock of Freesound 437589 (CC0).
+
 ### Voice
 
 `Main.say()` looks up a recorded clip for the exact line (`Audio.voice_clip("ray", text)`: the id is the first 12 hex

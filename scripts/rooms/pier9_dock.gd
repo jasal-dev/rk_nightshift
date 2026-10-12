@@ -246,7 +246,7 @@ func _maybe_hint() -> void:
 
 func _knock() -> void:
 	await main.player.play_action("use")
-	await main.say("*knock... knock... knockknockknock*")
+	await main.say("*knock... knock... knockknockknock*", "knock_right")
 	await main.wait(0.8)
 	await main.voice("...That's Danny's knock. He came every Tuesday to pay.", TINY_AT, TINY_COLOR, "tiny")
 	await main.voice("Knocked like that every time, like he was playing it.", TINY_AT, TINY_COLOR, "tiny")

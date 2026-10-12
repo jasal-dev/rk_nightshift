@@ -28,8 +28,14 @@ const MUSIC_CREDITS := [
 const SOUND_CREDITS := [
 	"\"Raining in my house\" by mandaki\nfreesound.org/s/695793 · CC0",
 	"\"Footsteps ground\" by emilgasi\nfreesound.org/s/685287 · CC0",
+	"\"3 Knock - 101\" by WakaProduction2018\nfreesound.org/s/437589 · CC0",
 ]
 const AMBIENCE := {"rain": ["res://assets/sounds/rain.wav", 0.0]}    ## id: [file, level in dB]
+## One-shot effects for sfx(): id: [file, level in dB]. Main.say(text, sfx) plays one with a line.
+const SFX := {
+	"knock_right": ["res://assets/sounds/knock_right.wav", -2.0],     ## Danny's knock: two slow, three fast
+	"knock_wrong": ["res://assets/sounds/knock_wrong.wav", -2.0],     ## an ordinary knock on a door
+}
 const VOICE_LINES := "res://assets/voice/lines.json"     ## id: {speaker, text, file, voice}
 const SETTINGS := "user://settings.cfg"     ## the same file as Main.SETTINGS
 const FADE := 2.5                           ## default crossfade, seconds
@@ -204,6 +210,22 @@ func _add_phone_bus() -> void:
 	limit.ceiling_db = -1.0
 	for e: AudioEffect in [hp, lp, grit, lift, limit]:
 		AudioServer.add_bus_effect(i, e)
+
+
+func sfx(id: String) -> float:
+	## Play a one-shot effect (a key of SFX) on the SFX bus; returns its length in seconds (0 if unknown).
+	if not SFX.has(id):
+		push_warning("Audio.sfx: no effect '%s'" % id)
+		return 0.0
+	var a: Array = SFX[id]
+	var p := AudioStreamPlayer.new()
+	p.stream = load(String(a[0]))
+	p.volume_db = float(a[1])
+	p.bus = "SFX"
+	add_child(p)
+	p.finished.connect(p.queue_free)
+	p.play()
+	return p.stream.get_length()
 
 
 func set_voice_volume(v: float) -> void:

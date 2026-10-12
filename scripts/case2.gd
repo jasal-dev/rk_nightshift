@@ -81,7 +81,7 @@ static func car_menu(main: Node, here: String) -> void:
 static func doorstep(main: Node) -> void:
 	## Up a flight of wet outdoor steps, in the dark. Devin opens the door.
 	var door := Vector2(960, 560)
-	await main.narrate("*knock knock knock*")
+	await main.narrate("*knock knock knock*", "knock_wrong")
 	await main.wait(0.8)
 	await main.voice("It's two in the morning.", door, DEVIN_COLOR, "devin")
 	await main.narrate("Detective Kessler, LAPD. Does Kenji Ota live here?")

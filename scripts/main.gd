@@ -592,9 +592,9 @@ func clue(id: String) -> void:
 		ui.toast("Notebook updated.")
 
 
-func narrate(text: String) -> void:
-	## Ray's voice-over, for scenes where he isn't on screen (the drive, the murder board).
-	await _show_text(text, Vector2(960, 1000), PLAYER_COLOR, "ray")
+func narrate(text: String, sfx := "") -> void:
+	## Ray's voice-over, for scenes where he isn't on screen (the drive, the murder board). `sfx` as for say().
+	await _show_text(text, Vector2(960, 1000), PLAYER_COLOR, "ray", false, sfx)
 
 
 func drive_begin() -> void:
@@ -630,11 +630,12 @@ func text_message(text: String, outgoing: bool, contact := "") -> void:
 	await _hold(clampf(1.2 + text.length() * 0.05, 1.8, 5.0))
 
 
-func say(text: String) -> void:
-	## The detective says a line. Await it.
+func say(text: String, sfx := "") -> void:
+	## The detective says a line. Await it. `sfx` (an Audio.SFX id, e.g. "knock_right") plays with it, for a line that
+	## is a sound written out ("*knock knock*"); the line stays up until the sound has played.
 	player.set_talking(true)
 	var anchor := player.global_position - Vector2(0, player.height() + 12)
-	await _show_text(text, anchor, PLAYER_COLOR, "ray")
+	await _show_text(text, anchor, PLAYER_COLOR, "ray", false, sfx)
 	player.set_talking(false)
 
 
@@ -644,15 +645,19 @@ func voice(text: String, anchor: Vector2, color := Color(0.6, 0.85, 1.0), speake
 	await _show_text(text, anchor, color, speaker, phone)
 
 
-func _show_text(text: String, anchor: Vector2, color: Color, speaker := "", phone := false) -> void:
+func _show_text(text: String, anchor: Vector2, color: Color, speaker := "", phone := false, sfx := "") -> void:
 	## With a speaker whose line has a recorded clip (Audio.voice_clip), the clip plays and the line stays up at least
-	## as long as it; a click cuts both. Lines without a clip are text only.
+	## as long as it; a click cuts both. Lines without a clip are text only. An `sfx` plays with the line and keeps it up
+	## for its length too (a click cuts the line, not the sound).
 	ui.set_hover("", Vector2.ZERO)
 	ui.show_speech(text, anchor, color)
 	var clip: AudioStream = Audio.voice_clip(speaker, text) if speaker != "" else null
 	if clip:
 		Audio.speak(clip, phone)
-	await _hold(clampf(0.9 + text.length() * 0.055, 1.6, 6.5), true, clip.get_length() + 0.25 if clip else 0.0)
+	var at_least := clip.get_length() + 0.25 if clip else 0.0
+	if sfx != "":
+		at_least = maxf(at_least, Audio.sfx(sfx) + 0.2)
+	await _hold(clampf(0.9 + text.length() * 0.055, 1.6, 6.5), true, at_least)
 	if clip:
 		Audio.stop_voice()
 	ui.hide_speech()

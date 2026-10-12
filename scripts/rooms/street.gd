@@ -55,7 +55,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.say("Sal's said all he's going to say.")
 			elif not Game.flag("knows_knock"):
 				await main.player.play_action("use")
-				await main.say("*knock knock*")
+				await main.say("*knock knock*", "knock_wrong")
 				await main.wait(0.8)
 				await main.say("Nothing. Whoever's in there isn't expecting company. Not my kind.")
 			else:
@@ -208,7 +208,7 @@ func _phone_call() -> void:
 func _talk_to_sal() -> void:
 	var door := Vector2(496, 490)
 	await main.player.play_action("use")
-	await main.say("*knock... knock... knockknockknock*")
+	await main.say("*knock... knock... knockknockknock*", "knock_right")
 	await main.wait(0.9)
 	await main.voice("...Danny's knock. Who is this?", door, SAL_COLOR, "sal")
 	var asked := []
