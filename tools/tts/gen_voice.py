@@ -131,8 +131,10 @@ def spoken(text):
         text = text.replace(k, PRONOUNCE[k])
     # years said the way people say them: 1954 is "nineteen fifty-four", 2011 "twenty eleven"
     text = re.sub(r"(?<![\d$.,:])\b(19[0-9]{2}|20[0-2][0-9])\b(?![\d,.:]\d)", lambda m: _year(int(m.group(1))), text)
-    # signs and stamps written in capitals (BLUE NOTE, PAID, HOMICIDE) are words, not letters to spell out
-    return re.sub(r"\b[A-Z]{2,}\b", lambda m: m.group(0) if m.group(0) in ACRONYMS else m.group(0).capitalize(), text)
+    # signs and stamps written in capitals (BLUE NOTE, PAID, HOMICIDE) are words, not letters to spell out; acronyms
+    # are spelled out, dotted (L.A.P.D), because Kokoro reads some bare ones as words ("LAPD" came out "lapt", "LAX" "lax")
+    return re.sub(r"\b[A-Z]{2,}\b", lambda m: ".".join(m.group(0)) if m.group(0) in ACRONYMS else m.group(0).capitalize(),
+                  text)
 
 
 _ONES = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen " \

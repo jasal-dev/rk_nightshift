@@ -83,7 +83,8 @@ forbids commercial use (for example Coqui XTTS's CPML) or one that needs a cloud
    When a word comes out wrong, don't change the game's text: add it to `PRONOUNCE` in the generator,
    {game text fragment: spoken text}, applied before rendering (the id still comes from the game text), then re-render
    the affected rows (delete their clips, or `--force`). Words in capitals (signs, stamps: BLUE NOTE, PAID) are read
-   as words unless they're in `ACRONYMS` (LAPD and the like), which are spelled out.
+   as words unless they're in `ACRONYMS` (LAPD, LAX, DA and the like), which are spelled out: the generator
+   dots them (L.A.P.D), because Kokoro reads some bare acronyms as words ("LAPD" came out "lapt").
 6. **Test** (CLAUDE.md): clips and lines alone are assets, so run the case the lines belong to
    (`tests/playthrough.tscn -- --case N`). If you change `main.gd`, `ui.gd`, `audio.gd` or other shared code, run the
    full playthrough. The playthrough checks that Ray's first line still has a clip, and that no cast speaker's line in
