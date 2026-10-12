@@ -174,7 +174,7 @@ func _shah(line: String) -> void:
 
 
 func _preacher(line: String) -> void:
-	await main.voice(line, speaker_at("preacher"), Case4.PREACHER_COLOR)
+	await main.voice(line, speaker_at("preacher"), Case4.PREACHER_COLOR, "preacher")
 
 
 func _maybe_hint() -> void:

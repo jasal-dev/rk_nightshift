@@ -308,7 +308,7 @@ func _new_game() -> void:
 
 
 func _check_voiced(n: int) -> void:
-	## Every line a cast speaker said in a fully voiced case (Cases 1 to 3) in a fully voiced case had a clip
+	## Every line a cast speaker said in a fully voiced case (Cases 1 to 4) in a fully voiced case had a clip
 	## (docs/voice-recording.md). Lines that are only sound effects in asterisks ("*knock knock*") and silences ("...") are never voiced.
 	var spoken := RegEx.create_from_string("[A-Za-z0-9]")     # "..." (a silence) has nothing to say
 	var missing := Audio.unvoiced.filter(func(t: String):
@@ -363,7 +363,9 @@ func _run() -> void:
 			3:
 				await _case3()
 				_check_voiced(3)
-			4: await _case4()
+			4:
+				await _case4()
+				_check_voiced(4)
 			5: await _case5()
 	if _failed:
 		return
@@ -395,6 +397,7 @@ func _full_run() -> void:
 	main._waiting_click = false                         # the "Case 4: Low Water" card, then the drive
 	await expect_room("fletcher_bridge")
 	await _case4()
+	_check_voiced(4)
 	if _failed:
 		return
 	print("Case 4 finished.")

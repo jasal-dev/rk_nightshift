@@ -161,11 +161,11 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 
 func _doss(line: String) -> void:
-	await main.voice(line, speaker_at("doss"), Case4.DOSS_COLOR)
+	await main.voice(line, speaker_at("doss"), Case4.DOSS_COLOR, "doss")
 
 
 func _preacher(line: String) -> void:
-	await main.voice(line, speaker_at("patrol_car"), Case4.PREACHER_COLOR)
+	await main.voice(line, speaker_at("patrol_car"), Case4.PREACHER_COLOR, "preacher")
 
 
 func _maybe_hint() -> void:

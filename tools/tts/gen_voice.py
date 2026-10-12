@@ -113,8 +113,14 @@ PRONOUNCE = {
     "8 x 10": "eight by ten",
     "911": "nine one one",
     "$40": "forty dollars",
+    "Avenue 43": "Avenue forty-three",
+    "A6": "A-six",
+    "$19.99": "nineteen ninety-nine",
+    "District 13": "District thirteen",
+    "8KXD392": "eight, K, X, D, three, nine, two",
+    "4K0": "four, K, zero",
 }
-ACRONYMS = {"LAPD", "LA", "LAX", "DA", "IA", "ID", "TV", "UV", "GPS", "ER", "SD", "DUI", "CSI", "IRS"}    ## all-caps words said letter by letter
+ACRONYMS = {"LAPD", "LA", "LAX", "DA", "IA", "ID", "TV", "UV", "GPS", "ER", "SD", "DUI", "CSI", "IRS", "MP"}    ## all-caps words said letter by letter
 
 
 def spoken(text):

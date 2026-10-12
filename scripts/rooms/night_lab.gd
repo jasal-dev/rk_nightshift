@@ -59,7 +59,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 
 func _ike(line: String) -> void:
-	await main.voice(line, speaker_at("ike"), Case4.IKE_COLOR)
+	await main.voice(line, speaker_at("ike"), Case4.IKE_COLOR, "ike")
 
 
 func _hand_over() -> void:

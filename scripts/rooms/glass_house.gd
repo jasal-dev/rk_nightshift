@@ -138,11 +138,11 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 
 func _courtney(line: String) -> void:
-	await main.voice(line, speaker_at("courtney"), Case4.COURTNEY_COLOR)
+	await main.voice(line, speaker_at("courtney"), Case4.COURTNEY_COLOR, "courtney")
 
 
 func _andre(line: String) -> void:
-	await main.voice(line, speaker_at("andre"), Case4.ANDRE_COLOR)
+	await main.voice(line, speaker_at("andre"), Case4.ANDRE_COLOR, "andre")
 
 
 func _maybe_hint() -> void:
@@ -250,17 +250,17 @@ func _gate_camera() -> void:
 		match i:
 			0:
 				main.ui.show_device("Gate camera", [], 0, "1:49 AM. Owen at the gate with two yellow bags, soaked through.", [], false)
-				await main.voice("You're forty minutes late.", CAM_AT, Case4.COURTNEY_COLOR)
-				await main.voice("It's raining, ma'am. The app stacks the orders.", CAM_AT, OWEN_COLOR)
+				await main.voice("You're forty minutes late.", CAM_AT, Case4.COURTNEY_COLOR, "courtney", true)
+				await main.voice("It's raining, ma'am. The app stacks the orders.", CAM_AT, OWEN_COLOR, "owen", true)
 			1:
 				main.ui.show_device("Gate camera", [], 0, "1:51 AM. A man in a dark suit weaves past the valet podium and takes a key off the board himself.", [], false)
-				await main.voice("Sir, I can call you a car...", CAM_AT, Case4.ANDRE_COLOR)
-				await main.voice("I'm fine.", CAM_AT, Case4.CRANE_COLOR)
+				await main.voice("Sir, I can call you a car...", CAM_AT, Case4.ANDRE_COLOR, "andre", true)
+				await main.voice("I'm fine.", CAM_AT, Case4.CRANE_COLOR, "crane", true)
 				main.ui.show_device("Gate camera", [], 0, "1:51 AM. At the gate, Owen steps into his way.", [], false)
-				await main.voice("Hey, man. You can't drive like that.", CAM_AT, OWEN_COLOR)
-				await main.voice("Mind your business, delivery boy.", CAM_AT, Case4.CRANE_COLOR)
-				await main.voice("You're gonna let him drive? Somebody's gonna get killed.", CAM_AT, OWEN_COLOR)
-				await main.voice("Just go.", CAM_AT, Case4.COURTNEY_COLOR)
+				await main.voice("Hey, man. You can't drive like that.", CAM_AT, OWEN_COLOR, "owen", true)
+				await main.voice("Mind your business, delivery boy.", CAM_AT, Case4.CRANE_COLOR, "crane", true)
+				await main.voice("You're gonna let him drive? Somebody's gonna get killed.", CAM_AT, OWEN_COLOR, "owen", true)
+				await main.voice("Just go.", CAM_AT, Case4.COURTNEY_COLOR, "courtney", true)
 				main.clue("clue_warning")
 				main.clue("clue_crane_drunk")
 			2:

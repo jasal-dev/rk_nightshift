@@ -171,7 +171,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 func _crane(line: String) -> void:
 	var at := speaker_at("crane_step" if Game.flag("crane_lie2_broken") else "crane")
-	await main.voice(line, at, Case4.CRANE_COLOR)
+	await main.voice(line, at, Case4.CRANE_COLOR, "crane")
 
 
 func _maybe_hint() -> void:
@@ -335,16 +335,16 @@ func _step3() -> void:
 		await main.say("Owen Tate was twenty-four. He told you not to drive.")
 	await main.wait(0.8)
 	var street := speaker_at("street")
-	await main.voice("Detective. Otis said you've got somebody who deserves these more.", street, Case4.DOSS_COLOR)
+	await main.voice("Detective. Otis said you've got somebody who deserves these more.", street, Case4.DOSS_COLOR, "doss")
 	await main.say("Elliot Crane. Gross vehicular manslaughter, felony hit and run, and whatever the DA calls what he did after. Read him the rest, Officer.")
 	await main.ui.fade_to(1.0, 0.8)
 	Game.set_flag("crane_arrested")
 	_sync()
 	await main.wait(0.8)
 	await main.ui.fade_to(0.0, 0.8)
-	await main.voice("I had a vet in my car for this. A guy who fought in a war.", street, Case4.DOSS_COLOR)
+	await main.voice("I had a vet in my car for this. A guy who fought in a war.", street, Case4.DOSS_COLOR, "doss")
 	await main.wait(0.6)
-	await main.voice("\"Sorry\" doesn't really cover it, huh.", street, Case4.DOSS_COLOR)
+	await main.voice("\"Sorry\" doesn't really cover it, huh.", street, Case4.DOSS_COLOR, "doss")
 	await main.say("Say it anyway. He told me you already did.")
 	await main.wait(0.8)
 	await main.say("The phone on the workbench buzzes again. Nobody answers it.")

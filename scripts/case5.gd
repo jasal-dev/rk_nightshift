@@ -72,7 +72,7 @@ static func phone(main: Node) -> void:
 static func call_ike(main: Node) -> void:
 	await main.player.play_action("use")
 	if Game.flag("heard_take"):
-		await main.voice("Kessler. The drive's in an evidence bag with your name on it. Come get it before you do anything stupid.", CALL_AT, Case4.IKE_COLOR)
+		await main.voice("Kessler. The drive's in an evidence bag with your name on it. Come get it before you do anything stupid.", CALL_AT, Case4.IKE_COLOR, "ike", true)
 	elif Game.flag("knows_password"):
 		if main.room.room_id != "blue_note_bar":
 			await main.say("Not out here. I want to hear it where he played it.")
@@ -81,7 +81,7 @@ static func call_ike(main: Node) -> void:
 	elif Game.flag("clue_takes_hint"):
 		await main.say("I've got three tries and no answer. Not yet.")
 	else:
-		await main.voice("You said one hour, Kessler. Go away so I can do it.", CALL_AT, Case4.IKE_COLOR)
+		await main.voice("You said one hour, Kessler. Go away so I can do it.", CALL_AT, Case4.IKE_COLOR, "ike", true)
 
 
 static func text_brenner(main: Node) -> void:
@@ -131,12 +131,12 @@ static func read_set_list(main: Node) -> void:
 # --- the take (Puzzle 5.3) -------------------------------------------------------------------------------------------
 static func take(main: Node) -> void:
 	var first := not Game.flag("heard_take")
-	await main.voice("Talk to me.", CALL_AT, Case4.IKE_COLOR)
+	await main.voice("Talk to me.", CALL_AT, Case4.IKE_COLOR, "ike", true)
 	await main.say("D, E, C, A, F. Lowercase, I'd guess. Decaf.")
-	await main.voice("(typing) ...One try. Okay. I'm in. Two years of takes, Thursdays mostly.", CALL_AT, Case4.IKE_COLOR)
-	await main.voice("Tuesday. Last upload, eleven fifty-two. He called it \"tues late, practice.\" Eleven minutes.", CALL_AT, Case4.IKE_COLOR)
+	await main.voice("(typing) ...One try. Okay. I'm in. Two years of takes, Thursdays mostly.", CALL_AT, Case4.IKE_COLOR, "ike", true)
+	await main.voice("Tuesday. Last upload, eleven fifty-two. He called it \"tues late, practice.\" Eleven minutes.", CALL_AT, Case4.IKE_COLOR, "ike", true)
 	await main.say("Play it.")
-	await main.voice("I'm not putting this on your phone, Ray. Your phone belongs to the city. I'll play it down the line. Sit somewhere.", CALL_AT, Case4.IKE_COLOR)
+	await main.voice("I'm not putting this on your phone, Ray. Your phone belongs to the city. I'll play it down the line. Sit somewhere.", CALL_AT, Case4.IKE_COLOR, "ike", true)
 	await main.ui.fade_to(1.0, 0.8)
 	main.ui.show_scene(TAKE)
 	await main.ui.fade_to(0.0, 1.2)
@@ -172,16 +172,16 @@ static func take(main: Node) -> void:
 	await main.say("(barely) Then pay him, Walt.")
 	await main.narrate("Three men in a booth, setting the price of a piano player. And Danny ten feet away, playing 'Round Midnight for them like it was any other Tuesday.")
 	await main.narrate("He heard every word. He played one wrong note.")
-	await main.voice("Ray? I heard it too. I wish I hadn't.", CALL_AT, Case4.IKE_COLOR)
-	await main.voice("Here's what I'm doing. I don't touch the original. I image the take to one drive, hashed and logged, in an evidence bag with your name on it.", CALL_AT, Case4.IKE_COLOR)
-	await main.voice("Then I send Takes a preservation letter and they freeze the account until a judge signs a warrant. Nobody deletes it, nobody plays it, not even me.", CALL_AT, Case4.IKE_COLOR)
-	await main.voice("If somebody killed two people for this, they'll come for the cloud next. Let them find a locked door.", CALL_AT, Case4.IKE_COLOR)
+	await main.voice("Ray? I heard it too. I wish I hadn't.", CALL_AT, Case4.IKE_COLOR, "ike", true)
+	await main.voice("Here's what I'm doing. I don't touch the original. I image the take to one drive, hashed and logged, in an evidence bag with your name on it.", CALL_AT, Case4.IKE_COLOR, "ike", true)
+	await main.voice("Then I send Takes a preservation letter and they freeze the account until a judge signs a warrant. Nobody deletes it, nobody plays it, not even me.", CALL_AT, Case4.IKE_COLOR, "ike", true)
+	await main.voice("If somebody killed two people for this, they'll come for the cloud next. Let them find a locked door.", CALL_AT, Case4.IKE_COLOR, "ike", true)
 	await main.say("Change the password first.")
-	await main.voice("Already did. Something only an idiot would guess. Come get it before you do anything stupid.", CALL_AT, Case4.IKE_COLOR)
+	await main.voice("Already did. Something only an idiot would guess. Come get it before you do anything stupid.", CALL_AT, Case4.IKE_COLOR, "ike", true)
 	await main.say("I'll come get it on the way to doing something stupid.")
 	if Game.flag("asked_cabin_clip"):
-		await main.voice("And Ray. Your November card. Wednesday, twelve past one, back seat. A big man in an old raincoat, soaked, wiping down a revolver with a handkerchief.", CALL_AT, Case4.IKE_COLOR)
-		await main.voice("In his lap, a phone in a cracked black case with a Blue Note sticker. He tries a passcode twice and gives up. I'm texting you a still.", CALL_AT, Case4.IKE_COLOR)
+		await main.voice("And Ray. Your November card. Wednesday, twelve past one, back seat. A big man in an old raincoat, soaked, wiping down a revolver with a handkerchief.", CALL_AT, Case4.IKE_COLOR, "ike", true)
+		await main.voice("In his lap, a phone in a cracked black case with a Blue Note sticker. He tries a passcode twice and gives up. I'm texting you a still.", CALL_AT, Case4.IKE_COLOR, "ike", true)
 		await main.say("Smelled like gun oil.")
 		main.clue("clue_cabin_clip")
 
