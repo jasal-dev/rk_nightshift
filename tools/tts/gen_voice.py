@@ -120,6 +120,7 @@ PRONOUNCE = {
     "8KXD392": "eight, K, X, D, three, nine, two",
     "4K0": "four, K, zero",
     "in '96": "in ninety-six",
+    "Los Angeles": "Loss Angelus",       # said "lawss AN-juh-lus"; spelled right, Kokoro gives "lohz AIN-jelz"
 }
 ACRONYMS = {"LAPD", "LA", "LAX", "DA", "IA", "ID", "TV", "UV", "GPS", "ER", "SD", "DUI", "CSI", "IRS", "MP"}    ## all-caps words said letter by letter
 
