@@ -12,6 +12,7 @@ The originals are in `sounds/` at the project root (not in git, and ignored by G
 | Game file | Original | Source | Author | Licence | Downloaded |
 | --- | --- | --- | --- | --- | --- |
 | `assets/sounds/rain.wav` | `695793__mandaki__raining-in-my-house.m4a` | https://freesound.org/s/695793/ | mandaki | CC0 (credited anyway) | 2026-10-11 |
+| `assets/sounds/knock_right.wav`, `knock_wrong.wav` | `437589__wakaproduction2018__3-knock-101.m4a` (one knock of three) | https://freesound.org/s/437589/ | WakaProduction2018 | CC0 | 2026-10-12 |
 | `assets/sounds/footsteps.wav` | `685287__emilgasi__footsteps-ground.wav` | https://freesound.org/s/685287/ | emilgasi | CC0 (credited anyway) | 2026-10-11 |
 
 ## Voice
