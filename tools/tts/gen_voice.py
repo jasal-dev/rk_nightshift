@@ -119,6 +119,7 @@ PRONOUNCE = {
     "District 13": "District thirteen",
     "8KXD392": "eight, K, X, D, three, nine, two",
     "4K0": "four, K, zero",
+    "in '96": "in ninety-six",
 }
 ACRONYMS = {"LAPD", "LA", "LAX", "DA", "IA", "ID", "TV", "UV", "GPS", "ER", "SD", "DUI", "CSI", "IRS", "MP"}    ## all-caps words said letter by letter
 

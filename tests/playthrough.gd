@@ -308,11 +308,11 @@ func _new_game() -> void:
 
 
 func _check_voiced(n: int) -> void:
-	## Every line a cast speaker said in a fully voiced case (Cases 1 to 4) in a fully voiced case had a clip
-	## (docs/voice-recording.md). Lines that are only sound effects in asterisks ("*knock knock*") and silences ("...") are never voiced.
+	## Every line a cast speaker said in a fully voiced case (all five) had a clip (docs/voice-recording.md). Sound
+	## effects and stage directions ("*knock knock*", "(muffled talk)") and silences ("...") are never voiced.
 	var spoken := RegEx.create_from_string("[A-Za-z0-9]")     # "..." (a silence) has nothing to say
-	var missing := Audio.unvoiced.filter(func(t: String):
-		return not (t.begins_with("*") and t.ends_with("*")) and spoken.search(t) != null)
+	var directions := RegEx.create_from_string("\\*[^*]*\\*|\\([^)]*\\)")   # "*click*", "(muffled talk)"
+	var missing := Audio.unvoiced.filter(func(t: String): return spoken.search(directions.sub(t, "", true)) != null)
 	if not missing.is_empty():
 		_fail("Case %d lines without a voice clip (add them to tools/tts/lines.json):\n  %s" % [n, "\n  ".join(missing)])
 	Audio.unvoiced.clear()
@@ -366,7 +366,9 @@ func _run() -> void:
 			4:
 				await _case4()
 				_check_voiced(4)
-			5: await _case5()
+			5:
+				await _case5()
+				_check_voiced(5)
 	if _failed:
 		return
 	print("PLAYTHROUGH OK - Case %d finished." % only)
@@ -404,6 +406,7 @@ func _full_run() -> void:
 	main._waiting_click = false                         # the "Case 5: Last Call" card, then across the street
 	await expect_room("street_crime")
 	await _case5()
+	_check_voiced(5)
 	if _failed:
 		return
 	print("PLAYTHROUGH OK - all five cases and four endings finished.")

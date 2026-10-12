@@ -182,7 +182,7 @@ func _vance(line: String) -> void:
 
 
 func _brenner(line: String) -> void:
-	await main.voice(line, speaker_at("brenner_cuffed" if _pose == "brenner_cuffed" else "brenner"), Case5.BRENNER_COLOR)
+	await main.voice(line, speaker_at("brenner_cuffed" if _pose == "brenner_cuffed" else "brenner"), Case5.BRENNER_COLOR, "brenner")
 
 
 func _talk_vance() -> void:

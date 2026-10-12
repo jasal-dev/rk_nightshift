@@ -163,7 +163,8 @@ static func take(main: Node) -> void:
 	]
 	for l: Array in lines:
 		var who: String = l[0]
-		await main.caption((who + ": " if who != "" else "") + String(l[1]), l[2], not first)
+		# the take plays down Ike's line, so the voices come through the phone filter
+		await main.caption((who + ": " if who != "" else "") + String(l[1]), l[2], not first, who.to_lower(), String(l[1]), true)
 	await main.ui.fade_to(1.0, 0.8)
 	main.ui.hide_scene()
 	await main.ui.fade_to(0.0, 0.8)

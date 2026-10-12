@@ -8740,5 +8740,4235 @@
 		"text": "A phone in a cracked black case, river water still in it. A half-peeled Blue Note sticker, and white tape: \"D.R. IF FOUND CALL THE BLUE NOTE.\"",
 		"file": "res://assets/voice/ray/07ef2212ed32.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ef9dcb410ddd": {
+		"speaker": "nina",
+		"text": "D.R., decaf. Every night. Sal's little joke.",
+		"file": "res://assets/voice/nina/ef9dcb410ddd.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"9fa96c5c92e5": {
+		"speaker": "nina",
+		"text": "His set list. The bit at the bottom is Sal's tune. I never could read his music.",
+		"file": "res://assets/voice/nina/9fa96c5c92e5.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"0dc3777e2b30": {
+		"speaker": "nina",
+		"text": "Go away. I've got a knife.",
+		"file": "res://assets/voice/nina/0dc3777e2b30.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"2d503bd463d8": {
+		"speaker": "nina",
+		"text": "That's what he said. He said he was police.",
+		"file": "res://assets/voice/nina/2d503bd463d8.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"91dcdfbc62e1": {
+		"speaker": "nina",
+		"text": "...Kessler. The payphone. \"Two days late.\"",
+		"file": "res://assets/voice/nina/91dcdfbc62e1.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"e632fb1ac3e7": {
+		"speaker": "nina",
+		"text": "He said he worked with Ray Kessler. He knew your name. How do I know you're you?",
+		"file": "res://assets/voice/nina/e632fb1ac3e7.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"193e928b7a34": {
+		"speaker": "nina",
+		"text": "...The payphone. Nobody calls from that payphone except Danny. And you.",
+		"file": "res://assets/voice/nina/193e928b7a34.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"788404fa79e5": {
+		"speaker": "nina",
+		"text": "Everybody knows the knock now. That's the problem.",
+		"file": "res://assets/voice/nina/788404fa79e5.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"89fef52ef912": {
+		"speaker": "nina",
+		"text": "So did he.",
+		"file": "res://assets/voice/nina/89fef52ef912.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"2b378a5fbd0d": {
+		"speaker": "nina",
+		"text": "You found it. His song.",
+		"file": "res://assets/voice/nina/2b378a5fbd0d.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"782385e527d0": {
+		"speaker": "nina",
+		"text": "Was he scared?",
+		"file": "res://assets/voice/nina/782385e527d0.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"c9195724df00": {
+		"speaker": "nina",
+		"text": "Where are you going?",
+		"file": "res://assets/voice/nina/c9195724df00.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"b3d4f50e8b4f": {
+		"speaker": "nina",
+		"text": "Come back after. Tell me.",
+		"file": "res://assets/voice/nina/b3d4f50e8b4f.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"94063ac34f6a": {
+		"speaker": "nina",
+		"text": "A man called me before two. He said he was your partner, that you'd sent him to check on Sal, and Sal wouldn't open up. He needed the knock.",
+		"file": "res://assets/voice/nina/94063ac34f6a.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"7e925d33d716": {
+		"speaker": "nina",
+		"text": "He was so calm. I gave it to him.",
+		"file": "res://assets/voice/nina/7e925d33d716.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"2ce22019e46b": {
+		"speaker": "nina",
+		"text": "Then I couldn't sleep. I called Sal three times. Sal never picks up the phone, I know that, but I kept calling. At half past three I took a cab and came in the back with my key.",
+		"file": "res://assets/voice/nina/2ce22019e46b.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"3d3a6e829255": {
+		"speaker": "nina",
+		"text": "There was a man in the bar with Sal. I couldn't see him. I heard him. Low and polite, like a doctor with bad news.",
+		"file": "res://assets/voice/nina/3d3a6e829255.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"1a08e138bb6d": {
+		"speaker": "nina",
+		"text": "He said, \"What did the kid leave you, Sal?\" And Sal said, \"A tab.\"",
+		"file": "res://assets/voice/nina/1a08e138bb6d.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"84a55480ae34": {
+		"speaker": "nina",
+		"text": "I went into the cooler. I don't know why the cooler.",
+		"file": "res://assets/voice/nina/84a55480ae34.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"88be5d01af67": {
+		"speaker": "nina",
+		"text": "Then they went in the back. Something fell. Then nothing for a long time. Then his shoes went right past the cooler door, slowly. Then the front door, a long way off.",
+		"file": "res://assets/voice/nina/88be5d01af67.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"35cce6f4c4b5": {
+		"speaker": "nina",
+		"text": "Then Teo screaming. Then police. He said he was police, Ray. What was I supposed to do, come out to police?",
+		"file": "res://assets/voice/nina/35cce6f4c4b5.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"0e53e98f7e76": {
+		"speaker": "nina",
+		"text": "Old. Calm. He called me \"young lady.\" Nobody's called me young lady since Catholic school.",
+		"file": "res://assets/voice/nina/0e53e98f7e76.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"765de01a9783": {
+		"speaker": "nina",
+		"text": "And it came up on my phone as a police number. I checked it after. That's why I believed him.",
+		"file": "res://assets/voice/nina/765de01a9783.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"f67b5841820d": {
+		"speaker": "nina",
+		"text": "He never told me. He said he'd found a song somebody would pay never to hear again. \"One of three, baby, and then Lisbon.\"",
+		"file": "res://assets/voice/nina/f67b5841820d.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"d61e13f0a733": {
+		"speaker": "nina",
+		"text": "He'd never been anywhere. He'd never even been to San Diego.",
+		"file": "res://assets/voice/nina/d61e13f0a733.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"a65905c88db7": {
+		"speaker": "nina",
+		"text": "A joke with Sal. Sal cut him off coffee at ten o'clock every night, and Danny said it made him play slow.",
+		"file": "res://assets/voice/nina/a65905c88db7.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"0015ed941fac": {
+		"speaker": "nina",
+		"text": "So he wrote Sal a little tune about what Sal served him instead. Five notes. He only ever played it after closing, when the room was empty and Sal was counting the till.",
+		"file": "res://assets/voice/nina/0015ed941fac.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"5c50bce1dcd5": {
+		"speaker": "nina",
+		"text": "Sal laughed every single time. Nobody else ever heard it. Then it was how we knocked.",
+		"file": "res://assets/voice/nina/5c50bce1dcd5.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"a16ccec31f3c": {
+		"speaker": "nina",
+		"text": "Every one. On his phone, on an app. He said one day he'd pick the good ones and make a record.",
+		"file": "res://assets/voice/nina/a16ccec31f3c.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"6f48d168ad94": {
+		"speaker": "nina",
+		"text": "Ray. Find him. And don't tell anybody where I am. Not even police. Especially not police.",
+		"file": "res://assets/voice/nina/6f48d168ad94.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"9554e67ab52a": {
+		"speaker": "nina",
+		"text": "You're you. That's different.",
+		"file": "res://assets/voice/nina/9554e67ab52a.ogg",
+		"voice": "kokoro: af_heart, speed 0.95"
+	},
+	"c0cb57ff4cfa": {
+		"speaker": "park",
+		"text": "The girlfriend was in the cooler the whole time, Detective. Hiding. That's not a great look.",
+		"file": "res://assets/voice/park/c0cb57ff4cfa.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"eaa58b1cd9a3": {
+		"speaker": "ray",
+		"text": "I said two more.",
+		"file": "res://assets/voice/ray/eaa58b1cd9a3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b52aacb941bd": {
+		"speaker": "ray",
+		"text": "Dr. Shah, kneeling on a concrete floor for the fourth time tonight.",
+		"file": "res://assets/voice/ray/b52aacb941bd.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1097783c316f": {
+		"speaker": "ray",
+		"text": "Sal Moretti. Sixty-four. Thirty-one years behind that bar.",
+		"file": "res://assets/voice/ray/1097783c316f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3951611f37bb": {
+		"speaker": "ray",
+		"text": "You wrote it down, Sal. I'm reading it.",
+		"file": "res://assets/voice/ray/3951611f37bb.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b575fc0e95ad": {
+		"speaker": "ray",
+		"text": "I lift the edge of the sheet at his hand.",
+		"file": "res://assets/voice/ray/b575fc0e95ad.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9611a71d2563": {
+		"speaker": "ray",
+		"text": "His palms are clean. A man who hangs himself with clothesline gets rope burn climbing up to it. Sal's hands are cleaner than mine.",
+		"file": "res://assets/voice/ray/9611a71d2563.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b8292c12df96": {
+		"speaker": "ray",
+		"text": "A step stool on its side, four feet from where Sal hung. Sal was five foot six. He'd have had to jump for it.",
+		"file": "res://assets/voice/ray/b8292c12df96.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"515f54920e5f": {
+		"speaker": "ray",
+		"text": "It stays where he kicked it. Where somebody kicked it.",
+		"file": "res://assets/voice/ray/515f54920e5f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d7f5e0f7b803": {
+		"speaker": "ray",
+		"text": "A water pipe and two feet of white clothesline where Park cut it. The rest of the coil's on the supply shelf.",
+		"file": "res://assets/voice/ray/d7f5e0f7b803.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8f74c1d7f7ab": {
+		"speaker": "ray",
+		"text": "I'll leave it for the lab.",
+		"file": "res://assets/voice/ray/8f74c1d7f7ab.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"046ee7451278": {
+		"speaker": "ray",
+		"text": "Six lockers. One's open with keys hanging from it.",
+		"file": "res://assets/voice/ray/046ee7451278.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4b8543ac003f": {
+		"speaker": "ray",
+		"text": "D. REYES on a strip of tape. Sal's own keys hanging from the lock: bar, cooler, lockers.",
+		"file": "res://assets/voice/ray/4b8543ac003f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a00baab9502e": {
+		"speaker": "ray",
+		"text": "Inside, a spare shirt and a stack of sheet music, every page turned and put back crooked.",
+		"file": "res://assets/voice/ray/a00baab9502e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"606e4b8eb8c1": {
+		"speaker": "ray",
+		"text": "Sal knew what was in Danny's locker. Somebody who didn't wanted to look.",
+		"file": "res://assets/voice/ray/606e4b8eb8c1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6bad31d13e8f": {
+		"speaker": "ray",
+		"text": "A steel desk, a gooseneck lamp, a cash box and a pile of mail.",
+		"file": "res://assets/voice/ray/6bad31d13e8f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fa1f92d467a0": {
+		"speaker": "ray",
+		"text": "A cash box with Tuesday's float still in it.",
+		"file": "res://assets/voice/ray/fa1f92d467a0.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ef1e3efe2271": {
+		"speaker": "ray",
+		"text": "And a letter from Pryce Development's lawyers, offering to buy out the last six years of Sal's lease. Across it, in red: NO. Underlined three times.",
+		"file": "res://assets/voice/ray/ef1e3efe2271.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0e2d24dcc6b4": {
+		"speaker": "ray",
+		"text": "Same letterhead as Gus's eviction.",
+		"file": "res://assets/voice/ray/0e2d24dcc6b4.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9b9cae33a4e5": {
+		"speaker": "ray",
+		"text": "Beer, rye, and enough Campari to float a gondola.",
+		"file": "res://assets/voice/ray/9b9cae33a4e5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"80d9c1531446": {
+		"speaker": "ray",
+		"text": "Nobody's hiding behind the Campari.",
+		"file": "res://assets/voice/ray/80d9c1531446.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"dc5e3a992077": {
+		"speaker": "ray",
+		"text": "Steel door to the alley, deadbolted from inside with a key. Nobody left this way.",
+		"file": "res://assets/voice/ray/dc5e3a992077.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"acab946776d9": {
+		"speaker": "ray",
+		"text": "Locked with a key, from in here. I'll leave it that way.",
+		"file": "res://assets/voice/ray/acab946776d9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b4411fd37642": {
+		"speaker": "ray",
+		"text": "Sal's coat. And a red umbrella, still dripping into a puddle on the floor.",
+		"file": "res://assets/voice/ray/b4411fd37642.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"618c472ea599": {
+		"speaker": "ray",
+		"text": "It's been raining since midnight, and the bar's been dark since Tuesday. Somebody came in out of the rain tonight.",
+		"file": "res://assets/voice/ray/618c472ea599.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fb7edb69da65": {
+		"speaker": "ray",
+		"text": "Small wet sneaker prints, from the alley door to the cooler. They don't come back.",
+		"file": "res://assets/voice/ray/fb7edb69da65.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"902d204c522d": {
+		"speaker": "ray",
+		"text": "It's her umbrella. She'll want it.",
+		"file": "res://assets/voice/ray/902d204c522d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5d783cce9b94": {
+		"speaker": "ray",
+		"text": "Limes, kegs, and a crate where she sat for an hour and a half.",
+		"file": "res://assets/voice/ray/5d783cce9b94.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b3751494c66b": {
+		"speaker": "ray",
+		"text": "The walk-in. The light's on inside and the hasp is open. Bartenders don't leave a cooler lit.",
+		"file": "res://assets/voice/ray/b3751494c66b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"66103cbf97f8": {
+		"speaker": "ray",
+		"text": "It won't open. Someone's holding the handle from the inside.",
+		"file": "res://assets/voice/ray/66103cbf97f8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f22320f80d01": {
+		"speaker": "ray",
+		"text": "Nina Alvarez, in my raincoat and Shah's blanket. Her lips are getting their color back.",
+		"file": "res://assets/voice/ray/f22320f80d01.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a37ee4929157": {
+		"speaker": "ray",
+		"text": "Officer Park, guarding a cooler that's empty now.",
+		"file": "res://assets/voice/ray/a37ee4929157.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"437394bdd904": {
+		"speaker": "ray",
+		"text": "She was hiding from the man who did this. She's the only one in here with any sense.",
+		"file": "res://assets/voice/ray/437394bdd904.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b1b1c3ab08df": {
+		"speaker": "ray",
+		"text": "Back to the bar.",
+		"file": "res://assets/voice/ray/b1b1c3ab08df.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"25b519e68b7b": {
+		"speaker": "ray",
+		"text": "A choke.",
+		"file": "res://assets/voice/ray/25b519e68b7b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ab1d96d468d3": {
+		"speaker": "ray",
+		"text": "Did he fight?",
+		"file": "res://assets/voice/ray/ab1d96d468d3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1c44b641b38b": {
+		"speaker": "ray",
+		"text": "No forced entry. Sal let him in, turned his back on him, and the man used a hold they stopped teaching in 1982.",
+		"file": "res://assets/voice/ray/1c44b641b38b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f9ca12f5aa1b": {
+		"speaker": "ray",
+		"text": "Then he dressed it up as a suicide, the way he'd seen a hundred of them.",
+		"file": "res://assets/voice/ray/f9ca12f5aa1b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a957e11a8751": {
+		"speaker": "ray",
+		"text": "Somebody in there?",
+		"file": "res://assets/voice/ray/a957e11a8751.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0d21f67b0985": {
+		"speaker": "ray",
+		"text": "LAPD. Come on out.",
+		"file": "res://assets/voice/ray/0d21f67b0985.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9dda8fd63e8b": {
+		"speaker": "ray",
+		"text": "I raise my hand to the door and stop. No. That knock's done enough tonight.",
+		"file": "res://assets/voice/ray/9dda8fd63e8b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0396eea01541": {
+		"speaker": "ray",
+		"text": "Nina? It's Ray Kessler.",
+		"file": "res://assets/voice/ray/0396eea01541.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0ef3c1d27922": {
+		"speaker": "ray",
+		"text": "Later than that now. Come out, Nina. You're freezing.",
+		"file": "res://assets/voice/ray/0ef3c1d27922.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e4947bec3ddd": {
+		"speaker": "ray",
+		"text": "I called you from the payphone across the street.",
+		"file": "res://assets/voice/ray/e4947bec3ddd.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7f9997d7ddb4": {
+		"speaker": "ray",
+		"text": "I know the knock.",
+		"file": "res://assets/voice/ray/7f9997d7ddb4.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"55c05ae280b7": {
+		"speaker": "ray",
+		"text": "I'm the one who talked to Sal.",
+		"file": "res://assets/voice/ray/55c05ae280b7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c42fb6864238": {
+		"speaker": "ray",
+		"text": "The handle turns. A wall of cold comes out. Nina Alvarez, on a crate between the limes and the kegs, lips blue, a paring knife in her fist.",
+		"file": "res://assets/voice/ray/c42fb6864238.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"53dbf520f7d1": {
+		"speaker": "ray",
+		"text": "She looks at me a long time. Then she puts the knife down on the crate.",
+		"file": "res://assets/voice/ray/53dbf520f7d1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"608cad4d284a": {
+		"speaker": "ray",
+		"text": "It leaks at the collar. It's still warmer than this.",
+		"file": "res://assets/voice/ray/608cad4d284a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"eb713cb7ed5f": {
+		"speaker": "ray",
+		"text": "Somebody would have paid a lot never to hear it.",
+		"file": "res://assets/voice/ray/eb713cb7ed5f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f6cb97328a5b": {
+		"speaker": "ray",
+		"text": "No. He sounded like he'd won.",
+		"file": "res://assets/voice/ray/f6cb97328a5b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b742e9f806c1": {
+		"speaker": "ray",
+		"text": "To give back something of Danny's.",
+		"file": "res://assets/voice/ray/b742e9f806c1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8ed7b00c4a4a": {
+		"speaker": "ray",
+		"text": "Everybody wants to be told tonight.",
+		"file": "res://assets/voice/ray/8ed7b00c4a4a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"81dfb50edafb": {
+		"speaker": "ray",
+		"text": "Because it locks from the inside.",
+		"file": "res://assets/voice/ray/81dfb50edafb.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e669749ad1ab": {
+		"speaker": "ray",
+		"text": "The man who called you.",
+		"file": "res://assets/voice/ray/e669749ad1ab.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"77d3484ab416": {
+		"speaker": "ray",
+		"text": "Can I see your phone?",
+		"file": "res://assets/voice/ray/77d3484ab416.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"700771bf909d": {
+		"speaker": "ray",
+		"text": "Three-two-three, five-five-five, oh-one-eight-six. One fifty-two.",
+		"file": "res://assets/voice/ray/700771bf909d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"dd3a3d1b3b5d": {
+		"speaker": "ray",
+		"text": "That number's a police line. I'd like to know whose.",
+		"file": "res://assets/voice/ray/dd3a3d1b3b5d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ab35b4a1b256": {
+		"speaker": "ray",
+		"text": "What did Danny have?",
+		"file": "res://assets/voice/ray/ab35b4a1b256.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"48600aed41e1": {
+		"speaker": "ray",
+		"text": "Where does the knock come from?",
+		"file": "res://assets/voice/ray/48600aed41e1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"caf07245e475": {
+		"speaker": "ray",
+		"text": "Did Danny record his sets?",
+		"file": "res://assets/voice/ray/caf07245e475.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ab8986a79969": {
+		"speaker": "ray",
+		"text": "Stay with Dr. Shah.",
+		"file": "res://assets/voice/ray/ab8986a79969.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"13d41da2eb79": {
+		"speaker": "ray",
+		"text": "I'm police.",
+		"file": "res://assets/voice/ray/13d41da2eb79.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a855972d1389": {
+		"speaker": "ray",
+		"text": "Shah says something's moving in the cooler. Bartenders don't leave a cooler lit.",
+		"file": "res://assets/voice/ray/a855972d1389.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2732f4906e07": {
+		"speaker": "ray",
+		"text": "She said it came up as a police number. I'd like to see that number.",
+		"file": "res://assets/voice/ray/2732f4906e07.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d8d07f98bac9": {
+		"speaker": "ray",
+		"text": "A police number at one fifty-two. I know a phone with a long memory. It's on my desk.",
+		"file": "res://assets/voice/ray/d8d07f98bac9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"51bb11079749": {
+		"speaker": "shah",
+		"text": "Four, Ray. That's my free coffee.",
+		"file": "res://assets/voice/shah/51bb11079749.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"6b4ee01e7195": {
+		"speaker": "shah",
+		"text": "There isn't going to be a fifth. I'm not doing a fifth.",
+		"file": "res://assets/voice/shah/6b4ee01e7195.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"b2c849abf927": {
+		"speaker": "shah",
+		"text": "I'm sorry. I know you liked him.",
+		"file": "res://assets/voice/shah/b2c849abf927.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"c79ebb9ec0af": {
+		"speaker": "shah",
+		"text": "I do bodies, Ray, not bookkeeping.",
+		"file": "res://assets/voice/shah/c79ebb9ec0af.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"1e6bc45a2a0d": {
+		"speaker": "shah",
+		"text": "Not the rope. The rope mark is a clean line with no bruising under it, no bleeding. He was dead when it went on.",
+		"file": "res://assets/voice/shah/1e6bc45a2a0d.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"726e666fbc59": {
+		"speaker": "shah",
+		"text": "But here, straight across the front of the throat, a band of bruising, and the small bones are cracked. A forearm. From behind.",
+		"file": "res://assets/voice/shah/726e666fbc59.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"a611a6fd5552": {
+		"speaker": "shah",
+		"text": "A bar-arm choke. A police hold, Ray, an old one. The department banned it in 1982 after it killed too many people.",
+		"file": "res://assets/voice/shah/a611a6fd5552.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"c97602552c93": {
+		"speaker": "shah",
+		"text": "You never learned it. Whoever did this learned it before you could shave.",
+		"file": "res://assets/voice/shah/c97602552c93.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"366b293ea554": {
+		"speaker": "shah",
+		"text": "Between half past three and four. The back room's cold, so give me ten minutes either way.",
+		"file": "res://assets/voice/shah/366b293ea554.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"a21edc67a1ac": {
+		"speaker": "shah",
+		"text": "No defensive wounds. Nothing under his nails. He turned his back on whoever it was.",
+		"file": "res://assets/voice/shah/a21edc67a1ac.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"933c6480ad9e": {
+		"speaker": "shah",
+		"text": "Like your rideshare driver. You don't see it coming from someone you've let in.",
+		"file": "res://assets/voice/shah/933c6480ad9e.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"74bbe1a42c88": {
+		"speaker": "shah",
+		"text": "Whoever did this put a man on a pipe and made it look like his choice. That's somebody who's stood in a lot of rooms like this one, writing the word \"suicide.\"",
+		"file": "res://assets/voice/shah/74bbe1a42c88.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"0fe15550a4b3": {
+		"speaker": "shah",
+		"text": "And Ray? Somebody's in that cooler. I heard it shift when I came in. Park thinks it's the compressor. Park is very young.",
+		"file": "res://assets/voice/shah/0fe15550a4b3.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"0f31877b4050": {
+		"speaker": "shah",
+		"text": "Bring her here, under the lamp. Not you, Ray. Her.",
+		"file": "res://assets/voice/shah/0f31877b4050.ogg",
+		"voice": "kokoro: bf_emma, speed 1"
+	},
+	"951de7910c41": {
+		"speaker": "ray",
+		"text": "The Blue Note. I used to come Thursdays, before I went to nights.",
+		"file": "res://assets/voice/ray/951de7910c41.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"bc705dcad626": {
+		"speaker": "ray",
+		"text": "Sal kept it like a church. Somebody came in and said a different kind of prayer.",
+		"file": "res://assets/voice/ray/bc705dcad626.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e423904cafe6": {
+		"speaker": "ray",
+		"text": "The knock, the way he played it. He played it right here every night after closing, for an audience of one.",
+		"file": "res://assets/voice/ray/e423904cafe6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d43c4ce69d2c": {
+		"speaker": "ray",
+		"text": "A fat green ledger by the register. Sal's tab book.",
+		"file": "res://assets/voice/ray/d43c4ce69d2c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"da4a11264b4e": {
+		"speaker": "ray",
+		"text": "The register. Sal rang up thirty-one years on it.",
+		"file": "res://assets/voice/ray/da4a11264b4e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7ba7de14ceff": {
+		"speaker": "ray",
+		"text": "\"If it isn't in the book, it didn't happen.\"",
+		"file": "res://assets/voice/ray/7ba7de14ceff.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f16d6c06b3e9": {
+		"speaker": "ray",
+		"text": "Sal's tab book. Three pages with bookmarks in them. Right-click it to read it.",
+		"file": "res://assets/voice/ray/f16d6c06b3e9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3151575c9874": {
+		"speaker": "ray",
+		"text": "The till's empty; the bar's been closed since Tuesday. Nobody came here for money.",
+		"file": "res://assets/voice/ray/3151575c9874.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"205435f54a45": {
+		"speaker": "ray",
+		"text": "Every glass dried and racked, except one. Upside down, still beaded with water.",
+		"file": "res://assets/voice/ray/205435f54a45.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"638b03b4743d": {
+		"speaker": "ray",
+		"text": "The bar's been closed since Tuesday. Somebody washed this one tonight.",
+		"file": "res://assets/voice/ray/638b03b4743d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"30cb88ee084d": {
+		"speaker": "ray",
+		"text": "No prints on a washed glass. Whoever it was knew that.",
+		"file": "res://assets/voice/ray/30cb88ee084d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8495195106e7": {
+		"speaker": "ray",
+		"text": "Thirty feet of mahogany, wiped clean. Closed since Tuesday, and Sal still wiped it every night like a man who expected to open again.",
+		"file": "res://assets/voice/ray/8495195106e7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5b9003f5cdb2": {
+		"speaker": "ray",
+		"text": "I'm not sitting at Sal's bar without Sal behind it.",
+		"file": "res://assets/voice/ray/5b9003f5cdb2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"47efe2607a90": {
+		"speaker": "ray",
+		"text": "The bar mirror. I look like a man who's been up since yesterday.",
+		"file": "res://assets/voice/ray/47efe2607a90.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"17789e75f343": {
+		"speaker": "ray",
+		"text": "Thirty years of bottles. The good ones are on the top shelf, where Sal could see who reached for them.",
+		"file": "res://assets/voice/ray/17789e75f343.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"08f2c096b611": {
+		"speaker": "ray",
+		"text": "Not on duty. Not with Sal in the back.",
+		"file": "res://assets/voice/ray/08f2c096b611.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4ae7ba9b9ad5": {
+		"speaker": "ray",
+		"text": "Deadbolt open, chain hanging loose. Somebody went out this way and let it shut behind him.",
+		"file": "res://assets/voice/ray/4ae7ba9b9ad5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8e0c8d50f7c4": {
+		"speaker": "ray",
+		"text": "Deadbolt open, chain hanging loose. Teo says it was on the latch.",
+		"file": "res://assets/voice/ray/8e0c8d50f7c4.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"36e97554e8fe": {
+		"speaker": "ray",
+		"text": "Three men and a piano player who could hear. Just a booth now. That's the worst part.",
+		"file": "res://assets/voice/ray/36e97554e8fe.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fcc474a2ed46": {
+		"speaker": "ray",
+		"text": "The back booth, half in shadow. A RESERVED card so old the corners curl.",
+		"file": "res://assets/voice/ray/fcc474a2ed46.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9da4a71bcf5b": {
+		"speaker": "ray",
+		"text": "You'd hear every note from the piano here, and the piano would hear you.",
+		"file": "res://assets/voice/ray/9da4a71bcf5b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"87247110a08f": {
+		"speaker": "ray",
+		"text": "I'm not sitting there.",
+		"file": "res://assets/voice/ray/87247110a08f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"15da1eca7df3": {
+		"speaker": "ray",
+		"text": "Best seat in the house for not being seen.",
+		"file": "res://assets/voice/ray/15da1eca7df3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7f5e5f124336": {
+		"speaker": "ray",
+		"text": "Red leather booths. Every one of them has heard a proposal, a confession or a lie. Usually all three.",
+		"file": "res://assets/voice/ray/7f5e5f124336.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c29bed0558a6": {
+		"speaker": "ray",
+		"text": "A baby grand, scuffed where a coffee cup sat on it every night.",
+		"file": "res://assets/voice/ray/c29bed0558a6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"26a4ca2f7607": {
+		"speaker": "ray",
+		"text": "Masking tape on the white keys with letters in ballpoint: C, D, E, F, G, A, B. Somebody was teaching somebody.",
+		"file": "res://assets/voice/ray/26a4ca2f7607.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"22b6283c760c": {
+		"speaker": "ray",
+		"text": "Danny's set list, taped to the music stand. Tuesday's date.",
+		"file": "res://assets/voice/ray/22b6283c760c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"22f509aebfe6": {
+		"speaker": "ray",
+		"text": "The music stand, empty now.",
+		"file": "res://assets/voice/ray/22f509aebfe6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"86cc81934d55": {
+		"speaker": "ray",
+		"text": "I've got it. It's still telling me the same thing.",
+		"file": "res://assets/voice/ray/86cc81934d55.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fe9cd0fb0e10": {
+		"speaker": "ray",
+		"text": "DANNY REYES. PIANO. THURSDAYS. Somebody drew a small heart in the corner in eyeliner.",
+		"file": "res://assets/voice/ray/fe9cd0fb0e10.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"edf2017a0262": {
+		"speaker": "ray",
+		"text": "I'll leave it up.",
+		"file": "res://assets/voice/ray/edf2017a0262.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"288d30728e9a": {
+		"speaker": "ray",
+		"text": "A jukebox full of records nobody played, because Danny played them better.",
+		"file": "res://assets/voice/ray/288d30728e9a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"38fa1c805ca3": {
+		"speaker": "ray",
+		"text": "Every chair up, legs in the air. Except one stool at the end of the bar.",
+		"file": "res://assets/voice/ray/38fa1c805ca3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b378a22f8f46": {
+		"speaker": "ray",
+		"text": "One stool down, at the end of the bar, where Sal could pour without walking.",
+		"file": "res://assets/voice/ray/b378a22f8f46.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7b92ff43aeae": {
+		"speaker": "ray",
+		"text": "Somebody sat there after closing. With a club soda.",
+		"file": "res://assets/voice/ray/7b92ff43aeae.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"24d2ab4b25b7": {
+		"speaker": "ray",
+		"text": "A stool, down off the bar. Somebody sat there after closing.",
+		"file": "res://assets/voice/ray/24d2ab4b25b7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9b1f06b42f94": {
+		"speaker": "ray",
+		"text": "The back room. Flashlights moving.",
+		"file": "res://assets/voice/ray/9b1f06b42f94.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"cf45eb5e79f0": {
+		"speaker": "ray",
+		"text": "Sal wrote everything down. I should read what he wrote.",
+		"file": "res://assets/voice/ray/cf45eb5e79f0.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"49017c32052c": {
+		"speaker": "ray",
+		"text": "I've played my one song.",
+		"file": "res://assets/voice/ray/49017c32052c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9506b7787ca9": {
+		"speaker": "ray",
+		"text": "The notes are on the paper. The letters are on the keys.",
+		"file": "res://assets/voice/ray/9506b7787ca9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f1249fb9efbf": {
+		"speaker": "ray",
+		"text": "I play like a cop. Hit things until they confess.",
+		"file": "res://assets/voice/ray/f1249fb9efbf.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9eee57ffe8a7": {
+		"speaker": "ray",
+		"text": "Not yet. I'll come back to it.",
+		"file": "res://assets/voice/ray/9eee57ffe8a7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ceee56cc8b6a": {
+		"speaker": "ray",
+		"text": "D. E. C, A, F.",
+		"file": "res://assets/voice/ray/ceee56cc8b6a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5f66748462ff": {
+		"speaker": "ray",
+		"text": "Decaf.",
+		"file": "res://assets/voice/ray/5f66748462ff.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"bbe1cd14b64e": {
+		"speaker": "ray",
+		"text": "Sal cut him off coffee at ten, so Danny wrote him a song about it, and Sal laughed every night for two years.",
+		"file": "res://assets/voice/ray/bbe1cd14b64e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"237e2b12e328": {
+		"speaker": "ray",
+		"text": "Three tries, and I only need one. Time to call Ike.",
+		"file": "res://assets/voice/ray/237e2b12e328.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0722aca889c7": {
+		"speaker": "ike",
+		"text": "Kessler. The drive's in an evidence bag with your name on it. Come get it before you do anything stupid.",
+		"file": "res://assets/voice/ike/0722aca889c7.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"e86bfba63b47": {
+		"speaker": "ike",
+		"text": "You said one hour, Kessler. Go away so I can do it.",
+		"file": "res://assets/voice/ike/e86bfba63b47.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"80b35dd644e4": {
+		"speaker": "ike",
+		"text": "Talk to me.",
+		"file": "res://assets/voice/ike/80b35dd644e4.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"8362da8b9eca": {
+		"speaker": "ike",
+		"text": "(typing) ...One try. Okay. I'm in. Two years of takes, Thursdays mostly.",
+		"file": "res://assets/voice/ike/8362da8b9eca.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"ebbc44280693": {
+		"speaker": "ike",
+		"text": "Tuesday. Last upload, eleven fifty-two. He called it \"tues late, practice.\" Eleven minutes.",
+		"file": "res://assets/voice/ike/ebbc44280693.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"5c65fa313daa": {
+		"speaker": "ike",
+		"text": "I'm not putting this on your phone, Ray. Your phone belongs to the city. I'll play it down the line. Sit somewhere.",
+		"file": "res://assets/voice/ike/5c65fa313daa.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"e0da10b3e4cd": {
+		"speaker": "ike",
+		"text": "Ray? I heard it too. I wish I hadn't.",
+		"file": "res://assets/voice/ike/e0da10b3e4cd.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"874e01f13112": {
+		"speaker": "ike",
+		"text": "Here's what I'm doing. I don't touch the original. I image the take to one drive, hashed and logged, in an evidence bag with your name on it.",
+		"file": "res://assets/voice/ike/874e01f13112.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"517aa16ec8d8": {
+		"speaker": "ike",
+		"text": "Then I send Takes a preservation letter and they freeze the account until a judge signs a warrant. Nobody deletes it, nobody plays it, not even me.",
+		"file": "res://assets/voice/ike/517aa16ec8d8.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"af91144fdb13": {
+		"speaker": "ike",
+		"text": "If somebody killed two people for this, they'll come for the cloud next. Let them find a locked door.",
+		"file": "res://assets/voice/ike/af91144fdb13.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"af99b07e2c44": {
+		"speaker": "ike",
+		"text": "Already did. Something only an idiot would guess. Come get it before you do anything stupid.",
+		"file": "res://assets/voice/ike/af99b07e2c44.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"7d6d73cdc6a7": {
+		"speaker": "ike",
+		"text": "And Ray. Your November card. Wednesday, twelve past one, back seat. A big man in an old raincoat, soaked, wiping down a revolver with a handkerchief.",
+		"file": "res://assets/voice/ike/7d6d73cdc6a7.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"9023d4422c17": {
+		"speaker": "ike",
+		"text": "In his lap, a phone in a cracked black case with a Blue Note sticker. He tries a passcode twice and gives up. I'm texting you a still.",
+		"file": "res://assets/voice/ike/9023d4422c17.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"2014dc3f4acd": {
+		"speaker": "ray",
+		"text": "Not out here. I want to hear it where he played it.",
+		"file": "res://assets/voice/ray/2014dc3f4acd.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"cd612910916f": {
+		"speaker": "ray",
+		"text": "I've got three tries and no answer. Not yet.",
+		"file": "res://assets/voice/ray/cd612910916f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"38b9f71a5b1b": {
+		"speaker": "ray",
+		"text": "Not yet. If he comes, I want a car at the end of that pier that nobody upstairs knows about.",
+		"file": "res://assets/voice/ray/38b9f71a5b1b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e4e14a20251f": {
+		"speaker": "ray",
+		"text": "He'll come alone. A man like Walt doesn't tell the boss he left a loose end. He ties it off himself.",
+		"file": "res://assets/voice/ray/e4e14a20251f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"17be13c68bbf": {
+		"speaker": "ray",
+		"text": "Closed since Tuesday, and Sal still wrote down who came. Me, through the door.",
+		"file": "res://assets/voice/ray/17be13c68bbf.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ba1bed9fbb5d": {
+		"speaker": "ray",
+		"text": "Then W.B., a club soda, no charge, at three-twenty. Sal let somebody in and poured him one on the house.",
+		"file": "res://assets/voice/ray/ba1bed9fbb5d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4767ae6043e3": {
+		"speaker": "ray",
+		"text": "If it isn't in the book, it didn't happen. Sal made sure this did.",
+		"file": "res://assets/voice/ray/4767ae6043e3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"829685a32b2b": {
+		"speaker": "ray",
+		"text": "Tuesday. The night Danny died. A private party in the back booth, three men, cash, no names. Two eighteen-year-old Scotches and a club soda.",
+		"file": "res://assets/voice/ray/829685a32b2b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"64a43ec1c424": {
+		"speaker": "ray",
+		"text": "Club soda again.",
+		"file": "res://assets/voice/ray/64a43ec1c424.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9acec3f8b032": {
+		"speaker": "ray",
+		"text": "D.R., decaf. Every night for two years. Sal cut him off the real stuff.",
+		"file": "res://assets/voice/ray/9acec3f8b032.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3aa7ad248b3f": {
+		"speaker": "ray",
+		"text": "Tuesday's set, in pencil. 'Round Midnight, for Tiny, if he's in. Body and Soul. Blue in Green. Lush Life.",
+		"file": "res://assets/voice/ray/3aa7ad248b3f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"92787c98386d": {
+		"speaker": "ray",
+		"text": "And under \"AFTER: for Sal\", one short staff. Five notes. Two slow, three fast.",
+		"file": "res://assets/voice/ray/92787c98386d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2c287941ee3a": {
+		"speaker": "ray",
+		"text": "He wrote the knock down. I just have to read it.",
+		"file": "res://assets/voice/ray/2c287941ee3a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b2ae2c0dda77": {
+		"speaker": "ray",
+		"text": "D, E, C, A, F. Lowercase, I'd guess. Decaf.",
+		"file": "res://assets/voice/ray/b2ae2c0dda77.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"83c0f3f41cfa": {
+		"speaker": "ray",
+		"text": "Play it.",
+		"file": "res://assets/voice/ray/83c0f3f41cfa.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b61fc8b3e6b2": {
+		"speaker": "ray",
+		"text": "(barely) Then pay him, Walt.",
+		"file": "res://assets/voice/ray/b61fc8b3e6b2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"34b9345792ff": {
+		"speaker": "ray",
+		"text": "Three men in a booth, setting the price of a piano player. And Danny ten feet away, playing 'Round Midnight for them like it was any other Tuesday.",
+		"file": "res://assets/voice/ray/34b9345792ff.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"490b7cfa9032": {
+		"speaker": "ray",
+		"text": "He heard every word. He played one wrong note.",
+		"file": "res://assets/voice/ray/490b7cfa9032.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9c392a71a0ca": {
+		"speaker": "ray",
+		"text": "Change the password first.",
+		"file": "res://assets/voice/ray/9c392a71a0ca.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3ae399021e4c": {
+		"speaker": "ray",
+		"text": "I'll come get it on the way to doing something stupid.",
+		"file": "res://assets/voice/ray/3ae399021e4c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1aabea279fee": {
+		"speaker": "ray",
+		"text": "Smelled like gun oil.",
+		"file": "res://assets/voice/ray/1aabea279fee.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8a0e29c4a0b2": {
+		"speaker": "ray",
+		"text": "The 110 at six in the morning. Trucks, cabs, and people who couldn't go home. Same as five hours ago. The difference is I know what I'm driving to.",
+		"file": "res://assets/voice/ray/8a0e29c4a0b2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b3ff5fdbd43d": {
+		"speaker": "ray",
+		"text": "Twenty-six years. You learn the job is mostly paper. Once in a while it's a pier at dawn and a man with a revolver.",
+		"file": "res://assets/voice/ray/b3ff5fdbd43d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d0d0ed004f31": {
+		"speaker": "ray",
+		"text": "I'd rather the paper. The paper doesn't get to choose.",
+		"file": "res://assets/voice/ray/d0d0ed004f31.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0287837e253a": {
+		"speaker": "brenner",
+		"text": "A piano player's envelope. So he could write.",
+		"file": "res://assets/voice/brenner/0287837e253a.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"6441bb2409c0": {
+		"speaker": "brenner",
+		"text": "Going to the papers already? Maureen said you were dramatic.",
+		"file": "res://assets/voice/brenner/6441bb2409c0.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"d1340a421faf": {
+		"speaker": "brenner",
+		"text": "A box of paper. I've filed boxes like that in the dumpster.",
+		"file": "res://assets/voice/brenner/d1340a421faf.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"32d52a94fc77": {
+		"speaker": "brenner",
+		"text": "You'll have to do better than that, son.",
+		"file": "res://assets/voice/brenner/32d52a94fc77.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"09aef6dc66be": {
+		"speaker": "brenner",
+		"text": "Detective Kessler. Maureen talks about you. Best she's got, she says, and the biggest pain in her neck.",
+		"file": "res://assets/voice/brenner/09aef6dc66be.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"3c1c95f9e46c": {
+		"speaker": "brenner",
+		"text": "Black. I was told you take it black.",
+		"file": "res://assets/voice/brenner/3c1c95f9e46c.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"b642c4fe268e": {
+		"speaker": "brenner",
+		"text": "Forty years of night shifts, son. You learn what people need at this hour. Coffee, and somebody to tell them to go home.",
+		"file": "res://assets/voice/brenner/b642c4fe268e.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"00fbaea3b0b0": {
+		"speaker": "brenner",
+		"text": "That it?",
+		"file": "res://assets/voice/brenner/00fbaea3b0b0.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"ee5fc4ffad5c": {
+		"speaker": "brenner",
+		"text": "Then let's talk about my retirement.",
+		"file": "res://assets/voice/brenner/ee5fc4ffad5c.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"541d72d627f6": {
+		"speaker": "brenner",
+		"text": "I don't know what you think you've got. I'm a retired man who drives a car for a living. I've never been in that bar in my life. Can't stand jazz.",
+		"file": "res://assets/voice/brenner/541d72d627f6.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"fce4df7fdc11": {
+		"speaker": "brenner",
+		"text": "I've got all morning, son. You're the one with a shift.",
+		"file": "res://assets/voice/brenner/fce4df7fdc11.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"743fce044252": {
+		"speaker": "brenner",
+		"text": "Kids today. No respect for a man who cleans his weapon.",
+		"file": "res://assets/voice/brenner/743fce044252.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"8337a38fc69e": {
+		"speaker": "brenner",
+		"text": "I saw the camera. Kids put those in to sell clips of drunk actresses. Nobody was ever going to pay to watch an old man in a raincoat.",
+		"file": "res://assets/voice/brenner/8337a38fc69e.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"78ab12b94921": {
+		"speaker": "brenner",
+		"text": "And a wet revolver rusts by morning, son. You dry it when it's wet, not when it's smart. Thirty years of habit doesn't stop to check who's filming.",
+		"file": "res://assets/voice/brenner/78ab12b94921.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"eea72e00448f": {
+		"speaker": "brenner",
+		"text": "It was a forecast. I'm good at forecasts.",
+		"file": "res://assets/voice/brenner/eea72e00448f.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"227868b8cb74": {
+		"speaker": "brenner",
+		"text": "Harlan likes a nice drawing.",
+		"file": "res://assets/voice/brenner/227868b8cb74.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"e6cb11dc6d59": {
+		"speaker": "brenner",
+		"text": "The river was supposed to keep it.",
+		"file": "res://assets/voice/brenner/e6cb11dc6d59.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"4f796626a5d1": {
+		"speaker": "brenner",
+		"text": "Old habits. I like to help.",
+		"file": "res://assets/voice/brenner/4f796626a5d1.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"330658ac24b3": {
+		"speaker": "brenner",
+		"text": "(a small smile) So I made a call. Maureen was upset about your bartender. I was helping. That's what I do.",
+		"file": "res://assets/voice/brenner/330658ac24b3.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"28d075080737": {
+		"speaker": "brenner",
+		"text": "I called the girl. I went home. I was asleep by three. Ask my pillow.",
+		"file": "res://assets/voice/brenner/28d075080737.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"2f87a0e9669b": {
+		"speaker": "brenner",
+		"text": "(the smile goes) A dead man's handwriting and a coroner's opinion. I've beaten better than that on a bad day.",
+		"file": "res://assets/voice/brenner/2f87a0e9669b.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"6f23c45dffe1": {
+		"speaker": "brenner",
+		"text": "And the piano player? You want to hang him on me too? Reyes owed money to every shark in the harbor. I read the file. Maureen showed me.",
+		"file": "res://assets/voice/brenner/6f23c45dffe1.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"3dbd6829ee6d": {
+		"speaker": "brenner",
+		"text": "Let me tell you how this city works, Ray, since nobody told you in twenty-six years. A city is a deal.",
+		"file": "res://assets/voice/brenner/3dbd6829ee6d.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"c3d2e24d0fc7": {
+		"speaker": "brenner",
+		"text": "Every street you drive on, somebody got paid to put it there. Harlan builds towers. Ted votes for towers. The towers get built, the city collects the taxes, the taxes pay your salary.",
+		"file": "res://assets/voice/brenner/c3d2e24d0fc7.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"3060c70b4735": {
+		"speaker": "brenner",
+		"text": "The piano player tried to cut himself a slice of that and the slice cut back.",
+		"file": "res://assets/voice/brenner/3060c70b4735.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"660775daa3e8": {
+		"speaker": "brenner",
+		"text": "Maureen? I taught her to drive a black-and-white. I wrote her letter for detective. I carried her through two shootings and a divorce.",
+		"file": "res://assets/voice/brenner/660775daa3e8.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"21a36144a03f": {
+		"speaker": "brenner",
+		"text": "If this goes where you want it to go, she goes with me. You want that on your board?",
+		"file": "res://assets/voice/brenner/21a36144a03f.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"939fbb2514b0": {
+		"speaker": "brenner",
+		"text": "Or. Harlan needs a head of security, a real one, not an old man who drives. Two-fifty a year, a car, a pension on top of your pension.",
+		"file": "res://assets/voice/brenner/939fbb2514b0.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"d6c677c83ccf": {
+		"speaker": "brenner",
+		"text": "You'd sleep nights, Ray. You haven't slept nights in eight years.",
+		"file": "res://assets/voice/brenner/d6c677c83ccf.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"cafe77e43908": {
+		"speaker": "brenner",
+		"text": "So did Danny, now.",
+		"file": "res://assets/voice/brenner/cafe77e43908.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"da5d10ccde82": {
+		"speaker": "brenner",
+		"text": "Less than he thought. He wouldn't sell his lease, and he wouldn't tell me what the kid left him. He just kept saying, \"A tab.\"",
+		"file": "res://assets/voice/brenner/da5d10ccde82.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"26458c703ead": {
+		"speaker": "brenner",
+		"text": "I know her better than you do. I know what she'd do to keep her badge. I taught her.",
+		"file": "res://assets/voice/brenner/26458c703ead.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"29237b8f0eb1": {
+		"speaker": "brenner",
+		"text": "The phone, Ray.",
+		"file": "res://assets/voice/brenner/29237b8f0eb1.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"3e96421d06c7": {
+		"speaker": "brenner",
+		"text": "Whatever goes in here doesn't come back up. I've been told.",
+		"file": "res://assets/voice/brenner/3e96421d06c7.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"d0a542902fd0": {
+		"speaker": "brenner",
+		"text": "I was a cop for thirty years and a civilian for seventeen, son. I'm better at the second one.",
+		"file": "res://assets/voice/brenner/d0a542902fd0.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"f551f1b55fb0": {
+		"speaker": "brenner",
+		"text": "Make me a better offer.",
+		"file": "res://assets/voice/brenner/f551f1b55fb0.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"2c87ab6fc0eb": {
+		"speaker": "brenner",
+		"text": "A loan shark and a doorman. Who's going to believe them?",
+		"file": "res://assets/voice/brenner/2c87ab6fc0eb.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"186212370606": {
+		"speaker": "brenner",
+		"text": "(the gun dips an inch) Leave her out of it.",
+		"file": "res://assets/voice/brenner/186212370606.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"9c5d71bd1d95": {
+		"speaker": "brenner",
+		"text": "Danny was a blackmailer. He named his price.",
+		"file": "res://assets/voice/brenner/9c5d71bd1d95.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"869ef2dadfd6": {
+		"speaker": "brenner",
+		"text": "It's never over. Ask Harlan.",
+		"file": "res://assets/voice/brenner/869ef2dadfd6.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"ef8deae92f7e": {
+		"speaker": "brenner",
+		"text": "He wouldn't tell me anything. He just kept saying, \"A tab.\" Like it was a joke.",
+		"file": "res://assets/voice/brenner/ef8deae92f7e.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"5827b809571d": {
+		"speaker": "brenner",
+		"text": "Come and take it.",
+		"file": "res://assets/voice/brenner/5827b809571d.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"77d7728f5490": {
+		"speaker": "brenner",
+		"text": "I did. Muzzle down, cylinder out, rounds in your palm. She was the best I ever had.",
+		"file": "res://assets/voice/brenner/77d7728f5490.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"3c743872b336": {
+		"speaker": "brenner",
+		"text": "Muzzle down. Cylinder out. Rounds in your palm.",
+		"file": "res://assets/voice/brenner/3c743872b336.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"cb7101f4de54": {
+		"speaker": "brenner",
+		"text": "Tell Maureen...",
+		"file": "res://assets/voice/brenner/cb7101f4de54.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"e1a31c285dda": {
+		"speaker": "brenner",
+		"text": "You think a drive full of piano music stops a forty-story building? Harlan's lawyers bill more an hour than you make in a week.",
+		"file": "res://assets/voice/brenner/e1a31c285dda.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"0a440151d71f": {
+		"speaker": "brenner",
+		"text": "Kessler. The coffee was a peace offering. I meant it.",
+		"file": "res://assets/voice/brenner/0a440151d71f.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"f69e24933567": {
+		"speaker": "ray",
+		"text": "Pier 9. The ocean still smells like diesel and money. At this hour you can see which is which.",
+		"file": "res://assets/voice/ray/f69e24933567.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"cbebc439f53f": {
+		"speaker": "ray",
+		"text": "Tiny, in his chair, with the radio. The sign.",
+		"file": "res://assets/voice/ray/cbebc439f53f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"be60d4899afd": {
+		"speaker": "ray",
+		"text": "In a few minutes. Stay in your chair, Tiny, whatever happens.",
+		"file": "res://assets/voice/ray/be60d4899afd.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"bdb13291e2a7": {
+		"speaker": "ray",
+		"text": "KJAZZ, low.",
+		"file": "res://assets/voice/ray/bdb13291e2a7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"beca2396de16": {
+		"speaker": "ray",
+		"text": "KJAZZ. Somebody's playing 'Round Midnight. Not as good as Danny did it.",
+		"file": "res://assets/voice/ray/beca2396de16.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9a51a4a4d4d3": {
+		"speaker": "ray",
+		"text": "Vance in the green door, an overcoat over the cardigan, holding his tea like a weapon.",
+		"file": "res://assets/voice/ray/9a51a4a4d4d3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ccd353d2392e": {
+		"speaker": "ray",
+		"text": "Nobody's square tonight.",
+		"file": "res://assets/voice/ray/ccd353d2392e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d887c1664415": {
+		"speaker": "ray",
+		"text": "An iron bollard at the end of the pier. A good place to put something down and wait.",
+		"file": "res://assets/voice/ray/d887c1664415.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"111e4da34642": {
+		"speaker": "ray",
+		"text": "That's where he left me a coffee.",
+		"file": "res://assets/voice/ray/111e4da34642.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2d409fd307a2": {
+		"speaker": "ray",
+		"text": "Tiny and Vance know their places. Then I wait at the end of the pier.",
+		"file": "res://assets/voice/ray/2d409fd307a2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0dcd1b6c1343": {
+		"speaker": "ray",
+		"text": "Walter Brenner. Six-three in an old belted raincoat, shoes like a parade.",
+		"file": "res://assets/voice/ray/0dcd1b6c1343.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5db7bee31e24": {
+		"speaker": "ray",
+		"text": "He looks like somebody's grandfather. He is somebody's grandfather.",
+		"file": "res://assets/voice/ray/5db7bee31e24.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"05f14f306faf": {
+		"speaker": "ray",
+		"text": "Walt Brenner, over the hood of his boss's car.",
+		"file": "res://assets/voice/ray/05f14f306faf.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"36864afbbcad": {
+		"speaker": "ray",
+		"text": "Anything you want to say, Walt, save it for a lawyer.",
+		"file": "res://assets/voice/ray/36864afbbcad.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a5fd0dc1366e": {
+		"speaker": "ray",
+		"text": "A long gray car. Preacher saw it stop on the Fletcher Drive bridge.",
+		"file": "res://assets/voice/ray/a5fd0dc1366e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"395293cdb8b1": {
+		"speaker": "ray",
+		"text": "A gray Lincoln Town Car. Long, clean, and somebody else's.",
+		"file": "res://assets/voice/ray/395293cdb8b1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e0973ecf6d3d": {
+		"speaker": "ray",
+		"text": "It's not my car. I'll let the lab drive it.",
+		"file": "res://assets/voice/ray/e0973ecf6d3d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"116ec453b013": {
+		"speaker": "ray",
+		"text": "The harbor's got enough of Danny's things.",
+		"file": "res://assets/voice/ray/116ec453b013.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1d6d552cd27c": {
+		"speaker": "ray",
+		"text": "Black water going pink. Whatever goes in here doesn't come back up.",
+		"file": "res://assets/voice/ray/1d6d552cd27c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"29d8fc64cc6e": {
+		"speaker": "ray",
+		"text": "Not today.",
+		"file": "res://assets/voice/ray/29d8fc64cc6e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"de8b742a6123": {
+		"speaker": "ray",
+		"text": "Cold. Tiny's taking the morning off.",
+		"file": "res://assets/voice/ray/de8b742a6123.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"90c574e54de3": {
+		"speaker": "ray",
+		"text": "The boat hook, back where it belongs. Tiny counts.",
+		"file": "res://assets/voice/ray/90c574e54de3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7a60314966ce": {
+		"speaker": "ray",
+		"text": "I've fished enough out of this pier.",
+		"file": "res://assets/voice/ray/7a60314966ce.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"aa77f99bc430": {
+		"speaker": "ray",
+		"text": "The gantry crane, red lights still blinking, though the sky's doing that job now.",
+		"file": "res://assets/voice/ray/aa77f99bc430.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"54091edaf9b9": {
+		"speaker": "ray",
+		"text": "Boxes from Busan and Shenzhen, pink in the dawn.",
+		"file": "res://assets/voice/ray/54091edaf9b9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9495c9462645": {
+		"speaker": "ray",
+		"text": "Sealed.",
+		"file": "res://assets/voice/ray/9495c9462645.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b879178e2586": {
+		"speaker": "ray",
+		"text": "HARBOR MARINE SALVAGE. Vance's front, and his back.",
+		"file": "res://assets/voice/ray/b879178e2586.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6bdafa25b890": {
+		"speaker": "ray",
+		"text": "My car, looking worse in daylight.",
+		"file": "res://assets/voice/ray/6bdafa25b890.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6c767d30393f": {
+		"speaker": "ray",
+		"text": "I'm not leaving. This is where it ends.",
+		"file": "res://assets/voice/ray/6c767d30393f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"71b9579b72de": {
+		"speaker": "ray",
+		"text": "Thanks for coming.",
+		"file": "res://assets/voice/ray/71b9579b72de.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4a0550425a77": {
+		"speaker": "ray",
+		"text": "The man on the phone.",
+		"file": "res://assets/voice/ray/4a0550425a77.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8f559b9fe7e9": {
+		"speaker": "ray",
+		"text": "Stay out of sight.",
+		"file": "res://assets/voice/ray/8f559b9fe7e9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ab8311c01277": {
+		"speaker": "ray",
+		"text": "I'm ready.",
+		"file": "res://assets/voice/ray/ab8311c01277.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5d37d37b3e78": {
+		"speaker": "ray",
+		"text": "Sunrise in twenty minutes. He'll be early. Cops are always early to the things that scare them.",
+		"file": "res://assets/voice/ray/5d37d37b3e78.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7ff19b27014b": {
+		"speaker": "ray",
+		"text": "Headlights between the containers, pale against the dawn. A long gray Lincoln rolls down slowly and stops. The engine runs a moment, then quits.",
+		"file": "res://assets/voice/ray/7ff19b27014b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"69e8ea6debe3": {
+		"speaker": "ray",
+		"text": "He carries two paper cups of coffee. He walks to me without hurrying and sets one on the bollard beside the phone.",
+		"file": "res://assets/voice/ray/69e8ea6debe3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e857dca1baf7": {
+		"speaker": "ray",
+		"text": "You're good with coffee.",
+		"file": "res://assets/voice/ray/e857dca1baf7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7156778e3327": {
+		"speaker": "ray",
+		"text": "That's it.",
+		"file": "res://assets/voice/ray/7156778e3327.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e14637e8194c": {
+		"speaker": "ray",
+		"text": "Let's see what you've got, Walt.",
+		"file": "res://assets/voice/ray/e14637e8194c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"cfeb49a6c987": {
+		"speaker": "ray",
+		"text": "An hour after Danny went down, Harlan's office booked you a Glide on the company account, Blue Note to Pryce Tower.",
+		"file": "res://assets/voice/ray/cfeb49a6c987.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"90126ebcedf7": {
+		"speaker": "ray",
+		"text": "Your driver gave you one star. He wrote that you smelled like gun oil.",
+		"file": "res://assets/voice/ray/90126ebcedf7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4de958ecda60": {
+		"speaker": "ray",
+		"text": "Kenji had a camera on his back seat. November's card. You, at twelve past one, wiping down a revolver, with a phone in a cracked case with a Blue Note sticker in your lap.",
+		"file": "res://assets/voice/ray/4de958ecda60.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ae73b55b1c4e": {
+		"speaker": "ray",
+		"text": "You handed out cards on that block last Thursday. Security consultant, Pryce Development. \"Empty by Christmas. The jazz club too.\"",
+		"file": "res://assets/voice/ray/ae73b55b1c4e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"08f0e6cfecc2": {
+		"speaker": "ray",
+		"text": "Your boss threw a party for Ted Haskell last night and drew a forty-story lobby where the Blue Note is.",
+		"file": "res://assets/voice/ray/08f0e6cfecc2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9a61f4a9eba3": {
+		"speaker": "ray",
+		"text": "A long gray car stopped on the Fletcher Drive bridge Tuesday after three, and a big man in an old cop's coat threw something into the reeds. I fished it out tonight.",
+		"file": "res://assets/voice/ray/9a61f4a9eba3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"440fcda8af59": {
+		"speaker": "ray",
+		"text": "The river's been concrete since 1938.",
+		"file": "res://assets/voice/ray/440fcda8af59.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3691d2062ebf": {
+		"speaker": "ray",
+		"text": "Tuesday night you stood inside Danny's tape for an hour with an old ID and a tray of coffee, asking my uniforms if they'd found his phone. Officer Park logs everybody.",
+		"file": "res://assets/voice/ray/3691d2062ebf.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8a7f85d289c1": {
+		"speaker": "ray",
+		"text": "You came back to see what you'd missed.",
+		"file": "res://assets/voice/ray/8a7f85d289c1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d8941a910c39": {
+		"speaker": "ray",
+		"text": "You signed in to see Maureen at one-twenty. At one-thirty you heard her half of my call, and her half had Sal Moretti's name in it.",
+		"file": "res://assets/voice/ray/d8941a910c39.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"922796b57a48": {
+		"speaker": "ray",
+		"text": "When she hung up, you asked, the way an old cop asks, and she told you the rest: the knock, and the girl who gave it to me.",
+		"file": "res://assets/voice/ray/922796b57a48.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c55136369af8": {
+		"speaker": "ray",
+		"text": "At ten to two she went to the copier, and you picked up her desk phone and called Nina Alvarez. You told her you were my partner. You called her \"young lady.\" You got Danny's knock.",
+		"file": "res://assets/voice/ray/c55136369af8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b88e8e3284d9": {
+		"speaker": "ray",
+		"text": "Otis has you on his log, and Nina's phone has Maureen's number at one fifty-two.",
+		"file": "res://assets/voice/ray/b88e8e3284d9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5b0b26acfb49": {
+		"speaker": "ray",
+		"text": "Three-twenty. W.B., club soda, no charge. Sal Moretti wrote down every drink he ever poured, and he wrote you down so somebody would find you.",
+		"file": "res://assets/voice/ray/5b0b26acfb49.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"12b2f6cfc809": {
+		"speaker": "ray",
+		"text": "And Dr. Shah says Sal died from a bar-arm choke, from behind. The department banned it in 1982. You came on in 1979.",
+		"file": "res://assets/voice/ray/12b2f6cfc809.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"df3bdb87e520": {
+		"speaker": "ray",
+		"text": "Brenner turns and looks at Vance for the first time. Then at Tiny.",
+		"file": "res://assets/voice/ray/df3bdb87e520.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"16e253c60779": {
+		"speaker": "ray",
+		"text": "Tuesday night, eleven o'clock, a private booking in the back booth at the Blue Note. Two eighteen-year-old Scotches and a club soda. Harlan Pryce, Ted Haskell, and you.",
+		"file": "res://assets/voice/ray/16e253c60779.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b4a06b54b414": {
+		"speaker": "ray",
+		"text": "Danny was playing 'Round Midnight ten feet away, and his phone was recording. \"You don't pay a man like that three times, Harlan. You pay him once.\"",
+		"file": "res://assets/voice/ray/b4a06b54b414.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"27e58cac6762": {
+		"speaker": "ray",
+		"text": "\"Then pay him, Walt.\"",
+		"file": "res://assets/voice/ray/27e58cac6762.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2cc6978baf75": {
+		"speaker": "ray",
+		"text": "I sleep days.",
+		"file": "res://assets/voice/ray/2cc6978baf75.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"771d254bc472": {
+		"speaker": "ray",
+		"text": "How much was Sal worth?",
+		"file": "res://assets/voice/ray/771d254bc472.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"01658fbb1e45": {
+		"speaker": "ray",
+		"text": "You don't know Maureen.",
+		"file": "res://assets/voice/ray/01658fbb1e45.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b1d1b9a5544f": {
+		"speaker": "ray",
+		"text": "I pick Danny's phone up off the bollard and put it in his hand. He weighs it, looks at the Blue Note sticker, and flicks it out over the water.",
+		"file": "res://assets/voice/ray/b1d1b9a5544f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4253656bb702": {
+		"speaker": "ray",
+		"text": "That's the second time you've thrown him in the water.",
+		"file": "res://assets/voice/ray/4253656bb702.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9a26434c5f85": {
+		"speaker": "ray",
+		"text": "It was dead before you threw it in the river, Walt. Danny's song wasn't on it. It went up to the cloud the second he stopped playing, and now it's in a place you'll never get to.",
+		"file": "res://assets/voice/ray/9a26434c5f85.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"30866a711c3d": {
+		"speaker": "ray",
+		"text": "He sets his coffee down on the bollard, very carefully. When his hand comes back out of his raincoat it has a .38 in it, held low and steady, the way they taught it in 1979.",
+		"file": "res://assets/voice/ray/30866a711c3d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3435caa04031": {
+		"speaker": "ray",
+		"text": "Put it down, Walt.",
+		"file": "res://assets/voice/ray/3435caa04031.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e18bda9723ca": {
+		"speaker": "ray",
+		"text": "She keeps your picture in her desk drawer, Walt. Right now she's going over a briefing she copied while you used her phone.",
+		"file": "res://assets/voice/ray/e18bda9723ca.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2b64c306659e": {
+		"speaker": "ray",
+		"text": "You pull that trigger and she's the one who reads my name on the board.",
+		"file": "res://assets/voice/ray/2b64c306659e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8f7a3b1a5e3b": {
+		"speaker": "ray",
+		"text": "You put her in it.",
+		"file": "res://assets/voice/ray/8f7a3b1a5e3b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3709834b5811": {
+		"speaker": "ray",
+		"text": "Sal opened his door to a dead man's knock and poured you a club soda on the house. Then he wrote it down, because that's who he was.",
+		"file": "res://assets/voice/ray/3709834b5811.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"88dfd9130a93": {
+		"speaker": "ray",
+		"text": "You killed the only man on that block who kept honest books.",
+		"file": "res://assets/voice/ray/88dfd9130a93.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"dbc8dde2811f": {
+		"speaker": "ray",
+		"text": "It was. You were the punch line.",
+		"file": "res://assets/voice/ray/dbc8dde2811f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"177ae1c83408": {
+		"speaker": "ray",
+		"text": "You came alone because you didn't want Harlan to know you'd left a loose end.",
+		"file": "res://assets/voice/ray/177ae1c83408.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f21bea80db54": {
+		"speaker": "ray",
+		"text": "He'll be at his desk at nine like nothing happened. He'll have a new driver by lunch.",
+		"file": "res://assets/voice/ray/f21bea80db54.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e477b95c8180": {
+		"speaker": "ray",
+		"text": "He looks past me at the gray Lincoln, then at the sun coming up behind the crane. He points the muzzle at the concrete, swings the cylinder out, and tips six rounds into his palm.",
+		"file": "res://assets/voice/ray/e477b95c8180.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0ada82aef7c8": {
+		"speaker": "ray",
+		"text": "He sets the empty revolver on the bollard next to my coffee, and the rounds beside it, in a neat row.",
+		"file": "res://assets/voice/ray/0ada82aef7c8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ca1a06983a82": {
+		"speaker": "ray",
+		"text": "Tell her yourself. You'll see her in court.",
+		"file": "res://assets/voice/ray/ca1a06983a82.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3cbd4bdc94a9": {
+		"speaker": "ray",
+		"text": "Go ahead, Walt. Do it in front of everybody. A loan shark, a doorman, and the sun.",
+		"file": "res://assets/voice/ray/3cbd4bdc94a9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9154631ea411": {
+		"speaker": "ray",
+		"text": "He raises the .38 to my face. Behind him Tiny stands up out of his chair, and the chair scrapes on the concrete. Brenner half turns toward the sound.",
+		"file": "res://assets/voice/ray/9154631ea411.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"bc4c5c06cf25": {
+		"speaker": "ray",
+		"text": "Tiny's hand closes over his wrist. The shot goes into the sky; the gulls come off the containers all at once.",
+		"file": "res://assets/voice/ray/bc4c5c06cf25.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"95bb660d5807": {
+		"speaker": "ray",
+		"text": "Tiny folds Brenner over the hood of the Lincoln like a man folding a towel.",
+		"file": "res://assets/voice/ray/95bb660d5807.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f125deabd72f": {
+		"speaker": "ray",
+		"text": "Thanks, Tiny.",
+		"file": "res://assets/voice/ray/f125deabd72f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"45c03763dfd4": {
+		"speaker": "ray",
+		"text": "Walter Brenner, you're under arrest for the murders of Salvatore Moretti and Daniel Reyes.",
+		"file": "res://assets/voice/ray/45c03763dfd4.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8dd2fe1a4070": {
+		"speaker": "ray",
+		"text": "Anything you want to say, I'd save it for a lawyer, and get a good one. Harlan's will be busy.",
+		"file": "res://assets/voice/ray/8dd2fe1a4070.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0c120ec6621f": {
+		"speaker": "ray",
+		"text": "A .38. Shah will want to introduce it to Danny.",
+		"file": "res://assets/voice/ray/0c120ec6621f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2f7e1d7add73": {
+		"speaker": "ray",
+		"text": "A patrol car with Harbor Division markings rolls down the pier with no lights and no siren, the way Otis promised, and two uniforms get out.",
+		"file": "res://assets/voice/ray/2f7e1d7add73.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"bebce84f4917": {
+		"speaker": "ray",
+		"text": "Then it'll be a long week.",
+		"file": "res://assets/voice/ray/bebce84f4917.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"310c9522704e": {
+		"speaker": "ray",
+		"text": "I know. That's the worst part.",
+		"file": "res://assets/voice/ray/310c9522704e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2a2ea34a2333": {
+		"speaker": "ray",
+		"text": "He says nothing. He looks straight ahead.",
+		"file": "res://assets/voice/ray/2a2ea34a2333.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"936585e3a345": {
+		"speaker": "ray",
+		"text": "The patrol car pulls away between the containers.",
+		"file": "res://assets/voice/ray/936585e3a345.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ba6ba8886c4f": {
+		"speaker": "ray",
+		"text": "That's him, Tiny. That's who did Danny.",
+		"file": "res://assets/voice/ray/ba6ba8886c4f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7f5c39a5040d": {
+		"speaker": "ray",
+		"text": "I know. I heard him. Tuesday. You weren't in, so he played it anyway.",
+		"file": "res://assets/voice/ray/7f5c39a5040d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6f8db2576df3": {
+		"speaker": "ray",
+		"text": "Tiny sits back down. He turns the radio up.",
+		"file": "res://assets/voice/ray/6f8db2576df3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"cd21c987e7f8": {
+		"speaker": "tiny",
+		"text": "Detective. You said you'd come tell me.",
+		"file": "res://assets/voice/tiny/cd21c987e7f8.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"22ceeea38cb5": {
+		"speaker": "tiny",
+		"text": "Nobody is.",
+		"file": "res://assets/voice/tiny/22ceeea38cb5.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"5e369e3f52fe": {
+		"speaker": "tiny",
+		"text": "Thank you.",
+		"file": "res://assets/voice/tiny/5e369e3f52fe.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"f83a1fe55a2e": {
+		"speaker": "tiny",
+		"text": "He played 'Round Midnight for me. Without me asking.",
+		"file": "res://assets/voice/tiny/f83a1fe55a2e.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"805e88cbe4d9": {
+		"speaker": "vance",
+		"text": "One of three. He only ever paid the first.",
+		"file": "res://assets/voice/vance/805e88cbe4d9.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"b1080f81add2": {
+		"speaker": "vance",
+		"text": "We're square, Detective. Danny paid his debts. So do I.",
+		"file": "res://assets/voice/vance/b1080f81add2.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"bd0fcb9ecea4": {
+		"speaker": "vance",
+		"text": "Then we're less crooked than we were. In my business that's a good morning.",
+		"file": "res://assets/voice/vance/bd0fcb9ecea4.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"50771f41c8c0": {
+		"speaker": "vance",
+		"text": "Detective. You look like a man who hasn't slept, and has decided not to.",
+		"file": "res://assets/voice/vance/50771f41c8c0.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"524b4dceb846": {
+		"speaker": "vance",
+		"text": "Don't thank me. I don't like men who telephone and ask about my clients. It's bad manners and worse for business.",
+		"file": "res://assets/voice/vance/524b4dceb846.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"5770261bc5ba": {
+		"speaker": "vance",
+		"text": "You asked me that before. This morning I get to hear the voice twice.",
+		"file": "res://assets/voice/vance/5770261bc5ba.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"175cce17574b": {
+		"speaker": "vance",
+		"text": "I'll know his voice. I never forget a voice I disliked.",
+		"file": "res://assets/voice/vance/175cce17574b.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"16a289c89091": {
+		"speaker": "vance",
+		"text": "I've stayed out of sight for forty years, Detective. It's my one real talent.",
+		"file": "res://assets/voice/vance/16a289c89091.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"588ea2c6d277": {
+		"speaker": "vance",
+		"text": "And I keep my .45 for people who want to be romantic.",
+		"file": "res://assets/voice/vance/588ea2c6d277.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"6091e10653f4": {
+		"speaker": "vance",
+		"text": "Dead men don't pay, Mr. Brenner. Danny paid me. All of it, Tuesday afternoon.",
+		"file": "res://assets/voice/vance/6091e10653f4.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"46fe4cc0b000": {
+		"speaker": "vance",
+		"text": "And I know your voice. You telephoned me Wednesday to ask.",
+		"file": "res://assets/voice/vance/46fe4cc0b000.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"7400edfb6692": {
+		"speaker": "vance",
+		"text": "He's right. I'm watching.",
+		"file": "res://assets/voice/vance/7400edfb6692.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"76ba46ee739c": {
+		"speaker": "vance",
+		"text": "A revolver, Mr. Brenner. I did tell the detective. They're for people who want to be romantic about it.",
+		"file": "res://assets/voice/vance/76ba46ee739c.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"a91d24a11fb1": {
+		"speaker": "doyle",
+		"text": "Harbor Division just booked Walt Brenner for two homicides on your say-so. Walt. Ray, have you lost your mind?",
+		"file": "res://assets/voice/doyle/a91d24a11fb1.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"16b81895f801": {
+		"speaker": "doyle",
+		"text": "(very quietly) He was in my office. He brought coffee.",
+		"file": "res://assets/voice/doyle/16b81895f801.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"b603bc83651f": {
+		"speaker": "doyle",
+		"text": "Give me the hard version, Ray. The one the captain's going to give me.",
+		"file": "res://assets/voice/doyle/b603bc83651f.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"5c50baf3ffe4": {
+		"speaker": "doyle",
+		"text": "He brought me coffee. He asked how my night was going. And I told him about your bartender like it was gossip. Like it was nothing.",
+		"file": "res://assets/voice/doyle/5c50baf3ffe4.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"63f4ec3f10cd": {
+		"speaker": "doyle",
+		"text": "Not like this. Not like this, Ray.",
+		"file": "res://assets/voice/doyle/63f4ec3f10cd.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"7a052195a00c": {
+		"speaker": "doyle",
+		"text": "Captain. It's Doyle. No, sir, it can't wait until eight.",
+		"file": "res://assets/voice/doyle/7a052195a00c.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"c7e09ca74d59": {
+		"speaker": "doyle",
+		"text": "Yes, sir. I'll be the one testifying.",
+		"file": "res://assets/voice/doyle/c7e09ca74d59.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"9926428329f1": {
+		"speaker": "doyle",
+		"text": "The call, the copier, all of it. It'll cost me.",
+		"file": "res://assets/voice/doyle/9926428329f1.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"ce4b5fc58d36": {
+		"speaker": "doyle",
+		"text": "I know. I'll carry the box. You carry the drive, and you don't let go of it until the DA signs for it in front of both of us.",
+		"file": "res://assets/voice/doyle/ce4b5fc58d36.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"a7dd4b651de4": {
+		"speaker": "doyle",
+		"text": "Every comma.",
+		"file": "res://assets/voice/doyle/a7dd4b651de4.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"c07f787314fb": {
+		"speaker": "doyle",
+		"text": "Go home after, Ray. That's not an order. I don't think I get to give you those this morning.",
+		"file": "res://assets/voice/doyle/c07f787314fb.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"806b70f18ec1": {
+		"speaker": "doyle",
+		"text": "That's what I thought.",
+		"file": "res://assets/voice/doyle/806b70f18ec1.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"063ae96b0ef2": {
+		"speaker": "doyle",
+		"text": "Give me the drive, Ray. I'll take it to IA myself, today, properly. We do this by the book.",
+		"file": "res://assets/voice/doyle/063ae96b0ef2.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"7399c231447c": {
+		"speaker": "doyle",
+		"text": "Walt killed a bartender. That we can prove, and that's what he'll go down for.",
+		"file": "res://assets/voice/doyle/7399c231447c.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"ad827721d5e3": {
+		"speaker": "doyle",
+		"text": "Danny was a blackmailer who got shot in an alley. I'm sorry, Ray. That's what the captain will see.",
+		"file": "res://assets/voice/doyle/ad827721d5e3.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"11ec9116d2cf": {
+		"speaker": "mara",
+		"text": "Quist.",
+		"file": "res://assets/voice/mara/11ec9116d2cf.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"7617cb21361e": {
+		"speaker": "mara",
+		"text": "(instantly awake) Where are you?",
+		"file": "res://assets/voice/mara/7617cb21361e.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"b8a8668d5835": {
+		"speaker": "mara",
+		"text": "You know what this does to you.",
+		"file": "res://assets/voice/mara/b8a8668d5835.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"98942294002e": {
+		"speaker": "mara",
+		"text": "When I've made my copy, the drive goes to the DA. I'll walk it over myself.",
+		"file": "res://assets/voice/mara/98942294002e.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"cd3c383061d8": {
+		"speaker": "mara",
+		"text": "It goes up at noon. They'll know where it came from.",
+		"file": "res://assets/voice/mara/cd3c383061d8.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"350aa74a3e59": {
+		"speaker": "okafor",
+		"text": "And the original?",
+		"file": "res://assets/voice/okafor/350aa74a3e59.ogg",
+		"voice": "kokoro: af_aoede, speed 0.95"
+	},
+	"a7435bd4aaf7": {
+		"speaker": "okafor",
+		"text": "I'll have one before lunch.",
+		"file": "res://assets/voice/okafor/a7435bd4aaf7.ogg",
+		"voice": "kokoro: af_aoede, speed 0.95"
+	},
+	"d31f8dc28508": {
+		"speaker": "okafor",
+		"text": "You understand this goes through every desk in your building. Including your lieutenant's.",
+		"file": "res://assets/voice/okafor/d31f8dc28508.ogg",
+		"voice": "kokoro: af_aoede, speed 0.95"
+	},
+	"b70f84b829ab": {
+		"speaker": "okafor",
+		"text": "It'll be slow. Men like Pryce make everything slow.",
+		"file": "res://assets/voice/okafor/b70f84b829ab.ogg",
+		"voice": "kokoro: af_aoede, speed 0.95"
+	},
+	"999ed9b98ae1": {
+		"speaker": "okafor",
+		"text": "(signing the chain-of-custody form) Go home, Detective. You'll be hearing from us more than you'd like.",
+		"file": "res://assets/voice/okafor/999ed9b98ae1.ogg",
+		"voice": "kokoro: af_aoede, speed 0.95"
+	},
+	"c3a9cf27ee0e": {
+		"speaker": "ray",
+		"text": "One drive. The original's frozen at Takes until somebody asks a judge for it, and whoever gets this decides whether anybody asks.",
+		"file": "res://assets/voice/ray/c3a9cf27ee0e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"94fe694930eb": {
+		"speaker": "ray",
+		"text": "Danny's song on a piece of plastic the size of a stick of gum.",
+		"file": "res://assets/voice/ray/94fe694930eb.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"adb3e3a990cd": {
+		"speaker": "ray",
+		"text": "Whoever I hand it to decides what Danny Reyes was worth. The department. The law. The paper.",
+		"file": "res://assets/voice/ray/adb3e3a990cd.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"37fbe5535003": {
+		"speaker": "ray",
+		"text": "Or Maureen.",
+		"file": "res://assets/voice/ray/37fbe5535003.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fc262822e3ce": {
+		"speaker": "ray",
+		"text": "The end of the pier. The sun's on the water now.",
+		"file": "res://assets/voice/ray/fc262822e3ce.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3485629608fb": {
+		"speaker": "ray",
+		"text": "Nothing left to put down.",
+		"file": "res://assets/voice/ray/3485629608fb.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5b41a8869cd7": {
+		"speaker": "ray",
+		"text": "Gold on the water. The harbor doesn't know what it's holding.",
+		"file": "res://assets/voice/ray/5b41a8869cd7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"50b6a8af5bfe": {
+		"speaker": "ray",
+		"text": "Tiny, the radio turned up. He hasn't looked away from the water.",
+		"file": "res://assets/voice/ray/50b6a8af5bfe.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8bdfe3747176": {
+		"speaker": "ray",
+		"text": "Vance in his doorway, finishing his tea, watching the morning like it owes him money.",
+		"file": "res://assets/voice/ray/8bdfe3747176.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d3d6ef59f2cb": {
+		"speaker": "ray",
+		"text": "Brenner's Lincoln, waiting for the lab's tow truck. It'll be the cleanest thing in the impound lot.",
+		"file": "res://assets/voice/ray/d3d6ef59f2cb.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4ccd7c51e142": {
+		"speaker": "ray",
+		"text": "My car. It's seen the whole night. It looks it.",
+		"file": "res://assets/voice/ray/4ccd7c51e142.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e25c433108ba": {
+		"speaker": "ray",
+		"text": "The pier in daylight. Everything looks smaller than it did at one in the morning.",
+		"file": "res://assets/voice/ray/e25c433108ba.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ea8e8eea5b0f": {
+		"speaker": "ray",
+		"text": "Thirty more seconds of nobody knowing.",
+		"file": "res://assets/voice/ray/ea8e8eea5b0f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"68de029778a2": {
+		"speaker": "ray",
+		"text": "Lieutenant. Come to Pier 9. Bring the briefing for the captain. You'll want to rewrite it.",
+		"file": "res://assets/voice/ray/68de029778a2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5f75d77afe6a": {
+		"speaker": "ray",
+		"text": "A dark sedan comes down the pier. Lt. Maureen Doyle: a good wool coat, her hair pinned up for a meeting at eight, a face that hasn't slept.",
+		"file": "res://assets/voice/ray/5f75d77afe6a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"473dca62630b": {
+		"speaker": "ray",
+		"text": "I found it. It was in a piano.",
+		"file": "res://assets/voice/ray/473dca62630b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"50d3adf37c94": {
+		"speaker": "ray",
+		"text": "I open Danny's box on the hood of my car and lay it out, and give her the gist: the one-thirty call, the copier, the one fifty-two call to Nina, the knock, Sal, the take.",
+		"file": "res://assets/voice/ray/50d3adf37c94.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8a8b6c519e5b": {
+		"speaker": "ray",
+		"text": "\"Walter Brenner, LAPD, retired. Security Consultant, Pryce Development.\" He handed these out on the Blue Note's block last Thursday.",
+		"file": "res://assets/voice/ray/8a8b6c519e5b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9648785c6f49": {
+		"speaker": "ray",
+		"text": "Empty by Christmas, the jazz club too.",
+		"file": "res://assets/voice/ray/9648785c6f49.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d4d158bc08a5": {
+		"speaker": "ray",
+		"text": "Wednesday, ten past one. A Glide from the Blue Note to Pryce Tower, billed to Pryce Development's business account. Rider: Walt B.",
+		"file": "res://assets/voice/ray/d4d158bc08a5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0a47f7b1078b": {
+		"speaker": "ray",
+		"text": "The driver gave him one star and wrote that he smelled like gun oil. An hour after Danny went down, Walt went straight to the boss, on the boss's account.",
+		"file": "res://assets/voice/ray/0a47f7b1078b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a7353a33270e": {
+		"speaker": "ray",
+		"text": "And the driver's back-seat camera has him in that car holding Danny's phone.",
+		"file": "res://assets/voice/ray/a7353a33270e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5920a7708ddf": {
+		"speaker": "ray",
+		"text": "Pryce threw him a party last night. \"Friends of Ted Haskell.\" Look inside. They've drawn a lobby where the Blue Note is.",
+		"file": "res://assets/voice/ray/5920a7708ddf.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6851e40249a6": {
+		"speaker": "ray",
+		"text": "The vote's next Wednesday, and he's the swing. His own chief of staff told me so, right before he asked for a lawyer.",
+		"file": "res://assets/voice/ray/6851e40249a6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fe88357ce332": {
+		"speaker": "ray",
+		"text": "Doyle looks at the hood of the car for a long time. The ride receipt, the card, the invitation, the envelope, the string still knotted to the pins.",
+		"file": "res://assets/voice/ray/fe88357ce332.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"77ccbe093830": {
+		"speaker": "ray",
+		"text": "You told me everything closes eventually.",
+		"file": "res://assets/voice/ray/77ccbe093830.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d6e4c00c0f57": {
+		"speaker": "ray",
+		"text": "She takes out her phone.",
+		"file": "res://assets/voice/ray/d6e4c00c0f57.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"da955a02241d": {
+		"speaker": "ray",
+		"text": "It cost Sal more.",
+		"file": "res://assets/voice/ray/da955a02241d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b788d7efc320": {
+		"speaker": "ray",
+		"text": "Every comma.",
+		"file": "res://assets/voice/ray/b788d7efc320.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b3f88f7bc04e": {
+		"speaker": "ray",
+		"text": "I had a name and a voice. I didn't have a single piece of paper with Walt and Pryce on it.",
+		"file": "res://assets/voice/ray/b3f88f7bc04e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"69f1ffd2cb82": {
+		"speaker": "ray",
+		"text": "I couldn't put Walt with Pryce that night. Somewhere in a dead driver's app there was a receipt I never looked for.",
+		"file": "res://assets/voice/ray/69f1ffd2cb82.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"048c1003f508": {
+		"speaker": "ray",
+		"text": "I had nothing with Pryce and Haskell on the same page. Somewhere up in Los Feliz there was a box of gift bags I walked past.",
+		"file": "res://assets/voice/ray/048c1003f508.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"00505d8c39f6": {
+		"speaker": "ray",
+		"text": "I hold the evidence bag a moment longer than I should. Then I put it in her hand.",
+		"file": "res://assets/voice/ray/00505d8c39f6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"56d2db5ea1b6": {
+		"speaker": "ray",
+		"text": "And Danny?",
+		"file": "res://assets/voice/ray/56d2db5ea1b6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f9dc32873f99": {
+		"speaker": "ray",
+		"text": "She gets back in her car. I watch it go.",
+		"file": "res://assets/voice/ray/f9dc32873f99.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"dfa16e6c2e76": {
+		"speaker": "ray",
+		"text": "She meant it. That's what I keep coming back to. She meant every word.",
+		"file": "res://assets/voice/ray/dfa16e6c2e76.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f8719c3fd382": {
+		"speaker": "ray",
+		"text": "Professional Standards Bureau? Detective Ray Kessler, Hollywood Homicide. I need to report a leak from a lieutenant's office.",
+		"file": "res://assets/voice/ray/f8719c3fd382.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"587e0e3913b9": {
+		"speaker": "ray",
+		"text": "And I need a deputy DA from Public Integrity at Pier 9, San Pedro, before the sun's all the way up.",
+		"file": "res://assets/voice/ray/587e0e3913b9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"92f1e3d550ec": {
+		"speaker": "ray",
+		"text": "Forty minutes later: two cars. Deputy DA Helen Okafor, a raincoat over gym clothes, and a silent IA sergeant with a camera.",
+		"file": "res://assets/voice/ray/92f1e3d550ec.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d12fe83265b5": {
+		"speaker": "ray",
+		"text": "She reads the index card, listens to me, and holds out an evidence envelope for the drive. I hand her Ike's hash sheet with it.",
+		"file": "res://assets/voice/ray/d12fe83265b5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9010eead6902": {
+		"speaker": "ray",
+		"text": "Frozen at Takes since five fifty-one. The lab sent a preservation letter. You'll want a warrant.",
+		"file": "res://assets/voice/ray/9010eead6902.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"37079bdbf73c": {
+		"speaker": "ray",
+		"text": "Slow's fine. Slow is how things stay done.",
+		"file": "res://assets/voice/ray/37079bdbf73c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5db4a7debad9": {
+		"speaker": "ray",
+		"text": "I take her card out of my coat and dial.",
+		"file": "res://assets/voice/ray/5db4a7debad9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"28ee652f04fe": {
+		"speaker": "ray",
+		"text": "It's a pattern.",
+		"file": "res://assets/voice/ray/28ee652f04fe.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ed6eccea6723": {
+		"speaker": "ray",
+		"text": "Twenty-five minutes later her hatchback bumps down the pier. She listens to the take on her laptop, headphones on, twice, without a word. Then she takes them off.",
+		"file": "res://assets/voice/ray/ed6eccea6723.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"34a965a3f70f": {
+		"speaker": "ray",
+		"text": "I know what it does to them.",
+		"file": "res://assets/voice/ray/34a965a3f70f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6b25dd53967a": {
+		"speaker": "ray",
+		"text": "Everybody always does.",
+		"file": "res://assets/voice/ray/6b25dd53967a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b7a182dc92f8": {
+		"speaker": "ray",
+		"text": "Five names on a board. Danny, Kenji, Gus, Owen, Sal. Nobody important stayed up for any of them.",
+		"file": "res://assets/voice/ray/b7a182dc92f8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a3a166be0775": {
+		"speaker": "ray",
+		"text": "Somebody has to.",
+		"file": "res://assets/voice/ray/a3a166be0775.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d9b76c83e11c": {
+		"speaker": "tiny",
+		"text": "Nobody plays it like Danny.",
+		"file": "res://assets/voice/tiny/d9b76c83e11c.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"432ee664a925": {
+		"speaker": "vance",
+		"text": "Go home, Detective. Even I'm going home.",
+		"file": "res://assets/voice/vance/432ee664a925.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"a2a9bcc137af": {
+		"speaker": "mara",
+		"text": "Detective Kessler? Mara Quist, the Times. I heard it on the scanner. Same bar as the piano player Tuesday. Is that a pattern?",
+		"file": "res://assets/voice/mara/a2a9bcc137af.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"478f6e0a6aed": {
+		"speaker": "mara",
+		"text": "That's what a pattern is.",
+		"file": "res://assets/voice/mara/478f6e0a6aed.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"ffa66cbac1f8": {
+		"speaker": "mara",
+		"text": "You'd be amazed how many stories start with that.",
+		"file": "res://assets/voice/mara/ffa66cbac1f8.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"aa1a4791165e": {
+		"speaker": "mara",
+		"text": "You're the only detective in Hollywood who works nights on purpose. People talk about you. Not always kindly.",
+		"file": "res://assets/voice/mara/aa1a4791165e.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"04c2593070b7": {
+		"speaker": "mara",
+		"text": "I am home. I live on the scanner.",
+		"file": "res://assets/voice/mara/04c2593070b7.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"c15ac35646ee": {
+		"speaker": "mara",
+		"text": "When it's a pattern, call me. Not the press office. Me.",
+		"file": "res://assets/voice/mara/c15ac35646ee.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"159b41c63d01": {
+		"speaker": "mara",
+		"text": "City Hall. Who pays for whose vote. It's like homicide, but nobody ever gets caught.",
+		"file": "res://assets/voice/mara/159b41c63d01.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"cbcd2fc5e4d0": {
+		"speaker": "mara",
+		"text": "Hollywood Core. Pryce Development wants forty stories where this bar is. The council votes next Wednesday.",
+		"file": "res://assets/voice/mara/cbcd2fc5e4d0.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"78595af0971f": {
+		"speaker": "mara",
+		"text": "Ted Haskell's the swing vote, and nobody can find out which way he swings. I've been on it a year. Nobody will talk to me.",
+		"file": "res://assets/voice/mara/78595af0971f.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"ae16763ccdab": {
+		"speaker": "mara",
+		"text": "It isn't. But thanks.",
+		"file": "res://assets/voice/mara/ae16763ccdab.ogg",
+		"voice": "kokoro: af_river, speed 1"
+	},
+	"5b2984811ed1": {
+		"speaker": "park",
+		"text": "Detective. Third time tonight. They should give us a punch card.",
+		"file": "res://assets/voice/park/5b2984811ed1.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"6950b5c44016": {
+		"speaker": "park",
+		"text": "The porter found him at four thirty-one and called it in on the bar phone. I was two blocks away.",
+		"file": "res://assets/voice/park/6950b5c44016.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"37d3717e2137": {
+		"speaker": "park",
+		"text": "He's in the back room. Dr. Shah's with him.",
+		"file": "res://assets/voice/park/37d3717e2137.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"719698797137": {
+		"speaker": "park",
+		"text": "Me. To check for a pulse. There wasn't one.",
+		"file": "res://assets/voice/park/719698797137.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"88eeaf841fce": {
+		"speaker": "park",
+		"text": "I'm sorry, Detective. Otis said you knew him.",
+		"file": "res://assets/voice/park/88eeaf841fce.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"aa771aab3d97": {
+		"speaker": "park",
+		"text": "The watch commander says suicide. Front door locked, back door locked, a man alone in his own bar with a rope.",
+		"file": "res://assets/voice/park/aa771aab3d97.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"63f1d1f5f244": {
+		"speaker": "park",
+		"text": "No note.",
+		"file": "res://assets/voice/park/63f1d1f5f244.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"1f51492ef9f5": {
+		"speaker": "park",
+		"text": "I held his tape. Midnight to four, in the rain.",
+		"file": "res://assets/voice/park/1f51492ef9f5.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"83023b41d8a8": {
+		"speaker": "park",
+		"text": "The usual. Two drunks and a man with a dog. And a retired cop. Big old-timer, white hair, belted raincoat.",
+		"file": "res://assets/voice/park/83023b41d8a8.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"899320939ea5": {
+		"speaker": "park",
+		"text": "He showed me his old ID and stood inside the tape with us for an hour like he never left the job. Brought us all coffee from the place on Cahuenga.",
+		"file": "res://assets/voice/park/899320939ea5.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"5d672bfa30d4": {
+		"speaker": "park",
+		"text": "Whether we'd found the victim's phone. I said no. He said kids today lose everything. A car came for him around ten past one.",
+		"file": "res://assets/voice/park/5d672bfa30d4.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"5d7515836d5a": {
+		"speaker": "park",
+		"text": "Walt something. He said everybody at Hollywood knows him. It's in my scene log. I log everybody inside my tape.",
+		"file": "res://assets/voice/park/5d7515836d5a.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"d86308aa2686": {
+		"speaker": "park",
+		"text": "I'll keep the Times on the right side of the tape. She's very polite about ignoring me.",
+		"file": "res://assets/voice/park/d86308aa2686.ogg",
+		"voice": "kokoro: af_bella, speed 1.05"
+	},
+	"e01c27b35877": {
+		"speaker": "ray",
+		"text": "Three hours ago I stood here and knocked like a dead man. Sal opened up.",
+		"file": "res://assets/voice/ray/e01c27b35877.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a8dff7b23fb1": {
+		"speaker": "ray",
+		"text": "The neon's off. Eight years across the street, and I've never seen it off.",
+		"file": "res://assets/voice/ray/a8dff7b23fb1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a32b3652b65a": {
+		"speaker": "ray",
+		"text": "Yellow tape from the lamp to the hydrant. It keeps out everyone who'd behave anyway.",
+		"file": "res://assets/voice/ray/a32b3652b65a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"352a513dcb04": {
+		"speaker": "ray",
+		"text": "The door I talked through. It's open now. That's worse.",
+		"file": "res://assets/voice/ray/352a513dcb04.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"986e80e62ea3": {
+		"speaker": "ray",
+		"text": "Mara Quist, LA Times. Notebook dry under her coat. She's been up longer than me.",
+		"file": "res://assets/voice/ray/986e80e62ea3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d79162483cc2": {
+		"speaker": "ray",
+		"text": "She knows where I keep it.",
+		"file": "res://assets/voice/ray/d79162483cc2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"788999e7b763": {
+		"speaker": "ray",
+		"text": "Not for the paper.",
+		"file": "res://assets/voice/ray/788999e7b763.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3a1ca3847c46": {
+		"speaker": "ray",
+		"text": "Officer Park. Third scene tonight, and her rain cape's still pressed.",
+		"file": "res://assets/voice/ray/3a1ca3847c46.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6d8d9227e272": {
+		"speaker": "ray",
+		"text": "The porter. Sixties, a mop bucket, and a face that hasn't caught up with what it saw.",
+		"file": "res://assets/voice/ray/6d8d9227e272.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c7f0017bfa41": {
+		"speaker": "ray",
+		"text": "The precinct. Room 214's one flight up. So's the lieutenant's office.",
+		"file": "res://assets/voice/ray/c7f0017bfa41.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7fb14ba2ef4a": {
+		"speaker": "ray",
+		"text": "Not yet. Sal first.",
+		"file": "res://assets/voice/ray/7fb14ba2ef4a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ba4fa211ac7b": {
+		"speaker": "ray",
+		"text": "The payphone. Three hours ago I put a dime in it and started all this.",
+		"file": "res://assets/voice/ray/ba4fa211ac7b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"338622ab93cd": {
+		"speaker": "ray",
+		"text": "I've made my call. It cost more than a dime.",
+		"file": "res://assets/voice/ray/338622ab93cd.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6acbf8837801": {
+		"speaker": "ray",
+		"text": "NOTICE OF PUBLIC HEARING. Applicant: Pryce Development. It was taped to the Blue Note's wall the whole time.",
+		"file": "res://assets/voice/ray/6acbf8837801.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1a1a5f23e947": {
+		"speaker": "ray",
+		"text": "It's somebody else's paperwork. For now.",
+		"file": "res://assets/voice/ray/1a1a5f23e947.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f32d000790b3": {
+		"speaker": "ray",
+		"text": "The dumpster where I found the matchbook. Seems like a week ago.",
+		"file": "res://assets/voice/ray/f32d000790b3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"354ad47f9227": {
+		"speaker": "ray",
+		"text": "Nothing in there tonight but rain.",
+		"file": "res://assets/voice/ray/354ad47f9227.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8963e59b4403": {
+		"speaker": "ray",
+		"text": "Where they found Danny on Tuesday. The back door to the Blue Note opens onto it.",
+		"file": "res://assets/voice/ray/8963e59b4403.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e11dc54811fd": {
+		"speaker": "ray",
+		"text": "Locked from the inside. I'll go in the front.",
+		"file": "res://assets/voice/ray/e11dc54811fd.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3c8e6b2d453c": {
+		"speaker": "ray",
+		"text": "Shah's van. She beat me here. She always does.",
+		"file": "res://assets/voice/ray/3c8e6b2d453c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"dae99e4c7a99": {
+		"speaker": "ray",
+		"text": "Not my van.",
+		"file": "res://assets/voice/ray/dae99e4c7a99.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c7fd1ff28760": {
+		"speaker": "ray",
+		"text": "Park's unit, lights turning for nobody.",
+		"file": "res://assets/voice/ray/c7fd1ff28760.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b02a4eda9182": {
+		"speaker": "ray",
+		"text": "Road flares, burning down in the wet. Somebody wanted the traffic to slow down for Sal. Nobody's driving.",
+		"file": "res://assets/voice/ray/b02a4eda9182.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3e3259d4a87c": {
+		"speaker": "ray",
+		"text": "BLUE NOTE. Dark. I've never seen it dark.",
+		"file": "res://assets/voice/ray/3e3259d4a87c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0ebecc0be584": {
+		"speaker": "ray",
+		"text": "My car. Still wet, still dented.",
+		"file": "res://assets/voice/ray/0ebecc0be584.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"980e50a1e88a": {
+		"speaker": "ray",
+		"text": "It's a bar. People keep dying near it.",
+		"file": "res://assets/voice/ray/980e50a1e88a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"64949c54b45b": {
+		"speaker": "ray",
+		"text": "No comment.",
+		"file": "res://assets/voice/ray/64949c54b45b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"61f320c4589a": {
+		"speaker": "ray",
+		"text": "How do you know my name?",
+		"file": "res://assets/voice/ray/61f320c4589a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"59803251471c": {
+		"speaker": "ray",
+		"text": "Go home, Ms. Quist.",
+		"file": "res://assets/voice/ray/59803251471c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"aa3eb6d44d33": {
+		"speaker": "ray",
+		"text": "What are you working on?",
+		"file": "res://assets/voice/ray/aa3eb6d44d33.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0fc225562f85": {
+		"speaker": "ray",
+		"text": "What do you know about the block?",
+		"file": "res://assets/voice/ray/0fc225562f85.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"229a83b6582f": {
+		"speaker": "ray",
+		"text": "Pryce Development. It was taped to the Blue Note's wall the whole time.",
+		"file": "res://assets/voice/ray/229a83b6582f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2dd565d18226": {
+		"speaker": "ray",
+		"text": "Goodnight.",
+		"file": "res://assets/voice/ray/2dd565d18226.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8b12882a4d4e": {
+		"speaker": "ray",
+		"text": "What happened?",
+		"file": "res://assets/voice/ray/8b12882a4d4e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"455aeb9a683d": {
+		"speaker": "ray",
+		"text": "Who cut him down?",
+		"file": "res://assets/voice/ray/455aeb9a683d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e2af17c583bd": {
+		"speaker": "ray",
+		"text": "What's patrol calling it?",
+		"file": "res://assets/voice/ray/e2af17c583bd.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"971c93ab58d6": {
+		"speaker": "ray",
+		"text": "A note?",
+		"file": "res://assets/voice/ray/971c93ab58d6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0dc0c9b810f5": {
+		"speaker": "ray",
+		"text": "Sal wrote down every drink he poured for thirty years. And he didn't leave a note.",
+		"file": "res://assets/voice/ray/0dc0c9b810f5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"24754abd03a6": {
+		"speaker": "ray",
+		"text": "Danny's alley, Tuesday.",
+		"file": "res://assets/voice/ray/24754abd03a6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"77d67f0981e5": {
+		"speaker": "ray",
+		"text": "Anybody hang around?",
+		"file": "res://assets/voice/ray/77d67f0981e5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8d23303a9de2": {
+		"speaker": "ray",
+		"text": "He ask anything?",
+		"file": "res://assets/voice/ray/8d23303a9de2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"96cb2ecd6436": {
+		"speaker": "ray",
+		"text": "An old cop at a fresh scene, asking about the one thing that's missing.",
+		"file": "res://assets/voice/ray/96cb2ecd6436.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f7a925eb67c6": {
+		"speaker": "ray",
+		"text": "I did.",
+		"file": "res://assets/voice/ray/f7a925eb67c6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"67b8211b5097": {
+		"speaker": "ray",
+		"text": "You found him?",
+		"file": "res://assets/voice/ray/67b8211b5097.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"61cdac927995": {
+		"speaker": "ray",
+		"text": "The front door.",
+		"file": "res://assets/voice/ray/61cdac927995.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"cbc854232d90": {
+		"speaker": "ray",
+		"text": "Somebody went out the front and pulled it shut behind him.",
+		"file": "res://assets/voice/ray/cbc854232d90.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5aa363a3411d": {
+		"speaker": "ray",
+		"text": "Sal's habits.",
+		"file": "res://assets/voice/ray/5aa363a3411d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e739e583494b": {
+		"speaker": "ray",
+		"text": "Who knows the knock?",
+		"file": "res://assets/voice/ray/e739e583494b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d11670d79e40": {
+		"speaker": "ray",
+		"text": "Go home, Teo.",
+		"file": "res://assets/voice/ray/d11670d79e40.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"243ff103d078": {
+		"speaker": "ray",
+		"text": "Not yet. Whatever I need is on this block.",
+		"file": "res://assets/voice/ray/243ff103d078.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e6fc6c42da4e": {
+		"speaker": "ray",
+		"text": "Pier 9. Last time I drove down there, Danny was a debt.",
+		"file": "res://assets/voice/ray/e6fc6c42da4e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"01d212ead333": {
+		"speaker": "ray",
+		"text": "Sal's inside. So's whatever he left me.",
+		"file": "res://assets/voice/ray/01d212ead333.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"dadfbcda6679": {
+		"speaker": "teo",
+		"text": "You're the detective from across the street. Sal said you came by. Through the door.",
+		"file": "res://assets/voice/teo/dadfbcda6679.ogg",
+		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2"
+	},
+	"8e09a2b0969b": {
+		"speaker": "teo",
+		"text": "He was scared after. He told me, \"Teo, I talked.\" Like it was a sin.",
+		"file": "res://assets/voice/teo/8e09a2b0969b.ogg",
+		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2"
+	},
+	"4d4623088670": {
+		"speaker": "teo",
+		"text": "Four-thirty, like every morning. Nineteen years. We've been closed since Danny, but Sal said keep coming, we open again Saturday.",
+		"file": "res://assets/voice/teo/4d4623088670.ogg",
+		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2"
+	},
+	"f6700173cdef": {
+		"speaker": "teo",
+		"text": "I let myself in, I take the chairs down, I go to the back for the mop. And he was...",
+		"file": "res://assets/voice/teo/f6700173cdef.ogg",
+		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2"
+	},
+	"a9b727db0f03": {
+		"speaker": "teo",
+		"text": "I called 911 on the bar phone. Then I came out here. I haven't been able to go back in.",
+		"file": "res://assets/voice/teo/a9b727db0f03.ogg",
+		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2"
+	},
+	"4bc2e97936f8": {
+		"speaker": "teo",
+		"text": "It was on the latch. Just the latch. Sal threw the deadbolt every night, and the chain, and he checked it twice.",
+		"file": "res://assets/voice/teo/4bc2e97936f8.ogg",
+		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2"
+	},
+	"7249ebcf8cbe": {
+		"speaker": "teo",
+		"text": "Nineteen years, I never once came in on just the latch.",
+		"file": "res://assets/voice/teo/7249ebcf8cbe.ogg",
+		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2"
+	},
+	"c6041b3d8a6f": {
+		"speaker": "teo",
+		"text": "He wrote everything down. Every drink, in the book by the register. Even mine, and I don't drink.",
+		"file": "res://assets/voice/teo/c6041b3d8a6f.ogg",
+		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2"
+	},
+	"51ef23b0e5c2": {
+		"speaker": "teo",
+		"text": "\"Teo, water, four thirty-five,\" every morning. He used to say, \"If it isn't in the book, it didn't happen.\"",
+		"file": "res://assets/voice/teo/51ef23b0e5c2.ogg",
+		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2"
+	},
+	"25aea7bb235a": {
+		"speaker": "teo",
+		"text": "I don't knock. I have a key. Since Tuesday Sal only opened that door to Danny's knock.",
+		"file": "res://assets/voice/teo/25aea7bb235a.ogg",
+		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2"
+	},
+	"5f1bb35d07ba": {
+		"speaker": "teo",
+		"text": "He said, \"Teo, if anybody knocks it any other way, I'm not home.\"",
+		"file": "res://assets/voice/teo/5f1bb35d07ba.ogg",
+		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2"
+	},
+	"31a3cc7c4644": {
+		"speaker": "teo",
+		"text": "Who's going to mop?",
+		"file": "res://assets/voice/teo/31a3cc7c4644.ogg",
+		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2"
+	},
+	"d4ededc72614": {
+		"speaker": "ray",
+		"text": "Room 214. Five hours ago I pinned an envelope next to Danny and drew a question mark. Time to fill it in.",
+		"file": "res://assets/voice/ray/d4ededc72614.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"30d2f0ad4b1f": {
+		"speaker": "ray",
+		"text": "Room 214. Whoever came for Sal knew he'd only open to Danny's knock. But he didn't know the knock. He had to call Nina for it.",
+		"file": "res://assets/voice/ray/30d2f0ad4b1f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"74a01abd6d8b": {
+		"speaker": "ray",
+		"text": "Danny knocked like that on Vance's door every Tuesday. Tiny and Vance had the rhythm and never needed to ask. This man had the rule and not the rhythm.",
+		"file": "res://assets/voice/ray/74a01abd6d8b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a852ffc16b11": {
+		"speaker": "ray",
+		"text": "I told somebody the rule. Who did I tell?",
+		"file": "res://assets/voice/ray/a852ffc16b11.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"51bdaffd12b2": {
+		"speaker": "ray",
+		"text": "Not yet. The board first.",
+		"file": "res://assets/voice/ray/51bdaffd12b2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"37e89e810d61": {
+		"speaker": "ray",
+		"text": "The sky's gone the color of a dirty dime. Sunrise in an hour.",
+		"file": "res://assets/voice/ray/37e89e810d61.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d0a03d48ac5d": {
+		"speaker": "ray",
+		"text": "Gray over the parking lot. The rain's thinking about stopping.",
+		"file": "res://assets/voice/ray/d0a03d48ac5d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b296f0462cf7": {
+		"speaker": "ray",
+		"text": "Five to six. Five minutes until I'm off shift. Then I'm a civilian with a badge.",
+		"file": "res://assets/voice/ray/b296f0462cf7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4d259cfbab73": {
+		"speaker": "ray",
+		"text": "Twenty past five. Forty minutes until I'm supposed to go home.",
+		"file": "res://assets/voice/ray/4d259cfbab73.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"419603c00f0f": {
+		"speaker": "ray",
+		"text": "Four corners and a hole in the middle where a piano player used to be.",
+		"file": "res://assets/voice/ray/419603c00f0f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7d67003a0659": {
+		"speaker": "ray",
+		"text": "Danny in the middle, Sal beside him now, and a name on the back of an index card.",
+		"file": "res://assets/voice/ray/7d67003a0659.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7e8b9705e080": {
+		"speaker": "ray",
+		"text": "Four corners and a middle. Danny's still in the middle, and now Sal is somewhere in it too.",
+		"file": "res://assets/voice/ray/7e8b9705e080.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b1a5f4b5fe19": {
+		"speaker": "ray",
+		"text": "Packed.",
+		"file": "res://assets/voice/ray/b1a5f4b5fe19.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"61cdc0ddc74d": {
+		"speaker": "ray",
+		"text": "After I know what Danny had.",
+		"file": "res://assets/voice/ray/61cdc0ddc74d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"282b4ace0bd3": {
+		"speaker": "ray",
+		"text": "Not yet. I need what Danny had.",
+		"file": "res://assets/voice/ray/282b4ace0bd3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d0f167ee6dd8": {
+		"speaker": "ray",
+		"text": "One call out, all night. One-thirty, to the lieutenant's office, one floor up.",
+		"file": "res://assets/voice/ray/d0f167ee6dd8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1dffb872cb33": {
+		"speaker": "ray",
+		"text": "I told her about Sal, and the knock, and Nina.",
+		"file": "res://assets/voice/ray/1dffb872cb33.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"cccfbe9e4a46": {
+		"speaker": "ray",
+		"text": "HOLLYWOOD STATION, INTERNAL. Every extension in the building.",
+		"file": "res://assets/voice/ray/cccfbe9e4a46.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b86e0b7d0b48": {
+		"speaker": "ray",
+		"text": "look",
+		"file": "res://assets/voice/ray/b86e0b7d0b48.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1bc9d9841404": {
+		"speaker": "ray",
+		"text": "Every extension in the building. One of them made a call it shouldn't have.",
+		"file": "res://assets/voice/ray/1bc9d9841404.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ad562fc27f66": {
+		"speaker": "ray",
+		"text": "Three-two-three, five-five-five, oh-one-eight-six. The lieutenant's direct line.",
+		"file": "res://assets/voice/ray/ad562fc27f66.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"348e22f453a3": {
+		"speaker": "ray",
+		"text": "That's Nina's police number. One fifty-two, twenty-two minutes after I hung up on her.",
+		"file": "res://assets/voice/ray/348e22f453a3.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0ba82718a338": {
+		"speaker": "ray",
+		"text": "Maureen Doyle doesn't call waitresses at two in the morning. She doesn't call anybody. She has people for that.",
+		"file": "res://assets/voice/ray/0ba82718a338.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"80171a56e1a9": {
+		"speaker": "ray",
+		"text": "The lieutenant's direct line. Somebody else was holding it at one fifty-two.",
+		"file": "res://assets/voice/ray/80171a56e1a9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"eb5a625cd195": {
+		"speaker": "ray",
+		"text": "The lieutenant's line, at one fifty-two. And at one-thirty I was on it, telling her everything.",
+		"file": "res://assets/voice/ray/eb5a625cd195.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b76a685589e4": {
+		"speaker": "ray",
+		"text": "I close my eyes and play the call back.",
+		"file": "res://assets/voice/ray/b76a685589e4.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a2f6ac1e03aa": {
+		"speaker": "ray",
+		"text": "One-thirty. Rain on the window. Her voice on the line, one floor up.",
+		"file": "res://assets/voice/ray/a2f6ac1e03aa.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"bf2379d7cf1c": {
+		"speaker": "ray",
+		"text": "She says that every time I call. It's always one-thirty somewhere.",
+		"file": "res://assets/voice/ray/bf2379d7cf1c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ab38387b5f2f": {
+		"speaker": "ray",
+		"text": "And I told her. Sal Moretti, the bartender.",
+		"file": "res://assets/voice/ray/ab38387b5f2f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"85205cb6eb9c": {
+		"speaker": "ray",
+		"text": "And I told her how he talks: through his door, if you knock right. Danny's knock. His girl Nina gave it to me. I said all of it.",
+		"file": "res://assets/voice/ray/85205cb6eb9c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"557f063f673a": {
+		"speaker": "ray",
+		"text": "\"Thanks, Walt. Black is fine.\" Muffled, away from the phone, right in the middle of it.",
+		"file": "res://assets/voice/ray/557f063f673a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"fdc96baf3421": {
+		"speaker": "ray",
+		"text": "Her favorite song. Not the line.",
+		"file": "res://assets/voice/ray/fdc96baf3421.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"27d72c72f596": {
+		"speaker": "ray",
+		"text": "There was somebody in her office at one-thirty in the morning, bringing her coffee and listening to her half of my call.",
+		"file": "res://assets/voice/ray/27d72c72f596.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"cc8c4d5308ad": {
+		"speaker": "ray",
+		"text": "Her half had Sal's name in it. The rest she could tell him after she hung up.",
+		"file": "res://assets/voice/ray/cc8c4d5308ad.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3f7f4d3cac2c": {
+		"speaker": "ray",
+		"text": "Otis. I need a black-and-white at Pier 9, San Pedro, at a quarter to seven. Lights off. No radio.",
+		"file": "res://assets/voice/ray/3f7f4d3cac2c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d5aa8eedefa8": {
+		"speaker": "ray",
+		"text": "I know.",
+		"file": "res://assets/voice/ray/d5aa8eedefa8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f2745037ac64": {
+		"speaker": "ray",
+		"text": "Otis. Who came up to see the lieutenant last night?",
+		"file": "res://assets/voice/ray/f2745037ac64.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"861637afe7ef": {
+		"speaker": "ray",
+		"text": "Walt.",
+		"file": "res://assets/voice/ray/861637afe7ef.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3fa7b6212ffe": {
+		"speaker": "ray",
+		"text": "Was she with him the whole time?",
+		"file": "res://assets/voice/ray/3fa7b6212ffe.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e2c753775f0f": {
+		"speaker": "ray",
+		"text": "Alone.",
+		"file": "res://assets/voice/ray/e2c753775f0f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"abb3180fa5b4": {
+		"speaker": "ray",
+		"text": "Nothing yet. Don't write down that I asked.",
+		"file": "res://assets/voice/ray/abb3180fa5b4.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d3ef4c9ab074": {
+		"speaker": "ray",
+		"text": "W.B., club soda. Walter Brenner.",
+		"file": "res://assets/voice/ray/d3ef4c9ab074.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"978a0a8308f6": {
+		"speaker": "ray",
+		"text": "Walt B. A Glide from the Blue Note to Pryce Tower an hour after Danny died. One star. Gun oil. And Kenji had a camera on his back seat.",
+		"file": "res://assets/voice/ray/978a0a8308f6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5671bc00d9c0": {
+		"speaker": "ray",
+		"text": "Walter Brenner, LAPD, retired. Security consultant, Pryce Development.",
+		"file": "res://assets/voice/ray/5671bc00d9c0.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"66f907e0e6d1": {
+		"speaker": "ray",
+		"text": "Park's old-timer at Danny's tape. An old ID, coffee from Cahuenga, and one question: did we find the phone.",
+		"file": "res://assets/voice/ray/66f907e0e6d1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d83246a865cd": {
+		"speaker": "ray",
+		"text": "\"He drives for some developer.\" Andre said Pryce's driver was a big old guy who used to be a cop.",
+		"file": "res://assets/voice/ray/d83246a865cd.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4dd8524f217e": {
+		"speaker": "ray",
+		"text": "Big fellow, old cop's coat.",
+		"file": "res://assets/voice/ray/4dd8524f217e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"68ab2e5b4572": {
+		"speaker": "ray",
+		"text": "Maureen didn't make that call. She went to copy the captain's briefing, and the man who taught her to drive a black-and-white picked up her phone.",
+		"file": "res://assets/voice/ray/68ab2e5b4572.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1918c8a4b257": {
+		"speaker": "ray",
+		"text": "She told him what I told her, because I told her, because she's my boss. That's how it works.",
+		"file": "res://assets/voice/ray/1918c8a4b257.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"76007fd30fe7": {
+		"speaker": "ray",
+		"text": "Sal Moretti's dead.",
+		"file": "res://assets/voice/ray/76007fd30fe7.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b485a656edca": {
+		"speaker": "ray",
+		"text": "Isn't it.",
+		"file": "res://assets/voice/ray/b485a656edca.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5fbce912ad62": {
+		"speaker": "ray",
+		"text": "He's never heard me.",
+		"file": "res://assets/voice/ray/5fbce912ad62.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5c07a7a3d7d1": {
+		"speaker": "ray",
+		"text": "I'm going home at six.",
+		"file": "res://assets/voice/ray/5c07a7a3d7d1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c816fd4b5702": {
+		"speaker": "ray",
+		"text": "First time for everything.",
+		"file": "res://assets/voice/ray/c816fd4b5702.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3048fe4430ba": {
+		"speaker": "ray",
+		"text": "Twenty-six years, and the first time I lied to a lieutenant it felt like the right thing. It felt like being sick. Both.",
+		"file": "res://assets/voice/ray/3048fe4430ba.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2f95a64f4364": {
+		"speaker": "ray",
+		"text": "Tell me.",
+		"file": "res://assets/voice/ray/2f95a64f4364.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2a2b73b9cca2": {
+		"speaker": "ray",
+		"text": "Eight minutes before he died.",
+		"file": "res://assets/voice/ray/2a2b73b9cca2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"76c488c7dd66": {
+		"speaker": "ray",
+		"text": "Maybe. Give me ten minutes and a piano.",
+		"file": "res://assets/voice/ray/76c488c7dd66.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3cf89183e3bc": {
+		"speaker": "ray",
+		"text": "One more thing. The rideshare case. Eleven dashcam cards came in from a freezer around three. Pull November. Wednesday, ten past one, the back-seat lens.",
+		"file": "res://assets/voice/ray/3cf89183e3bc.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6070da51c977": {
+		"speaker": "ray",
+		"text": "Tiny. Ray Kessler. Friend of Danny's.",
+		"file": "res://assets/voice/ray/6070da51c977.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"cbde02a16fd8": {
+		"speaker": "ray",
+		"text": "I found him. I need your pier at sunrise, and I need Mr. Vance.",
+		"file": "res://assets/voice/ray/cbde02a16fd8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ec72f548db4e": {
+		"speaker": "ray",
+		"text": "You said a man telephoned you Wednesday, asking whether Danny paid you. You keep records, Mr. Vance.",
+		"file": "res://assets/voice/ray/ec72f548db4e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3fb681de228d": {
+		"speaker": "ray",
+		"text": "Did anyone else ask you about Danny this week?",
+		"file": "res://assets/voice/ray/3fb681de228d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"76e254ec57d0": {
+		"speaker": "ray",
+		"text": "You keep records, Mr. Vance.",
+		"file": "res://assets/voice/ray/76e254ec57d0.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"1f41f1a687e9": {
+		"speaker": "ray",
+		"text": "Same number as the card on Gus's desk.",
+		"file": "res://assets/voice/ray/1f41f1a687e9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5a91b56d9f36": {
+		"speaker": "ray",
+		"text": "I'd like to meet him on your pier at sunrise. I'd like you there. Tiny too.",
+		"file": "res://assets/voice/ray/5a91b56d9f36.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"dad0c7d438a9": {
+		"speaker": "ray",
+		"text": "I want witnesses who aren't anybody's.",
+		"file": "res://assets/voice/ray/dad0c7d438a9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"932f505e6429": {
+		"speaker": "ray",
+		"text": "Otis can find me a patrol car nobody upstairs knows about.",
+		"file": "res://assets/voice/ray/932f505e6429.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8d27465c3b9d": {
+		"speaker": "ray",
+		"text": "Thirty-one years behind a bar, and he opened the door one last time. Who for?",
+		"file": "res://assets/voice/ray/8d27465c3b9d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"277bd71548c9": {
+		"speaker": "ray",
+		"text": "Shah says he was dead before the rope. And he'd have had to fly to that pipe.",
+		"file": "res://assets/voice/ray/277bd71548c9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9c461c8db009": {
+		"speaker": "ray",
+		"text": "Shah says he was dead before the rope.",
+		"file": "res://assets/voice/ray/9c461c8db009.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c8514ce1a029": {
+		"speaker": "ray",
+		"text": "Nina was in a cooler with a paring knife, hiding from the man who did it. She couldn't put a bar-arm choke on a man if he lay down for her.",
+		"file": "res://assets/voice/ray/c8514ce1a029.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"18ce60202964": {
+		"speaker": "ray",
+		"text": "Her phone made the call. She was at the copier when it did. And nobody taught that hold to anyone who joined in '96.",
+		"file": "res://assets/voice/ray/18ce60202964.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8f66e7aa2026": {
+		"speaker": "ray",
+		"text": "Vance and Tiny heard Danny's knock every Tuesday. Whoever killed Sal had to call Nina to get it.",
+		"file": "res://assets/voice/ray/8f66e7aa2026.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"12674e917f52": {
+		"speaker": "ray",
+		"text": "The man who brought the coffee.",
+		"file": "res://assets/voice/ray/12674e917f52.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c4d35baadff1": {
+		"speaker": "ray",
+		"text": "Somebody pulled the trigger on Danny. Somebody else named the price. Who?",
+		"file": "res://assets/voice/ray/c4d35baadff1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6b4925c556fd": {
+		"speaker": "ray",
+		"text": "Dead men don't pay, and Danny had paid.",
+		"file": "res://assets/voice/ray/6b4925c556fd.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"9aa0a2fb490e": {
+		"speaker": "ray",
+		"text": "Nina had a plan for Lisbon. You don't kill the man who's buying the tickets.",
+		"file": "res://assets/voice/ray/9aa0a2fb490e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e10428eab173": {
+		"speaker": "ray",
+		"text": "Maureen never heard of Danny Reyes until he was a file on her desk.",
+		"file": "res://assets/voice/ray/e10428eab173.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"69d0249ab970": {
+		"speaker": "ray",
+		"text": "Walt Brenner. He killed Danny for a price somebody else named, and he killed Sal for opening a door.",
+		"file": "res://assets/voice/ray/69d0249ab970.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6b3b9638b3c5": {
+		"speaker": "ray",
+		"text": "A ride receipt, a business card and a party invitation. Three pieces of paper that hadn't been introduced. Now they're family.",
+		"file": "res://assets/voice/ray/6b3b9638b3c5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"330643e8d0ca": {
+		"speaker": "ray",
+		"text": "A string with gaps in it. Gaps are where lawyers live.",
+		"file": "res://assets/voice/ray/330643e8d0ca.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"806b5b3e7f13": {
+		"speaker": "ray",
+		"text": "No string. A name, a dead man's handwriting, and a song I haven't picked up yet.",
+		"file": "res://assets/voice/ray/806b5b3e7f13.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"506827ed6f1e": {
+		"speaker": "ray",
+		"text": "Danny's case goes in a box. Then I need a place, a witness, and a way to get Walt there.",
+		"file": "res://assets/voice/ray/506827ed6f1e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a41ae3ae2fb1": {
+		"speaker": "ray",
+		"text": "If I'm wrong about the next hour, somebody should find all of this in one box.",
+		"file": "res://assets/voice/ray/a41ae3ae2fb1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d77693d772ed": {
+		"speaker": "doyle",
+		"text": "Ray. Otis says you're at the Blue Note.",
+		"file": "res://assets/voice/doyle/d77693d772ed.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"92d2443ce6e8": {
+		"speaker": "doyle",
+		"text": "I heard. Patrol says he hanged himself. I know you talked to him tonight. That's not on you.",
+		"file": "res://assets/voice/doyle/92d2443ce6e8.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"df87fe9ba00c": {
+		"speaker": "doyle",
+		"text": "Walt Brenner called me ten minutes ago. My old training officer; you've never met him. He listens to the scanner like it's a ballgame.",
+		"file": "res://assets/voice/doyle/df87fe9ba00c.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"71149978eed5": {
+		"speaker": "doyle",
+		"text": "He heard the Blue Note call and asked if you were on it. He's worried about you. He says you sound like a man who's been up all night chasing a ghost.",
+		"file": "res://assets/voice/doyle/71149978eed5.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"2e8648d2e580": {
+		"speaker": "doyle",
+		"text": "He's heard me talk about you. That's worse. Tell me you're going home at six.",
+		"file": "res://assets/voice/doyle/2e8648d2e580.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"8c155fd530de": {
+		"speaker": "doyle",
+		"text": "That's the first time you've ever listened to me.",
+		"file": "res://assets/voice/doyle/8c155fd530de.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"c5de2d8ea032": {
+		"speaker": "doyle",
+		"text": "I see the captain at eight. Get some sleep. *click*",
+		"file": "res://assets/voice/doyle/c5de2d8ea032.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"60c51494999d": {
+		"speaker": "otis",
+		"text": "Harbor's not our division, Ray.",
+		"file": "res://assets/voice/otis/60c51494999d.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"44793f559c5e": {
+		"speaker": "otis",
+		"text": "Does the lieutenant know?",
+		"file": "res://assets/voice/otis/44793f559c5e.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"72edc4a95475": {
+		"speaker": "otis",
+		"text": "Then I don't either. Harbor Division owes me a favor from 2011. I'll call it in myself.",
+		"file": "res://assets/voice/otis/72edc4a95475.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"049a1439930c": {
+		"speaker": "otis",
+		"text": "Ray. Bring the coat back.",
+		"file": "res://assets/voice/otis/049a1439930c.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"57817e77f9b7": {
+		"speaker": "otis",
+		"text": "Front desk. Your car's called in, Ray. Lights off, no radio, quarter to seven. I don't know a thing.",
+		"file": "res://assets/voice/otis/57817e77f9b7.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"966b6693eb2b": {
+		"speaker": "otis",
+		"text": "Front desk. I've lost a page, Ray. Like I said.",
+		"file": "res://assets/voice/otis/966b6693eb2b.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"dee28afcba6d": {
+		"speaker": "otis",
+		"text": "Front desk. Ray, I'm sorry about Sal.",
+		"file": "res://assets/voice/otis/dee28afcba6d.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"3f092786a1eb": {
+		"speaker": "otis",
+		"text": "(pages turning) One visitor after midnight. In at one-twenty, out at two-oh-five. Walter Brenner.",
+		"file": "res://assets/voice/otis/3f092786a1eb.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"2688589ac5c5": {
+		"speaker": "otis",
+		"text": "Retired, showed me his old ID and signed in like a civilian. He brought the lieutenant a coffee from the place on Cahuenga, and he brought me one too. Black.",
+		"file": "res://assets/voice/otis/2688589ac5c5.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"4fbd198dcf23": {
+		"speaker": "otis",
+		"text": "Nobody ever brings the desk a coffee.",
+		"file": "res://assets/voice/otis/4fbd198dcf23.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"e7a3dc0099e0": {
+		"speaker": "otis",
+		"text": "Old-timer. Rampart, way back. He was her training officer. She thinks the world of him. He drives for some developer now. Says the hours are better than ours.",
+		"file": "res://assets/voice/otis/e7a3dc0099e0.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"9e8fe308b4ab": {
+		"speaker": "otis",
+		"text": "Funny you ask. I've got her hallway on my monitor. Ten to two she went down to the copier with a stack the size of a phone book. The captain's briefing.",
+		"file": "res://assets/voice/otis/9e8fe308b4ab.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"e26f089c76f0": {
+		"speaker": "otis",
+		"text": "Six, seven minutes. He stayed in her office.",
+		"file": "res://assets/voice/otis/e26f089c76f0.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"d86c1dc2d01c": {
+		"speaker": "otis",
+		"text": "With the coffee. Ray, what's this about?",
+		"file": "res://assets/voice/otis/d86c1dc2d01c.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"b9e0889ffac3": {
+		"speaker": "otis",
+		"text": "I write everything down, Ray. But I've been known to lose a page.",
+		"file": "res://assets/voice/otis/b9e0889ffac3.ogg",
+		"voice": "kokoro: am_liam, speed 1"
+	},
+	"ab1b7293d7b2": {
+		"speaker": "ike",
+		"text": "Kessler. You said one hour. It's been fifty minutes. I'm a man of my word.",
+		"file": "res://assets/voice/ike/ab1b7293d7b2.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"d0c9cc64b009": {
+		"speaker": "ike",
+		"text": "The phone's soup, like I said. But your piano player recorded every set on an app called Takes. Every take uploads to the cloud the second you hit stop.",
+		"file": "res://assets/voice/ike/d0c9cc64b009.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"0e1df8712233": {
+		"speaker": "ike",
+		"text": "Account name \"reyes.keys.\" Last upload: Tuesday, eleven fifty-two p.m.",
+		"file": "res://assets/voice/ike/0e1df8712233.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"bc5ea901861a": {
+		"speaker": "ike",
+		"text": "His mother in Fresno is next of kin. She gave written consent ten minutes ago, so this is legal, and I'd like to keep it that way.",
+		"file": "res://assets/voice/ike/bc5ea901861a.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"b7b534b4ce05": {
+		"speaker": "ike",
+		"text": "I can get in through account recovery, but it wants the password, and he left himself a hint. Quote: \"the knock, the way I play it.\"",
+		"file": "res://assets/voice/ike/b7b534b4ce05.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"1d0021a23d78": {
+		"speaker": "ike",
+		"text": "Three wrong tries and it locks for a day. You know what that means?",
+		"file": "res://assets/voice/ike/1d0021a23d78.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"551bb3528171": {
+		"speaker": "ike",
+		"text": "You know what my job is, right? It's this. Fine.",
+		"file": "res://assets/voice/ike/551bb3528171.ogg",
+		"voice": "kokoro: am_echo, speed 1"
+	},
+	"3aaeefc5f864": {
+		"speaker": "vance",
+		"text": "Detective. Dawn is an unchristian hour.",
+		"file": "res://assets/voice/vance/3aaeefc5f864.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"37e76a15e40e": {
+		"speaker": "vance",
+		"text": "A man telephoned Wednesday. He wanted to know if Danny had paid me, and in what. He talked like a cop who'd stopped being one.",
+		"file": "res://assets/voice/vance/37e76a15e40e.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"f59660c1092c": {
+		"speaker": "vance",
+		"text": "I keep everyone's number. It's the only way to be sure of people.",
+		"file": "res://assets/voice/vance/f59660c1092c.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"3dcc9aabc118": {
+		"speaker": "vance",
+		"text": "Two-one-three, five-five-five, oh-one-six-three. A cell telephone. A cop's voice and a civilian's manners.",
+		"file": "res://assets/voice/vance/3dcc9aabc118.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"adae77143ac3": {
+		"speaker": "vance",
+		"text": "You want witnesses who aren't police.",
+		"file": "res://assets/voice/vance/adae77143ac3.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"0f27e60c25d1": {
+		"speaker": "vance",
+		"text": "Danny paid his debts, Detective. I like to think I pay mine. Sunrise.",
+		"file": "res://assets/voice/vance/0f27e60c25d1.ogg",
+		"voice": "kokoro: bm_george, speed 0.88"
+	},
+	"1ca3abfef9d4": {
+		"speaker": "tiny",
+		"text": "Harbor Marine. Sunrise, Detective. Mr. Vance doesn't like to be asked twice.",
+		"file": "res://assets/voice/tiny/1ca3abfef9d4.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"3e1fa434e675": {
+		"speaker": "tiny",
+		"text": "Harbor Marine.",
+		"file": "res://assets/voice/tiny/3e1fa434e675.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"de3683193f9a": {
+		"speaker": "tiny",
+		"text": "You found him.",
+		"file": "res://assets/voice/tiny/de3683193f9a.ogg",
+		"voice": "kokoro: am_adam, -3 semitones, speed 0.85"
+	},
+	"8595f05947a5": {
+		"speaker": "ray",
+		"text": "That's how he got the knock. Put him in the bar.",
+		"file": "res://assets/voice/ray/8595f05947a5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d4dbef0fa6a8": {
+		"speaker": "ray",
+		"text": "That puts him at Sal's bar. First, how he got in.",
+		"file": "res://assets/voice/ray/d4dbef0fa6a8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"51f815bc8f1f": {
+		"speaker": "ray",
+		"text": "That's Maureen's phone. Who was holding it?",
+		"file": "res://assets/voice/ray/51f815bc8f1f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8c9425e24c9e": {
+		"speaker": "ray",
+		"text": "That's when the knock got out. Not who took it.",
+		"file": "res://assets/voice/ray/8c9425e24c9e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c59b8eed5349": {
+		"speaker": "ray",
+		"text": "Walt was in the room. Was he alone with the phone?",
+		"file": "res://assets/voice/ray/c59b8eed5349.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"854f57e8a59d": {
+		"speaker": "ray",
+		"text": "That's what I told. Pin who listened.",
+		"file": "res://assets/voice/ray/854f57e8a59d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c2e2fcee986c": {
+		"speaker": "ray",
+		"text": "That's how. Put him in the room.",
+		"file": "res://assets/voice/ray/c2e2fcee986c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f20af8806656": {
+		"speaker": "ray",
+		"text": "Somebody washed a glass. Whose name goes with it?",
+		"file": "res://assets/voice/ray/f20af8806656.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"201b17c7832b": {
+		"speaker": "ray",
+		"text": "Nina heard a voice. She never saw a face.",
+		"file": "res://assets/voice/ray/201b17c7832b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"970b0c7992ee": {
+		"speaker": "ray",
+		"text": "That's how he left. Pin him arriving.",
+		"file": "res://assets/voice/ray/970b0c7992ee.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0bb77609e13c": {
+		"speaker": "ray",
+		"text": "That proves it wasn't Sal. It doesn't prove it was Walt.",
+		"file": "res://assets/voice/ray/0bb77609e13c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"14ea64bc824a": {
+		"speaker": "ray",
+		"text": "Somebody was looking. Pin who.",
+		"file": "res://assets/voice/ray/14ea64bc824a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"bdd9cc8b9b77": {
+		"speaker": "ray",
+		"text": "That's why Pryce wanted him gone. Not who came.",
+		"file": "res://assets/voice/ray/bdd9cc8b9b77.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"570b42373bd1": {
+		"speaker": "ray",
+		"text": "That's what Danny had. First, what it was costing them.",
+		"file": "res://assets/voice/ray/570b42373bd1.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5e0127c230ef": {
+		"speaker": "ray",
+		"text": "That's the bill. First, what Danny had.",
+		"file": "res://assets/voice/ray/5e0127c230ef.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"21df25f77228": {
+		"speaker": "ray",
+		"text": "That's who sat there. Pin what they said.",
+		"file": "res://assets/voice/ray/21df25f77228.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d8764c1f28bd": {
+		"speaker": "ray",
+		"text": "He recorded a lot of sets. Pin the one that mattered.",
+		"file": "res://assets/voice/ray/d8764c1f28bd.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3f5929c2c9c8": {
+		"speaker": "ray",
+		"text": "That says he had money. What says there was more coming?",
+		"file": "res://assets/voice/ray/3f5929c2c9c8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"2c4071fdf960": {
+		"speaker": "ray",
+		"text": "Nina knew the dream. Pin the bill.",
+		"file": "res://assets/voice/ray/2c4071fdf960.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"b98c3cf6ba83": {
+		"speaker": "ray",
+		"text": "That's on the string. The board wants Tuesday and tonight.",
+		"file": "res://assets/voice/ray/b98c3cf6ba83.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"356fe14a6c9b": {
+		"speaker": "ray",
+		"text": "Think, Ray. Who was holding Maureen's phone, and who did Sal write down?",
+		"file": "res://assets/voice/ray/356fe14a6c9b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f94a31f463f6": {
+		"speaker": "ray",
+		"text": "That's on the string. The board wants what Danny had and what he charged.",
+		"file": "res://assets/voice/ray/f94a31f463f6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4307e3f7f48d": {
+		"speaker": "ray",
+		"text": "What did Danny have, and what was he charging for it?",
+		"file": "res://assets/voice/ray/4307e3f7f48d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8c0809e8ab02": {
+		"speaker": "ray",
+		"text": "An empty evidence box from under the desk. Danny's photo, the envelope, the lab receipt, the index card, the tab book photo, and the three pieces of paper on the string.",
+		"file": "res://assets/voice/ray/8c0809e8ab02.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6935b0e4da71": {
+		"speaker": "ray",
+		"text": "An empty evidence box from under the desk. Danny's photo, the envelope, the lab receipt, the index card, the tab book photo.",
+		"file": "res://assets/voice/ray/6935b0e4da71.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f72a7b60c245": {
+		"speaker": "ray",
+		"text": "Not yet. Box.",
+		"file": "res://assets/voice/ray/f72a7b60c245.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"8b996b0ea024": {
+		"speaker": "ray",
+		"text": "Not yet. Pier.",
+		"file": "res://assets/voice/ray/8b996b0ea024.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"17e31b02c658": {
+		"speaker": "ray",
+		"text": "Not yet. Backup.",
+		"file": "res://assets/voice/ray/17e31b02c658.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c98154d2141b": {
+		"speaker": "ray",
+		"text": "Not yet. Bait.",
+		"file": "res://assets/voice/ray/c98154d2141b.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ced415e302e8": {
+		"speaker": "ray",
+		"text": "Not yet. Box, pier.",
+		"file": "res://assets/voice/ray/ced415e302e8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"df1fef6e256e": {
+		"speaker": "ray",
+		"text": "Not yet. Box, backup.",
+		"file": "res://assets/voice/ray/df1fef6e256e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"47677bc6d29a": {
+		"speaker": "ray",
+		"text": "Not yet. Box, bait.",
+		"file": "res://assets/voice/ray/47677bc6d29a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"4cf5f4defd02": {
+		"speaker": "ray",
+		"text": "Not yet. Pier, backup.",
+		"file": "res://assets/voice/ray/4cf5f4defd02.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"99a114f6b626": {
+		"speaker": "ray",
+		"text": "Not yet. Pier, bait.",
+		"file": "res://assets/voice/ray/99a114f6b626.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"603bbc380ad9": {
+		"speaker": "ray",
+		"text": "Not yet. Backup, bait.",
+		"file": "res://assets/voice/ray/603bbc380ad9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e47b35010b19": {
+		"speaker": "ray",
+		"text": "Not yet. Box, pier, backup.",
+		"file": "res://assets/voice/ray/e47b35010b19.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"58473670c6c2": {
+		"speaker": "ray",
+		"text": "Not yet. Box, pier, bait.",
+		"file": "res://assets/voice/ray/58473670c6c2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"20489ae74d10": {
+		"speaker": "ray",
+		"text": "Not yet. Box, backup, bait.",
+		"file": "res://assets/voice/ray/20489ae74d10.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ae00dea92d67": {
+		"speaker": "ray",
+		"text": "Not yet. Pier, backup, bait.",
+		"file": "res://assets/voice/ray/ae00dea92d67.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"6f59fb1fb9a8": {
+		"speaker": "ray",
+		"text": "Not yet. Box, pier, backup, bait.",
+		"file": "res://assets/voice/ray/6f59fb1fb9a8.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"86619d3eadee": {
+		"speaker": "doyle",
+		"text": "Walt drives for half the money in Century City. Car service, security, whatever's going. That doesn't make him Pryce's man.",
+		"file": "res://assets/voice/doyle/86619d3eadee.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"5ef00b8a8402": {
+		"speaker": "doyle",
+		"text": "That's not Walt and Pryce on paper, Ray.",
+		"file": "res://assets/voice/doyle/5ef00b8a8402.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"3127f9b15096": {
+		"speaker": "doyle",
+		"text": "All right. He works for Pryce. That tape's still a voice under a piano. Pryce's lawyers will find a man who swears it's an actor. You can't put Walt with Pryce the night Reyes died.",
+		"file": "res://assets/voice/doyle/3127f9b15096.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"6ea20657cb12": {
+		"speaker": "doyle",
+		"text": "That doesn't put him in Century City on Tuesday night.",
+		"file": "res://assets/voice/doyle/6ea20657cb12.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"33d4dbd990e6": {
+		"speaker": "doyle",
+		"text": "And Haskell? Ted Haskell is a sitting councilman. Fifty thousand in a booth is his word against a dead piano player's phone. He'll call it a campaign donation and the captain will thank him for it.",
+		"file": "res://assets/voice/doyle/33d4dbd990e6.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"f759a6977832": {
+		"speaker": "doyle",
+		"text": "That's not Pryce and Haskell together, Ray.",
+		"file": "res://assets/voice/doyle/f759a6977832.ogg",
+		"voice": "kokoro: af_kore, speed 0.95"
+	},
+	"ade955767e77": {
+		"speaker": "haskell",
+		"text": "Harlan, not here. Christ.",
+		"file": "res://assets/voice/haskell/ade955767e77.ogg",
+		"voice": "kokoro: am_eric, speed 1.05"
+	},
+	"62d2baf2c19f": {
+		"speaker": "pryce",
+		"text": "Ted, nobody in this room is listening to anything but the music. That's why I like it here.",
+		"file": "res://assets/voice/pryce/62d2baf2c19f.ogg",
+		"voice": "kokoro: am_eric 50% + am_michael 50%, -1.5 semitones, speed 0.92, warmth 2"
+	},
+	"ab5b1ae71ab1": {
+		"speaker": "pryce",
+		"text": "The second fifty. The rest after the vote.",
+		"file": "res://assets/voice/pryce/ab5b1ae71ab1.ogg",
+		"voice": "kokoro: am_eric 50% + am_michael 50%, -1.5 semitones, speed 0.92, warmth 2"
+	},
+	"e833655885a7": {
+		"speaker": "haskell",
+		"text": "Elliot says the hearing will be packed. The neighborhood groups, the jazz people...",
+		"file": "res://assets/voice/haskell/e833655885a7.ogg",
+		"voice": "kokoro: am_eric, speed 1.05"
+	},
+	"8a76d976c9e0": {
+		"speaker": "pryce",
+		"text": "Jazz people don't vote, Ted. They barely get up before noon.",
+		"file": "res://assets/voice/pryce/8a76d976c9e0.ogg",
+		"voice": "kokoro: am_eric 50% + am_michael 50%, -1.5 semitones, speed 0.92, warmth 2"
+	},
+	"7a1a9006dc17": {
+		"speaker": "brenner",
+		"text": "The piano player gets up.",
+		"file": "res://assets/voice/brenner/7a1a9006dc17.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"d4272bf88912": {
+		"speaker": "pryce",
+		"text": "Mr. Reyes and I have an arrangement. Eight thousand on Monday, sixteen to come, and he forgets what he heard.",
+		"file": "res://assets/voice/pryce/d4272bf88912.ogg",
+		"voice": "kokoro: am_eric 50% + am_michael 50%, -1.5 semitones, speed 0.92, warmth 2"
+	},
+	"22d96e68db13": {
+		"speaker": "brenner",
+		"text": "He was close enough to hear, last time. He's close enough now.",
+		"file": "res://assets/voice/brenner/22d96e68db13.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"5d639d61fa9a": {
+		"speaker": "brenner",
+		"text": "You don't pay a man like that three times, Harlan. You pay him once.",
+		"file": "res://assets/voice/brenner/5d639d61fa9a.ogg",
+		"voice": "kokoro: am_eric 50% + am_santa 50%, -2 semitones, speed 0.88, warmth 2"
+	},
+	"e559730f4fe7": {
+		"speaker": "pryce",
+		"text": "(lightly) Then pay him, Walt.",
+		"file": "res://assets/voice/pryce/e559730f4fe7.ogg",
+		"voice": "kokoro: am_eric 50% + am_michael 50%, -1.5 semitones, speed 0.92, warmth 2"
+	},
+	"4f0a039a2fbd": {
+		"speaker": "haskell",
+		"text": "I didn't hear that. I'm going home.",
+		"file": "res://assets/voice/haskell/4f0a039a2fbd.ogg",
+		"voice": "kokoro: am_eric, speed 1.05"
+	},
+	"4031ca4ef18d": {
+		"speaker": "danny",
+		"text": "Got you.",
+		"file": "res://assets/voice/danny/4031ca4ef18d.ogg",
+		"voice": "kokoro: am_michael, +1 semitones, speed 1"
+	},
+	"0aff52031622": {
+		"speaker": "danny",
+		"text": "Sal, I'm taking five.",
+		"file": "res://assets/voice/danny/0aff52031622.ogg",
+		"voice": "kokoro: am_michael, +1 semitones, speed 1"
+	},
+	"471b9bc2b092": {
+		"speaker": "sal",
+		"text": "(far off) Take an umbrella, kid.",
+		"file": "res://assets/voice/sal/471b9bc2b092.ogg",
+		"voice": "kokoro: am_santa, speed 0.9"
+	},
+	"ef926fa6015f": {
+		"speaker": "ray",
+		"text": "Mara Quist, Los Angeles Times. Metro. A cell number in pen on the back.",
+		"file": "res://assets/voice/ray/ef926fa6015f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"d6d722c81b67": {
+		"speaker": "ray",
+		"text": "\"When it's a pattern, call me.\"",
+		"file": "res://assets/voice/ray/d6d722c81b67.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f74bd2642cbe": {
+		"speaker": "ray",
+		"text": "Danny's whole case, in a box that held printer paper.",
+		"file": "res://assets/voice/ray/f74bd2642cbe.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e7c1e650fc0d": {
+		"speaker": "ray",
+		"text": "One drive in an evidence bag, hashed and logged, my name on the seal.",
+		"file": "res://assets/voice/ray/e7c1e650fc0d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"f40e187a54a9": {
+		"speaker": "ray",
+		"text": "The original's frozen at Takes until a judge asks for it. This is the only copy anybody can play.",
+		"file": "res://assets/voice/ray/f40e187a54a9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"e74c81ef5769": {
+		"speaker": "ray",
+		"text": "A .38 revolver, bagged. Shah will want to introduce it to Danny.",
+		"file": "res://assets/voice/ray/e74c81ef5769.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a59810cd60e2": {
+		"speaker": "ray",
+		"text": "His photo, the envelope, the index card with a name on the back, the tab book page. And the papers that were never introduced.",
+		"file": "res://assets/voice/ray/a59810cd60e2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"543fb00b087f": {
+		"speaker": "ray",
+		"text": "His photo, the envelope, the index card with a name on the back, the tab book page.",
+		"file": "res://assets/voice/ray/543fb00b087f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
 	}
 }

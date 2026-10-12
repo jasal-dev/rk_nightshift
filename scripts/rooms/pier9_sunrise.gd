@@ -246,25 +246,25 @@ func _by_the_book() -> void:
 
 
 func _okafor(line: String) -> void:
-	await main.voice(line, speaker_at("okafor"), Case5.OKAFOR_COLOR)
+	await main.voice(line, speaker_at("okafor"), Case5.OKAFOR_COLOR, "okafor")
 
 
 func _the_times() -> void:
 	## Ending D: Mara Quist, LA Times.
 	await main.narrate("I take her card out of my coat and dial.")
-	await main.voice("Quist.", Case5.CALL_AT, Case5.MARA_COLOR)
+	await main.voice("Quist.", Case5.CALL_AT, Case5.MARA_COLOR, "mara", true)
 	await main.say("It's a pattern.")
-	await main.voice("(instantly awake) Where are you?", Case5.CALL_AT, Case5.MARA_COLOR)
+	await main.voice("(instantly awake) Where are you?", Case5.CALL_AT, Case5.MARA_COLOR, "mara", true)
 	await main.ui.fade_to(1.0, 0.8)
 	_show("mara")
 	await main.walk(Vector2(hotspot("mara").walk_to))
 	main.player.face("left")
 	await main.ui.fade_to(0.0, 1.0)
 	await main.narrate("Twenty-five minutes later her hatchback bumps down the pier. She listens to the take on her laptop, headphones on, twice, without a word. Then she takes them off.")
-	await main.voice("You know what this does to you.", speaker_at("mara"), Case5.MARA_COLOR)
+	await main.voice("You know what this does to you.", speaker_at("mara"), Case5.MARA_COLOR, "mara")
 	await main.say("I know what it does to them.")
-	await main.voice("When I've made my copy, the drive goes to the DA. I'll walk it over myself.", speaker_at("mara"), Case5.MARA_COLOR)
-	await main.voice("It goes up at noon. They'll know where it came from.", speaker_at("mara"), Case5.MARA_COLOR)
+	await main.voice("When I've made my copy, the drive goes to the DA. I'll walk it over myself.", speaker_at("mara"), Case5.MARA_COLOR, "mara")
+	await main.voice("It goes up at noon. They'll know where it came from.", speaker_at("mara"), Case5.MARA_COLOR, "mara")
 	await main.say("Everybody always does.")
 	main.take("take_drive")
 	Game.set_flag("ending_times")

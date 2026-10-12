@@ -170,7 +170,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 # --- Mara Quist ---------------------------------------------------------------------------------------------------
 func _mara(line: String) -> void:
-	await main.voice(line, speaker_at("mara"), Case5.MARA_COLOR)
+	await main.voice(line, speaker_at("mara"), Case5.MARA_COLOR, "mara")
 
 
 func _mara_first() -> void:
@@ -288,7 +288,7 @@ func _talk_park() -> void:
 
 # --- Teo ------------------------------------------------------------------------------------------------------------
 func _teo(line: String) -> void:
-	await main.voice(line, speaker_at("teo"), Case5.TEO_COLOR)
+	await main.voice(line, speaker_at("teo"), Case5.TEO_COLOR, "teo")
 
 
 func _talk_teo() -> void:

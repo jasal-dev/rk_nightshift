@@ -678,12 +678,18 @@ func _hold(duration: float, skippable := true, at_least := 0.0) -> void:
 	_skip = false
 
 
-func caption(text: String, color := PLAYER_COLOR, skippable := true) -> void:
+func caption(text: String, color := PLAYER_COLOR, skippable := true, speaker := "", line := "", phone := false) -> void:
 	## A subtitle in the lower third (Danny's take, the end of the night). With skippable = false a click doesn't cut it
-	## short (the take, the first time through).
+	## short (the take, the first time through). With a cast `speaker`, the clip for `line` (the words without the
+	## "PRYCE: " in front) plays, through the phone filter if `phone`, and the subtitle stays up for it.
 	ui.set_hover("", Vector2.ZERO)
 	ui.show_speech(text, Vector2(960, 1010), color)
-	await _hold(clampf(1.2 + text.length() * 0.06, 2.0, 7.0), skippable)
+	var clip: AudioStream = Audio.voice_clip(speaker, line) if speaker != "" else null
+	if clip:
+		Audio.speak(clip, phone)
+	await _hold(clampf(1.2 + text.length() * 0.06, 2.0, 7.0), skippable, clip.get_length() + 0.25 if clip else 0.0)
+	if clip:
+		Audio.stop_voice()
 	ui.hide_speech()
 
 
