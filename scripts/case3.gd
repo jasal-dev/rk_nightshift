@@ -40,6 +40,12 @@ static func drive_back(main: Node) -> void:
 	## Scene 6: Highland southbound, the boulevard's lights shrinking in the mirror, and Maya.
 	await main.drive_begin()
 	await main.drive_wait(1.2)
+	if Game.flag("drove_back3"):
+		# Went back to the Stardust for a missing card: no second round of Maya's texts
+		await main.drive_wait(1.0)
+		await main.drive_end()
+		return
+	Game.set_flag("drove_back3")
 	await main.text_message("would u ever want an oscar", false, "Maya")
 	await main.text_message("For what?", true)
 	await main.text_message("best supporting dad", false)
