@@ -13,7 +13,7 @@ The originals are in `sounds/` at the project root (not in git, and ignored by G
 | --- | --- | --- | --- | --- | --- |
 | `assets/sounds/rain.wav` | `695793__mandaki__raining-in-my-house.m4a` | https://freesound.org/s/695793/ | mandaki | CC0 (credited anyway) | 2026-10-11 |
 | `assets/sounds/knock_right.wav`, `knock_wrong.wav` | `437589__wakaproduction2018__3-knock-101.m4a` (one knock of three) | https://freesound.org/s/437589/ | WakaProduction2018 | CC0 | 2026-10-12 |
-| `assets/sounds/hang_up.wav` | `273213__e_vice__hang-up-tone.wav` (its first second) | https://freesound.org/s/273213/ | E_Vice | CC0 | 2026-10-12 |
+| `assets/sounds/hang_up.wav` | `273213__e_vice__hang-up-tone.wav` (2.4 s of it, an octave up) | https://freesound.org/s/273213/ | E_Vice | CC0 | 2026-10-12 |
 | `assets/sounds/text_tone.wav` | `636401__dvidrio02__text-tone-5.mp3` | https://freesound.org/s/636401/ | dVidrio02 | CC0 | 2026-10-12 |
 | `assets/sounds/footsteps.wav` | `685287__emilgasi__footsteps-ground.wav` | https://freesound.org/s/685287/ | emilgasi | CC0 (credited anyway) | 2026-10-11 |
 

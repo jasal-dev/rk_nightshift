@@ -40,7 +40,7 @@ const AMBIENCE := {"rain": ["res://assets/sounds/rain.wav", 0.0]}    ## id: [fil
 const SFX := {
 	"knock_right": ["res://assets/sounds/knock_right.wav", -2.0],     ## Danny's knock: two slow, three fast
 	"knock_wrong": ["res://assets/sounds/knock_wrong.wav", -2.0],     ## an ordinary knock on a door
-	"hang_up": ["res://assets/sounds/hang_up.wav", -6.0],             ## a caller hangs up ("*click*" on a phone line)
+	"hang_up": ["res://assets/sounds/hang_up.wav", 0.0],             ## a caller hangs up ("*click*" on a phone line)
 	"text_tone": ["res://assets/sounds/text_tone.wav", -4.0],         ## a text arrives on Ray's phone
 }
 const VOICE_LINES := "res://assets/voice/lines.json"     ## id: {speaker, text, file, voice}
