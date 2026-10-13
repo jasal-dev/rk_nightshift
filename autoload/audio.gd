@@ -15,6 +15,9 @@ const TRACK_PATH := "res://assets/music/bensound-%s.mp3"
 const TITLE_TRACK := "rainyday"
 ## Case 5, the pier at dawn, the endings, the end cards and the end credits are all "rainyday", as is the title screen.
 const CASE_TRACKS := {1: "sleepless", 2: "november", 3: "entenca", 4: "echoofsadness", 5: "rainyday"}
+## Per-track gain (dB) so every track plays about as loud as Case 1's: the files range from about -28 to -16 LUFS.
+## Measured 2026-10-13 (roughly K-weighted RMS over the whole track); november's peaks stay under 0 dBFS at +6.
+const TRACK_GAIN_DB := {"sleepless": 0.0, "november": 6.0, "entenca": -5.0, "echoofsadness": -4.0, "rainyday": -5.5}
 ## The licence attributions, as the user wrote them, in that order (shown under Credits and in the end credits).
 ## Track for each: sleepless, echoofsadness, november, entenca, rainyday.
 const MUSIC_CREDITS := [
@@ -144,7 +147,7 @@ func music(id: String, fade := FADE) -> void:
 	if id != "":
 		stream = load(track_path(id)) as AudioStreamMP3
 		stream.loop = true
-	_music.play(stream, 0.0, fade)
+	_music.play(stream, float(TRACK_GAIN_DB.get(id, 0.0)), fade)
 
 
 func stop_music(fade := FADE) -> void:

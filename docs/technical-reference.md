@@ -50,7 +50,8 @@ project.godot ── autoload Game (autoload/game.gd)    flags, inventory, item 
 ### Music
 
 `Audio` (`autoload/audio.gd`) plays `assets/music/bensound-<track>.mp3` on the Music bus, looping. `Audio.music(track)`
-crossfades and does nothing when that track is already on. `CASE_TRACKS` maps cases to tracks: 1 sleepless,
+crossfades and does nothing when that track is already on. Each track plays at its `TRACK_GAIN_DB` so all five sit at about the
+same loudness (the files differ by up to 12 dB). `CASE_TRACKS` maps cases to tracks: 1 sleepless,
 2 november, 3 entenca, 4 echoofsadness, 5 rainyday (Case 5, the endings, end cards, end credits and the title screen).
 Main calls it on the title screen, at each case card (`case_card`, the next case's track) and on every room change
 (the current case's track), so new game, Skip to Case N and loading a save all land on the right track. The end
