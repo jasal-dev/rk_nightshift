@@ -126,14 +126,14 @@ them gives the same voice. All clips are levelled the same way (about -18 dBFS R
 under -1 dBFS, mono 24 kHz Ogg Vorbis). "Semitones" lowers the pitch without changing the pace; warmth, grit and
 flutter are the post-processing in `render_variant()` (none of the cast uses them yet).
 
-Voiced so far: every spoken line in the game, all five cases and the four endings (2,162 lines, about 166 minutes).
+Voiced so far: every spoken line in the game, all five cases and the four endings (2,169 lines, about 166 minutes).
 Phone calls, voicemail, Brielle's phone video, the glass house's gate camera and Danny's take (played down Ike's line)
 go through the phone filter; the take's lines are `Main.caption()` with a speaker, the rest `say()`, `narrate()` and
 `voice()`.
 
 | Speaker | Who | Kokoro voice | Speed | Semitones | Processing | Preset in code | Picked | Voiced |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `ray` | Det. Ray Kessler: LAPD Homicide, twenty-six years on the job, tired, hard-boiled | `am_onyx` 70% + `am_fenrir` 30% (style vectors mixed) | 0.9 | 0 | none | `SPEAKERS["ray"]` (was `VARIANTS["2_blend"]`) | 2026-10-11, over plain onyx and four rougher variants | every line, all five cases (1489) |
+| `ray` | Det. Ray Kessler: LAPD Homicide, twenty-six years on the job, tired, hard-boiled | `am_onyx` 70% + `am_fenrir` 30% (style vectors mixed) | 0.9 | 0 | none | `SPEAKERS["ray"]` (was `VARIANTS["2_blend"]`) | 2026-10-11, over plain onyx and four rougher variants | every line, all five cases (1496) |
 | `nina` | Nina Alvarez: Danny's girlfriend, on the payphone in Case 1, in the Blue Note's cooler in Case 5; guarded, grieving, quick | `af_heart` | 0.95 | 0 | phone-line filter in the game on her payphone lines; in person clean | `SPEAKERS["nina"]` (was `CASTING["nina"]` A) | 2026-10-11, over `af_bella` (B) and `af_sky` (C) | every line, all five cases (40) |
 | `otis` | Sgt. Otis Bell: the desk phone; warm, funny, tired | `am_liam` | 1.0 | 0 | phone-line filter in the game (all his lines are on the phone) | `SPEAKERS["otis"]` (was `CASTING["otis"]` B) | 2026-10-11, over `am_eric` (A) and `am_echo` (C) | every line, all five cases (39) |
 | `sal` | Sal Moretti: the Blue Note's bartender, through his door; gravel, short sentences, scared and hiding it | `am_santa` | 0.9 | 0 | none | `SPEAKERS["sal"]` (was `CASTING["sal"]` A) | 2026-10-11, over a lowered `am_eric` (B) and a gritty `am_michael`/`am_santa` mix (C) | every line, all five cases (13) |

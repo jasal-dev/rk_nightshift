@@ -2161,5 +2161,12 @@
 	["ray", "A .38 revolver, bagged. Shah will want to introduce it to Danny.", "main.gd:555 examine_item"],
 	["ray", "His photo, the envelope, the index card with a name on the back, the tab book page. And the papers that were never introduced.", "main.gd examine_item danny_box"],
 	["ray", "His photo, the envelope, the index card with a name on the back, the tab book page.", "main.gd examine_item danny_box"],
-	["whitaker", "Mr. Lindqvist, Trent Whitaker again. Thirty days. Please don't make this ugly.", "stardust_office.gd:316 _phone (voicemail)"]
+	["whitaker", "Mr. Lindqvist, Trent Whitaker again. Thirty days. Please don't make this ugly.", "stardust_office.gd:316 _phone (voicemail)"],
+	["ray", "Gus's UV lamp. Masking tape on the handle: \"Modern ink glows. Old ink doesn't. Trust nobody.\"", "main.gd:501 examine_item"],
+	["ray", "Calloway's catalogue, the page Gus turned down. Lyle Brandt's Oscar, base serial No. 734, sold by private treaty.", "main.gd:506 examine_item"],
+	["ray", "Gus's red ink: \"It's in my case.\" It wasn't.", "main.gd:507 examine_item"],
+	["ray", "Lyle Brandt's Oscar, or what's supposed to pass for it. Gold paint on hollow resin. It weighs about as much as a promise.", "main.gd:510 examine_item"],
+	["ray", "No. 734 on the base, the cuts still shiny.", "main.gd:511 examine_item"],
+	["ray", "Walter Brenner. LAPD, retired. Security for Pryce Development.", "main.gd:515 examine_item"],
+	["ray", "On the back: \"Gus. Think it over. Nobody else is going to offer.\"", "main.gd:516 examine_item"]
 ]

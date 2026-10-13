@@ -497,6 +497,24 @@ func examine_item(id: String) -> void:
 		"ride_receipt":
 			await say("My photo of Kenji's screen. Wednesday, 1:10 a.m. Blue Note, Hollywood, to Pryce Tower, Century City.")
 			await say("Rider: Walt B. Billed to Pryce Development, on the business account. One star. \"Wet, rude, smelled like gun oil.\"")
+		"uv_lamp":
+			await say("Gus's UV lamp. Masking tape on the handle: \"Modern ink glows. Old ink doesn't. Trust nobody.\"")
+		"catalogue":
+			ui.show_paper("Calloway's: Private Sales, Summer Season",
+					"[photo of an Oscar]\nAcademy Award statuette, Best Supporting Actor, 1954. Base serial No. 734. Sold by private treaty.",
+					"734?? THREE WEEKS AGO?? IT'S IN MY CASE.")
+			await say("Calloway's catalogue, the page Gus turned down. Lyle Brandt's Oscar, base serial No. 734, sold by private treaty.")
+			await say("Gus's red ink: \"It's in my case.\" It wasn't.")
+			ui.hide_paper()
+		"fake_oscar":
+			await say("Lyle Brandt's Oscar, or what's supposed to pass for it. Gold paint on hollow resin. It weighs about as much as a promise.")
+			await say("No. 734 on the base, the cuts still shiny.")
+		"brenner_card":
+			ui.show_paper("WALTER BRENNER", "LAPD (Ret.)\nSecurity Consultant, Pryce Development",
+					"On the back, in ballpoint: \"Gus. Think it over. Nobody else is going to offer. W.\"", Color(0.15, 0.2, 0.5))
+			await say("Walter Brenner. LAPD, retired. Security for Pryce Development.")
+			await say("On the back: \"Gus. Think it over. Nobody else is going to offer.\"")
+			ui.hide_paper()
 		"lens_piece":
 			await say("Half a headlight. Clear plastic, curved, chrome on the back.")
 			await say("Moulded into the plastic: four interlocking rings and a part number starting 4K0. A smear of blue-gray paint on the broken edge.")
@@ -554,7 +572,9 @@ Received: 4:46 AM",
 		"brenner_38":
 			await say("A .38 revolver, bagged. Shah will want to introduce it to Danny.")
 		_:
-			await say(Game.ITEMS.get(id, {}).get("desc", "It's a %s." % Game.item_name(id)))
+			## An item with no case above and an empty "desc" would say an empty line (talking, no text, no voice).
+			var desc: String = Game.ITEMS.get(id, {}).get("desc", "")
+			await say(desc if desc != "" else "It's a %s." % Game.item_name(id))
 
 
 func read_notebook() -> void:

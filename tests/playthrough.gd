@@ -755,6 +755,11 @@ func _case3() -> void:
 	await expect_room("squad_room")
 
 	print("Case 3, scene 6: the murder board")
+	await _idle()
+	main.busy = true
+	for id in ["uv_lamp", "catalogue", "fake_oscar", "brenner_card"]:   # Look on each says something (voiced, checked below)
+		await main.examine_item(id)
+	main.busy = false
 	await act("door")
 	await act("phone")
 	await act("clock")

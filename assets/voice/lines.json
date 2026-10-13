@@ -12976,5 +12976,47 @@
 		"text": "Mr. Lindqvist, Trent Whitaker again. Thirty days. Please don't make this ugly.",
 		"file": "res://assets/voice/whitaker/ce94282798e1.ogg",
 		"voice": "kokoro: am_michael 50% + am_puck 50%, speed 1.05"
+	},
+	"0222d47d5801": {
+		"speaker": "ray",
+		"text": "Gus's UV lamp. Masking tape on the handle: \"Modern ink glows. Old ink doesn't. Trust nobody.\"",
+		"file": "res://assets/voice/ray/0222d47d5801.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"75d08e91df7f": {
+		"speaker": "ray",
+		"text": "Calloway's catalogue, the page Gus turned down. Lyle Brandt's Oscar, base serial No. 734, sold by private treaty.",
+		"file": "res://assets/voice/ray/75d08e91df7f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"45f3a1bd734d": {
+		"speaker": "ray",
+		"text": "Gus's red ink: \"It's in my case.\" It wasn't.",
+		"file": "res://assets/voice/ray/45f3a1bd734d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"7bc8730bdfef": {
+		"speaker": "ray",
+		"text": "Lyle Brandt's Oscar, or what's supposed to pass for it. Gold paint on hollow resin. It weighs about as much as a promise.",
+		"file": "res://assets/voice/ray/7bc8730bdfef.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"a9269ac42e4c": {
+		"speaker": "ray",
+		"text": "No. 734 on the base, the cuts still shiny.",
+		"file": "res://assets/voice/ray/a9269ac42e4c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"0a7bbed7ffe9": {
+		"speaker": "ray",
+		"text": "Walter Brenner. LAPD, retired. Security for Pryce Development.",
+		"file": "res://assets/voice/ray/0a7bbed7ffe9.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"157e75ead35a": {
+		"speaker": "ray",
+		"text": "On the back: \"Gus. Think it over. Nobody else is going to offer.\"",
+		"file": "res://assets/voice/ray/157e75ead35a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
 	}
 }
