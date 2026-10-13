@@ -468,7 +468,7 @@ func _call_doyle() -> void:
 	await main.say("Wasting the night. That's what nights are for.")
 	Game.set_flag("told_doyle")
 	await main.wait(0.7)
-	await main.voice("*RIIING*", PHONE_AT, Color.WHITE)
+	await main.voice("*RIIING*", PHONE_AT, Color.WHITE, "", false, "phone_ring")
 	await main.player.play_action("use")
 	await main.voice("Ray, it's Otis. Hope I'm not interrupting your social life.", PHONE_AT, OTIS_COLOR, "otis", true)
 	await main.say("You're interrupting Danny Reyes.")
@@ -629,7 +629,7 @@ func _pin_texts2(pins: Array[String]) -> Array:
 func _calls2() -> void:
 	# No branches: Case 5 throws "Everything closes eventually" back at Doyle.
 	await main.wait(0.6)
-	await main.voice("*RIIING*", PHONE_AT, Color.WHITE)
+	await main.voice("*RIIING*", PHONE_AT, Color.WHITE, "", false, "phone_ring")
 	await main.walk(hotspot("phone").walk_to)
 	main.player.face("up")
 	await main.player.play_action("use")
@@ -641,7 +641,7 @@ func _calls2() -> void:
 	await main.say("It's not night anymore. It's not morning yet, either. That's my shift.")
 	await main.wait(0.8)
 	await main.say("Two forty-five.")
-	await main.voice("*RIIING*", PHONE_AT, Color.WHITE)
+	await main.voice("*RIIING*", PHONE_AT, Color.WHITE, "", false, "phone_ring")
 	await main.player.play_action("use")
 	await main.voice("Ray. You still awake?", PHONE_AT, OTIS_COLOR, "otis", true)
 	await main.say("Somebody has to be.")
@@ -821,7 +821,7 @@ func _pin_texts3(pins: Array[String]) -> Array:
 func _calls3() -> void:
 	# No branches: Case 5 throws "I see the captain at eight" back at Doyle.
 	await main.wait(0.6)
-	await main.voice("*RIIING*", PHONE_AT, Color.WHITE)
+	await main.voice("*RIIING*", PHONE_AT, Color.WHITE, "", false, "phone_ring")
 	await main.walk(hotspot("phone").walk_to)
 	main.player.face("up")
 	await main.player.play_action("use")
@@ -835,7 +835,7 @@ func _calls3() -> void:
 	await main.say("Six. Sure. This whole town's full of optimists.")
 	await main.wait(0.8)
 	await main.say("Ten to four.")
-	await main.voice("*RIIING*", PHONE_AT, Color.WHITE)
+	await main.voice("*RIIING*", PHONE_AT, Color.WHITE, "", false, "phone_ring")
 	await main.player.play_action("use")
 	await main.voice("Ray. You want the good news or the river?", PHONE_AT, OTIS_COLOR, "otis", true)
 	await main.say("There's good news?")
@@ -1015,7 +1015,7 @@ func _pin_texts4(pins: Array[String]) -> Array:
 func _calls4() -> void:
 	# No branches: Ray keeps the phone from Doyle, and Case 5 starts with Sal.
 	await main.wait(0.6)
-	await main.voice("*RIIING*", PHONE_AT, Color.WHITE)
+	await main.voice("*RIIING*", PHONE_AT, Color.WHITE, "", false, "phone_ring")
 	await main.walk(hotspot("phone").walk_to)
 	main.player.face("up")
 	await main.player.play_action("use")
@@ -1035,9 +1035,9 @@ func _calls4() -> void:
 	await main.narrate("I didn't tell her about the phone. I couldn't have told you why. Twenty-six years, and some nights the job keeps its mouth shut for you.")
 	await main.wait(1.0)
 	await main.say("Ten to five.")
-	await main.voice("*RIIING*", PHONE_AT, Color.WHITE)
+	await main.voice("*RIIING*", PHONE_AT, Color.WHITE, "", false, "phone_ring")
 	await main.wait(1.2)
-	await main.voice("*RIIING*", PHONE_AT, Color.WHITE)
+	await main.voice("*RIIING*", PHONE_AT, Color.WHITE, "", false, "phone_ring")
 	await main.player.play_action("use")
 	await main.voice("Ray.", PHONE_AT, OTIS_COLOR, "otis", true)
 	await main.wait(0.8)
@@ -1231,7 +1231,7 @@ func _visitor_log() -> void:
 func _doyle_calls() -> void:
 	## Puzzle 4.5: scripted, no branches. Ray lies to a lieutenant for the first time.
 	await main.wait(0.6)
-	await main.voice("*RIIING*", PHONE_AT, Color.WHITE)
+	await main.voice("*RIIING*", PHONE_AT, Color.WHITE, "", false, "phone_ring")
 	await main.walk(hotspot("phone").walk_to)
 	main.player.face("up")
 	await main.player.play_action("use")

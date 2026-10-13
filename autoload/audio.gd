@@ -34,6 +34,7 @@ const SOUND_CREDITS := [
 	"\"3 Knock - 101\" by WakaProduction2018\nfreesound.org/s/437589 · CC0",
 	"\"Hang up tone\" by E_Vice\nfreesound.org/s/273213 · CC0",
 	"\"Text Tone 5\" by dVidrio02\nfreesound.org/s/636401 · CC0",
+	"\"Telephone ring dry\" by djfroyd\nfreesound.org/s/342167 · CC BY 3.0",
 ]
 const AMBIENCE := {"rain": ["res://assets/sounds/rain.wav", 0.0]}    ## id: [file, level in dB]
 ## One-shot effects for sfx(): id: [file, level in dB]. Main.say(text, sfx) plays one with a line.
@@ -42,6 +43,7 @@ const SFX := {
 	"knock_wrong": ["res://assets/sounds/knock_wrong.wav", -2.0],     ## an ordinary knock on a door
 	"hang_up": ["res://assets/sounds/hang_up.wav", 0.0],             ## a caller hangs up ("*click*" on a phone line)
 	"text_tone": ["res://assets/sounds/text_tone.wav", -4.0],         ## a text arrives on Ray's phone
+	"phone_ring": ["res://assets/sounds/phone_ring.wav", -2.0],       ## the squad room's desk phone ("*RIIING*")
 }
 const VOICE_LINES := "res://assets/voice/lines.json"     ## id: {speaker, text, file, voice}
 const SETTINGS := "user://settings.cfg"     ## the same file as Main.SETTINGS

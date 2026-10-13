@@ -17,6 +17,8 @@ assets/sounds/hang_up.wav    273213 hang-up-tone (E_Vice, CC0): the first 2.4 s 
                              fast, so an octave up (its 165 + 220 Hz hum, which small speakers barely play, becomes
                              330 + 440 Hz, close to an American dial tone's 350 + 440) and 1.2 s long; a 5 ms fade in, a
                              0.3 s fade out, peak -3 dBFS.
+assets/sounds/phone_ring.wav 342167 telephone-ring-dry (djfroyd, CC BY 3.0, credited): the one ring (the first 1.05 s;
+                             the rest is silence), a 2 ms fade in and 50 ms fade out, peak -3 dBFS.
 assets/sounds/text_tone.wav  636401 text-tone-5 (dVidrio02, CC0): the chime without its 0.26 s of leading silence or
                              its long quiet tail (0.24 s to 1.5 s), a 0.2 s fade out, peak -3 dBFS.
 """
@@ -129,6 +131,8 @@ def tones():
     x, sr = read_compressed(os.path.join(SRC, "273213__e_vice__hang-up-tone.wav"))    # 32-bit float: PyAV reads it
     octave_up = x[: int(2.4 * sr)][::2]          # every other sample: twice the pitch, half the length
     write(os.path.join(OUT, "hang_up.wav"), _cut(octave_up, sr, 0.0, 1.2, 0.005, 0.3, -3), sr)
+    x, sr = read(os.path.join(SRC, "342167__djfroyd__telephone-ring-dry.wav"))
+    write(os.path.join(OUT, "phone_ring.wav"), _cut(x, sr, 0.0, 1.05, 0.002, 0.05, -3), sr)
     x, sr = read_compressed(os.path.join(SRC, "636401__dvidrio02__text-tone-5.mp3"))
     write(os.path.join(OUT, "text_tone.wav"), _cut(x, sr, 0.24, 1.5, 0.0, 0.2, -3), sr)
 

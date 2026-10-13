@@ -661,10 +661,11 @@ func say(text: String, sfx := "") -> void:
 	player.set_talking(false)
 
 
-func voice(text: String, anchor: Vector2, color := Color(0.6, 0.85, 1.0), speaker := "", phone := false) -> void:
+func voice(text: String, anchor: Vector2, color := Color(0.6, 0.85, 1.0), speaker := "", phone := false, sfx := "") -> void:
 	## Someone off-screen or unseen speaks from `anchor` (room coordinates). With a cast `speaker` ("doyle"), the line
 	## plays its recorded clip if it has one (docs/voice-recording.md); `phone` plays it through the phone-line filter.
-	await _show_text(text, anchor, color, speaker, phone)
+	## `sfx` as for say(): "*RIIING*" plays "phone_ring".
+	await _show_text(text, anchor, color, speaker, phone, sfx)
 
 
 func _show_text(text: String, anchor: Vector2, color: Color, speaker := "", phone := false, sfx := "") -> void:
