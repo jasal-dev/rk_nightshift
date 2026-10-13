@@ -2160,5 +2160,6 @@
 	["ray", "The original's frozen at Takes until a judge asks for it. This is the only copy anybody can play.", "main.gd:553 examine_item"],
 	["ray", "A .38 revolver, bagged. Shah will want to introduce it to Danny.", "main.gd:555 examine_item"],
 	["ray", "His photo, the envelope, the index card with a name on the back, the tab book page. And the papers that were never introduced.", "main.gd examine_item danny_box"],
-	["ray", "His photo, the envelope, the index card with a name on the back, the tab book page.", "main.gd examine_item danny_box"]
+	["ray", "His photo, the envelope, the index card with a name on the back, the tab book page.", "main.gd examine_item danny_box"],
+	["whitaker", "Mr. Lindqvist, Trent Whitaker again. Thirty days. Please don't make this ugly.", "stardust_office.gd:316 _phone (voicemail)"]
 ]

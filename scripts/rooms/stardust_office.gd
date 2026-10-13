@@ -314,7 +314,7 @@ func _phone() -> void:
 		var i := int(pick.substr(4))
 		if tab == 1:
 			await main.voice("Mr. Lindqvist, Trent Whitaker again. Thirty days. Please don't make this ugly.", Vector2(1530, 330),
-					Color(0.7, 0.74, 0.8))
+					Color(0.7, 0.74, 0.8), "whitaker", true)
 			await main.say("He's polite about ugly. That's how you know he does it for a living.")
 		elif i <= 1:
 			if not Game.flag("clue_phone_log"):

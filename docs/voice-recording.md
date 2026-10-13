@@ -164,14 +164,11 @@ go through the phone filter; the take's lines are `Main.caption()` with a speake
 | `danny` | Danny Reyes, the piano player, 34 (heard only on the take) | `am_michael` | 1 | 1 | none | `SPEAKERS["danny"]` (was `CASTING_REST["danny"]` C) | 2026-10-11, over A and B | every line, all five cases (2) |
 | `pryce` | Harlan Pryce, developer (heard only on the take): smooth, used to being obeyed | `am_eric` 50% + `am_michael` 50% | 0.92 | -1.5 | warmth 2 | `SPEAKERS["pryce"]` (was `CASTING_REST["pryce"]` C) | 2026-10-11, over A and B | every line, all five cases (5) |
 | `haskell` | Councilman Ted Haskell (heard only on the take): nervous, wants to go home | `am_eric` | 1.05 | 0 | none | `SPEAKERS["haskell"]` (was `CASTING_REST["haskell"]` A) | 2026-10-11, over B and C | every line, all five cases (3) |
+| `whitaker` | Trent Whitaker: Pryce Development's acquisitions agent, only Gus's saved voicemail (Case 3); slick, polite, a threat in a nice suit | `am_michael` 50% + `am_puck` 50% | 1.05 | 0 | phone-line filter in the game (a voicemail) | `SPEAKERS["whitaker"]` (was `CASTING_REST["whitaker"]` B) | 2026-10-13, over a British `bm_lewis` (A) and a lowered `am_eric` (C) | every line, all five cases (1) |
 
 ## Proposed, awaiting a pick
 
-| Speaker | Case | Who | Lines | A | B | C |
-| --- | --- | --- | --- | --- | --- | --- |
-| `whitaker` | 3 | Trent Whitaker, Pryce Development's acquisitions agent: Gus's saved voicemail, through the phone filter. Missed in the first casting (his call had no colour constant) | 1 | `bm_lewis` (British), speed 1 | `am_michael` 50% + `am_puck` 50%, speed 1.05 | `am_eric`, -0.5 semitones, speed 0.95 |
-
-Everyone else in the game is cast (2026-10-11). The A/B/C proposals stay in `CASTING` and
+None: every speaking character in the game is cast (Trent Whitaker last, 2026-10-13). The A/B/C proposals stay in `CASTING` and
 `CASTING_REST` in the generator, and their samples in `tools/tts/out/casting_case1/` and `casting_rest/`. A new
 character gets three proposals there and a row here until the user picks.
 

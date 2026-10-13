@@ -12970,5 +12970,11 @@
 		"text": "His photo, the envelope, the index card with a name on the back, the tab book page.",
 		"file": "res://assets/voice/ray/543fb00b087f.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ce94282798e1": {
+		"speaker": "whitaker",
+		"text": "Mr. Lindqvist, Trent Whitaker again. Thirty days. Please don't make this ugly.",
+		"file": "res://assets/voice/whitaker/ce94282798e1.ogg",
+		"voice": "kokoro: am_michael 50% + am_puck 50%, speed 1.05"
 	}
 }

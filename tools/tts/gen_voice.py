@@ -74,6 +74,7 @@ SPEAKERS = {
     "danny": {"blend": {"am_michael": 1.0}, "semitones": 1.0, "speed": 1.0, "from": "CASTING_REST danny C"},
     "pryce": {"blend": {"am_eric": 0.5, "am_michael": 0.5}, "semitones": -1.5, "speed": 0.92, "warmth": 2.0, "from": "CASTING_REST pryce C"},
     "haskell": {"blend": {"am_eric": 1.0}, "speed": 1.05, "from": "CASTING_REST haskell A"},
+    "whitaker": {"blend": {"am_michael": 0.5, "am_puck": 0.5}, "speed": 1.05, "from": "CASTING_REST whitaker B"},
 }
 
 
