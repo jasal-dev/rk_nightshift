@@ -3,7 +3,7 @@ extends Room
 ## service (the valet ticket or the gate camera), the coyote (Puzzle 5.1, the headlight fit), and "I didn't stop" (his
 ## loafers and Shah's scrapes). The tarp comes off mid-scene (tarp_off), Crane sits down on the step, then Doss takes him.
 ## Puzzle 5.2: the tarp, the hose, the loafers, his phone and the grille, any time. The street opens the car menu after.
-## The tarp and Crane's two poses are overlays.
+## The tarp, Crane's two poses and Doss (on the apron, from his first line to the end of the arrest) are overlays.
 
 ## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
 const VERBS := {
@@ -15,6 +15,7 @@ const PIECES := [Vector2(433.5, 350.5), Vector2(650.5, 421.5)]   ## the two piec
 @onready var tarp: Sprite2D = $Tarp
 @onready var crane_stand: Sprite2D = $Actors/Crane_stand
 @onready var crane_step: Sprite2D = $Actors/Crane_step
+@onready var doss: Sprite2D = $Actors/Doss
 var _wander := 0
 
 
@@ -30,6 +31,8 @@ func _sync() -> void:
 	crane_step.visible = not gone and Game.flag("crane_lie2_broken")
 	hotspot("crane").enabled = crane_stand.visible
 	hotspot("crane_step").enabled = crane_step.visible
+	doss.visible = Game.flag("doss_here")
+	hotspot("doss").enabled = doss.visible
 	hotspot("audi_tarp").enabled = tarp.visible
 	for id in ["audi", "headlight", "grille"]:
 		hotspot(id).enabled = not tarp.visible
@@ -154,6 +157,12 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.say("Up to the house. The lights upstairs are off. Somebody up there is sleeping through this.")
 			else:
 				await main.say("I'm not going in. Everything I need is down here.")
+
+		"doss":
+			if item != "":
+				await default_response(verb, item)
+			else:
+				await main.say("Officer Doss, waiting out on the apron with the cuffs. He's got a good look at the rain.")
 
 		"street":
 			if verb == "look":
@@ -334,7 +343,11 @@ func _step3() -> void:
 	else:
 		await main.say("Owen Tate was twenty-four. He told you not to drive.")
 	await main.wait(0.8)
-	var street := speaker_at("street")
+	await main.ui.fade_to(1.0, 0.4)
+	Game.set_flag("doss_here")             # Doss walks up the hill to the open door
+	_sync()
+	await main.ui.fade_to(0.0, 0.4)
+	var street := speaker_at("doss")
 	await main.voice("Detective. Otis said you've got somebody who deserves these more.", street, Case4.DOSS_COLOR, "doss")
 	await main.say("Elliot Crane. Gross vehicular manslaughter, felony hit and run, and whatever the DA calls what he did after. Read him the rest, Officer.")
 	await main.ui.fade_to(1.0, 0.8)
@@ -348,3 +361,7 @@ func _step3() -> void:
 	await main.say("Say it anyway. He told me you already did.")
 	await main.wait(0.8)
 	await main.say("The phone on the workbench buzzes again. Nobody answers it.")
+	await main.ui.fade_to(1.0, 0.5)
+	Game.set_flag("doss_here", false)      # he takes Crane down to the car
+	_sync()
+	await main.ui.fade_to(0.0, 0.5)

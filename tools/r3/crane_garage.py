@@ -8,8 +8,8 @@ runs across the wet floor into the drain, a bucket of suds and a sponge beside i
 soaked Italian loafers on a spread of newspaper, a phone face-up, lit. A suit jacket on a hook by the door up into the
 house, two steps up. Outside, rain under a streetlight, the hill across the street, houses stacked up it.
 
-Overlays: the tarp (tarp), Crane standing by the steps in his robe with a glass of water (crane_stand), and Crane
-sitting on the step (crane_step)."""
+Overlays: the tarp (tarp), Crane standing by the steps in his robe with a glass of water (crane_stand), Crane
+sitting on the step (crane_step), and Officer Doss waiting on the apron outside the door for the arrest (doss)."""
 import math, random
 import numpy as np
 from scene3d import *
@@ -26,6 +26,7 @@ BENCH_Z = (-5.2, -1.9)
 DOOR_Z = (-0.4, 0.6)           # the door up into the house, in the right wall
 CRANE_STAND = (1.7, 0.15)
 CRANE_STEP = (2.95, 0.1)       # sitting on the upper step (0.4 up), legs out, feet on the floor past the lower step
+DOSS = (1.0, GZ0 - 1.0)        # on the apron outside the rolled-up door, facing in
 DRAIN = (0.7, -1.6)
 SLOPE = 6.0                   # how steeply the street climbs, left to right (degrees)
 BUCKET = (1.25, -0.6)
@@ -197,6 +198,11 @@ def build(hide=()):
                                   re=74, rin=42, hp=26, hy=-10),
                  (CRANE_STEP[0], 0.0, CRANE_STEP[1]), yaw=-90, scale=0.95, tag='crane_step')
 
+    # Officer Doss, on the apron outside the door, waiting to take Crane (overlay, only for the arrest)
+    if 'doss' not in hide:
+        npc.cast(S, 'doss', dict(npc.STAND, lsp=6, le=24, rsp=6, re=24, hp=0),
+                 (DOSS[0], 0, DOSS[1]), yaw=-5, scale=0.96, tag='doss')
+
     # ---------------------------------------------------------------- outside: the steep street, the hill, the houses
     # a level concrete apron runs out from the door; the street beyond climbs left to right, dipping just below it
     S.wboxr(GX0 - 0.3, -0.3, GZ0 - 2.6, GX1 + 0.3, 0.0, GZ0 + 0.01, 'floor')
@@ -242,6 +248,7 @@ def build(hide=()):
             'jacket': ('suit jacket', (2.0, -1.2), 'right'),
             'house_door': ('door to the house', (2.0, 1.3), 'right'),
             'street': ('street', (1.3, GZ0 - 0.6), 'up'),
+            'doss': ('Officer Doss', (DOSS[0], DOSS[1] + 1.0), 'up'),
         },
         hotspot_shapes={
             'crane': [(CRANE_STAND[0] - 0.3, 0.0, CRANE_STAND[1]), (CRANE_STAND[0] + 0.3, 0.0, CRANE_STAND[1]),
@@ -255,11 +262,13 @@ def build(hide=()):
             'headlight': [apt(0.3, 0.55, -2.48), apt(0.9, 0.55, -2.48), apt(0.9, 0.82, -2.48), apt(0.3, 0.82, -2.48)],
             'grille': [apt(-0.3, 0.4, -2.48), apt(0.28, 0.4, -2.48), apt(0.28, 0.72, -2.48), apt(-0.3, 0.72, -2.48)],
             'street': [(GX0, 0.0, GZ0 - 0.2), (GX1, 0.0, GZ0 - 0.2), (GX1, 2.2, GZ0 - 0.2), (GX0, 2.2, GZ0 - 0.2)],
+            'doss': [(DOSS[0] - 0.32, 0.0, DOSS[1]), (DOSS[0] + 0.32, 0.0, DOSS[1]), (DOSS[0] + 0.32, 1.8, DOSS[1]),
+                     (DOSS[0] - 0.32, 1.8, DOSS[1])],
         },
         hotspot_order=['street', 'house_door', 'jacket', 'phone', 'loafers', 'hose', 'audi_tarp', 'audi', 'grille',
-                       'headlight', 'crane_step', 'crane'],
-        overlays=['crane_stand', 'crane_step', 'tarp'],
-        overlay_bases={'crane_stand': CRANE_STAND, 'crane_step': CRANE_STEP},
+                       'headlight', 'crane_step', 'crane', 'doss'],
+        overlays=['crane_stand', 'crane_step', 'tarp', 'doss'],
+        overlay_bases={'crane_stand': CRANE_STAND, 'crane_step': CRANE_STEP, 'doss': DOSS},
         exclusive_overlays=['crane_stand', 'crane_step'],
         obstacles=[(BUCKET[0], BUCKET[1], 0.3), (CRANE_STAND[0], CRANE_STAND[1], 0.3)],
         char_fill=((220, 226, 236), 0.16),

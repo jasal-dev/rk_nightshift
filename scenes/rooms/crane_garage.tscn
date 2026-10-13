@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_crane_stand.png" id="ov_crane_stand"]
 [ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_crane_step.png" id="ov_crane_step"]
 [ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_tarp.png" id="ov_tarp"]
+[ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_doss.png" id="ov_doss"]
 
 [node name="CraneGarage" type="Node2D"]
 script = ExtResource("script")
@@ -45,6 +46,12 @@ texture = ExtResource("ov_crane_step")
 centered = false
 position = Vector2(1605, 943)
 offset = Vector2(-227, -395)
+
+[node name="Doss" type="Sprite2D" parent="Actors"]
+texture = ExtResource("ov_doss")
+centered = false
+position = Vector2(1096, 598)
+offset = Vector2(-260, -143)
 
 [node name="Obstacles" type="Node2D" parent="."]
 
@@ -191,3 +198,13 @@ face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/crane"]
 polygon = PackedVector2Array(1205.1, 947.8, 1217.8, 516.8, 1378, 518.6, 1357, 957.5)
+
+[node name="doss" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "doss"
+display_name = "Officer Doss"
+walk_to = Vector2(1097, 614)
+face = "up"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/doss"]
+polygon = PackedVector2Array(1068.7, 606.2, 1070.6, 452.1, 1126.9, 452.3, 1123.9, 607.4)
