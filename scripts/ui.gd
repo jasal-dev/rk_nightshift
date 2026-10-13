@@ -217,7 +217,8 @@ func is_over_bar(p: Vector2) -> bool:
 
 func refresh_inventory() -> void:
 	for c in bar_items.get_children():
-		c.queue_free()
+		bar_items.remove_child(c)       # now, not at frame end: several changes in one frame would stack slots
+		c.queue_free()                  # and widen the bar past the screen, where it stays (the cog off to the right)
 	for id in Game.inventory:
 		var slot := TextureRect.new()
 		slot.texture = Game.item_icon(id)
@@ -230,6 +231,7 @@ func refresh_inventory() -> void:
 		slot.mouse_entered.connect(func(): slot.modulate = Color(1.3, 1.2, 0.9))
 		slot.mouse_exited.connect(func(): slot.modulate = Color.WHITE)
 		bar_items.add_child(slot)
+	bar.size = Vector2(SCREEN.x, BAR_H)     # the panel grows to fit its contents but never shrinks back by itself
 
 
 func is_over_cog(p: Vector2) -> bool:
