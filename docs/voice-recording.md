@@ -167,7 +167,11 @@ go through the phone filter; the take's lines are `Main.caption()` with a speake
 
 ## Proposed, awaiting a pick
 
-None: every speaking character in the game is cast (2026-10-11). The A/B/C proposals stay in `CASTING` and
+| Speaker | Case | Who | Lines | A | B | C |
+| --- | --- | --- | --- | --- | --- | --- |
+| `whitaker` | 3 | Trent Whitaker, Pryce Development's acquisitions agent: Gus's saved voicemail, through the phone filter. Missed in the first casting (his call had no colour constant) | 1 | `bm_lewis` (British), speed 1 | `am_michael` 50% + `am_puck` 50%, speed 1.05 | `am_eric`, -0.5 semitones, speed 0.95 |
+
+Everyone else in the game is cast (2026-10-11). The A/B/C proposals stay in `CASTING` and
 `CASTING_REST` in the generator, and their samples in `tools/tts/out/casting_case1/` and `casting_rest/`. A new
 character gets three proposals there and a row here until the user picks.
 

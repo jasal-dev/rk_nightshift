@@ -498,6 +498,12 @@ CASTING_REST = {
                     "B": {"blend": {"am_echo": 1.0}, "speed": 1.05},
                     "C": {"blend": {"am_puck": 1.0}, "semitones": -1.0, "speed": 1.0},
                 }),
+    "whitaker": (3, "Trent Whitaker, Pryce Development's acquisitions agent (only Gus's saved voicemail): polite, corporate, a threat in a nice suit", 1,
+                 "Mr. Lindqvist, Trent Whitaker again. Thirty days. Please don't make this ugly.", {
+                     "A": {"blend": {"bm_lewis": 1.0}, "speed": 1.0, "lang": "b"},
+                     "B": {"blend": {"am_michael": 0.5, "am_puck": 0.5}, "speed": 1.05},
+                     "C": {"blend": {"am_eric": 1.0}, "semitones": -0.5, "speed": 0.95},
+                 }),
 }
 
 
