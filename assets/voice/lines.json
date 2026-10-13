@@ -13018,5 +13018,35 @@
 		"text": "On the back: \"Gus. Think it over. Nobody else is going to offer.\"",
 		"file": "res://assets/voice/ray/157e75ead35a.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"ab16eada9a0a": {
+		"speaker": "ray",
+		"text": "Not yet. I know where she was. I can't prove what she was doing behind his back.",
+		"file": "res://assets/voice/ray/ab16eada9a0a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"3649e6a1017e": {
+		"speaker": "ray",
+		"text": "Her locker, upstairs. Or the man who bought the real Lyle.",
+		"file": "res://assets/voice/ray/3649e6a1017e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"5e4b4e168cd2": {
+		"speaker": "ray",
+		"text": "The board's missing what she was doing behind his back. Back to the Stardust.",
+		"file": "res://assets/voice/ray/5e4b4e168cd2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"940bf59a5cf4": {
+		"speaker": "ray",
+		"text": "It's her. I can see where she was. What was she doing behind his back? I've got nothing that says.",
+		"file": "res://assets/voice/ray/940bf59a5cf4.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
+	},
+	"c220469451f0": {
+		"speaker": "ray",
+		"text": "Her locker, or the man who bought the real Lyle. Back to the Stardust.",
+		"file": "res://assets/voice/ray/c220469451f0.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9"
 	}
 }

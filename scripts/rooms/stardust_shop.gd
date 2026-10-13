@@ -120,6 +120,9 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.say("Smashed. Rain's coming through the hole.")
 			elif not Game.flag("pearl_arrested"):
 				await main.say("Not yet. Gus is still at the bottom of the stairs.")
+			elif not Case3.has_motive_card():
+				await main.say("Not yet. I know where she was. I can't prove what she was doing behind his back.")
+				await main.say("Her locker, upstairs. Or the man who bought the real Lyle.")
 			else:
 				await main.say("Back to the board.")
 				await Case3.drive_back(main)

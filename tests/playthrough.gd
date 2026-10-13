@@ -760,6 +760,21 @@ func _case3() -> void:
 	for id in ["uv_lamp", "catalogue", "fake_oscar", "brenner_card"]:   # Look on each says something (voiced, checked below)
 		await main.examine_item(id)
 	main.busy = false
+	# Left the Stardust with Pearl arrested but nothing proving "she was selling him out": the door goes back, and the
+	# shop's front door won't drive home again until a card turns up (it used to be a dead end).
+	var kept := {}
+	for f in ["clue_practice_sigs", "clue_gold_pen", "clue_morty_bought"]:
+		kept[f] = Game.flag(f)
+		Game.flags.erase(f)
+	await act("door")
+	await expect_room("stardust_shop")
+	await act("front_door")
+	await expect_room("stardust_shop")
+	for f in kept:
+		if kept[f]:
+			Game.set_flag(f)
+	await act("front_door")
+	await expect_room("squad_room")
 	await act("door")
 	await act("phone")
 	await act("clock")

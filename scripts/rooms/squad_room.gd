@@ -152,6 +152,9 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 					await main.change_room("street_crime", "squad_room")
 			elif _case4():
 				await main.say("Not yet. Owen's waiting on the board.")
+			elif _case3() and not Case3.has_motive_card():
+				await main.say("The board's missing what she was doing behind his back. Back to the Stardust.")
+				await main.change_room("stardust_shop", "squad_room")
 			elif _case3():
 				await main.say("Not yet. Gus is waiting on the board.")
 			elif _case2():
@@ -730,6 +733,12 @@ func _deduction3(first: String) -> void:
 			_:
 				main.ui.hide_board()
 				return
+	if not Case3.has_motive_card():
+		# Nothing on the board proves the first slot (a way out of the board, then the door to the Stardust)
+		await main.narrate("It's her. I can see where she was. What was she doing behind his back? I've got nothing that says.")
+		await main.narrate("Her locker, or the man who bought the real Lyle. Back to the Stardust.")
+		main.ui.hide_board()
+		return
 	# step 2: two labeled slots. A right card stays pinned; a wrong one gets Ray's line and comes down.
 	main.ui.set_board_question("Pearl Danvers. Pin up what proves it.")
 	var pins: Array[String] = ["", ""]

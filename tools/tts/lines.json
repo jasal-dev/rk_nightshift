@@ -2168,5 +2168,10 @@
 	["ray", "Lyle Brandt's Oscar, or what's supposed to pass for it. Gold paint on hollow resin. It weighs about as much as a promise.", "main.gd:510 examine_item"],
 	["ray", "No. 734 on the base, the cuts still shiny.", "main.gd:511 examine_item"],
 	["ray", "Walter Brenner. LAPD, retired. Security for Pryce Development.", "main.gd:515 examine_item"],
-	["ray", "On the back: \"Gus. Think it over. Nobody else is going to offer.\"", "main.gd:516 examine_item"]
+	["ray", "On the back: \"Gus. Think it over. Nobody else is going to offer.\"", "main.gd:516 examine_item"],
+	["ray", "Not yet. I know where she was. I can't prove what she was doing behind his back.", "stardust_shop.gd:124 interact"],
+	["ray", "Her locker, upstairs. Or the man who bought the real Lyle.", "stardust_shop.gd:125 interact"],
+	["ray", "The board's missing what she was doing behind his back. Back to the Stardust.", "squad_room.gd:156 interact"],
+	["ray", "It's her. I can see where she was. What was she doing behind his back? I've got nothing that says.", "squad_room.gd:738 _deduction3"],
+	["ray", "Her locker, or the man who bought the real Lyle. Back to the Stardust.", "squad_room.gd:739 _deduction3"]
 ]

@@ -30,6 +30,12 @@ static func drive_in(main: Node) -> void:
 	await main.drive_end()
 
 
+static func has_motive_card() -> bool:
+	## The board's first slot ("she was selling him out") needs one of these three. Pearl can be arrested without any
+	## of them (the phone log and Lyle in the tank break her story), so the drive back and the board check this.
+	return Game.flag("clue_practice_sigs") or Game.flag("clue_gold_pen") or Game.flag("clue_morty_bought")
+
+
 static func drive_back(main: Node) -> void:
 	## Scene 6: Highland southbound, the boulevard's lights shrinking in the mirror, and Maya.
 	await main.drive_begin()
