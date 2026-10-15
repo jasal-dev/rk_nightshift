@@ -106,7 +106,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 			elif Game.has_item("gaff"):
 				await main.say("I've already got the hook.")
 			else:
-				await main.player.play_action("pickup")
+				await main.player.play_action("take")
 				await main.give("gaff", false)
 				_sync()
 				await main.voice("Bring that back when you're done.", TINY_AT, TINY_COLOR, "tiny")

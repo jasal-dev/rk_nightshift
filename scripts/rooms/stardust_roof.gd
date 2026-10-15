@@ -180,7 +180,7 @@ func _maybe_hint() -> void:
 func _tank() -> void:
 	await main.player.play_action("use")
 	await main.say("Neon light slides across black water a foot below the rim. Something floats face down in it, gold, like a drowned starlet.")
-	await main.player.play_action("pickup")
+	await main.player.play_action("take")
 	await main.say("Lyle Brandt. Best Supporting Actor, 1954. Floating.")
 	await main.say("It comes up far too easily. Eight and a half pounds of metal doesn't float. This is resin, hollow as a promise.")
 	if Game.flag("clue_weight"):

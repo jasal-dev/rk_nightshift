@@ -367,7 +367,7 @@ func _talk_nina() -> void:
 				main.clue("clue_young_lady")
 			"phone":
 				await main.say("Can I see your phone?")
-				await main.player.play_action("pickup")
+				await main.player.play_action("take")
 				main.ui.show_device("Nina's phone", ["Recent calls"], 0, "", ["1:52 AM  Incoming  (323) 555-0186   2 min",
 						"2:31 AM  Outgoing  Sal   no answer", "2:50 AM  Outgoing  Sal   no answer",
 						"3:10 AM  Outgoing  Sal   no answer", "3:22 AM  Outgoing  Yellow Cab"], false)

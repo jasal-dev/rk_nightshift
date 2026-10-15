@@ -822,7 +822,7 @@ func topics(options: Array) -> int:
 
 func give(item: String, animate := true) -> void:
 	if animate:
-		await player.play_action("pickup")
+		await player.play_action("take")
 	Game.add_item(item)
 	ui.toast("Picked up: %s" % Game.item_name(item))
 

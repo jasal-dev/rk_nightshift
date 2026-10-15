@@ -121,7 +121,7 @@ func _heck(line: String) -> void:
 # --- Rosa -------------------------------------------------------------------------
 func _pour() -> void:
 	## Puzzle 3.1: Ray works his way down the counter with the pot.
-	await main.player.play_action("pickup")
+	await main.player.play_action("take")
 	await main.walk(hotspot("regulars").walk_to)
 	main.player.face("up")
 	await main.say("Coffee. Coffee.")

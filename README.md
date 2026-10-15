@@ -290,6 +290,7 @@ cl /O2 /fp:fast /openmp /arch:AVX2 r3.c /Fe:r3.exe            # or once with MSV
 python render_room.py street          # -> assets/rooms/street.png + out/street.json
 python render_room.py squad_room      # (add --preview for a fast low-res look)
 python gen_sprites.py                 # -> assets/characters/detective.png + detective_light.png + scripts/detective_anims.gd
+python gen_sprites.py --only take_right   # re-render one animation; the other rows are kept from the current sheets
 python light_probes.py street         # -> assets/rooms/street_light.json (render_room.py also does this)
 python gen_icons.py                   # -> assets/items/*.png (84x84)
 python gen_closeups.py                # -> assets/ui/: the UV lamp's views, Pryce's invitation, the headlight fit

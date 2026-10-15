@@ -1,7 +1,7 @@
 """Render the detective's relightable animation sheets for the game.
 python gen_sprites.py [--only walk_right,...] [--preview]
 Writes assets/characters/detective.png, detective_light.png and scripts/detective_anims.gd"""
-import argparse, math, os, sys, time
+import argparse, math, os, re, sys, time
 import numpy as np
 from PIL import Image
 import detective
@@ -61,6 +61,16 @@ def pickup():
             dict(yaw=90, rsp=10, re=96, rin=12, rhand='hold', props=(('box', 'r'),)),
             dict(yaw=90, rsp=10, re=98, rin=12, rhand='hold', props=(('box', 'r'),), hp=14)]
 
+def take():
+    """Standing reach for something at waist height or above (a desk, a counter, a hand): no knees."""
+    reach = dict(yaw=90, lean=10, rsp=52, re=18, rin=6, rhand='open', hp=12, rhp=4, lhp=-2)
+    held = (('box', 'r'),)
+    return [dict(yaw=90), dict(yaw=90, lean=4, rsp=28, re=42, rin=8, hp=6), reach,
+            {**reach, 'rhand': 'hold', 'props': held},
+            dict(yaw=90, lean=4, rsp=26, re=64, rin=10, rhand='hold', props=held, hp=8),
+            dict(yaw=90, rsp=10, re=96, rin=12, rhand='hold', props=held),
+            dict(yaw=90, rsp=10, re=98, rin=12, rhand='hold', props=held, hp=14)]
+
 def use():
     return [dict(yaw=90), dict(yaw=90, rsp=40, re=40, lean=2),
             dict(yaw=90, rsp=74, re=14, rhand='open', lean=4, rhp=6, lhp=-2),
@@ -107,6 +117,7 @@ ANIMS = [
     ('look_around', look_around(), 4, True),
     ('shrug', shrug(), 8, False),
     ('show_badge', badge(), 6, False),
+    ('take_right', take(), 8, False),
 ]
 
 
@@ -233,7 +244,20 @@ def main():
             sheet_rows.append((name.replace('_right', '_left'), [im.transpose(Image.FLIP_LEFT_RIGHT) for im in alb],
                                msh, fps, loop))
     order = ['idle_right', 'walk_right', 'idle_down', 'walk_down', 'idle_up', 'walk_up', 'talk_right', 'talk_down',
-             'pickup_right', 'use_right', 'notebook_right', 'look_around', 'shrug', 'show_badge']
+             'pickup_right', 'use_right', 'notebook_right', 'look_around', 'shrug', 'show_badge', 'take_right']
+    if only and not a.preview:
+        # keep every row we didn't re-render: cut it out of the current sheets
+        done = {r[0] for r in sheet_rows}
+        old = Image.open(os.path.join(ROOT, 'assets', 'characters', 'detective.png')).convert('RGBA')
+        lold = Image.open(os.path.join(ROOT, 'assets', 'characters', 'detective_light.png')).convert('RGBA')
+        src = open(os.path.join(ROOT, 'scripts', 'detective_anims.gd')).read()
+        for name, r, n, fps, loop in re.findall(r'"(\w+)": \[(\d+), (\d+), (\d+), (true|false)\]', src):
+            if name in done:
+                continue
+            r, n = int(r), int(n)
+            crop = lambda im, c: im.crop((c * FW, r * FH, (c + 1) * FW, (r + 1) * FH))
+            sheet_rows.append((name, [crop(old, c) for c in range(n)], [crop(lold, c) for c in range(n)],
+                               int(fps), loop == 'true'))
     sheet_rows.sort(key=lambda r: (r[0].endswith('_left'), order.index(r[0].replace('_left', '_right')) if r[0].replace('_left', '_right') in order else 99))
     cols = max(len(r[1]) for r in sheet_rows)
     sheet = Image.new('RGBA', (cols * FW, len(sheet_rows) * FH), (0, 0, 0, 0))

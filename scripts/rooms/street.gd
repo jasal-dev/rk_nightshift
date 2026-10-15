@@ -103,7 +103,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 			elif item != "":
 				await default_response(verb, item)
 			elif not Game.flag("got_matchbook"):
-				await main.player.play_action("pickup")
+				await main.player.play_action("take")
 				await main.say("A matchbook from the Blue Note. Wet, but readable.")
 				Game.set_flag("got_matchbook")
 				await main.give("matchbook", false)

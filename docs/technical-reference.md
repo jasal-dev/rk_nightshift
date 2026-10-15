@@ -207,7 +207,7 @@ aren't in the `notebook_seen` flag yet are highlighted and marked NEW; closing t
 | `topics(options) -> int` | A conversation's topic menu (asked topics drop out, the last option is the way out). If only the way out is left when a talk starts, no menu opens: Ray says one of `NOTHING_TO_ASK` and it returns -1 (the caller returns, skipping its goodbye). |
 | `device(title, tabs, active, body, rows) -> String` | Phone or car screen. Returns `"tab:i"`, `"row:i"` or `"close"`. |
 | `jigsaw(bg, pieces) -> bool` | Fit-the-pieces close-up. Each piece: `{tex, target: Vector2, turns}`. |
-| `give(item, animate := true)`, `take(item)` | Inventory with pickup animation and toast. |
+| `give(item, animate := true)`, `take(item)` | Inventory with a standing `take` animation and toast (kneel first with `play_action("pickup")` and `animate = false` for floor items). |
 | `clue(id)` | Sets the clue flag and toasts "Notebook updated" (first time with a hint). |
 | `walk(to)`, `wait(seconds)`, `wait_click()` | |
 | `drive_begin()`, `drive_wait(s)`, `text_message(text, outgoing, contact)`, `drive_end()` | The rain-on-windshield transition. Follow `drive_end()` with `change_room()`. |
@@ -216,7 +216,7 @@ aren't in the `notebook_seen` flag yet are highlighted and marked NEW; closing t
 | `caption(text, color, skippable)` | A subtitle in the lower third (the take). `skippable = false` ignores clicks. |
 | `piano(notes, set_list) -> bool` | Danny's keyboard. True once the last five notes played spell `notes` by letter; false if the player stepped back. Hints after three and six wrong runs of five. |
 | `the_end()` | The last card after Case 5's credits; a new game starts after it (or F9 loads). |
-| `player.play_action(kind)` | `use`, `pickup`, `notebook`, `shrug`, `badge`, `look_around`. |
+| `player.play_action(kind)` | `use`, `pickup` (kneels: floor or low things), `take` (stands and reaches: waist height or above, or a hand), `notebook`, `shrug`, `badge`, `look_around`. |
 | `player.face(dir)`, `player.face_point(p)` | |
 
 `change_room()` also has a small hard-coded table for which way Ray faces on arrival (`main.gd`); new rooms get

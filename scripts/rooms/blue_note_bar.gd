@@ -47,7 +47,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 			elif item != "":
 				await default_response(verb, item)
 			elif not Game.flag("got_tab_book"):
-				await main.player.play_action("pickup")
+				await main.player.play_action("take")
 				Game.set_flag("got_tab_book")
 				_sync()
 				await main.give("tab_book", false)
@@ -130,7 +130,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 			elif item != "":
 				await default_response(verb, item)
 			elif not Game.flag("got_set_list"):
-				await main.player.play_action("pickup")
+				await main.player.play_action("take")
 				Game.set_flag("got_set_list")
 				_sync()
 				await main.give("set_list", false)

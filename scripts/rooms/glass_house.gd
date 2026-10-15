@@ -309,7 +309,7 @@ func _talk_to_andre() -> void:
 				await _andre("No! He took them off the board himself. I offered him an Uber. I wrote it on the ticket so it's not on me. That's what they tell you to write.")
 			"ticket":
 				await _andre("Here.")
-				await main.player.play_action("pickup")
+				await main.player.play_action("take")
 				Game.set_flag("got_valet_ticket")
 				await main.give("valet_ticket", false)
 				await main.say("Number forty-seven. Audi A6, blue-gray, 8KXD392. Crane. Out one fifty-five. Guest insisted, offered rideshare, declined.")

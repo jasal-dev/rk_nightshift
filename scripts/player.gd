@@ -262,10 +262,11 @@ func set_talking(on: bool) -> void:
 
 
 func play_action(kind: String) -> void:
-	## One-shot actions: "pickup", "use", "notebook", "shrug", "badge", "look_around".
+	## One-shot actions: "pickup" (kneel, for things on or near the floor), "take" (standing reach, for a desk,
+	## counter, shelf or someone's hand), "use", "notebook", "shrug", "badge", "look_around".
 	var anim_name := kind
 	match kind:
-		"pickup", "use", "notebook":
+		"pickup", "take", "use", "notebook":
 			var side := facing if facing in ["left", "right"] else "right"
 			facing = side
 			anim_name = "%s_%s" % [kind, side]

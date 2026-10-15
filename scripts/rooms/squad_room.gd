@@ -254,7 +254,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.say("My coffee. Made at six. It's past midnight now.")
 			else:
 				await main.say("Waste not.")
-				await main.player.play_action("pickup")
+				await main.player.play_action("take")
 				Game.set_flag("took_mug")
 				_sync()
 				await main.give("coffee", false)
