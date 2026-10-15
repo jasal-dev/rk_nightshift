@@ -95,6 +95,9 @@ DIRECTION = {
     ("devin", "Jesus. Who would... He's a Glide driver. He gives people water bottles."):
         {"say": "Jesus. [0.8] Who would... [0.8] He's a Glide driver. [0.5] He gives people water bottles."},
     ("devin", "I panicked! My roommate's dead!"): {"say": "I panicked! [0.7] My roommate's dead!"},
+    # "No." before an abbreviation is read as "number": say it on its own
+    ("otis", "No. LA River, Elysian Valley, under the Fletcher Drive bridge. Delivery rider, twenty-four, Owen Tate. Down in the channel."):
+        {"say": "No. [0.35] LA River, Elysian Valley, under the Fletcher Drive bridge. Delivery rider, twenty-four, Owen Tate. Down in the channel."},
 }
 
 
