@@ -102,6 +102,16 @@ Copy the rows whose "where" is `_calls2` into `tools/tts/lines.json`, run `gen_v
 in Doyle's cast voice from `SPEAKERS`), import, run `--case 2`, and add `_check_voiced(2)` once all of Case 2's cast
 lines are in. Nothing about her voice needs choosing again.
 
+## Directing a line (pauses, a quieter line)
+
+When the user asks for a pause or a quieter delivery, add the line to `DIRECTION` in the generator, keyed by
+(speaker, game text): `"say"` is what Kokoro gets, with `[0.8]` for a 0.8 s pause (each piece is rendered alone and
+Kokoro's own padding trimmed, so the number is the gap you hear); `"gain_db"` makes it quieter or louder than the
+speaker's other lines. A speaker preset can have `"sentence_pause"` (seconds between sentences, Devin has 0.3). The
+manifest keeps a signature of each clip's preset and direction, so a changed direction re-renders that clip on the next
+run. (Clips from before signatures don't carry one; after changing a whole speaker's preset, delete their clips or use
+`--force`.)
+
 ## When a line's text changes
 
 Edit the row in `tools/tts/lines.json` to the new text and run the generator. The old clip is removed as stale and the

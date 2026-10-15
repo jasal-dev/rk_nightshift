@@ -54,7 +54,7 @@ SPEAKERS = {
     "park":  {"blend": {"af_bella": 1.0}, "speed": 1.05, "from": "CASTING_REST park A"},
     "rosa":  {"blend": {"af_jessica": 1.0}, "semitones": -1.5, "speed": 0.95, "from": "CASTING_REST rosa B"},
     "heck":  {"blend": {"am_echo": 0.6, "am_puck": 0.4}, "speed": 1.05, "from": "CASTING_REST heck C"},
-    "devin": {"blend": {"am_puck": 1.0}, "speed": 0.9, "from": "CASTING_REST devin C"},
+    "devin": {"blend": {"am_puck": 1.0}, "speed": 0.9, "sentence_pause": 0.3, "from": "CASTING_REST devin C"},
     "brielle": {"blend": {"af_jessica": 1.0}, "speed": 1.05, "from": "CASTING_REST brielle B"},
     "cabbie": {"blend": {"am_michael": 1.0}, "semitones": -1.5, "from": "CASTING_REST cabbie B"},
     "pearl": {"blend": {"af_bella": 1.0}, "speed": 1.0, "from": "CASTING_REST pearl A"},
@@ -76,6 +76,31 @@ SPEAKERS = {
     "haskell": {"blend": {"am_eric": 1.0}, "speed": 1.05, "from": "CASTING_REST haskell A"},
     "whitaker": {"blend": {"am_michael": 0.5, "am_puck": 0.5}, "speed": 1.05, "from": "CASTING_REST whitaker B"},
 }
+
+
+## Direction for single lines, by (speaker, game text), as the user asked for it by ear:
+##   "say": what Kokoro gets instead of the game text, with "[0.8]" for a pause of 0.8 s (the game text is unchanged)
+##   "gain_db": louder or quieter than the speaker's other lines (a "(low)" line)
+## A line with direction is re-rendered when its direction changes (the manifest keeps a "sig").
+DIRECTION = {
+    ("ray", "Rain. Of course it's raining."): {"say": "Rain. [0.9] Of course it's raining."},
+    ("ray", "One of three. One of three what?"): {"say": "One of three. [0.9] One of three what?"},
+    ("ray", "Coffee. Coffee."): {"say": "Coffee. [1.0] Coffee."},
+    ("tiny", "(low) Five minutes."): {"gain_db": -9.0},
+    ("brielle", "Reported. One star. Creep."): {"say": "Reported. [0.6] One star. [0.6] Creep."},
+    ("heck", "No. No, man. I yelled at him. I didn't, I would never."):
+        {"say": "No. [0.5] No, man. [0.6] I yelled at him. [0.6] I didn't, [0.4] I would never."},
+    ("devin", "No. No, no. What happened? Was it a crash?"):
+        {"say": "No. [0.6] No, [0.4] no. [0.7] What happened? [0.7] Was it a crash?"},
+    ("devin", "Jesus. Who would... He's a Glide driver. He gives people water bottles."):
+        {"say": "Jesus. [0.8] Who would... [0.8] He's a Glide driver. [0.5] He gives people water bottles."},
+    ("devin", "I panicked! My roommate's dead!"): {"say": "I panicked! [0.7] My roommate's dead!"},
+}
+
+
+def take_sig(preset, direction):
+    ## What a clip was rendered with; a change re-renders it.
+    return hashlib.sha1(json.dumps([preset, direction], sort_keys=True).encode("utf-8")).hexdigest()[:10]
 
 
 def load_lines():
@@ -223,11 +248,45 @@ def _fry(x, depth, seed=7):
     return (x * (1 - depth + depth * np.abs(wobble) * 2)).astype(np.float32)
 
 
+PAUSE = re.compile(r"\[(\d+(?:\.\d+)?)\]")
+SENTENCE_END = re.compile(r"(?<=[.!?])\s+(?=\S)")
+
+
+def _speak(pipe, voice, text, speed, sentence_pause):
+    ## Kokoro's audio for `text`. "[0.8]" in the text is a pause of 0.8 s (each piece is rendered on its own and the
+    ## silence put between them); a sentence_pause puts that much silence after each sentence as well.
+    parts = PAUSE.split(text)
+    out = []
+    for i, part in enumerate(parts):
+        if i % 2:
+            out.append(np.zeros(int(RATE * float(part)), np.float32))
+            continue
+        pieces = SENTENCE_END.split(part.strip()) if sentence_pause else [part]
+        for j, piece in enumerate(pieces):
+            said = spoken(piece)
+            if not any(c.isalnum() for c in said):
+                continue
+            out.append(np.concatenate([np.asarray(a, dtype=np.float32) for _, _, a in pipe(said, voice=voice, speed=speed)]))
+            if sentence_pause and j < len(pieces) - 1:
+                out.append(np.zeros(int(RATE * sentence_pause), np.float32))
+    if len(out) == 1:
+        return out[0]
+    # Kokoro pads every piece with about 0.25 s of silence before and 0.4 s after; trim it so a [0.6] is a 0.6 s pause
+    return np.concatenate([_trim(a) if a.any() else a for a in out])
+
+
+def _trim(a, lead=0.04, tail=0.12):
+    loud = np.where(np.abs(a) > np.abs(a).max() * 0.02)[0]
+    if not len(loud):
+        return a
+    return a[max(0, loud[0] - int(RATE * lead)): loud[-1] + int(RATE * tail)]
+
+
 def render_variant(pipe, preset, text):
     voice = sum(w * pipe.load_voice(v) for v, w in preset["blend"].items())
     factor = 2 ** (-preset.get("semitones", 0.0) / 12)          # pitch down = play the take longer
     speed = preset.get("speed", SPEED) * factor                  # so render it that much faster first
-    audio = np.concatenate([np.asarray(a, dtype=np.float32) for _, _, a in pipe(spoken(text), voice=voice, speed=speed)])
+    audio = _speak(pipe, voice, text, speed, preset.get("sentence_pause", 0.0) / factor)
     if factor != 1.0:
         audio = _resample(audio, factor)
     if preset.get("warmth"):
@@ -657,6 +716,7 @@ def main():
             print("wrote", out)
         return
     force = "--force" in sys.argv
+    old = json.load(open(MANIFEST, encoding="utf-8")) if os.path.exists(MANIFEST) else {}
     pipes = {"a": pipe}         ## American English; British voices ("lang": "b") get their own
     manifest = {}
     made = 0
@@ -668,13 +728,21 @@ def main():
         rel = "assets/voice/%s/%s.ogg" % (speaker, lid)
         path = os.path.join(ROOT, rel)
         os.makedirs(os.path.dirname(path), exist_ok=True)
-        if force or not os.path.exists(path):
+        direction = DIRECTION.get((speaker, text), {})
+        sig = take_sig(preset, direction)
+        # a clip from before signatures (no "sig") counts as current, so adding them didn't re-render everything
+        stale_take = old.get(lid, {}).get("sig", sig) != sig
+        if force or stale_take or not os.path.exists(path):
             lang = preset.get("lang", "a")
             if lang not in pipes:
                 pipes[lang] = KPipeline(lang_code=lang)
-            sf.write(path, render_variant(pipes[lang], preset, text), RATE, format="OGG", subtype="VORBIS")
+            audio = render_variant(pipes[lang], preset, direction.get("say", text))
+            if direction.get("gain_db"):
+                audio = audio * 10 ** (direction["gain_db"] / 20)
+            sf.write(path, audio, RATE, format="OGG", subtype="VORBIS")
             made += 1
-        manifest[lid] = {"speaker": speaker, "text": text, "file": "res://" + rel, "voice": "kokoro: " + _describe(preset)}
+        manifest[lid] = {"speaker": speaker, "text": text, "file": "res://" + rel, "voice": "kokoro: " + _describe(preset),
+                         "sig": sig}
     # clips no line points at any more (its text changed, it went, or an older format): remove them and their .import
     stale = 0
     used = {m["file"] for m in manifest.values()}
