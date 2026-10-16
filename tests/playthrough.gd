@@ -10,6 +10,49 @@ extends Node
 ## Exit code 0 = the case can be finished; 1 = something went wrong (see the output).
 
 const MainScene := preload("res://scenes/main.tscn")
+## Speakers heard in a room (not down a phone) with no talking head there (FacePatch, `faces` in the set's meta) on
+## purpose: "room:speaker": why. Anyone else talking in a room without one fails the run (Main.faceless).
+## Phase 2 of the talking heads gives the rest of the on-screen cast their patches and removes them from here.
+const NO_FACE := {
+	"norms_diner:cabbie": "at the counter, back to us",
+	"norms_diner:devin": "at his door after the drive from Norm's (the room changes after)",
+	"kenji_apartment:park": "outside the front door",
+	"street:sal": "Phase 2",
+	"pier9_dock:tiny": "Phase 2",
+	"pier9_dock:vance": "Phase 2",
+	"vance_office:vance": "Phase 2",
+	"mulholland_overlook:park": "Phase 2",
+	"mulholland_overlook:shah": "Phase 2",
+	"kenji_apartment:devin": "Phase 2",
+	"stardust_shop:park": "Phase 2",
+	"stardust_shop:pearl": "Phase 2",
+	"stardust_shop:morty": "Phase 2",
+	"stardust_office:shah": "Phase 2",
+	"stardust_roof:charlie": "Phase 2",
+	"fletcher_bridge:doss": "Phase 2",
+	"fletcher_bridge:preacher": "Phase 2",
+	"river_channel:shah": "Phase 2",
+	"river_channel:preacher": "Phase 2",
+	"glass_house:courtney": "Phase 2",
+	"glass_house:andre": "Phase 2",
+	"crane_garage:crane": "Phase 2",
+	"crane_garage:doss": "Phase 2",
+	"night_lab:ike": "Phase 2",
+	"street_crime:mara": "Phase 2",
+	"street_crime:park": "Phase 2",
+	"street_crime:teo": "Phase 2",
+	"blue_note_back:shah": "Phase 2",
+	"blue_note_back:nina": "Phase 2",
+	"blue_note_back:park": "Phase 2",
+	"pier9_dawn:tiny": "Phase 2",
+	"pier9_dawn:vance": "Phase 2",
+	"pier9_dawn:brenner": "Phase 2",
+	"pier9_sunrise:doyle": "Phase 2",
+	"pier9_sunrise:okafor": "Phase 2",
+	"pier9_sunrise:mara": "Phase 2",
+	"pier9_sunrise:tiny": "Phase 2",
+	"pier9_sunrise:vance": "Phase 2",
+}
 const FIRST_ROOMS := {2: "mulholland_overlook", 3: "stardust_shop", 4: "fletcher_bridge", 5: "street_crime"}   ## where --case N starts
 
 var main: Node
@@ -316,6 +359,21 @@ func _check_voiced(n: int) -> void:
 	if not missing.is_empty():
 		_fail("Case %d lines without a voice clip (add them to tools/tts/lines.json):\n  %s" % [n, "\n  ".join(missing)])
 	Audio.unvoiced.clear()
+	_check_faces(n)
+
+
+func _check_faces(n: int) -> void:
+	## Everyone heard talking in a room has a talking head there, or is on NO_FACE.
+	var missing: Array[String] = []
+	for key: String in main.faceless:
+		if not NO_FACE.has(key):
+			missing.append(key)
+	if not missing.is_empty():
+		_fail("Case %d speakers in a room without a face patch (give them `faces` in the set, or add them to NO_FACE):
+  %s"
+				% [n, "
+  ".join(missing)])
+	main.faceless.clear()
 
 
 func _only_case() -> int:

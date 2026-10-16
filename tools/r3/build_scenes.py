@@ -76,6 +76,13 @@ def build(room):
         ext.append(('Texture2D', f'res://assets/rooms/{room}_{tag}.png', f'ov_{tag}'))
     for tag in d.get('occluders', {}):
         ext.append(('Texture2D', f'res://assets/rooms/{room}_{tag}.png', f'occ_{tag}'))
+    faces = d.get('faces', {})
+    if faces:
+        ext.append(('Script', 'res://scripts/face_patch.gd', 'face'))
+    for spk, f in faces.items():
+        for part in ('mouth', 'eyes'):
+            for n in range(1, f.get(part, {}).get('frames', 0) + 1):
+                ext.append(('Texture2D', f'res://assets/rooms/{room}_face_{spk}_{part}{n}.png', f'face_{spk}_{part}{n}'))
     neon_pos = None
     if room == 'street' and 'neon' in d['hotspots']:
         neon_pos = neon_overlay(room, d['hotspots']['neon']['polygon'])
@@ -116,6 +123,19 @@ def build(room):
         nm = ''.join(w.capitalize() for w in tag.split('_'))
         L += [f'[node name="{nm}" type="Sprite2D" parent="Actors"]', f'texture = ExtResource("occ_{tag}")',
               'centered = false', f'position = Vector2({bx}, {by})', f'offset = Vector2({x0 - bx}, {y0 - by})', '']
+    # talking heads (scripts/face_patch.gd): y-sorted at the person's floor point, after their overlay if they have one
+    for spk, f in faces.items():
+        bx, by = f['base']
+        L += [f'[node name="Face_{spk}" type="Node2D" parent="Actors"]', 'script = ExtResource("face")',
+              f'position = Vector2({bx}, {by})', f'speaker = "{spk}"']
+        if 'mouth' in f:
+            refs = ', '.join(f'ExtResource("face_{spk}_mouth{n}")' for n in range(1, f['mouth']['frames'] + 1))
+            L += [f'mouth_frames = Array[Texture2D]([{refs}])', 'mouth_pos = Vector2({}, {})'.format(*f['mouth']['pos'])]
+        if 'eyes' in f:
+            L += [f'eyes_frame = ExtResource("face_{spk}_eyes1")', 'eyes_pos = Vector2({}, {})'.format(*f['eyes']['pos'])]
+        if spk in bases:
+            L += [f'follow = NodePath("../{spk.capitalize()}")']
+        L += ['']
     if d.get('obstacles'):
         L += ['[node name="Obstacles" type="Node2D" parent="."]', '']
         for i, poly in enumerate(d['obstacles']):

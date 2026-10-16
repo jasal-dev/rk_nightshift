@@ -130,6 +130,56 @@ def finish(img, seed=1):
     return (out * 255 + 0.5).astype(np.uint8)
 
 
+FACE_VARIANTS = {'mouth1': dict(mouth=0.5), 'mouth2': dict(mouth=1.0), 'blink': dict(blink=1.0)}
+
+
+def render_faces(mod, S, cam, env, room, meta, img, hidden, overlays, exposure=0):
+    """Talking heads: render the set again with each speaker's mouth half open, open and eyes shut, and return the
+    changed pixels per speaker as {speaker: {'mouth': (box, [frame1, frame2]), 'eyes': (box, [frame])}}, frames being
+    full finished images to crop and box (x0, y0, x1, y1) in output pixels. Speakers baked into the background share
+    one render per variant; one who is an overlay is rendered with their overlay shown and cut against that."""
+    import npc
+    ss = max(1, cam.W // OUTW)
+    P = lambda p: Camera(cam.pos, cam.target, cam.fov, cam.W, cam.H).project(p, OUTW, OUTH)
+    groups = {}
+    for spk in meta['faces']:
+        groups.setdefault(spk if spk in hidden else '', []).append(spk)
+    grade = dict(exposure=exposure or meta.get('exposure', 1.0), grade=meta.get('grade'))
+    out = {}
+    for ov, spks in groups.items():
+        hide = set(hidden) - {ov}
+        base = overlays[ov][0] if ov else img
+        frames = {}
+        for v, face in FACE_VARIANTS.items():
+            npc.FACE = {s: face for s in spks}
+            S2, _, _, _ = mod.build(hide=hide)
+            s2, _, v2 = S2.render(cam, env, f'{room}_face_{v}')
+            frames[v], _ = composite(s2, v2, ss, **grade)
+        npc.FACE = {}
+        for spk in spks:
+            pts = []
+            for i in S.tags.get(spk, []):
+                pts += [P(c)[:2] for c in S.corners(i)]
+            xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+            rx0, ry0 = max(0, int(min(xs)) - 4), max(0, int(min(ys)) - 4)
+            rx1, ry1 = min(OUTW, int(max(xs)) + 5), min(OUTH, int(max(ys)) + 5)
+            res = {}
+            for part, vs in (('mouth', ['mouth1', 'mouth2']), ('eyes', ['blink'])):
+                hit = np.zeros(img.shape[:2], bool)
+                for v in vs:
+                    d = np.abs(frames[v] - base).max(-1)
+                    hit[ry0:ry1, rx0:rx1] |= d[ry0:ry1, rx0:rx1] > 0.02
+                yy, xx = np.nonzero(hit)
+                if len(xx) == 0:
+                    print('WARNING: face variant changes nothing on screen', spk, part)
+                    continue
+                box = (int(xx.min()) - 1, int(yy.min()) - 1, int(xx.max()) + 2, int(yy.max()) + 2)
+                res[part] = (box, [frames[v] for v in vs])
+            bx, bz = meta['faces'][spk]
+            out[spk] = dict(parts=res, base=[round(v) for v in P((bx, 0.1, bz))[:2]])
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('room'); ap.add_argument('--preview', action='store_true')
@@ -144,6 +194,7 @@ def main():
         info = export_meta(S, Camera(cam.pos, cam.target, cam.fov, cam.W, cam.H), meta)
         info['overlays'] = old.get('overlays', {})
         info['occluders'] = old.get('occluders', {})
+        info['faces'] = old.get('faces', {})
         json.dump(info, open(path, 'w'), indent=1)
         print('meta written'); return
     if a.preview:
@@ -216,6 +267,9 @@ def main():
         hit = (d2 - depth > np.maximum(0.03, 0.01 * depth)).astype(np.float32)
         h, w = hit.shape
         occ_masks[tag] = drop_specks(hit.reshape(h // ss, ss, w // ss, ss).mean((1, 3)))   # anti-aliased coverage
+    faces = {}
+    if meta.get('faces') and not a.preview:
+        faces = render_faces(mod, S, cam, env, a.room, meta, img, hidden, overlays, a.exposure)
     os.makedirs(os.path.join(HERE, 'out'), exist_ok=True)
     Image.fromarray((img * 255).astype(np.uint8)).save(os.path.join(HERE, 'out', f'{a.room}_raw.png'))
     out = Image.fromarray(finish(img, seed=1))
@@ -250,6 +304,17 @@ def main():
             bx, by, _ = Camera(cam.pos, cam.target, cam.fov, cam.W, cam.H).project(
                 (meta['occluders'][tag][0], 0.1, meta['occluders'][tag][1]), OUTW, OUTH)
             info['occluders'][tag] = dict(pos=[int(x0), int(y0)], base=[round(bx), round(by)])
+        info['faces'] = {}
+        for spk, f in faces.items():
+            # each part is a small rectangle cut from the finished variant frames (the same grain as the background,
+            # so the patch is seamless): <room>_face_<speaker>_<part><n>.png, n = 1.. (mouth: half open, open)
+            entry = dict(base=f['base'])
+            for part, ((x0, y0, x1, y1), frames) in f['parts'].items():
+                for n, fr in enumerate(frames, 1):
+                    crop = finish(fr, seed=1)[y0:y1, x0:x1]
+                    Image.fromarray(crop).save(os.path.join(ROOT, 'assets', 'rooms', f'{a.room}_face_{spk}_{part}{n}.png'))
+                entry[part] = dict(pos=[x0, y0], frames=len(frames))
+            info['faces'][spk] = entry
         with open(os.path.join(HERE, 'out', f'{a.room}.json'), 'w') as f:
             json.dump(info, f, indent=1)
         if 'screen' not in meta:

@@ -3,6 +3,13 @@
 [ext_resource type="Script" path="res://scripts/rooms/norms_diner.gd" id="script"]
 [ext_resource type="Texture2D" path="res://assets/rooms/norms_diner.png" id="bg"]
 [ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
+[ext_resource type="Script" path="res://scripts/face_patch.gd" id="face"]
+[ext_resource type="Texture2D" path="res://assets/rooms/norms_diner_face_rosa_mouth1.png" id="face_rosa_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/norms_diner_face_rosa_mouth2.png" id="face_rosa_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/norms_diner_face_rosa_eyes1.png" id="face_rosa_eyes1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/norms_diner_face_heck_mouth1.png" id="face_heck_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/norms_diner_face_heck_mouth2.png" id="face_heck_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/norms_diner_face_heck_eyes1.png" id="face_heck_eyes1"]
 
 [node name="NormsDiner" type="Node2D"]
 script = ExtResource("script")
@@ -25,6 +32,24 @@ polygon = PackedVector2Array(6, 814.9, 248.9, 698.6, 1384.9, 694.4, 1752, 958.7,
 
 [node name="Actors" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="Face_rosa" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(843, 650)
+speaker = "rosa"
+mouth_frames = Array[Texture2D]([ExtResource("face_rosa_mouth1"), ExtResource("face_rosa_mouth2")])
+mouth_pos = Vector2(841, 486)
+eyes_frame = ExtResource("face_rosa_eyes1")
+eyes_pos = Vector2(837, 477)
+
+[node name="Face_heck" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(1406, 638)
+speaker = "heck"
+mouth_frames = Array[Texture2D]([ExtResource("face_heck_mouth1"), ExtResource("face_heck_mouth2")])
+mouth_pos = Vector2(1405, 520)
+eyes_frame = ExtResource("face_heck_eyes1")
+eyes_pos = Vector2(1402, 512)
 
 [node name="Obstacles" type="Node2D" parent="."]
 

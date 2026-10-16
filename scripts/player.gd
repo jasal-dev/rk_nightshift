@@ -17,6 +17,7 @@ const STEP_DB := -1.0
 
 var facing := "right"           ## right / left / up / down
 var talking := false
+var _talk_gate := true          ## false in the pauses of a spoken line: he stands quiet (Main gates it by voice level)
 var _path: PackedVector2Array = []
 var _room: Room
 var _base_scale := 1.0
@@ -242,7 +243,7 @@ func _play(anim_name: String) -> void:
 
 
 func _play_idle() -> void:
-	if talking:
+	if talking and _talk_gate:
 		_play_talk()
 	else:
 		_play("idle_" + facing)
@@ -258,6 +259,14 @@ func _play_talk() -> void:
 func set_talking(on: bool) -> void:
 	talking = on
 	if _path.is_empty():
+		_play_idle()
+
+
+func set_talk_gate(on: bool) -> void:
+	if on == _talk_gate:
+		return
+	_talk_gate = on
+	if _path.is_empty() and talking:
 		_play_idle()
 
 

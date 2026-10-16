@@ -138,6 +138,16 @@ func speaker_at(id: String) -> Vector2:
 	return Vector2((x0 + x1) * 0.5, top) if top < INF else hs.position
 
 
+func face_patch(speaker: String) -> FacePatch:
+	## The talking head for `speaker` in this room (see FacePatch), or null.
+	var actors := get_node_or_null("Actors")
+	if actors:
+		for c in actors.get_children():
+			if c is FacePatch and (c as FacePatch).speaker == speaker:
+				return c
+	return null
+
+
 func hotspot_at(p: Vector2) -> Hotspot:
 	## Topmost enabled hotspot under point p (later children win).
 	var found: Hotspot = null

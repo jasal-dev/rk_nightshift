@@ -29,11 +29,22 @@ var _load_requested := false
 var _on_title := false      ## the title screen is up and waiting for a choice
 var _topic_menus := 0       ## topic menus shown in the current conversation (see topics())
 var text_speed := 1         ## index into TEXT_TIME (Slow, Normal, Fast, Manual), set on the title screen's settings panel
+var faceless: Array[String] = []   ## "room:speaker" for lines spoken in a room by someone with no FacePatch there (tests)
+var _talker := ""           ## the speaker whose clip is playing ("ray" for the detective), "" for none
+var _mouth_t := 0.0
+var _ray_quiet := 0.0
+var _ray_heard := false     ## the clip has been heard (output starts a moment after play()): gate only after that
 
 
 const SETTINGS := "user://settings.cfg"
 const TEXT_TIME := [1.5, 1.0, 0.65, 1.0]   ## how long lines stay up, per text speed
 const MANUAL := 3                          ## the Manual text speed: a line stays up until a click
+## Talking heads: while a clip plays, the speaker's mouth (FacePatch) follows the voice level (Audio.voice_level),
+## changing shape at most every MOUTH_STEP seconds; Ray's talk loop runs only while he is audible, so he rests in pauses.
+const MOUTH_STEP := 0.07
+const MOUTH_HALF := 0.05     ## voice level (linear peak) for a half-open mouth
+const MOUTH_OPEN := 0.2      ## and for an open one
+const TALK_HOLD := 0.25      ## Ray keeps talking through gaps shorter than this (between words), rests in longer ones
 const NOTHING_TO_ASK := [                  ## Ray, when he talks to someone with nothing left to ask (see topics())
 	"We've said all there is to say.",
 	"Nothing left to ask. Nothing I want the answer to, anyway.",
@@ -289,7 +300,8 @@ func change_room(id: String, from_room: String) -> void:
 
 
 # --- per frame ----------------------------------------------------------------
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	_animate_talker(delta)
 	var m := world.get_global_mouse_position()
 	var hover := ""
 	var left := ""
@@ -679,8 +691,10 @@ func _show_text(text: String, anchor: Vector2, color: Color, speaker := "", phon
 		hang_up = false
 	ui.set_hover("", Vector2.ZERO)
 	ui.show_speech(text, anchor, color)
+	_check_face(speaker, phone)
 	var clip: AudioStream = Audio.voice_clip(speaker, text) if speaker != "" else null
 	if clip:
+		_start_talker(speaker)
 		Audio.speak(clip, phone)
 	var at_least := clip.get_length() + 0.25 if clip else 0.0
 	if sfx != "":
@@ -688,9 +702,57 @@ func _show_text(text: String, anchor: Vector2, color: Color, speaker := "", phon
 	await _hold(clampf(0.9 + text.length() * 0.055, 1.6, 6.5), true, at_least)
 	if clip:
 		Audio.stop_voice()
+		_stop_talker()
 	if hang_up:
 		Audio.sfx("hang_up")
 	ui.hide_speech()
+
+
+func _start_talker(speaker: String) -> void:
+	_stop_talker()
+	_talker = speaker
+	_mouth_t = 0.0
+	_ray_quiet = 0.0
+	_ray_heard = false
+
+
+func _stop_talker() -> void:
+	## The line ended or was cut: close the mouth (or let Ray's talk loop run again for a line with no clip).
+	if _talker == "ray" and player:
+		player.set_talk_gate(true)
+	var face: FacePatch = room.face_patch(_talker) if room and _talker != "" else null
+	if face:
+		face.mouth = 0
+	_talker = ""
+
+
+func _animate_talker(delta: float) -> void:
+	if _talker == "":
+		return
+	var level: float = Audio.voice_level()
+	if _talker == "ray":
+		_ray_heard = _ray_heard or level >= MOUTH_HALF
+		_ray_quiet = 0.0 if level >= MOUTH_HALF or not _ray_heard else _ray_quiet + delta
+		if player:
+			player.set_talk_gate(_ray_quiet < TALK_HOLD)
+		return
+	_mouth_t -= delta
+	if _mouth_t > 0.0:
+		return
+	_mouth_t = MOUTH_STEP
+	var face: FacePatch = room.face_patch(_talker) if room else null
+	if face:
+		face.mouth = 2 if level >= MOUTH_OPEN else (1 if level >= MOUTH_HALF else 0)
+
+
+func _check_face(speaker: String, phone: bool) -> void:
+	## Note a line spoken in the room (not down a phone, not Ray) by someone with no talking head here, for the
+	## playthrough's guard (tests/playthrough.gd NO_FACE lists the ones that are allowed: off-screen, backs to us ...).
+	if speaker == "" or speaker == "ray" or phone or room == null:
+		return
+	var key := "%s:%s" % [room.room_id, speaker]
+	if room.face_patch(speaker) == null and not faceless.has(key):
+		faceless.append(key)
 
 
 func _hold(duration: float, skippable := true, at_least := 0.0) -> void:
@@ -719,12 +781,15 @@ func caption(text: String, color := PLAYER_COLOR, skippable := true, speaker := 
 	## "PRYCE: " in front) plays, through the phone filter if `phone`, and the subtitle stays up for it.
 	ui.set_hover("", Vector2.ZERO)
 	ui.show_speech(text, Vector2(960, 1010), color)
+	_check_face(speaker, phone)
 	var clip: AudioStream = Audio.voice_clip(speaker, line) if speaker != "" else null
 	if clip:
+		_start_talker(speaker)
 		Audio.speak(clip, phone)
 	await _hold(clampf(1.2 + text.length() * 0.06, 2.0, 7.0), skippable, clip.get_length() + 0.25 if clip else 0.0)
 	if clip:
 		Audio.stop_voice()
+		_stop_talker()
 	ui.hide_speech()
 
 

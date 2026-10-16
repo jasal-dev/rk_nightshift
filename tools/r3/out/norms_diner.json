@@ -503,5 +503,47 @@
  ],
  "extra": {},
  "overlays": {},
- "occluders": {}
+ "occluders": {},
+ "faces": {
+  "rosa": {
+   "base": [
+    843,
+    650
+   ],
+   "mouth": {
+    "pos": [
+     841,
+     486
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     837,
+     477
+    ],
+    "frames": 1
+   }
+  },
+  "heck": {
+   "base": [
+    1406,
+    638
+   ],
+   "mouth": {
+    "pos": [
+     1405,
+     520
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1402,
+     512
+    ],
+    "frames": 1
+   }
+  }
+ }
 }

@@ -6,6 +6,10 @@ import numpy as np
 import detective
 from scene3d import Ry
 
+# face overrides by tag for the talking-head renders (render_room.py sets this, e.g. {'rosa': dict(mouth=1.0)}):
+# a tagged person is built with these merged over their pose, so one set can be rendered with the mouth open
+FACE = {}
+
 SEATED = dict(lhp=86, rhp=84, lk=88, rk=86, lfp=4, rfp=2, labd=7, rabd=7, lean=4, coatlen=0.14)
 
 
@@ -38,6 +42,8 @@ def place(S, name, pose, pos, yaw=0.0, scale=1.0, colors=None, tag=None, rot=Non
     """Build the rig in `pose`, recolour materials (name -> rgb), turn it to `yaw` (0 = facing the camera's +z),
     scale it and add it to scene S standing (or sitting) at floor point `pos`. `rot` (a 3x3 matrix, applied before
     the yaw) tips the whole figure over, for someone lying on the floor."""
+    if tag in FACE:
+        pose = {**pose, **FACE[tag]}
     R = detective.build(pose)
     for m, rgb in (colors or {}).items():
         vals = R.mats[R.mat_index[m]]

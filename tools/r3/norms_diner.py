@@ -218,6 +218,8 @@ def build(hide=()):
                         # the whole booth, benches and table: the tabletop alone is edge-on from here
                         'booth6': [(x, y, z) for x in (3.75, X1) for y in (0.0, 1.05) for z in (tz6 - 1.13, tz6 + 1.13)]},
         hotspot_order=['window', 'door', 'jukebox', 'pie_case', 'regulars', 'rosa', 'coffee_pot', 'heck', 'booth6'],
+        # talking heads: speaker (= their tag) -> floor point (x, z), the y-sort base of their face patches
+        faces={'rosa': (ROSA[0], ROSA[2]), 'heck': (HECK[0], HECK[2])},
         char_fill=((255, 226, 200), 0.18),
         tint=(0.95, 0.85, 0.75),
         exposure=1.25,

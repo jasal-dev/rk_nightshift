@@ -7,7 +7,7 @@ extends Node
 ## loading a save), so whatever path got Ray into a case, its track is playing.
 ## Voice: spoken lines (`speak()`), recorded clips found by speaker and text (`voice_clip()`, assets/voice/lines.json,
 ## made by tools/tts/gen_voice.py); Main plays one with each line that has one.
-## Buses: Master > Music, Voice, SFX (made here, so there's no bus layout file to keep in sync). The Music, Voice and
+## Buses: Master > Music, Voice (< Speech, Phone), SFX (made here, so there's no bus layout file to keep in sync). The Music, Voice and
 ## Effects (SFX) volumes are set on the settings panel and kept in user://settings.cfg with the other settings.
 ## Sound sources and licences: assets/sounds/LICENSES.md (the loops are cut by tools/sounds/make_loops.py).
 
@@ -114,6 +114,7 @@ func _ready() -> void:
 			var i := AudioServer.bus_count - 1
 			AudioServer.set_bus_name(i, bus)
 			AudioServer.set_bus_send(i, "Master")
+	_add_bus("Speech", "Voice")
 	_add_phone_bus()
 	_music = Crossfader.new(self, "Music")
 	_ambience = Crossfader.new(self, "SFX")
@@ -185,13 +186,31 @@ func voice_clip(speaker: String, text: String) -> AudioStream:
 
 func speak(clip: AudioStream, phone := false) -> void:
 	## Play a spoken line on the Voice bus, cutting off the one before; `phone` sends it through the Phone bus first.
-	_voice.bus = "Phone" if phone else "Voice"
+	_voice.bus = "Phone" if phone else "Speech"
 	_voice.stream = clip
 	_voice.play()
 
 
 func stop_voice() -> void:
 	_voice.stop()
+
+
+func voice_level() -> float:
+	## How loud the line playing is right now, 0..1 (linear peak). It is read off the Speech (or Phone) bus, ahead of
+	## the Voice volume slider, so the speaker's mouth moves the same at any volume. 0 when no line is playing.
+	if not _voice.playing:
+		return 0.0
+	var i := AudioServer.get_bus_index(_voice.bus)
+	return db_to_linear(maxf(AudioServer.get_bus_peak_volume_left_db(i, 0), AudioServer.get_bus_peak_volume_right_db(i, 0)))
+
+
+func _add_bus(bus_name: String, send: String) -> void:
+	if AudioServer.get_bus_index(bus_name) >= 0:
+		return
+	AudioServer.add_bus()
+	var i := AudioServer.bus_count - 1
+	AudioServer.set_bus_name(i, bus_name)
+	AudioServer.set_bus_send(i, send)
 
 
 func _add_phone_bus() -> void:

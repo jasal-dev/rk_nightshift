@@ -87,6 +87,16 @@ more and cast new characters: `docs/voice-recording.md`. `Main.narrate()` is Ray
 `Main.voice()` (Doyle: `"doyle"`), plus `phone = true` for lines heard over a telephone, which plays the clip through the
 Phone bus (Phone > Voice: band-limited to 350-3,200 Hz, light overdrive, +10 dB, limited at -1 dBFS). The cast and its settings: `docs/voice-recording.md`. Every spoken line in the
 game is voiced (Danny's take too: `Main.caption()` takes a speaker and the line's words) (Ogg Vorbis clips; spoken-form fixes in `PRONOUNCE`), and the playthrough checks it.
+Clean lines play on the Speech bus (Speech > Voice), so `Audio.voice_level()` can read the line's peak ahead of the Voice
+slider.
+
+**Talking heads.** While a clip plays, Main follows its level (`_animate_talker()`): a speaker with a `FacePatch` in the
+room (`Room.face_patch(speaker)`, `scripts/face_patch.gd`) shows the mouth closed, half open or open (levels
+`MOUTH_HALF` / `MOUTH_OPEN`, at most every `MOUTH_STEP` s); a cut or finished line closes it. Patches blink on their own
+(every 2.5 to 6 s). Ray's talk loop runs only while his clip is audible: after a gap longer than `TALK_HOLD` he stands at
+idle until the voice comes back (`Player.set_talk_gate()`); lines without a clip keep the loop going. Lines spoken in a
+room (not `phone`, not Ray) by someone without a patch there go on `Main.faceless`, and the playthrough fails on any not
+listed in its `NO_FACE` (off-screen speakers, backs to the camera, and the rooms Phase 2 still has to do).
 
 ## 2. Game state, flags and saves
 
@@ -351,7 +361,7 @@ grazing-angle pixels differ). On the RTX 4090 a 4K room render takes about 1 s a
 | Option | Effect |
 | --- | --- |
 | `--preview` | Half resolution, coarser fog; writes only `tools/r3/out/<room>_final.png`. |
-| `--meta-only` | Re-projects hotspots, walk area and spawns into `out/<room>.json` without rendering. Keeps the existing overlays and occluders. Use it after moving a hotspot or walk point. |
+| `--meta-only` | Re-projects hotspots, walk area and spawns into `out/<room>.json` without rendering. Keeps the existing overlays, occluders and faces. Use it after moving a hotspot or walk point. |
 | `--exposure X` | Overrides the set's `exposure`. |
 | `--colors N` | Parsed but unused (left from the pixel-art version). |
 
@@ -367,7 +377,12 @@ grazing-angle pixels differ). On the RTX 4090 a 4K room render takes about 1 s a
    detective when he walks behind them. Below the line (their shadow and reflection in front) it is unchanged.
 4. For each `occluders` tag, re-renders depth without it and cuts out the pixels where it was the nearest surface.
    The cut-out uses the background's own pixels, so it is invisible until the detective walks behind it.
-5. Adds the vignette and grain (`finish()`), writes the PNGs and `out/<room>.json`, and bakes light probes
+5. For `faces` (talking heads), re-renders the set three times with every speaker's mouth half open
+   (`mouth=0.5`), open (`mouth=1`) and eyes shut (`blink=1`) (`npc.FACE` merges these over the tagged person's pose),
+   and cuts the changed pixels near each speaker into small rectangles, `<room>_face_<speaker>_mouth1/2.png` and
+   `_eyes1.png`. They come from the finished frame, so they match the background's grain. Speakers who are overlays get
+   their own renders, cut against their overlay.
+6. Adds the vignette and grain (`finish()`), writes the PNGs and `out/<room>.json`, and bakes light probes
    (skipped for close-ups with a `screen` entry).
 
 **Supporting cast.** `npc.CAST` maps a name to rig options (hair style, beard, mustache, stubble, coat length,
@@ -404,6 +419,7 @@ metres, y up, and the floor is at y = 0 (points are projected at y = 0.1).
 | `overlays` | `[tag, ...]` | Props cut out as sprites the game shows by flag. |
 | `exclusive_overlays` | `[tag, ...]` | Subset of `overlays` that never show together (two poses). |
 | `overlay_bases` | `{tag: (x, z)}` | Overlays that stand on the floor: placed under `Actors` and y-sorted with the detective at that floor point. Above that line the sprite is cut to the person only. |
+| `faces` | `{speaker: (x, z)}` | Talking heads: the person tagged `speaker` (the `Main.voice()` speaker id) and their floor point, the y-sort base of their face patches. `build_scenes.py` adds a `Face_<speaker>` FacePatch under `Actors` (it follows the person's overlay's visibility when they are one). |
 | `occluders` | `{tag: (x, z)}` | Walk-behind props and the floor point they stand on. The set must leave the tag out when it is in `hide` (`if 'tag' not in hide:`), or the cut-out is empty. |
 | `obstacles` | `[(x, z, r) or (x0, z0, x1, z1), ...]` | Footprints pathfinding steers around: round ones (a 12-sided ring) or floor rectangles. |
 | `screen` | `{walk, spawns, scale}` | Close-ups: walk polygon and spawns in pixels, `scale = ((y0, s0), (y1, s1))`. Also skips the light probes. |
@@ -428,7 +444,8 @@ backdrops inside it.
 ```
 room, hotspots{tag: {name, polygon[[x,y]...], walk_to[x,y]|null, face}}, order[tags], walk[[x,y]...],
 spawns{name: [x,y]}, obstacles[[[x,y]...]], overlay_bases{tag: [x,y]}, overlays{tag: [x0,y0]},
-occluders{tag: {pos: [x0,y0], base: [x,y]}}, far_y, far_scale, near_y, near_scale, tint, extra
+occluders{tag: {pos: [x0,y0], base: [x,y]}}, faces{speaker: {base: [x,y], mouth: {pos: [x0,y0], frames: 2},
+eyes: {pos: [x0,y0], frames: 1}}}, far_y, far_scale, near_y, near_scale, tint, extra
 ```
 
 **`assets/rooms/<room>_light.json`**: `cell` (32), `gw`, `gh` (60 × 34 for 1920×1080), `exposure`, and `data`, with
