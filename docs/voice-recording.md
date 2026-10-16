@@ -107,7 +107,9 @@ lines are in. Nothing about her voice needs choosing again.
 When the user asks for a pause or a quieter delivery, add the line to `DIRECTION` in the generator, keyed by
 (speaker, game text): `"say"` is what Kokoro gets, with `[0.8]` for a 0.8 s pause (each piece is rendered alone and
 Kokoro's own padding trimmed, so the number is the gap you hear); `"gain_db"` makes it quieter or louder than the
-speaker's other lines. A speaker preset can have `"sentence_pause"` (seconds between sentences, Devin has 0.3). The
+speaker's other lines. A speaker preset can have `"sentence_pause"` (seconds between sentences): everyone but Ray has 0.3 (the user's call,
+2026-10-16), and a directed line ignores it (its pauses are set by hand). Sentences don't split after a title or an
+initial ("Mr. Vance", "D. Clark", "No. 734"). The
 manifest keeps a signature of each clip's preset and direction, so a changed direction re-renders that clip on the next
 run. (Clips from before signatures don't carry one; after changing a whole speaker's preset, delete their clips or use
 `--force`.)

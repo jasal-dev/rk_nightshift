@@ -37,44 +37,45 @@ SPEED = 0.92               ## a touch slow: tired, a quarter past midnight
 RATE = 24000
 LINES_FILE = os.path.join(ROOT, "tools", "tts", "lines.json")    ## [[speaker, text, where?], ...], text exactly as shown
 MANIFEST = os.path.join(ROOT, "assets", "voice", "lines.json")
+## Everyone but Ray has a 0.3 s beat between sentences ("sentence_pause"; the user's call, 2026-10-16).
 ## The cast: speaker id (as Main passes it: say() and narrate() are "ray", voice(..., "doyle") is "doyle") -> their
 ## voice, picked by the user by ear. Same keys as the presets below (VARIANTS); "from" says which proposal it was.
 ## Keep this in step with the cast table in docs/voice-recording.md. Changing a voice means re-rendering its lines
 ## (--force), so don't, unless the user asks.
 SPEAKERS = {
     "ray":   {"blend": {"am_onyx": 0.7, "am_fenrir": 0.3}, "speed": 0.9, "from": "VARIANTS 2_blend"},
-    "doyle": {"blend": {"af_kore": 1.0}, "speed": 0.95, "from": "CASTING doyle B"},
-    "nina":  {"blend": {"af_heart": 1.0}, "speed": 0.95, "from": "CASTING nina A"},
-    "sal":   {"blend": {"am_santa": 1.0}, "speed": 0.9, "from": "CASTING sal A"},
-    "tiny":  {"blend": {"am_adam": 1.0}, "semitones": -3.0, "speed": 0.85, "from": "CASTING tiny A"},
-    "vance": {"blend": {"bm_george": 1.0}, "speed": 0.88, "lang": "b", "from": "CASTING vance A"},
-    "otis":  {"blend": {"am_liam": 1.0}, "speed": 1.0, "from": "CASTING otis B"},
+    "doyle": {"blend": {"af_kore": 1.0}, "speed": 0.95, "sentence_pause": 0.3, "from": "CASTING doyle B"},
+    "nina":  {"blend": {"af_heart": 1.0}, "speed": 0.95, "sentence_pause": 0.3, "from": "CASTING nina A"},
+    "sal":   {"blend": {"am_santa": 1.0}, "speed": 0.9, "sentence_pause": 0.3, "from": "CASTING sal A"},
+    "tiny":  {"blend": {"am_adam": 1.0}, "semitones": -3.0, "speed": 0.85, "sentence_pause": 0.3, "from": "CASTING tiny A"},
+    "vance": {"blend": {"bm_george": 1.0}, "speed": 0.88, "lang": "b", "sentence_pause": 0.3, "from": "CASTING vance A"},
+    "otis":  {"blend": {"am_liam": 1.0}, "speed": 1.0, "sentence_pause": 0.3, "from": "CASTING otis B"},
     # Cases 2-5, picked 2026-10-11, not voiced yet
-    "shah":  {"blend": {"bf_emma": 1.0}, "speed": 1.0, "lang": "b", "from": "CASTING_REST shah C"},
-    "park":  {"blend": {"af_bella": 1.0}, "speed": 1.05, "from": "CASTING_REST park A"},
-    "rosa":  {"blend": {"af_jessica": 1.0}, "semitones": -1.5, "speed": 0.95, "from": "CASTING_REST rosa B"},
-    "heck":  {"blend": {"am_echo": 0.6, "am_puck": 0.4}, "speed": 1.05, "from": "CASTING_REST heck C"},
+    "shah":  {"blend": {"bf_emma": 1.0}, "speed": 1.0, "lang": "b", "sentence_pause": 0.3, "from": "CASTING_REST shah C"},
+    "park":  {"blend": {"af_bella": 1.0}, "speed": 1.05, "sentence_pause": 0.3, "from": "CASTING_REST park A"},
+    "rosa":  {"blend": {"af_jessica": 1.0}, "semitones": -1.5, "speed": 0.95, "sentence_pause": 0.3, "from": "CASTING_REST rosa B"},
+    "heck":  {"blend": {"am_echo": 0.6, "am_puck": 0.4}, "speed": 1.05, "sentence_pause": 0.3, "from": "CASTING_REST heck C"},
     "devin": {"blend": {"am_puck": 1.0}, "speed": 0.9, "sentence_pause": 0.3, "from": "CASTING_REST devin C"},
-    "brielle": {"blend": {"af_jessica": 1.0}, "speed": 1.05, "from": "CASTING_REST brielle B"},
-    "cabbie": {"blend": {"am_michael": 1.0}, "semitones": -1.5, "from": "CASTING_REST cabbie B"},
-    "pearl": {"blend": {"af_bella": 1.0}, "speed": 1.0, "from": "CASTING_REST pearl A"},
-    "morty": {"blend": {"am_michael": 1.0}, "semitones": -2.5, "speed": 0.85, "fry": 0.1, "from": "CASTING_REST morty A"},
-    "charlie": {"blend": {"bm_daniel": 1.0}, "speed": 0.95, "lang": "b", "from": "CASTING_REST charlie C"},
-    "preacher": {"blend": {"am_eric": 1.0}, "semitones": -3.0, "speed": 0.82, "warmth": 4.0, "fry": 0.08, "from": "CASTING_REST preacher C"},
-    "doss":  {"blend": {"am_puck": 1.0}, "speed": 1.05, "from": "CASTING_REST doss A"},
-    "courtney": {"blend": {"af_nova": 1.0}, "speed": 1.1, "from": "CASTING_REST courtney A"},
-    "andre": {"blend": {"am_puck": 1.0}, "semitones": 1.0, "speed": 1.05, "from": "CASTING_REST andre A"},
-    "crane": {"blend": {"am_michael": 1.0}, "speed": 0.95, "from": "CASTING_REST crane A"},
-    "ike":   {"blend": {"am_echo": 1.0}, "speed": 1.0, "from": "CASTING_REST ike C"},
-    "owen":  {"blend": {"am_eric": 1.0}, "semitones": 1.0, "from": "CASTING_REST owen C"},
-    "teo":   {"blend": {"am_michael": 1.0}, "semitones": -1.5, "speed": 0.85, "warmth": 2.0, "from": "CASTING_REST teo B"},
-    "mara":  {"blend": {"af_river": 1.0}, "speed": 1.0, "from": "CASTING_REST mara A"},
-    "brenner": {"blend": {"am_eric": 0.5, "am_santa": 0.5}, "semitones": -2.0, "speed": 0.88, "warmth": 2.0, "from": "CASTING_REST brenner B"},
-    "okafor": {"blend": {"af_aoede": 1.0}, "speed": 0.95, "from": "CASTING_REST okafor A"},
-    "danny": {"blend": {"am_michael": 1.0}, "semitones": 1.0, "speed": 1.0, "from": "CASTING_REST danny C"},
-    "pryce": {"blend": {"am_eric": 0.5, "am_michael": 0.5}, "semitones": -1.5, "speed": 0.92, "warmth": 2.0, "from": "CASTING_REST pryce C"},
-    "haskell": {"blend": {"am_eric": 1.0}, "speed": 1.05, "from": "CASTING_REST haskell A"},
-    "whitaker": {"blend": {"am_michael": 0.5, "am_puck": 0.5}, "speed": 1.05, "from": "CASTING_REST whitaker B"},
+    "brielle": {"blend": {"af_jessica": 1.0}, "speed": 1.05, "sentence_pause": 0.3, "from": "CASTING_REST brielle B"},
+    "cabbie": {"blend": {"am_michael": 1.0}, "semitones": -1.5, "sentence_pause": 0.3, "from": "CASTING_REST cabbie B"},
+    "pearl": {"blend": {"af_bella": 1.0}, "speed": 1.0, "sentence_pause": 0.3, "from": "CASTING_REST pearl A"},
+    "morty": {"blend": {"am_michael": 1.0}, "semitones": -2.5, "speed": 0.85, "fry": 0.1, "sentence_pause": 0.3, "from": "CASTING_REST morty A"},
+    "charlie": {"blend": {"bm_daniel": 1.0}, "speed": 0.95, "lang": "b", "sentence_pause": 0.3, "from": "CASTING_REST charlie C"},
+    "preacher": {"blend": {"am_eric": 1.0}, "semitones": -3.0, "speed": 0.82, "warmth": 4.0, "fry": 0.08, "sentence_pause": 0.3, "from": "CASTING_REST preacher C"},
+    "doss":  {"blend": {"am_puck": 1.0}, "speed": 1.05, "sentence_pause": 0.3, "from": "CASTING_REST doss A"},
+    "courtney": {"blend": {"af_nova": 1.0}, "speed": 1.1, "sentence_pause": 0.3, "from": "CASTING_REST courtney A"},
+    "andre": {"blend": {"am_puck": 1.0}, "semitones": 1.0, "speed": 1.05, "sentence_pause": 0.3, "from": "CASTING_REST andre A"},
+    "crane": {"blend": {"am_michael": 1.0}, "speed": 0.95, "sentence_pause": 0.3, "from": "CASTING_REST crane A"},
+    "ike":   {"blend": {"am_echo": 1.0}, "speed": 1.0, "sentence_pause": 0.3, "from": "CASTING_REST ike C"},
+    "owen":  {"blend": {"am_eric": 1.0}, "semitones": 1.0, "sentence_pause": 0.3, "from": "CASTING_REST owen C"},
+    "teo":   {"blend": {"am_michael": 1.0}, "semitones": -1.5, "speed": 0.85, "warmth": 2.0, "sentence_pause": 0.3, "from": "CASTING_REST teo B"},
+    "mara":  {"blend": {"af_river": 1.0}, "speed": 1.0, "sentence_pause": 0.3, "from": "CASTING_REST mara A"},
+    "brenner": {"blend": {"am_eric": 0.5, "am_santa": 0.5}, "semitones": -2.0, "speed": 0.88, "warmth": 2.0, "sentence_pause": 0.3, "from": "CASTING_REST brenner B"},
+    "okafor": {"blend": {"af_aoede": 1.0}, "speed": 0.95, "sentence_pause": 0.3, "from": "CASTING_REST okafor A"},
+    "danny": {"blend": {"am_michael": 1.0}, "semitones": 1.0, "speed": 1.0, "sentence_pause": 0.3, "from": "CASTING_REST danny C"},
+    "pryce": {"blend": {"am_eric": 0.5, "am_michael": 0.5}, "semitones": -1.5, "speed": 0.92, "warmth": 2.0, "sentence_pause": 0.3, "from": "CASTING_REST pryce C"},
+    "haskell": {"blend": {"am_eric": 1.0}, "speed": 1.05, "sentence_pause": 0.3, "from": "CASTING_REST haskell A"},
+    "whitaker": {"blend": {"am_michael": 0.5, "am_puck": 0.5}, "speed": 1.05, "sentence_pause": 0.3, "from": "CASTING_REST whitaker B"},
 }
 
 
@@ -253,6 +254,19 @@ def _fry(x, depth, seed=7):
 
 PAUSE = re.compile(r"\[(\d+(?:\.\d+)?)\]")
 SENTENCE_END = re.compile(r"(?<=[.!?])\s+(?=\S)")
+NOT_AN_END = {"Mr.", "Mrs.", "Ms.", "Dr.", "Lt.", "Sgt.", "St.", "Ave.", "Jr.", "Sr.", "vs.", "Mt."}
+
+
+def sentences(text):
+    ## `text` split into sentences, but not after a title or an initial ("Mr. Vance", "D. Clark", "W.B.", "No. 734").
+    out = []
+    for piece in SENTENCE_END.split(text.strip()):
+        prev = out[-1].split()[-1] if out else ""
+        if out and (prev in NOT_AN_END or re.fullmatch(r"(?:[A-Z]\.)+", prev) or (prev == "No." and piece[:1].isdigit())):
+            out[-1] += " " + piece
+        else:
+            out.append(piece)
+    return out
 
 
 def _speak(pipe, voice, text, speed, sentence_pause):
@@ -264,7 +278,7 @@ def _speak(pipe, voice, text, speed, sentence_pause):
         if i % 2:
             out.append(np.zeros(int(RATE * float(part)), np.float32))
             continue
-        pieces = SENTENCE_END.split(part.strip()) if sentence_pause else [part]
+        pieces = sentences(part) if sentence_pause else [part]
         for j, piece in enumerate(pieces):
             said = spoken(piece)
             if not any(c.isalnum() for c in said):
@@ -732,6 +746,9 @@ def main():
         path = os.path.join(ROOT, rel)
         os.makedirs(os.path.dirname(path), exist_ok=True)
         direction = DIRECTION.get((speaker, text), {})
+        if direction:
+            # a directed line is timed by hand: the speaker's sentence_pause doesn't apply (nor change its signature)
+            preset = {k: v for k, v in preset.items() if k != "sentence_pause"}
         sig = take_sig(preset, direction)
         # a clip from before signatures (no "sig") counts as current, so adding them didn't re-render everything
         stale_take = old.get(lid, {}).get("sig", sig) != sig
