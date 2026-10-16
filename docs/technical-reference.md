@@ -93,7 +93,7 @@ slider.
 **Talking heads.** While a clip plays, Main follows its level (`_animate_talker()`): a speaker with a `FacePatch` in the
 room (`Room.face_patch(speaker)`, `scripts/face_patch.gd`) shows the mouth closed, half open or open (levels
 `MOUTH_HALF` / `MOUTH_OPEN`, at most every `MOUTH_STEP` s); a cut or finished line closes it. Patches blink on their own
-(every 2.5 to 6 s). Ray's talk loop runs only while his clip is audible: after a gap longer than `TALK_HOLD` he stands at
+(every 3 to 6 s). Ray's talk loop runs only while his clip is audible: after a gap longer than `TALK_HOLD` he stands at
 idle until the voice comes back (`Player.set_talk_gate()`); lines without a clip keep the loop going. Lines spoken in a
 room (not `phone`, not Ray) by someone without a patch there go on `Main.faceless`, and the playthrough fails on any not
 listed in its `NO_FACE` (off-screen speakers, backs to the camera, and the rooms Phase 2 still has to do).
