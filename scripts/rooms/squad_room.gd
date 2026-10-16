@@ -240,6 +240,9 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 					await main.say("Not until I know what I'm telling her.")
 			elif not Game.flag("heard_voicemail"):
 				await _voicemail()
+			elif (Game.has_item("matchbook") or Game.flag("got_matchbook")) and not Game.flag("knows_knock"):
+				await main.say("A station line shows up as LAPD. Whoever wrote that number won't pick up for a cop.")
+				await main.say("A payphone, they might.")
 			else:
 				await main.say("Nobody I want to call at this hour.")
 

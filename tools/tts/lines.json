@@ -27,6 +27,8 @@
 	["ray", "The desk phone. It only rings when someone's dead.", "squad_room.gd:224 interact"],
 	["ray", "The message light is blinking.", "squad_room.gd:226 interact"],
 	["ray", "Not until I know what I'm telling her.", "squad_room.gd:237 interact"],
+	["ray", "A station line shows up as LAPD. Whoever wrote that number won't pick up for a cop.", "squad_room.gd:244 interact"],
+	["ray", "A payphone, they might.", "squad_room.gd:245 interact"],
 	["ray", "Nobody I want to call at this hour.", "squad_room.gd:241 interact"],
 	["ray", "My coffee. Made at six. It's past midnight now.", "squad_room.gd:251 interact"],
 	["ray", "Waste not.", "squad_room.gd:253 interact"],

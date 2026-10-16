@@ -195,6 +195,20 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
+	"16b072e0c9ff": {
+		"speaker": "ray",
+		"text": "A station line shows up as LAPD. Whoever wrote that number won't pick up for a cop.",
+		"file": "res://assets/voice/ray/16b072e0c9ff.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"96f770c20a94": {
+		"speaker": "ray",
+		"text": "A payphone, they might.",
+		"file": "res://assets/voice/ray/96f770c20a94.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
 	"c77350b14797": {
 		"speaker": "ray",
 		"text": "Nobody I want to call at this hour.",
