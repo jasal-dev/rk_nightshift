@@ -26,6 +26,9 @@ func _run() -> void:
 	_step_started = Time.get_ticks_msec()
 	_step = "_phone_click"
 	await _phone_click()
+	_step_started = Time.get_ticks_msec()
+	_step = "_case5_door"
+	await _case5_door()
 	if _failed:
 		return
 	print("SAVE AND LOCK CHECKS OK")
@@ -188,3 +191,17 @@ func _phone_click() -> void:
 		return
 	main.ui.choice_made.emit(99)                    # Close
 	await _idle()
+
+
+func _case5_door() -> void:
+	print("Case 5: Room 214's door needs Shah's answer about Sal")
+	Game.reset()
+	for f in ["case4_done", "case5_started", "clue_nina_call"]:
+		Game.set_flag(f)
+	await main.change_room("squad_room", "street")
+	await _idle()
+	await act("door")
+	await expect_room("blue_note_back")
+	Game.set_flag("clue_choke")
+	await act("bar_door")
+	await expect_room("blue_note_bar")

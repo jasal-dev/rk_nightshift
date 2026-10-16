@@ -146,7 +146,11 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 			elif item != "":
 				await main.say("The door's not locked. My problems are.")
 			elif _case5():
-				if Game.flag("heard_take") and not Game.flag("case5_deduced"):
+				if not Game.flag("clue_choke"):
+					# Shah's "How did he die?" is needed at the pier (Sal's tab book against Brenner)
+					await main.say("I never asked Shah how Sal died. Everything about that night starts with the hold on his throat. Back to the Blue Note.")
+					await main.change_room("blue_note_back", "squad_room")
+				elif Game.flag("heard_take") and not Game.flag("case5_deduced"):
 					await main.say("Not yet. The board first.")
 				else:
 					await main.change_room("street_crime", "squad_room")
