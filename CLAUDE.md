@@ -32,7 +32,7 @@
   `render_room.py`, `gen_sprites.py` and `build_scenes.py`.
 - Close-up rooms (`prius_interior`) set `show_player = false` in `_init()`; their hotspots have no `walk_to`.
 - Testing: run only the affected case, `tests/playthrough.tscn -- --case N` (20 to 75 s). Run the full playthrough
-  (no `--case`, about 3 minutes) only when a change touches several cases or shared code (`main.gd`, `ui.gd`,
+  (no `--case`, about 3 minutes; `tests/save_and_locks.tscn` for the save slots and the soft-lock fixes) only when a change touches several cases or shared code (`main.gd`, `ui.gd`,
   `game.gd`, `room.gd`, `hotspot.gd`, `player.gd`, shaders, the playthrough's helpers). If a case's clues or flags
   change, also re-run `tests/capture_case_starts.tscn`, because the later cases start from that state.
 - Spoken lines are text-to-speech clips (Kokoro, run locally). To voice more lines or cast a character, follow

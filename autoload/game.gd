@@ -5,7 +5,10 @@ extends Node
 signal inventory_changed
 signal item_selected(id: String)
 
-const SAVE_PATH := "user://savegame.json"
+const SLOT_COUNT := 3
+const SAVE_VERSION := 2
+const LEGACY_PATH := "user://savegame.json"      ## the old single quicksave; copied into slot 1 on first run (Game._ready)
+const SHOT_SIZE := Vector2i(384, 216)             ## a slot's screenshot
 
 ## Item database. Add new items here; icons live in res://assets/items/<id>.png
 const ITEMS := {
@@ -207,6 +210,11 @@ var inventory: Array[String] = []
 var selected_item: String = ""
 var current_room: String = "squad_room"
 var player_position: Vector2 = Vector2.ZERO
+var slot := 1              ## the save slot the last save or load used (the save and load menus set it)
+
+
+func _ready() -> void:
+	_migrate_legacy()
 
 
 func reset() -> void:
@@ -229,13 +237,18 @@ func flag(key: String) -> bool:
 
 func current_case() -> int:
 	## The case Ray is working: each one starts when Otis's call ends the one before.
-	if flag("case4_done"):
+	return case_of(flags)
+
+
+static func case_of(f: Dictionary) -> int:
+	## The same, for any flag set (a save slot's).
+	if bool(f.get("case4_done", false)):
 		return 5
-	if flag("case3_done"):
+	if bool(f.get("case3_done", false)):
 		return 4
-	if flag("case2_done"):
+	if bool(f.get("case2_done", false)):
 		return 3
-	return 2 if flag("case1_done") else 1
+	return 2 if bool(f.get("case1_done", false)) else 1
 
 
 func clues(case_no := 0) -> Array[String]:
@@ -283,38 +296,162 @@ func item_icon(id: String) -> Texture2D:
 
 
 # --- save / load ----------------------------------------------------------
-func save_game() -> bool:
+## Three slots: user://save_N.json (flags, inventory, room, position, case, local time) and save_N.png (a screenshot).
+## Writes go to a temp file that then replaces the slot, and the slot it replaces is kept as save_N.json.bak, which
+## a load falls back to if the slot itself turns out to be damaged.
+static func slot_path(n: int) -> String:
+	return "user://save_%d.json" % n
+
+
+static func shot_path(n: int) -> String:
+	return "user://save_%d.png" % n
+
+
+func _abs(path: String) -> String:
+	return ProjectSettings.globalize_path(path)
+
+
+func _migrate_legacy() -> void:
+	if FileAccess.file_exists(LEGACY_PATH) and not FileAccess.file_exists(slot_path(1)):
+		if _write_atomic(slot_path(1), FileAccess.get_file_as_string(LEGACY_PATH)):
+			DirAccess.rename_absolute(_abs(LEGACY_PATH), _abs(LEGACY_PATH + ".migrated"))
+
+
+func _write_atomic(path: String, text: String) -> bool:
+	var tmp := path + ".tmp"
+	var f := FileAccess.open(tmp, FileAccess.WRITE)
+	if f == null:
+		return false
+	f.store_string(text)
+	f.close()
+	if FileAccess.get_file_as_string(tmp) != text:
+		return false
+	if FileAccess.file_exists(path):
+		DirAccess.copy_absolute(_abs(path), _abs(path + ".bak"))
+		DirAccess.remove_absolute(_abs(path))
+	return DirAccess.rename_absolute(_abs(tmp), _abs(path)) == OK
+
+
+func save_game(n := 0, shot: Image = null) -> bool:
+	## Saves into slot `n` (the current slot by default), with a screenshot if given.
+	n = clampi(n if n > 0 else slot, 1, SLOT_COUNT)
+	var t := Time.get_datetime_dict_from_system(false)
 	var data := {
-		"version": 1,
+		"version": SAVE_VERSION,
 		"flags": flags,
 		"inventory": inventory,
 		"room": current_room,
 		"pos": [player_position.x, player_position.y],
+		"case": current_case(),
+		"time": "%04d-%02d-%02d %02d:%02d" % [t["year"], t["month"], t["day"], t["hour"], t["minute"]],
 	}
-	var f := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	if f == null:
+	if not _write_atomic(slot_path(n), JSON.stringify(data, "	")):
 		return false
-	f.store_string(JSON.stringify(data, "\t"))
+	slot = n
+	if shot != null and not shot.is_empty():
+		var img := shot.duplicate() as Image
+		img.resize(SHOT_SIZE.x, SHOT_SIZE.y, Image.INTERPOLATE_BILINEAR)
+		img.save_png(shot_path(n))
+	else:
+		DirAccess.remove_absolute(_abs(shot_path(n)))
 	return true
 
 
-func has_save() -> bool:
-	return FileAccess.file_exists(SAVE_PATH)
+func has_save(n := 0) -> bool:
+	## A file in slot `n`, or in any slot with the default (it may still be damaged; see slot_info).
+	if n > 0:
+		return FileAccess.file_exists(slot_path(n))
+	for i in range(1, SLOT_COUNT + 1):
+		if FileAccess.file_exists(slot_path(i)):
+			return true
+	return false
 
 
-func load_game() -> bool:
-	if not has_save():
+func _read_slot(n: int) -> Dictionary:
+	## The slot's save (or, failing that, its .bak), checked; {} when there is none that can be loaded.
+	for path: String in [slot_path(n), slot_path(n) + ".bak"]:
+		if not FileAccess.file_exists(path):
+			continue
+		var json := JSON.new()
+		if json.parse(FileAccess.get_file_as_string(path)) != OK or typeof(json.data) != TYPE_DICTIONARY:
+			continue
+		var d: Dictionary = json.data
+		var pos: Variant = d.get("pos")
+		if typeof(d.get("flags")) != TYPE_DICTIONARY or typeof(d.get("inventory")) != TYPE_ARRAY 				or typeof(d.get("room")) != TYPE_STRING or typeof(pos) != TYPE_ARRAY or (pos as Array).size() != 2:
+			continue
+		if not ResourceLoader.exists("res://scenes/rooms/%s.tscn" % d["room"]):
+			continue
+		return d
+	return {}
+
+
+func slot_info(n: int) -> Dictionary:
+	## {} for an empty slot, {"damaged": true} for one that can't be loaded, else {"case", "time", "shot"} (a Texture2D or null).
+	if not has_save(n):
+		return {}
+	var d := _read_slot(n)
+	if d.is_empty():
+		return {"damaged": true}
+	var when: String = String(d.get("time", ""))
+	if when == "":      # saved by the old single-slot version: its file time, to the minute
+		var unix := int(FileAccess.get_modified_time(slot_path(n))) + int(Time.get_time_zone_from_system().get("bias", 0)) * 60
+		when = Time.get_datetime_string_from_unix_time(unix, true).substr(0, 16)
+	var tex: Texture2D = null
+	if FileAccess.file_exists(shot_path(n)):
+		var img := Image.load_from_file(_abs(shot_path(n)))
+		if img != null and not img.is_empty():
+			tex = ImageTexture.create_from_image(img)
+	return {"case": case_of(d["flags"]), "time": when, "shot": tex}
+
+
+func latest_slot() -> int:
+	## The slot saved most recently (the one F9 loads on the title screen and at a case card), or the current one.
+	var best := slot
+	var best_t := -1
+	for i in range(1, SLOT_COUNT + 1):
+		if FileAccess.file_exists(slot_path(i)):
+			var t := int(FileAccess.get_modified_time(slot_path(i)))
+			if t > best_t:
+				best_t = t
+				best = i
+	return best
+
+
+func load_game(n := 0) -> bool:
+	## Loads slot `n` (the current slot by default). Nothing changes if the slot is empty or damaged.
+	n = clampi(n if n > 0 else slot, 1, SLOT_COUNT)
+	var d := _read_slot(n)
+	if d.is_empty():
 		return false
-	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(SAVE_PATH))
-	if typeof(parsed) != TYPE_DICTIONARY:
-		return false
-	flags = parsed.get("flags", {})
+	slot = n
+	flags = d["flags"]
 	inventory.clear()
-	for id in parsed.get("inventory", []):
+	for id in d["inventory"]:
 		inventory.append(String(id))
-	current_room = String(parsed.get("room", "squad_room"))
-	var p: Array = parsed.get("pos", [0, 0])
+	current_room = String(d["room"])
+	var p: Array = d["pos"]
 	player_position = Vector2(float(p[0]), float(p[1]))
 	selected_item = ""
 	inventory_changed.emit()
 	return true
+
+
+func snapshot_saves() -> Dictionary:
+	## Every file of every slot, for a test to put back afterwards (restore_saves).
+	var out := {}
+	for i in range(1, SLOT_COUNT + 1):
+		for path in [slot_path(i), slot_path(i) + ".bak", shot_path(i)]:
+			if FileAccess.file_exists(path):
+				out[path] = FileAccess.get_file_as_bytes(path)
+	return out
+
+
+func restore_saves(snap: Dictionary) -> void:
+	for i in range(1, SLOT_COUNT + 1):
+		for path in [slot_path(i), slot_path(i) + ".bak", shot_path(i)]:
+			if snap.has(path):
+				var f := FileAccess.open(path, FileAccess.WRITE)
+				f.store_buffer(snap[path])
+				f.close()
+			elif FileAccess.file_exists(path):
+				DirAccess.remove_absolute(_abs(path))

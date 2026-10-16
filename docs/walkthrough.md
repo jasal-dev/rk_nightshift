@@ -75,8 +75,8 @@ the Blue Note, and ends at Pier 9 at dawn with a choice of who gets the evidence
 | Click the **notebook** | Opens it full screen (left or right click). |
 | Click, **Space** | Skip the current line of dialogue. |
 | **1 to 9** | Pick a dialogue option. |
-| **F5 / F9** | Quick save / quick load. |
-| **Esc** | Quick save and return to the title screen (when nothing else is open). |
+| **F5 / F9** | Save / load menu: three slots, each with a screenshot, the case and the date. |
+| **Esc** | Save menu (with EXIT WITHOUT SAVING), then back to the title screen (when nothing else is open). |
 | **F11** or **Alt+Enter** | Toggle fullscreen. |
 
 **The cursor tells you what each button does.** Over a hotspot it shows the hotspot's name above, the left-click action
@@ -87,7 +87,7 @@ does nothing.
 highlighted with a red NEW. The arrows in the corners turn back to earlier cases. Close it with the Close button, Esc,
 a right click, or a click outside the book (Esc here only closes the book, it doesn't save and quit).
 
-**Title screen.** New Game, Load Game (your quicksave), Settings (fullscreen and text speed: Slow, Normal, Fast, or
+**Title screen.** New Game, Load Game (three slots), Settings (fullscreen and text speed: Slow, Normal, Fast, or
 Manual, where every line waits for a click) and Exit. The "SKIP TO" row starts Case 2, 3, 4 or 5 directly with every
 earlier case solved, including all three optional seeds.
 
@@ -482,7 +482,7 @@ staff; Ike Feld at the lab.
 **Cast:** Sal Moretti (the victim); Mara Quist, an LA Times reporter; Teo, the porter who found him; Officer Park; Dr. Shah;
 Nina Alvarez; Otis; Lt. Doyle; Ike Feld; Vance and Tiny; and a big man in an old raincoat.
 
-You start with **your phone** in the inventory. Right click it to use it (texts and calls).
+You start with **your phone** in the inventory. Click it (left or right) to use it (texts and calls).
 
 #### `[C5.1]` The street
 
@@ -548,7 +548,7 @@ You start with **your phone** in the inventory. Right click it to use it (texts 
 
 1. Use the **piano** (or the **set list** on it). Play the knock as notes: **D, E, C, A, F**. The answer is on the set list's
    staff, or in the tab book's margin: D.R. DECAF. Wrong notes don't count against you, so just play the five keys in order.
-2. Right click **your phone** in the inventory: **Calls**, **"Call Ike Feld (lab)"**. Ike gets in on the first try and plays
+2. Click **your phone** in the inventory: **Calls**, **"Call Ike Feld (lab)"**. Ike gets in on the first try and plays
    Danny's last take down the line. Listen: Tuesday, the back booth, Harlan Pryce, Councilman Ted Haskell and Walt. "Then pay
    him, Walt." With the November card asked for, Ike also has Brenner in Kenji's back seat at 1:12 a.m. Wednesday, wiping a
    revolver, Danny's phone in his lap.
@@ -572,7 +572,7 @@ Use the **murder board** before anything else (the door says "Not yet. The board
    - **Desk phone: "Call Harbor Marine."** Tiny, then Vance. Vance gives you the number of the man who called him: **Brenner's
      cell, 213-555-0163**. He'll be at the pier at sunrise.
    - **Desk phone: "Call Otis."** A patrol car at Pier 9, lights off, no radio, that nobody upstairs knows about.
-   - **Your phone** (right click): **Texts**, **"New message to 213-555-0163"**. The bait.
+   - **Your phone** (click it): **Texts**, **"New message to 213-555-0163"**. The bait.
 8. Out the **door** and use **your car**. Ray stops at the lab first: Ike hands over **the drive** (the only copy of the
    take) and **Danny's phone**, dead. Then the 110 south.
 
@@ -749,7 +749,7 @@ Right click any item in the inventory to examine it. Items marked * are optional
 
 | Item | Where | Use |
 |---|---|---|
-| my phone | You start with it | Right click: call Ike, text Brenner; at sunrise, the endings |
+| my phone | You start with it | Click: call Ike, text Brenner; at sunrise, the endings |
 | Mara Quist's card | Mara, at the tape | Flavor (and the Times ending) |
 | Sal's tab book | Register, the bar | Read it; the board; Brenner, step 2 |
 | Danny's set list | Piano's music stand | The knock as notes; the piano |
@@ -774,5 +774,5 @@ Right click any item in the inventory to examine it. Items marked * are optional
 - **The board is forgiving.** Wrong guesses cost nothing. If you can't decide, try a card and listen to Ray's line.
 - **Stand still and Ray will help.** Wander for a while without progress and he'll think out loud.
 - **Some pieces of paper matter later.** If something in a case seems unrelated to that case, take it anyway.
-- **Save before big moments** with F5, especially at the end of the night. Esc also saves before it goes back to the title.
+- **Save before big moments** with F5, especially at the end of the night. Esc opens the save menu before it goes back to the title.
 - **Prefer to read at your own pace?** Set the text speed to Manual in Settings, and each line waits for a click.

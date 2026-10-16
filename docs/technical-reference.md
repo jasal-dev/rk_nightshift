@@ -115,10 +115,10 @@ listed in its `NO_FACE` (off-screen speakers, backs to the camera, and the rooms
 
 Signals: `inventory_changed`, `item_selected(id)`.
 
-**Saves.** One quicksave slot at `user://savegame.json` (F5 saves, and so does Esc before it returns to the title; F9 loads, as does the title screen's Load Game, or F9 there):
+**Saves.** Three slots, `user://save_N.json` plus a screenshot `save_N.png` (384×216). F5 and F9 open `SaveMenu` (`scripts/save_menu.gd`) in save / load mode over the paused room; Esc opens it in save mode with EXIT WITHOUT SAVING (saving or exiting goes to the title; BACK or Esc stays). Each slot shows its screenshot, the case and the local date and time; saving over a used slot asks first. The title's Load Game shows the same menu (picking a slot sets `Game.slot` and emits `"load"`); F9 on the title screen or on a case card loads the newest slot (`Game.latest_slot()`). `Game.save_game(n, image)` writes a temp file and renames it, keeping the replaced slot as `save_N.json.bak`; `load_game(n)` validates the file (falling back to the `.bak`) and changes nothing if it is damaged (`Main._load(n)` returns false and says so). `Game.slot_info(n)` feeds the menu. The old `user://savegame.json` is copied into slot 1 on first run. `snapshot_saves()` / `restore_saves()` are for tests. Format:
 
 ```json
-{ "version": 1, "flags": {...}, "inventory": ["notebook", ...], "room": "street", "pos": [812.0, 944.0] }
+{ "version": 2, "flags": {...}, "inventory": ["notebook", ...], "room": "street", "pos": [812.0, 944.0], "case": 1, "time": "2026-10-16 20:23" }
 ```
 
 Loading restores the room and position but not mid-conversation state, so a save is only allowed when nothing
@@ -240,11 +240,11 @@ All UI is built in code in `scripts/ui.gd` (`class_name GameUI`), with DejaVu Sa
 | --- | --- | --- |
 | Hover label, cursor, item cursor | `set_hover`, `update_cursor` | Hotspot and item names; "Use X with Y". |
 | Inventory bar (104 px, 84 px icons) | `update_bar`, `bar_pinned`, `item_under`, `is_over_cog`, signals `inventory_clicked(id, button)`, `settings_clicked` | Slides down at the top edge; Tab pins it. The cog at its right end (drawn in `_draw_cog`) opens the settings. |
-| Settings, in a room | `open_settings(text_speed)`, `close_settings`, `settings` | The title screen's `SettingsPanel` (`scripts/settings_panel.gd`) centred on a dimmed screen. `Main.open_settings()` pauses the tree (Main and the UI run with `PROCESS_MODE_ALWAYS`, `World` is pausable); BACK or Esc closes it, and that Esc never quicksaves or goes to the title. |
+| Settings, in a room | `open_settings(text_speed)`, `close_settings`, `settings` | The title screen's `SettingsPanel` (`scripts/settings_panel.gd`) centred on a dimmed screen. `Main.open_settings()` pauses the tree (Main and the UI run with `PROCESS_MODE_ALWAYS`, `World` is pausable); BACK or Esc closes it, and that Esc never opens the save menu or goes to the title. |
 | Speech | `show_speech`, `hide_speech` | `say`, `voice`, `narrate`. Drawn above the fade, so lines read on black (Case 2's doorstep). |
 | Toast | `toast(text, hold)` | Pickups, notebook, save/load. |
 | Choices | `show_choices`, `hide_choices`, `options`, signal `choice_made(i)` | Dialogue; also device buttons. Long lists (the boards' evidence) go into up to three columns under the board, with a smaller font if needed. |
-| Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings (a `SettingsPanel`: fullscreen, text speed, music volume), Credits (slow movie-style scroll: "A game by Denary Games", then the music and sound attributions; Esc or click leaves), Exit (quits), and a SKIP TO row for Case 2 to 5 (`Main.jump_to_case(n)`). `Main._title()` runs it at start, after THE END, and on Esc in a room (`_save_to_title()` quicksaves first). |
+| Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings (a `SettingsPanel`: fullscreen, text speed, music volume), Credits (slow movie-style scroll: "A game by Denary Games", then the music and sound attributions; Esc or click leaves), Exit (quits), and a SKIP TO row for Case 2 to 5 (`Main.jump_to_case(n)`). `Main._title()` runs it at start, after THE END, and on Esc in a room (`_save_to_title()` opens the save menu first). |
 | Card | `show_card(lines, colors)`, `hide_card` | Case cards and the end card. |
 | Fade | `fade_rect`, `fade_to(alpha, time)` | Room changes, drives. |
 | Murder board | `show_board(question, caption)`, `set_board_question`, `set_board_pins(pins, labels)`, `hide_board` | Deductions. |
@@ -255,7 +255,7 @@ All UI is built in code in `scripts/ui.gd` (`class_name GameUI`), with DejaVu Sa
 | Jigsaw | `show_jigsaw(bg, pieces)`, `hide_jigsaw`, `jigsaw_place(i)`, signal `jigsaw_event(kind)` | Crane's headlight. |
 | Scene still | `show_scene(tex, dim, caption)`, `hide_scene`, `show_endcard(tex, text)` | The take, the 1:30 call remembered, the end cards. |
 | Piano | `show_piano(set_list)`, `hide_piano`, `piano_press(key)`, signal `piano_event(letter)` | Danny's piano (Case 5). |
-| Notebook | `show_notebook(sections)`, `hide_notebook`, `notebook_page_turn(step)`, signal `notebook_closed` | Ray's notebook, open: two ruled pages, each case from a fresh page under `Game.CASE_TITLES[n]`, overflow onto further pages. Close, Esc (handled in `Main`, before the quicksave-and-title), a right click or a click outside closes it. |
+| Notebook | `show_notebook(sections)`, `hide_notebook`, `notebook_page_turn(step)`, signal `notebook_closed` | Ray's notebook, open: two ruled pages, each case from a fresh page under `Game.CASE_TITLES[n]`, overflow onto further pages. Close, Esc (handled in `Main`, before the save menu), a right click or a click outside closes it. |
 
 `show_device(..., accent, lcd)` with `lcd = true` is the desk phone's green call log. `change_room()` hides the
 device, paper, jigsaw, piano and scene still, so a close-up never leaks into the next room.
@@ -487,7 +487,7 @@ start from the captured state.
 
 At the end of Case 5 the test snapshots the flags and inventory at sunrise and plays each ending from there (Ending
 B with Pryce's invitation taken off the board), checking that exactly one ending flag is set and the credits finish.
-The test saves and later restores the player's own quicksave, so running it doesn't destroy a real save. When a
+The test saves and later restores the player's own save slots, so running it doesn't destroy a real save. When a
 new case is added, extend `_run()` with its steps and add its rooms to the `--shots` list.
 
 **Case jumps.** The title screen's Case 2 to 5 buttons (`Main.jump_to_case`) load the flags and inventory from

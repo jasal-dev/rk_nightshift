@@ -93,11 +93,11 @@ that's an exact 2×. The window opens at the largest 16:9 size that fits your sc
 | Click an item, then a hotspot | Use the item on it (right click or Esc to put it away) |
 | Click / Space | Skip a line of dialogue |
 | 1–9 | Pick a dialogue option |
-| **F5** / **F9** | Quick save / quick load |
-| **Esc** | Quick save and go back to the title screen (when nothing else is open) |
+| **F5** / **F9** | Save / load menu (three slots, each with a screenshot, the case and the date) |
+| **Esc** | Save menu, with EXIT WITHOUT SAVING, then back to the title screen (when nothing else is open) |
 | **F11** or **Alt+Enter** | Toggle fullscreen (remembered between sessions) |
 
-The game opens on the title screen: New Game, Load Game (the quicksave), Settings (fullscreen, and text speed: Slow, Normal, Fast,
+The game opens on the title screen: New Game, Load Game (three slots), Settings (fullscreen, and text speed: Slow, Normal, Fast,
 or Manual, where each line waits for a click) and Exit, which quits the game.
 
 **Walkthrough (spoilers), Case 1:**

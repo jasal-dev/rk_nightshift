@@ -3,7 +3,8 @@ extends Room
 ## Officer Park: the last passenger (Brielle's video and alibi) and the walker on Mulholland.
 ## Dr. Shah: gloves first (every Prius interior hotspot needs them), then the ligature and the time of death.
 ## The open door leads into the car (prius_interior.gd: the Glide app, the car's screen, the glovebox).
-## Leaving needs gloves, Brielle's alibi and clue_off_app; Ray's car then opens the car menu.
+## Leaving needs gloves, Brielle's alibi and clue_off_app; Ray's car then opens the car menu (which lists the overlook
+## from the other places, so the Prius can be searched again).
 
 ## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
 const VERBS := {
@@ -223,10 +224,15 @@ func _leave() -> void:
 	if not Game.flag("clue_brielle_alibi") or not Game.flag("clue_off_app"):
 		await main.say("Not yet. Kenji's car still has things to tell me.")
 		return
-	if not Game.flag("left_overlook"):
-		Game.set_flag("left_overlook")
-		if Game.has_item("kenji_keys"):
-			await main.say("Park. His keys.")
-			main.take("kenji_keys")
-		await _park("I'll ride down with the car. Call if you need a unit, Detective. I'll be in the neighborhood all night.")
-	await Case2.car_menu(main, "mulholland_overlook")
+	await Case2.car_menu(main, "mulholland_overlook", _park_takes_keys)
+
+
+func _park_takes_keys() -> void:
+	## Once Ray has picked a destination (not on "Not yet."), the first time: Park takes Kenji's keys and the car.
+	if Game.flag("left_overlook"):
+		return
+	Game.set_flag("left_overlook")
+	if Game.has_item("kenji_keys"):
+		await main.say("Park. His keys.")
+		main.take("kenji_keys")
+	await _park("I'll ride down with the car. Call if you need a unit, Detective. I'll be in the neighborhood all night.")

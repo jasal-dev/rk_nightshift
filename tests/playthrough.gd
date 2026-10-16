@@ -38,7 +38,7 @@ var _step_started := 0
 var _shots := {}         ## with `-- --shots`: screenshots of the drive, phone and board, saved to user://
 
 
-var _user_save := ""     ## the player's own quicksave, put back when the test ends
+var _user_saves := {}      ## the player's own save slots (Game.snapshot_saves), put back when the test ends
 var _jig_solved := false
 var _piano_keys: Array[String] = []    ## keys still to press on Danny's piano
 var _piano_done := false
@@ -46,8 +46,7 @@ var _speak_frames := 0                 ## frames the current line has been up
 
 
 func _ready() -> void:
-	if Game.has_save():
-		_user_save = FileAccess.get_file_as_string(Game.SAVE_PATH)
+	_user_saves = Game.snapshot_saves()
 	Engine.time_scale = 8.0
 	_step_started = Time.get_ticks_msec()
 	main = MainScene.instantiate()
@@ -164,10 +163,7 @@ func _fail(msg: String) -> void:
 
 
 func _quit(code: int) -> void:
-	if _user_save != "":
-		FileAccess.open(Game.SAVE_PATH, FileAccess.WRITE).store_string(_user_save)
-	elif Game.has_save():
-		DirAccess.remove_absolute(ProjectSettings.globalize_path(Game.SAVE_PATH))
+	Game.restore_saves(_user_saves)
 	get_tree().quit(code)
 
 
@@ -524,18 +520,29 @@ func _case1() -> void:
 	Game.save_game()
 	await main._load()
 	await expect_room("pier9_dock")
-	# Esc: quicksave, back to the title screen, and Load Game picks up in the same room
+	# Esc: the save menu (three slots, EXIT WITHOUT SAVING); saving to slot 2 goes back to the title screen, and
+	# Load Game > slot 2 picks up in the same room
 	await _idle()
-	DirAccess.remove_absolute(ProjectSettings.globalize_path(Game.SAVE_PATH))
+	Game.restore_saves({})
 	var esc := InputEventKey.new()
 	esc.keycode = KEY_ESCAPE
 	esc.pressed = true
 	main._unhandled_input(esc)
+	while main.ui.save_menu == null and not _failed:
+		await get_tree().process_frame
+	if main.ui.save_menu.find_children("*", "Button", true, false).size() < 5:
+		_fail("the save menu should have three slots, EXIT WITHOUT SAVING and BACK")
+	main.ui.save_menu.result.emit("save:2")
 	while not main._on_title and not _failed:
 		await get_tree().process_frame
-	if not Game.has_save() or main.ui.title.load_button.disabled:
-		_fail("Esc should quicksave before the title screen")
+	if not Game.has_save(2) or Game.has_save(1) or main.ui.title.load_button.disabled:
+		_fail("saving to slot 2 from the Esc menu should leave only slot 2 and go to the title screen")
+	if Game.slot_info(2).is_empty() or int(Game.slot_info(2)["case"]) != 1:
+		_fail("slot 2 should hold a Case 1 save")
 	main.ui.title.load_button.pressed.emit()
+	if main.ui.title.load_menu == null:
+		_fail("Load Game should open the slot menu")
+	main.ui.title.load_menu.result.emit("load:2")
 	await expect_room("pier9_dock")
 	if not Game.flag("got_envelope"):
 		_fail("loading the Esc save should keep the envelope")
@@ -607,11 +614,13 @@ func _case2() -> void:
 	expect(["got_kenji_keys", "clue_empty_case", "got_receipt", "got_driver_card", "clue_dashcam", "clue_two_cups",
 			"clue_rat", "saw_grit"])
 	await act("car", "use", "", ["Not yet."])
+	if Game.flag("left_overlook") or not Game.has_item("kenji_keys"):
+		_fail("'Not yet.' should leave Kenji's keys with Ray and the overlook not yet left")
+	await act("car", "use", "", ["Norm's on Sunset"])
+	await expect_room("norms_diner")
 	expect(["left_overlook"])
 	if Game.has_item("kenji_keys"):
 		_fail("Kenji's keys should have gone to Park")
-	await act("car", "use", "", ["Norm's on Sunset"])
-	await expect_room("norms_diner")
 
 	print("Case 2, scene 3: Norm's on Sunset")
 	await act("rosa")                                   # too busy

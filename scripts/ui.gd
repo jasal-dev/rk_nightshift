@@ -32,6 +32,8 @@ var bar_items: HBoxContainer
 var cog: Control                  ## the settings cog, at the right end of the inventory bar
 var settings: SettingsPanel       ## the in-game settings, while open (see open_settings)
 var _settings_dim: ColorRect
+var save_menu: SaveMenu                 ## the in-game save or load menu, while open (see open_save_menu)
+var _save_dim: ColorRect
 var choices_box: GridContainer
 var fade_rect: ColorRect
 var card: Control
@@ -1128,6 +1130,37 @@ func close_settings() -> void:
 		_settings_dim.queue_free()
 		_settings_dim = null
 		settings = null
+
+
+func modal() -> Control:
+	## The settings or the save menu, whichever is open over the room (null for neither).
+	return settings if settings else save_menu
+
+
+## The save or load menu (SaveMenu), centred over the room on a dimmed screen that takes every click. Main pauses the
+## game while it is open.
+func open_save_menu(mode: String, allow_exit: bool) -> SaveMenu:
+	close_save_menu()
+	_save_dim = ColorRect.new()
+	_save_dim.color = Color(0, 0, 0, 0.6)
+	_save_dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_save_dim.mouse_filter = Control.MOUSE_FILTER_STOP
+	root.add_child(_save_dim)
+	root.move_child(_save_dim, cursor_item.get_index())
+	var center := CenterContainer.new()
+	center.set_anchors_preset(Control.PRESET_FULL_RECT)
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_save_dim.add_child(center)
+	save_menu = SaveMenu.new(mode, allow_exit)
+	center.add_child(save_menu)
+	return save_menu
+
+
+func close_save_menu() -> void:
+	if _save_dim:
+		_save_dim.queue_free()
+		_save_dim = null
+		save_menu = null
 
 
 # --- murder board (deduction) ---------------------------------------------------

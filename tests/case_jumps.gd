@@ -20,8 +20,7 @@ func _run() -> void:
 		if _failed:
 			return
 		main._title()                                   # back to the title screen for the next one
-	var save_now := FileAccess.get_file_as_string(Game.SAVE_PATH) if Game.has_save() else ""
-	if save_now != _user_save:
+	if Game.snapshot_saves().hash() != _user_saves.hash():
 		_fail("a case jump shouldn't touch the quicksave")
 		return
 	print("CASE JUMPS OK - Cases 2 to 5 start from the title screen.")
