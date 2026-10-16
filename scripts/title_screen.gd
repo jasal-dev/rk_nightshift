@@ -24,6 +24,7 @@ const CREAM := Color(0.85, 0.8, 0.7)
 const AMBER := Color(1, 0.85, 0.45)
 const BRASS := Color(0.55, 0.42, 0.28)
 const GREY := Color(0.5, 0.48, 0.45)
+const CREDITS_SPEED := 45.0     ## px/s the credits scroll up
 
 var new_button: Button
 var load_button: Button
@@ -33,7 +34,8 @@ var exit_button: Button
 var case_buttons: Array[Button] = []    ## Case 2 to Case 5, in order
 var menu: VBoxContainer
 var settings: SettingsPanel
-var credits: PanelContainer
+var credits: Control
+var _credits_col: VBoxContainer
 var _help: Label
 var _bar_red: TextureRect
 var _bar_blue: TextureRect
@@ -133,6 +135,10 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if credits.visible:
+		_credits_col.position.y -= CREDITS_SPEED * delta
+		if _credits_col.position.y + _credits_col.size.y < 0.0:
+			close_credits()
 	# the light bar turning, as on the street_crime room: red, blue, with a beat of dark
 	_blink += delta
 	var phase := fmod(_blink, 1.2)
@@ -171,6 +177,8 @@ func open_credits() -> void:
 	menu.visible = false
 	for c: CanvasItem in [_help, _sub, _tag]:     # the credits fill the screen under RAY KESSLER
 		c.visible = false
+	_credits_col.size = Vector2(1000, 0)
+	_credits_col.position = Vector2(460, 1080)
 	credits.visible = true
 
 
@@ -205,21 +213,56 @@ static func menu_font() -> FontVariation:
 	return _font
 
 
-func _credits_panel() -> PanelContainer:
-	## The music and sound attributions (Audio.MUSIC_CREDITS, Audio.SOUND_CREDITS), under the logo.
-	var panel := PanelContainer.new()
-	style_panel(panel)
-	panel.position = Vector2(190, 262)
-	panel.custom_minimum_size = Vector2(1540, 0)
-	var vb := VBoxContainer.new()
-	vb.add_theme_constant_override("separation", 14)
-	panel.add_child(vb)
-	vb.add_child(menu_label("CREDITS", 34, BRASS))
-	vb.add_child(music_credits(GameUI.FONT, menu_font(), 27, CREAM, GREY))
-	var back := menu_button("BACK", 38)
-	back.pressed.connect(close_credits)
-	vb.add_child(back)
-	return panel
+func _credits_panel() -> Control:
+	## Movie-style credits: a dimmed screen with a centered column of small type that scrolls up slowly (CREDITS_SPEED
+	## px/s), opening with "A game by Denary Games", then the music and sound attributions (Audio.MUSIC_CREDITS,
+	## Audio.SOUND_CREDITS). Esc or a click leaves; it also closes by itself when the last line has gone off the top.
+	var root := Control.new()
+	root.set_anchors_preset(Control.PRESET_FULL_RECT)
+	root.mouse_filter = Control.MOUSE_FILTER_STOP
+	root.clip_contents = true
+	root.gui_input.connect(func(e: InputEvent):
+		if e is InputEventMouseButton and e.pressed:
+			close_credits())
+	var shade := ColorRect.new()
+	shade.color = Color(0, 0, 0, 0.85)
+	shade.set_anchors_preset(Control.PRESET_FULL_RECT)
+	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(shade)
+	_credits_col = VBoxContainer.new()
+	_credits_col.add_theme_constant_override("separation", 10)
+	_credits_col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_credits_col.custom_minimum_size = Vector2(1000, 0)
+	root.add_child(_credits_col)
+	var f := GameUI.FONT
+	_credit_line("A game by", f, 24, GREY)
+	_credit_line("DENARY GAMES", menu_font(), 44, AMBER)
+	_credit_gap(90)
+	_credit_line("MUSIC", menu_font(), 26, BRASS)
+	for t: String in Audio.MUSIC_CREDITS:
+		_credit_line(t, f, 22, CREAM)
+		_credit_gap(14)
+	_credit_gap(50)
+	_credit_line("SOUND", menu_font(), 26, BRASS)
+	for t: String in Audio.SOUND_CREDITS:
+		_credit_line(t, f, 22, CREAM)
+		_credit_gap(14)
+	_credit_gap(90)
+	_credit_line("Thanks for playing", menu_font(), 30, AMBER)
+	return root
+
+
+func _credit_line(text: String, font: Font, size: int, col: Color) -> void:
+	var l := _text_label(text, font, size, col)
+	l.custom_minimum_size = Vector2(1000, 0)
+	_credits_col.add_child(l)
+
+
+func _credit_gap(h: int) -> void:
+	var g := Control.new()
+	g.custom_minimum_size = Vector2(0, h)
+	g.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_credits_col.add_child(g)
 
 
 static func music_credits(font: Font, head_font: Font, font_size: int, col: Color, head_col: Color) -> VBoxContainer:
