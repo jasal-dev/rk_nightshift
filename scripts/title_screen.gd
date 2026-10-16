@@ -3,7 +3,8 @@ extends Control
 ## The title screen (GameUI.show_title): the street the morning Sal died, empty but for the tape and the patrol car's
 ## turning light bar, RAY KESSLER in neon over NIGHTSHIFT, and New Game, Load Game, Settings, Credits and Exit, with a
 ## row under them that skips to Case 2, 3, 4 or 5 (Main.jump_to_case).
-## Emits `chosen` ("new", "load", "case2" to "case5", or "quit").
+## Emits `chosen` ("new", "load", "case2" to "case5", or "quit"). Load Game opens the three-slot SaveMenu in place of
+## the menu; picking a slot sets Game.slot and emits "load".
 ## Settings is a SettingsPanel (the same one the inventory bar's cog opens in a room); TitleScreen passes on its
 ## `fullscreen_pressed` and `text_speed_chosen`, and Main applies and remembers them. Credits shows the music attributions.
 ## Art: tools/r3/title.py (the backdrop, via render_room.py) and tools/r3/gen_title.py (the logo).
@@ -34,6 +35,7 @@ var exit_button: Button
 var case_buttons: Array[Button] = []    ## Case 2 to Case 5, in order
 var menu: VBoxContainer
 var settings: SettingsPanel
+var load_menu: SaveMenu
 var credits: Control
 var _credits_col: VBoxContainer
 var _help: Label
@@ -97,7 +99,7 @@ func _init(has_save: bool, text_speed: int) -> void:
 	exit_button = menu_button("EXIT", 46)
 	load_button.disabled = not has_save
 	new_button.pressed.connect(func(): chosen.emit("new"))
-	load_button.pressed.connect(func(): chosen.emit("load"))
+	load_button.pressed.connect(open_load)
 	settings_button.pressed.connect(open_settings)
 	credits_button.pressed.connect(open_credits)
 	exit_button.pressed.connect(func(): chosen.emit("quit"))
@@ -116,7 +118,7 @@ func _init(has_save: bool, text_speed: int) -> void:
 	credits.visible = false
 	add_child(credits)
 
-	_help = menu_label("Left click to walk and use, right click to look.     F5 save    F9 load    Esc save and quit to title    F11 fullscreen", 22, GREY)
+	_help = menu_label("Left click to walk and use, right click to look.     F5 save    F9 load    Esc save menu / quit to title    F11 fullscreen", 22, GREY)
 	_help.position = Vector2(0, 1020)
 	_help.size = Vector2(1920, 30)
 	add_child(_help)
@@ -157,7 +159,9 @@ func _process(delta: float) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_pressed() and (event as InputEventKey).keycode == KEY_ESCAPE:
-		if settings.visible:
+		if load_menu:
+			load_menu.back()
+		elif settings.visible:
 			close_settings()
 		elif credits.visible:
 			close_credits()
@@ -170,6 +174,30 @@ func open_settings() -> void:
 
 func close_settings() -> void:
 	settings.visible = false
+	menu.visible = true
+
+
+func open_load() -> void:
+	menu.visible = false
+	for c: CanvasItem in [_help, _tag]:
+		c.visible = false
+	load_menu = SaveMenu.new("load", false)
+	load_menu.position = Vector2(480, 330)
+	load_menu.result.connect(func(kind: String):
+		if kind.begins_with("load:"):
+			Game.slot = int(kind.substr(5))
+			chosen.emit("load")
+		else:
+			close_load())
+	add_child(load_menu)
+
+
+func close_load() -> void:
+	if load_menu:
+		load_menu.queue_free()
+		load_menu = null
+	for c: CanvasItem in [_help, _tag]:
+		c.visible = true
 	menu.visible = true
 
 

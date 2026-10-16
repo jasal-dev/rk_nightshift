@@ -45,10 +45,14 @@ static func gps_hint(main: Node) -> void:
 		await main.say("Glide says his night ended at eleven fifty-two. I'd like a second opinion. Cars talk too, these days.")
 
 
-static func car_menu(main: Node, here: String) -> void:
-	## Where to next. Each hop is a short drive; Room 214 opens once Devin is in custody.
+static func car_menu(main: Node, here: String, on_leave := Callable()) -> void:
+	## Where to next. Each hop is a short drive; Room 214 opens once Devin is in custody. The overlook stays on the
+	## list, so a card or receipt missed in the Prius can still be fetched. `on_leave` (a coroutine) runs once a
+	## destination is chosen, before the drive (the overlook's Park takes Kenji's keys there).
 	var opts: Array = []
 	var dest: Array = []
+	if here != "mulholland_overlook":
+		opts.append("Mulholland overlook"); dest.append("mulholland_overlook")
 	if here != "norms_diner":
 		opts.append("Norm's on Sunset"); dest.append("norms_diner")
 	if here != "kenji_apartment":
@@ -60,7 +64,11 @@ static func car_menu(main: Node, here: String) -> void:
 	if c >= dest.size():
 		return
 	var to: String = dest[c]
+	if on_leave.is_valid():
+		await on_leave.call()
 	match to:
+		"mulholland_overlook":
+			await main.say("Back up the hill. Kenji's car hasn't gone anywhere.")
 		"norms_diner":
 			await main.say("Norm's. Cherry pie, two coffees, twelve-fourteen.")
 		"kenji_apartment":

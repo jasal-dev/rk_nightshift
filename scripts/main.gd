@@ -7,7 +7,9 @@ extends Node
 ## right click = look (nothing on a look-only hotspot); both are shown under the cursor (Room.verb_for),
 ## mouse to top edge (or Tab) = inventory (its cog opens Settings, the game paused; Esc closes it), F5 = save,
 ## F9 = load, F11 / Alt+Enter = fullscreen,
-## Esc = save and go back to the title screen (TitleScreen: New Game, Load Game, Case 2 to 5, Settings, Exit).
+## F5 / F9 open the save / load menu (SaveMenu: three slots, each with a screenshot, the case and the date and time).
+## Esc = the save menu with EXIT WITHOUT SAVING; saving or exiting goes back to the title screen (TitleScreen: New Game,
+## Load Game, Case 2 to 5, Settings, Exit).
 
 const PlayerScene := preload("res://scenes/player.tscn")
 const CaseStarts := preload("res://scripts/case_starts.gd")
@@ -27,6 +29,7 @@ var _choosing := false
 var _waiting_click := false
 var _load_requested := false
 var _on_title := false      ## the title screen is up and waiting for a choice
+var _menu_busy := false     ## the save / load menu is open (or about to be)
 var _topic_menus := 0       ## topic menus shown in the current conversation (see topics())
 var text_speed := 1         ## index into TEXT_TIME (Slow, Normal, Fast, Manual), set on the title screen's settings panel
 var faceless: Array[String] = []   ## "room:speaker" for lines spoken in a room by someone with no FacePatch there (tests)
@@ -117,7 +120,7 @@ func set_text_speed(index: int) -> void:
 
 func open_settings() -> void:
 	## The inventory bar's cog: the title screen's settings over the room, the game paused until BACK or Esc.
-	if busy or _speaking or _choosing or room == null or ui.settings:
+	if busy or _speaking or _choosing or room == null or ui.settings or _menu_busy:
 		return
 	get_tree().paused = true
 	var s := ui.open_settings(text_speed)
@@ -157,7 +160,8 @@ func _title() -> void:
 		get_tree().quit()
 		return
 	if action == "load":
-		await _load()
+		if not await _load():            # damaged or missing: back to the title screen
+			await _title()
 		return
 	if action.begins_with("case"):
 		await jump_to_case(int(action.substr(4)))
@@ -181,8 +185,7 @@ func case_card(time: String, title: String) -> bool:
 	await wait_click()
 	ui.hide_card()
 	if _load_requested:
-		await _load()
-		return true
+		return await _load()
 	return false
 
 
@@ -232,30 +235,76 @@ func the_end() -> void:
 			Color(1, 0.85, 0.45), Color.WHITE, Color(0.6, 0.6, 0.6)])
 	await wait_click()
 	ui.hide_card()
-	if _load_requested:
-		await _load()
+	if _load_requested and await _load():
 		return
 	await _title()
+
+
+func _grab_screen() -> Image:
+	## What is on screen now, for a save slot's picture (null where there is no renderer, e.g. headless tests).
+	if DisplayServer.get_name() == "headless":      # nothing is drawn (and frame_post_draw never comes)
+		return null
+	await RenderingServer.frame_post_draw
+	return get_viewport().get_texture().get_image()
+
+
+func _run_save_menu(mode: String, allow_exit: bool) -> String:
+	## The save or load menu over the room, the game paused. Returns "save:N", "load:N", "exit" or "back".
+	get_tree().paused = true
+	var m := ui.open_save_menu(mode, allow_exit)
+	var r: String = await m.result
+	ui.close_save_menu()
+	get_tree().paused = false
+	return r
 
 
 func _save_to_title() -> void:
-	## Esc in a room: quicksave (the slot Load Game and F9 use), then back to the title screen.
-	## Stays in the room if the save fails, so nothing is lost.
+	## Esc in a room: the save menu, with EXIT WITHOUT SAVING. Saving or exiting goes back to the title screen; BACK (or Esc)
+	## stays in the room, and so does a save that fails, so nothing is lost.
+	_menu_busy = true
 	_action_token += 1
 	player.stop()
 	Game.player_position = player.position
-	if not Game.save_game():
-		ui.toast("Could not save.")
-		return
-	await _title()
+	var shot := await _grab_screen()
+	var r := await _run_save_menu("save", true)
+	_menu_busy = false
+	if r.begins_with("save:"):
+		if not Game.save_game(int(r.substr(5)), shot):
+			ui.toast("Could not save.")
+			return
+		await _title()
+	elif r == "exit":
+		await _title()
 
 
-func _load() -> void:
+func _quick_menu(saving: bool) -> void:
+	## F5 and F9 in a room: the same menu without the exit option.
+	_menu_busy = true
+	var shot: Image = null
+	if saving:
+		Game.player_position = player.position
+		shot = await _grab_screen()
+	var r := await _run_save_menu("save" if saving else "load", false)
+	_menu_busy = false
+	if r.begins_with("save:"):
+		ui.toast("Game saved." if Game.save_game(int(r.substr(5)), shot) else "Could not save.")
+	elif r.begins_with("load:"):
+		await _load(int(r.substr(5)))
+
+
+func _load(n := 0) -> bool:
+	## Loads slot n (the current one by default) and goes to its room. Returns false, changing nothing, if the slot is
+	## empty or damaged. Whatever click Ray was still walking to is dropped, so it can't fire in the loaded game.
+	_action_token += 1
+	player.stop()
 	_load_requested = false
+	if not Game.load_game(n):
+		ui.toast("That saved game is damaged or missing.")
+		return false
 	busy = true
-	Game.load_game()
 	await change_room(Game.current_room, "__load")
 	ui.toast("Game loaded.")
+	return true
 
 
 # --- rooms ------------------------------------------------------------------
@@ -308,7 +357,7 @@ func _process(delta: float) -> void:
 	var right := ""
 	var hot := false
 	var busy_cursor := busy
-	if room and not _speaking and not _choosing and ui.card.visible == false and ui.title == null and ui.settings == null:
+	if room and not _speaking and not _choosing and ui.card.visible == false and ui.title == null and ui.modal() == null:
 		var inv_item := ui.item_under(m)
 		if ui.is_over_cog(m):
 			hover = "Settings"
@@ -340,10 +389,10 @@ func _process(delta: float) -> void:
 	if ui.title:
 		hot = ui.title.is_hot(m)
 		busy_cursor = false
-	elif ui.settings:
-		hot = TitleScreen.button_at(ui.settings, m)
+	elif ui.modal():
+		hot = TitleScreen.button_at(ui.modal(), m)
 	ui.update_cursor(m, hot and not busy_cursor)
-	ui.update_bar(m, room != null and not busy and ui.settings == null)
+	ui.update_bar(m, room != null and not busy and ui.modal() == null)
 
 
 func _hover_text(target: String) -> String:
@@ -374,7 +423,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if mb and mb.pressed:
 		if not (mb.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT]):
 			return
-		if busy or _choosing or room == null or ui.settings:
+		if busy or _choosing or room == null or ui.modal() or _menu_busy:
 			return
 		var p: Vector2 = world.get_global_mouse_position()
 		var hs := room.hotspot_at(p)
@@ -405,10 +454,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		if ui.settings:
 			if key.keycode == KEY_ESCAPE:
-				close_settings()            # never the quicksave and title
+				close_settings()            # never the save menu and title
+			return
+		if ui.save_menu:
+			if key.keycode == KEY_ESCAPE:
+				ui.save_menu.back()
+			return
+		if _menu_busy:
 			return
 		if _on_title:
 			if key.keycode == KEY_F9 and Game.has_save():
+				Game.slot = Game.latest_slot()         # the newest save; Load Game on the title screen picks one
 				ui.title.chosen.emit("load")
 			return
 		match key.keycode:
@@ -428,16 +484,16 @@ func _unhandled_input(event: InputEvent) -> void:
 				ui.bar_pinned = not ui.bar_pinned
 			KEY_F5:
 				if not busy and room:
-					Game.player_position = player.position
-					ui.toast("Game saved." if Game.save_game() else "Could not save.")
+					await _quick_menu(true)
 			KEY_F9:
 				if not Game.has_save():
 					ui.toast("No saved game.")
-				elif _waiting_click:          # on a case card or the end card
+				elif _waiting_click:          # on a case card or the end card: the newest save
+					Game.slot = Game.latest_slot()
 					_load_requested = true
 					_waiting_click = false
 				elif not busy and not _speaking and not _choosing:
-					await _load()
+					await _quick_menu(false)
 
 
 func _run_action(hs: Hotspot, verb: String, item: String, click: Vector2) -> void:
@@ -471,6 +527,11 @@ func _on_inventory_clicked(id: String, button: int) -> void:
 			# nothing in the game takes the notebook, so a left click opens it too
 			busy = true
 			await read_notebook()
+			busy = false
+		elif id == "ray_phone" and Game.selected_item == "":
+			# nor does anything take the phone: a left click picks it up (texts and calls), as a right click does
+			busy = true
+			await examine_item(id)
 			busy = false
 		elif Game.selected_item == "":
 			Game.select_item(id)
