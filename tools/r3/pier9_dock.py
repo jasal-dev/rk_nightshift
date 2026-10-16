@@ -237,6 +237,8 @@ def build(hide=(), time='night'):
         hotspot_order=['crane', 'water', 'containers', 'warehouse_sign', 'car', 'green_door', 'radio', 'tiny', 'barrel',
                        'piling'],
         overlays=['hook'],
+        # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
+        faces={'tiny': (tx_, tz_ - 0.08)},
         occluders={'barrel': (bx, bz)},
         obstacles=[(bx, bz, 0.45)],
         char_fill=((196, 196, 226), 0.08),

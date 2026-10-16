@@ -907,15 +907,15 @@
  "overlays": {
   "pearl_chair": [
    419,
-   374
+   503
   ],
   "pearl_stand": [
-   581,
-   388
+   645,
+   458
   ],
   "park": [
-   220,
-   386
+   513,
+   452
   ],
   "morty": [
    684,
@@ -982,6 +982,92 @@
     624,
     809
    ]
+  }
+ },
+ "faces": {
+  "pearl_chair": {
+   "base": [
+    622,
+    813
+   ],
+   "speaker": "pearl",
+   "mouth": {
+    "pos": [
+     633,
+     615
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     623,
+     601
+    ],
+    "frames": 1
+   }
+  },
+  "pearl_stand": {
+   "base": [
+    960,
+    837
+   ],
+   "speaker": "pearl",
+   "mouth": {
+    "pos": [
+     939,
+     557
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     927,
+     543
+    ],
+    "frames": 1
+   }
+  },
+  "park": {
+   "base": [
+    779,
+    679
+   ],
+   "speaker": "park",
+   "mouth": {
+    "pos": [
+     779,
+     479
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     774,
+     468
+    ],
+    "frames": 1
+   }
+  },
+  "morty": {
+   "base": [
+    922,
+    625
+   ],
+   "speaker": "morty",
+   "mouth": {
+    "pos": [
+     918,
+     454
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     914,
+     445
+    ],
+    "frames": 1
+   }
   }
  }
 }

@@ -13,6 +13,19 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_display_case.png" id="occ_display_case"]
 [ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_certificate.png" id="occ_certificate"]
 [ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_chair.png" id="occ_chair"]
+[ext_resource type="Script" path="res://scripts/face_patch.gd" id="face"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_face_pearl_chair_mouth1.png" id="face_pearl_chair_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_face_pearl_chair_mouth2.png" id="face_pearl_chair_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_face_pearl_chair_eyes1.png" id="face_pearl_chair_eyes1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_face_pearl_stand_mouth1.png" id="face_pearl_stand_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_face_pearl_stand_mouth2.png" id="face_pearl_stand_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_face_pearl_stand_eyes1.png" id="face_pearl_stand_eyes1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_face_park_mouth1.png" id="face_park_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_face_park_mouth2.png" id="face_park_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_face_park_eyes1.png" id="face_park_eyes1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_face_morty_mouth1.png" id="face_morty_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_face_morty_mouth2.png" id="face_morty_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/stardust_shop_face_morty_eyes1.png" id="face_morty_eyes1"]
 
 [node name="StardustShop" type="Node2D"]
 script = ExtResource("script")
@@ -45,19 +58,19 @@ y_sort_enabled = true
 texture = ExtResource("ov_pearl_chair")
 centered = false
 position = Vector2(622, 813)
-offset = Vector2(-203, -439)
+offset = Vector2(-203, -310)
 
 [node name="Pearl_stand" type="Sprite2D" parent="Actors"]
 texture = ExtResource("ov_pearl_stand")
 centered = false
 position = Vector2(960, 837)
-offset = Vector2(-379, -449)
+offset = Vector2(-315, -379)
 
 [node name="Park" type="Sprite2D" parent="Actors"]
 texture = ExtResource("ov_park")
 centered = false
 position = Vector2(779, 679)
-offset = Vector2(-559, -293)
+offset = Vector2(-266, -227)
 
 [node name="Mannequin" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_mannequin")
@@ -94,6 +107,46 @@ texture = ExtResource("occ_chair")
 centered = false
 position = Vector2(624, 809)
 offset = Vector2(-59, -201)
+
+[node name="Face_pearl_chair" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(622, 813)
+speaker = "pearl"
+mouth_frames = Array[Texture2D]([ExtResource("face_pearl_chair_mouth1"), ExtResource("face_pearl_chair_mouth2")])
+mouth_pos = Vector2(633, 615)
+eyes_frame = ExtResource("face_pearl_chair_eyes1")
+eyes_pos = Vector2(623, 601)
+follow = NodePath("../Pearl_chair")
+
+[node name="Face_pearl_stand" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(960, 837)
+speaker = "pearl"
+mouth_frames = Array[Texture2D]([ExtResource("face_pearl_stand_mouth1"), ExtResource("face_pearl_stand_mouth2")])
+mouth_pos = Vector2(939, 557)
+eyes_frame = ExtResource("face_pearl_stand_eyes1")
+eyes_pos = Vector2(927, 543)
+follow = NodePath("../Pearl_stand")
+
+[node name="Face_park" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(779, 679)
+speaker = "park"
+mouth_frames = Array[Texture2D]([ExtResource("face_park_mouth1"), ExtResource("face_park_mouth2")])
+mouth_pos = Vector2(779, 479)
+eyes_frame = ExtResource("face_park_eyes1")
+eyes_pos = Vector2(774, 468)
+follow = NodePath("../Park")
+
+[node name="Face_morty" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(922, 625)
+speaker = "morty"
+mouth_frames = Array[Texture2D]([ExtResource("face_morty_mouth1"), ExtResource("face_morty_mouth2")])
+mouth_pos = Vector2(918, 454)
+eyes_frame = ExtResource("face_morty_eyes1")
+eyes_pos = Vector2(914, 445)
+follow = NodePath("../../Morty")
 
 [node name="Obstacles" type="Node2D" parent="."]
 

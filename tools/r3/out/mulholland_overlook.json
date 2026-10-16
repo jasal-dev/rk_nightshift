@@ -638,5 +638,28 @@
  ],
  "extra": {},
  "overlays": {},
- "occluders": {}
+ "occluders": {},
+ "faces": {
+  "park": {
+   "base": [
+    1587,
+    783
+   ],
+   "speaker": "park",
+   "mouth": {
+    "pos": [
+     1594,
+     564
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1589,
+     552
+    ],
+    "frames": 1
+   }
+  }
+ }
 }

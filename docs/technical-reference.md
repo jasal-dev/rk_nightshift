@@ -379,8 +379,8 @@ grazing-angle pixels differ). On the RTX 4090 a 4K room render takes about 1 s a
    The cut-out uses the background's own pixels, so it is invisible until the detective walks behind it.
 5. For `faces` (talking heads), re-renders the set three times with every speaker's mouth half open
    (`mouth=0.5`), open (`mouth=1`) and eyes shut (`blink=1`) (`npc.FACE` merges these over the tagged person's pose),
-   and cuts the changed pixels near each speaker into small rectangles, `<room>_face_<speaker>_mouth1/2.png` and
-   `_eyes1.png`. They come from the finished frame, so they match the background's grain. Speakers who are overlays get
+   and cuts the changed pixels near each tagged person into small rectangles, `<room>_face_<tag>_mouth1/2.png` and
+   `_eyes1.png` (it prints each box; a face turned away gives no mouth, or a suspiciously big box). They come from the finished frame, so they match the background's grain. Speakers who are overlays get
    their own renders, cut against their overlay.
 6. Adds the vignette and grain (`finish()`), writes the PNGs and `out/<room>.json`, and bakes light probes
    (skipped for close-ups with a `screen` entry).
@@ -419,7 +419,7 @@ metres, y up, and the floor is at y = 0 (points are projected at y = 0.1).
 | `overlays` | `[tag, ...]` | Props cut out as sprites the game shows by flag. |
 | `exclusive_overlays` | `[tag, ...]` | Subset of `overlays` that never show together (two poses). |
 | `overlay_bases` | `{tag: (x, z)}` | Overlays that stand on the floor: placed under `Actors` and y-sorted with the detective at that floor point. Above that line the sprite is cut to the person only. |
-| `faces` | `{speaker: (x, z)}` | Talking heads: the person tagged `speaker` (the `Main.voice()` speaker id) and their floor point, the y-sort base of their face patches. `build_scenes.py` adds a `Face_<speaker>` FacePatch under `Actors` (it follows the person's overlay's visibility when they are one). |
+| `faces` | `{tag: (x, z)}` or `{tag: (x, z, speaker)}` | Talking heads: the person placed with `tag` and their floor point, the y-sort base of their face patches (use the overlay base for a y-sorted overlay person). `speaker` (the `Main.voice()` id) defaults to the tag; one person in two poses is two tags with one speaker (`devin_fridge`, `devin_couch`). `build_scenes.py` adds a `Face_<tag>` FacePatch under `Actors`; for an overlay person it follows the overlay's visibility, and `Room.face_patch(speaker)` returns the one showing. Leave out people whose face can't be seen (turned away, in shadow): the renders would cut noise, and they go on the playthrough's `NO_FACE`. |
 | `occluders` | `{tag: (x, z)}` | Walk-behind props and the floor point they stand on. The set must leave the tag out when it is in `hide` (`if 'tag' not in hide:`), or the cut-out is empty. |
 | `obstacles` | `[(x, z, r) or (x0, z0, x1, z1), ...]` | Footprints pathfinding steers around: round ones (a 12-sided ring) or floor rectangles. |
 | `screen` | `{walk, spawns, scale}` | Close-ups: walk polygon and spawns in pixels, `scale = ((y0, s0), (y1, s1))`. Also skips the light probes. |
@@ -444,7 +444,7 @@ backdrops inside it.
 ```
 room, hotspots{tag: {name, polygon[[x,y]...], walk_to[x,y]|null, face}}, order[tags], walk[[x,y]...],
 spawns{name: [x,y]}, obstacles[[[x,y]...]], overlay_bases{tag: [x,y]}, overlays{tag: [x0,y0]},
-occluders{tag: {pos: [x0,y0], base: [x,y]}}, faces{speaker: {base: [x,y], mouth: {pos: [x0,y0], frames: 2},
+occluders{tag: {pos: [x0,y0], base: [x,y]}}, faces{tag: {base: [x,y], speaker, mouth: {pos: [x0,y0], frames: 2},
 eyes: {pos: [x0,y0], frames: 1}}}, far_y, far_scale, near_y, near_scale, tint, extra
 ```
 

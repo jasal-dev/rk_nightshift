@@ -288,6 +288,8 @@ def build(hide=()):
         },
         hotspot_order=['view', 'wall', 'sign', 'ground', 'van', 'car', 'park', 'prius', 'scratch', 'inside', 'shah', 'kenji'],
         obstacles=[],
+        # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
+        faces={'park': (5.05, 2.9)},                                      # Shah has her face in the car
         char_fill=((200, 196, 220), 0.12),
         tint=(0.76, 0.72, 0.84),
         exposure=1.6,

@@ -720,9 +720,8 @@ func _stop_talker() -> void:
 	## The line ended or was cut: close the mouth (or let Ray's talk loop run again for a line with no clip).
 	if _talker == "ray" and player:
 		player.set_talk_gate(true)
-	var face: FacePatch = room.face_patch(_talker) if room and _talker != "" else null
-	if face:
-		face.mouth = 0
+	if room:
+		room.close_mouths()
 	_talker = ""
 
 

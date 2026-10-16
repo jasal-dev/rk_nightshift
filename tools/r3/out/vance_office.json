@@ -436,6 +436,7 @@
    ]
   ]
  ],
+ "overlay_bases": {},
  "far_y": 691.0,
  "far_scale": 1.087,
  "near_y": 1006.9,
@@ -457,6 +458,29 @@
     1110,
     815
    ]
+  }
+ },
+ "faces": {
+  "vance": {
+   "base": [
+    1251,
+    689
+   ],
+   "speaker": "vance",
+   "mouth": {
+    "pos": [
+     1262,
+     491
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1255,
+     476
+    ],
+    "frames": 1
+   }
   }
  }
 }

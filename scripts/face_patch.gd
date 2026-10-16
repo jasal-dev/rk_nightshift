@@ -41,6 +41,11 @@ func _ready() -> void:
 		_follow = get_node_or_null(follow) as CanvasItem
 
 
+func is_shown() -> bool:
+	## False while the person's overlay is hidden (they aren't in the room right now).
+	return _follow == null or _follow.visible
+
+
 func _part(tex: Texture2D, at: Vector2) -> Sprite2D:
 	var s := Sprite2D.new()
 	s.texture = tex

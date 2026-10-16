@@ -442,6 +442,9 @@ def build(hide=()):
         occluders={'mannequin': (-3.0, 2.75), 'lowcase': (2.5, 2.95), 'ropes': (CASE[0], CASE[1] + 0.75),
                    'display_case': (cx, cz + 0.36), 'certificate': (ex, ez + 0.15), 'chair': (chx, chz + 0.3)},
         obstacles=[(cx, cz, 0.85), (ex, ez, 0.35), (chx, chz, 0.45), (PARK[0], PARK[1], 0.28), (-3.0, 2.75, 0.4)],
+        # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
+        faces={'pearl_chair': (chx, chz + 0.35, 'pearl'), 'pearl_stand': (PEARL_UP[0], PEARL_UP[1], 'pearl'),
+               'park': PARK, 'morty': MORTY},
         char_fill=((236, 220, 200), 0.18),
         tint=(0.86, 0.78, 0.72),
         exposure=1.35,

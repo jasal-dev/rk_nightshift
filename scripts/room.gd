@@ -139,13 +139,23 @@ func speaker_at(id: String) -> Vector2:
 
 
 func face_patch(speaker: String) -> FacePatch:
-	## The talking head for `speaker` in this room (see FacePatch), or null.
+	## The talking head for `speaker` in this room (see FacePatch), or null. Someone with two poses (two overlays) has
+	## a patch for each: the one whose overlay is showing.
 	var actors := get_node_or_null("Actors")
 	if actors:
 		for c in actors.get_children():
-			if c is FacePatch and (c as FacePatch).speaker == speaker:
+			if c is FacePatch and (c as FacePatch).speaker == speaker and (c as FacePatch).is_shown():
 				return c
 	return null
+
+
+func close_mouths() -> void:
+	## Every talking head's mouth shut (a line ended or was cut).
+	var actors := get_node_or_null("Actors")
+	if actors:
+		for c in actors.get_children():
+			if c is FacePatch:
+				(c as FacePatch).mouth = 0
 
 
 func hotspot_at(p: Vector2) -> Hotspot:

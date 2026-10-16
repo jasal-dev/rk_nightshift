@@ -12,23 +12,15 @@ extends Node
 const MainScene := preload("res://scenes/main.tscn")
 ## Speakers heard in a room (not down a phone) with no talking head there (FacePatch, `faces` in the set's meta) on
 ## purpose: "room:speaker": why. Anyone else talking in a room without one fails the run (Main.faceless).
-## Phase 2 of the talking heads gives the rest of the on-screen cast their patches and removes them from here.
+## "Phase 2" entries are the on-screen cast of Cases 4 and 5 still waiting for their patches.
 const NO_FACE := {
 	"norms_diner:cabbie": "at the counter, back to us",
 	"norms_diner:devin": "at his door after the drive from Norm's (the room changes after)",
-	"kenji_apartment:park": "outside the front door",
-	"street:sal": "Phase 2",
-	"pier9_dock:tiny": "Phase 2",
-	"pier9_dock:vance": "Phase 2",
-	"vance_office:vance": "Phase 2",
-	"mulholland_overlook:park": "Phase 2",
-	"mulholland_overlook:shah": "Phase 2",
-	"kenji_apartment:devin": "Phase 2",
-	"stardust_shop:park": "Phase 2",
-	"stardust_shop:pearl": "Phase 2",
-	"stardust_shop:morty": "Phase 2",
-	"stardust_office:shah": "Phase 2",
-	"stardust_roof:charlie": "Phase 2",
+	"street:sal": "through his door",
+	"pier9_dock:vance": "behind the green door",
+	"mulholland_overlook:shah": "crouched at the car door, her face inside",
+	"stardust_office:shah": "bent over Gus, her face hidden",
+	"stardust_roof:charlie": "under his umbrella across the gap, his face in shadow",
 	"fletcher_bridge:doss": "Phase 2",
 	"fletcher_bridge:preacher": "Phase 2",
 	"river_channel:shah": "Phase 2",

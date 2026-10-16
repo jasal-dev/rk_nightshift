@@ -79,10 +79,10 @@ def build(room):
     faces = d.get('faces', {})
     if faces:
         ext.append(('Script', 'res://scripts/face_patch.gd', 'face'))
-    for spk, f in faces.items():
+    for tag, f in faces.items():
         for part in ('mouth', 'eyes'):
             for n in range(1, f.get(part, {}).get('frames', 0) + 1):
-                ext.append(('Texture2D', f'res://assets/rooms/{room}_face_{spk}_{part}{n}.png', f'face_{spk}_{part}{n}'))
+                ext.append(('Texture2D', f'res://assets/rooms/{room}_face_{tag}_{part}{n}.png', f'face_{tag}_{part}{n}'))
     neon_pos = None
     if room == 'street' and 'neon' in d['hotspots']:
         neon_pos = neon_overlay(room, d['hotspots']['neon']['polygon'])
@@ -124,17 +124,18 @@ def build(room):
         L += [f'[node name="{nm}" type="Sprite2D" parent="Actors"]', f'texture = ExtResource("occ_{tag}")',
               'centered = false', f'position = Vector2({bx}, {by})', f'offset = Vector2({x0 - bx}, {y0 - by})', '']
     # talking heads (scripts/face_patch.gd): y-sorted at the person's floor point, after their overlay if they have one
-    for spk, f in faces.items():
+    for tag, f in faces.items():
         bx, by = f['base']
-        L += [f'[node name="Face_{spk}" type="Node2D" parent="Actors"]', 'script = ExtResource("face")',
-              f'position = Vector2({bx}, {by})', f'speaker = "{spk}"']
+        L += [f'[node name="Face_{tag}" type="Node2D" parent="Actors"]', 'script = ExtResource("face")',
+              f'position = Vector2({bx}, {by})', f'speaker = "{f.get("speaker", tag)}"']
         if 'mouth' in f:
-            refs = ', '.join(f'ExtResource("face_{spk}_mouth{n}")' for n in range(1, f['mouth']['frames'] + 1))
+            refs = ', '.join(f'ExtResource("face_{tag}_mouth{n}")' for n in range(1, f['mouth']['frames'] + 1))
             L += [f'mouth_frames = Array[Texture2D]([{refs}])', 'mouth_pos = Vector2({}, {})'.format(*f['mouth']['pos'])]
         if 'eyes' in f:
-            L += [f'eyes_frame = ExtResource("face_{spk}_eyes1")', 'eyes_pos = Vector2({}, {})'.format(*f['eyes']['pos'])]
-        if spk in bases:
-            L += [f'follow = NodePath("../{spk.capitalize()}")']
+            L += [f'eyes_frame = ExtResource("face_{tag}_eyes1")', 'eyes_pos = Vector2({}, {})'.format(*f['eyes']['pos'])]
+        if tag in d.get('overlays', {}):
+            # an overlay person: the face shows only while their sprite does (under Actors when y-sorted, else the room)
+            L += [f'follow = NodePath("{"../" if tag in bases else "../../"}{tag.capitalize()}")']
         L += ['']
     if d.get('obstacles'):
         L += ['[node name="Obstacles" type="Node2D" parent="."]', '']

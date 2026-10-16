@@ -172,6 +172,8 @@ def build(hide=()):
         hotspot_order=['markers', 'boat_photo', 'door', 'heater', 'vance', 'lamp', 'ledger', 'tea', 'gun'],
         occluders={'chair': (1.0, 0.05)},
         obstacles=[(1.0, -0.15, 0.32)],
+        # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
+        faces={'vance': (vx, vz + 0.05)},
         char_fill=((236, 214, 190), 0.25),
         tint=(0.86, 0.76, 0.66),
         exposure=1.4,

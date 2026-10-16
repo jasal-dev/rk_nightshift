@@ -314,6 +314,9 @@ def build(hide=()):
         obstacles=[(cx, cz - 0.6, 0.55), (cx, cz + 0.6, 0.55), (cx - 1.1, cz - 0.35, 0.4), (cx - 1.1, cz + 0.35, 0.4),
                    (DINING[0] - 0.45, DINING[1], 0.7), (DINING[0] + 0.45, DINING[1], 0.7), (DINING[0] + 1.05, DINING[1] + 0.1, 0.3),
                    (cx + 0.1, cz - 1.35, 0.2), (-4.15, 0.8, 0.3)],
+        # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
+        faces={'devin_fridge': (fx + 0.02, fz + 0.62, 'devin'), 'devin_couch': (cx + 0.45, cz + 1.02, 'devin'),
+               'park': PARK},
         char_fill=((236, 220, 200), 0.2),
         tint=(0.86, 0.8, 0.74),
         exposure=1.45,

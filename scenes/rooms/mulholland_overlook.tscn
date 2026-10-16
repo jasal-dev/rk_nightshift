@@ -3,6 +3,10 @@
 [ext_resource type="Script" path="res://scripts/rooms/mulholland_overlook.gd" id="script"]
 [ext_resource type="Texture2D" path="res://assets/rooms/mulholland_overlook.png" id="bg"]
 [ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
+[ext_resource type="Script" path="res://scripts/face_patch.gd" id="face"]
+[ext_resource type="Texture2D" path="res://assets/rooms/mulholland_overlook_face_park_mouth1.png" id="face_park_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/mulholland_overlook_face_park_mouth2.png" id="face_park_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/mulholland_overlook_face_park_eyes1.png" id="face_park_eyes1"]
 
 [node name="MulhollandOverlook" type="Node2D"]
 script = ExtResource("script")
@@ -25,6 +29,15 @@ polygon = PackedVector2Array(6, 962.8, 464.8, 628.9, 787.1, 625.5, 819.7, 723.6,
 
 [node name="Actors" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="Face_park" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(1587, 783)
+speaker = "park"
+mouth_frames = Array[Texture2D]([ExtResource("face_park_mouth1"), ExtResource("face_park_mouth2")])
+mouth_pos = Vector2(1594, 564)
+eyes_frame = ExtResource("face_park_eyes1")
+eyes_pos = Vector2(1589, 552)
 
 [node name="Spawns" type="Node2D" parent="."]
 

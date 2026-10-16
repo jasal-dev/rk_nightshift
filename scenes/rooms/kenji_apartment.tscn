@@ -9,6 +9,14 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_couch.png" id="occ_couch"]
 [ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_table.png" id="occ_table"]
 [ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_dining.png" id="occ_dining"]
+[ext_resource type="Script" path="res://scripts/face_patch.gd" id="face"]
+[ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_face_devin_fridge_mouth1.png" id="face_devin_fridge_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_face_devin_fridge_mouth2.png" id="face_devin_fridge_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_face_devin_fridge_eyes1.png" id="face_devin_fridge_eyes1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_face_devin_couch_eyes1.png" id="face_devin_couch_eyes1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_face_park_mouth1.png" id="face_park_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_face_park_mouth2.png" id="face_park_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/kenji_apartment_face_park_eyes1.png" id="face_park_eyes1"]
 
 [node name="KenjiApartment" type="Node2D"]
 script = ExtResource("script")
@@ -66,6 +74,34 @@ texture = ExtResource("occ_dining")
 centered = false
 position = Vector2(1359, 919)
 offset = Vector2(-219, -323)
+
+[node name="Face_devin_fridge" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(1397, 607)
+speaker = "devin"
+mouth_frames = Array[Texture2D]([ExtResource("face_devin_fridge_mouth1"), ExtResource("face_devin_fridge_mouth2")])
+mouth_pos = Vector2(1397, 404)
+eyes_frame = ExtResource("face_devin_fridge_eyes1")
+eyes_pos = Vector2(1393, 394)
+follow = NodePath("../../Devin_fridge")
+
+[node name="Face_devin_couch" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(645, 752)
+speaker = "devin"
+eyes_frame = ExtResource("face_devin_couch_eyes1")
+eyes_pos = Vector2(532, 509)
+follow = NodePath("../Devin_couch")
+
+[node name="Face_park" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(455, 594)
+speaker = "park"
+mouth_frames = Array[Texture2D]([ExtResource("face_park_mouth1"), ExtResource("face_park_mouth2")])
+mouth_pos = Vector2(439, 406)
+eyes_frame = ExtResource("face_park_eyes1")
+eyes_pos = Vector2(433, 395)
+follow = NodePath("../Park")
 
 [node name="Obstacles" type="Node2D" parent="."]
 

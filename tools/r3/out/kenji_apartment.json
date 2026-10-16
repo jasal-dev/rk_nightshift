@@ -1296,5 +1296,63 @@
     919
    ]
   }
+ },
+ "faces": {
+  "devin_fridge": {
+   "base": [
+    1397,
+    607
+   ],
+   "speaker": "devin",
+   "mouth": {
+    "pos": [
+     1397,
+     404
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1393,
+     394
+    ],
+    "frames": 1
+   }
+  },
+  "devin_couch": {
+   "base": [
+    645,
+    752
+   ],
+   "speaker": "devin",
+   "eyes": {
+    "pos": [
+     532,
+     509
+    ],
+    "frames": 1
+   }
+  },
+  "park": {
+   "base": [
+    455,
+    594
+   ],
+   "speaker": "park",
+   "mouth": {
+    "pos": [
+     439,
+     406
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     433,
+     395
+    ],
+    "frames": 1
+   }
+  }
  }
 }
