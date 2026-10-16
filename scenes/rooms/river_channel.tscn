@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/river_channel_cart.png" id="occ_cart"]
 [ext_resource type="Texture2D" path="res://assets/rooms/river_channel_debris.png" id="occ_debris"]
 [ext_resource type="Texture2D" path="res://assets/rooms/river_channel_shah.png" id="occ_shah"]
+[ext_resource type="Script" path="res://scripts/face_patch.gd" id="face"]
+[ext_resource type="Texture2D" path="res://assets/rooms/river_channel_face_preacher_mouth1.png" id="face_preacher_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/river_channel_face_preacher_mouth2.png" id="face_preacher_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/river_channel_face_preacher_eyes1.png" id="face_preacher_eyes1"]
 
 [node name="RiverChannel" type="Node2D"]
 script = ExtResource("script")
@@ -59,6 +63,16 @@ texture = ExtResource("occ_shah")
 centered = false
 position = Vector2(1510, 804)
 offset = Vector2(-28, -110)
+
+[node name="Face_preacher" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(527, 783)
+speaker = "preacher"
+mouth_frames = Array[Texture2D]([ExtResource("face_preacher_mouth1"), ExtResource("face_preacher_mouth2")])
+mouth_pos = Vector2(529, 671)
+eyes_frame = ExtResource("face_preacher_eyes1")
+eyes_pos = Vector2(526, 665)
+follow = NodePath("../Preacher")
 
 [node name="Obstacles" type="Node2D" parent="."]
 

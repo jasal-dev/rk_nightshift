@@ -1024,5 +1024,49 @@
     781
    ]
   }
+ },
+ "faces": {
+  "andre": {
+   "base": [
+    832,
+    719
+   ],
+   "speaker": "andre",
+   "mouth": {
+    "pos": [
+     831,
+     550
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     827,
+     541
+    ],
+    "frames": 1
+   }
+  },
+  "courtney": {
+   "base": [
+    1062,
+    796
+   ],
+   "speaker": "courtney",
+   "mouth": {
+    "pos": [
+     1048,
+     586
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1045,
+     575
+    ],
+    "frames": 1
+   }
+  }
  }
 }

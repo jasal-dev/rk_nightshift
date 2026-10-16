@@ -408,6 +408,11 @@ def dawn_meta(time, EDGE, bx, bz, px, pz):
         exclusive_overlays=exclusive,
         occluders={'barrel': (bx, bz)},
         obstacles=[(bx, bz, 0.45)],
+        # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
+        faces={'tiny': (2.85, -1.43), 'vance': VANCE,
+               # at sunrise Mara faces the hood, away from us
+               **({k: (p[0], p[1], 'brenner') for k, p in bases.items()} if time == 'dawn'
+                  else {k: p for k, p in bases.items() if k != 'mara'})},
         char_fill=((236, 210, 210), 0.1) if time == 'dawn' else ((255, 236, 210), 0.08),
         tint=(0.9, 0.82, 0.86) if time == 'dawn' else (1.0, 0.92, 0.84),
         exposure=1.2 if time == 'dawn' else 1.05,

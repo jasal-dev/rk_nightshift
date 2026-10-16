@@ -932,5 +932,28 @@
     804
    ]
   }
+ },
+ "faces": {
+  "preacher": {
+   "base": [
+    527,
+    783
+   ],
+   "speaker": "preacher",
+   "mouth": {
+    "pos": [
+     529,
+     671
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     526,
+     665
+    ],
+    "frames": 1
+   }
+  }
  }
 }

@@ -126,6 +126,10 @@ def build(room):
     # talking heads (scripts/face_patch.gd): y-sorted at the person's floor point, after their overlay if they have one
     for tag, f in faces.items():
         bx, by = f['base']
+        if tag in d.get('occluders', {}):
+            # the person is also a walk-behind cut-out (the background's own pixels, closed mouth): sort the face at
+            # the same baseline, after it (tree order), so the cut-out never covers it
+            bx, by = d['occluders'][tag]['base']
         L += [f'[node name="Face_{tag}" type="Node2D" parent="Actors"]', 'script = ExtResource("face")',
               f'position = Vector2({bx}, {by})', f'speaker = "{f.get("speaker", tag)}"']
         if 'mouth' in f:

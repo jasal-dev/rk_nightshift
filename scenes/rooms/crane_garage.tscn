@@ -7,6 +7,16 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_crane_step.png" id="ov_crane_step"]
 [ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_tarp.png" id="ov_tarp"]
 [ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_doss.png" id="ov_doss"]
+[ext_resource type="Script" path="res://scripts/face_patch.gd" id="face"]
+[ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_face_crane_stand_mouth1.png" id="face_crane_stand_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_face_crane_stand_mouth2.png" id="face_crane_stand_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_face_crane_stand_eyes1.png" id="face_crane_stand_eyes1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_face_crane_step_mouth1.png" id="face_crane_step_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_face_crane_step_mouth2.png" id="face_crane_step_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_face_crane_step_eyes1.png" id="face_crane_step_eyes1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_face_doss_mouth1.png" id="face_doss_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_face_doss_mouth2.png" id="face_doss_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/crane_garage_face_doss_eyes1.png" id="face_doss_eyes1"]
 
 [node name="CraneGarage" type="Node2D"]
 script = ExtResource("script")
@@ -52,6 +62,36 @@ texture = ExtResource("ov_doss")
 centered = false
 position = Vector2(1096, 598)
 offset = Vector2(-260, -143)
+
+[node name="Face_crane_stand" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(1281, 929)
+speaker = "crane"
+mouth_frames = Array[Texture2D]([ExtResource("face_crane_stand_mouth1"), ExtResource("face_crane_stand_mouth2")])
+mouth_pos = Vector2(1264, 573)
+eyes_frame = ExtResource("face_crane_stand_eyes1")
+eyes_pos = Vector2(1264, 552)
+follow = NodePath("../Crane_stand")
+
+[node name="Face_crane_step" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(1605, 943)
+speaker = "crane"
+mouth_frames = Array[Texture2D]([ExtResource("face_crane_step_mouth1"), ExtResource("face_crane_step_mouth2")])
+mouth_pos = Vector2(1530, 712)
+eyes_frame = ExtResource("face_crane_step_eyes1")
+eyes_pos = Vector2(1518, 698)
+follow = NodePath("../Crane_step")
+
+[node name="Face_doss" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(1096, 598)
+speaker = "doss"
+mouth_frames = Array[Texture2D]([ExtResource("face_doss_mouth1"), ExtResource("face_doss_mouth2")])
+mouth_pos = Vector2(1095, 470)
+eyes_frame = ExtResource("face_doss_eyes1")
+eyes_pos = Vector2(1092, 463)
+follow = NodePath("../Doss")
 
 [node name="Obstacles" type="Node2D" parent="."]
 

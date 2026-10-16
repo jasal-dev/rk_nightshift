@@ -271,6 +271,9 @@ def build(hide=()):
         overlay_bases={'crane_stand': CRANE_STAND, 'crane_step': CRANE_STEP, 'doss': DOSS},
         exclusive_overlays=['crane_stand', 'crane_step'],
         obstacles=[(BUCKET[0], BUCKET[1], 0.3), (CRANE_STAND[0], CRANE_STAND[1], 0.3)],
+        # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
+        faces={'crane_stand': (CRANE_STAND[0], CRANE_STAND[1], 'crane'),
+               'crane_step': (CRANE_STEP[0], CRANE_STEP[1], 'crane'), 'doss': DOSS},
         char_fill=((220, 226, 236), 0.16),
         tint=(0.86, 0.9, 0.95),
         exposure=1.35,

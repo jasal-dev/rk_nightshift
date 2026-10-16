@@ -5,6 +5,10 @@
 [ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
 [ext_resource type="Texture2D" path="res://assets/rooms/night_lab_wetsign.png" id="occ_wetsign"]
 [ext_resource type="Texture2D" path="res://assets/rooms/night_lab_bin.png" id="occ_bin"]
+[ext_resource type="Script" path="res://scripts/face_patch.gd" id="face"]
+[ext_resource type="Texture2D" path="res://assets/rooms/night_lab_face_ike_face_mouth1.png" id="face_ike_face_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/night_lab_face_ike_face_mouth2.png" id="face_ike_face_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/night_lab_face_ike_face_eyes1.png" id="face_ike_face_eyes1"]
 
 [node name="NightLab" type="Node2D"]
 script = ExtResource("script")
@@ -39,6 +43,15 @@ texture = ExtResource("occ_bin")
 centered = false
 position = Vector2(1738, 973)
 offset = Vector2(-71, -185)
+
+[node name="Face_ike_face" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(987, 717)
+speaker = "ike"
+mouth_frames = Array[Texture2D]([ExtResource("face_ike_face_mouth1"), ExtResource("face_ike_face_mouth2")])
+mouth_pos = Vector2(984, 508)
+eyes_frame = ExtResource("face_ike_face_eyes1")
+eyes_pos = Vector2(979, 496)
 
 [node name="Obstacles" type="Node2D" parent="."]
 

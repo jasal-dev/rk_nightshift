@@ -9,6 +9,13 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/blue_note_back_fg_crates.png" id="occ_fg_crates"]
 [ext_resource type="Texture2D" path="res://assets/rooms/blue_note_back_fg_truck.png" id="occ_fg_truck"]
 [ext_resource type="Texture2D" path="res://assets/rooms/blue_note_back_worklight.png" id="occ_worklight"]
+[ext_resource type="Script" path="res://scripts/face_patch.gd" id="face"]
+[ext_resource type="Texture2D" path="res://assets/rooms/blue_note_back_face_nina_mouth1.png" id="face_nina_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/blue_note_back_face_nina_mouth2.png" id="face_nina_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/blue_note_back_face_nina_eyes1.png" id="face_nina_eyes1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/blue_note_back_face_park_mouth1.png" id="face_park_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/blue_note_back_face_park_mouth2.png" id="face_park_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/blue_note_back_face_park_eyes1.png" id="face_park_eyes1"]
 
 [node name="BlueNoteBack" type="Node2D"]
 script = ExtResource("script")
@@ -66,6 +73,26 @@ texture = ExtResource("occ_worklight")
 centered = false
 position = Vector2(927, 762)
 offset = Vector2(-33, -359)
+
+[node name="Face_nina" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(1220, 634)
+speaker = "nina"
+mouth_frames = Array[Texture2D]([ExtResource("face_nina_mouth1"), ExtResource("face_nina_mouth2")])
+mouth_pos = Vector2(1228, 508)
+eyes_frame = ExtResource("face_nina_eyes1")
+eyes_pos = Vector2(1225, 499)
+follow = NodePath("../Nina")
+
+[node name="Face_park" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(277, 753)
+speaker = "park"
+mouth_frames = Array[Texture2D]([ExtResource("face_park_mouth1"), ExtResource("face_park_mouth2")])
+mouth_pos = Vector2(231, 509)
+eyes_frame = ExtResource("face_park_eyes1")
+eyes_pos = Vector2(223, 494)
+follow = NodePath("../Park")
 
 [node name="Obstacles" type="Node2D" parent="."]
 

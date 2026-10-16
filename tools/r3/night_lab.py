@@ -113,7 +113,7 @@ def build(hide=()):
     with S.tag('ike'):
         npc.cast(S, 'ike', dict(npc.SEATED, lsp=40, le=84, lin=40, rsp=34, re=96, rin=50, lean=12, hp=6, hy=8,
                                 props=(('pen', 'l'),)),
-                 (IKE[0], 0.32, IKE[1] + 0.6), yaw=0, scale=0.95)                         # swivelled round to the glass
+                 (IKE[0], 0.32, IKE[1] + 0.6), yaw=0, scale=0.95, tag='ike_face')                         # swivelled round to the glass
         S.wboxr(IKE[0] - 0.24, 0.72, IKE[1] - 0.2, IKE[0] + 0.24, 0.78, IKE[1] + 0.2, 'mon')     # his tall stool
         S.cyl((IKE[0], 0.0, IKE[1]), (IKE[0], 0.72, IKE[1]), 0.03, 'steel')
     S.fcyl((-0.6, 1.0, -4.55), 0.05, 0.07, 'mug')
@@ -150,6 +150,8 @@ def build(hide=()):
         overlays=[],
         occluders={'wetsign': (-2.3, 0.8), 'bin': (2.7, 0.6)},
         obstacles=[(3.45, -1.35, 0.4), (-2.3, 0.75, 0.35), (2.7, 0.6, 0.3)],
+        # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
+        faces={'ike_face': (IKE[0], IKE[1] + 0.6, 'ike')},
         char_fill=((236, 240, 246), 0.12),
         tint=(0.95, 0.96, 1.0),
         exposure=1.1,

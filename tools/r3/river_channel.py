@@ -373,6 +373,8 @@ def build(hide=()):
         occluders={'cart': (-3.6, 5.9), 'debris': (3.4, 6.4), 'shah': (SHAH[0], SHAH[1] + 0.05)},
         obstacles=[(BIKE[0], BIKE[1], 0.6), (SHAH[0], SHAH[1], 0.4), (OWEN[0] + 0.8, OWEN[1], 0.6),
                    (TENT[0], TENT[1] + 0.6, 0.9), (-3.6, 5.9, 0.6), (3.4, 6.4, 0.7)],
+        # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
+        faces={'preacher': PREACHER},                           # Shah looks down at Owen: no face to see
         char_fill=((200, 196, 220), 0.2),
         tint=(0.76, 0.78, 0.86),
         exposure=2.25,

@@ -450,6 +450,8 @@ def crime_meta():
                    'tape': ((HYDRANT[0] + LAMP[0]) / 2, (HYDRANT[1] + LAMP[1]) / 2),
                    'teo': (T[0], T[1] + 0.1), 'mara': M, 'bucket': (BUCKET[0], BUCKET[1] + 0.22)},
         obstacles=[(HYDRANT[0], HYDRANT[1], 0.4), (LAMP[0], LAMP[1], 0.2), (P[0], P[1], 0.3), (BUCKET[0] - 0.1, BUCKET[1] - 0.05, 0.42)],
+        # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
+        faces={'park': P},                     # Teo's head is down in shadow, Mara looks away at the door
         char_fill=((190, 196, 230), 0.08),
         tint=(0.7, 0.72, 0.88),
     )

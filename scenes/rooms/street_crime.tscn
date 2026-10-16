@@ -14,6 +14,10 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/street_crime_teo.png" id="occ_teo"]
 [ext_resource type="Texture2D" path="res://assets/rooms/street_crime_mara.png" id="occ_mara"]
 [ext_resource type="Texture2D" path="res://assets/rooms/street_crime_bucket.png" id="occ_bucket"]
+[ext_resource type="Script" path="res://scripts/face_patch.gd" id="face"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_face_park_mouth1.png" id="face_park_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_face_park_mouth2.png" id="face_park_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/street_crime_face_park_eyes1.png" id="face_park_eyes1"]
 
 [node name="StreetCrime" type="Node2D"]
 script = ExtResource("script")
@@ -100,6 +104,16 @@ texture = ExtResource("occ_bucket")
 centered = false
 position = Vector2(325, 851)
 offset = Vector2(-18, -199)
+
+[node name="Face_park" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(608, 807)
+speaker = "park"
+mouth_frames = Array[Texture2D]([ExtResource("face_park_mouth1"), ExtResource("face_park_mouth2")])
+mouth_pos = Vector2(599, 610)
+eyes_frame = ExtResource("face_park_eyes1")
+eyes_pos = Vector2(596, 601)
+follow = NodePath("../Park")
 
 [node name="Obstacles" type="Node2D" parent="."]
 

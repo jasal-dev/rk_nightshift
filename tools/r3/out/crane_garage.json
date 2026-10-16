@@ -675,5 +675,70 @@
    455
   ]
  },
- "occluders": {}
+ "occluders": {},
+ "faces": {
+  "crane_stand": {
+   "base": [
+    1281,
+    929
+   ],
+   "speaker": "crane",
+   "mouth": {
+    "pos": [
+     1264,
+     573
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1264,
+     552
+    ],
+    "frames": 1
+   }
+  },
+  "crane_step": {
+   "base": [
+    1605,
+    943
+   ],
+   "speaker": "crane",
+   "mouth": {
+    "pos": [
+     1530,
+     712
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1518,
+     698
+    ],
+    "frames": 1
+   }
+  },
+  "doss": {
+   "base": [
+    1096,
+    598
+   ],
+   "speaker": "doss",
+   "mouth": {
+    "pos": [
+     1095,
+     470
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1092,
+     463
+    ],
+    "frames": 1
+   }
+  }
+ }
 }

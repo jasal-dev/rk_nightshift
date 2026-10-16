@@ -960,5 +960,49 @@
     762
    ]
   }
+ },
+ "faces": {
+  "nina": {
+   "base": [
+    1220,
+    634
+   ],
+   "speaker": "nina",
+   "mouth": {
+    "pos": [
+     1228,
+     508
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1225,
+     499
+    ],
+    "frames": 1
+   }
+  },
+  "park": {
+   "base": [
+    277,
+    753
+   ],
+   "speaker": "park",
+   "mouth": {
+    "pos": [
+     231,
+     509
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     223,
+     494
+    ],
+    "frames": 1
+   }
+  }
  }
 }

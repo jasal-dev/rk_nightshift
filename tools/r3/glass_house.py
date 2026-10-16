@@ -307,6 +307,8 @@ def build(hide=()):
         obstacles=[(PODIUM[0], PODIUM[1], 0.45), (ANDRE[0], ANDRE[1], 0.3), (COURTNEY[0], COURTNEY[1], 0.3),
                    (KEYS[0], KEYS[1], 0.3), (EASEL[0], EASEL[1], 0.4), (BAGS[0], BAGS[1], 0.5),
                    (VAN[0] + 3.6, VAN[1] + 1.6, 0.35), (TABLE[0], TABLE[1], 0.5)],
+        # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
+        faces={'andre': ANDRE, 'courtney': COURTNEY},
         char_fill=((220, 205, 196), 0.18),
         tint=(0.86, 0.8, 0.76),
         exposure=1.5,

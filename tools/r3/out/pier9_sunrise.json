@@ -746,5 +746,84 @@
     816
    ]
   }
+ },
+ "faces": {
+  "tiny": {
+   "base": [
+    1244,
+    761
+   ],
+   "speaker": "tiny",
+   "mouth": {
+    "pos": [
+     1237,
+     628
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1232,
+     618
+    ],
+    "frames": 1
+   }
+  },
+  "vance": {
+   "base": [
+    1100,
+    754
+   ],
+   "speaker": "vance",
+   "mouth": {
+    "pos": [
+     1104,
+     599
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1101,
+     591
+    ],
+    "frames": 1
+   }
+  },
+  "doyle": {
+   "base": [
+    449,
+    840
+   ],
+   "speaker": "doyle",
+   "eyes": {
+    "pos": [
+     423,
+     632
+    ],
+    "frames": 1
+   }
+  },
+  "okafor": {
+   "base": [
+    464,
+    839
+   ],
+   "speaker": "okafor",
+   "mouth": {
+    "pos": [
+     476,
+     642
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     472,
+     632
+    ],
+    "frames": 1
+   }
+  }
  }
 }

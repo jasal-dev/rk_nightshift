@@ -7,6 +7,17 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/pier9_sunrise_okafor.png" id="ov_okafor"]
 [ext_resource type="Texture2D" path="res://assets/rooms/pier9_sunrise_mara.png" id="ov_mara"]
 [ext_resource type="Texture2D" path="res://assets/rooms/pier9_sunrise_barrel.png" id="occ_barrel"]
+[ext_resource type="Script" path="res://scripts/face_patch.gd" id="face"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_sunrise_face_tiny_mouth1.png" id="face_tiny_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_sunrise_face_tiny_mouth2.png" id="face_tiny_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_sunrise_face_tiny_eyes1.png" id="face_tiny_eyes1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_sunrise_face_vance_mouth1.png" id="face_vance_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_sunrise_face_vance_mouth2.png" id="face_vance_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_sunrise_face_vance_eyes1.png" id="face_vance_eyes1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_sunrise_face_doyle_eyes1.png" id="face_doyle_eyes1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_sunrise_face_okafor_mouth1.png" id="face_okafor_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_sunrise_face_okafor_mouth2.png" id="face_okafor_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_sunrise_face_okafor_eyes1.png" id="face_okafor_eyes1"]
 
 [node name="Pier9Sunrise" type="Node2D"]
 script = ExtResource("script")
@@ -53,6 +64,42 @@ texture = ExtResource("occ_barrel")
 centered = false
 position = Vector2(824, 816)
 offset = Vector2(-41, -108)
+
+[node name="Face_tiny" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(1244, 761)
+speaker = "tiny"
+mouth_frames = Array[Texture2D]([ExtResource("face_tiny_mouth1"), ExtResource("face_tiny_mouth2")])
+mouth_pos = Vector2(1237, 628)
+eyes_frame = ExtResource("face_tiny_eyes1")
+eyes_pos = Vector2(1232, 618)
+
+[node name="Face_vance" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(1100, 754)
+speaker = "vance"
+mouth_frames = Array[Texture2D]([ExtResource("face_vance_mouth1"), ExtResource("face_vance_mouth2")])
+mouth_pos = Vector2(1104, 599)
+eyes_frame = ExtResource("face_vance_eyes1")
+eyes_pos = Vector2(1101, 591)
+
+[node name="Face_doyle" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(449, 840)
+speaker = "doyle"
+eyes_frame = ExtResource("face_doyle_eyes1")
+eyes_pos = Vector2(423, 632)
+follow = NodePath("../Doyle")
+
+[node name="Face_okafor" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(464, 839)
+speaker = "okafor"
+mouth_frames = Array[Texture2D]([ExtResource("face_okafor_mouth1"), ExtResource("face_okafor_mouth2")])
+mouth_pos = Vector2(476, 642)
+eyes_frame = ExtResource("face_okafor_eyes1")
+eyes_pos = Vector2(472, 632)
+follow = NodePath("../Okafor")
 
 [node name="Obstacles" type="Node2D" parent="."]
 

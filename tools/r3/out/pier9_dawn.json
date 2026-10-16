@@ -696,16 +696,16 @@
  "extra": {},
  "overlays": {
   "brenner": [
-   245,
-   477
+   1260,
+   556
   ],
   "brenner_gun": [
-   137,
-   477
+   1260,
+   556
   ],
   "brenner_cuffed": [
-   275,
-   563
+   324,
+   624
   ],
   "bollard_phone": [
    1669,
@@ -730,6 +730,113 @@
     824,
     816
    ]
+  }
+ },
+ "faces": {
+  "tiny": {
+   "base": [
+    1244,
+    761
+   ],
+   "speaker": "tiny",
+   "mouth": {
+    "pos": [
+     1237,
+     628
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1232,
+     618
+    ],
+    "frames": 1
+   }
+  },
+  "vance": {
+   "base": [
+    1100,
+    754
+   ],
+   "speaker": "vance",
+   "mouth": {
+    "pos": [
+     1105,
+     599
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1101,
+     591
+    ],
+    "frames": 1
+   }
+  },
+  "brenner": {
+   "base": [
+    1406,
+    892
+   ],
+   "speaker": "brenner",
+   "mouth": {
+    "pos": [
+     1424,
+     630
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1419,
+     616
+    ],
+    "frames": 1
+   }
+  },
+  "brenner_gun": {
+   "base": [
+    1406,
+    892
+   ],
+   "speaker": "brenner",
+   "mouth": {
+    "pos": [
+     1425,
+     631
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1421,
+     617
+    ],
+    "frames": 1
+   }
+  },
+  "brenner_cuffed": {
+   "base": [
+    620,
+    775
+   ],
+   "speaker": "brenner",
+   "mouth": {
+    "pos": [
+     535,
+     648
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     532,
+     638
+    ],
+    "frames": 1
+   }
   }
  }
 }

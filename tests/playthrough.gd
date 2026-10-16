@@ -12,7 +12,6 @@ extends Node
 const MainScene := preload("res://scenes/main.tscn")
 ## Speakers heard in a room (not down a phone) with no talking head there (FacePatch, `faces` in the set's meta) on
 ## purpose: "room:speaker": why. Anyone else talking in a room without one fails the run (Main.faceless).
-## "Phase 2" entries are the on-screen cast of Cases 4 and 5 still waiting for their patches.
 const NO_FACE := {
 	"norms_diner:cabbie": "at the counter, back to us",
 	"norms_diner:devin": "at his door after the drive from Norm's (the room changes after)",
@@ -21,29 +20,13 @@ const NO_FACE := {
 	"mulholland_overlook:shah": "crouched at the car door, her face inside",
 	"stardust_office:shah": "bent over Gus, her face hidden",
 	"stardust_roof:charlie": "under his umbrella across the gap, his face in shadow",
-	"fletcher_bridge:doss": "Phase 2",
-	"fletcher_bridge:preacher": "Phase 2",
-	"river_channel:shah": "Phase 2",
-	"river_channel:preacher": "Phase 2",
-	"glass_house:courtney": "Phase 2",
-	"glass_house:andre": "Phase 2",
-	"crane_garage:crane": "Phase 2",
-	"crane_garage:doss": "Phase 2",
-	"night_lab:ike": "Phase 2",
-	"street_crime:mara": "Phase 2",
-	"street_crime:park": "Phase 2",
-	"street_crime:teo": "Phase 2",
-	"blue_note_back:shah": "Phase 2",
-	"blue_note_back:nina": "Phase 2",
-	"blue_note_back:park": "Phase 2",
-	"pier9_dawn:tiny": "Phase 2",
-	"pier9_dawn:vance": "Phase 2",
-	"pier9_dawn:brenner": "Phase 2",
-	"pier9_sunrise:doyle": "Phase 2",
-	"pier9_sunrise:okafor": "Phase 2",
-	"pier9_sunrise:mara": "Phase 2",
-	"pier9_sunrise:tiny": "Phase 2",
-	"pier9_sunrise:vance": "Phase 2",
+	"fletcher_bridge:preacher": "in the back of the patrol car, too dark to read",
+	"river_channel:shah": "kneeling over Owen, looking down",
+	"street_crime:mara": "looking away at the Blue Note's door",
+	"street_crime:teo": "head down on his crate, his face in shadow",
+	"blue_note_back:shah": "kneeling at the sheet, her face down",
+	"blue_note_back:nina": "first heard from inside the shut cooler (once she is out, her face talks)",
+	"pier9_sunrise:mara": "facing the hood, away from us",
 }
 const FIRST_ROOMS := {2: "mulholland_overlook", 3: "stardust_shop", 4: "fletcher_bridge", 5: "street_crime"}   ## where --case N starts
 
