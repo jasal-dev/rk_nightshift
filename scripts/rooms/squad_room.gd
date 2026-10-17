@@ -167,6 +167,8 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.say("Not yet. Danny's waiting on the board.")
 			elif not Game.has_item("case_file"):
 				await main.say("Not without the Reyes file.")
+			elif not Game.flag("read_file"):
+				await main.say("Not before I've read the file.")
 			else:
 				await main.say("Let's go see what the Blue Note didn't see.")
 				await main.change_room("street", "squad_room")

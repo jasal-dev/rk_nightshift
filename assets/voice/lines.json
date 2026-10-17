@@ -69,6 +69,13 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
+	"f6393c99f9f2": {
+		"speaker": "ray",
+		"text": "Not before I've read the file.",
+		"file": "res://assets/voice/ray/f6393c99f9f2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
 	"e51bbc49f05e": {
 		"speaker": "ray",
 		"text": "Let's go see what the Blue Note didn't see.",

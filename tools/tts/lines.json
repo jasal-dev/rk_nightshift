@@ -9,6 +9,7 @@
 	["ray", "The door's not locked. My problems are.", "squad_room.gd:147 interact"],
 	["ray", "Not yet. Danny's waiting on the board.", "squad_room.gd:160 interact"],
 	["ray", "Not without the Reyes file.", "squad_room.gd:162 interact"],
+	["ray", "Not before I've read the file.", "squad_room.gd:170 interact"],
 	["ray", "Let's go see what the Blue Note didn't see.", "squad_room.gd:164 interact"],
 	["ray", "My raincoat. Twenty years old and it still leaks at the collar.", "squad_room.gd:169 interact"],
 	["ray", "It's raining out. I'll be wet either way.", "squad_room.gd:171 interact"],
