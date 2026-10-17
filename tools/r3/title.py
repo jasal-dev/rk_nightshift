@@ -11,7 +11,7 @@ EMPTY = {'park', 'teo', 'mara'}
 
 def build(hide=()):
     S, cam, env, meta = street.build(set(hide) | EMPTY, crime=True)
-    meta = dict(meta, room='title', hotspots={}, hotspot_order=[], hotspot_shapes={}, occluders={}, obstacles=[],
+    meta = dict(meta, room='title', hotspots={}, faces={}, hotspot_order=[], hotspot_shapes={}, occluders={}, obstacles=[],
                 overlay_bases={}, overlays=['bar_red', 'bar_blue'], exclusive_overlays=['bar_red', 'bar_blue'],
                 screen={'walk': [(0, 0), (1920, 0), (1920, 1080)], 'spawns': {}, 'scale': ((0, 1.0), (1080, 1.0))})
     return S, cam, env, meta
