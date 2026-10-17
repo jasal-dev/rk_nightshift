@@ -163,6 +163,9 @@ func _title() -> void:
 		if not await _load():            # damaged or missing: back to the title screen
 			await _title()
 		return
+	if action == "ending_b":
+		await jump_to_ending_b()
+		return
 	if action.begins_with("case"):
 		await jump_to_case(int(action.substr(4)))
 		return
@@ -223,6 +226,28 @@ func jump_to_case(n: int) -> void:
 				return
 			Case5.start(self)
 			await change_room("street_crime", "squad_room")
+
+
+func jump_to_ending_b() -> void:
+	## The title screen's SKIP TO ENDING B: Pier 9 at sunrise, with the choice of who to call up, as after a full
+	## playthrough that found Brenner's card but neither Walt's ride receipt nor Pryce's invitation. "Call Lt. Doyle."
+	## fails on the second objection and gives the bitter ending. Nothing is saved until the player saves.
+	Game.reset()
+	Game.flags = (CaseStarts.STARTS[5]["flags"] as Dictionary).duplicate(true)
+	Game.inventory.clear()
+	for id in CaseStarts.STARTS[5]["inventory"]:
+		Game.inventory.append(String(id))
+	Case5.start(self)                                 # Case 4's leftovers go, Ray's phone comes
+	for f in ["board_ride_receipt", "board_pryce_invite"]:
+		Game.flags.erase(f)
+	for id: String in Game.CLUES:
+		Game.set_flag(id)                             # every clue of every case
+	for f in ["case5_deduced", "got_take_drive", "phone_in_harbor", "brenner_talked_down", "brenner_arrested", "tiny_told"]:
+		Game.set_flag(f)
+	Game.set_flag("notebook_seen", Game.clues())
+	Game.add_item("take_drive")
+	Audio.music(Audio.case_track(5), 0.0)
+	await change_room("pier9_sunrise", "pier9_dawn")  # Ray walks to the bollard and the choice comes up
 
 
 func the_end() -> void:

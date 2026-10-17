@@ -20,11 +20,38 @@ func _run() -> void:
 		if _failed:
 			return
 		main._title()                                   # back to the title screen for the next one
+	await _ending_b()
+	if _failed:
+		return
 	if Game.snapshot_saves().hash() != _user_saves.hash():
 		_fail("a case jump shouldn't touch the quicksave")
 		return
-	print("CASE JUMPS OK - Cases 2 to 5 start from the title screen.")
+	print("CASE JUMPS OK - Cases 2 to 5 and Ending B start from the title screen.")
 	_quit(0)
+
+
+func _ending_b() -> void:
+	## SKIP TO ENDING B: Pier 9 at sunrise with only Brenner's card pinned; the choice comes up, and "Call Lt. Doyle."
+	## fails on the receipt for the bitter ending.
+	print("Ending B from the title screen")
+	while not main._on_title and not _failed:
+		await get_tree().process_frame
+	_step = "jump to Ending B"
+	_step_started = Time.get_ticks_msec()
+	_choices = ["Call Lt. Doyle.", "Walter Brenner's card", "I don't have it."]
+	main.ui.title.ending_b_button.pressed.emit()
+	while not main._waiting_click and not _failed:      # the choice, the call, the credits, then the last card
+		await get_tree().process_frame
+	if main.room.room_id != "pier9_sunrise":
+		_fail("Ending B should play out at Pier 9, not %s" % main.room.room_id)
+	expect(["case5_deduced", "brenner_arrested", "board_brenner_card", "ending_doyle_bitter"])
+	for f in ["board_ride_receipt", "board_pryce_invite", "ending_doyle_best", "ending_by_book", "ending_times"]:
+		if Game.flag(f):
+			_fail("Ending B shouldn't have %s" % f)
+	if not _choices.is_empty():
+		_fail("answers left over: %s" % [_choices])
+	main._waiting_click = false
+	await _new_game()
 
 
 func _jump(n: int) -> void:

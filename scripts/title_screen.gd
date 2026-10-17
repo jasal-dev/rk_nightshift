@@ -33,6 +33,7 @@ var settings_button: Button
 var credits_button: Button
 var exit_button: Button
 var case_buttons: Array[Button] = []    ## Case 2 to Case 5, in order
+var ending_b_button: Button             ## SKIP TO ENDING B: Pier 9 at sunrise, Brenner's card only
 var menu: VBoxContainer
 var settings: SettingsPanel
 var load_menu: SaveMenu
@@ -328,6 +329,12 @@ func _case_row() -> VBoxContainer:
 		b.pressed.connect(func(): chosen.emit("case%d" % n))
 		case_buttons.append(b)
 		row.add_child(b)
+	var row2 := HBoxContainer.new()
+	row2.alignment = BoxContainer.ALIGNMENT_CENTER
+	box.add_child(row2)
+	ending_b_button = menu_button("SKIP TO ENDING B", 30)
+	ending_b_button.pressed.connect(func(): chosen.emit("ending_b"))
+	row2.add_child(ending_b_button)
 	return box
 
 
