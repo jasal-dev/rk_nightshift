@@ -44,8 +44,8 @@ y_sort_enabled = true
 [node name="Doyle" type="Sprite2D" parent="Actors"]
 texture = ExtResource("ov_doyle")
 centered = false
-position = Vector2(449, 840)
-offset = Vector2(-297, -225)
+position = Vector2(392, 842)
+offset = Vector2(-240, -227)
 
 [node name="Okafor" type="Sprite2D" parent="Actors"]
 texture = ExtResource("ov_okafor")
@@ -56,8 +56,8 @@ offset = Vector2(-123, -222)
 [node name="Mara" type="Sprite2D" parent="Actors"]
 texture = ExtResource("ov_mara")
 centered = false
-position = Vector2(453, 842)
-offset = Vector2(-209, -227)
+position = Vector2(373, 845)
+offset = Vector2(-130, -230)
 
 [node name="Barrel" type="Sprite2D" parent="Actors"]
 texture = ExtResource("occ_barrel")
@@ -85,10 +85,10 @@ eyes_pos = Vector2(1101, 591)
 
 [node name="Face_doyle" type="Node2D" parent="Actors"]
 script = ExtResource("face")
-position = Vector2(449, 840)
+position = Vector2(392, 842)
 speaker = "doyle"
 eyes_frame = ExtResource("face_doyle_eyes1")
-eyes_pos = Vector2(423, 632)
+eyes_pos = Vector2(369, 632)
 follow = NodePath("../Doyle")
 
 [node name="Face_okafor" type="Node2D" parent="Actors"]
@@ -251,7 +251,7 @@ walk_to = Vector2(551, 851)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/doyle"]
-polygon = PackedVector2Array(400.7, 615.1, 493.4, 615.2, 494.9, 854.2, 402.6, 853.8)
+polygon = PackedVector2Array(343.4, 615.5, 436.4, 615.6, 438.2, 855.5, 345.5, 855.1)
 
 [node name="okafor" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
@@ -271,4 +271,4 @@ walk_to = Vector2(551, 851)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/mara"]
-polygon = PackedVector2Array(404.9, 615.6, 498, 615.7, 499.6, 855.8, 406.8, 855.4)
+polygon = PackedVector2Array(324, 616.5, 417.7, 616.6, 419.6, 858.6, 326.1, 858.2)

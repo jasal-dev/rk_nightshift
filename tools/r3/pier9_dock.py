@@ -253,9 +253,10 @@ BOLLARD = (5.05, 4.4)         # the iron bollard at the end of the pier, where R
 BRENNER = (3.05, 3.65)        # where Brenner stands to talk, facing Ray at the bollard
 HOOD = (-3.65, 0.5)           # Brenner bent over the Lincoln's hood from the camera's side, back to us, cuffed
 VANCE = (1.5, -1.85)          # Vance in his doorway
-DOYLE = (-3.55, 2.25)         # by the hood of Ray's car, where the box is laid out
+DOYLE = (-3.95, 2.3)          # by the hood of Ray's car, where the box is laid out
 OKAFOR = (-3.45, 2.2)
-MARA = (-3.5, 2.3)
+MARA = (-4.05, 2.4)
+LAP_Z, LAP_TILT = 0.12, 12
 
 VANCE_COLORS = dict(coat=(52, 52, 58), coat_dk=(38, 38, 42), lining=(60, 56, 70), shirt=(104, 96, 118),
                     pants=(44, 44, 50), hair=(190, 188, 184), hairgrey=(214, 212, 208), brow=(170, 168, 164),
@@ -344,8 +345,12 @@ def dawn_extras(S, hide, time, EDGE):
                                        hp=8, hy=20), (OKAFOR[0], 0.0, OKAFOR[1]), yaw=70, scale=0.94, tag='okafor')
         if 'mara' not in hide:
             with S.tag('mara_laptop'):
-                S.wbox((-4.75, 0.86, 2.55), (0.17, 0.01, 0.12), 'laptop', rot=Ry(-70))
-                S.wbox((-4.68, 0.97, 2.48), (0.17, 0.11, 0.008), 'laptop_lit', rot=Ry(-70) @ Rx(-12))
+                # open on the hood, screen on the far side from Mara and tilted back, so its face is turned to her
+                ly = Ry(-70)
+                lb = np.array((-4.75, 0.86, 2.5))
+                S.wbox(tuple(lb), (0.17, 0.01, 0.12), 'laptop', rot=ly)
+                S.wbox(tuple(lb + ly @ np.array((0.0, 0.07, LAP_Z))), (0.17, 0.11, 0.008), 'laptop_lit',
+                       rot=ly @ Rx(LAP_TILT))
             npc.cast(S, 'mara', dict(npc.STAND, headset=True, lsp=30, le=74, lin=20, rsp=30, re=78, rin=22, hp=18,
                                      hy=-10), (MARA[0], 0.0, MARA[1]), yaw=-75, scale=0.94, tag='mara')
 
