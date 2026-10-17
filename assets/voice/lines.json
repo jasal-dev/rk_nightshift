@@ -1133,6 +1133,13 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
+	"94611c49cf9a": {
+		"speaker": "ray",
+		"text": "Vance isn't done talking. Not yet.",
+		"file": "res://assets/voice/ray/94611c49cf9a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
 	"802fc2f639c9": {
 		"speaker": "ray",
 		"text": "Not without that envelope.",

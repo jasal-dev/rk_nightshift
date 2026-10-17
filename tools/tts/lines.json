@@ -161,6 +161,7 @@
 	["ray", "Not tonight.", "pier9_dock.gd:132 interact"],
 	["ray", "Still dented. Now wet and dented.", "pier9_dock.gd:136 interact"],
 	["ray", "Not until I've talked to Vance.", "pier9_dock.gd:140 interact"],
+	["ray", "Vance isn't done talking. Not yet.", "pier9_dock.gd:142 interact"],
 	["ray", "Not without that envelope.", "pier9_dock.gd:142 interact"],
 	["ray", "Back to the board. Danny's got a new piece of paper on it.", "pier9_dock.gd:144 interact"],
 	["ray", "Six-five, maybe more. Built like a vending machine.", "pier9_dock.gd:157 _tiny"],

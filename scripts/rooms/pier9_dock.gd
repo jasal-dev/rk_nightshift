@@ -138,6 +138,8 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await default_response(verb, item)
 			elif not Game.flag("in_vance_office"):
 				await main.say("Not until I've talked to Vance.")
+			elif not Game.flag("knows_envelope"):
+				await main.say("Vance isn't done talking. Not yet.")
 			elif not Game.has_item("envelope"):
 				await main.say("Not without that envelope.")
 			else:
