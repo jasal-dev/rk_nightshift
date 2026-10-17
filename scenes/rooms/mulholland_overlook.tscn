@@ -32,12 +32,12 @@ y_sort_enabled = true
 
 [node name="Face_park" type="Node2D" parent="Actors"]
 script = ExtResource("face")
-position = Vector2(1587, 783)
+position = Vector2(1511, 784)
 speaker = "park"
 mouth_frames = Array[Texture2D]([ExtResource("face_park_mouth1"), ExtResource("face_park_mouth2")])
-mouth_pos = Vector2(1594, 564)
+mouth_pos = Vector2(1516, 565)
 eyes_frame = ExtResource("face_park_eyes1")
-eyes_pos = Vector2(1589, 552)
+eyes_pos = Vector2(1513, 553)
 
 [node name="Spawns" type="Node2D" parent="."]
 
@@ -120,7 +120,7 @@ walk_to = Vector2(1463, 802)
 face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/park"]
-polygon = PackedVector2Array(1547.3, 688.2, 1548.9, 664.1, 1549.6, 658.4, 1566.7, 585.1, 1586.9, 539.1, 1588.5, 537.9, 1598.4, 531.9, 1624.2, 534.4, 1625.1, 535.7, 1639.6, 589.2, 1643.4, 632.3, 1634.5, 735.4, 1633.7, 743.6, 1614.6, 812.8, 1614.3, 812.9, 1599.1, 810.8, 1557.5, 798, 1557.2, 797.8, 1549.6, 735)
+polygon = PackedVector2Array(1470.8, 689.2, 1472.3, 665, 1473.1, 659.3, 1473.7, 656.5, 1490, 585.8, 1508.7, 539.7, 1510.3, 538.5, 1521.6, 532.4, 1546.6, 535, 1547.4, 536.3, 1562, 589.9, 1564.6, 627.5, 1564.9, 633.2, 1557.4, 736.5, 1554.9, 746.3, 1536.9, 814.1, 1536.5, 814.3, 1521.7, 812.1, 1481.9, 799.3, 1481.6, 799, 1472.5, 734.5)
 
 [node name="prius" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")

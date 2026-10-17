@@ -338,6 +338,8 @@
 	["ray", "Up here the rain comes in sideways. Down there, four million people are asleep, or wish they were.", "case2.gd:32 drive_up"],
 	["ray", "Glide says his night ended at eleven fifty-two. I'd like a second opinion. Cars talk too, these days.", "case2.gd:45 gps_hint"],
 	["ray", "Norm's. Cherry pie, two coffees, twelve-fourteen.", "case2.gd:65 car_menu"],
+	["ray", "Back up the hill. Kenji's car hasn't gone anywhere.", "case2.gd:71 car_menu"],
+	["ray", "Engine off, the wipers dead halfway across the glass. The car's finally heard the news.", "mulholland_overlook.gd:74 interact"],
 	["ray", "Home, Silver Lake. Two minutes, eleven fifty-six. Somebody was waiting.", "case2.gd:67 car_menu"],
 	["ray", "Back to the board.", "case2.gd:69 car_menu"],
 	["ray", "Detective Kessler, LAPD. Does Kenji Ota live here?", "case2.gd:87 doorstep"],

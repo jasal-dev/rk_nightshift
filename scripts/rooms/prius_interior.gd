@@ -208,10 +208,15 @@ func _glide_app() -> void:
 		if pick.begins_with("tab:"):
 			tab = int(pick.substr(4))
 			page = -1
+			## Show the new tab before Ray talks about it.
 			if tab == 1 and not Game.flag("clue_last_trip"):
+				main.ui.show_device("Glide Driver", ["Status", "Trips", "Messages"], tab, "Tonight", [], false, Case2.GLIDE)
 				await main.say("His last fare ended at eleven fifty-two. After that, the app says he went home to bed.")
 				main.clue("clue_last_trip")
 			elif tab == 2 and not Game.flag("clue_threat"):
+				main.ui.show_device("Glide Driver", ["Status", "Trips", "Messages"], tab,
+						"Heck D.  -  Tuesday 6:02 PM\n\n\"You took my spot in the LAX queue AGAIN. Do it once more and I'll put you in the ground.\"",
+						[], false, Case2.GLIDE)
 				await main.say("Heck D. Some people take the airport very seriously.")
 				main.clue("clue_threat")
 			continue

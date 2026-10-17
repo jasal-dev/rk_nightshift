@@ -204,7 +204,7 @@ def build(hide=()):
     npc.cast(S, 'shah', dict(npc.CROUCH, rsp=70, re=28, rin=14, lsp=30, le=60, hp=10, hy=-10,
                              props=(('torch', 'r'),)),
              car_pt(-1.36, 0, 0.18), yaw=CAR_YAW + 90, scale=0.95, tag='shah')
-    PARK = (5.05, 0, 2.9)
+    PARK = (4.55, 0, 2.9)
     npc.cast(S, 'park', dict(npc.STAND, lsp=28, le=40, lin=24, rsp=4, re=18, hp=4, hy=-16), PARK, yaw=-28, scale=0.94,
              tag='park')
     # cones and tape
@@ -289,7 +289,7 @@ def build(hide=()):
         hotspot_order=['view', 'wall', 'sign', 'ground', 'van', 'car', 'park', 'prius', 'scratch', 'inside', 'shah', 'kenji'],
         obstacles=[],
         # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
-        faces={'park': (5.05, 2.9)},                                      # Shah has her face in the car
+        faces={'park': (4.55, 2.9)},                                      # Shah has her face in the car
         char_fill=((200, 196, 220), 0.12),
         tint=(0.76, 0.72, 0.84),
         exposure=1.6,

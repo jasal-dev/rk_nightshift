@@ -317,6 +317,7 @@ func open_peas() -> void:
 	main.take("frozen_peas")
 	Game.set_flag("got_sd_cards")
 	await main.give("sd_cards", false)
+	main.player.face("left")
 	await main.say("Nobody ever got killed over frozen peas.")
 	await _devin("Those are mine. Half of those are mine. A year of work, and he was going to give them away.")
 	await _devin("Give them away, to some assistant who got what she...")

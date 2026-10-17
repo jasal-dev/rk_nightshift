@@ -71,7 +71,10 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 			elif item != "":
 				await default_response(verb, item)
 			else:
-				await main.say("Engine running, wipers going. The car hasn't heard the news.")
+				if Game.flag("got_kenji_keys"):
+					await main.say("Engine off, the wipers dead halfway across the glass. The car's finally heard the news.")
+				else:
+					await main.say("Engine running, wipers going. The car hasn't heard the news.")
 
 		"scratch":
 			if verb == "look":

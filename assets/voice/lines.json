@@ -2372,6 +2372,20 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
+	"b50153ca5355": {
+		"speaker": "ray",
+		"text": "Back up the hill. Kenji's car hasn't gone anywhere.",
+		"file": "res://assets/voice/ray/b50153ca5355.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"e89d87d4e6fb": {
+		"speaker": "ray",
+		"text": "Engine off, the wipers dead halfway across the glass. The car's finally heard the news.",
+		"file": "res://assets/voice/ray/e89d87d4e6fb.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
 	"841191afb8c5": {
 		"speaker": "ray",
 		"text": "Home, Silver Lake. Two minutes, eleven fifty-six. Somebody was waiting.",
