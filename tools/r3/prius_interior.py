@@ -43,15 +43,14 @@ def build(hide=()):
             'head_unit': fquad((0.0, 0.99, -0.74), 0.13, 0.08),
             'dashcam': fquad((0.0, 1.37, -0.64), 0.1, 0.06),
             'cups': fquad((0.0, 0.8, -0.2), 0.13, 0.08),
-            'door_pocket': [car_pt(-1.05, 0.38, -0.05), car_pt(-1.6, 0.38, -0.3), car_pt(-1.6, 0.62, -0.3),
-                            car_pt(-1.05, 0.62, -0.05)],
             'visor': fquad((-0.38, 1.4, -0.4), 0.2, 0.06),
             'ignition': fquad((-0.17, 0.88, -0.72), 0.06, 0.05),
             'glovebox': fquad((0.42, 0.8, -0.74), 0.23, 0.09),
             'out': [car_pt(-0.95, 0.4, -0.45), car_pt(-0.95, 0.4, 0.65), car_pt(-0.95, 1.45, 0.65),
                     car_pt(-0.95, 1.45, -0.45)],
         },
-        screen_shapes={'back_seat': [(1240, 950), (1920, 950), (1920, 1080), (1240, 1080)]},   # under Ray
+        screen_shapes={'back_seat': [(1240, 950), (1920, 950), (1920, 1080), (1240, 1080)],
+                       'door_pocket': [(0, 900), (340, 900), (340, 1080), (0, 1080)]},   # under Ray
         hotspot_order=['out', 'back_seat', 'door_pocket', 'kenji', 'glovebox', 'cups', 'head_unit', 'ignition',
                        'phone_mount', 'dashcam', 'visor'],
         overlays=['visor_card'],                    # the driver card on the visor, gone once Ray takes it

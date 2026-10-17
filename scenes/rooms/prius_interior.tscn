@@ -70,7 +70,7 @@ walk_to = Vector2(0, 0)
 face = "none"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/door_pocket"]
-polygon = PackedVector2Array(239.2, 717.6, 395.3, 788.9, 414.7, 908.2, 260, 819.9)
+polygon = PackedVector2Array(0, 900, 340, 900, 340, 1080, 0, 1080)
 
 [node name="kenji" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
