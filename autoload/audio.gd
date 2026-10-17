@@ -43,8 +43,11 @@ const SFX := {
 	"knock_wrong": ["res://assets/sounds/knock_wrong.wav", -2.0],     ## an ordinary knock on a door
 	"hang_up": ["res://assets/sounds/hang_up.wav", 0.0],             ## a caller hangs up ("*click*" on a phone line)
 	"text_tone": ["res://assets/sounds/text_tone.wav", -4.0],         ## a text arrives on Ray's phone
-	"phone_ring": ["res://assets/sounds/phone_ring.wav", -2.0],       ## the squad room's desk phone ("*RIIING*")
+	"phone_ring": ["res://assets/sounds/phone_ring.wav", -13.0],       ## the squad room's desk phone ("*RIIING*")
 }
+const PIANO_KEY := "res://assets/sounds/piano/%s.wav"      ## one per key of GameUI.show_piano ("C#4"); tools/sounds/gen_piano.py
+const TAKE_TUNE := "res://assets/sounds/take_tune.wav"     ## the piano on Danny's recording (the take)
+const TAKE_TUNE_DB := -15.0                                  ## on the Phone bus, which lifts it by 10 dB, under the voices
 const VOICE_LINES := "res://assets/voice/lines.json"     ## id: {speaker, text, file, voice}
 const SETTINGS := "user://settings.cfg"     ## the same file as Main.SETTINGS
 const FADE := 2.5                           ## default crossfade, seconds
@@ -59,6 +62,7 @@ var _voice: AudioStreamPlayer
 var unvoiced: Array[String] = []   ## lines asked for that have no clip, in order (tests/playthrough.gd)
 var _voice_lines := {}          ## id: res:// path, from VOICE_LINES
 var _music: Crossfader
+var _tune: AudioStreamPlayer
 var _ambience: Crossfader
 
 
@@ -254,6 +258,38 @@ func sfx(id: String) -> float:
 	p.finished.connect(p.queue_free)
 	p.play()
 	return p.stream.get_length()
+
+
+func piano_note(key: String) -> void:
+	## One key of Danny's piano close-up ("D4", "C#5"), on the SFX bus. Notes ring over each other.
+	var path := PIANO_KEY % key
+	if not ResourceLoader.exists(path):
+		return
+	var p := AudioStreamPlayer.new()
+	p.stream = load(path)
+	p.volume_db = -3.0
+	p.bus = "SFX"
+	add_child(p)
+	p.finished.connect(p.queue_free)
+	p.play()
+
+
+func take_tune(on: bool) -> void:
+	## Danny's tune under the take: the music steps aside and the tune plays down Ike's line (the Phone bus) until it
+	## ends or this is called with false, which brings the case's music back.
+	if on:
+		music("", 0.8)
+		if _tune == null:
+			_tune = AudioStreamPlayer.new()
+			_tune.bus = "Phone"
+			_tune.volume_db = TAKE_TUNE_DB
+			add_child(_tune)
+		_tune.stream = load(TAKE_TUNE)
+		_tune.play()
+	else:
+		if _tune:
+			_tune.stop()
+		music(case_track(Game.current_case()), 1.5)
 
 
 func set_voice_volume(v: float) -> void:

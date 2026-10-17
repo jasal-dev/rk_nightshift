@@ -430,7 +430,7 @@ def crime_meta():
             'tape': ('crime tape', None, 'up'),
             'park': ('Officer Park', (-2.0, 1.45), 'left'),
             'teo': ('Teo', (-3.55, 2.35), 'left'),
-            'mara': ('Mara Quist', (-0.3, 2.35), 'down'),
+            'mara': ('Mara Quist', (-2.0, 2.4), 'right'),    # in front of her (she faces the door, to the left), not behind her
             'flares': ('road flares', None, 'down'),
         },
         hotspot_shapes={'alley': [(-1.9, 0, 0), (1.0, 0, 0), (1.0, 6.0, 0), (-1.9, 6.0, 0)],

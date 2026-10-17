@@ -184,6 +184,11 @@ func verb_for(hs: Hotspot) -> String:
 	return String(verbs.get(hs.id, "use"))
 
 
+func entry_face(_from_room: String) -> String:
+	## Which way Ray faces on coming in from `from_room` ("left", "right", "up", "down"), or "" for Main's default.
+	return ""
+
+
 func spawn_point(from_room: String) -> Vector2:
 	var spawns := get_node_or_null("Spawns")
 	if spawns:

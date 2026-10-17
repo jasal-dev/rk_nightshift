@@ -823,6 +823,7 @@ func piano_press(key: String, emit := true) -> void:
 	## letter (sharps as "C#"). Also used by the automated playthrough and to replay the knock.
 	if piano == null or not _piano_keys.has(key):
 		return
+	Audio.piano_note(key)
 	var k: ColorRect = _piano_keys[key]
 	var up := Color(0.93, 0.91, 0.85) if key.length() == 2 else Color(0.06, 0.06, 0.07)
 	k.color = Color(0.72, 0.64, 0.42) if key.length() == 2 else Color(0.32, 0.27, 0.2)
@@ -847,12 +848,24 @@ func show_endcard(tex: Texture2D, text: String) -> void:
 
 
 ## The last end card: the music and sound attributions on black (the same block as the title screen's Credits).
-func show_music_credits() -> void:
+func show_credits_roll() -> VBoxContainer:
+	## The end credits: the Credits menu's column (TitleScreen.fill_credits) on black, to be scrolled up by the caller
+	## (Main.roll_credits). Returns the column.
 	show_scene(null)
-	var box := TitleScreen.music_credits(FONT, FONT, 32, Color(1, 0.92, 0.7), Color(0.45, 0.75, 1.0))
-	box.alignment = BoxContainer.ALIGNMENT_CENTER
-	box.set_anchors_preset(Control.PRESET_FULL_RECT)
-	scene_pic.add_child(box)
+	var clip := Control.new()
+	clip.set_anchors_preset(Control.PRESET_FULL_RECT)
+	clip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	clip.clip_contents = true
+	scene_pic.add_child(clip)
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 10)
+	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	col.custom_minimum_size = Vector2(1000, 0)
+	clip.add_child(col)
+	TitleScreen.fill_credits(col)
+	col.size = Vector2(1000, 0)
+	col.position = Vector2(460, 1080)
+	return col
 
 
 func hide_paper() -> void:

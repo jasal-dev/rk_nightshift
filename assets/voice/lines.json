@@ -13747,10 +13747,10 @@
 		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2",
 		"sig": "2aa9a80bc0"
 	},
-	"f6700173cdef": {
+	"7243c832ac08": {
 		"speaker": "teo",
-		"text": "I let myself in, I take the chairs down, I go to the back for the mop. And he was...",
-		"file": "res://assets/voice/teo/f6700173cdef.ogg",
+		"text": "I let myself in, I go to the back for the mop. And he was...",
+		"file": "res://assets/voice/teo/7243c832ac08.ogg",
 		"voice": "kokoro: am_michael, -1.5 semitones, speed 0.85, warmth 2",
 		"sig": "2aa9a80bc0"
 	},

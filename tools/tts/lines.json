@@ -1963,7 +1963,7 @@
 	["teo", "You're the detective from across the street. Sal said you came by. Through the door.", "street_crime.gd:297 _talk_teo"],
 	["teo", "He was scared after. He told me, \"Teo, I talked.\" Like it was a sin.", "street_crime.gd:299 _talk_teo"],
 	["teo", "Four-thirty, like every morning. Nineteen years. We've been closed since Danny, but Sal said keep coming, we open again Saturday.", "street_crime.gd:319 _talk_teo"],
-	["teo", "I let myself in, I take the chairs down, I go to the back for the mop. And he was...", "street_crime.gd:320 _talk_teo"],
+	["teo", "I let myself in, I go to the back for the mop. And he was...", "street_crime.gd:320 _talk_teo"],
 	["teo", "I called 911 on the bar phone. Then I came out here. I haven't been able to go back in.", "street_crime.gd:321 _talk_teo"],
 	["teo", "It was on the latch. Just the latch. Sal threw the deadbolt every night, and the chain, and he checked it twice.", "street_crime.gd:324 _talk_teo"],
 	["teo", "Nineteen years, I never once came in on just the latch.", "street_crime.gd:325 _talk_teo"],

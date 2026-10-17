@@ -382,12 +382,15 @@ def build_arm(S, chest, side, sh, sp, sa, el, inward, wr, roll, hand, p, key):
         tf = Frame(grip + chest.M @ A(0, 0.03, 0.04), chest.M)
         S.tcyl(tf, (0, 0, 0), (0.07, 0.07), (0.07, 0.07), 0.004, 'paper')
         S.tcyl(tf, (0, 0.03, 0), (0.04, 0.04), (0.03, 0.03), 0.03, 'paper')
-    if ('revolver', key) in props:                                                   # a .38 snub: grip in the fist
-        S.cone(hf.to((-s * 0.015, -0.06, -0.01)), hf.to((-s * 0.015, -0.12, -0.03)), 0.014, 0.016, 'leather')
-        S.box(Frame(hf.to((-s * 0.015, -0.07, 0.04)), Lh), (0, 0, 0), (0.012, 0.022, 0.03), 0.006, 'pen')     # frame
-        S.tcyl(Frame(hf.to((-s * 0.015, -0.068, 0.045)), Lh @ Rx(90)), (0, 0, 0), (0.02, 0.02), (0.02, 0.02),
+    if ('revolver', key) in props:                                                   # a .38 snub, level, barrel forward
+        # built in the body's frame, not the hand's: the hand's axes follow the forearm, so a barrel on them points
+        # wherever the arm happens to (straight up, with the arm raised in front)
+        gf = Frame(grip + chest.M @ A(0, 0.0, 0.0), chest.M)
+        S.cone(gf.to((0, 0.03, -0.01)), gf.to((0, -0.05, -0.035)), 0.014, 0.016, 'leather')              # grip
+        S.box(Frame(gf.to((0, 0.04, 0.03)), chest.M), (0, 0, 0), (0.012, 0.022, 0.03), 0.006, 'pen')     # frame
+        S.tcyl(Frame(gf.to((0, 0.05, 0.05)), chest.M @ Rx(90)), (0, 0, 0), (0.02, 0.02), (0.02, 0.02),
                0.022, 'pen')                                                         # cylinder
-        S.cyl(hf.to((-s * 0.015, -0.058, 0.06)), hf.to((-s * 0.015, -0.058, 0.13)), 0.009, 'pen')           # barrel
+        S.cyl(gf.to((0, 0.052, 0.07)), gf.to((0, 0.052, 0.17)), 0.009, 'pen')                              # barrel
     if ('knife', key) in props:                                                      # a paring knife
         S.cyl(hf.to((-s * 0.02, -0.1, -0.02)), hf.to((-s * 0.02, -0.1, 0.05)), 0.009, 'leather')
         S.box(Frame(hf.to((-s * 0.02, -0.1, 0.1)), Lh), (0, 0, 0), (0.002, 0.012, 0.05), 0.001, 'steel')

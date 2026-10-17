@@ -20,6 +20,10 @@ func _ready() -> void:
 	_sync()
 
 
+func entry_face(from_room: String) -> String:
+	return "down" if from_room == "blue_note_back" else "left"     # in from the street (door on the right) or the back (door at the top)
+
+
 func _sync() -> void:
 	ledger.visible = not Game.flag("got_tab_book")
 	setlist.visible = not Game.flag("got_set_list")

@@ -17,6 +17,7 @@ The originals are in `sounds/` at the project root (not in git, and ignored by G
 | `assets/sounds/phone_ring.wav` | `342167__djfroyd__telephone-ring-dry.wav` (the ring, without its silence) | https://freesound.org/s/342167/ | djfroyd | CC BY 3.0 (credit required) | 2026-10-13 |
 | `assets/sounds/text_tone.wav` | `636401__dvidrio02__text-tone-5.mp3` | https://freesound.org/s/636401/ | dVidrio02 | CC0 | 2026-10-12 |
 | `assets/sounds/footsteps.wav` | `685287__emilgasi__footsteps-ground.wav` | https://freesound.org/s/685287/ | emilgasi | CC0 (credited anyway) | 2026-10-11 |
+| `assets/sounds/piano/*.wav`, `assets/sounds/take_tune.wav` | none: synthesised by `tools/sounds/gen_piano.py` (the piano keys, and an original slow ballad for Danny's recording) | n/a | made for the game | no licence needed, no credit | 2026-10-17 |
 
 ## Voice
 

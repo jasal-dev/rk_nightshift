@@ -197,7 +197,7 @@ TEO: He was scared after. He told me, "Teo, I talked." Like it was a sin.
 
 You found him?
 
-TEO: Four-thirty, like every morning. Nineteen years. We've been closed since Danny, but Sal said keep coming, we open again Saturday. I let myself in, I take the chairs down, I go to the back for the mop. And he was... (beat) I called 911 on the bar phone. Then I came out here. I haven't been able to go back in.
+TEO: Four-thirty, like every morning. Nineteen years. We've been closed since Danny, but Sal said keep coming, we open again Saturday. I let myself in, I go to the back for the mop. And he was... (beat) I called 911 on the bar phone. Then I came out here. I haven't been able to go back in.
 
 The front door.
 

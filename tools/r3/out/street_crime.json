@@ -560,10 +560,10 @@
     ]
    ],
    "walk_to": [
-    892,
-    845
+    655,
+    846
    ],
-   "face": "down"
+   "face": "right"
   },
   "flares": {
    "name": "road flares",

@@ -148,25 +148,27 @@ def build(hide=(), take=False):
         S.wboxr(X0, 1.2, bz0 + 0.3, X0 + 0.02, 2.55, bz1 - 0.3, 'mirror')
         S.wboxr(X0, 2.55, bz0 + 0.25, X0 + 0.05, 2.62, bz1 - 0.25, 'brass')
     # the register and Sal's tab book, by the front end of the bar
-    with S.tag('register'):
-        rz = 1.5
-        # facing the bartender (-x): the cash drawer and the sloped keys on his side, the little display for customers
-        S.wbox((bx0 + 0.28, 1.2, rz), (0.17, 0.1, 0.2), 'register', rnd=0.02)
-        S.wbox((bx0 + 0.09, 1.16, rz), (0.04, 0.05, 0.18), 'register', rnd=0.01)                 # cash drawer
-        S.wbox((bx0 + 0.22, 1.33, rz), (0.12, 0.03, 0.18), 'register', rot=Rz(22))               # keys, sloping his way
-        S.wbox((bx0 + 0.38, 1.45, rz), (0.03, 0.06, 0.12), 'register', rnd=0.01)                 # display for customers
+    if 'register' not in hide:
+        with S.tag('register'):
+            rz = 1.5
+            # facing the bartender (-x): the cash drawer and the sloped keys on his side, the little display for customers
+            S.wbox((bx0 + 0.28, 1.2, rz), (0.17, 0.1, 0.2), 'register', rnd=0.02)
+            S.wbox((bx0 + 0.09, 1.16, rz), (0.04, 0.05, 0.18), 'register', rnd=0.01)                 # cash drawer
+            S.wbox((bx0 + 0.22, 1.33, rz), (0.12, 0.03, 0.18), 'register', rot=Rz(22))               # keys, sloping his way
+            S.wbox((bx0 + 0.38, 1.45, rz), (0.03, 0.06, 0.12), 'register', rnd=0.01)                 # display for customers
     if 'ledger' not in hide:
         with S.tag('ledger'):
             S.wbox((bx0 + 0.32, 1.13, 1.02), (0.16, 0.025, 0.22), 'ledger', rot=Ry(8))
             S.wbox((bx0 + 0.32, 1.155, 1.02), (0.15, 0.002, 0.2), 'paper', rot=Ry(8))
     # the drying rack: every glass upside down and dry, but one still beaded
-    with S.tag('rack'):
-        rz = RACK_Z
-        S.wboxr(bx0 + 0.05, 1.1, rz - 0.26, bx0 + 0.42, 1.12, rz + 0.26, 'rack')
-        for i in range(3):
-            for j in range(4):
-                S.tcyl(Frame((bx0 + 0.12 + i * 0.12, 1.17, rz - 0.195 + j * 0.13)), (0, 0, 0), (0.035, 0.035),
-                       (0.03, 0.03), 0.05, 'glass_c')
+    if 'rack' not in hide:
+        with S.tag('rack'):
+            rz = RACK_Z
+            S.wboxr(bx0 + 0.05, 1.1, rz - 0.26, bx0 + 0.42, 1.12, rz + 0.26, 'rack')
+            for i in range(3):
+                for j in range(4):
+                    S.tcyl(Frame((bx0 + 0.12 + i * 0.12, 1.17, rz - 0.195 + j * 0.13)), (0, 0, 0), (0.035, 0.035),
+                           (0.03, 0.03), 0.05, 'glass_c')
     # the stools: pedestal stools turned up on the counter, base in the air, except the one at the far end
     def stool(x, z, up):
         if up:
@@ -394,6 +396,7 @@ def build(hide=(), take=False):
         hotspot_order=['mirror', 'bottles', 'bar', 'booths', 'back_booth', 'poster', 'piano', 'set_list', 'back_door',
                        'chairs', 'jukebox', 'front_door', 'stool', 'rack', 'register'],
         overlays=['ledger', 'setlist'],
+        occluder_with={'bar': ['register', 'rack']},      # the counter's walk-behind also covers what stands on it
         occluders=dict({'fg_table': FG_TABLE, 'palm': PALM, 'bar': ((BAR_X[0] + BAR_X[1]) / 2, BAR_Z[0]),
                         'stool': STOOL}, **{f'table{n}': t for n, t in enumerate(TABLES)}),
         obstacles=[FG_TABLE + (0.55,)] + [t + (0.55,) for t in TABLES] + [STOOL + (0.3,)],

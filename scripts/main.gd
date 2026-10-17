@@ -334,12 +334,15 @@ func change_room(id: String, from_room: String) -> void:
 	player.set_room(room)
 	player.visible = room.show_player
 	if from_room != "__load":
+		var entry := room.entry_face(from_room)
 		match from_room:
 			"squad_room": player.face("down")
 			"street": player.face("down" if id == "squad_room" else "right")
 			"pier9_dock", "pier9_dawn": player.face("down")
 			"vance_office": player.face("down")
 			_: player.face("right")
+		if entry != "":
+			player.face(entry)
 	Game.current_room = id
 	Audio.music(Audio.case_track(Game.current_case()))    # nothing changes inside a case; this catches new game and load
 	Audio.ambience("rain" if room.rainy else "")
@@ -707,6 +710,18 @@ func drive_wait(seconds: float) -> void:
 	while t < seconds and not _skip:
 		await get_tree().process_frame
 		t += get_process_delta_time()
+	_speaking = false
+	_skip = false
+
+
+func roll_credits(col: Control) -> void:
+	## Scroll the end credits' column up the screen at the Credits menu's speed until the last line has gone off the
+	## top. A click (or Space) skips the rest.
+	_speaking = true
+	_skip = false
+	while col.position.y + col.size.y > 0.0 and not _skip:
+		await get_tree().process_frame
+		col.position.y -= TitleScreen.CREDITS_SPEED * get_process_delta_time()
 	_speaking = false
 	_skip = false
 

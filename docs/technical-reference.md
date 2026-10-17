@@ -55,7 +55,7 @@ same loudness (the files differ by up to 12 dB). `CASE_TRACKS` maps cases to tra
 2 november, 3 entenca, 4 echoofsadness, 5 rainyday (Case 5, the endings, end cards, end credits and the title screen).
 Main calls it on the title screen, at each case card (`case_card`, the next case's track) and on every room change
 (the current case's track), so new game, Skip to Case N and loading a save all land on the right track. The end
-credits close with the music and sound attributions (`GameUI.show_music_credits`).
+credits close with the same scrolling credits as the Credits menu (`GameUI.show_credits_roll`, scrolled by `Main.roll_credits`; a click skips).
 
 ### Sound effects
 
@@ -73,7 +73,9 @@ play one with a line written as a sound and keep the line up for it. The knocks:
 Blue Note door before Ray knows the rhythm, Devin's door) and `knock_right` (Danny's knock, two slow and three fast: the
 Blue Note and Vance's green door), cut by `tools/sounds/make_loops.py` from one knock of Freesound 437589 (CC0). A text arriving
 on Ray's phone (`Main.text_message`, not outgoing) plays `text_tone`; a phone line containing `"*click*"` is the caller
-hanging up, and `hang_up` (the hang-up tone, an octave up) plays after their words, or with a bare `"*click*"`. The squad room's desk phone rings with `phone_ring` (`voice("*RIIING*", ..., sfx)`).
+hanging up, and `hang_up` (the hang-up tone, an octave up) plays after their words, or with a bare `"*click*"`. The squad room's desk phone rings with `phone_ring` (`voice("*RIIING*", ..., sfx)`), at -13 dB so it sits with the other effects.
+
+Danny's piano is synthesised, not sampled (`tools/sounds/gen_piano.py`, numpy only): the 20 keys of the close-up (`assets/sounds/piano/C#4.wav` ...) are played by `Audio.piano_note(key)` from `GameUI.piano_press`, and the tune under the take (`assets/sounds/take_tune.wav`, an original 90 s ballad with one wrong note in bar 11) by `Audio.take_tune(true/false)`: the music steps aside and the tune plays on the Phone bus, as the take comes down Ike's line (`Case5.take`).
 
 ### Voice
 
@@ -421,6 +423,7 @@ metres, y up, and the floor is at y = 0 (points are projected at y = 0.1).
 | `overlay_bases` | `{tag: (x, z)}` | Overlays that stand on the floor: placed under `Actors` and y-sorted with the detective at that floor point. Above that line the sprite is cut to the person only. |
 | `faces` | `{tag: (x, z)}` or `{tag: (x, z, speaker)}` | Talking heads: the person placed with `tag` and their floor point, the y-sort base of their face patches (use the overlay base for a y-sorted overlay person). `speaker` (the `Main.voice()` id) defaults to the tag; one person in two poses is two tags with one speaker (`devin_fridge`, `devin_couch`). `build_scenes.py` adds a `Face_<tag>` FacePatch under `Actors`; for an overlay person it follows the overlay's visibility, and `Room.face_patch(speaker)` returns the one showing. A person who is also an `occluders` cut-out gets that cut-out's baseline, so the face sorts just after it and the cut-out (closed mouth) never covers it. Leave out people whose face can't be seen (turned away, in shadow): the renders would cut noise, and they go on the playthrough's `NO_FACE`. |
 | `occluders` | `{tag: (x, z)}` | Walk-behind props and the floor point they stand on. The set must leave the tag out when it is in `hide` (`if 'tag' not in hide:`), or the cut-out is empty. |
+| `occluder_with` | `{occluder_tag: [tag, ...]}` | Other tags rendered away together with that occluder's own when its cut-out is made, so props standing on it (the register and the glass rack on the bar) are part of the walk-behind and the player can't show through them. Each tag needs an `if 'tag' not in hide:` guard in the set. |
 | `obstacles` | `[(x, z, r) or (x0, z0, x1, z1), ...]` | Footprints pathfinding steers around: round ones (a 12-sided ring) or floor rectangles. |
 | `screen` | `{walk, spawns, scale}` | Close-ups: walk polygon and spawns in pixels, `scale = ((y0, s0), (y1, s1))`. Also skips the light probes. |
 | `char_fill` | `((r, g, b), power)` | Soft fill light from the camera side for the detective, baked into the probes. |

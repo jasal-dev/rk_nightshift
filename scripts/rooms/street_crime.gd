@@ -317,7 +317,7 @@ func _talk_teo() -> void:
 				Game.set_flag("teo_found")
 				await main.say("You found him?")
 				await _teo("Four-thirty, like every morning. Nineteen years. We've been closed since Danny, but Sal said keep coming, we open again Saturday.")
-				await _teo("I let myself in, I take the chairs down, I go to the back for the mop. And he was...")
+				await _teo("I let myself in, I go to the back for the mop. And he was...")
 				await _teo("I called 911 on the bar phone. Then I came out here. I haven't been able to go back in.")
 			"door":
 				await main.say("The front door.")

@@ -262,59 +262,40 @@ func _credits_panel() -> Control:
 	_credits_col.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_credits_col.custom_minimum_size = Vector2(1000, 0)
 	root.add_child(_credits_col)
-	var f := GameUI.FONT
-	_credit_line("A game by", f, 24, GREY)
-	_credit_line("DENARY GAMES", menu_font(), 44, AMBER)
-	_credit_gap(90)
-	_credit_line("MUSIC", menu_font(), 26, BRASS)
-	for t: String in Audio.MUSIC_CREDITS:
-		_credit_line(t, f, 22, CREAM)
-		_credit_gap(14)
-	_credit_gap(50)
-	_credit_line("SOUND", menu_font(), 26, BRASS)
-	for t: String in Audio.SOUND_CREDITS:
-		_credit_line(t, f, 22, CREAM)
-		_credit_gap(14)
-	_credit_gap(90)
-	_credit_line("Thanks for playing", menu_font(), 30, AMBER)
+	fill_credits(_credits_col)
 	return root
 
 
-func _credit_line(text: String, font: Font, size: int, col: Color) -> void:
-	var l := _text_label(text, font, size, col)
+static func fill_credits(col: VBoxContainer) -> void:
+	## The credits' lines: "A game by DENARY GAMES", the music and sound attributions, thanks. Also the end credits (GameUI.show_credits_roll).
+	var f := GameUI.FONT
+	_credit_line(col, "A game by", f, 24, GREY)
+	_credit_line(col, "DENARY GAMES", menu_font(), 44, AMBER)
+	_credit_gap(col, 90)
+	_credit_line(col, "MUSIC", menu_font(), 26, BRASS)
+	for t: String in Audio.MUSIC_CREDITS:
+		_credit_line(col, t, f, 22, CREAM)
+		_credit_gap(col, 14)
+	_credit_gap(col, 50)
+	_credit_line(col, "SOUND", menu_font(), 26, BRASS)
+	for t: String in Audio.SOUND_CREDITS:
+		_credit_line(col, t, f, 22, CREAM)
+		_credit_gap(col, 14)
+	_credit_gap(col, 90)
+	_credit_line(col, "Thanks for playing", menu_font(), 30, AMBER)
+
+
+static func _credit_line(col: VBoxContainer, text: String, font: Font, size: int, color: Color) -> void:
+	var l := _text_label(text, font, size, color)
 	l.custom_minimum_size = Vector2(1000, 0)
-	_credits_col.add_child(l)
+	col.add_child(l)
 
 
-func _credit_gap(h: int) -> void:
+static func _credit_gap(col: VBoxContainer, h: int) -> void:
 	var g := Control.new()
 	g.custom_minimum_size = Vector2(0, h)
 	g.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_credits_col.add_child(g)
-
-
-static func music_credits(font: Font, head_font: Font, font_size: int, col: Color, head_col: Color) -> VBoxContainer:
-	## MUSIC over the five attributions, two to a row, and SOUND over the Freesound ones, three to a row (they're
-	## short; a little smaller), each block as written (line breaks kept). Also the last of the end credits (GameUI.show_music_credits).
-	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 16)
-	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	for section: Array in [["MUSIC", Audio.MUSIC_CREDITS, 2], ["SOUND", Audio.SOUND_CREDITS, 3]]:
-		box.add_child(_text_label(String(section[0]), head_font, font_size, head_col))
-		var blocks: Array = section[1]
-		var per_row: int = section[2]
-		var row: HBoxContainer = null
-		for i in blocks.size():
-			if i % per_row == 0:
-				row = HBoxContainer.new()
-				row.alignment = BoxContainer.ALIGNMENT_CENTER
-				row.add_theme_constant_override("separation", 60)
-				row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-				box.add_child(row)
-			var l := _text_label(String(blocks[i]), font, font_size - (3 if per_row > 2 else 0), col)
-			l.custom_minimum_size = Vector2(1240.0 / per_row, 0)
-			row.add_child(l)
-	return box
+	col.add_child(g)
 
 
 static func _text_label(text: String, font: Font, font_size: int, col: Color) -> Label:

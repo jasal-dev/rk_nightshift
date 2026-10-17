@@ -272,7 +272,7 @@ def main():
         depth = np.nan_to_num(depth, nan=1e6, posinf=1e6)
     for tag in meta.get('occluders', {}):
         # render again without the prop; wherever the prop was the nearest surface, it covers the player
-        S2, _, _, _ = mod.build(hide=hidden | {tag})
+        S2, _, _, _ = mod.build(hide=hidden | {tag} | set(meta.get('occluder_with', {}).get(tag, [])))
         _, d2, _ = S2.render(cam, dict(env, vol_scale=0, reflections=False), a.room + '_occ_' + tag)
         d2 = np.nan_to_num(d2, nan=1e6, posinf=1e6)
         hit = (d2 - depth > np.maximum(0.03, 0.01 * depth)).astype(np.float32)

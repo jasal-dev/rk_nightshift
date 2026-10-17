@@ -251,7 +251,7 @@ def build(hide=(), time='night'):
 LINCOLN = (-6.15, -0.75)      # Brenner's gray Lincoln Town Car, nose to the right, behind Ray's car
 BOLLARD = (5.05, 4.4)         # the iron bollard at the end of the pier, where Ray sets down Danny's phone
 BRENNER = (3.05, 3.65)        # where Brenner stands to talk, facing Ray at the bollard
-HOOD = (-2.95, -0.55)         # Brenner bent over the Lincoln's hood, cuffed
+HOOD = (-3.65, 0.5)           # Brenner bent over the Lincoln's hood from the camera's side, back to us, cuffed
 VANCE = (1.5, -1.85)          # Vance in his doorway
 DOYLE = (-3.55, 2.25)         # by the hood of Ray's car, where the box is laid out
 OKAFOR = (-3.45, 2.2)
@@ -326,9 +326,9 @@ def dawn_extras(S, hide, time, EDGE):
                                         lsp=-4, le=12, hp=6, hy=-2),
                      (BRENNER[0], 0.0, BRENNER[1]), yaw=58, scale=1.07, tag='brenner_gun')
         if 'brenner_cuffed' not in hide:
-            npc.cast(S, 'brenner', dict(npc.STAND, lean=66, lhp=30, rhp=26, lk=8, rk=6, lsp=-22, lsa=10, le=96, lin=96,
+            npc.cast(S, 'brenner', dict(npc.STAND, lean=80, lhp=30, rhp=26, lk=8, rk=6, lsp=-22, lsa=10, le=96, lin=96,
                                         rsp=-22, rsa=10, re=96, rin=96, hp=-36, hy=34, coatlen=0.24),
-                     (HOOD[0], 0.0, HOOD[1]), yaw=-90, scale=1.07, tag='brenner_cuffed')
+                     (HOOD[0], 0.0, HOOD[1]), yaw=180, scale=1.07, tag='brenner_cuffed')
     if time == 'sunrise':
         # Danny's box laid open on the hood of Ray's car, for Doyle (with her), the drive for Okafor, Mara's laptop
         if 'doyle' not in hide:
@@ -379,7 +379,7 @@ def dawn_meta(time, EDGE, bx, bz, px, pz):
              'piling', 'bollard']
     if time == 'dawn':
         hs['brenner'] = ('Brenner', (4.2, 4.15), 'left')
-        hs['brenner_cuffed'] = ('Brenner', (-1.9, 0.75), 'left')
+        hs['brenner_cuffed'] = ('Brenner', (-2.7, 0.8), 'left')
         shapes['brenner'] = rect(BRENNER, 0.36, 1.95)
         shapes['brenner_cuffed'] = [(HOOD[0] - 0.9, 0.0, HOOD[1]), (HOOD[0] + 0.4, 0.0, HOOD[1]),
                                     (HOOD[0] + 0.4, 1.5, HOOD[1]), (HOOD[0] - 0.9, 1.5, HOOD[1])]
@@ -410,8 +410,8 @@ def dawn_meta(time, EDGE, bx, bz, px, pz):
         obstacles=[(bx, bz, 0.45)],
         # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
         faces={'tiny': (2.85, -1.43), 'vance': VANCE,
-               # at sunrise Mara faces the hood, away from us
-               **({k: (p[0], p[1], 'brenner') for k, p in bases.items()} if time == 'dawn'
+               # at sunrise Mara faces the hood, away from us; at dawn cuffed Brenner is bent over it, back to us
+               **({k: (p[0], p[1], 'brenner') for k, p in bases.items() if k != 'brenner_cuffed'} if time == 'dawn'
                   else {k: p for k, p in bases.items() if k != 'mara'})},
         char_fill=((236, 210, 210), 0.1) if time == 'dawn' else ((255, 236, 210), 0.08),
         tint=(0.9, 0.82, 0.86) if time == 'dawn' else (1.0, 0.92, 0.84),

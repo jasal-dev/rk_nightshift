@@ -23,6 +23,10 @@ func _ready() -> void:
 	_sync()
 
 
+func entry_face(_from_room: String) -> String:
+	return "left"     # in at the bar door on the right, facing into the room
+
+
 func _sync() -> void:
 	var out := Game.flag("nina_out")
 	nina.visible = out

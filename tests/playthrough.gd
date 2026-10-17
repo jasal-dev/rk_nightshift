@@ -17,6 +17,7 @@ const NO_FACE := {
 	"norms_diner:devin": "at his door after the drive from Norm's (the room changes after)",
 	"street:sal": "through his door",
 	"pier9_dock:vance": "behind the green door",
+	"pier9_dawn:brenner": "cuffed, bent over the Lincoln's hood, back to us",
 	"mulholland_overlook:shah": "crouched at the car door, her face inside",
 	"stardust_office:shah": "bent over Gus, her face hidden",
 	"stardust_roof:charlie": "under his umbrella across the gap, his face in shadow",

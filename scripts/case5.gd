@@ -130,7 +130,6 @@ static func read_set_list(main: Node) -> void:
 
 # --- the take (Puzzle 5.3) -------------------------------------------------------------------------------------------
 static func take(main: Node) -> void:
-	var first := not Game.flag("heard_take")
 	await main.voice("Talk to me.", CALL_AT, Case4.IKE_COLOR, "ike", true)
 	await main.say("D, E, C, A, F. Lowercase, I'd guess. Decaf.")
 	await main.voice("(typing) ...One try. Okay. I'm in. Two years of takes, Thursdays mostly.", CALL_AT, Case4.IKE_COLOR, "ike", true)
@@ -140,6 +139,7 @@ static func take(main: Node) -> void:
 	await main.ui.fade_to(1.0, 0.8)
 	main.ui.show_scene(TAKE)
 	await main.ui.fade_to(0.0, 1.2)
+	Audio.take_tune(true)
 	var lines := [
 		["", "Piano: 'Round Midnight, slow.", STAGE],
 		["HASKELL", "Harlan, not here. Christ.", HASKELL_COLOR],
@@ -164,8 +164,9 @@ static func take(main: Node) -> void:
 	for l: Array in lines:
 		var who: String = l[0]
 		# the take plays down Ike's line, so the voices come through the phone filter
-		await main.caption((who + ": " if who != "" else "") + String(l[1]), l[2], not first, who.to_lower(), String(l[1]), true)
+		await main.caption((who + ": " if who != "" else "") + String(l[1]), l[2], true, who.to_lower(), String(l[1]), true)
 	await main.ui.fade_to(1.0, 0.8)
+	Audio.take_tune(false)
 	main.ui.hide_scene()
 	await main.ui.fade_to(0.0, 0.8)
 	Game.set_flag("heard_take")
@@ -259,9 +260,9 @@ static func credits(main: Node) -> void:
 		await main.drive_wait(clampf(2.5 + String(c[1]).length() * 0.045, 4.0, 8.0))
 		await main.ui.fade_to(1.0, 0.6)
 	main.ui.fade_rect.color = Color(0, 0, 0, 1)
-	main.ui.show_music_credits()
+	var roll: VBoxContainer = main.ui.show_credits_roll()
 	await main.ui.fade_to(0.0, 0.8)
-	await main.drive_wait(9.0)
+	await main.roll_credits(roll)
 	await main.ui.fade_to(1.0, 0.8)
 	main.ui.hide_scene()
 	Game.set_flag("game_done")
