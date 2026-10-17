@@ -55,9 +55,9 @@ const SILENT_DB := -60.0
 
 var track := ""                 ## the music track playing (or fading in), "" for none
 var ambient := ""               ## the ambience playing, "" for none
-var music_volume := 0.8         ## 0..1, linear, the Music bus
+var music_volume := 0.5         ## 0..1, linear, the Music bus
 var effects_volume := 0.8       ## 0..1, linear, the SFX bus (footsteps and ambience)
-var voice_volume := 0.8         ## 0..1, linear, the Voice bus
+var voice_volume := 0.9         ## 0..1, linear, the Voice bus
 var _voice: AudioStreamPlayer
 var unvoiced: Array[String] = []   ## lines asked for that have no clip, in order (tests/playthrough.gd)
 var _voice_lines := {}          ## id: res:// path, from VOICE_LINES

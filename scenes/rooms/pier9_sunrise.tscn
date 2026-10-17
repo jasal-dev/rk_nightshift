@@ -231,7 +231,7 @@ walk_to = Vector2(1588, 872)
 face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/piling"]
-polygon = PackedVector2Array(1715.5, 1080, 1715, 747.6, 1720.6, 715.8, 1740.8, 670.9, 1748.5, 663.4, 1756, 670.9, 1775.2, 716, 1771, 1080)
+polygon = PackedVector2Array(1653.4, 1080, 1659.2, 490.3, 1788.5, 490.3, 1781.6, 1080)
 
 [node name="bollard" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")

@@ -233,7 +233,8 @@ def build(hide=(), time='night'):
             'warehouse_sign': ('sign', None, 'up'),
             'car': ('car', (-3.6, 2.5), 'left'),
         },
-        hotspot_shapes={'water': [(EDGE + 0.1, -1.1, 12), (EDGE + 0.1, -1.1, -45), (90, -1.1, -45), (90, -1.1, 12)]},
+        hotspot_shapes={'water': [(EDGE + 0.1, -1.1, 12), (EDGE + 0.1, -1.1, -45), (90, -1.1, -45), (90, -1.1, 12)],
+                        'piling': piling_shape(px, pz)},
         hotspot_order=['crane', 'water', 'containers', 'warehouse_sign', 'car', 'green_door', 'radio', 'tiny', 'barrel',
                        'piling'],
         overlays=['hook'],
@@ -355,6 +356,11 @@ def dawn_extras(S, hide, time, EDGE):
                                      hy=-10), (MARA[0], 0.0, MARA[1]), yaw=-75, scale=0.94, tag='mara')
 
 
+def piling_shape(px, pz):
+    """The piling and the boat hook hanging beside it, padded: the hook is a thin pole, hard to hit on its own."""
+    return [(px - 0.6, -2.0, pz), (px + 0.25, -2.0, pz), (px + 0.25, 2.65, pz), (px - 0.6, 2.65, pz)]
+
+
 def dawn_meta(time, EDGE, bx, bz, px, pz):
     def rect(p, w, h):
         x, z = p
@@ -375,6 +381,7 @@ def dawn_meta(time, EDGE, bx, bz, px, pz):
         'lincoln': ('gray Lincoln', (-2.9, 0.75), 'left'),
     }
     shapes = {'water': [(EDGE + 0.1, -1.1, 12), (EDGE + 0.1, -1.1, -45), (90, -1.1, -45), (90, -1.1, 12)],
+              'piling': piling_shape(px, pz),
               'vance': rect((VANCE[0], VANCE[1]), 0.36, 1.8),
               'bollard': [(BOLLARD[0] - 0.3, 0.0, BOLLARD[1]), (BOLLARD[0] + 0.3, 0.0, BOLLARD[1]),
                           (BOLLARD[0] + 0.3, 0.95, BOLLARD[1]), (BOLLARD[0] - 0.3, 0.95, BOLLARD[1])],

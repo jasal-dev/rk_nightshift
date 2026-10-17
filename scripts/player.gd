@@ -274,6 +274,7 @@ func play_action(kind: String) -> void:
 	## One-shot actions: "pickup" (kneel, for things on or near the floor), "take" (standing reach, for a desk,
 	## counter, shelf or someone's hand), "use", "notebook", "shrug", "badge", "look_around".
 	var anim_name := kind
+	var before := facing      # the notebook is a note-taking aside: Ray turns back to whoever he was talking to
 	match kind:
 		"pickup", "take", "use", "notebook":
 			var side := facing if facing in ["left", "right"] else "right"
@@ -289,4 +290,6 @@ func play_action(kind: String) -> void:
 		await get_tree().create_timer(2.0).timeout
 	else:
 		await sprite.animation_finished
+	if kind == "notebook":
+		facing = before
 	_play_idle()

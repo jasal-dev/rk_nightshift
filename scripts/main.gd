@@ -31,7 +31,7 @@ var _load_requested := false
 var _on_title := false      ## the title screen is up and waiting for a choice
 var _menu_busy := false     ## the save / load menu is open (or about to be)
 var _topic_menus := 0       ## topic menus shown in the current conversation (see topics())
-var text_speed := 1         ## index into TEXT_TIME (Slow, Normal, Fast, Manual), set on the title screen's settings panel
+var text_speed := 3         ## index into TEXT_TIME (Slow, Normal, Fast, Manual), set on the title screen's settings panel
 var faceless: Array[String] = []   ## "room:speaker" for lines spoken in a room by someone with no FacePatch there (tests)
 var _talker := ""           ## the speaker whose clip is playing ("ray" for the detective), "" for none
 var _mouth_t := 0.0
@@ -80,7 +80,7 @@ func _apply_settings() -> void:
 	## F11 or Alt+Enter toggles fullscreen; the choice is remembered, and so is the text speed.
 	var cfg := ConfigFile.new()
 	cfg.load(SETTINGS)
-	text_speed = clampi(int(cfg.get_value("text", "speed", 1)), 0, TEXT_TIME.size() - 1)
+	text_speed = clampi(int(cfg.get_value("text", "speed", MANUAL)), 0, TEXT_TIME.size() - 1)
 	if bool(cfg.get_value("video", "fullscreen", false)):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
