@@ -125,7 +125,7 @@ Signals: `inventory_changed`, `item_selected(id)`.
 
 Loading restores the room and position but not mid-conversation state, so a save is only allowed when nothing
 is running (`Main.busy` is false). Settings are stored separately in `user://settings.cfg`:
-`[video] fullscreen`, `[audio] music`, `voice` and `effects` (Music, Voice and SFX bus volumes, 0 to 1, set by `Audio.set_music_volume`, `set_voice_volume` and `set_effects_volume`) and `[text] speed` (0 slow, 1 normal, 2 fast, 3 manual; `Main.TEXT_TIME` scales how long lines stay up, and Manual
+`[video] fullscreen`, `[audio] music`, `voice` and `effects` (Music, Voice and SFX bus volumes, 0 to 1, set by `Audio.set_music_volume`, `set_voice_volume` and `set_effects_volume`) and `[text] mode` ("auto" or "manual", default manual; Auto keeps a line up for its reading time or its voice clip and a click skips it, and Manual
 keeps each line up until a click, see `Main._hold()`). On Windows, `user://` is `%APPDATA%\Godot\app_userdata\Nightshift\`.
 
 **Flag conventions.**
@@ -246,7 +246,7 @@ All UI is built in code in `scripts/ui.gd` (`class_name GameUI`), with DejaVu Sa
 | Speech | `show_speech`, `hide_speech` | `say`, `voice`, `narrate`. Drawn above the fade, so lines read on black (Case 2's doorstep). |
 | Toast | `toast(text, hold)` | Pickups, notebook, save/load. |
 | Choices | `show_choices`, `hide_choices`, `options`, signal `choice_made(i)` | Dialogue; also device buttons. Long lists (the boards' evidence) go into up to three columns under the board, with a smaller font if needed. |
-| Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings (a `SettingsPanel`: fullscreen, text speed, music volume), Credits (slow movie-style scroll: "A game by Denary Games", then the music and sound attributions; Esc or click leaves), Exit (quits), and a SKIP TO row for Case 2 to 5 (`Main.jump_to_case(n)`). `Main._title()` runs it at start, after THE END, and on Esc in a room (`_save_to_title()` opens the save menu first). |
+| Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings (a `SettingsPanel`: fullscreen, text advance, music volume), Credits (slow movie-style scroll: "A game by Denary Games", then the music and sound attributions; Esc or click leaves), Exit (quits), and a SKIP TO row for Case 2 to 5 (`Main.jump_to_case(n)`). `Main._title()` runs it at start, after THE END, and on Esc in a room (`_save_to_title()` opens the save menu first). |
 | Card | `show_card(lines, colors)`, `hide_card` | Case cards and the end card. |
 | Fade | `fade_rect`, `fade_to(alpha, time)` | Room changes, drives. |
 | Murder board | `show_board(question, caption)`, `set_board_question`, `set_board_pins(pins, labels)`, `hide_board` | Deductions. |
@@ -462,7 +462,7 @@ transmittance. `Room.light_at()` interpolates it bilinearly at the detective's f
 ## 11. Testing
 
 `tests/playthrough.tscn` runs the real main scene at 8× speed, clicks hotspots through `Main._run_action`, plays with
-the Manual text speed and ends every line with a real click pushed through the viewport (so an overlay that swallows
+the Manual text mode and ends every line with a real click pushed through the viewport (so an overlay that swallows
 clicks hangs the test), answers choices and device screens by matching text, solves the jigsaw, and checks the flags later
 cases depend on. It ends with `PLAYTHROUGH OK` and exit code 0, or names the step where it got stuck (a step gets
 45 s, or 150 s with `--shots`).

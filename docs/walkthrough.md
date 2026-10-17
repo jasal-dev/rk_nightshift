@@ -87,8 +87,8 @@ does nothing.
 highlighted with a red NEW. The arrows in the corners turn back to earlier cases. Close it with the Close button, Esc,
 a right click, or a click outside the book (Esc here only closes the book, it doesn't save and quit).
 
-**Title screen.** New Game, Load Game (three slots), Settings (fullscreen and text speed: Slow, Normal, Fast, or
-Manual, where every line waits for a click) and Exit. The "SKIP TO" row starts Case 2, 3, 4 or 5 directly with every
+**Title screen.** New Game, Load Game (three slots), Settings (fullscreen and text advance: Auto, where lines move on by themselves and a click skips, or
+Manual, the default, where every line waits for a click) and Exit. The "SKIP TO" row starts Case 2, 3, 4 or 5 directly with every
 earlier case solved, including all three optional seeds.
 
 ---
@@ -775,4 +775,4 @@ Right click any item in the inventory to examine it. Items marked * are optional
 - **Stand still and Ray will help.** Wander for a while without progress and he'll think out loud.
 - **Some pieces of paper matter later.** If something in a case seems unrelated to that case, take it anyway.
 - **Save before big moments** with F5, especially at the end of the night. Esc opens the save menu before it goes back to the title.
-- **Prefer to read at your own pace?** Set the text speed to Manual in Settings, and each line waits for a click.
+- **Prefer to read at your own pace?** Manual is the default text advance: each line waits for a click. Auto in Settings moves on by itself.

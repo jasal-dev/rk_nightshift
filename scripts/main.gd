@@ -31,7 +31,7 @@ var _load_requested := false
 var _on_title := false      ## the title screen is up and waiting for a choice
 var _menu_busy := false     ## the save / load menu is open (or about to be)
 var _topic_menus := 0       ## topic menus shown in the current conversation (see topics())
-var text_speed := 3         ## index into TEXT_TIME (Slow, Normal, Fast, Manual), set on the title screen's settings panel
+var text_speed := 1         ## AUTO or MANUAL, set on the title screen's settings panel
 var faceless: Array[String] = []   ## "room:speaker" for lines spoken in a room by someone with no FacePatch there (tests)
 var _talker := ""           ## the speaker whose clip is playing ("ray" for the detective), "" for none
 var _mouth_t := 0.0
@@ -40,8 +40,8 @@ var _ray_heard := false     ## the clip has been heard (output starts a moment a
 
 
 const SETTINGS := "user://settings.cfg"
-const TEXT_TIME := [1.5, 1.0, 0.65, 1.0]   ## how long lines stay up, per text speed
-const MANUAL := 3                          ## the Manual text speed: a line stays up until a click
+const AUTO := 0                            ## the Auto text mode: a line stays up for its reading time or its voice clip, a click skips it
+const MANUAL := 1                          ## the Manual text mode: a line stays up until a click
 ## Talking heads: while a clip plays, the speaker's mouth (FacePatch) follows the voice level (Audio.voice_level),
 ## changing shape at most every MOUTH_STEP seconds; Ray's talk loop runs only while he is audible, so he rests in pauses.
 const MOUTH_STEP := 0.07
@@ -80,7 +80,7 @@ func _apply_settings() -> void:
 	## F11 or Alt+Enter toggles fullscreen; the choice is remembered, and so is the text speed.
 	var cfg := ConfigFile.new()
 	cfg.load(SETTINGS)
-	text_speed = clampi(int(cfg.get_value("text", "speed", MANUAL)), 0, TEXT_TIME.size() - 1)
+	text_speed = AUTO if String(cfg.get_value("text", "mode", "manual")) == "auto" else MANUAL
 	if bool(cfg.get_value("video", "fullscreen", false)):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
@@ -114,7 +114,7 @@ func set_text_speed(index: int) -> void:
 	text_speed = index
 	var cfg := ConfigFile.new()
 	cfg.load(SETTINGS)
-	cfg.set_value("text", "speed", index)
+	cfg.set_value("text", "mode", "auto" if index == AUTO else "manual")
 	cfg.save(SETTINGS)
 
 
@@ -132,10 +132,6 @@ func open_settings() -> void:
 func close_settings() -> void:
 	ui.close_settings()
 	get_tree().paused = false
-
-
-func _text_time() -> float:
-	return float(TEXT_TIME[text_speed])
 
 
 # --- title / ending ---------------------------------------------------------
@@ -856,13 +852,13 @@ func _check_face(speaker: String, phone: bool) -> void:
 
 
 func _hold(duration: float, skippable := true, at_least := 0.0) -> void:
-	## Keep a line up for `duration` seconds, scaled by the text speed, or until a click (Space, Esc).
+	## Keep a line up for `duration` seconds, or until a click (Space, Esc).
 	## With the Manual text speed it stays until a click. A line that isn't skippable stays at least that long.
 	## `at_least` (seconds, not scaled) keeps a spoken line up until its clip has played.
 	_speaking = true
 	_skip = false
 	var manual := text_speed == MANUAL
-	var d := duration if manual else maxf(duration * _text_time(), at_least)
+	var d := duration if manual else maxf(duration, at_least)
 	var t := 0.0
 	while true:
 		if _skip and not skippable and t < d:

@@ -1,6 +1,6 @@
 class_name SettingsPanel
 extends PanelContainer
-## SETTINGS: fullscreen, text speed, music, voice and effects volume, then BACK. The title screen shows it in place of
+## SETTINGS: fullscreen, text advance, music, voice and effects volume, then BACK. The title screen shows it in place of
 ## its menu, and the cog at the right end of the inventory bar opens it over a room (GameUI.open_settings, the game
 ## paused). Emits `fullscreen_pressed` and `text_speed_chosen`, which Main applies and remembers; the Music, Voice and
 ## Effects volume sliders go straight to the Audio autoload, which remembers them. BACK (or Esc, handled by whoever shows
@@ -11,7 +11,7 @@ signal fullscreen_pressed
 signal text_speed_chosen(index: int)
 signal closed
 
-const TEXT_SPEEDS := ["Slow", "Normal", "Fast", "Manual"]   ## Main.TEXT_TIME; Manual waits for a click
+const TEXT_SPEEDS := ["Auto", "Manual"]   ## Main.AUTO, MANUAL: Auto moves on by itself (a click skips), Manual waits for a click
 
 var music_slider: HSlider
 var effects_slider: HSlider
@@ -34,7 +34,7 @@ func _init(text_speed: int) -> void:
 	_fullscreen_button.pressed.connect(func(): fullscreen_pressed.emit())
 	row.add_child(_fullscreen_button)
 
-	row = TitleScreen.menu_row(vb, "Text speed")
+	row = TitleScreen.menu_row(vb, "Text advance")
 	for i in TEXT_SPEEDS.size():
 		var b := TitleScreen.menu_button(String(TEXT_SPEEDS[i]), 34)
 		b.custom_minimum_size = Vector2(130, 0)

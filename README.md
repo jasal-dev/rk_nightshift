@@ -97,8 +97,8 @@ that's an exact 2×. The window opens at the largest 16:9 size that fits your sc
 | **Esc** | Save menu, with EXIT WITHOUT SAVING, then back to the title screen (when nothing else is open) |
 | **F11** or **Alt+Enter** | Toggle fullscreen (remembered between sessions) |
 
-The game opens on the title screen: New Game, Load Game (three slots), Settings (fullscreen, and text speed: Slow, Normal, Fast,
-or Manual, where each line waits for a click) and Exit, which quits the game.
+The game opens on the title screen: New Game, Load Game (three slots), Settings (fullscreen, and text advance: Auto, where lines move on by themselves and a click skips, or
+Manual, the default, where each line waits for a click) and Exit, which quits the game.
 
 **Walkthrough (spoilers), Case 1:**
 
