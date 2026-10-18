@@ -306,7 +306,8 @@ def build(hide=()):
         occluders={'raycar': (RAYCAR[0], RAYCAR[1] - 0.95), 'busstop': (BUS[0], BUS[1]),
                    'patrol_car': (CAR[0], CAR[1] + 0.95), 'spotlight': (CAR[0], CAR[1] + 0.95),
                    'doss': (DOSS[0], DOSS[1] + 0.1)},
-        obstacles=[(CAR[0] - 1.6, CAR[1], 1.0), (CAR[0], CAR[1], 1.0), (CAR[0] + 1.6, CAR[1], 1.0),
+        obstacles=[(CAR[0] - 2.55, CAR[1] - 1.05, CAR[0] + 2.55, CAR[1] + 1.05),                      # the whole car, corners included
+                   
                    (RAYCAR[0] - 0.9, RAYCAR[1], 0.95), (RAYCAR[0] + 0.7, RAYCAR[1], 0.95), (DOSS[0], DOSS[1], 0.3),
                    (cpt(1.6, 0, 1.0)[0] + 0.1, cpt(1.6, 0, 1.0)[2] + 0.1, 0.32)],
         # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches

@@ -233,7 +233,7 @@ the stairs go to the dark one until the sign's breaker is on.
 Case 4's cast is in `npc.CAST` as well: Preacher bronze, Doss steel blue, Courtney lilac, Andre mint, Crane cream, Ike
 lime. The rig gained a beard, a headset, a hood and shirtsleeves, and props (a glass, a clipboard, a Bible, a phone).
 Cars come from `tools/r3/cars.py` (a sedan or SUV in its own frame, a rear door that can stand open, a broken
-headlight). States that change mid-scene are overlays: Preacher in the patrol car or at his tent, Doss's spotlight on the
+headlight, `arches=True` to cut wheel arches so the tyres show above the sill). States that change mid-scene are overlays: Preacher in the patrol car or at his tent, Doss's spotlight on the
 road or on the reeds, the tarp over Crane's Audi, Crane standing or sitting on his step. The headlight fit is
 `ui.show_jigsaw()`: a picture with holes and loose pieces you drag in and click to turn (`tools/r3/gen_closeups.py`
 draws them and prints each piece's target).

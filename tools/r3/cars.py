@@ -26,10 +26,10 @@ def mats(S, name, paint, lights=True):
 
 
 def car(S, name, origin, yaw, paint, L=4.9, W=1.86, H=1.45, kind='sedan', lights=True, tag=None,
-        rear_door_open=0.0, door_side=-1, broken='', dent=False, interior=False):
+        rear_door_open=0.0, door_side=-1, broken='', dent=False, interior=False, arches=False):
     """Build a car with its floor centre at `origin`, nose pointing along -z turned by `yaw` degrees.
     kind: 'sedan' | 'suv' | 'hatch'. rear_door_open: degrees a rear door stands open (shows the back seat),
-    door_side: -1 the driver's side, 1 the passenger's. broken: 'r' or 'l' leaves that headlight a black hole. interior: model seats (for open doors)."""
+    door_side: -1 the driver's side, 1 the passenger's. arches: cut wheel arches so the upper half of each tyre shows. broken: 'r' or 'l' leaves that headlight a black hole. interior: model seats (for open doors)."""
     mats(S, name, paint, lights)
     F = Frame(origin, Ry(yaw))
     pt = lambda x, y, z: tuple(F.to((x, y, z)))
@@ -139,6 +139,11 @@ def car(S, name, origin, yaw, paint, L=4.9, W=1.86, H=1.45, kind='sedan', lights
     wb = L * 0.3
     for sx in (-1, 1):
         for wz in (-wb, wb):
+            if arches:                                           # a wheel arch cut through the slab, lined dark
+                af = Frame(pt(sx * (hw - 0.1), 0.38, wz), Ry(yaw) @ Rz(90))
+                S.tcyl(af, (0, 0, 0), (0.37, 0.37), (0.37, 0.37), 0.2, m('hole'), op=1)
+                lf = Frame(pt(sx * (hw - 0.3), 0.38, wz), Ry(yaw) @ Rz(90))
+                S.tcyl(lf, (0, 0, 0), (0.37, 0.37), (0.37, 0.37), 0.01, m('hole'))
             wf = Frame(pt(sx * (hw - 0.12), 0.33, wz), Ry(yaw) @ Rz(90))
             S.tcyl(wf, (0, 0, 0), (0.33, 0.33), (0.33, 0.33), 0.11, m('tire'))
             S.tcyl(wf, (0, -0.11 * sx, 0), (0.2, 0.2), (0.2, 0.2), 0.012, m('rim'))

@@ -167,7 +167,7 @@ def build(hide=()):
 
     # ---------------------------------------------------------------- the Audi, washed, nose toward us
     apt = cars.car(S, 'audi', (AUDI[0], 0.0, AUDI[1]), 180, (98, 112, 128), L=4.95, W=1.88, H=1.45, lights=False,
-                   broken='r', dent=True, tag='audi')
+                   broken='r', dent=True, arches=True, tag='audi')
     with S.tag('grille'):
         F = Frame((AUDI[0], 0.0, AUDI[1]), Ry(180))
         S.box(F, (0.12, 0.6, -2.47), (0.06, 0.02, 0.004), 0.0, 'yellow')                    # Chomp yellow in the grille
