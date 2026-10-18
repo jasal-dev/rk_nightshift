@@ -151,6 +151,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.say("Twenty of them, signed, ready to hand out.")
 				main.clue("clue_headshots_left")
 				await main.say("She came back at two in the morning for her headshots. Here they are.")
+				await main.say("There's more under that envelope.")
 			elif not Game.flag("clue_practice_sigs"):
 				await main.player.play_action("use")
 				await main.say("Under the envelope, a legal pad. Somebody's written \"Lyle Brandt\" forty times in gold pen.")
@@ -264,6 +265,7 @@ func _eviction_letter() -> void:
 	await main.say("Last Thursday. A week old. If Pryce wanted Gus gone, all they had to do was wait twenty-three days.")
 	main.ui.hide_paper()
 	main.clue("clue_eviction")
+	await main.say("There's more under that.")
 
 
 func _catalogue() -> void:
@@ -277,6 +279,7 @@ func _catalogue() -> void:
 	main.ui.hide_paper()
 	Game.set_flag("got_catalogue")
 	await main.give("catalogue", false)
+	await main.say("There's more under the letter.")
 
 
 func _brenner_card() -> void:

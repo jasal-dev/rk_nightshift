@@ -4857,6 +4857,27 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
+	"43c9a2b7c1d6": {
+		"speaker": "ray",
+		"text": "There's more under that envelope.",
+		"file": "res://assets/voice/ray/43c9a2b7c1d6.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"49c054d6ccab": {
+		"speaker": "ray",
+		"text": "There's more under that.",
+		"file": "res://assets/voice/ray/49c054d6ccab.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"4e087f6a7776": {
+		"speaker": "ray",
+		"text": "There's more under the letter.",
+		"file": "res://assets/voice/ray/4e087f6a7776.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
 	"0137e5f565f3": {
 		"speaker": "ray",
 		"text": "Under the envelope, a legal pad. Somebody's written \"Lyle Brandt\" forty times in gold pen.",
