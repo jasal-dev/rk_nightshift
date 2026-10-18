@@ -186,17 +186,16 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 
 func _missing_for_crane() -> String:
-	## What Ray still has to find elsewhere before Crane can be taken apart; "" when it's all in hand. Never a lock: the
-	## street lets him go back out and fetch it.
+	## Whether Ray still has something to find elsewhere before Crane can be taken apart; "" when it's all in hand.
+	## Never a lock: the street lets him go back out and get it. The line doesn't say what is missing.
+	var missing := false
 	if not Game.flag("crane_lie1_broken"):
-		if not Game.has_item("valet_ticket") and not Game.flag("clue_gate_clip"):
-			return "I've got nothing to put in front of him yet. Somebody on Glendower saw him take those keys. I'll go ask."
+		missing = not Game.has_item("valet_ticket") and not Game.flag("clue_gate_clip")
 	elif not Game.flag("crane_lie2_broken"):
-		if not Game.has_item("lens_piece") or not Game.has_item("lens_shard"):
-			return "I'm missing something. Half a headlight and a sliver are still out there, by the river. I'll go find them."
+		missing = not Game.has_item("lens_piece") or not Game.has_item("lens_shard")
 	elif not Game.flag("clue_moved"):
-		return "I'm missing something. The river bank has more to say about how Owen got down there. I'll go back and listen."
-	return ""
+		missing = true
+	return "I don't have enough on him yet. I need more evidence." if missing else ""
 
 
 func _crane(line: String) -> void:
