@@ -15300,5 +15300,47 @@
 		"file": "res://assets/voice/ray/c220469451f0.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
+	},
+	"cdf25efd52ab": {
+		"speaker": "ray",
+		"text": "The board can wait. Sal's tab book can't. It's still by the register.",
+		"file": "res://assets/voice/ray/cdf25efd52ab.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"ec7dd647cc6e": {
+		"speaker": "ray",
+		"text": "Before I pin Walt to Sal's bar, I want what Sal wrote down. His tab book's still by the register.",
+		"file": "res://assets/voice/ray/ec7dd647cc6e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"1d9154e62260": {
+		"speaker": "ray",
+		"text": "Can I have Kenji's keys back?",
+		"file": "res://assets/voice/ray/1d9154e62260.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"8132285b889d": {
+		"speaker": "park",
+		"text": "Here. I'll want them back before you go, Detective. They're on my log.",
+		"file": "res://assets/voice/park/8132285b889d.ogg",
+		"voice": "kokoro: af_bella, speed 1.05",
+		"sig": "dafdfc66ac"
+	},
+	"9b77b81c29a6": {
+		"speaker": "park",
+		"text": "Back on the log. Thanks, Detective.",
+		"file": "res://assets/voice/park/9b77b81c29a6.ogg",
+		"voice": "kokoro: af_bella, speed 1.05",
+		"sig": "dafdfc66ac"
+	},
+	"94a4a135180e": {
+		"speaker": "ray",
+		"text": "Locked. Park has Kenji's keys.",
+		"file": "res://assets/voice/ray/94a4a135180e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
 	}
 }

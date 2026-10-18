@@ -145,6 +145,8 @@ func _talk_to_park() -> void:
 			opts.append("Who was his last passenger?"); keys.append("passenger")
 		if Game.flag("park_what") and Game.flag("clue_brielle_alibi") and not Game.flag("clue_walker"):
 			opts.append("Anything else from the couple?"); keys.append("couple")
+		if Game.flag("park_has_keys") and not Game.flag("clue_empty_case"):
+			opts.append("Can I have Kenji's keys back?"); keys.append("keys")
 		opts.append("That'll do."); keys.append("done")
 		var c: int = await main.topics(opts)
 		if c < 0:
@@ -174,6 +176,10 @@ func _talk_to_park() -> void:
 				await _park("They figured he was a hiker.")
 				await main.say("Hikers go up.")
 				main.clue("clue_walker")
+			"keys":
+				await _park("Here. I'll want them back before you go, Detective. They're on my log.")
+				Game.set_flag("park_has_keys", false)
+				await main.give("kenji_keys")
 			"done":
 				await _park("I'll be at the tape, Detective.")
 				return
@@ -234,10 +240,17 @@ func _leave() -> void:
 
 func _park_takes_keys() -> void:
 	## Once Ray has picked a destination (not on "Not yet."), the first time: Park takes Kenji's keys and the car.
+	## If Ray asked for the keys back (for the glovebox), she takes them again as he leaves.
 	if Game.flag("left_overlook"):
+		if Game.has_item("kenji_keys"):
+			await main.say("Park. His keys.")
+			main.take("kenji_keys")
+			Game.set_flag("park_has_keys")
+			await _park("Back on the log. Thanks, Detective.")
 		return
 	Game.set_flag("left_overlook")
 	if Game.has_item("kenji_keys"):
 		await main.say("Park. His keys.")
 		main.take("kenji_keys")
+		Game.set_flag("park_has_keys")
 	await _park("I'll ride down with the car. Call if you need a unit, Detective. I'll be in the neighborhood all night.")

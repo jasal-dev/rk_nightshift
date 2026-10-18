@@ -150,6 +150,10 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 					# Shah's "How did he die?" is needed at the pier (Sal's tab book against Brenner)
 					await main.say("I never asked Shah how Sal died. Everything about that night starts with the hold on his throat. Back to the Blue Note.")
 					await main.change_room("blue_note_back", "squad_room")
+				elif Game.flag("heard_take") and not Game.flag("case5_deduced") and not Game.has_item("tab_book"):
+					# the board needs Sal's tab book (He was in the bar at 3:20), so Ray goes back for it
+					await main.say("The board can wait. Sal's tab book can't. It's still by the register.")
+					await main.change_room("street_crime", "squad_room")
 				elif Game.flag("heard_take") and not Game.flag("case5_deduced"):
 					await main.say("Not yet. The board first.")
 				else:
@@ -1082,6 +1086,9 @@ func _board5(verb: String, item: String) -> void:
 		await main.say("Packed.")
 	elif Game.flag("case5_deduced"):
 		await _pack_box()
+	elif Game.flag("heard_take") and not Game.has_item("tab_book"):
+		# the only card for "He was in the bar at 3:20"
+		await main.say("Before I pin Walt to Sal's bar, I want what Sal wrote down. His tab book's still by the register.")
 	elif Game.flag("heard_take"):
 		await _deduction5(item)
 	elif item == "tab_book":

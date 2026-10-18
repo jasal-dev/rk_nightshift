@@ -229,7 +229,8 @@ Rosa, a waitress at Norm's; Heck Dominguez, a rival driver; Devin Clark, Kenji's
 5. Use the **door pocket** to take **Norm's receipt** (table 6, 12:14 a.m.).
 6. Use the **sun visor** to take **Kenji's driver card**.
 7. **(optional)** Use the **dashcam mount** and the **cups**, and look at the back seat.
-8. Use **Out** to climb back out, then use **your car**. Park takes Kenji's keys. Pick **"Norm's on Sunset"**.
+8. Use **Out** to climb back out, then use **your car**. Park takes Kenji's keys. Pick **"Norm's on Sunset"**. (If you skipped the glovebox, ask Park
+   "Can I have Kenji's keys back?" when you come back up; she takes them again when you drive off.)
 
 You can't leave until you've had Park's answer about the passenger and worked out the off-app trip. Norm's and the
 apartment can be visited in either order, but Norm's first makes the apartment easier.
@@ -556,7 +557,8 @@ You start with **your phone** in the inventory. Click it (left or right) to use 
 
 #### `[C5.6]` Room 214: the last board
 
-Use the **murder board** before anything else (the door says "Not yet. The board first.").
+Use the **murder board** before anything else (the door says "Not yet. The board first."). Without Sal's tab book the
+board can't be finished, so the door lets you back out to fetch it from the bar.
 
 1. **"Who for?"** Answer: **"Walt Brenner"**.
 2. Pin how he got to Sal:
@@ -715,7 +717,7 @@ Right click any item in the inventory to examine it. Items marked * are optional
 
 | Item | Where | Use |
 |---|---|---|
-| Kenji's keys | Ignition, after reading the dashboard screen | Glovebox; Park takes them when you leave |
+| Kenji's keys | Ignition, after reading the dashboard screen | Glovebox; Park takes them when you leave (ask her for them back) |
 | Norm's receipt | Door pocket | Rosa, for the card slip |
 | Kenji's driver card | Sun visor | Show it to Rosa |
 | photo of Kenji's screen* | Glide app, Wednesday's ride | Seed for the best ending |

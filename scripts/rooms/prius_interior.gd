@@ -122,7 +122,12 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 					await main.say("Twelve slots for memory cards. Somebody emptied a year.")
 					main.clue("clue_empty_case")
 			elif await _gloves(item):
-				await main.say("Empty case, empty year." if Game.flag("clue_empty_case") else "Locked.")
+				if Game.flag("clue_empty_case"):
+					await main.say("Empty case, empty year.")
+				elif Game.flag("park_has_keys"):
+					await main.say("Locked. Park has Kenji's keys.")
+				else:
+					await main.say("Locked.")
 
 		"back_seat":
 			if verb == "look":

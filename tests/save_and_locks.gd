@@ -29,6 +29,9 @@ func _run() -> void:
 	_step_started = Time.get_ticks_msec()
 	_step = "_case5_door"
 	await _case5_door()
+	_step_started = Time.get_ticks_msec()
+	_step = "_case5_tab_book"
+	await _case5_tab_book()
 	if _failed:
 		return
 	print("SAVE AND LOCK CHECKS OK")
@@ -176,6 +179,20 @@ func _overlook_menu() -> void:
 	await act("visor")
 	if not Game.has_item("driver_card"):
 		_fail("the driver card should still be on the visor, back at the overlook")
+	# Park gives the keys back for the glovebox, and takes them again as Ray drives off
+	await act("out")
+	await expect_room("mulholland_overlook")
+	await act("park", "use", "", ["Can I have Kenji's keys back?", "That'll do."])
+	if not Game.has_item("kenji_keys") or Game.flag("park_has_keys"):
+		_fail("Park should hand Kenji's keys back")
+	await act("inside")
+	await act("glovebox", "use", "kenji_keys")
+	expect(["clue_empty_case"])
+	await act("out")
+	await act("car", "use", "", ["Norm's on Sunset"])
+	await expect_room("norms_diner")
+	if Game.has_item("kenji_keys") or not Game.flag("park_has_keys"):
+		_fail("driving off again should hand Park the keys again")
 
 
 func _phone_click() -> void:
@@ -205,3 +222,24 @@ func _case5_door() -> void:
 	Game.set_flag("clue_choke")
 	await act("bar_door")
 	await expect_room("blue_note_bar")
+
+
+func _case5_tab_book() -> void:
+	print("Case 5: after the take, Room 214's door lets Ray go back for Sal's tab book")
+	Game.reset()
+	for f in ["case4_done", "case5_started", "clue_nina_call", "clue_choke", "heard_take", "board_envelope",
+			"clue_brenner_alone", "clue_take"]:
+		Game.set_flag(f)
+	await main.change_room("squad_room", "street")
+	await _idle()
+	await act("case_board")
+	if main.ui.board != null and main.ui.board.visible:
+		_fail("the board shouldn't open without the tab book")
+	await act("door")
+	await expect_room("street_crime")
+	Game.add_item("tab_book")
+	Game.set_flag("got_tab_book")
+	await act("precinct_door")
+	await expect_room("squad_room")
+	await act("door")
+	await expect_room("squad_room")                  # with the book in hand, the board comes first again
