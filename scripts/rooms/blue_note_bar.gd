@@ -7,7 +7,7 @@ extends Room
 ## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
 const VERBS := {
 	"mirror": "look", "booths": "look", "chairs": "look", "front_door": "go", "back_door": "go", "register": "open",
-	"set_list": "take", "piano": "play"
+	"tab_book": "take", "set_list": "take", "piano": "play"
 }
 
 @onready var ledger: Sprite2D = $Ledger
@@ -26,12 +26,14 @@ func entry_face(from_room: String) -> String:
 
 func _sync() -> void:
 	ledger.visible = not Game.flag("got_tab_book")
+	hotspot("tab_book").enabled = ledger.visible
 	setlist.visible = not Game.flag("got_set_list")
 
 
 func on_enter(_from_room: String) -> void:
 	if not Game.flag("in_blue_note"):
 		Game.set_flag("in_blue_note")
+		main.player.face("down")
 		await main.wait(0.3)
 		await main.say("The Blue Note. I used to come Thursdays, before I went to nights.")
 		await main.say("Sal kept it like a church. Somebody came in and said a different kind of prayer.")
@@ -44,22 +46,27 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 	match hs.id:
 		"register":
 			if verb == "look":
-				await main.say("A fat green ledger by the register. Sal's tab book." if not Game.flag("got_tab_book")
-						else "The register. Sal rang up thirty-one years on it.")
-				if Game.flag("clue_tab_habit") and not Game.flag("got_tab_book"):
+				await main.say("The register. Sal rang up thirty-one years on it.")
+			elif item != "":
+				await default_response(verb, item)
+			else:
+				await main.player.play_action("use")
+				await main.say("The till's empty; the bar's been closed since Tuesday. Nobody came here for money.")
+				main.clue("clue_cash")
+
+		"tab_book":
+			if verb == "look":
+				await main.say("A fat green ledger by the register. Sal's tab book.")
+				if Game.flag("clue_tab_habit"):
 					await main.say("\"If it isn't in the book, it didn't happen.\"")
 			elif item != "":
 				await default_response(verb, item)
-			elif not Game.flag("got_tab_book"):
+			else:
 				await main.player.play_action("take")
 				Game.set_flag("got_tab_book")
 				_sync()
 				await main.give("tab_book", false)
 				await main.say("Sal's tab book. Three pages with bookmarks in them. Right-click it to read it.")
-			else:
-				await main.player.play_action("use")
-				await main.say("The till's empty; the bar's been closed since Tuesday. Nobody came here for money.")
-				main.clue("clue_cash")
 
 		"rack":
 			if verb == "look":

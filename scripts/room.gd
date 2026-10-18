@@ -184,6 +184,15 @@ func verb_for(hs: Hotspot) -> String:
 	return String(verbs.get(hs.id, "use"))
 
 
+func face_toward(id: String) -> void:
+	## Ray turns to the character `id` (left or right; the camera when they're straight ahead or behind a prop).
+	var hs := hotspot(id)
+	if hs == null or player == null:
+		return
+	var dx := speaker_at(id).x - player.position.x
+	player.face("down" if absf(dx) < 60.0 else ("right" if dx > 0.0 else "left"))
+
+
 func entry_face(_from_room: String) -> String:
 	## Which way Ray faces on coming in from `from_room` ("left", "right", "up", "down"), or "" for Main's default.
 	return ""

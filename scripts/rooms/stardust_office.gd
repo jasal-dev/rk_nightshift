@@ -28,11 +28,13 @@ func _sync() -> void:
 func on_enter(from_room: String) -> void:
 	if from_room == "stardust_shop" and not Game.flag("in_office"):
 		Game.set_flag("in_office")
+		main.player.face("down")
 		await main.wait(0.3)
 		await main.say("Gus's office. Everything he ever loved, filed under \"later.\"")
 		await main.say("Gloves on before I touch any of it.")
 		await main.player.play_action("use")
 		main.ui.toast("Nitrile gloves on.")
+		face_toward("shah")
 		await _shah("Look at that. You can be taught.")
 		await main.say("You've been saying that for eleven years.")
 		await _shah("And look how long it took.")

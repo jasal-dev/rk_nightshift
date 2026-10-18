@@ -11,6 +11,7 @@ func on_enter(_from_room: String) -> void:
 		return
 	if not Game.flag("at_lab"):
 		Game.set_flag("at_lab")
+		face_toward("ike")
 		await main.wait(0.4)
 		await _ike("Kessler. You only come here when it's weird.")
 		await main.say("It's weird.")

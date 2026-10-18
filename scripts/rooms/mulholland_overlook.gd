@@ -20,8 +20,10 @@ func _ready() -> void:
 func on_enter(from_room: String) -> void:
 	if from_room == "drive" and not Game.flag("met_park"):
 		Game.set_flag("met_park")
+		main.player.face("down")
 		await main.wait(0.4)
 		await main.say("The overlook. Best view in Los Angeles. He had it all to himself, and he isn't looking.")
+		face_toward("park")
 		await _park("Detective Kessler? Officer Park. Lena. I've held the scene since one twenty-two. Nobody's touched the car but Dr. Shah.")
 		await main.say("Who found him?")
 		await _park("A couple came up to, uh, look at the view. Engine running, wipers going, nobody moving. I took their statement and let them go home.")

@@ -35,6 +35,7 @@ func _sync() -> void:
 func on_enter(_from_room: String) -> void:
 	if not Game.flag("met_devin"):
 		Game.set_flag("met_devin")
+		face_toward("devin")
 		await main.say("I'm sorry. Kenji was found dead tonight, in his car, up on Mulholland.")
 		await main.wait(1.0)
 		await _devin("No. No, no. What happened? Was it a crash?")

@@ -33,6 +33,7 @@ func _sync() -> void:
 func on_enter(from_room: String) -> void:
 	if from_room == "street" and not Game.flag("pier_arrived"):
 		Game.set_flag("pier_arrived")
+		main.player.face("down")
 		await main.say("Pier 9. The ocean smells like diesel and money.")
 		await main.say("Green door. And a man the size of the door in front of it.")
 	elif from_room == "vance_office" and Game.flag("knows_envelope") and not Game.flag("said_barrel_line"):

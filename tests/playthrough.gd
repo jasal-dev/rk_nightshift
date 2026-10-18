@@ -1021,8 +1021,8 @@ func _case5() -> void:
 	await expect_room("blue_note_bar")
 
 	print("Case 5, scene 2: the bar")
-	await act("register", "look")
-	await act("register")                               # the tab book
+	await act("tab_book", "look")
+	await act("tab_book")                               # the tab book
 	await act("register")                               # the till: not a robbery
 	await _idle()
 	main.busy = true

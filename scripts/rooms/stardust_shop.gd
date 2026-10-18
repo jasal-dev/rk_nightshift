@@ -42,7 +42,7 @@ func on_enter(from_room: String) -> void:
 		main.player.face("down")
 		await main.wait(0.4)
 		await main.say("Stardust Memorabilia. Sixty years of other people's dreams, sold by the square inch.")
-		main.player.face("left")
+		face_toward("park")
 		await _park("Detective. Small city tonight.")
 		await main.say("It always is, after midnight.")
 		await _park("Gus Lindqvist, seventy-one, the owner. He's in back, at the bottom of the roof stairs. Dr. Shah's with him.")
@@ -113,13 +113,16 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 		"front_door":
 			if item != "":
 				await default_response(verb, item)
-			elif not Game.flag("clue_glass_out"):
-				await main.say("The glass in the door is smashed. Most of it is out on the sidewalk, on the star of a TV cowboy nobody remembers.")
-				await main.say("Break into a shop and the glass lands inside. This glass went out.")
-				main.clue("clue_glass_out")
-				await _staged()
 			elif verb == "look":
-				await main.say("Smashed. Rain's coming through the hole.")
+				if Game.flag("clue_glass_out"):
+					await main.say("Smashed. Rain's coming through the hole.")
+				else:
+					await main.say("The glass in the door is smashed. Most of it is out on the sidewalk, on the star of a TV cowboy nobody remembers.")
+					await main.say("Break into a shop and the glass lands inside. This glass went out.")
+					main.clue("clue_glass_out")
+					await _staged()
+			elif not Game.flag("clue_glass_out"):
+				await main.say("Not yet. I want a good look at that door first.")
 			elif not Game.flag("pearl_arrested"):
 				await main.say("Not yet. Gus is still at the bottom of the stairs.")
 			elif not Case3.has_motive_card():

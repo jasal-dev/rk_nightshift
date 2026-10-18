@@ -31,8 +31,10 @@ func _sync() -> void:
 func on_enter(_from_room: String) -> void:
 	if not Game.flag("in_channel"):
 		Game.set_flag("in_channel")
+		main.player.face("down")
 		await main.wait(0.4)
 		await main.say("The Los Angeles River. Fifty-one miles of concrete and three inches of water, doing an impression of a river.")
+		face_toward("shah")
 		await _shah("Third time tonight, Ray. One more and I get a free coffee.")
 		await main.say("Make it two more and I'll buy.")
 

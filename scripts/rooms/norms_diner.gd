@@ -15,7 +15,9 @@ const VERBS := {
 func on_enter(from_room: String) -> void:
 	if not Game.flag("been_to_norms"):
 		Game.set_flag("been_to_norms")
+		main.player.face("down")
 		await main.say("Norm's. Open twenty-four hours since 1957. The coffee's improved since then. Not by much.")
+		face_toward("rosa")
 		await _rosa("Sit anywhere, hon. I'll get to you when I get to you.")
 
 

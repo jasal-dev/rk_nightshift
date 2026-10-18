@@ -6152,6 +6152,13 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
+	"a617e0a87062": {
+		"speaker": "ray",
+		"text": "Not yet. I want a good look at that door first.",
+		"file": "res://assets/voice/ray/a617e0a87062.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
 	"11f17402befb": {
 		"speaker": "ray",
 		"text": "Smashed. Rain's coming through the hole.",

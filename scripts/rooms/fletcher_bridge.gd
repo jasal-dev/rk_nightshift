@@ -32,8 +32,10 @@ func _sync() -> void:
 func on_enter(from_room: String) -> void:
 	if from_room == "drive" and not Game.flag("met_doss"):
 		Game.set_flag("met_doss")
+		main.player.face("down")
 		await main.wait(0.4)
 		await main.say("Fletcher Drive. Built in 1927, back when the city still thought the river was worth looking at.")
+		face_toward("doss")
 		await _doss("Detective! Brian Doss, Northeast. Sorry to drag you out. Honestly, it's a wrap. Kid's bike, guy's tent. Coroner's just being thorough.")
 		await main.say("She usually is.")
 

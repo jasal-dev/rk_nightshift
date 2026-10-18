@@ -290,7 +290,7 @@ three doors down; Officer Park; Dr. Shah; Charlie, a Charlie Chaplin impersonato
 
 #### `[C3.1]` The shop
 
-1. Click the **front door**: the glass is out on the sidewalk, so it was broken from the inside.
+1. Look at the **front door** (right click; going out is "Not yet" until you have): the glass is out on the sidewalk, so it was broken from the inside.
 2. Use the **display case**: the Oscar's case was opened with a key. Ray concludes the robbery was staged.
 3. **(optional)** Use the **register**: $212 left in it.
 4. Talk to **Pearl**: **"What happened tonight?"** (she closed at nine, came back at 2:15 for her headshots, and found Gus),
@@ -499,7 +499,7 @@ You start with **your phone** in the inventory. Click it (left or right) to use 
 
 #### `[C5.2]` The bar (first visit)
 
-1. Use the **register** to take **Sal's tab book**. Use the register again: the till is empty and nothing's taken. Not a robbery.
+1. Take **Sal's tab book** from beside the register. Use the **register**: the till is empty and nothing's taken. Not a robbery.
 2. **Right click the tab book** in the inventory to read its three bookmarked pages:
    - Tonight: "12:30 KESSLER, THRU DOOR" and **"3:20 W.B. CLUB SODA. N/C."**, after closing.
    - Tuesday: a private booking in the back booth, three men, two Macallan 18s and a club soda, cash, no names.

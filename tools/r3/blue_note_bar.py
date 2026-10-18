@@ -370,7 +370,8 @@ def build(hide=(), take=False):
         spawns={'street_crime': (3.35, 2.2), 'blue_note_back': (-3.6, -5.2), 'start': (0.0, 1.5)},
         hotspots={
             'bar': ('bar', (-1.95, 0.15), 'left'),
-            'register': ('register and tab book', (-1.95, 1.25), 'left'),
+            'register': ('register', (-1.95, 1.4), 'left'),
+            'tab_book': ('tab book', (-1.95, 1.0), 'left'),
             'rack': ('drying rack', (-1.95, RACK_Z), 'left'),
             'mirror': ('mirror', None, 'left'),
             'bottles': ('bottles', None, 'left'),
@@ -388,13 +389,15 @@ def build(hide=(), take=False):
         hotspot_shapes={
             'register': [(BAR_X[0], 1.0, 1.0 - 0.35), (BAR_X[0], 1.0, 1.75), (BAR_X[0], 1.55, 1.75), (BAR_X[0], 1.55, 0.65),
                          (BAR_X[1] + 0.1, 1.0, 1.75), (BAR_X[1] + 0.1, 1.0, 0.65)],
+            'tab_book': [(BAR_X[0] + 0.1, 1.1, 0.76), (BAR_X[0] + 0.55, 1.1, 0.76), (BAR_X[0] + 0.55, 1.1, 1.28),
+                         (BAR_X[0] + 0.1, 1.1, 1.28), (BAR_X[0] + 0.1, 1.3, 1.28), (BAR_X[0] + 0.1, 1.3, 0.76)],
             'rack': [(BAR_X[0], 1.08, RACK_Z - 0.32), (BAR_X[0], 1.08, RACK_Z + 0.32), (BAR_X[1], 1.3, RACK_Z + 0.32),
                      (BAR_X[1], 1.3, RACK_Z - 0.32)],
             'chairs': [p for (x, z) in TABLES for p in ((x - 0.45, 0.0, z), (x + 0.45, 0.0, z), (x - 0.45, 1.3, z),
                                                         (x + 0.45, 1.3, z))],
         },
         hotspot_order=['mirror', 'bottles', 'bar', 'booths', 'back_booth', 'poster', 'piano', 'set_list', 'back_door',
-                       'chairs', 'jukebox', 'front_door', 'stool', 'rack', 'register'],
+                       'chairs', 'jukebox', 'front_door', 'stool', 'rack', 'register', 'tab_book'],
         overlays=['ledger', 'setlist'],
         occluder_with={'bar': ['register', 'rack']},      # the counter's walk-behind also covers what stands on it
         occluders=dict({'fg_table': FG_TABLE, 'palm': PALM, 'bar': ((BAR_X[0] + BAR_X[1]) / 2, BAR_Z[0]),

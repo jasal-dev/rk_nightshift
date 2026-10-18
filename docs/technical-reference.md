@@ -171,7 +171,7 @@ a left click looks (no walking) and a right click does nothing. Mark a hotspot `
 same thing for both verbs.
 
 Helpers: `hotspot(id)`, `hotspots()`, `verb_for(hs)`, `hotspot_at(p)` (topmost enabled one; later children win, so
-`hotspot_order` in the set decides overlap), `speaker_at(id)` (just above a hotspot, for `main.voice()`),
+`hotspot_order` in the set decides overlap), `speaker_at(id)` (just above a hotspot, for `main.voice()`), `face_toward(id)` (Ray turns to a character, or to the camera when they are straight ahead; first-arrival intros face the camera for the monologue, then `face_toward` the speaker),
 `spawn_point(from)`, `light_at(p)`, `scale_at(y)`, `is_walkable(p)`, `clamp_to_walkable(p)`, `find_path(a, b)`.
 
 **Pathfinding** is a visibility graph: nodes are the walk polygon shrunk by 9 px plus each obstacle grown by 9 px,

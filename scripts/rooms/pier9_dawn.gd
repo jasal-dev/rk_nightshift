@@ -47,6 +47,7 @@ func _sync() -> void:
 func on_enter(_from_room: String) -> void:
 	if not Game.flag("pier_dawn"):
 		Game.set_flag("pier_dawn")
+		main.player.face("down")
 		await main.wait(0.5)
 		await main.say("Pier 9. The ocean still smells like diesel and money. At this hour you can see which is which.")
 

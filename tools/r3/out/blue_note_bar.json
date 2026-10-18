@@ -64,7 +64,7 @@
    "face": "left"
   },
   "register": {
-   "name": "register and tab book",
+   "name": "register",
    "polygon": [
     [
      368.6,
@@ -88,8 +88,38 @@
     ]
    ],
    "walk_to": [
-    609,
-    809
+    601,
+    819
+   ],
+   "face": "left"
+  },
+  "tab_book": {
+   "name": "tab book",
+   "polygon": [
+    [
+     429.9,
+     611.1
+    ],
+    [
+     467.1,
+     589.2
+    ],
+    [
+     542.5,
+     621.5
+    ],
+    [
+     510.8,
+     645.5
+    ],
+    [
+     432.8,
+     644.9
+    ]
+   ],
+   "walk_to": [
+    621,
+    792
    ],
    "face": "left"
   },
@@ -710,7 +740,8 @@
   "front_door",
   "stool",
   "rack",
-  "register"
+  "register",
+  "tab_book"
  ],
  "walk": [
   [

@@ -23,6 +23,7 @@ func _ready() -> void:
 func on_enter(_from_room: String) -> void:
 	if not Game.flag("at_glass_house"):
 		Game.set_flag("at_glass_house")
+		main.player.face("down")
 		await main.wait(0.4)
 		await main.say("Los Feliz. Up here the rain falls on a better class of people.")
 

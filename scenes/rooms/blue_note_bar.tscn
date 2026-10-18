@@ -276,9 +276,19 @@ polygon = PackedVector2Array(543.8, 566.5, 572.2, 548.4, 634.1, 521.2, 609.7, 53
 [node name="register" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
 id = "register"
-display_name = "register and tab book"
-walk_to = Vector2(609, 809)
+display_name = "register"
+walk_to = Vector2(601, 819)
 face = "left"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/register"]
 polygon = PackedVector2Array(368.6, 587.9, 455, 545.2, 557.7, 632.5, 488.7, 688.3, 378.1, 687.4)
+
+[node name="tab_book" type="Area2D" parent="Hotspots"]
+script = ExtResource("hs")
+id = "tab_book"
+display_name = "tab book"
+walk_to = Vector2(621, 792)
+face = "left"
+
+[node name="Shape" type="CollisionPolygon2D" parent="Hotspots/tab_book"]
+polygon = PackedVector2Array(429.9, 611.1, 467.1, 589.2, 542.5, 621.5, 510.8, 645.5, 432.8, 644.9)

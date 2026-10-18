@@ -28,7 +28,7 @@ It has five cases, one night shift from midnight to sunrise, and four endings.
 
 1. *The street.* Head for the Blue Note's door: Mara Quist stops you and gives you her card. Ask Teo everything
    (the latch, "If it isn't in the book"). Park's "Danny's alley, Tuesday" is optional. Go in.
-2. *The bar.* Use the register twice (the tab book, then the till), read the tab book (right click). Look at the
+2. *The bar.* Take the tab book, then use the register (the till), read the tab book (right click). Look at the
    drying rack. Take the set list from the piano. Go through the door at the end of the bar.
 3. *The back room.* Ask Shah how he died. Look at the stool, use Sal, Danny's locker and the desk. Use the cooler,
    then "Nina? It's Ray Kessler." Ask Nina everything, above all "Can I see your phone?" (1:52, a police number).

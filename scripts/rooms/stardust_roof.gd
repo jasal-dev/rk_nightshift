@@ -37,8 +37,10 @@ func _sync() -> void:
 func on_enter(from_room: String) -> void:
 	if not Game.flag("on_roof_lit"):
 		Game.set_flag("on_roof_lit")
+		main.player.face("down")
 		await main.wait(0.4)
 		await main.say("Gus's roof. A lawn chair, a coffee can of cigar ends, and the best seat on the boulevard.")
+		face_toward("charlie")
 		await _charlie("Ah! Lights, at last! Are you the man in charge? You look like the man in charge of being tired.")
 
 

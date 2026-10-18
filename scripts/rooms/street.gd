@@ -32,6 +32,7 @@ func _process(delta: float) -> void:
 func on_enter(from_room: String) -> void:
 	if from_room == "squad_room" and not Game.flag("been_outside"):
 		Game.set_flag("been_outside")
+		main.player.face("down")
 		await main.say("Rain. Of course it's raining.")
 		await main.say("The Blue Note's across the street. Lights are off, but somebody's home.")
 

@@ -41,8 +41,10 @@ func _sync() -> void:
 func on_enter(_from_room: String) -> void:
 	if not Game.flag("met_crane"):
 		Game.set_flag("met_crane")
+		main.player.face("down")
 		await main.wait(0.4)
 		await main.say("Mount Washington. The houses hang off the hill like they're waiting to be asked in.")
+		face_toward("crane")
 		await _crane("Can I help you? It's four in the morning.")
 		await main.say("Detective Kessler, LAPD. You're washing your car at four in the morning, Mr. Crane.")
 		await _crane("The car washes are closed at four in the morning, Detective.")

@@ -43,6 +43,7 @@ func _process(delta: float) -> void:
 func on_enter(from_room: String) -> void:
 	if not Game.flag("street5_arrived"):
 		Game.set_flag("street5_arrived")
+		main.player.face("down")
 		await main.wait(0.4)
 		await main.say("Three hours ago I stood here and knocked like a dead man. Sal opened up.")
 		await main.say("The neon's off. Eight years across the street, and I've never seen it off.")
