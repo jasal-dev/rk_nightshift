@@ -15301,17 +15301,17 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"cdf25efd52ab": {
+	"c2a8c3268f51": {
 		"speaker": "ray",
-		"text": "The board can wait. Sal's tab book can't. It's still by the register.",
-		"file": "res://assets/voice/ray/cdf25efd52ab.ogg",
+		"text": "The board can wait. Sal wrote down everybody who walked into his bar, and I never read what he wrote.",
+		"file": "res://assets/voice/ray/c2a8c3268f51.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"ec7dd647cc6e": {
+	"864077cc7dda": {
 		"speaker": "ray",
-		"text": "Before I pin Walt to Sal's bar, I want what Sal wrote down. His tab book's still by the register.",
-		"file": "res://assets/voice/ray/ec7dd647cc6e.ogg",
+		"text": "I can't put Walt in Sal's bar yet. Sal would have. He wrote everything down.",
+		"file": "res://assets/voice/ray/864077cc7dda.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
