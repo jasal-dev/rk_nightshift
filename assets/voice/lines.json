@@ -4703,6 +4703,13 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
+	"84bc215de53c": {
+		"speaker": "ray",
+		"text": "Gloves on before I touch any of it.",
+		"file": "res://assets/voice/ray/84bc215de53c.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
 	"2bb1573cc099": {
 		"speaker": "ray",
 		"text": "You've been saying that for eleven years.",
@@ -4927,10 +4934,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"f29a23763bc6": {
+	"4254b17b72bb": {
 		"speaker": "ray",
-		"text": "Calloway's Auctions, Beverly Hills. \"Hollywood Legends, Fall Season.\" Came in today's mail, still in its plastic.",
-		"file": "res://assets/voice/ray/f29a23763bc6.ogg",
+		"text": "Calloway's Auctions, Beverly Hills. \"Hollywood Legends, Fall Season.\" Came in today's mail. Gus tore the plastic off it.",
+		"file": "res://assets/voice/ray/4254b17b72bb.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -6145,10 +6152,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"76f078e8336e": {
+	"7d5bc798c76a": {
 		"speaker": "ray",
-		"text": "Gus would've spotted a fake across the room. If he ever looked.",
-		"file": "res://assets/voice/ray/76f078e8336e.ogg",
+		"text": "Signatures, all in frames. I'd want Gus here to tell me which ones are worth the glass.",
+		"file": "res://assets/voice/ray/7d5bc798c76a.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},

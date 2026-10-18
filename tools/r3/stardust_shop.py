@@ -217,10 +217,12 @@ def build(hide=()):
         S.wboxr(rx - 0.22, 1.0, rz - 0.2, rx + 0.22, 1.16, rz + 0.2, 'register', rnd=0.02)   # cash drawer
         S.wboxr(rx - 0.235, 1.03, rz - 0.21, rx + 0.235, 1.13, rz + 0.21, 'register_dk', rnd=0.01)
         S.wbox((rx - 0.02, 1.3, rz), (0.15, 0.14, 0.17), 'register', rnd=0.04, rot=Rz(18))   # keyboard body
-        for i in range(4):
+        ca, sa = math.cos(math.radians(18)), math.sin(math.radians(18))                       # keys sit on the body's
+        for i in range(4):                                                                     # camera face, tilted with it
             for j in range(3):
-                S.cyl((rx - 0.17 + i * 0.05, 1.33 + j * 0.05, rz - 0.12 + j * 0.0),
-                      (rx - 0.2 + i * 0.05, 1.36 + j * 0.05, rz - 0.12), 0.012, 'keys')
+                dx, dy = (i - 1.5) * 0.065, (j - 1.0) * 0.07
+                kx, ky = rx - 0.02 + dx * ca - dy * sa, 1.3 + dx * sa + dy * ca
+                S.cyl((kx, ky, rz + 0.165), (kx, ky, rz + 0.195), 0.015, 'keys')
         S.wboxr(rx - 0.05, 1.48, rz - 0.15, rx + 0.12, 1.62, rz + 0.15, 'register', rnd=0.02)  # the flag top
         S.cyl((rx + 0.26, 1.15, rz + 0.1), (rx + 0.36, 1.3, rz + 0.1), 0.012, 'brass')         # crank
     S.fcyl((X1 - 0.5, 1.02, 1.6), 0.13, 0.02, 'lacquer')                                       # an ashtray, a lamp

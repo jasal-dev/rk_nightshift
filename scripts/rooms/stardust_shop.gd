@@ -39,8 +39,10 @@ func _sync() -> void:
 func on_enter(from_room: String) -> void:
 	if from_room == "drive" and not Game.flag("met_park3"):
 		Game.set_flag("met_park3")
+		main.player.face("down")
 		await main.wait(0.4)
 		await main.say("Stardust Memorabilia. Sixty years of other people's dreams, sold by the square inch.")
+		main.player.face("left")
 		await _park("Detective. Small city tonight.")
 		await main.say("It always is, after midnight.")
 		await _park("Gus Lindqvist, seventy-one, the owner. He's in back, at the bottom of the roof stairs. Dr. Shah's with him.")
@@ -136,7 +138,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 			elif item != "":
 				await default_response(verb, item)
 			else:
-				await main.say("Gus would've spotted a fake across the room. If he ever looked.")
+				await main.say("Signatures, all in frames. I'd want Gus here to tell me which ones are worth the glass.")
 
 		"register":
 			if verb == "look":

@@ -30,7 +30,9 @@ func on_enter(from_room: String) -> void:
 		Game.set_flag("in_office")
 		await main.wait(0.3)
 		await main.say("Gus's office. Everything he ever loved, filed under \"later.\"")
+		await main.say("Gloves on before I touch any of it.")
 		await main.player.play_action("use")
+		main.ui.toast("Nitrile gloves on.")
 		await _shah("Look at that. You can be taught.")
 		await main.say("You've been saying that for eleven years.")
 		await _shah("And look how long it took.")
@@ -266,7 +268,7 @@ func _eviction_letter() -> void:
 
 func _catalogue() -> void:
 	await main.player.play_action("use")
-	await main.say("Calloway's Auctions, Beverly Hills. \"Hollywood Legends, Fall Season.\" Came in today's mail, still in its plastic.")
+	await main.say("Calloway's Auctions, Beverly Hills. \"Hollywood Legends, Fall Season.\" Came in today's mail. Gus tore the plastic off it.")
 	main.ui.show_paper("Calloway's: Private Sales, Summer Season",
 			"[photo of an Oscar]\nAcademy Award statuette, Best Supporting Actor, 1954. Base serial No. 734. Sold by private treaty.",
 			"734?? THREE WEEKS AGO?? IT'S IN MY CASE.")

@@ -244,7 +244,7 @@ walk_to = Vector2(1578, 813)
 face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/register"]
-polygon = PackedVector2Array(1708.9, 628.1, 1710.4, 609.4, 1723.9, 562, 1729.1, 549.4, 1760, 517.7, 1793.2, 517.7, 1829, 525.6, 1867.7, 587.9, 1849, 645.7, 1844.2, 651.2, 1755.2, 651.2, 1712.3, 634.2)
+polygon = PackedVector2Array(1708.9, 628.1, 1710.4, 609.4, 1723.9, 562, 1760, 517.7, 1793.2, 517.7, 1829, 525.6, 1867.7, 587.9, 1849, 645.7, 1844.2, 651.2, 1755.2, 651.2, 1712.3, 634.2)
 
 [node name="certificate" type="Area2D" parent="Hotspots"]
 script = ExtResource("hs")
