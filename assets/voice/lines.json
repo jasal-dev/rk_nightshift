@@ -7104,10 +7104,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"5b1da59a26c2": {
+	"409ac4f5eb0c": {
 		"speaker": "otis",
-		"text": "Room 214. The night is young and so am I.",
-		"file": "res://assets/voice/otis/5b1da59a26c2.ogg",
+		"text": "Desk. The night is young and so am I.",
+		"file": "res://assets/voice/otis/409ac4f5eb0c.ogg",
 		"voice": "kokoro: am_liam, speed 1",
 		"sig": "ad131cbc8f"
 	},

@@ -1014,7 +1014,7 @@
 	["ray", "That's a man who wanted Gus out. Gus went out another way.", "squad_room.gd EVIDENCE3"],
 	["ray", "Gus's key ring. A door key, a desk key, and a little brass one, like the key Pearl wears.", "game.gd ITEMS desc, Case 3 (main.gd examine_item)"],
 	["ray", "A little gold star, five points, the post bent back. Torn out of somebody's ear.", "game.gd ITEMS desc, Case 3 (main.gd examine_item)"],
-	["otis", "Room 214. The night is young and so am I.", "case4.gd:84 plate_call"],
+	["otis", "Desk. The night is young and so am I.", "case4.gd:84 plate_call"],
 	["otis", "Registered to an Elliot Crane, Mount Washington. Crane, Crane... Ray, that's Councilman Haskell's chief of staff.", "case4.gd:86 plate_call"],
 	["otis", "He's on the news every time Haskell won't comment.", "case4.gd:87 plate_call"],
 	["otis", "You're about to ruin a whole lot of mornings.", "case4.gd:89 plate_call"],

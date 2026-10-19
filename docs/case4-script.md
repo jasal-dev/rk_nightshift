@@ -725,7 +725,7 @@ Then at most one more line, the first that applies: with clue\_block\_empty: "Em
 
 **Puzzle 4.2: Run the plate.** Once clue\_plate is set, using Ray's car plays a scripted call before the car menu opens.
 
-OTIS (V.O., phone): Room 214. The night is young and so am I.
+OTIS (V.O., phone): Desk. The night is young and so am I.
 
 RAY: Run a plate for me. Eight, K, X, D, three, nine, two. Blue-gray Audi.
 
