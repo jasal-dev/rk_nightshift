@@ -16,6 +16,7 @@ const VERBS := {
 @onready var cooler: Sprite2D = $Cooler_shut
 var _hints := 0
 var _knock_tried := false
+var _door_open := false          ## the walk-in's door swung open, before Nina is out on her chair
 
 
 func _ready() -> void:
@@ -31,7 +32,7 @@ func _sync() -> void:
 	var out := Game.flag("nina_out")
 	nina.visible = out
 	park.visible = out
-	cooler.visible = not out
+	cooler.visible = not (out or _door_open)
 	hotspot("nina").enabled = out
 	hotspot("park").enabled = out
 
@@ -306,6 +307,8 @@ func _cooler() -> void:
 			break
 	await main.ui.fade_to(1.0, 0.5)
 	await main.wait(0.4)
+	_door_open = true
+	_sync()
 	await main.ui.fade_to(0.0, 0.5)
 	await main.narrate("The handle turns. A wall of cold comes out. Nina Alvarez, on a crate between the limes and the kegs, lips blue, a paring knife in her fist.")
 	await main.narrate("She looks at me a long time. Then she puts the knife down on the crate.")

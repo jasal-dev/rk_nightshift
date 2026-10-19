@@ -407,7 +407,7 @@ def build(hide=()):
         occluders={'fg_crates': (FG_CRATES[0] - 0.2, FG_CRATES[1] - 0.3), 'fg_truck': (FG_TRUCK[0], FG_TRUCK[1] - 0.35),
                    'worklight': (-0.6, 0.5)},
         overlay_bases={'nina': (NINA[0], NINA[1] + 0.25), 'park': PARK},
-        obstacles=[(FG_CRATES[0] - 0.2, FG_CRATES[1] - 0.1, 0.5), (FG_TRUCK[0], FG_TRUCK[1] - 0.1, 0.4), (SHAH[0], SHAH[1] + 0.05, 0.42), (STOOL[0], STOOL[1], 0.35), (-0.6, 0.3, 0.5), (PARK[0], PARK[1], 0.3)],
+        obstacles=[(FG_CRATES[0] - 0.2, FG_CRATES[1] - 0.1, 0.5), (FG_TRUCK[0], FG_TRUCK[1] - 0.1, 0.4), (SHAH[0], SHAH[1] + 0.05, 0.42), (STOOL[0] - 0.55, STOOL[1] - 0.35, STOOL[0] + 0.3, STOOL[1] + 0.55), (-0.6, 0.3, 0.5), (PARK[0], PARK[1], 0.3)],
         # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
         faces={'nina': (NINA[0], NINA[1] + 0.25), 'park': PARK},          # Shah's face is down over the sheet
         char_fill=((230, 230, 236), 0.2),

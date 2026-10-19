@@ -12606,10 +12606,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"6f8db2576df3": {
+	"2b16b89caa86": {
 		"speaker": "ray",
-		"text": "Tiny sits back down. He turns the radio up.",
-		"file": "res://assets/voice/ray/6f8db2576df3.ogg",
+		"text": "Tiny turns the radio up.",
+		"file": "res://assets/voice/ray/2b16b89caa86.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},

@@ -110,7 +110,7 @@ polygon = PackedVector2Array(1119.1, 635.2, 1114.4, 643.5, 1095.4, 649.6, 1067.3
 
 [node name="Obstacle4" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)
-polygon = PackedVector2Array(1359.9, 698.4, 1360.7, 708, 1346.2, 715.1, 1320, 717.5, 1289.8, 714.4, 1264.7, 706.8, 1251.5, 697.1, 1253.1, 688, 1268.1, 681.7, 1292.5, 679.7, 1320.2, 682.4, 1344.8, 689.1)
+polygon = PackedVector2Array(1211.2, 678.8, 1336.9, 680.3, 1378.9, 730.2, 1237.3, 728.4)
 
 [node name="Obstacle5" type="Polygon2D" parent="Obstacles"]
 color = Color(0.9, 0.3, 0.2, 0.4)

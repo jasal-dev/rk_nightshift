@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://scripts/hotspot.gd" id="hs"]
 [ext_resource type="Texture2D" path="res://assets/rooms/pier9_dawn_brenner.png" id="ov_brenner"]
 [ext_resource type="Texture2D" path="res://assets/rooms/pier9_dawn_brenner_gun.png" id="ov_brenner_gun"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_dawn_brenner_open.png" id="ov_brenner_open"]
 [ext_resource type="Texture2D" path="res://assets/rooms/pier9_dawn_brenner_cuffed.png" id="ov_brenner_cuffed"]
 [ext_resource type="Texture2D" path="res://assets/rooms/pier9_dawn_bollard_phone.png" id="ov_bollard_phone"]
 [ext_resource type="Texture2D" path="res://assets/rooms/pier9_dawn_bollard_cup.png" id="ov_bollard_cup"]
@@ -23,6 +24,9 @@
 [ext_resource type="Texture2D" path="res://assets/rooms/pier9_dawn_face_brenner_gun_mouth1.png" id="face_brenner_gun_mouth1"]
 [ext_resource type="Texture2D" path="res://assets/rooms/pier9_dawn_face_brenner_gun_mouth2.png" id="face_brenner_gun_mouth2"]
 [ext_resource type="Texture2D" path="res://assets/rooms/pier9_dawn_face_brenner_gun_eyes1.png" id="face_brenner_gun_eyes1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_dawn_face_brenner_open_mouth1.png" id="face_brenner_open_mouth1"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_dawn_face_brenner_open_mouth2.png" id="face_brenner_open_mouth2"]
+[ext_resource type="Texture2D" path="res://assets/rooms/pier9_dawn_face_brenner_open_eyes1.png" id="face_brenner_open_eyes1"]
 
 [node name="Pier9Dawn" type="Node2D"]
 script = ExtResource("script")
@@ -42,12 +46,12 @@ centered = false
 [node name="Bollard_phone" type="Sprite2D" parent="."]
 texture = ExtResource("ov_bollard_phone")
 centered = false
-position = Vector2(1669, 729)
+position = Vector2(1669, 712)
 
 [node name="Bollard_cup" type="Sprite2D" parent="."]
 texture = ExtResource("ov_bollard_cup")
 centered = false
-position = Vector2(1682, 670)
+position = Vector2(1708, 688)
 
 [node name="Lincoln" type="Sprite2D" parent="."]
 texture = ExtResource("ov_lincoln")
@@ -69,6 +73,12 @@ offset = Vector2(-146, -336)
 
 [node name="Brenner_gun" type="Sprite2D" parent="Actors"]
 texture = ExtResource("ov_brenner_gun")
+centered = false
+position = Vector2(1406, 892)
+offset = Vector2(-146, -336)
+
+[node name="Brenner_open" type="Sprite2D" parent="Actors"]
+texture = ExtResource("ov_brenner_open")
 centered = false
 position = Vector2(1406, 892)
 offset = Vector2(-146, -336)
@@ -122,6 +132,16 @@ mouth_pos = Vector2(1425, 631)
 eyes_frame = ExtResource("face_brenner_gun_eyes1")
 eyes_pos = Vector2(1421, 617)
 follow = NodePath("../Brenner_gun")
+
+[node name="Face_brenner_open" type="Node2D" parent="Actors"]
+script = ExtResource("face")
+position = Vector2(1406, 892)
+speaker = "brenner"
+mouth_frames = Array[Texture2D]([ExtResource("face_brenner_open_mouth1"), ExtResource("face_brenner_open_mouth2")])
+mouth_pos = Vector2(1424, 630)
+eyes_frame = ExtResource("face_brenner_open_eyes1")
+eyes_pos = Vector2(1419, 616)
+follow = NodePath("../Brenner_open")
 
 [node name="Obstacles" type="Node2D" parent="."]
 

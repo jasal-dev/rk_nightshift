@@ -312,8 +312,8 @@ def dawn_extras(S, hide, time, EDGE):
             S.wbox((bx - 0.02, 0.724, bz + 0.02), (0.015, 0.002, 0.015), 'sticker', rot=Ry(20))
     if time == 'dawn' and 'bollard_cup' not in hide:
         with S.tag('bollard_cup'):
-            S.tcyl(Frame((bx + 0.1, 0.77, bz - 0.06)), (0, 0, 0), (0.044, 0.044), (0.034, 0.034), 0.065, 'cup_w')
-            S.tcyl(Frame((bx + 0.1, 0.84, bz - 0.06)), (0, 0, 0), (0.046, 0.046), (0.046, 0.046), 0.008, 'lincoln_dk')
+            S.tcyl(Frame((bx + 0.1, 0.665, bz - 0.06)), (0, 0, 0), (0.044, 0.044), (0.034, 0.034), 0.065, 'cup_w')
+            S.tcyl(Frame((bx + 0.1, 0.735, bz - 0.06)), (0, 0, 0), (0.046, 0.046), (0.046, 0.046), 0.008, 'lincoln_dk')
     # Brenner's gray Lincoln: an overlay at dawn (it arrives), part of the set at sunrise (left for the lab)
     if time == 'sunrise' or 'lincoln' not in hide:
         cars.car(S, 'lincoln', (LINCOLN[0], 0.0, LINCOLN[1]), -90, (118, 122, 128), L=5.5, W=1.95, H=1.45,
@@ -327,6 +327,9 @@ def dawn_extras(S, hide, time, EDGE):
             npc.cast(S, 'brenner', dict(stand, props=(('revolver', 'r'),), rsp=30, rsa=6, re=34, rin=10, rhand='fist',
                                         lsp=-4, le=12, hp=6, hy=-2),
                      (BRENNER[0], 0.0, BRENNER[1]), yaw=58, scale=1.07, tag='brenner_gun')
+        if 'brenner_open' not in hide:      # empty-handed, after the revolver is on the bollard
+            npc.cast(S, 'brenner', dict(stand, lsp=-2, le=14, rsp=-2, re=14),
+                     (BRENNER[0], 0.0, BRENNER[1]), yaw=58, scale=1.07, tag='brenner_open')
         if 'brenner_cuffed' not in hide:
             npc.cast(S, 'brenner', dict(npc.STAND, lean=80, lhp=30, rhp=26, lk=8, rk=6, lsp=-22, lsa=10, le=96, lin=96,
                                         rsp=-22, rsa=10, re=96, rin=96, hp=-36, hy=34, coatlen=0.24),
@@ -396,9 +399,9 @@ def dawn_meta(time, EDGE, bx, bz, px, pz):
         shapes['brenner_cuffed'] = [(HOOD[0] - 0.9, 0.0, HOOD[1]), (HOOD[0] + 0.4, 0.0, HOOD[1]),
                                     (HOOD[0] + 0.4, 1.5, HOOD[1]), (HOOD[0] - 0.9, 1.5, HOOD[1])]
         order += ['brenner_cuffed', 'brenner']
-        overlays = ['brenner', 'brenner_gun', 'brenner_cuffed', 'bollard_phone', 'bollard_cup', 'lincoln']
-        bases = {'brenner': BRENNER, 'brenner_gun': BRENNER, 'brenner_cuffed': HOOD}
-        exclusive = ['brenner', 'brenner_gun', 'brenner_cuffed']
+        overlays = ['brenner', 'brenner_gun', 'brenner_open', 'brenner_cuffed', 'bollard_phone', 'bollard_cup', 'lincoln']
+        bases = {'brenner': BRENNER, 'brenner_gun': BRENNER, 'brenner_open': BRENNER, 'brenner_cuffed': HOOD}
+        exclusive = ['brenner', 'brenner_gun', 'brenner_open', 'brenner_cuffed']
     else:
         for k, p in (('doyle', DOYLE), ('okafor', OKAFOR), ('mara', MARA)):
             hs[k] = ({'doyle': 'Lt. Doyle', 'okafor': 'Okafor', 'mara': 'Mara Quist'}[k], (-2.7, 2.6), 'left')

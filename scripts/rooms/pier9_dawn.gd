@@ -4,7 +4,7 @@ extends Room
 ## the tab book and Shah's choke; Vance and the take), with seed options that only change what's said. Puzzle 8.2: his
 ## pitch, the phone in the harbor, the .38. Puzzle 8.3: talk him down (three beats) or force his hand (Tiny). He's
 ## arrested either way; then Tiny's answer (tiny_told) and the sun comes up (pier9_sunrise).
-## Overlays: the Lincoln, Brenner (standing, gun drawn, cuffed over the hood), the phone and his coffee on the bollard.
+## Overlays: the Lincoln, Brenner (standing with his coffee, gun drawn, empty-handed, cuffed over the hood), the phone and his coffee on the bollard.
 
 ## Left-click verbs shown under the cursor (see Room.verb_for); unlisted hotspots are "use".
 const VERBS := {
@@ -18,6 +18,7 @@ const VANCE_COLOR := Color(0.78, 0.74, 0.9)
 @onready var lincoln: Sprite2D = $Lincoln
 @onready var brenner: Sprite2D = $Actors/Brenner
 @onready var brenner_gun: Sprite2D = $Actors/Brenner_gun
+@onready var brenner_open: Sprite2D = $Actors/Brenner_open
 @onready var brenner_cuffed: Sprite2D = $Actors/Brenner_cuffed
 @onready var bollard_phone: Sprite2D = $Bollard_phone
 @onready var bollard_cup: Sprite2D = $Bollard_cup
@@ -36,11 +37,12 @@ func _sync() -> void:
 	lincoln.visible = here
 	brenner.visible = here and not gone and _pose == "brenner"
 	brenner_gun.visible = here and not gone and _pose == "brenner_gun"
+	brenner_open.visible = here and not gone and _pose == "brenner_open"
 	brenner_cuffed.visible = here and not gone and _pose == "brenner_cuffed"
 	bollard_phone.visible = Game.flag("phone_on_bollard") and not Game.flag("phone_in_harbor")
 	bollard_cup.visible = here
 	hotspot("lincoln").enabled = here
-	hotspot("brenner").enabled = brenner.visible or brenner_gun.visible
+	hotspot("brenner").enabled = brenner.visible or brenner_gun.visible or brenner_open.visible
 	hotspot("brenner_cuffed").enabled = brenner_cuffed.visible
 
 
@@ -381,7 +383,9 @@ func _pitch() -> void:
 			await main.say("You don't know Maureen.")
 			await _brenner("I know her better than you do. I know what she'd do to keep her badge. I taught her.")
 	await _brenner("The phone, Ray.")
+	main.player.face("right")
 	await main.player.play_action("pickup")
+	main.player.face("left")
 	await main.narrate("I pick Danny's phone up off the bollard and put it in his hand. He weighs it, looks at the Blue Note sticker, and flicks it out over the water.")
 	Game.set_flag("phone_in_harbor")
 	_sync()
@@ -443,7 +447,7 @@ func _talk_down() -> void:
 			await main.say("He'll be at his desk at nine like nothing happened. He'll have a new driver by lunch.")
 			break
 	await main.narrate("He looks past me at the gray Lincoln, then at the sun coming up behind the crane. He points the muzzle at the concrete, swings the cylinder out, and tips six rounds into his palm.")
-	_pose = "brenner"
+	_pose = "brenner_open"
 	_sync()
 	await main.narrate("He sets the empty revolver on the bollard next to my coffee, and the rounds beside it, in a neat row.")
 	await _brenner("Muzzle down. Cylinder out. Rounds in your palm.")
@@ -470,7 +474,6 @@ func _force() -> void:
 
 
 func _arrest() -> void:
-	await main.walk(hotspot("brenner_cuffed").walk_to)
 	main.player.face("left")
 	_pose = "brenner_cuffed"
 	_sync()
@@ -502,7 +505,7 @@ func _tinys_answer() -> void:
 	await main.wait(0.6)
 	await _tiny("He played 'Round Midnight for me. Without me asking.")
 	await main.say("I know. I heard him. Tuesday. You weren't in, so he played it anyway.")
-	await main.narrate("Tiny sits back down. He turns the radio up.")
+	await main.narrate("Tiny turns the radio up.")
 	Game.set_flag("tiny_told")
 	await main.wait(0.6)
 	await main.change_room("pier9_sunrise", "pier9_dawn")

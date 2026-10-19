@@ -1800,7 +1800,7 @@
 	["ray", "The patrol car pulls away between the containers.", "pier9_dawn.gd:494 _arrest"],
 	["ray", "That's him, Tiny. That's who did Danny.", "pier9_dawn.gd:498 _tinys_answer"],
 	["ray", "I know. I heard him. Tuesday. You weren't in, so he played it anyway.", "pier9_dawn.gd:503 _tinys_answer"],
-	["ray", "Tiny sits back down. He turns the radio up.", "pier9_dawn.gd:504 _tinys_answer"],
+	["ray", "Tiny turns the radio up.", "pier9_dawn.gd:505 _tinys_answer"],
 	["tiny", "Detective. You said you'd come tell me.", "pier9_dawn.gd:64 interact"],
 	["tiny", "Nobody is.", "pier9_dawn.gd:75 interact"],
 	["tiny", "Thank you.", "pier9_dawn.gd:500 _tinys_answer"],

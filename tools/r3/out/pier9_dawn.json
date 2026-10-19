@@ -663,6 +663,10 @@
    1406,
    892
   ],
+  "brenner_open": [
+   1406,
+   892
+  ],
   "brenner_cuffed": [
    508,
    796
@@ -687,17 +691,21 @@
    1260,
    556
   ],
+  "brenner_open": [
+   1260,
+   556
+  ],
   "brenner_cuffed": [
    286,
    647
   ],
   "bollard_phone": [
    1669,
-   729
+   712
   ],
   "bollard_cup": [
-   1682,
-   670
+   1708,
+   688
   ],
   "lincoln": [
    0,
@@ -797,6 +805,27 @@
     "pos": [
      1421,
      617
+    ],
+    "frames": 1
+   }
+  },
+  "brenner_open": {
+   "base": [
+    1406,
+    892
+   ],
+   "speaker": "brenner",
+   "mouth": {
+    "pos": [
+     1424,
+     630
+    ],
+    "frames": 2
+   },
+   "eyes": {
+    "pos": [
+     1419,
+     616
     ],
     "frames": 1
    }

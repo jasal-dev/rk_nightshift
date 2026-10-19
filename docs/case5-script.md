@@ -1494,7 +1494,7 @@ TINY: (finally) Thank you. (beat) He played "'Round Midnight" for me. Without me
 
 RAY: I know. I heard him. Tuesday. You weren't in, so he played it anyway.
 
-*Tiny sits back down. He turns the radio up.* (sets tiny\_told)
+*Tiny turns the radio up.* (sets tiny\_told)
 
 **Vance, after.** VANCE: "We're square, Detective. Danny paid his debts. So do I." RAY: "Nobody's square tonight." VANCE: "Then we're less crooked than we were. In my business that's a good morning."
 
