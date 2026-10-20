@@ -268,6 +268,7 @@
 	["nina", "Friends of Danny knock like Danny played. Two slow, three fast.", "street.gd:190 _phone_call"],
 	["nina", "Sal's scared, Detective. Don't make me sorry I told you.", "street.gd:192 _phone_call"],
 	["sal", "...Danny's knock. Who is this?", "street.gd:213 _talk_to_sal"],
+	["sal", "...Kessler? Thursdays, end of the bar. I know that voice.", "street.gd:233 _talk_to_sal"],
 	["sal", "Cops don't know that knock. Somebody gave it to you.", "street.gd:231 _talk_to_sal"],
 	["sal", "Door stays shut. Talk through it.", "street.gd:232 _talk_to_sal"],
 	["sal", "Danny didn't have friends. He had a piano and a tab.", "street.gd:235 _talk_to_sal"],

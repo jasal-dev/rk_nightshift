@@ -1882,6 +1882,13 @@
 		"voice": "kokoro: am_santa, speed 0.9",
 		"sig": "5de31435f2"
 	},
+	"6af0725bff5f": {
+		"speaker": "sal",
+		"text": "...Kessler? Thursdays, end of the bar. I know that voice.",
+		"file": "res://assets/voice/sal/6af0725bff5f.ogg",
+		"voice": "kokoro: am_santa, speed 0.9",
+		"sig": "5de31435f2"
+	},
 	"3e89b88c24f2": {
 		"speaker": "sal",
 		"text": "Cops don't know that knock. Somebody gave it to you.",

@@ -213,6 +213,7 @@ func _talk_to_sal() -> void:
 	await main.wait(0.9)
 	await main.voice("...Danny's knock. Who is this?", door, SAL_COLOR, "sal")
 	var asked := []
+	var recognised := false
 	while true:
 		var opts := []
 		var keys := []
@@ -226,21 +227,22 @@ func _talk_to_sal() -> void:
 		var c: int = await main.choose(opts)
 		var k: String = keys[c]
 		asked.append(k)
+		await main.say(opts[c])
+		if not recognised:
+			# Ray was a Thursday regular before he went to nights: Sal knows the voice
+			recognised = true
+			await main.voice("...Kessler? Thursdays, end of the bar. I know that voice.", door, SAL_COLOR, "sal")
 		match k:
 			"cop":
-				await main.say("Police. Open the door, Sal.")
 				await main.voice("Cops don't know that knock. Somebody gave it to you.", door, SAL_COLOR, "sal")
 				await main.voice("Door stays shut. Talk through it.", door, SAL_COLOR, "sal")
 			"friend":
-				await main.say("A friend of Danny's.")
 				await main.voice("Danny didn't have friends. He had a piano and a tab.", door, SAL_COLOR, "sal")
 			"saw":
-				await main.say("Did you see who shot him?")
 				await main.voice("I was counting the till. One shot. When I looked out the back, there was only Danny and the rain.", door, SAL_COLOR, "sal")
 				await main.say("You told the uniforms you didn't hear anything.")
 				await main.voice("I told the uniforms what they wanted to write down.", door, SAL_COLOR, "sal")
 			"owed":
-				await main.say("Who did Danny owe money to?")
 				await main.voice("...", door, SAL_COLOR, "sal")
 				await main.voice("A man named Vance. Vance doesn't send letters, if you follow me.", door, SAL_COLOR, "sal")
 				await main.say("Where do I find Vance?")

@@ -280,6 +280,10 @@ Building Case 1 on the existing Godot slice needs two new rooms, two new charact
 
 `[choice]` Police. Open the door, Sal. / A friend of Danny's. / Who did Danny owe money to? / Did you see who shot him? *(new)*
 
+*After Ray's first answer, whichever it is, Sal recognises the voice once (Ray drank there on Thursdays before he went to nights, Case 5):*
+
+  - **SAL:** ...Kessler? Thursdays, end of the bar. I know that voice. *(new)*
+
 - **Police. Open the door, Sal.**
   - **SAL:** Cops don't know that knock. Somebody gave it to you.
   - **SAL:** Door stays shut. Talk through it.
