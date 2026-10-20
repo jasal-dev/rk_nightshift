@@ -317,7 +317,7 @@ func _talk_to_preacher() -> void:
 				main.clue("clue_bang")
 			"saw":
 				Game.set_flag("preacher_saw")
-				await _preacher("No, sir. He was on the far side, under the east end, in the dark. If I'd seen him I'd have gone to him.")
+				await _preacher("No, sir. I came down those stairs with a bicycle on my shoulder, watching my feet, and the light under that bridge is nothing. If I'd seen him I'd have gone to him.")
 				await main.wait(0.5)
 				await _preacher("I'd have sat with him.")
 			"carry":

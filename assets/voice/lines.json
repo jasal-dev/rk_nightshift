@@ -7923,10 +7923,10 @@
 		"voice": "kokoro: am_eric, -3 semitones, speed 0.82, warmth 4, flutter 0.08",
 		"sig": "933a2d598d"
 	},
-	"346e06a8fd0c": {
+	"d8247d868447": {
 		"speaker": "preacher",
-		"text": "No, sir. He was on the far side, under the east end, in the dark. If I'd seen him I'd have gone to him.",
-		"file": "res://assets/voice/preacher/346e06a8fd0c.ogg",
+		"text": "No, sir. I came down those stairs with a bicycle on my shoulder, watching my feet, and the light under that bridge is nothing. If I'd seen him I'd have gone to him.",
+		"file": "res://assets/voice/preacher/d8247d868447.ogg",
 		"voice": "kokoro: am_eric, -3 semitones, speed 0.82, warmth 4, flutter 0.08",
 		"sig": "933a2d598d"
 	},

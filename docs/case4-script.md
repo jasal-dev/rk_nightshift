@@ -197,7 +197,7 @@ PREACHER: Long enough for a man to do something. Not long enough to do it right.
 
 *Did you see the boy?*
 
-PREACHER: No, sir. He was on the far side, under the east end, in the dark. If I'd seen him I'd have gone to him. *(beat)* I'd have sat with him.
+PREACHER: No, sir. I came down those stairs with a bicycle on my shoulder, watching my feet, and the light under that bridge is nothing. If I'd seen him I'd have gone to him. *(beat)* I'd have sat with him.
 
 *Why carry the bike all the way down?*
 
