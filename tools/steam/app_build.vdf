@@ -1,0 +1,12 @@
+"appbuild"
+{
+	"appid" "YOUR_APP_ID"
+	"desc" "Nightshift build"
+	"buildoutput" "..\..\builds\steam\output"
+	"contentroot" "..\..\builds\steam\content"
+	"setlive" ""
+	"depots"
+	{
+		"YOUR_DEPOT_ID" "depot_build.vdf"
+	}
+}
