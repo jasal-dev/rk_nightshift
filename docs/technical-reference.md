@@ -126,7 +126,7 @@ Signals: `inventory_changed`, `item_selected(id)`.
 
 Loading restores the room and position but not mid-conversation state, so a save is only allowed when nothing
 is running (`Main.busy` is false). Settings are stored separately in `user://settings.cfg`:
-`[video] fullscreen`, `[audio] music`, `voice` and `effects` (Music, Voice and SFX bus volumes, 0 to 1, set by `Audio.set_music_volume`, `set_voice_volume` and `set_effects_volume`) and `[text] mode` ("auto" or "manual", default manual; Auto keeps a line up for its reading time or its voice clip and a click skips it, and Manual
+`[video] fullscreen` (default true: a fresh install starts fullscreen; a saved value wins), `[audio] music`, `voice` and `effects` (Music, Voice and SFX bus volumes, 0 to 1, set by `Audio.set_music_volume`, `set_voice_volume` and `set_effects_volume`) and `[text] mode` ("auto" or "manual", default manual; Auto keeps a line up for its reading time or its voice clip and a click skips it, and Manual
 keeps each line up until a click, see `Main._hold()`). On Windows, `user://` is `%APPDATA%\Godot\app_userdata\Nightshift\`.
 
 **Flag conventions.**

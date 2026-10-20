@@ -78,10 +78,11 @@ func _ready() -> void:
 func _apply_settings() -> void:
 	## Art is 1920x1080 and scales (fractionally) to any window, e.g. exactly 2x on a 4K screen.
 	## F11 or Alt+Enter toggles fullscreen; the choice is remembered, and so is the text speed.
+	## With no saved choice the game starts fullscreen (which also avoids a window bigger than the screen).
 	var cfg := ConfigFile.new()
 	cfg.load(SETTINGS)
 	text_speed = AUTO if String(cfg.get_value("text", "mode", "manual")) == "auto" else MANUAL
-	if bool(cfg.get_value("video", "fullscreen", false)):
+	if bool(cfg.get_value("video", "fullscreen", true)):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		_fit_window()
