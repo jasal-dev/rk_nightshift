@@ -765,7 +765,7 @@ func _case3() -> void:
 	await act("glint")                                  # the gold star earring
 	await act("water_tank")                             # the "Oscar" floats
 	await act("charlie", "use", "", ["What did you see tonight?", "Did you hear anything?", "You knew Gus?",
-			"Ever seen this man?", "Good night, Charlie."])
+			"Do you know this man? Walter Brenner.", "Good night, Charlie."])
 	expect(["clue_footprints", "clue_cigar", "got_star_earring", "got_fake_oscar", "clue_replica", "clue_fiat",
 			"clue_shouting", "clue_block_empty"])
 	if main.room.get_node("Earring").visible:

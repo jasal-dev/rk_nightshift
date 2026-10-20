@@ -213,7 +213,7 @@ func _talk_to_charlie() -> void:
 		if not Game.flag("charlie_gus"):
 			opts.append("You knew Gus?"); keys.append("gus")
 		if Game.has_item("brenner_card") and not Game.flag("clue_block_empty"):
-			opts.append("Ever seen this man?"); keys.append("brenner")
+			opts.append("Do you know this man? Walter Brenner."); keys.append("brenner")
 		opts.append("Good night, Charlie."); keys.append("done")
 		var c: int = await main.topics(opts)
 		if c < 0:
@@ -252,7 +252,7 @@ func _brenner() -> void:
 		await _charlie("Him again? I told you. Big fellow, cop's shoes. Empty by Christmas.")
 		return
 	await main.player.play_action("use")
-	await main.say("Ever seen this man?")
+	await main.say("Do you know this man? Walter Brenner.")
 	await _charlie("Him. Big fellow, old raincoat, cop's shoes. Last Thursday he went door to door, handing those out like a priest with wafers.")
 	await _charlie("Said the whole block would be empty by Christmas. \"The jazz club too,\" he said. As if it were good news.")
 	await main.say("The jazz club.")

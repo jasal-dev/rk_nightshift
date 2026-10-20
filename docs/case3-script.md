@@ -461,7 +461,7 @@ RAY: Detective Kessler. And you are?
 
 CHARLIE: On the boulevard, Charlie. To the IRS, Desmond Pike. Thirty-one years in the forecourt. I've been in more tourists' photographs than the Pope.
 
-[choice] What did you see tonight? / Did you hear anything? / You knew Gus? / Ever seen this man? (with brenner\_card, or use brenner\_card on Charlie) / Good night, Charlie.
+[choice] What did you see tonight? / Did you hear anything? / You knew Gus? / Do you know this man? Walter Brenner. (with brenner\_card, or use brenner\_card on Charlie) / Good night, Charlie.
 
 *What did you see tonight?*
 
@@ -483,7 +483,7 @@ CHARLIE: I should have come out. *(sets clue\_shouting)*
 
 CHARLIE: Thirty years. He sold me this derby. Told me it was Chaplin's own. It wasn't. He told me that too, after I'd paid. *(he laughs, then stops)* He'd have hated this fuss.
 
-*Ever seen this man?* (with brenner\_card)
+*Do you know this man? Walter Brenner.* (with brenner\_card)
 
 *Ray holds the card up across the gap. Charlie squints at it in the neon.*
 

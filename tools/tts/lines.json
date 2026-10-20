@@ -800,7 +800,7 @@
 	["ray", "Not past forty cameras.", "stardust_roof.gd:194 _tank"],
 	["ray", "Detective Kessler. And you are?", "stardust_roof.gd:201 _talk_to_charlie"],
 	["ray", "Around one.", "stardust_roof.gd:225 _talk_to_charlie"],
-	["ray", "Ever seen this man?", "stardust_roof.gd:253 _brenner"],
+	["ray", "Do you know this man? Walter Brenner.", "stardust_roof.gd:253 _brenner"],
 	["ray", "The jazz club.", "stardust_roof.gd:256 _brenner"],
 	["morty", "Is that... that's a prop. Give it here.", "stardust_shop.gd:74 interact"],
 	["morty", "Two pounds. Gus would've known in a second.", "stardust_shop.gd:76 interact"],

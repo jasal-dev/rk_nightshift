@@ -338,7 +338,7 @@ three doors down; Officer Park; Dr. Shah; Charlie, a Charlie Chaplin impersonato
 6. Use the **water tank**: the "Oscar" floats. It's a hollow resin prop with No. 734 freshly engraved. You get **the "Oscar"**.
 7. Talk to **Charlie**: "What did you see tonight?" (Pearl's yellow Fiat in the alley around one), "Did you hear
    anything?" (Gus shouting "How long?" around 1:30), "You knew Gus?". **(optional)** If you have Brenner's card:
-   **"Ever seen this man?"** He went door to door last Thursday and said the block would be empty by Christmas, "the
+   **"Do you know this man? Walter Brenner."** He went door to door last Thursday and said the block would be empty by Christmas, "the
    jazz club too".
 8. Go back down through the **roof door**, then through the **curtain** to the shop.
 

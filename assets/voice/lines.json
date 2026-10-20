@@ -5606,10 +5606,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"2fba113147ac": {
+	"8c517c816659": {
 		"speaker": "ray",
-		"text": "Ever seen this man?",
-		"file": "res://assets/voice/ray/2fba113147ac.ogg",
+		"text": "Do you know this man? Walter Brenner.",
+		"file": "res://assets/voice/ray/8c517c816659.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
