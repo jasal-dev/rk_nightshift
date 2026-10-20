@@ -138,6 +138,22 @@ Manual, the default, where each line waits for a click) and Exit, which quits th
 5. *Room 214* (the front door, then the car). Use the murder board: Devin Clark, then the card slip (or Rosa's
    statement) for "He was with Kenji tonight" and the dashcam and memory cards for "What he killed him for".
 
+## Building for Windows
+
+Needs the Godot 4.7.2 **Windows export templates** (Editor > Manage Export Templates, or unpack the official
+`.tpz` into `%APPDATA%\Godot\export_templates\4.7.2.stable\`; only the `windows_*_x86_64*.exe` files are used).
+Presets live in `export_presets.cfg` (committed): `Windows Desktop` (x86_64, .pck embedded) and `Windows Steam`
+(same, .pck separate). `tests/`, `docs/`, `tools/` and `sounds/` are excluded from the export.
+
+```powershell
+.\tools\build_windows.ps1          # builds\windows\Nightshift.exe, one file (~284 MB)
+.\tools\build_windows.ps1 -Steam   # builds\steam\content\Nightshift.exe + .pck
+```
+
+The script imports, then runs a headless release export (`-Godot` sets the editor path). `builds/` is gitignored.
+For Steam, fill in the app and depot IDs in `tools/steam/*.vdf` and upload with SteamPipe:
+`steamcmd +login <user> +run_app_build <repo>\tools\steam\app_build.vdf +quit`.
+
 ## Project layout
 
 ```

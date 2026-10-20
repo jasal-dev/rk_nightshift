@@ -20,6 +20,7 @@ the room map, and the conventions each case follows.
 11. Testing
 12. Checklists
 13. Leftovers and known stale bits
+14. Windows and Steam builds
 
 ## 1. Runtime architecture
 
@@ -541,3 +542,7 @@ case's murder board pick it up.
 - `render_room.py`'s docstring still says it converts to pixel art, and `--colors` and
   `scene3d.palette_quantize()` and `painterly()` are unused by the current pipeline.
 - `.claude/`, `tools/r3/out/*.png`, `r3`/`r3.exe` and quicksaves are ignored by git.
+
+## 14. Windows and Steam builds
+
+See "Building for Windows" in the README: `tools/build_windows.ps1` (`-Steam` for a separate .pck), presets in `export_presets.cfg`, SteamPipe templates in `tools/steam/`.
