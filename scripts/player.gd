@@ -281,8 +281,10 @@ func play_action(kind: String) -> void:
 			facing = side
 			anim_name = "%s_%s" % [kind, side]
 		"badge":
-			facing = "down"
-			anim_name = "show_badge"
+			# shown side-on, to whoever he is facing, and he stays turned that way afterwards
+			var badge_side := facing if facing in ["left", "right"] else "right"
+			facing = badge_side
+			anim_name = "badge_%s" % badge_side
 	if not sprite.sprite_frames.has_animation(anim_name):
 		return
 	sprite.play(anim_name)

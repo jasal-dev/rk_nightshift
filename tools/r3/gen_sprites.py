@@ -102,6 +102,14 @@ def badge():
             dict(yaw=0, rsp=46, re=92, rin=24, rhand='hold', props=bd, mouth=0.5),
             dict(yaw=0, rsp=46, re=92, rin=24, rhand='hold', props=bd)]
 
+def badge_side():
+    """Side-on badge flash (facing right): the forearm comes up in front, the badge held out toward whoever is there."""
+    bd = (('badge_side', 'r'),)
+    a = dict(yaw=90, rsp=16, re=100, rin=40, hp=4)
+    b = dict(yaw=90, rsp=50, re=78, rin=16, rhand='hold', props=bd, hp=6)
+    c = dict(yaw=90, rsp=64, re=60, rin=8, rhand='hold', props=bd, hp=6)
+    return [dict(yaw=90), a, b, c, dict(c, mouth=0.5), c]
+
 ANIMS = [
     ('idle_right', idle(90), 6, True),
     ('walk_right', [walk_pose(i, 12, 90) for i in range(12)], 12, True),
@@ -117,6 +125,7 @@ ANIMS = [
     ('look_around', look_around(), 4, True),
     ('shrug', shrug(), 8, False),
     ('show_badge', badge(), 6, False),
+    ('badge_right', badge_side(), 6, False),
     ('take_right', take(), 8, False),
 ]
 
@@ -244,7 +253,7 @@ def main():
             sheet_rows.append((name.replace('_right', '_left'), [im.transpose(Image.FLIP_LEFT_RIGHT) for im in alb],
                                msh, fps, loop))
     order = ['idle_right', 'walk_right', 'idle_down', 'walk_down', 'idle_up', 'walk_up', 'talk_right', 'talk_down',
-             'pickup_right', 'use_right', 'notebook_right', 'look_around', 'shrug', 'show_badge', 'take_right']
+             'pickup_right', 'use_right', 'notebook_right', 'look_around', 'shrug', 'show_badge', 'take_right', 'badge_right']
     if only and not a.preview:
         # keep every row we didn't re-render: cut it out of the current sheets
         done = {r[0] for r in sheet_rows}

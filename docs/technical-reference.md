@@ -228,7 +228,7 @@ aren't in the `notebook_seen` flag yet are highlighted and marked NEW; closing t
 | `caption(text, color, skippable)` | A subtitle in the lower third (the take). `skippable = false` ignores clicks. |
 | `piano(notes, set_list) -> bool` | Danny's keyboard. True once the last five notes played spell `notes` by letter; false if the player stepped back. Hints after three and six wrong runs of five. |
 | `the_end()` | The last card after Case 5's credits; a new game starts after it (or F9 loads). |
-| `player.play_action(kind)` | `use`, `pickup` (kneels: floor or low things), `take` (stands and reaches: waist height or above, or a hand), `notebook`, `shrug`, `badge`, `look_around`. |
+| `player.play_action(kind)` | `use`, `pickup` (kneels: floor or low things), `take` (stands and reaches: waist height or above, or a hand), `notebook`, `shrug`, `badge` (side-on, to the side he faces, `badge_right`/`badge_left`; the front-facing `show_badge` row is unused), `look_around`. |
 | `player.face(dir)`, `player.face_point(p)` | |
 
 `change_room()` also has a small hard-coded table for which way Ray faces on arrival (`main.gd`); new rooms get

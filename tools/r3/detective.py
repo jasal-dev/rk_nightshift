@@ -394,8 +394,10 @@ def build_arm(S, chest, side, sh, sp, sa, el, inward, wr, roll, hand, p, key):
     if ('knife', key) in props:                                                      # a paring knife
         S.cyl(hf.to((-s * 0.02, -0.1, -0.02)), hf.to((-s * 0.02, -0.1, 0.05)), 0.009, 'leather')
         S.box(Frame(hf.to((-s * 0.02, -0.1, 0.1)), Lh), (0, 0, 0), (0.002, 0.012, 0.05), 0.001, 'steel')
-    if ('badge', key) in props:
-        bf = Frame(grip + chest.M @ A(0, 0.02, 0.03), chest.M)
+    if ('badge', key) in props or ('badge_side', key) in props:
+        # badge_side: turned a quarter so the face of the badge shows to a camera looking at the figure's side
+        bm = chest.M @ Ry(-90) if ('badge_side', key) in props else chest.M
+        bf = Frame(grip + chest.M @ A(0, 0.02, 0.03), bm)
         S.box(bf, (0, 0, 0), (0.04, 0.055, 0.007), 0.004, 'leather')
         S.ell(bf, (0, 0.008, 0.008), (0.026, 0.032, 0.004), 'gold')
         S.ell(bf, (0, -0.03, 0.008), (0.012, 0.012, 0.004), 'gold')
