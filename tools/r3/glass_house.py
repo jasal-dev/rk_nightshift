@@ -123,14 +123,15 @@ def build(hide=()):
     S.light(((HX0 + HX1) / 2, HY + 1.5, HZ1 + 2.0), (255, 210, 160), power=8, range=14, shadow=False)  # spill out
 
     # ---------------------------------------------------------------- string lights over the drive
-    poles = [(-8.5, 3.6), (-8.5, -5.5), (5.0, 3.6), (5.0, -5.0)]
+    # every pole stands on pavers: behind the cars the ground is hidden by the cars, over the drop there is none
+    poles = [(-8.5, 3.6), (-0.65, -5.5), (5.0, 3.6), (3.0, 0.9)]
     for (x, z) in poles:
         S.cyl((x, 0, z), (x, 4.0, z), 0.05, 'steel')
     for (a, b) in ((poles[1], poles[2]), (poles[0], poles[3]), (poles[1], poles[3])):
         pts = []
         for t in np.linspace(0, 1, 22):
             x = a[0] + (b[0] - a[0]) * t; z = a[1] + (b[1] - a[1]) * t
-            y = 3.9 - 0.9 * 4 * t * (1 - t)
+            y = 3.9 - min(0.9, 0.07 * math.hypot(b[0] - a[0], b[1] - a[1])) * 4 * t * (1 - t)
             pts.append((x, y, z))
         for p, q in zip(pts, pts[1:]):
             S.cyl(p, q, 0.006, 'wire')

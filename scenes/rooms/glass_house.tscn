@@ -101,7 +101,7 @@ script = ExtResource("face")
 position = Vector2(832, 720)
 speaker = "andre"
 mouth_frames = Array[Texture2D]([ExtResource("face_andre_mouth1"), ExtResource("face_andre_mouth2")])
-mouth_pos = Vector2(831, 550)
+mouth_pos = Vector2(832, 550)
 eyes_frame = ExtResource("face_andre_eyes1")
 eyes_pos = Vector2(827, 541)
 
@@ -110,7 +110,7 @@ script = ExtResource("face")
 position = Vector2(1062, 798)
 speaker = "courtney"
 mouth_frames = Array[Texture2D]([ExtResource("face_courtney_mouth1"), ExtResource("face_courtney_mouth2")])
-mouth_pos = Vector2(1048, 586)
+mouth_pos = Vector2(1047, 586)
 eyes_frame = ExtResource("face_courtney_eyes1")
 eyes_pos = Vector2(1045, 575)
 

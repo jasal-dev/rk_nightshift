@@ -51,8 +51,22 @@ func on_enter(_from_room: String) -> void:
 
 
 func interact(hs: Hotspot, verb: String, item: String) -> void:
-	if not hs.id in ["crane", "crane_step"]:
+	var clues_before := _clue_count()
+	await _interact(hs, verb, item)
+	# The wander nudge waits until the click has finished and never talks over a fresh clue (the phone, the loafers).
+	if not hs.id in ["crane", "crane_step"] and _clue_count() == clues_before:
 		await _maybe_hint()
+
+
+func _clue_count() -> int:
+	var n := 0
+	for id in Game.CLUES:
+		if Game.flag(id):
+			n += 1
+	return n
+
+
+func _interact(hs: Hotspot, verb: String, item: String) -> void:
 	match hs.id:
 		"crane", "crane_step":
 			if verb == "look":
