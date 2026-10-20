@@ -4,12 +4,12 @@
 
 # Export builds
 /build/
+/builds/
 /export/
 /exports/
 *.pck
 *.apk
 *.aab
-export_presets.cfg
 export_credentials.cfg
 
 # Save data / quicksaves (normally in user://, but just in case)
