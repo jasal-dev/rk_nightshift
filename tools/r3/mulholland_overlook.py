@@ -266,7 +266,7 @@ def build(hide=()):
         hotspots={
             'kenji': ('Kenji', (0.25, 1.9), 'right'),
             'shah': ('Dr. Shah', (0.25, 1.9), 'right'),
-            'park': ('Officer Park', (4.1, 3.2), 'right'),
+            'park': ('Officer Park', (3.7, 3.05), 'right'),
             'inside': ('inside the car', (0.0, 1.4), 'right'),
             'prius': ('white Prius', (1.9, 3.0), 'up'),
             'scratch': ('scratches', (1.0, 2.6), 'right'),
@@ -287,7 +287,7 @@ def build(hide=()):
             'view': [(-40, 0.85, -60), (60, 0.85, -60), (60, 30, -60), (-40, 30, -60)],
         },
         hotspot_order=['view', 'wall', 'sign', 'ground', 'van', 'car', 'park', 'prius', 'scratch', 'inside', 'shah', 'kenji'],
-        obstacles=[],
+        obstacles=[(PARK[0], PARK[2], 0.3)],      # Officer Park
         # talking heads (render_room.py): tag -> floor point (x, z) [, speaker], the y-sort base of the face patches
         faces={'park': (4.55, 2.9)},                                      # Shah has her face in the car
         char_fill=((200, 196, 220), 0.12),

@@ -39,6 +39,12 @@ mouth_pos = Vector2(1516, 565)
 eyes_frame = ExtResource("face_park_eyes1")
 eyes_pos = Vector2(1513, 553)
 
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Obstacle1" type="Polygon2D" parent="Obstacles"]
+color = Color(0.9, 0.3, 0.2, 0.4)
+polygon = PackedVector2Array(1556.8, 783, 1562.1, 791.2, 1553.5, 797.7, 1533.2, 800.3, 1506.8, 798.4, 1482.1, 792.6, 1466, 784.5, 1462.5, 776.5, 1471.8, 770.6, 1491.2, 768.2, 1515.9, 769.9, 1539.8, 775.3)
+
 [node name="Spawns" type="Node2D" parent="."]
 
 [node name="drive" type="Marker2D" parent="Spawns"]
@@ -116,7 +122,7 @@ polygon = PackedVector2Array(0, 548.2, 77.7, 528.5, 300.8, 527, 363.9, 568.9, 36
 script = ExtResource("hs")
 id = "park"
 display_name = "Officer Park"
-walk_to = Vector2(1463, 802)
+walk_to = Vector2(1391, 794)
 face = "right"
 
 [node name="Shape" type="CollisionPolygon2D" parent="Hotspots/park"]
