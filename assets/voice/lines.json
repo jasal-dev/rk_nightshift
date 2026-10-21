@@ -6166,6 +6166,13 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
+	"46f87a5de55f": {
+		"speaker": "ray",
+		"text": "Not yet. First I want to hear Pearl's side of tonight.",
+		"file": "res://assets/voice/ray/46f87a5de55f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
 	"11f17402befb": {
 		"speaker": "ray",
 		"text": "Smashed. Rain's coming through the hole.",

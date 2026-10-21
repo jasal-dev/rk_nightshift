@@ -702,6 +702,8 @@ func _case3() -> void:
 	await act("counter", "look")
 	await act("window")
 	await act("chair")
+	await act("curtain")                                # locked until Pearl has told her story
+	await expect_room("stardust_shop")
 	await act("pearl", "use", "", ["What happened tonight?", "How long did you work for Gus?",
 			"Who has keys to the Oscar case?", "Who'd want the Oscar?", "I'll be back."])
 	await act("park", "use", "", ["Who's the man in the bathrobe?", "Anything from the canvass?", "That'll do."])

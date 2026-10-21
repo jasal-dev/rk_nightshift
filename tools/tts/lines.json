@@ -880,6 +880,7 @@
 	["ray", "The glass in the door is smashed. Most of it is out on the sidewalk, on the star of a TV cowboy nobody remembers.", "stardust_shop.gd:115 interact"],
 	["ray", "Break into a shop and the glass lands inside. This glass went out.", "stardust_shop.gd:116 interact"],
 	["ray", "Not yet. I want a good look at that door first.", "stardust_shop.gd front_door"],
+	["ray", "Not yet. First I want to hear Pearl's side of tonight.", "stardust_shop.gd curtain"],
 	["ray", "Smashed. Rain's coming through the hole.", "stardust_shop.gd:120 interact"],
 	["ray", "Not yet. Gus is still at the bottom of the stairs.", "stardust_shop.gd:122 interact"],
 	["ray", "Forty years of Hollywood, signed. Bogart, Monroe, Lyle Brandt, and a dozen faces only Gus remembered.", "stardust_shop.gd:130 interact"],
