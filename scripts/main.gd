@@ -18,6 +18,9 @@ const PLAYER_COLOR := Color(0.93, 0.86, 0.68)
 var room: Room
 var player: Player
 var busy := false
+var _splash_skip := false   ## a click or key during the Denary Games splash
+
+const SPLASH_INK := Color("14161C")
 
 @onready var world: Node2D = $World
 @onready var ui: GameUI = $UI
@@ -71,6 +74,9 @@ func _ready() -> void:
 	player = PlayerScene.instantiate()
 	ui.inventory_clicked.connect(_on_inventory_clicked)
 	ui.settings_clicked.connect(open_settings)
+	if get_tree().current_scene == self:     # the tests instantiate Main under their own scene and go straight to the title
+		busy = true
+		await _splash()
 	_title()
 
 
@@ -133,6 +139,45 @@ func open_settings() -> void:
 func close_settings() -> void:
 	ui.close_settings()
 	get_tree().paused = false
+
+
+# --- splash / title / ending ------------------------------------------------
+func _splash() -> void:
+	## Denary Games logo (as in the trailer): fades in, holds, fades out to black, then the title screen. Any key or
+	## click skips it. The title's music and rain only start afterwards.
+	var layer := CanvasLayer.new()
+	layer.layer = 100
+	add_child(layer)
+	var bg := ColorRect.new()
+	bg.color = SPLASH_INK
+	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(bg)
+	var logo := TextureRect.new()
+	logo.texture = load("res://assets/ui/denary_logo.png")
+	logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	logo.size = Vector2(540, 407)
+	logo.position = Vector2(960, 540) - logo.size / 2.0
+	logo.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	logo.modulate.a = 0.0
+	layer.add_child(logo)
+	_splash_skip = false
+	var t := create_tween()
+	t.tween_property(logo, "modulate:a", 1.0, 1.2)
+	t.tween_interval(1.6)
+	t.tween_property(logo, "modulate:a", 0.0, 0.9)
+	t.parallel().tween_property(bg, "color", Color.BLACK, 0.9)
+	while t.is_running() and not _splash_skip:
+		await get_tree().process_frame
+	t.kill()
+	if _splash_skip:                     # a short fade from wherever it got to
+		var o := create_tween().set_parallel()
+		o.tween_property(logo, "modulate:a", 0.0, 0.3)
+		o.tween_property(bg, "color", Color.BLACK, 0.3)
+		await o.finished
+	layer.queue_free()
+	await get_tree().create_timer(0.3).timeout
 
 
 # --- title / ending ---------------------------------------------------------
@@ -428,6 +473,8 @@ func _hover_text(target: String) -> String:
 
 # --- input --------------------------------------------------------------------
 func _input(event: InputEvent) -> void:
+	if event.is_pressed() and not event.is_echo() and (event is InputEventKey or event is InputEventMouseButton):
+		_splash_skip = true
 	## A click that ends a line or a card is taken before the GUI sees it: a close-up's backdrop (the jigsaw, the
 	## piano, a device screen) would otherwise swallow it, and with the Manual text speed the line would never end.
 	var mb := event as InputEventMouseButton
