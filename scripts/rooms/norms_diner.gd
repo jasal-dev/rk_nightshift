@@ -221,7 +221,7 @@ func _talk_to_heck() -> void:
 		else:
 			if not Game.flag("clue_side_thing"):
 				opts.append("Was Kenji into anything?"); keys.append("into")
-			if not Game.flag("heck_roommate"):
+			if not Game.flag("heck_roommate") and (Game.flag("clue_roommate_norms") or Game.flag("met_devin")):
 				opts.append("What about his roommate?"); keys.append("roommate")
 		opts.append("Never mind."); keys.append("done")
 		var c: int = await main.topics(opts)

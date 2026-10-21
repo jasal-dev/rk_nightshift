@@ -39,7 +39,10 @@ func on_enter(_from_room: String) -> void:
 		await main.say("Sal kept it like a church. Somebody came in and said a different kind of prayer.")
 	elif Game.flag("clue_takes_hint") and not Game.flag("knows_password") and not Game.flag("said_piano_line"):
 		Game.set_flag("said_piano_line")
-		await main.say("The knock, the way he played it. He played it right here every night after closing, for an audience of one.")
+		if Game.flag("clue_knock_tune"):
+			await main.say("The knock, the way he played it. He played it right here every night after closing, for an audience of one.")
+		else:
+			await main.say("The knock, the way he played it. It has to be on this piano somewhere.")
 
 
 func interact(hs: Hotspot, verb: String, item: String) -> void:
@@ -101,7 +104,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				if Game.flag("clue_latch"):
 					await main.say("Deadbolt open, chain hanging loose. Somebody went out this way and let it shut behind him.")
 				else:
-					await main.say("Deadbolt open, chain hanging loose. Teo says it was on the latch.")
+					await main.say("Deadbolt open, chain hanging loose.")
 			elif item != "":
 				await default_response(verb, item)
 			else:
@@ -207,6 +210,9 @@ func _piano(with_set_list: bool) -> void:
 	await main.wait(0.6)
 	await main.say("Decaf.")
 	main.ui.hide_piano()
-	await main.say("Sal cut him off coffee at ten, so Danny wrote him a song about it, and Sal laughed every night for two years.")
+	if Game.flag("clue_knock_tune"):
+		await main.say("Sal cut him off coffee at ten, so Danny wrote him a song about it, and Sal laughed every night for two years.")
+	else:
+		await main.say("Sal cut him off the real stuff, so Danny wrote him a song about what he got instead.")
 	main.clue("knows_password")
 	await main.say("Three tries, and I only need one. Time to call Ike.")

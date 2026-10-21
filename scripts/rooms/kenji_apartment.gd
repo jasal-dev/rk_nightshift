@@ -77,7 +77,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 			else:
 				await main.player.play_action("use")
 				await main.say("A sticky note in Kenji's hand: \"Carla Mendes. Fired over this. My fault. Giving her lawyer the cards. Done with HH.\"")
-				await main.say("So the camera wasn't for safety.")
+				await main.say("So the camera wasn't about the road.")
 				main.clue("clue_kenji_quitting")
 
 		"dashcam_box":
@@ -116,8 +116,11 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 		"laptop":
 			if verb == "look":
 				await main.say("Open to a photo editor. A folder called WEDDINGS_OCT. Last saved at 6:12 p.m.")
-				await main.say("Editing all night, and the last save was before dinner.")
-				main.clue("clue_laptop")
+				if Game.flag("clue_devin_story"):
+					await main.say("Editing all night, and the last save was before dinner.")
+					main.clue("clue_laptop")
+				else:
+					await main.say("Nothing saved since dinnertime. I'll ask him what he was doing all night.")
 			elif item != "":
 				await default_response(verb, item)
 			else:
@@ -171,7 +174,10 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 		"dining":
 			if verb == "look":
-				await main.say("Two plates and a takeout box. Dinner at six, Devin said. That part might even be true.")
+				if Game.flag("clue_devin_story"):
+					await main.say("Two plates and a takeout box. Dinner at six, Devin said. That part might even be true.")
+				else:
+					await main.say("Two plates and a takeout box. Somebody had company for dinner.")
 			else:
 				await main.say("Leftovers. Not evidence.")
 
@@ -344,4 +350,7 @@ func open_peas() -> void:
 	_sync()
 	await main.wait(0.6)
 	await main.ui.fade_to(0.0, 0.6)
-	await main.say("Eleven cards. Twenty-five hundred apiece. Twenty-seven thousand dollars, and a man who wanted to give it back.")
+	if Game.flag("clue_napkin"):
+		await main.say("Eleven cards. Twenty-five hundred apiece. Twenty-seven thousand dollars, and a man who wanted to give it back.")
+	else:
+		await main.say("Eleven cards. A year of Kenji's nights, and a man who wanted to give it away.")

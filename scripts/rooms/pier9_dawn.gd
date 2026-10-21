@@ -263,7 +263,7 @@ func _confront() -> void:
 			if Game.flag("clue_brenner_alone") and Game.flag("clue_nina_call"):
 				opts.append("You called Nina Alvarez.")
 		elif not Game.flag("brenner_lie2_broken"):
-			if Game.has_item("tab_book") and Game.flag("clue_choke"):
+			if Game.flag("clue_wb") and Game.flag("clue_choke"):
 				opts.append("Sal wrote you down.")
 		elif Game.flag("heard_take"):
 			opts.append("You were in the booth Tuesday.")
@@ -296,7 +296,7 @@ func _seed_options() -> Array:
 		out.append(["Empty by Christmas."])
 	if Game.flag("got_pryce_invite"):
 		out.append(["They drew a lobby."])
-	if Game.flag("clue_big_man") or Game.flag("clue_pryce_driver"):
+	if Game.flag("clue_big_man"):
 		out.append(["A long gray car."])
 	if Game.flag("clue_tape_helper"):
 		out.append(["Officer Park logged you."])
@@ -316,10 +316,16 @@ func _seed(pick: String) -> void:
 				await _brenner("I saw the camera. Kids put those in to sell clips of drunk actresses. Nobody was ever going to pay to watch an old man in a raincoat.")
 				await _brenner("And a wet revolver rusts by morning, son. You dry it when it's wet, not when it's smart. Thirty years of habit doesn't stop to check who's filming.")
 		"Empty by Christmas.":
-			await main.say("You handed out cards on that block last Thursday. Security consultant, Pryce Development. \"Empty by Christmas. The jazz club too.\"")
+			if Game.flag("clue_block_empty"):
+				await main.say("You handed out cards on that block last Thursday. Security consultant, Pryce Development. \"Empty by Christmas. The jazz club too.\"")
+			else:
+				await main.say("Your card was under Gus Lindqvist's eviction letter. \"Think it over. Nobody else is going to offer.\"")
 			await _brenner("It was a forecast. I'm good at forecasts.")
 		"They drew a lobby.":
-			await main.say("Your boss threw a party for Ted Haskell last night and drew a forty-story lobby where the Blue Note is.")
+			if Game.flag("clue_render"):
+				await main.say("Your boss threw a party for Ted Haskell last night and drew a forty-story lobby where the Blue Note is.")
+			else:
+				await main.say("Your boss threw a party for Ted Haskell last night. I've got the invitation.")
 			await _brenner("Harlan likes a nice drawing.")
 		"A long gray car.":
 			await main.say("A long gray car stopped on the Fletcher Drive bridge Tuesday after three, and a big man in an old cop's coat threw something into the reeds. I fished it out tonight.")

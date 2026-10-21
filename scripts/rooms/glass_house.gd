@@ -225,7 +225,7 @@ func _talk_to_courtney() -> void:
 
 func _tell_her() -> void:
 	await main.say("His name was Owen Tate. He's dead, Ms. Vail. He's under the Fletcher Drive bridge.")
-	await main.say("A car hit him at about two o'clock, ten minutes after he left your gate.")
+	await main.say("Something hit him on Fletcher Drive, not long after he left your gate.")
 	await main.wait(1.2)
 	await _courtney("He said somebody was going to get killed.")
 	await main.wait(0.6)
@@ -269,7 +269,7 @@ func _gate_camera() -> void:
 				await main.say("Downhill toward Riverside Drive. Toward the river.")
 			3:
 				main.ui.show_device("Gate camera", [], 0, "1:55 AM. A blue-gray Audi rolls out of the drive, scrapes the curb and turns downhill, the same way. Both headlights bright.\n\nPaused, the plate reads 8KXD392.", [], false)
-				await main.say("Both headlights at one fifty-five. Two minutes behind a kid on a bike, going the same way, in a hurry.")
+				await main.say("Both headlights at one fifty-five. Right behind the rider, going the same way, in a hurry.")
 				main.clue("clue_gate_clip")
 				main.clue("clue_headlights_intact")
 				main.clue("clue_plate")

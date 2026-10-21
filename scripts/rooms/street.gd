@@ -174,8 +174,10 @@ func _phone_call() -> void:
 				await main.say("...Actually, I won't. I'm not paying twice for that kind of manners.")
 				break
 		else:
-			var opts := ["How do I get Sal to open the door?", "Never mind."]
-			if not Game.flag("met_nina"):
+			var opts := ["Never mind."]
+			if Game.flag("met_nina"):
+				opts.push_front("How do I get Sal to open the door?")
+			else:
 				opts.push_front("Who am I talking to?")
 			var c: int = await main.choose(opts)
 			var pick: String = opts[c]

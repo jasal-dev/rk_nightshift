@@ -166,15 +166,22 @@ func _box_cards() -> Array:
 func _answer(i: int) -> void:
 	match i:
 		0:
-			await main.say("\"Walter Brenner, LAPD, retired. Security Consultant, Pryce Development.\" He handed these out on the Blue Note's block last Thursday.")
-			await main.say("Empty by Christmas, the jazz club too.")
+			if Game.flag("clue_block_empty"):
+				await main.say("\"Walter Brenner, LAPD, retired. Security Consultant, Pryce Development.\" He handed these out on the Blue Note's block last Thursday.")
+				await main.say("Empty by Christmas, the jazz club too.")
+			else:
+				await main.say("\"Walter Brenner, LAPD, retired. Security Consultant, Pryce Development.\" It was under the eviction letter on Gus Lindqvist's desk.")
+				await main.say("A retired cop on Pryce's payroll, leaning on a man Pryce wanted gone.")
 		1:
 			await main.say("Wednesday, ten past one. A Glide from the Blue Note to Pryce Tower, billed to Pryce Development's business account. Rider: Walt B.")
 			await main.say("The driver gave him one star and wrote that he smelled like gun oil. An hour after Danny went down, Walt went straight to the boss, on the boss's account.")
 			if Game.flag("clue_cabin_clip"):
 				await main.say("And the driver's back-seat camera has him in that car holding Danny's phone.")
 		_:
-			await main.say("Pryce threw him a party last night. \"Friends of Ted Haskell.\" Look inside. They've drawn a lobby where the Blue Note is.")
+			if Game.flag("clue_render"):
+				await main.say("Pryce threw him a party last night. \"Friends of Ted Haskell.\" Look inside. They've drawn a lobby where the Blue Note is.")
+			else:
+				await main.say("Pryce threw him a party last night. \"Friends of Ted Haskell.\" I've got the invitation.")
 			await main.say("The vote's next Wednesday, and he's the swing. His own chief of staff told me so, right before he asked for a lawyer.")
 
 

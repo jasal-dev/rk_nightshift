@@ -179,7 +179,7 @@ func _maybe_hint() -> void:
 		hint = "Shah says a car. Doss says a tent. Only one of them went to medical school."
 	elif Game.flag("reeds_dark") and not Game.flag("channel_lit"):
 		key = "hint_bridge_spot"
-		hint = "Everything that went down that drain is in the reeds. Doss has a spotlight he's very proud of."
+		hint = "Everything that went off this bridge is in the reeds. Doss has a spotlight he's very proud of."
 	if key == "" or Game.flag(key):
 		_wander = 0
 		return
@@ -262,7 +262,7 @@ func _uncuff() -> bool:
 
 func _spotlight() -> void:
 	## Puzzle 2.4: Doss lights up the river.
-	await main.say("Swing your spotlight over the rail. Under the bridge, on the reeds below the drain pipe.")
+	await main.say("Swing your spotlight over the rail. Under the bridge, on the reeds.")
 	await _doss("You want me to light up the river? At four in the morning?")
 	await main.wait(0.4)
 	await _doss("Sure. Not my electricity.")
@@ -294,7 +294,7 @@ func _talk_to_preacher() -> void:
 			opts.append("Did you hear anything?"); keys.append("bang")
 		if not Game.flag("preacher_saw"):
 			opts.append("Did you see the boy?"); keys.append("saw")
-		if not Game.flag("preacher_carry"):
+		if not Game.flag("preacher_carry") and Game.flag("clue_preacher_story"):
 			opts.append("Why carry the bike all the way down?"); keys.append("carry")
 		opts.append("That'll do."); keys.append("done")
 		var c: int = await main.topics(opts)

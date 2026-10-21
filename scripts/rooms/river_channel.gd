@@ -311,7 +311,7 @@ func _talk_to_preacher() -> void:
 	while true:
 		var opts := []
 		var keys := []
-		if not Game.flag("clue_reeds_tip"):
+		if not Game.flag("clue_reeds_tip") and (Game.flag("reeds_dark") or Game.flag("clue_scupper")):
 			opts.append("Where does stuff end up, off that bridge?"); keys.append("reeds")
 		if Game.has_item("danny_phone") and not Game.flag("clue_big_man"):
 			opts.append("Ever seen this?"); keys.append("phone")

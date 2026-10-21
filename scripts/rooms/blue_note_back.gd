@@ -142,7 +142,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 					await main.say("Small wet sneaker prints, from the alley door to the cooler. They don't come back.")
 					Game.set_flag("saw_prints")
 			else:
-				await main.say("It's her umbrella. She'll want it.")
+				await main.say("Somebody will want this umbrella back.")
 
 		"cooler":
 			if Game.flag("nina_out"):
@@ -271,7 +271,7 @@ func _cooler() -> void:
 	await _nina("Go away. I've got a knife.")
 	while true:
 		var opts := ["LAPD. Come on out.", "Nina? It's Ray Kessler."]
-		if not _knock_tried:
+		if not _knock_tried and Game.flag("clue_knock_only"):
 			opts.append("(Knock two slow, three fast.)")
 		var c: int = await main.choose(opts)
 		var pick: String = opts[c]
@@ -342,7 +342,7 @@ func _talk_nina() -> void:
 			opts.append("What happened tonight?"); keys.append("tonight")
 		if not Game.flag("clue_young_lady"):
 			opts.append("The man who called you."); keys.append("caller")
-		if not Game.flag("clue_nina_call"):
+		if not Game.flag("clue_nina_call") and Game.flag("clue_nina_heard") and Game.flag("clue_young_lady"):
 			opts.append("Can I see your phone?"); keys.append("phone")
 		if not Game.flag("clue_lisbon"):
 			opts.append("What did Danny have?"); keys.append("danny")
@@ -411,7 +411,7 @@ func _maybe_hint() -> void:
 		return
 	if Game.flag("shah_cooler") and not Game.flag("nina_out"):
 		await main.say("Shah says something's moving in the cooler. Bartenders don't leave a cooler lit.")
-	elif Game.flag("nina_out") and not Game.flag("clue_nina_call"):
+	elif Game.flag("clue_nina_heard") and Game.flag("clue_young_lady") and not Game.flag("clue_nina_call"):
 		await main.say("She said it came up as a police number. I'd like to see that number.")
 	elif Game.flag("clue_nina_call") and Game.flag("clue_choke") and not Game.flag("clue_desk_line"):
 		await main.say("A police number at one fifty-two. I know a phone with a long memory. It's on my desk.")

@@ -70,7 +70,7 @@ static func car_menu(main: Node, here: String, on_leave := Callable()) -> void:
 		"mulholland_overlook":
 			await main.say("Back up the hill. Kenji's car hasn't gone anywhere.")
 		"norms_diner":
-			await main.say("Norm's. Cherry pie, two coffees, twelve-fourteen.")
+			await main.say("Norm's. Where Kenji's night went after eleven fifty-six.")
 		"kenji_apartment":
 			await main.say("Home, Silver Lake. Two minutes, eleven fifty-six. Somebody was waiting.")
 		"squad_room":

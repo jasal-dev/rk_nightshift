@@ -107,7 +107,7 @@ func _interrogate() -> void:
 			opts.append("Where were you Tuesday night?"); keys.append("where")
 		if Game.flag("saw_gun") and not Game.flag("asked_gun"):
 			opts.append("That's a .45."); keys.append("gun")
-		if Game.flag("saw_paid") and not Game.flag("clue_paid"):
+		if Game.flag("saw_paid") and Game.flag("clue_alibi") and not Game.flag("clue_paid"):
 			opts.append("Danny's marker says PAID."); keys.append("paid")
 		if Game.flag("clue_paid") and not Game.flag("knows_envelope"):
 			opts.append("How did he pay you?"); keys.append("how")

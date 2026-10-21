@@ -1084,8 +1084,8 @@ func _case5() -> void:
 	print("Case 5, scene 4: Room 214, the leak")
 	await act("case_board")                             # not yet
 	await act("phone", "use", "", ["Call log", "Hang up"])
-	await act("phone_list")                             # the lieutenant's direct line
-	await act("case_board", "use", "", ["\"Ray, it's one-thirty.\"", "\"Thanks, Walt. Black is fine.\""])
+	await act("phone_list", "use", "", ["\"Ray, it's one-thirty.\"", "\"Thanks, Walt. Black is fine.\""])   # the lieutenant's line, then the 1:30 call replayed
+	await act("case_board")                             # not yet
 	await act("phone", "use", "", ["Call Otis"])        # the visitor log, then Doyle, then Ike
 	expect(["clue_one_call", "clue_desk_line", "clue_walt_aside", "clue_visitor_log", "clue_brenner_alone", "knows_brenner",
 			"lied_to_doyle", "clue_takes_hint", "asked_cabin_clip"])

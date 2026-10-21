@@ -224,10 +224,10 @@ func _maybe_hint() -> void:
 		pass
 	elif Game.flag("crane_lie2_broken"):
 		key = "hint_garage_step3"
-		hint = "He says he never stopped. His shoes say he went for a walk by the river."
+		hint = "He says he never stopped. Something got out of that car."
 	elif Game.flag("crane_lie1_broken"):
 		key = "hint_garage_step2"
-		hint = "A coyote. I've got half a headlight that says different."
+		hint = "A coyote. There's a headlight somewhere between here and the river."
 	elif Game.flag("clue_crane_story"):
 		key = "hint_garage_step1"
 		hint = "He says a car service. Somebody up on Glendower wrote down otherwise."
@@ -301,7 +301,10 @@ func _step1(how: String) -> void:
 		await main.player.play_action("use")
 		await main.say("Starline Valet, ticket forty-seven. \"Crane. Out one fifty-five. Guest insisted.\"")
 	else:
-		await main.say("There's a camera on Mr. Pryce's gate. It has you taking your own keys off the board at one fifty-one, and a delivery rider telling you that you can't drive like that.")
+		if Game.flag("clue_crane_drunk"):
+			await main.say("There's a camera on Mr. Pryce's gate. It has you taking your own keys off the board at one fifty-one, and a delivery rider telling you that you can't drive like that.")
+		else:
+			await main.say("There's a camera on Mr. Pryce's gate. It has your Audi leaving at one fifty-five, a couple of minutes behind a delivery rider.")
 	await main.wait(1.2)
 	await main.say("He puts the glass down on the bench, very carefully.")
 	await _crane("All right. I drove. I'd had two glasses. Three. I was fine. I drove home slowly.")
@@ -389,10 +392,14 @@ func _step3() -> void:
 	_sync()
 	await main.wait(0.8)
 	await main.ui.fade_to(0.0, 0.8)
-	await main.voice("I had a vet in my car for this. A guy who fought in a war.", street, Case4.DOSS_COLOR, "doss")
-	await main.wait(0.6)
-	await main.voice("\"Sorry\" doesn't really cover it, huh.", street, Case4.DOSS_COLOR, "doss")
-	await main.say("Say it anyway. He told me you already did.")
+	if Game.flag("preacher_freed"):
+		await main.voice("I had a vet in my car for this. A guy who fought in a war.", street, Case4.DOSS_COLOR, "doss")
+		await main.wait(0.6)
+		await main.voice("\"Sorry\" doesn't really cover it, huh.", street, Case4.DOSS_COLOR, "doss")
+		if Game.flag("preacher_ok"):
+			await main.say("Say it anyway. He told me you already did.")
+		else:
+			await main.say("Say it anyway. He's at the tent.")
 	await main.wait(0.8)
 	await main.say("The phone on the workbench buzzes again. Nobody answers it.")
 	await main.ui.fade_to(1.0, 0.5)

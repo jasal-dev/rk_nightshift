@@ -2372,10 +2372,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"0cc45e9b59ae": {
+	"2757e9ff3fda": {
 		"speaker": "ray",
-		"text": "Norm's. Cherry pie, two coffees, twelve-fourteen.",
-		"file": "res://assets/voice/ray/0cc45e9b59ae.ogg",
+		"text": "Norm's. Where Kenji's night went after eleven fifty-six.",
+		"file": "res://assets/voice/ray/2757e9ff3fda.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -2638,10 +2638,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"a3d62a77fa7b": {
+	"600a8335eb9d": {
 		"speaker": "ray",
-		"text": "So the camera wasn't for safety.",
-		"file": "res://assets/voice/ray/a3d62a77fa7b.ogg",
+		"text": "So the camera wasn't about the road.",
+		"file": "res://assets/voice/ray/600a8335eb9d.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -4108,10 +4108,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"2e183375a331": {
+	"08de63567fce": {
 		"speaker": "ray",
-		"text": "The app says his night ended at eleven fifty-two. The car says it didn't. He went home for two minutes, then out for pie, then up here. Off the clock.",
-		"file": "res://assets/voice/ray/2e183375a331.ogg",
+		"text": "The app says his night ended at eleven fifty-two. The car says it didn't. He went home for two minutes, then out to Norm's, then up here. Off the clock.",
+		"file": "res://assets/voice/ray/08de63567fce.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -4381,10 +4381,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"f31782b20392": {
+	"a153d5d0ecf0": {
 		"speaker": "ray",
-		"text": "Off the app, home for two minutes, then pie? That's not a stranger. That's a friend.",
-		"file": "res://assets/voice/ray/f31782b20392.ogg",
+		"text": "Off the app, home for two minutes, then Norm's? That's not a stranger. That's a friend.",
+		"file": "res://assets/voice/ray/a153d5d0ecf0.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -5543,10 +5543,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"63a8f110c2e0": {
+	"93bfff350e64": {
 		"speaker": "ray",
-		"text": "Lyle Brandt. Best Supporting Actor, 1954. Floating.",
-		"file": "res://assets/voice/ray/63a8f110c2e0.ogg",
+		"text": "The Oscar. Best Supporting Actor, 1954. Floating.",
+		"file": "res://assets/voice/ray/93bfff350e64.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -6740,17 +6740,17 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"3c45c2ec0874": {
+	"d945394e222a": {
 		"speaker": "ray",
-		"text": "I've got what she hid and what she lost. Time to go downstairs and see what she says.",
-		"file": "res://assets/voice/ray/3c45c2ec0874.ogg",
+		"text": "I've got what was hidden and what was lost. Time to go downstairs and see who it fits.",
+		"file": "res://assets/voice/ray/d945394e222a.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"1a89117be9e5": {
+	"c3173d330d63": {
 		"speaker": "ray",
-		"text": "Her heels went to that tank and came back. People don't visit water tanks.",
-		"file": "res://assets/voice/ray/1a89117be9e5.ogg",
+		"text": "Somebody went to that tank and came back. People don't visit water tanks.",
+		"file": "res://assets/voice/ray/c3173d330d63.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -6838,10 +6838,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"f4de1efbe75e": {
+	"886ae1b4a248": {
 		"speaker": "ray",
-		"text": "A burglar who breaks out, uses a key, leaves the cash and hides the loot on the roof? That's not a burglar. That's a stage manager.",
-		"file": "res://assets/voice/ray/f4de1efbe75e.ogg",
+		"text": "A burglar who hides the loot on the roof of the shop he just robbed? That's not a burglar. That's a stage manager.",
+		"file": "res://assets/voice/ray/886ae1b4a248.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -8259,10 +8259,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"68a2de8829b5": {
+	"cd0560f264ae": {
 		"speaker": "ray",
-		"text": "Swing your spotlight over the rail. Under the bridge, on the reeds below the drain pipe.",
-		"file": "res://assets/voice/ray/68a2de8829b5.ogg",
+		"text": "Swing your spotlight over the rail. Under the bridge, on the reeds.",
+		"file": "res://assets/voice/ray/cd0560f264ae.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -8770,10 +8770,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"7fc0a76436d3": {
+	"5141a7d50f6f": {
 		"speaker": "ray",
-		"text": "A car hit him at about two o'clock, ten minutes after he left your gate.",
-		"file": "res://assets/voice/ray/7fc0a76436d3.ogg",
+		"text": "Something hit him on Fletcher Drive, not long after he left your gate.",
+		"file": "res://assets/voice/ray/5141a7d50f6f.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -8784,10 +8784,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"1f2df59482e0": {
+	"cc344e7e9987": {
 		"speaker": "ray",
-		"text": "Both headlights at one fifty-five. Two minutes behind a kid on a bike, going the same way, in a hurry.",
-		"file": "res://assets/voice/ray/1f2df59482e0.ogg",
+		"text": "Both headlights at one fifty-five. Right behind the rider, going the same way, in a hurry.",
+		"file": "res://assets/voice/ray/cc344e7e9987.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -9771,17 +9771,17 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"e4c9469469bb": {
+	"54f05f5f7559": {
 		"speaker": "ray",
-		"text": "He says he never stopped. His shoes say he went for a walk by the river.",
-		"file": "res://assets/voice/ray/e4c9469469bb.ogg",
+		"text": "He says he never stopped. Something got out of that car.",
+		"file": "res://assets/voice/ray/54f05f5f7559.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"739500729f42": {
+	"f7854f1822e7": {
 		"speaker": "ray",
-		"text": "A coyote. I've got half a headlight that says different.",
-		"file": "res://assets/voice/ray/739500729f42.ogg",
+		"text": "A coyote. There's a headlight somewhere between here and the river.",
+		"file": "res://assets/voice/ray/f7854f1822e7.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -9799,10 +9799,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"ecffb43150cf": {
+	"db683786a33d": {
 		"speaker": "ray",
-		"text": "Everything that went down that drain is in the reeds. Doss has a spotlight he's very proud of.",
-		"file": "res://assets/voice/ray/ecffb43150cf.ogg",
+		"text": "Everything that went off this bridge is in the reeds. Doss has a spotlight he's very proud of.",
+		"file": "res://assets/voice/ray/db683786a33d.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -9890,10 +9890,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"8fae4e5a8321": {
+	"ea9b8df44bfa": {
 		"speaker": "ray",
-		"text": "Preacher carried the bike down to save it. Shah says a car, and Preacher hasn't driven anything since 1991.",
-		"file": "res://assets/voice/ray/8fae4e5a8321.ogg",
+		"text": "A car did this. Preacher lives in a tent. It isn't him.",
+		"file": "res://assets/voice/ray/ea9b8df44bfa.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -9911,10 +9911,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"999de5734573": {
+	"771ac11b1029": {
 		"speaker": "ray",
-		"text": "Haskell left at eleven with his wife and a driver. Men like Haskell don't drive themselves anywhere.",
-		"file": "res://assets/voice/ray/999de5734573.ogg",
+		"text": "Haskell's a councilman. Men like Haskell don't drive themselves anywhere.",
+		"file": "res://assets/voice/ray/771ac11b1029.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -9960,10 +9960,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"a05f8cff16d4": {
+	"8a8c5569a47f": {
 		"speaker": "ray",
-		"text": "The headlight fits like a key. A valet ticket, a gate camera, river mud on his shoes.",
-		"file": "res://assets/voice/ray/a05f8cff16d4.ogg",
+		"text": "The headlight fits like a key. River mud on his shoes, and a paper trail that puts him behind the wheel.",
+		"file": "res://assets/voice/ray/8a8c5569a47f.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -10688,10 +10688,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"902d204c522d": {
+	"4deb5134d832": {
 		"speaker": "ray",
-		"text": "It's her umbrella. She'll want it.",
-		"file": "res://assets/voice/ray/902d204c522d.ogg",
+		"text": "Somebody will want this umbrella back.",
+		"file": "res://assets/voice/ray/4deb5134d832.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -11185,10 +11185,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"8e0c8d50f7c4": {
+	"ab31e922902e": {
 		"speaker": "ray",
-		"text": "Deadbolt open, chain hanging loose. Teo says it was on the latch.",
-		"file": "res://assets/voice/ray/8e0c8d50f7c4.ogg",
+		"text": "Deadbolt open, chain hanging loose.",
+		"file": "res://assets/voice/ray/ab31e922902e.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -15354,6 +15354,118 @@
 		"speaker": "ray",
 		"text": "Locked. Park has Kenji's keys.",
 		"file": "res://assets/voice/ray/94a4a135180e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"22d65df30285": {
+		"speaker": "ray",
+		"text": "Nothing saved since dinnertime. I'll ask him what he was doing all night.",
+		"file": "res://assets/voice/ray/22d65df30285.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"21b0b4a14d56": {
+		"speaker": "ray",
+		"text": "Two plates and a takeout box. Somebody had company for dinner.",
+		"file": "res://assets/voice/ray/21b0b4a14d56.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"2eb91b2bc816": {
+		"speaker": "ray",
+		"text": "Eleven cards. A year of Kenji's nights, and a man who wanted to give it away.",
+		"file": "res://assets/voice/ray/2eb91b2bc816.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"205cd7f54701": {
+		"speaker": "ray",
+		"text": "Devin Clark. Signed the slip.",
+		"file": "res://assets/voice/ray/205cd7f54701.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"780b1d660fa5": {
+		"speaker": "ray",
+		"text": "There's a camera on Mr. Pryce's gate. It has your Audi leaving at one fifty-five, a couple of minutes behind a delivery rider.",
+		"file": "res://assets/voice/ray/780b1d660fa5.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"bdfd2c68d676": {
+		"speaker": "ray",
+		"text": "Say it anyway. He's at the tent.",
+		"file": "res://assets/voice/ray/bdfd2c68d676.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"7bb0ffcc5003": {
+		"speaker": "ray",
+		"text": "The knock, the way he played it. It has to be on this piano somewhere.",
+		"file": "res://assets/voice/ray/7bb0ffcc5003.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"7741aee348f2": {
+		"speaker": "ray",
+		"text": "Sal cut him off the real stuff, so Danny wrote him a song about what he got instead.",
+		"file": "res://assets/voice/ray/7741aee348f2.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"e4234a1c172e": {
+		"speaker": "ray",
+		"text": "Your card was under Gus Lindqvist's eviction letter. \"Think it over. Nobody else is going to offer.\"",
+		"file": "res://assets/voice/ray/e4234a1c172e.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"2e8fa45cc343": {
+		"speaker": "ray",
+		"text": "Your boss threw a party for Ted Haskell last night. I've got the invitation.",
+		"file": "res://assets/voice/ray/2e8fa45cc343.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"3b12c9fcfdee": {
+		"speaker": "ray",
+		"text": "\"Walter Brenner, LAPD, retired. Security Consultant, Pryce Development.\" It was under the eviction letter on Gus Lindqvist's desk.",
+		"file": "res://assets/voice/ray/3b12c9fcfdee.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"c85922c3f39d": {
+		"speaker": "ray",
+		"text": "A retired cop on Pryce's payroll, leaning on a man Pryce wanted gone.",
+		"file": "res://assets/voice/ray/c85922c3f39d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"1e5e806d1466": {
+		"speaker": "ray",
+		"text": "Pryce threw him a party last night. \"Friends of Ted Haskell.\" I've got the invitation.",
+		"file": "res://assets/voice/ray/1e5e806d1466.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"fab56ee0a95d": {
+		"speaker": "ray",
+		"text": "Nina was Danny's girl. You don't kill the man she's counting on.",
+		"file": "res://assets/voice/ray/fab56ee0a95d.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"395a7b9a8c58": {
+		"speaker": "ray",
+		"text": "A long drop to a wet, empty alley.",
+		"file": "res://assets/voice/ray/395a7b9a8c58.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"be3a3fdd2c4e": {
+		"speaker": "ray",
+		"text": "Nobody stole the Oscar tonight. This one was never it.",
+		"file": "res://assets/voice/ray/be3a3fdd2c4e.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	}

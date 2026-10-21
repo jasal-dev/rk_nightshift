@@ -553,9 +553,12 @@ func _deduction2(first: String) -> void:
 				else:
 					await main.narrate("Heck talks big. I never checked where he was, and the board wants proof, not a grudge.")
 			2:
-				await main.narrate("Off the app, home for two minutes, then pie? That's not a stranger. That's a friend.")
+				await main.narrate("Off the app, home for two minutes, then Norm's? That's not a stranger. That's a friend.")
 			3:
-				await main.narrate("The one with the camera bag.")
+				if Game.flag("clue_roommate_norms") or Game.flag("clue_strap"):
+					await main.narrate("The one with the camera bag.")
+				else:
+					await main.narrate("Devin Clark. Signed the slip.")
 				break
 			_:
 				main.ui.hide_board()
@@ -739,7 +742,7 @@ func _deduction3(first: String) -> void:
 				else:
 					await main.narrate("Pryce sent a letter. A letter isn't a pair of hands. I never checked where Whitaker was.")
 			2:
-				await main.narrate("A burglar who breaks out, uses a key, leaves the cash and hides the loot on the roof? That's not a burglar. That's a stage manager.")
+				await main.narrate("A burglar who hides the loot on the roof of the shop he just robbed? That's not a burglar. That's a stage manager.")
 			3:
 				await main.narrate("Pearlie.")
 				break
@@ -924,14 +927,14 @@ func _deduction4(first: String) -> void:
 				"Elliot Crane, Haskell's chief of staff.", "(Step back from the board)"])
 		match c:
 			0:
-				await main.narrate("Preacher carried the bike down to save it. Shah says a car, and Preacher hasn't driven anything since 1991.")
+				await main.narrate("A car did this. Preacher lives in a tent. It isn't him.")
 			1:
 				if Game.flag("clue_courtney_alibi"):
 					await main.narrate("Courtney sent him out into the rain. Her own camera says she never left the house.")
 				else:
 					await main.narrate("Courtney gave him one star. That's cruelty, not a car. And I never checked where she was.")
 			2:
-				await main.narrate("Haskell left at eleven with his wife and a driver. Men like Haskell don't drive themselves anywhere.")
+				await main.narrate("Haskell's a councilman. Men like Haskell don't drive themselves anywhere.")
 			3:
 				await main.narrate("The man he told not to drive.")
 				break
@@ -1037,7 +1040,7 @@ func _calls4() -> void:
 	await main.voice("Ted Haskell called the captain at home. The captain called me at home. Do you know how often the captain calls me at home?", PHONE_AT, DOYLE_COLOR, "doyle", true)
 	await main.say("Then it's a big night for both of you.")
 	await main.voice("Is it solid?", PHONE_AT, DOYLE_COLOR, "doyle", true)
-	await main.say("The headlight fits like a key. A valet ticket, a gate camera, river mud on his shoes.")
+	await main.say("The headlight fits like a key. River mud on his shoes, and a paper trail that puts him behind the wheel.")
 	await main.wait(0.6)
 	await main.voice("Then book him. By the book, every comma. I don't want to read about one shortcut.", PHONE_AT, DOYLE_COLOR, "doyle", true)
 	await main.say("You won't.")
@@ -1086,7 +1089,7 @@ func _board5(verb: String, item: String) -> void:
 		await main.say("Packed.")
 	elif Game.flag("case5_deduced"):
 		await _pack_box()
-	elif Game.flag("heard_take") and not Game.has_item("tab_book"):
+	elif Game.flag("heard_take") and not Game.flag("clue_wb"):
 		# the only card for "He was in the bar at 3:20"
 		await main.say("I can't put Walt in Sal's bar yet. Sal would have. He wrote everything down.")
 	elif Game.flag("heard_take"):
@@ -1150,6 +1153,11 @@ func _phone_list(verb: String) -> void:
 		main.clue("clue_desk_line")
 		main.ui.hide_paper()
 		await main.narrate("Maureen Doyle doesn't call waitresses at two in the morning. She doesn't call anybody. She has people for that.")
+		# the pier leans on all of this, so it can't be skipped
+		if not Game.flag("clue_one_call"):
+			await _call_log()
+		if not Game.flag("clue_walt_aside"):
+			await _remember()
 	else:
 		await main.say("The lieutenant's direct line. Somebody else was holding it at one fifty-two.")
 	main.ui.hide_paper()
@@ -1463,7 +1471,10 @@ func _deduction5(first: String) -> void:
 			0:
 				await main.narrate("Dead men don't pay, and Danny had paid.")
 			1:
-				await main.narrate("Nina had a plan for Lisbon. You don't kill the man who's buying the tickets.")
+				if Game.flag("clue_lisbon"):
+					await main.narrate("Nina had a plan for Lisbon. You don't kill the man who's buying the tickets.")
+				else:
+					await main.narrate("Nina was Danny's girl. You don't kill the man she's counting on.")
 			2:
 				await main.narrate("Maureen never heard of Danny Reyes until he was a file on her desk.")
 			3:

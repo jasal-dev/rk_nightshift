@@ -309,6 +309,6 @@ func _head_unit() -> void:
 func _insight() -> void:
 	## Once the app and the car disagree, Ray puts them together (once).
 	if Game.flag("clue_last_trip") and Game.flag("clue_gps") and not Game.flag("clue_off_app"):
-		await main.say("The app says his night ended at eleven fifty-two. The car says it didn't. He went home for two minutes, then out for pie, then up here. Off the clock.")
+		await main.say("The app says his night ended at eleven fifty-two. The car says it didn't. He went home for two minutes, then out to Norm's, then up here. Off the clock.")
 		await main.say("Nobody drives a stranger around for free. He picked someone up at home.")
 		main.clue("clue_off_app")

@@ -79,7 +79,7 @@ const CLUES := {
 	"clue_last_trip": [2, "Glide: last trip ended in Silver Lake at 11:52. Offline after."],
 	"clue_threat": [2, "Heck D., Tuesday: \"Do it once more and I'll put you in the ground.\""],
 	"clue_gps": [2, "Car GPS: Home 11:56, Norm's 12:08, Mulholland overlook 12:58."],
-	"clue_off_app": [2, "After 11:52 Kenji drove off the app: home, pie, the overlook. Someone he knew."],
+	"clue_off_app": [2, "After 11:52 Kenji drove off the app: home, Norm's, the overlook. Someone he knew."],
 	"clue_dashcam": [2, "Dashcam unscrewed, cable coiled. Taken by someone who knows cameras."],
 	"clue_two_cups": [2, "Two Norm's coffees. One drunk, one barely touched."],
 	"clue_empty_case": [2, "Card case in the glovebox, JAN to DEC. Every slot empty."],

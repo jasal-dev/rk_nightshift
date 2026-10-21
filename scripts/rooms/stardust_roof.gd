@@ -139,7 +139,10 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 			if item != "":
 				await main.say("Nothing goes off this roof tonight.")
 			elif verb == "look":
-				await main.say("A long drop to a wet, empty alley. No yellow Fiat now.")
+				if Game.flag("clue_fiat"):
+					await main.say("A long drop to a wet, empty alley. No yellow Fiat now.")
+				else:
+					await main.say("A long drop to a wet, empty alley.")
 			else:
 				await main.say("Gus didn't go off the edge. He went down the stairs.")
 
@@ -164,10 +167,10 @@ func _maybe_hint() -> void:
 	var hint := ""
 	if Game.has_item("fake_oscar") and Game.has_item("star_earring"):
 		key = "hint_roof_done"
-		hint = "I've got what she hid and what she lost. Time to go downstairs and see what she says."
+		hint = "I've got what was hidden and what was lost. Time to go downstairs and see who it fits."
 	elif Game.has_item("star_earring") and not Game.flag("got_fake_oscar"):
 		key = "hint_roof_tank"
-		hint = "Her heels went to that tank and came back. People don't visit water tanks."
+		hint = "Somebody went to that tank and came back. People don't visit water tanks."
 	if key == "" or Game.flag(key):
 		_wander = 0
 		return
@@ -183,7 +186,7 @@ func _tank() -> void:
 	await main.player.play_action("use")
 	await main.say("Neon light slides across black water a foot below the rim. Something floats face down in it, gold, like a drowned starlet.")
 	await main.player.play_action("take")
-	await main.say("Lyle Brandt. Best Supporting Actor, 1954. Floating.")
+	await main.say("The Oscar. Best Supporting Actor, 1954. Floating.")
 	await main.say("It comes up far too easily. Eight and a half pounds of metal doesn't float. This is resin, hollow as a promise.")
 	if Game.flag("clue_weight"):
 		await main.say("Morty said they'd float in a bathtub.")
@@ -191,7 +194,10 @@ func _tank() -> void:
 	Game.set_flag("got_fake_oscar")
 	await main.give("fake_oscar", false)
 	main.clue("clue_replica")
-	await main.say("Nobody stole Lyle tonight. Lyle left three weeks ago.")
+	if Game.flag("clue_same_serial") or Game.flag("clue_morty_bought"):
+		await main.say("Nobody stole Lyle tonight. Lyle left three weeks ago.")
+	else:
+		await main.say("Nobody stole the Oscar tonight. This one was never it.")
 	await main.say("Somebody hid this one up here to make a robbery out of it, because nobody walks down Hollywood Boulevard at two in the morning with a gold statue under their arm.")
 	await main.say("Not past forty cameras.")
 
