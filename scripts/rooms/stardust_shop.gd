@@ -178,7 +178,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 				await main.say("The back office.")
 			elif item != "":
 				await default_response(verb, item)
-			elif not Game.flag("clue_pearl_story") and not Game.flag("in_office"):
+			elif not Game.flag("clue_pearl_story"):
 				## The office's lines about Pearl lean on her story of the night, so hear it first.
 				await main.say("Not yet. First I want to hear Pearl's side of tonight.")
 			else:
