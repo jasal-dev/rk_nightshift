@@ -577,9 +577,9 @@ RAY: Gus didn't fall. He went down those stairs backward, with the heels of two 
 
 *He holds up the earring.*
 
-RAY: It was at the top of his stairs, Pearl. Push your hair back.
+RAY: It was at the top of his stairs, Pearl. Your left ear. You can stop hiding it.
 
-*She doesn't move. Then she does. Her left earlobe is torn and red.* *(sets clue\_bare\_ear if not set)*
+*She lifts her hair away herself. The left earlobe is torn and red.* *(sets clue\_bare\_ear if not set)*
 
 PEARL: He kept saying "How long? How long?" So I told him. Eighteen months. A Bogart letter first, for rent. Then the photos. Then Lyle. I'm good, you know? I'm good at being somebody else. It's the only thing I've ever been good at.
 

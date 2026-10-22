@@ -6516,17 +6516,17 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"61e012693288": {
+	"0788283d9955": {
 		"speaker": "ray",
-		"text": "It was at the top of his stairs, Pearl. Push your hair back.",
-		"file": "res://assets/voice/ray/61e012693288.ogg",
+		"text": "It was at the top of his stairs, Pearl. Your left ear. You can stop hiding it.",
+		"file": "res://assets/voice/ray/0788283d9955.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"c4ae040fffd0": {
+	"3e6f375dbcde": {
 		"speaker": "ray",
-		"text": "Her left earlobe is torn and red.",
-		"file": "res://assets/voice/ray/c4ae040fffd0.ogg",
+		"text": "She lifts her hair away herself. The left earlobe is torn and red.",
+		"file": "res://assets/voice/ray/3e6f375dbcde.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
