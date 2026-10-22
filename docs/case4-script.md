@@ -123,7 +123,7 @@ RAY: That's what worries me, Officer.
 
 *Why's he in your car?*
 
-DOSS: Calvin Odom, they call him Preacher. Army guy, lives under the bridge. Won't say a word to me. Says he'll only talk to "somebody who's been somewhere." *(beat)* I've been to Rancho Cucamonga.
+DOSS: Calvin Odom, they call him Preacher. Army guy, lives under the bridge. Won't say much to me. Says he'll only talk to "somebody who's been somewhere." *(beat)* I've been to Rancho Cucamonga.
 
 *That'll do.*
 
@@ -185,7 +185,7 @@ After preacher\_trusts, Preacher's menu:
 
 PREACHER: I was in my tent with Deuteronomy. Some while after two, I see a red light blinking on the water. Off, on, off, on. Up on the bridge. So I went up the stairs. A bicycle, leaning on the rail, light still going, nobody with it. Big yellow box on the back, all stove in.
 
-PREACHER: I carried it down. By sunup the strippers would've had the wheels, the battery, the seat. I meant to hand it to the first police I saw. *(beat)* The first police I saw put me in this car. *(sets clue\_preacher\_story)*
+PREACHER: I got it down to my tent. By sunup the strippers would've had the wheels, the battery, the seat. I meant to hand it to the first police I saw. *(beat)* The first police I saw put me in this car. *(sets clue\_preacher\_story)*
 
 *Did you hear anything?*
 
@@ -197,7 +197,7 @@ PREACHER: Long enough for a man to do something. Not long enough to do it right.
 
 *Did you see the boy?*
 
-PREACHER: No, sir. I came down those stairs with a bicycle on my shoulder, watching my feet, and the light under that bridge is nothing. If I'd seen him I'd have gone to him. *(beat)* I'd have sat with him.
+PREACHER: No, sir. I came down those stairs wheeling a bicycle, watching my feet, and the light under that bridge is nothing. If I'd seen him I'd have gone to him. *(beat)* I'd have sat with him.
 
 *Why carry the bike all the way down?*
 
@@ -294,7 +294,7 @@ Case 4 has 6 new inventory items and 40 notebook clues, 24 of them optional and 
 | clue\_trip\_paused | Chomp: no movement on Fletcher Drive from 2:04. | Owen's phone | Optional |
 | clue\_drag\_marks | Heel marks down the east bank from the fence gap to Owen. | East bank | Optional |
 | clue\_bike\_stairs | One tire line and boot prints down the stairs. | Stairs | Optional |
-| clue\_two\_tracks | The bike came down the stairs with Preacher. Owen came down the bank with somebody else. | Automatic once both of the above are read | One of (free Preacher) |
+| clue\_two\_tracks | The bike came down the stairs with somebody in big boots. Owen came down the bank with somebody else. | Automatic once both of the above are read | One of (free Preacher) |
 | clue\_audi | The headlight piece: four rings, part 4K0, blue-gray paint. An Audi. | lens\_piece | Yes |
 | clue\_danny\_phone | Danny's phone, in the reeds under the Fletcher Drive bridge. | Reeds | Yes |
 | clue\_big\_man | Preacher: Tuesday after three, a big man in an old cop's coat threw something small and black off the bridge from a long gray car. | Preacher, with danny\_phone | Optional |
@@ -519,7 +519,7 @@ Look at the stairs: "Down the middle of every step, a single muddy tire line, an
 
 Once both are set:
 
-RAY: The bike came down the stairs with Preacher. Owen came down the bank with somebody else. *(sets clue\_two\_tracks)*
+RAY: The bike came down the stairs with somebody in big boots. Owen came down the bank with somebody else. *(with clue\_preacher\_story: "…with Preacher."; sets clue\_two\_tracks)*
 
 **Talking to Preacher** (at his tent, after preacher\_freed). The first time:
 
@@ -587,7 +587,7 @@ Using the reeds again: "Water, mud, a shopping cart. Nothing else of anybody's."
 | --- | --- | --- | --- | --- |
 | Owen | "Owen Tate. Twenty-four. His Chomp jacket says SPEED IS SERVICE in letters bigger than his name." | "Shah's got him." | Default | New, static in the art |
 | Shah | "Dr. Shah, kneeling on wet concrete at four in the morning. Third time tonight." | Talk | lens\_shard: SHAH: "Same plastic I took out of his hair. Bag it." danny\_phone: SHAH: "That's been in the water a lot longer than he has." | Reused |
-| E-bike | "A heavy secondhand e-bike. The back end's crushed: rack bent, rear light smashed, yellow box caved in." | Puzzle 3.1 | Default | New |
+| E-bike | "A heavy secondhand e-bike. The back end's crushed: rack bent, rear light cracked but still blinking, yellow box caved in. Same Chomp yellow as the bag by Owen; a night of orders takes both." | Puzzle 3.1 | Default | New |
 | Owen's phone | See Puzzle 3.2 | Puzzle 3.2 | Default | New |
 | Preacher's tent | "A tarp tent pitched square as a barracks. Boots lined up, a folded flag, a Bible on a milk crate." | "It's his house. I'll knock with my eyes." | Default | New |
 | Preacher | Before preacher\_freed: absent. After: "Preacher, at his tent, reading to the river." | Talk | danny\_phone: "Ever seen this?" | New |
@@ -819,7 +819,7 @@ CRANE: They're everywhere up here.
 
 RAY: This piece was in the reeds under the Fletcher Drive bridge. This one was in a delivery box on Owen Tate's bike. They fit your headlight like a key, Mr. Crane. Coyotes don't carry headlights into the river. *(sets clue\_lens\_match, crane\_lie2\_broken)*
 
-With clue\_yellow\_paint: RAY: "And there's Chomp yellow in your grille."
+With clue\_yellow\_paint: RAY: "And there's Chomp yellow in your grille, off the box on his bike."
 
 *Crane sits down on the step to the house.*
 

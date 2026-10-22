@@ -65,7 +65,7 @@ func interact(hs: Hotspot, verb: String, item: String) -> void:
 
 		"bike":
 			if verb == "look":
-				await main.say("A heavy secondhand e-bike. The back end's crushed: rack bent, rear light smashed, yellow box caved in.")
+				await main.say("A heavy secondhand e-bike. The back end's crushed: rack bent, rear light cracked but still blinking, yellow box caved in. Same Chomp yellow as the bag by Owen; a night of orders takes both.")
 			elif item != "":
 				await default_response(verb, item)
 			else:
@@ -297,7 +297,10 @@ func _owens_phone() -> void:
 func _two_tracks() -> void:
 	if Game.flag("clue_drag_marks") and Game.flag("clue_bike_stairs") and not Game.flag("clue_two_tracks"):
 		await main.wait(0.4)
-		await main.say("The bike came down the stairs with Preacher. Owen came down the bank with somebody else.")
+		if Game.flag("clue_preacher_story"):
+			await main.say("The bike came down the stairs with Preacher. Owen came down the bank with somebody else.")
+		else:
+			await main.say("The bike came down the stairs with somebody in big boots. Owen came down the bank with somebody else.")
 		main.clue("clue_two_tracks")
 
 

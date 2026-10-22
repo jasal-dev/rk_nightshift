@@ -7671,10 +7671,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"8467b314f91d": {
+	"e0fb4a8789dd": {
 		"speaker": "ray",
-		"text": "And there's Chomp yellow in your grille.",
-		"file": "res://assets/voice/ray/8467b314f91d.ogg",
+		"text": "And there's Chomp yellow in your grille, off the box on his bike.",
+		"file": "res://assets/voice/ray/e0fb4a8789dd.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -7818,10 +7818,10 @@
 		"voice": "kokoro: am_puck, speed 1.05",
 		"sig": "89918b9a5f"
 	},
-	"11df49e4fb9b": {
+	"332e36298754": {
 		"speaker": "doss",
-		"text": "Calvin Odom, they call him Preacher. Army guy, lives under the bridge. Won't say a word to me. Says he'll only talk to \"somebody who's been somewhere.\"",
-		"file": "res://assets/voice/doss/11df49e4fb9b.ogg",
+		"text": "Calvin Odom, they call him Preacher. Army guy, lives under the bridge. Won't say much to me. Says he'll only talk to \"somebody who's been somewhere.\"",
+		"file": "res://assets/voice/doss/332e36298754.ogg",
 		"voice": "kokoro: am_puck, speed 1.05",
 		"sig": "89918b9a5f"
 	},
@@ -7895,10 +7895,10 @@
 		"voice": "kokoro: am_eric, -3 semitones, speed 0.82, warmth 4, flutter 0.08",
 		"sig": "933a2d598d"
 	},
-	"149440244ff1": {
+	"acead9b2bd7f": {
 		"speaker": "preacher",
-		"text": "I carried it down. By sunup the strippers would've had the wheels, the battery, the seat. I meant to hand it to the first police I saw.",
-		"file": "res://assets/voice/preacher/149440244ff1.ogg",
+		"text": "I got it down to my tent. By sunup the strippers would've had the wheels, the battery, the seat. I meant to hand it to the first police I saw.",
+		"file": "res://assets/voice/preacher/acead9b2bd7f.ogg",
 		"voice": "kokoro: am_eric, -3 semitones, speed 0.82, warmth 4, flutter 0.08",
 		"sig": "933a2d598d"
 	},
@@ -7930,10 +7930,10 @@
 		"voice": "kokoro: am_eric, -3 semitones, speed 0.82, warmth 4, flutter 0.08",
 		"sig": "933a2d598d"
 	},
-	"d8247d868447": {
+	"fd350a96408a": {
 		"speaker": "preacher",
-		"text": "No, sir. I came down those stairs with a bicycle on my shoulder, watching my feet, and the light under that bridge is nothing. If I'd seen him I'd have gone to him.",
-		"file": "res://assets/voice/preacher/d8247d868447.ogg",
+		"text": "No, sir. I came down those stairs wheeling a bicycle, watching my feet, and the light under that bridge is nothing. If I'd seen him I'd have gone to him.",
+		"file": "res://assets/voice/preacher/fd350a96408a.ogg",
 		"voice": "kokoro: am_eric, -3 semitones, speed 0.82, warmth 4, flutter 0.08",
 		"sig": "933a2d598d"
 	},
@@ -9127,10 +9127,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"226f3a7a87af": {
+	"f93953e110cb": {
 		"speaker": "ray",
-		"text": "A heavy secondhand e-bike. The back end's crushed: rack bent, rear light smashed, yellow box caved in.",
-		"file": "res://assets/voice/ray/226f3a7a87af.ogg",
+		"text": "A heavy secondhand e-bike. The back end's crushed: rack bent, rear light cracked but still blinking, yellow box caved in. Same Chomp yellow as the bag by Owen; a night of orders takes both.",
+		"file": "res://assets/voice/ray/f93953e110cb.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -9383,6 +9383,13 @@
 		"speaker": "ray",
 		"text": "The bike came down the stairs with Preacher. Owen came down the bank with somebody else.",
 		"file": "res://assets/voice/ray/93b06aa5f16a.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"be22c2bc353d": {
+		"speaker": "ray",
+		"text": "The bike came down the stairs with somebody in big boots. Owen came down the bank with somebody else.",
+		"file": "res://assets/voice/ray/be22c2bc353d.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},

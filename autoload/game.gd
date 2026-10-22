@@ -141,7 +141,7 @@ const CLUES := {
 	"clue_trip_paused": [4, "Chomp: no movement on Fletcher Drive from 2:04."],
 	"clue_drag_marks": [4, "Heel marks down the east bank from the fence gap to Owen."],
 	"clue_bike_stairs": [4, "One tire line and boot prints down the stairs."],
-	"clue_two_tracks": [4, "The bike came down the stairs with Preacher. Owen came down the bank with somebody else."],
+	"clue_two_tracks": [4, "The bike came down the stairs with somebody in big boots. Owen came down the bank with somebody else."],
 	"clue_audi": [4, "The headlight piece: four rings, part 4K0, blue-gray paint. An Audi."],
 	"clue_danny_phone": [4, "Danny's phone, in the reeds under the Fletcher Drive bridge."],
 	"clue_big_man": [4, "Preacher: Tuesday after three, a big man in an old cop's coat threw something small and black off the bridge from a long gray car."],

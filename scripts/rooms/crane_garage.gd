@@ -345,7 +345,7 @@ func _headlight() -> void:
 	await main.say("This piece was in the reeds under the Fletcher Drive bridge. This one was in a delivery box on Owen Tate's bike.")
 	await main.say("They fit your headlight like a key, Mr. Crane. Coyotes don't carry headlights into the river.")
 	if Game.flag("clue_yellow_paint"):
-		await main.say("And there's Chomp yellow in your grille.")
+		await main.say("And there's Chomp yellow in your grille, off the box on his bike.")
 	await main.ui.fade_to(1.0, 0.4)
 	Game.set_flag("crane_lie2_broken")
 	_sync()
