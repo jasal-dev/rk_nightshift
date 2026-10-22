@@ -281,7 +281,7 @@ func _the_times() -> void:
 func _last_scene() -> void:
 	await main.ui.fade_to(1.0, 1.0)
 	_show("")
-	main.player.position = Vector2(hotspot("bollard").walk_to)
+	main.player.place(Vector2(hotspot("bollard").walk_to))
 	main.player.face("right")
 	await main.wait(0.8)
 	await main.ui.fade_to(0.0, 1.2)

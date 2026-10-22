@@ -134,6 +134,12 @@ func set_room(room: Room) -> void:
 	_update_light()
 
 
+func place(p: Vector2) -> void:
+	## Jump to p (room coordinates) and take on the room's depth scale there.
+	position = p
+	_update_scale()
+
+
 func height() -> float:
 	return Anims.HEIGHT * scale.y
 

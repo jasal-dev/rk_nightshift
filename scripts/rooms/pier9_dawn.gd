@@ -480,7 +480,7 @@ func _force() -> void:
 
 
 func _arrest() -> void:
-	main.player.position = Vector2(hotspot("brenner_cuffed").walk_to)
+	main.player.place(Vector2(hotspot("brenner_cuffed").walk_to))
 	main.player.face("left")
 	_pose = "brenner_cuffed"
 	_sync()
