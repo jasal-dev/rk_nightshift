@@ -368,6 +368,7 @@ func _deduction(envelope_first: bool) -> void:
 		await main.say("Let me go over the file once more.")
 		await main.examine_item("case_file")
 	main.ui.show_board("Two nights, one bullet, one piano player. Why?")
+	await main.narrate("Nobody's in custody. The file has to hold up until somebody is.")
 	await main.narrate("Two nights, one bullet, one piano player. Why?")
 	# step 1: the question (wrong answers just get a line from Ray; pick again)
 	while true:
@@ -387,7 +388,7 @@ func _deduction(envelope_first: bool) -> void:
 			main.ui.hide_board()
 			return
 	# step 2: two pieces of evidence. A right card stays pinned; a wrong one gets Ray's line and comes down.
-	main.ui.set_board_question("Not what he owed. What he had. Pin up what proves it.")
+	main.ui.set_board_question("Not what he owed. What he had. Pin up what a jury needs.")
 	var pins: Array[String] = []
 	if envelope_first:
 		pins.append("envelope")
@@ -539,6 +540,7 @@ const SLOT_LABELS := ["He was with Kenji tonight", "What he killed him for"]
 
 func _deduction2(first: String) -> void:
 	main.ui.show_board("Four point nine eight stars, and somebody gave him a zero. Who?", "KENJI OTA\n29. Glide driver")
+	await main.narrate("Devin's in a cell. Now I build what the DA can take to a jury.")
 	await main.narrate("Four point nine eight stars, and somebody gave him a zero. Who?")
 	# step 1: the culprit (wrong picks get a line; pick again)
 	while true:
@@ -564,7 +566,7 @@ func _deduction2(first: String) -> void:
 				main.ui.hide_board()
 				return
 	# step 2: two labeled slots. A right card stays pinned; a wrong one gets Ray's line and comes down.
-	main.ui.set_board_question("Devin Clark. Pin up what proves it.")
+	main.ui.set_board_question("Devin Clark. Pin up what a jury needs.")
 	var pins: Array[String] = ["", ""]
 	var pre := _card2(first)
 	if first != "" and pre[2] != "":
@@ -575,7 +577,7 @@ func _deduction2(first: String) -> void:
 		for slot in 2:
 			if pins[slot] != "":
 				continue
-			main.ui.set_board_question(SLOT_LABELS[slot] + ":")
+			main.ui.set_board_question("For the jury: " + SLOT_LABELS[slot] + ":")
 			var ids := _available_evidence2(pins)
 			var opts: Array = []
 			for id in ids:
@@ -601,7 +603,7 @@ func _deduction2(first: String) -> void:
 		if wrong_tries == 3:
 			await main.narrate("Think, Ray. Who sat with Kenji at midnight, and what did he carry home?")
 	# solved: Kenji's corner of the board, and a line through the case
-	main.ui.set_board_question("OTA, K.  -  CLOSED")
+	main.ui.set_board_question("OTA, K.  -  CHARGED")
 	await main.wait(0.6)
 	await main.narrate("Devin Clark. Kenji wanted to give it back, and Devin wanted his half.")
 	Game.set_flag("case2_deduced")
@@ -723,6 +725,7 @@ const SLOT_LABELS3 := ["She was selling him out", "She was at the top of his sta
 
 func _deduction3(first: String) -> void:
 	main.ui.show_board("Seventy-one years, fourteen stairs, and two small hands. Whose?", "GUS LINDQVIST\n71. Stardust")
+	await main.narrate("Pearl's in the car. A confession is a start. A jury wants it on paper.")
 	await main.narrate("Seventy-one years, fourteen stairs, and two small hands. Whose?")
 	# step 1: the culprit (wrong picks get a line; pick again)
 	while true:
@@ -756,7 +759,7 @@ func _deduction3(first: String) -> void:
 		main.ui.hide_board()
 		return
 	# step 2: two labeled slots. A right card stays pinned; a wrong one gets Ray's line and comes down.
-	main.ui.set_board_question("Pearl Danvers. Pin up what proves it.")
+	main.ui.set_board_question("Pearl Danvers. Pin up what a jury needs.")
 	var pins: Array[String] = ["", ""]
 	var pre := _card3(first)
 	if first != "" and pre[2] != "":
@@ -767,7 +770,7 @@ func _deduction3(first: String) -> void:
 		for slot in 2:
 			if pins[slot] != "":
 				continue
-			main.ui.set_board_question(SLOT_LABELS3[slot] + ":")
+			main.ui.set_board_question("For the jury: " + SLOT_LABELS3[slot] + ":")
 			var ids := _available_evidence3(pins)
 			var opts: Array = []
 			for id in ids:
@@ -793,7 +796,7 @@ func _deduction3(first: String) -> void:
 		if wrong_tries == 3:
 			await main.narrate("Think, Ray. What was she doing behind his back, and what did she leave at the top of his stairs?")
 	# solved: a Polaroid of the dripping prop, the earring in its bag, the catalogue page; a line through the case
-	main.ui.set_board_question("LINDQVIST, G.  -  CLOSED")
+	main.ui.set_board_question("LINDQVIST, G.  -  CHARGED")
 	await main.wait(0.6)
 	await main.narrate("Pearl Danvers. She sold him the fake, then she sold him the fall.")
 	Game.set_flag("case3_deduced")
@@ -920,6 +923,7 @@ const SLOT_LABELS4 := ["His car hit Owen", "He was behind the wheel"]
 
 func _deduction4(first: String) -> void:
 	main.ui.show_board("Twenty-four, a yellow box and a red light. Who didn't stop?", "OWEN TATE\n24. Chomp rider")
+	await main.narrate("Crane's in custody. Now the file that keeps him there.")
 	await main.narrate("Twenty-four, a yellow box and a red light. Who didn't stop?")
 	# step 1: the culprit (wrong picks get a line; pick again)
 	while true:
@@ -942,7 +946,7 @@ func _deduction4(first: String) -> void:
 				main.ui.hide_board()
 				return
 	# step 2: two labeled slots. A right card stays pinned; a wrong one gets Ray's line and comes down.
-	main.ui.set_board_question("Elliot Crane. Pin up what proves it.")
+	main.ui.set_board_question("Elliot Crane. Pin up what a jury needs.")
 	var pins: Array[String] = ["", ""]
 	var pre := _card4(first)
 	if first != "" and pre[2] != "":
@@ -953,7 +957,7 @@ func _deduction4(first: String) -> void:
 		for slot in 2:
 			if pins[slot] != "":
 				continue
-			main.ui.set_board_question(SLOT_LABELS4[slot] + ":")
+			main.ui.set_board_question("For the jury: " + SLOT_LABELS4[slot] + ":")
 			var ids := _available_evidence4(pins)
 			var opts: Array = []
 			for id in ids:
@@ -979,7 +983,7 @@ func _deduction4(first: String) -> void:
 		if wrong_tries == 3:
 			await main.narrate("Think, Ray. What on his car came from the river, and who saw him take the keys?")
 	# solved: a Polaroid of the headlight with the pieces fitted back, the valet ticket beside it, a line through the case
-	main.ui.set_board_question("TATE, O.  -  CLOSED")
+	main.ui.set_board_question("TATE, O.  -  CHARGED")
 	await main.wait(0.6)
 	await main.narrate("Elliot Crane. He ran down the one man who told him not to drive, then tried to give him to the river.")
 	Game.set_flag("case4_deduced")
@@ -1392,7 +1396,7 @@ func _pins5(labels: Array, slots: Array, first: String, seed_line: String, nudge
 		for slot in 2:
 			if pins[slot] != "":
 				continue
-			main.ui.set_board_question(String(labels[slot]) + ":")
+			main.ui.set_board_question("For the jury: " + String(labels[slot]) + ":")
 			var ids := _available5(pins)
 			var opts: Array = []
 			for id in ids:
@@ -1431,6 +1435,7 @@ func _deduction5(first: String) -> void:
 	# step 1: who killed Sal
 	main.ui.show_board("Thirty-one years behind a bar, and he opened the door one last time. Who for?",
 			"SAL MORETTI\n64. The Blue Note")
+	await main.narrate("Walt's still on the loose. I build the file before I go to the pier, so it's there if I don't come back.")
 	await main.narrate("Thirty-one years behind a bar, and he opened the door one last time. Who for?")
 	while true:
 		var c: int = await main.choose(["Nobody. Sal hanged himself.", "Nina Alvarez", "Lt. Maureen Doyle", "Vance",

@@ -15475,5 +15475,40 @@
 		"file": "res://assets/voice/ray/be3a3fdd2c4e.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
+	},
+	"970e9b663d50": {
+		"speaker": "ray",
+		"text": "Nobody's in custody. The file has to hold up until somebody is.",
+		"file": "res://assets/voice/ray/970e9b663d50.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"45092731092f": {
+		"speaker": "ray",
+		"text": "Devin's in a cell. Now I build what the DA can take to a jury.",
+		"file": "res://assets/voice/ray/45092731092f.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"4aa2ea3697cf": {
+		"speaker": "ray",
+		"text": "Pearl's in the car. A confession is a start. A jury wants it on paper.",
+		"file": "res://assets/voice/ray/4aa2ea3697cf.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"b5c708a31848": {
+		"speaker": "ray",
+		"text": "Crane's in custody. Now the file that keeps him there.",
+		"file": "res://assets/voice/ray/b5c708a31848.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
+	},
+	"c062c212bf47": {
+		"speaker": "ray",
+		"text": "Walt's still on the loose. I build the file before I go to the pier, so it's there if I don't come back.",
+		"file": "res://assets/voice/ray/c062c212bf47.ogg",
+		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
+		"sig": "7a6f8a650f"
 	}
 }

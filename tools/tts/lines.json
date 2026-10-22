@@ -2209,5 +2209,10 @@
 	["ray", "Pryce threw him a party last night. \"Friends of Ted Haskell.\" I've got the invitation.", "pier9_sunrise.gd _answer"],
 	["ray", "Nina was Danny's girl. You don't kill the man she's counting on.", "squad_room.gd _deduction5"],
 	["ray", "A long drop to a wet, empty alley.", "stardust_roof.gd roof_edge"],
-	["ray", "Nobody stole the Oscar tonight. This one was never it.", "stardust_roof.gd water_tank"]
+	["ray", "Nobody stole the Oscar tonight. This one was never it.", "stardust_roof.gd water_tank"],
+	["ray", "Nobody's in custody. The file has to hold up until somebody is.", "squad_room.gd _deduction"],
+	["ray", "Devin's in a cell. Now I build what the DA can take to a jury.", "squad_room.gd _deduction2"],
+	["ray", "Pearl's in the car. A confession is a start. A jury wants it on paper.", "squad_room.gd _deduction3"],
+	["ray", "Crane's in custody. Now the file that keeps him there.", "squad_room.gd _deduction4"],
+	["ray", "Walt's still on the loose. I build the file before I go to the pier, so it's there if I don't come back.", "squad_room.gd _deduction5"]
 ]
