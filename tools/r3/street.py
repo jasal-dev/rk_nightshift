@@ -32,7 +32,7 @@ def build(hide=(), crime=False):
     nm = 1 if crime else 2                                           # the neon is off (unlit glass) the morning Sal died
     S.mat('neon_blue', (20, 20, 30), tex=tx.neon_text('BLUE NOTE', (80, 150, 255), size=72,
           fnt='DejaVuSerif-BoldItalic.ttf'), texmode=nm, texemis=5.0)
-    S.mat('neon_open', (20, 20, 30), tex=tx.neon_text('OPEN', (255, 60, 150), size=48), texmode=1, texemis=4.0)
+    S.mat('neon_open', (20, 20, 30), tex=tx.neon_text('OPEN', (255, 60, 150) if crime else (70, 18, 44), size=48), texmode=1, texemis=4.0)
     S.mat('neon_bar', (20, 20, 30), tex=tx.neon_text('COCKTAILS', (255, 90, 170), size=40, vertical=True), texmode=nm,
           texemis=4.0)
     S.mat('phone_sign', (30, 30, 40), tex=tx.sign_board('PHONE', (220, 235, 255), (30, 70, 160), 256, 64), texmode=3,
