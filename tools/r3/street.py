@@ -32,7 +32,7 @@ def build(hide=(), crime=False):
     nm = 1 if crime else 2                                           # the neon is off (unlit glass) the morning Sal died
     S.mat('neon_blue', (20, 20, 30), tex=tx.neon_text('BLUE NOTE', (80, 150, 255), size=72,
           fnt='DejaVuSerif-BoldItalic.ttf'), texmode=nm, texemis=5.0)
-    S.mat('neon_open', (20, 20, 30), tex=tx.neon_text('OPEN', (255, 60, 150), size=48), texmode=nm, texemis=4.0)
+    S.mat('neon_open', (20, 20, 30), tex=tx.neon_text('OPEN', (255, 60, 150), size=48), texmode=1, texemis=4.0)
     S.mat('neon_bar', (20, 20, 30), tex=tx.neon_text('COCKTAILS', (255, 90, 170), size=40, vertical=True), texmode=nm,
           texemis=4.0)
     S.mat('phone_sign', (30, 30, 40), tex=tx.sign_board('PHONE', (220, 235, 255), (30, 70, 160), 256, 64), texmode=3,
@@ -117,8 +117,7 @@ def build(hide=(), crime=False):
         S.wboxr(-7.55, 3.2, 0.18, -3.45, 4.2, 0.2, 'neon_blue')
         for x in (-7.2, -3.8):
             S.cyl((x, 4.25, 0.1), (x, 5.0, 0.0), 0.02, 'metal_dk')
-    if crime:
-        S.wboxr(-6.9, 1.7, 0.07, -5.8, 2.3, 0.08, 'neon_open')       # unlit; in Case 1 the bar is shut, so no sign
+    S.wboxr(-6.9, 1.7, 0.07, -5.8, 2.3, 0.08, 'neon_open')
     # rooftop billboard
     with S.tag('billboard'):
         S.wboxr(-10.0, 5.6, -4.05, -5.4, 7.9, -3.95, 'billboard')
