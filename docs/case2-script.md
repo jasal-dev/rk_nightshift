@@ -297,7 +297,7 @@ ROSA: Sit anywhere, hon. I'll get to you when I get to you.
 
 *Ray takes the pot and works his way down the counter.*
 
-RAY: Coffee. Coffee. You're asleep, you don't need coffee. Coffee.
+RAY: Coffee? Anybody? Coffee? Asleep, huh? You don't need coffee. Coffee?
 
 CABBIE: Thanks, officer.
 

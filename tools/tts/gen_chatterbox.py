@@ -22,6 +22,7 @@ def clip_path(speaker, text):
 
 
 def sig_of(entry, reference):
+    ## reference: the speaker's reference lines
     return "cb" + hashlib.sha1(json.dumps([entry, reference], sort_keys=True).encode("utf-8")).hexdigest()[:10]
 
 
@@ -43,10 +44,10 @@ def main():
     cfg = json.load(open(CONFIG, encoding="utf-8"))
     force = "--force" in sys.argv
     old = json.load(open(MANIFEST, encoding="utf-8"))
-    ref_cfg = cfg["reference"]
+    refs = cfg["references"]
     todo = []
     for e in cfg["lines"]:
-        sig = sig_of(e, ref_cfg)
+        sig = sig_of(e, {"speaker": e["speaker"], "lines": refs[e["speaker"]]})
         lid = line_id(e["speaker"], e["text"])
         if force or old.get(lid, {}).get("sig") != sig or not os.path.exists(clip_path(e["speaker"], e["text"])):
             todo.append((e, sig, lid))
@@ -59,11 +60,14 @@ def main():
     vc = ChatterboxVC.from_pretrained("cuda")
     tmp = os.path.join(ROOT, "tools", "tts", "out", "chatterbox")
     os.makedirs(tmp, exist_ok=True)
-    ref_audio = np.concatenate([np.concatenate([sf.read(clip_path(ref_cfg["speaker"], t))[0].astype(np.float32),
-                                                np.zeros(6000, np.float32)]) for t in ref_cfg["lines"]])
-    ref_path = os.path.join(tmp, "ref_%s.wav" % ref_cfg["speaker"])
-    sf.write(ref_path, ref_audio, RATE)
+    ref_paths = {}
+    for speaker, lines in refs.items():
+        ref_audio = np.concatenate([np.concatenate([sf.read(clip_path(speaker, t))[0].astype(np.float32),
+                                                    np.zeros(6000, np.float32)]) for t in lines])
+        ref_paths[speaker] = os.path.join(tmp, "ref_%s.wav" % speaker)
+        sf.write(ref_paths[speaker], ref_audio, RATE)
     for e, sig, lid in todo:
+        ref_path = ref_paths[e["speaker"]]
         torch.manual_seed(e.get("seed", 1))
         wav = tts.generate(e["text"], audio_prompt_path=ref_path, exaggeration=e["exaggeration"], cfg_weight=e["cfg_weight"])
         raw = os.path.join(tmp, lid + "_raw.wav")

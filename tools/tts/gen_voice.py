@@ -86,7 +86,9 @@ SPEAKERS = {
 DIRECTION = {
     ("ray", "Rain. Of course it's raining."): {"say": "Rain. [0.9] Of course it's raining."},
     ("ray", "One of three. One of three what?"): {"say": "One of three. [0.9] One of three what?"},
-    ("ray", "Coffee. Coffee."): {"say": "Coffee. [1.0] Coffee."},
+    ("ray", "Coffee? Anybody? Coffee?"): {"say": "Coffee? [0.7] Anybody? [0.9] Coffee?"},
+    ("ray", "Asleep, huh? You don't need coffee. Coffee?"):
+        {"say": "Asleep, huh? [0.5] You don't need coffee. [1.1] Coffee?"},
     ("tiny", "(low) Five minutes."): {"gain_db": -9.0},
     ("brielle", "Reported. One star. Creep."): {"say": "Reported. [0.6] One star. [0.6] Creep."},
     ("heck", "No. No, man. I yelled at him. I didn't, I would never."):
@@ -114,7 +116,7 @@ def chatterbox_sigs():
         return {}
     cfg = json.load(open(path, encoding="utf-8"))
     return {line_id(e["speaker"], e["text"]):
-            "cb" + hashlib.sha1(json.dumps([e, cfg["reference"]], sort_keys=True).encode("utf-8")).hexdigest()[:10]
+            "cb" + hashlib.sha1(json.dumps([e, {"speaker": e["speaker"], "lines": cfg["references"][e["speaker"]]}], sort_keys=True).encode("utf-8")).hexdigest()[:10]
             for e in cfg["lines"]}
 
 

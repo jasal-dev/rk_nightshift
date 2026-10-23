@@ -1,18 +1,174 @@
 {
-	"reference": {
-		"speaker": "devin",
-		"lines": [
+	"references": {
+		"devin": [
 			"Devin. Devin Clark. Roommate, three years. I'm a photographer. Weddings, headshots, whatever pays.",
 			"Okay. Okay, I went out. I knew how it would look. We got pie.",
 			"He dropped me back here at like twelve-forty and drove off. That's the last time I saw him. I swear to God."
+		],
+		"pearl": [
+			"We closed at nine. I went home. I've got an audition at nine this morning, a pharmacy ad, \"concerned mom\", and I left my headshots in my locker.",
+			"Six years. I came in to sell him a lobby card from my grandmother's attic, and he gave me a job instead. Said I had an eye.",
+			"Lyle Brandt. The Oscar. Gus called it by name. \"Morning, Lyle. Night, Lyle.\""
+		],
+		"crane": [
+			"At a fundraiser for the councilman. I'm Councilmember Haskell's chief of staff.",
+			"A car service. I'd had a glass of wine; I'm responsible. The Audi's been in here all evening.",
+			"All right. I drove. I'd had two glasses. Three. I was fine. I drove home slowly."
+		],
+		"nina": [
+			"Nina. I wait tables at the Note. Waited.",
+			"I was his girl. Whatever that means now.",
+			"Friends of Danny knock like Danny played. Two slow, three fast.",
+			"Sal's scared, Detective. Don't make me sorry I told you."
 		]
 	},
 	"lines": [
-		{"speaker": "devin", "text": "No. No, no. What happened? Was it a crash?", "exaggeration": 0.9, "cfg_weight": 0.3, "seed": 1},
-		{"speaker": "devin", "text": "Jesus. Who would... He's a Glide driver. He gives people water bottles.", "exaggeration": 0.9, "cfg_weight": 0.3, "seed": 1},
-		{"speaker": "devin", "text": "Don't. Please.", "exaggeration": 0.9, "cfg_weight": 0.3, "seed": 1},
-		{"speaker": "devin", "text": "I panicked! My roommate's dead!", "exaggeration": 0.9, "cfg_weight": 0.3, "seed": 1},
-		{"speaker": "devin", "text": "Those are mine. Half of those are mine. A year of work, and he was going to give them away.", "exaggeration": 0.9, "cfg_weight": 0.3, "seed": 1},
-		{"speaker": "devin", "text": "Give them away, to some assistant who got what she...", "exaggeration": 0.9, "cfg_weight": 0.3, "seed": 1}
+		{
+			"speaker": "devin",
+			"text": "No. No, no. What happened? Was it a crash?",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "devin",
+			"text": "Jesus. Who would... He's a Glide driver. He gives people water bottles.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "devin",
+			"text": "Don't. Please.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "devin",
+			"text": "I panicked! My roommate's dead!",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "devin",
+			"text": "Those are mine. Half of those are mine. A year of work, and he was going to give them away.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "devin",
+			"text": "Give them away, to some assistant who got what she...",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "pearl",
+			"text": "Okay. Okay! He called. He was upset, he'd seen something in a catalogue, he wasn't making sense. So I came in. At one.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "pearl",
+			"text": "Yes. Okay. Yes. I sold things. I sold Lyle.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "pearl",
+			"text": "He's seventy-one, he goes up there in the rain in his slippers. And I thought, they'll look at the case, and then they'll look at me, and I'll go to prison for a fall.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "pearl",
+			"text": "So I made it a robbery. That's all I did. I swear to God, that's all I did.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "pearl",
+			"text": "I put my hands on him. To get him off me. And then he wasn't there. He was just gone. Down the stairs. One slipper.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "pearl",
+			"text": "I'm thirty-four. I've died on four cop shows. Corpse number two. I've never had a line that wasn't a scream.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "pearl",
+			"text": "Was I any good tonight?",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "pearl",
+			"text": "Night, Lyle.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "crane",
+			"text": "Okay. Okay. Something hit me. On the bridge. A shape, in the rain, in the dark.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "crane",
+			"text": "And I knew him. That's the thing. I knew him. The kid from the gate. \"You can't drive like that.\"",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "crane",
+			"text": "Eleven years I've carried that man's briefcase. If his chief of staff is a DUI story on Friday morning, they postpone, and Harlan...",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "nina",
+			"text": "He was so calm. I gave it to him.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "nina",
+			"text": "He'd never been anywhere. He'd never even been to San Diego.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "nina",
+			"text": "Then Teo screaming. Then police. He said he was police, Ray. What was I supposed to do, come out to police?",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		},
+		{
+			"speaker": "nina",
+			"text": "Ray. Find him. And don't tell anybody where I am. Not even police. Especially not police.",
+			"exaggeration": 0.9,
+			"cfg_weight": 0.3,
+			"seed": 1
+		}
 	]
 }

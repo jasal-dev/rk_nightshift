@@ -3597,19 +3597,19 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"14c313e02388": {
+	"7d672c87259d": {
 		"speaker": "ray",
-		"text": "Coffee. Coffee.",
-		"file": "res://assets/voice/ray/14c313e02388.ogg",
+		"text": "Coffee? Anybody? Coffee?",
+		"file": "res://assets/voice/ray/7d672c87259d.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
-		"sig": "d1b25e414f"
+		"sig": "9ca159e366"
 	},
-	"add303ecaf23": {
+	"0fd235356945": {
 		"speaker": "ray",
-		"text": "You're asleep, you don't need coffee. Coffee.",
-		"file": "res://assets/voice/ray/add303ecaf23.ogg",
+		"text": "Asleep, huh? You don't need coffee. Coffee?",
+		"file": "res://assets/voice/ray/0fd235356945.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
-		"sig": "7a6f8a650f"
+		"sig": "139feb664a"
 	},
 	"bd62ea74216e": {
 		"speaker": "ray",
@@ -5967,8 +5967,8 @@
 		"speaker": "pearl",
 		"text": "Okay. Okay! He called. He was upset, he'd seen something in a catalogue, he wasn't making sense. So I came in. At one.",
 		"file": "res://assets/voice/pearl/327d407a547f.ogg",
-		"voice": "kokoro: af_bella, speed 1",
-		"sig": "4adf97ca92"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cb25a8f15522"
 	},
 	"c0f92d12b647": {
 		"speaker": "pearl",
@@ -5995,8 +5995,8 @@
 		"speaker": "pearl",
 		"text": "Yes. Okay. Yes. I sold things. I sold Lyle.",
 		"file": "res://assets/voice/pearl/09d97c285a55.ogg",
-		"voice": "kokoro: af_bella, speed 1",
-		"sig": "4adf97ca92"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cbaff2862386"
 	},
 	"165d622f5409": {
 		"speaker": "pearl",
@@ -6009,15 +6009,15 @@
 		"speaker": "pearl",
 		"text": "He's seventy-one, he goes up there in the rain in his slippers. And I thought, they'll look at the case, and then they'll look at me, and I'll go to prison for a fall.",
 		"file": "res://assets/voice/pearl/e25dd2bae18d.ogg",
-		"voice": "kokoro: af_bella, speed 1",
-		"sig": "4adf97ca92"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cb7cabc2d1ff"
 	},
 	"8a74bbae9b43": {
 		"speaker": "pearl",
 		"text": "So I made it a robbery. That's all I did. I swear to God, that's all I did.",
 		"file": "res://assets/voice/pearl/8a74bbae9b43.ogg",
-		"voice": "kokoro: af_bella, speed 1",
-		"sig": "4adf97ca92"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cb212d200e48"
 	},
 	"9057569a4ba8": {
 		"speaker": "pearl",
@@ -6044,29 +6044,29 @@
 		"speaker": "pearl",
 		"text": "I put my hands on him. To get him off me. And then he wasn't there. He was just gone. Down the stairs. One slipper.",
 		"file": "res://assets/voice/pearl/6eeec90ff0ce.ogg",
-		"voice": "kokoro: af_bella, speed 1",
-		"sig": "4adf97ca92"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cbd241928932"
 	},
 	"e88be7a699a1": {
 		"speaker": "pearl",
 		"text": "I'm thirty-four. I've died on four cop shows. Corpse number two. I've never had a line that wasn't a scream.",
 		"file": "res://assets/voice/pearl/e88be7a699a1.ogg",
-		"voice": "kokoro: af_bella, speed 1",
-		"sig": "4adf97ca92"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cb1f37dcf9fb"
 	},
 	"f6e9d339c414": {
 		"speaker": "pearl",
 		"text": "Was I any good tonight?",
 		"file": "res://assets/voice/pearl/f6e9d339c414.ogg",
-		"voice": "kokoro: af_bella, speed 1",
-		"sig": "4adf97ca92"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cba2724cbaa0"
 	},
 	"1b1f53df4e24": {
 		"speaker": "pearl",
 		"text": "Night, Lyle.",
 		"file": "res://assets/voice/pearl/1b1f53df4e24.ogg",
-		"voice": "kokoro: af_bella, speed 1",
-		"sig": "4adf97ca92"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cbc387afb27b"
 	},
 	"06dcea838231": {
 		"speaker": "ray",
@@ -7318,8 +7318,8 @@
 		"speaker": "crane",
 		"text": "Okay. Okay. Something hit me. On the bridge. A shape, in the rain, in the dark.",
 		"file": "res://assets/voice/crane/40fd48f61ae7.ogg",
-		"voice": "kokoro: am_michael, speed 0.95",
-		"sig": "73d44d8b78"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cba096fa3cb2"
 	},
 	"cebf7c025d45": {
 		"speaker": "crane",
@@ -7339,8 +7339,8 @@
 		"speaker": "crane",
 		"text": "And I knew him. That's the thing. I knew him. The kid from the gate. \"You can't drive like that.\"",
 		"file": "res://assets/voice/crane/25359d0f92d1.ogg",
-		"voice": "kokoro: am_michael, speed 0.95",
-		"sig": "73d44d8b78"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cb77bf70dd94"
 	},
 	"7f866ae652d4": {
 		"speaker": "crane",
@@ -7360,8 +7360,8 @@
 		"speaker": "crane",
 		"text": "Eleven years I've carried that man's briefcase. If his chief of staff is a DUI story on Friday morning, they postpone, and Harlan...",
 		"file": "res://assets/voice/crane/8f3e7c5e1273.ogg",
-		"voice": "kokoro: am_michael, speed 0.95",
-		"sig": "73d44d8b78"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cbeaf73a119a"
 	},
 	"7d08eb3421c8": {
 		"speaker": "crane",
@@ -10398,8 +10398,8 @@
 		"speaker": "nina",
 		"text": "He was so calm. I gave it to him.",
 		"file": "res://assets/voice/nina/7e925d33d716.ogg",
-		"voice": "kokoro: af_heart, speed 0.95",
-		"sig": "6abee0a22f"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cba3e5db84d7"
 	},
 	"2ce22019e46b": {
 		"speaker": "nina",
@@ -10440,8 +10440,8 @@
 		"speaker": "nina",
 		"text": "Then Teo screaming. Then police. He said he was police, Ray. What was I supposed to do, come out to police?",
 		"file": "res://assets/voice/nina/35cce6f4c4b5.ogg",
-		"voice": "kokoro: af_heart, speed 0.95",
-		"sig": "6abee0a22f"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cb9524b68bc3"
 	},
 	"0e53e98f7e76": {
 		"speaker": "nina",
@@ -10468,8 +10468,8 @@
 		"speaker": "nina",
 		"text": "He'd never been anywhere. He'd never even been to San Diego.",
 		"file": "res://assets/voice/nina/d61e13f0a733.ogg",
-		"voice": "kokoro: af_heart, speed 0.95",
-		"sig": "6abee0a22f"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cb47260cbf4a"
 	},
 	"a65905c88db7": {
 		"speaker": "nina",
@@ -10503,8 +10503,8 @@
 		"speaker": "nina",
 		"text": "Ray. Find him. And don't tell anybody where I am. Not even police. Especially not police.",
 		"file": "res://assets/voice/nina/6f48d168ad94.ogg",
-		"voice": "kokoro: af_heart, speed 0.95",
-		"sig": "6abee0a22f"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cbb55a987e90"
 	},
 	"9554e67ab52a": {
 		"speaker": "nina",
