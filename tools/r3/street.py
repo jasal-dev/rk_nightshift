@@ -27,8 +27,8 @@ def build(hide=(), crime=False):
     S.mat('glass_dk', (12, 14, 20), spec=1.2, shin=90, refl=0.35)
     S.mat('wood_dk', (52, 30, 22), namp=0.2, nscale=8)
     S.mat('backing', (16, 14, 20), spec=0.2)
-    S.mat('bar_window', (40, 24, 18), tex=tx.hires(tx.bar_interior(), 3), texmode=3, texemis=1.6, refl=0.15)
-    S.mat('door_glow', (120, 70, 40), tex=tx.bar_door_glass(), texmode=3, texemis=1.1)
+    S.mat('bar_window', (40, 24, 18), tex=tx.hires(tx.bar_interior(), 3), texmode=3, texemis=(1.6 if crime else 0.4), refl=0.15)
+    S.mat('door_glow', (120, 70, 40), tex=tx.bar_door_glass(), texmode=3, texemis=(1.1 if crime else 0.6))      # closed for the night: only a back-room glow shows
     nm = 1 if crime else 2                                           # the neon is off (unlit glass) the morning Sal died
     S.mat('neon_blue', (20, 20, 30), tex=tx.neon_text('BLUE NOTE', (80, 150, 255), size=72,
           fnt='DejaVuSerif-BoldItalic.ttf'), texmode=nm, texemis=5.0)
@@ -117,7 +117,8 @@ def build(hide=(), crime=False):
         S.wboxr(-7.55, 3.2, 0.18, -3.45, 4.2, 0.2, 'neon_blue')
         for x in (-7.2, -3.8):
             S.cyl((x, 4.25, 0.1), (x, 5.0, 0.0), 0.02, 'metal_dk')
-    S.wboxr(-6.9, 1.7, 0.07, -5.8, 2.3, 0.08, 'neon_open')
+    if crime:
+        S.wboxr(-6.9, 1.7, 0.07, -5.8, 2.3, 0.08, 'neon_open')       # unlit; in Case 1 the bar is shut, so no sign
     # rooftop billboard
     with S.tag('billboard'):
         S.wboxr(-10.0, 5.6, -4.05, -5.4, 7.9, -3.95, 'billboard')
@@ -236,11 +237,10 @@ def build(hide=(), crime=False):
             spot=((-0.12, -1, -0.3), 28, 58))
     for x in (-9.2, -5.8):
         S.light((x, 5.5, -2.8), (255, 220, 170), power=1.6, range=5, vol=0.3, shadow=False, spot=((0, 0.6, -1), 35, 70))
-    S.light((-6.3, 1.7, -0.9), (255, 140, 70), power=10, range=8, vol=0.25)
+    S.light((-6.3, 1.7, -0.9), (255, 140, 70), power=(10 if crime else 3), range=8, vol=0.25)
     if not crime:
         S.light((-5.5, 3.7, 0.9), (90, 150, 255), power=6, range=8, vol=0.7, shadow=False)
-        S.light((-3.1, 2.1, 0.5), (255, 70, 160), power=2.5, range=6, vol=0.5, shadow=False)
-        S.light((-3.9, 1.8, 0.4), (255, 150, 80), power=2.0, range=5, vol=0.2, shadow=False)
+        S.light((-3.9, 1.8, 0.4), (255, 150, 80), power=1.0, range=5, vol=0.2, shadow=False)
     else:
         S.light((-3.9, 1.9, -1.0), (255, 170, 100), power=9, range=8, vol=0.5, volshadow=True, soft=10)   # out the open door
     S.light((5.7, 2.9, 0.8), (205, 222, 255), power=26, range=9, vol=0.9, spot=((0, -1, 0.15), 30, 70))
