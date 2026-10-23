@@ -2432,22 +2432,22 @@
 		"speaker": "devin",
 		"text": "No. No, no. What happened? Was it a crash?",
 		"file": "res://assets/voice/devin/d54efe3d22a9.ogg",
-		"voice": "kokoro: am_puck, speed 0.9",
-		"sig": "68e1b40885"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cb67d22a89eb"
 	},
 	"c88b9b562267": {
 		"speaker": "devin",
 		"text": "Jesus. Who would... He's a Glide driver. He gives people water bottles.",
 		"file": "res://assets/voice/devin/c88b9b562267.ogg",
-		"voice": "kokoro: am_puck, speed 0.9",
-		"sig": "9e3b9eaade"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cb379307ecf8"
 	},
 	"08e2b55c6b78": {
 		"speaker": "devin",
 		"text": "Don't. Please.",
 		"file": "res://assets/voice/devin/08e2b55c6b78.ogg",
-		"voice": "kokoro: am_puck, speed 0.9",
-		"sig": "fb8950eed3"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cbd5e37d3ef7"
 	},
 	"e996e5d753a4": {
 		"speaker": "devin",
@@ -2523,8 +2523,8 @@
 		"speaker": "devin",
 		"text": "I panicked! My roommate's dead!",
 		"file": "res://assets/voice/devin/467a72461c2d.ogg",
-		"voice": "kokoro: am_puck, speed 0.9",
-		"sig": "111f8d6845"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cba402781401"
 	},
 	"a7c3a15fa242": {
 		"speaker": "devin",
@@ -2537,15 +2537,15 @@
 		"speaker": "devin",
 		"text": "Those are mine. Half of those are mine. A year of work, and he was going to give them away.",
 		"file": "res://assets/voice/devin/990e76ca3872.ogg",
-		"voice": "kokoro: am_puck, speed 0.9",
-		"sig": "fb8950eed3"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cb2e6acd512e"
 	},
 	"2df78b4c0de1": {
 		"speaker": "devin",
 		"text": "Give them away, to some assistant who got what she...",
 		"file": "res://assets/voice/devin/2df78b4c0de1.ogg",
-		"voice": "kokoro: am_puck, speed 0.9",
-		"sig": "fb8950eed3"
+		"voice": "chatterbox (exaggeration 0.9, cfg 0.3, seed 1) voice-converted to the Kokoro timbre",
+		"sig": "cb75525f1b3c"
 	},
 	"55b382e6e163": {
 		"speaker": "devin",

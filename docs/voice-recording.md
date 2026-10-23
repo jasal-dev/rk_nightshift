@@ -114,6 +114,15 @@ manifest keeps a signature of each clip's preset and direction, so a changed dir
 run. (Clips from before signatures don't carry one; after changing a whole speaker's preset, delete their clips or use
 `--force`.)
 
+## Acted lines (Chatterbox + voice conversion)
+
+A few climactic lines are acted with Chatterbox (MIT, own venv `tools/tts/.venv_cb`, needs the GPU) and then voice-converted
+back to the speaker's Kokoro timbre, so they still sound like the same person. They are listed in
+`tools/tts/chatterbox_lines.json` (exaggeration, cfg_weight, seed per line, plus the speaker's reference clips); render them with
+`tools/tts/.venv_cb/Scripts/python tools/tts/gen_chatterbox.py` (`--force` to redo). `gen_voice.py` skips a line whose clip and
+signature are current, so the two scripts don't fight. Devin's six lines from 2026-10-22 are the first; the user picks by ear,
+so audition a new line with a few seeds/exaggerations before adding it.
+
 ## When a line's text changes
 
 Edit the row in `tools/tts/lines.json` to the new text and run the generator. The old clip is removed as stale and the

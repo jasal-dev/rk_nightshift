@@ -107,6 +107,17 @@ def take_sig(preset, direction):
     return hashlib.sha1(json.dumps([preset, direction], sort_keys=True).encode("utf-8")).hexdigest()[:10]
 
 
+def chatterbox_sigs():
+    ## {line id: signature} of the lines acted with Chatterbox (tools/tts/gen_chatterbox.py); this script leaves them alone
+    path = os.path.join(ROOT, "tools", "tts", "chatterbox_lines.json")
+    if not os.path.exists(path):
+        return {}
+    cfg = json.load(open(path, encoding="utf-8"))
+    return {line_id(e["speaker"], e["text"]):
+            "cb" + hashlib.sha1(json.dumps([e, cfg["reference"]], sort_keys=True).encode("utf-8")).hexdigest()[:10]
+            for e in cfg["lines"]}
+
+
 def load_lines():
     with open(LINES_FILE, encoding="utf-8") as f:
         return [(str(row[0]), str(row[1])) for row in json.load(f)]     # row[2], if any: where the line is
@@ -736,6 +747,7 @@ def main():
     old = json.load(open(MANIFEST, encoding="utf-8")) if os.path.exists(MANIFEST) else {}
     pipes = {"a": pipe}         ## American English; British voices ("lang": "b") get their own
     manifest = {}
+    chatterbox = chatterbox_sigs()
     made = 0
     for speaker, text in LINES:
         if speaker not in SPEAKERS:
@@ -745,6 +757,9 @@ def main():
         rel = "assets/voice/%s/%s.ogg" % (speaker, lid)
         path = os.path.join(ROOT, rel)
         os.makedirs(os.path.dirname(path), exist_ok=True)
+        if lid in chatterbox and old.get(lid, {}).get("sig") == chatterbox[lid] and os.path.exists(path) and not force:
+            manifest[lid] = old[lid]            # acted with Chatterbox: current, keep it
+            continue
         direction = DIRECTION.get((speaker, text), {})
         if direction:
             # a directed line is timed by hand: the speaker's sentence_pause doesn't apply (nor change its signature)

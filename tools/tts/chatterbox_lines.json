@@ -1,0 +1,18 @@
+{
+	"reference": {
+		"speaker": "devin",
+		"lines": [
+			"Devin. Devin Clark. Roommate, three years. I'm a photographer. Weddings, headshots, whatever pays.",
+			"Okay. Okay, I went out. I knew how it would look. We got pie.",
+			"He dropped me back here at like twelve-forty and drove off. That's the last time I saw him. I swear to God."
+		]
+	},
+	"lines": [
+		{"speaker": "devin", "text": "No. No, no. What happened? Was it a crash?", "exaggeration": 0.9, "cfg_weight": 0.3, "seed": 1},
+		{"speaker": "devin", "text": "Jesus. Who would... He's a Glide driver. He gives people water bottles.", "exaggeration": 0.9, "cfg_weight": 0.3, "seed": 1},
+		{"speaker": "devin", "text": "Don't. Please.", "exaggeration": 0.9, "cfg_weight": 0.3, "seed": 1},
+		{"speaker": "devin", "text": "I panicked! My roommate's dead!", "exaggeration": 0.9, "cfg_weight": 0.3, "seed": 1},
+		{"speaker": "devin", "text": "Those are mine. Half of those are mine. A year of work, and he was going to give them away.", "exaggeration": 0.9, "cfg_weight": 0.3, "seed": 1},
+		{"speaker": "devin", "text": "Give them away, to some assistant who got what she...", "exaggeration": 0.9, "cfg_weight": 0.3, "seed": 1}
+	]
+}
