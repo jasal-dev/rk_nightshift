@@ -1,9 +1,8 @@
 class_name TitleScreen
 extends Control
 ## The title screen (GameUI.show_title): the street the morning Sal died, empty but for the tape and the patrol car's
-## turning light bar, RAY KESSLER in neon over NIGHTSHIFT, and New Game, Load Game, Settings, Credits and Exit, with a
-## row under them that skips to Case 2, 3, 4 or 5 (Main.jump_to_case).
-## Emits `chosen` ("new", "load", "case2" to "case5", or "quit"). Load Game opens the three-slot SaveMenu in place of
+## turning light bar, RAY KESSLER in neon over NIGHTSHIFT, and New Game, Load Game, Settings, Credits and Exit.
+## Emits `chosen` ("new", "load", or "quit"; tests also emit "case2" to "case5" and "ending_b" to jump, see Main). Load Game opens the three-slot SaveMenu in place of
 ## the menu; picking a slot sets Game.slot and emits "load".
 ## Settings is a SettingsPanel (the same one the inventory bar's cog opens in a room); TitleScreen passes on its
 ## `fullscreen_pressed` and `text_speed_chosen`, and Main applies and remembers them. Credits shows the music attributions.
@@ -32,8 +31,6 @@ var load_button: Button
 var settings_button: Button
 var credits_button: Button
 var exit_button: Button
-var case_buttons: Array[Button] = []    ## Case 2 to Case 5, in order
-var ending_b_button: Button             ## SKIP TO ENDING B: Pier 9 at sunrise, Brenner's card only
 var menu: VBoxContainer
 var settings: SettingsPanel
 var load_menu: SaveMenu
@@ -106,7 +103,6 @@ func _init(has_save: bool, text_speed: int) -> void:
 	exit_button.pressed.connect(func(): chosen.emit("quit"))
 	for b in [new_button, load_button, settings_button, credits_button, exit_button]:
 		menu.add_child(b)
-	menu.add_child(_case_row())
 
 	settings = SettingsPanel.new(text_speed)
 	settings.position = Vector2(470, 500)
@@ -311,31 +307,6 @@ static func _text_label(text: String, font: Font, font_size: int, col: Color) ->
 	l.add_theme_constant_override("outline_size", 6)
 	l.add_theme_constant_override("line_spacing", 4)
 	return l
-
-
-func _case_row() -> VBoxContainer:
-	## SKIP TO  CASE 2  CASE 3  CASE 4  CASE 5, smaller, a little below the main buttons.
-	var box := VBoxContainer.new()
-	var gap := Control.new()
-	gap.custom_minimum_size = Vector2(0, 18)
-	box.add_child(gap)
-	var row := HBoxContainer.new()
-	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.add_theme_constant_override("separation", 26)
-	box.add_child(row)
-	row.add_child(menu_label("SKIP TO", 26, GREY))
-	for n in [2, 3, 4, 5]:
-		var b := menu_button("CASE %d" % n, 30)
-		b.pressed.connect(func(): chosen.emit("case%d" % n))
-		case_buttons.append(b)
-		row.add_child(b)
-	var row2 := HBoxContainer.new()
-	row2.alignment = BoxContainer.ALIGNMENT_CENTER
-	box.add_child(row2)
-	ending_b_button = menu_button("SKIP TO ENDING B", 30)
-	ending_b_button.pressed.connect(func(): chosen.emit("ending_b"))
-	row2.add_child(ending_b_button)
-	return box
 
 
 static func style_panel(panel: PanelContainer) -> void:

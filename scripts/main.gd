@@ -271,7 +271,7 @@ func jump_to_case(n: int) -> void:
 
 
 func jump_to_ending_b() -> void:
-	## The title screen's SKIP TO ENDING B: Pier 9 at sunrise, with the choice of who to call up, as after a full
+	## Test-only (title `chosen("ending_b")`): Pier 9 at sunrise, with the choice of who to call up, as after a full
 	## playthrough that found Brenner's card but neither Walt's ride receipt nor Pryce's invitation. "Call Lt. Doyle."
 	## fails on the second objection and gives the bitter ending. Nothing is saved until the player saves.
 	Game.reset()

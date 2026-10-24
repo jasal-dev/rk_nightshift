@@ -55,7 +55,7 @@ crossfades and does nothing when that track is already on. Each track plays at i
 same loudness (the files differ by up to 12 dB). `CASE_TRACKS` maps cases to tracks: 1 sleepless,
 2 november, 3 entenca, 4 echoofsadness, 5 rainyday (Case 5, the endings, end cards, end credits and the title screen).
 Main calls it on the title screen, at each case card (`case_card`, the next case's track) and on every room change
-(the current case's track), so new game, Skip to Case N and loading a save all land on the right track. The end
+(the current case's track), so new game, a test's case jump and loading a save all land on the right track. The end
 credits close with the same scrolling credits as the Credits menu (`GameUI.show_credits_roll`, scrolled by `Main.roll_credits`; a click skips).
 
 ### Sound effects
@@ -247,7 +247,7 @@ All UI is built in code in `scripts/ui.gd` (`class_name GameUI`), with DejaVu Sa
 | Speech | `show_speech`, `hide_speech` | `say`, `voice`, `narrate`. Drawn above the fade, so lines read on black (Case 2's doorstep). |
 | Toast | `toast(text, hold)` | Pickups, notebook, save/load. |
 | Choices | `show_choices`, `hide_choices`, `options`, signal `choice_made(i)` | Dialogue; also device buttons. Long lists (the boards' evidence) go into up to three columns under the board, with a smaller font if needed. |
-| Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings (a `SettingsPanel`: fullscreen, text advance, music volume), Credits (slow movie-style scroll: "A game by Denary Games", then the music and sound attributions; Esc or click leaves), Exit (quits), and a SKIP TO row for Case 2 to 5 (`Main.jump_to_case(n)`). `Main._title()` runs it at start, after THE END, and on Esc in a room (`_save_to_title()` opens the save menu first). |
+| Title | `show_title(has_save, text_speed)`, `hide_title` | The title screen (`scripts/title_screen.gd`): New Game, Load Game, Settings (a `SettingsPanel`: fullscreen, text advance, music volume), Credits (slow movie-style scroll: "A game by Denary Games", then the music and sound attributions; Esc or click leaves), Exit (quits). `Main._title()` runs it at start, after THE END, and on Esc in a room (`_save_to_title()` opens the save menu first). |
 | Card | `show_card(lines, colors)`, `hide_card` | Case cards and the end card. |
 | Fade | `fade_rect`, `fade_to(alpha, time)` | Room changes, drives. |
 | Murder board | `show_board(question, caption)`, `set_board_question`, `set_board_pins(pins, labels)`, `hide_board` | Deductions. |
@@ -482,7 +482,7 @@ taken, with the cursor, hover text, toasts and inventory bar hidden. It also tak
 line, menu and close-up as it comes up, which is the easy way to pick new moments. Run it in a window, not headless.
 
 `--case N` runs `_caseN()` alone. Case 1 starts with New Game and stops when its case card comes up; Cases 2 to 5
-press the title's SKIP TO button (so they start from `scripts/case_starts.gd`, see "Case jumps" below) and stop
+emit the title's `chosen("caseN")` signal (so they start from `scripts/case_starts.gd`, see "Case jumps" below) and stop
 when the next card comes up, or after the endings for Case 5. One case takes 20 to 35 s (Case 5, with its four
 endings, about 75 s) against about 3 minutes for the full run. Run only the case a change touches; run the full
 playthrough when a change touches several cases, shared code (`main.gd`, `ui.gd`, `game.gd`, `room.gd`,
@@ -494,12 +494,12 @@ B with Pryce's invitation taken off the board), checking that exactly one ending
 The test saves and later restores the player's own save slots, so running it doesn't destroy a real save. When a
 new case is added, extend `_run()` with its steps and add its rooms to the `--shots` list.
 
-**Case jumps.** The title screen's Case 2 to 5 buttons (`Main.jump_to_case`) load the flags and inventory from
+**Case jumps.** The title screen's `chosen("case2")` to `chosen("case5")` signals (`Main.jump_to_case`; no buttons in the menu, only tests emit them) load the flags and inventory from
 `scripts/case_starts.gd`, then show the case card and run the drive, as at the end of the case before. That file is
 generated: `tests/capture_case_starts.tscn` runs the playthrough and snapshots the state as each case card comes up
 (every earlier case fully solved, with every clue and board seed, so the best ending stays reachable), failing if an
 earlier clue is missing. Re-run it whenever a case gains or renames a clue or flag. `tests/case_jumps.tscn` presses
-each button and checks the start room, the notebook, the board flags and the inventory, and that the quicksave is
+each signal and checks the start room, the notebook, the board flags and the inventory, and that the quicksave is
 untouched. Send the output to a
 file rather than piping it through `tail`, and if a run hangs, stop Godot by process id, not by name, in case the
 editor is open.

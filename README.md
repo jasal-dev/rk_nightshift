@@ -173,7 +173,7 @@ scripts/case3.gd          Case 3's shared pieces: speech colours, the drive in a
 scripts/case4.gd          Case 4's shared pieces: speech colours, the drives, the car menu, Otis running the plate
 scripts/case5.gd          Case 5's shared pieces: speech colours, Ray's phone, the take, the drives, the credits
 tests/playthrough.tscn    Automated playthrough of all five cases and the four endings, or one with --case N (see "Testing")
-tests/case_jumps.tscn     Checks the title screen's Case 2 to 5 buttons
+tests/case_jumps.tscn     Checks the Case 2 to 5 and Ending B jumps
 assets/                   Generated room art, character sheets, light probes, item icons, cursors
 tools/                    Python generators for the art (Pillow + numpy)
 docs/                     Story outline, case scripts, story arc review, and the technical reference
@@ -278,7 +278,7 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . res://tests/playthroug
 ```
 
 It prints each action and ends with `PLAYTHROUGH OK` (exit code 0), or says where it got stuck.
-`-- --case N` plays only Case N: Cases 2 to 5 start from the title screen's SKIP TO state, and the run stops when
+`-- --case N` plays only Case N: Cases 2 to 5 start from the saved case-start state (`chosen("caseN")` on the title screen), and the run stops when
 that case is solved (Case 5 after its four endings). One case takes about 20 to 35 s (Case 5 about 75 s), the full
 run about 3 minutes. **Run only the case a change touches.** Run the full playthrough when a change touches several
 cases or shared code (`main.gd`, `ui.gd`, `game.gd`, `room.gd`, `hotspot.gd`, `player.gd`, the shaders, the
@@ -287,7 +287,7 @@ Add `-- --shots` (and leave out `--headless`) to also save screenshots of each r
 the device screens and the boards to `user://`. The web page screenshots in `docs/screenshots/` come from
 `tests/action_shots.tscn` (in a window, about 3 minutes), which plays the same run and stops on the moments listed in its `SHOTS` table.
 
-The title screen's SKIP TO row starts Case 2, 3, 4 or 5 with every earlier case fully solved. Its starting states
+Tests jump to Case 2, 3, 4 or 5 (and Ending B) by emitting the title screen's `chosen` signal, with every earlier case fully solved; the menu has no skip buttons. The starting states
 in `scripts/case_starts.gd` are captured from the playthrough by `tests/capture_case_starts.tscn`; re-run that after
 changing a case's clues or flags, and run `tests/case_jumps.tscn` to check each jump.
 

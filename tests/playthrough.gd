@@ -5,7 +5,7 @@ extends Node
 ##
 ## Godot_v4.7_console.exe --headless --path . res://tests/playthrough.tscn
 ## Godot_v4.7_console.exe --headless --path . res://tests/playthrough.tscn -- --case 3   # just Case 3
-## With --case N, Cases 2 to 5 start from the title screen's SKIP TO button (scripts/case_starts.gd) and the run
+## With --case N, Cases 2 to 5 start from the title screen's case jump (`chosen("caseN")`) (scripts/case_starts.gd) and the run
 ## stops when that case is solved (Case 5: after its four endings).
 ## Exit code 0 = the case can be finished; 1 = something went wrong (see the output).
 
@@ -381,7 +381,7 @@ func _run() -> void:
 			await get_tree().process_frame
 		_step = "jump to Case %d" % only
 		_step_started = Time.get_ticks_msec()
-		main.ui.title.case_buttons[only - 2].pressed.emit()
+		main.ui.title.chosen.emit("case%d" % only)
 		while not main._waiting_click and not _failed:
 			await get_tree().process_frame
 		main._waiting_click = false

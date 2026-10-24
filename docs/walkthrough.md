@@ -88,8 +88,7 @@ highlighted with a red NEW. The arrows in the corners turn back to earlier cases
 a right click, or a click outside the book (Esc here only closes the book, it doesn't save and quit).
 
 **Title screen.** New Game, Load Game (three slots), Settings (fullscreen and text advance: Auto, where lines move on by themselves and a click skips, or
-Manual, the default, where every line waits for a click) and Exit. The "SKIP TO" row starts Case 2, 3, 4 or 5 directly with every
-earlier case solved, including all three optional seeds.
+Manual, the default, where every line waits for a click) and Exit.
 
 ---
 

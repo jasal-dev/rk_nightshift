@@ -1,5 +1,5 @@
 extends "res://tests/playthrough.gd"
-## The title screen's Case 2 to 5 buttons: each one shows its card, drives to the case's first room, and starts the
+## The title screen's case jumps (`chosen("caseN")`, no menu buttons): each one shows its card, drives to the case's first room, and starts the
 ## case with everything from the cases before it (every clue, the board pins, the notebook) and nothing else
 ## in the inventory. Nothing is saved: the player's quicksave is the same afterwards.
 ##
@@ -31,7 +31,7 @@ func _run() -> void:
 
 
 func _ending_b() -> void:
-	## SKIP TO ENDING B: Pier 9 at sunrise with only Brenner's card pinned; the choice comes up, and "Call Lt. Doyle."
+	## Ending B jump: Pier 9 at sunrise with only Brenner's card pinned; the choice comes up, and "Call Lt. Doyle."
 	## fails on the receipt for the bitter ending.
 	print("Ending B from the title screen")
 	while not main._on_title and not _failed:
@@ -39,7 +39,7 @@ func _ending_b() -> void:
 	_step = "jump to Ending B"
 	_step_started = Time.get_ticks_msec()
 	_choices = ["Call Lt. Doyle.", "Walter Brenner's card", "I don't have it."]
-	main.ui.title.ending_b_button.pressed.emit()
+	main.ui.title.chosen.emit("ending_b")
 	while not main._waiting_click and not _failed:      # the choice, the call, the credits, then the last card
 		await get_tree().process_frame
 	if main.room.room_id != "pier9_sunrise":
@@ -60,7 +60,7 @@ func _jump(n: int) -> void:
 		await get_tree().process_frame
 	_step = "jump to Case %d" % n
 	_step_started = Time.get_ticks_msec()
-	main.ui.title.case_buttons[n - 2].pressed.emit()
+	main.ui.title.chosen.emit("case%d" % n)
 	while not main._waiting_click and not _failed:      # the case card
 		await get_tree().process_frame
 	if not main.ui.card.visible:

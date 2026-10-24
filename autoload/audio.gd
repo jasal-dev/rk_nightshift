@@ -3,7 +3,7 @@ extends Node
 ## crossfades to another track and does nothing when that track is already on. `ambience()` does the same for the
 ## background loop (rain in the rooms that show rain, on the title screen and on the drives), so it carries on between
 ## two rainy rooms and fades out going into a dry one. Footsteps are the player's own (Player, on the SFX bus).
-## Main switches tracks on the title screen, at each case card and on every room change (new game, Skip to Case N,
+## Main switches tracks on the title screen, at each case card and on every room change (new game, a test's case jump,
 ## loading a save), so whatever path got Ray into a case, its track is playing.
 ## Voice: spoken lines (`speak()`), recorded clips found by speaker and text (`voice_clip()`, assets/voice/lines.json,
 ## made by tools/tts/gen_voice.py); Main plays one with each line that has one.
