@@ -551,7 +551,7 @@ You start with **your phone** in the inventory. Click it (left or right) to use 
    staff, or in the tab book's margin: D.R. DECAF. Wrong notes don't count against you, so just play the five keys in order.
 2. Click **your phone** in the inventory: **Calls**, **"Call Ike Feld (lab)"**. Ike gets in on the first try and plays
    Danny's last take down the line. Listen: Tuesday, the back booth, Harlan Pryce, Councilman Ted Haskell and Walt. "Then pay
-   him, Walt." With the November card asked for, Ike also has Brenner in Kenji's back seat at 1:12 a.m. Wednesday, wiping a
+   him, Walt." With the November card asked for, Ike also has Brenner in Kenji's back seat at 1:12 a.m. Tuesday night, wiping a
    revolver, Danny's phone in his lap.
 3. Out the **front door**, across to the **precinct door**.
 
@@ -591,7 +591,7 @@ The car won't go until you have the box, Vance, Otis's car and the text. Ray lis
    - **Step 2:** **"Sal wrote you down."** (or use the **tab book** on Brenner). The tab book and Shah's banned choke.
    - **Step 3:** **"You were in the booth Tuesday."** (the take)
 
-   Optional lines, if you have them: "Wednesday, ten past one." (ride receipt), "Empty by Christmas." (Brenner's card or
+   Optional lines, if you have them: "Tuesday night, ten past one." (ride receipt), "Empty by Christmas." (Brenner's card or
    Charlie), "They drew a lobby." (invitation), "A long gray car." (Preacher or Andre), "Officer Park logged you." (Park).
    "Let's see what you've got, Walt." ends the conversation for now; talk to him again to go on.
 5. Brenner makes his pitch. Answer however you like. He throws Danny's phone into the harbor, then draws a .38. Choose:

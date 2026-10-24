@@ -399,7 +399,7 @@ Building Case 1 on the existing Godot slice needs two new rooms, two new charact
 
 *Tiny goes very still.*
 
-**TINY:** ...That's Danny's knock. He came every Tuesday to pay. Knocked like that every time, like he was playing it.
+**TINY:** ...That's Danny's knock. He came every Tuesday with a little on account. Last Tuesday he paid the lot. Knocked like that every time, like he was playing it.
 
 **VANCE (V.O., behind the door):** Tiny? Who is it?
 
@@ -462,9 +462,9 @@ Building Case 1 on the existing Godot slice needs two new rooms, two new charact
 - **How did he pay you?**
   - **VANCE:** In a Blue Note envelope, like a boy bringing his allowance. He'd written something on the back. I didn't read it. I'm not his diary.
   - **RAY:** Where's the envelope now?
-  - **VANCE:** Tiny burns the trash every night. If it's anywhere, it's in the barrel. *(sets* `knows_envelope`*)*
+  - **VANCE:** Tiny burns the barrel when it's full. If it's anywhere, it's in there. *(sets* `knows_envelope`*)*
 - **Anyone else asking about Danny?** *(optional)*
-  - **VANCE:** You're the second this week. Yesterday a man telephoned. Wanted to know if Danny had paid me, and in what.
+  - **VANCE:** You're the second this week. Wednesday a man telephoned. Wanted to know if Danny had paid me, and in what.
   - **RAY:** Name?
   - **VANCE:** He didn't offer one. He talked like a cop who'd stopped being one. You'd know the type better than I would.
   - **RAY:** What did you tell him?
@@ -500,7 +500,7 @@ Building Case 1 on the existing Godot slice needs two new rooms, two new charact
 
 *Goal: recover the envelope. Same Pier 9 dock room as Scene 4, now with* `knows_envelope` *set. Tiny is back in his chair.*
 
-**RAY:** Tiny burns the trash every night. Lucky for me it rains every night too.
+**RAY:** Tiny burns the barrel when it's full. Lucky for me it rains every night.
 
 **Puzzle 6.1: The envelope.**
 

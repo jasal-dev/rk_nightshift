@@ -38,7 +38,7 @@ func on_enter(from_room: String) -> void:
 		await main.say("Green door. And a man the size of the door in front of it.")
 	elif from_room == "vance_office" and Game.flag("knows_envelope") and not Game.flag("said_barrel_line"):
 		Game.set_flag("said_barrel_line")
-		await main.say("Tiny burns the trash every night. Lucky for me it rains every night too.")
+		await main.say("Tiny burns the barrel when it's full. Lucky for me it rains every night.")
 
 
 func interact(hs: Hotspot, verb: String, item: String) -> void:
@@ -251,7 +251,7 @@ func _knock() -> void:
 	await main.player.play_action("use")
 	await main.say("*knock... knock... knockknockknock*", "knock_right")
 	await main.wait(0.8)
-	await main.voice("...That's Danny's knock. He came every Tuesday to pay.", TINY_AT, TINY_COLOR, "tiny")
+	await main.voice("...That's Danny's knock. He came every Tuesday with a little on account. Last Tuesday he paid the lot.", TINY_AT, TINY_COLOR, "tiny")
 	await main.voice("Knocked like that every time, like he was playing it.", TINY_AT, TINY_COLOR, "tiny")
 	await main.voice("Tiny? Who is it?", DOOR_AT, VANCE_COLOR, "vance")
 	await main.voice("(low) Five minutes.", TINY_AT, TINY_COLOR, "tiny")

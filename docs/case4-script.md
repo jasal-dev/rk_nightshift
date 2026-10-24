@@ -18,7 +18,7 @@ The bridge and the channel connect on foot. After that the car menu offers the g
 
 | Time | Event | Clue that shows it |
 | --- | --- | --- |
-| Tuesday, after 3 a.m. | A long gray car stops mid-bridge. A big man in an old cop's coat throws something small and black into the reeds. | Preacher, Danny's phone |
+| Tuesday night, after 3 a.m. | A long gray car stops mid-bridge. A big man in an old cop's coat throws something small and black into the reeds. | Preacher, Danny's phone |
 | Thursday 8:00 p.m. | Pryce's fundraiser for Councilman Haskell opens at the glass house. | Invitation, easel sign |
 | 11:00 p.m. | Pryce leaves in his gray Lincoln with his driver. Haskell leaves with his wife. | Andre |
 | 12:58 a.m. | Courtney Vail orders staff dinner on Chomp. | Owen's phone |

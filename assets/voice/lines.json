@@ -972,10 +972,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"667cc8944b7e": {
+	"f36ad4d8be73": {
 		"speaker": "ray",
-		"text": "Tiny burns the trash every night. Lucky for me it rains every night too.",
-		"file": "res://assets/voice/ray/667cc8944b7e.ogg",
+		"text": "Tiny burns the barrel when it's full. Lucky for me it rains every night.",
+		"file": "res://assets/voice/ray/f36ad4d8be73.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -2057,10 +2057,10 @@
 		"voice": "kokoro: am_adam, -3 semitones, speed 0.85",
 		"sig": "9a1e4ff5f0"
 	},
-	"d4c3cc0d54b7": {
+	"21931c38fbc2": {
 		"speaker": "tiny",
-		"text": "...That's Danny's knock. He came every Tuesday to pay.",
-		"file": "res://assets/voice/tiny/d4c3cc0d54b7.ogg",
+		"text": "...That's Danny's knock. He came every Tuesday with a little on account. Last Tuesday he paid the lot.",
+		"file": "res://assets/voice/tiny/21931c38fbc2.ogg",
 		"voice": "kokoro: am_adam, -3 semitones, speed 0.85",
 		"sig": "9a1e4ff5f0"
 	},
@@ -2239,17 +2239,17 @@
 		"voice": "kokoro: bm_george, speed 0.88",
 		"sig": "2d9abd8287"
 	},
-	"bc6ee949c174": {
+	"5258d9f210cc": {
 		"speaker": "vance",
-		"text": "Tiny burns the trash every night. If it's anywhere, it's in the barrel.",
-		"file": "res://assets/voice/vance/bc6ee949c174.ogg",
+		"text": "Tiny burns the barrel when it's full. If it's anywhere, it's in there.",
+		"file": "res://assets/voice/vance/5258d9f210cc.ogg",
 		"voice": "kokoro: bm_george, speed 0.88",
 		"sig": "2d9abd8287"
 	},
-	"83fffd24eb0e": {
+	"b67b27bcc1d7": {
 		"speaker": "vance",
-		"text": "You're the second this week. Yesterday a man telephoned.",
-		"file": "res://assets/voice/vance/83fffd24eb0e.ogg",
+		"text": "You're the second this week. Wednesday a man telephoned.",
+		"file": "res://assets/voice/vance/b67b27bcc1d7.ogg",
 		"voice": "kokoro: bm_george, speed 0.88",
 		"sig": "2d9abd8287"
 	},
@@ -4633,10 +4633,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"af11912600bf": {
+	"d167e1c9a55b": {
 		"speaker": "ray",
-		"text": "My photo of Kenji's screen. Wednesday, 1:10 a.m. Blue Note, Hollywood, to Pryce Tower, Century City.",
-		"file": "res://assets/voice/ray/af11912600bf.ogg",
+		"text": "My photo of Kenji's screen. Tuesday night, 1:10 a.m. Blue Note, Hollywood, to Pryce Tower, Century City.",
+		"file": "res://assets/voice/ray/d167e1c9a55b.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -11472,10 +11472,10 @@
 		"voice": "kokoro: am_echo, speed 1",
 		"sig": "9add3a0036"
 	},
-	"7d6d73cdc6a7": {
+	"397a7038ce09": {
 		"speaker": "ike",
-		"text": "And Ray. Your November card. Wednesday, twelve past one, back seat. A big man in an old raincoat, soaked, wiping down a revolver with a handkerchief.",
-		"file": "res://assets/voice/ike/7d6d73cdc6a7.ogg",
+		"text": "And Ray. Your November card. Tuesday night, twelve past one, back seat. A big man in an old raincoat, soaked, wiping down a revolver with a handkerchief.",
+		"file": "res://assets/voice/ike/397a7038ce09.ogg",
 		"voice": "kokoro: am_echo, speed 1",
 		"sig": "9add3a0036"
 	},
@@ -13061,10 +13061,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"d4d158bc08a5": {
+	"52555c0d91ec": {
 		"speaker": "ray",
-		"text": "Wednesday, ten past one. A Glide from the Blue Note to Pryce Tower, billed to Pryce Development's business account. Rider: Walt B.",
-		"file": "res://assets/voice/ray/d4d158bc08a5.ogg",
+		"text": "Tuesday night, ten past one. A Glide from the Blue Note to Pryce Tower, billed to Pryce Development's business account. Rider: Walt B.",
+		"file": "res://assets/voice/ray/52555c0d91ec.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
@@ -14300,10 +14300,10 @@
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},
-	"3cf89183e3bc": {
+	"fa03ae0f8380": {
 		"speaker": "ray",
-		"text": "One more thing. The rideshare case. Eleven dashcam cards came in from a freezer around three. Pull November. Wednesday, ten past one, the back-seat lens.",
-		"file": "res://assets/voice/ray/3cf89183e3bc.ogg",
+		"text": "One more thing. The rideshare case. Eleven dashcam cards came in from a freezer around three. Pull November. Tuesday night, ten past one, the back-seat lens.",
+		"file": "res://assets/voice/ray/fa03ae0f8380.ogg",
 		"voice": "kokoro: am_onyx 70% + am_fenrir 30%, speed 0.9",
 		"sig": "7a6f8a650f"
 	},

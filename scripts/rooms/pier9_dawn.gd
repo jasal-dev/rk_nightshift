@@ -291,7 +291,7 @@ func _confront() -> void:
 func _seed_options() -> Array:
 	var out := []
 	if Game.flag("got_ride_receipt"):
-		out.append(["Wednesday, ten past one."])
+		out.append(["Tuesday night, ten past one."])
 	if Game.flag("got_brenner_card") or Game.flag("clue_block_empty"):
 		out.append(["Empty by Christmas."])
 	if Game.flag("got_pryce_invite"):
@@ -306,7 +306,7 @@ func _seed_options() -> Array:
 func _seed(pick: String) -> void:
 	_seeds_used.append(pick)
 	match pick:
-		"Wednesday, ten past one.":
+		"Tuesday night, ten past one.":
 			await main.say("An hour after Danny went down, Harlan's office booked you a Glide on the company account, Blue Note to Pryce Tower.")
 			await main.say("Your driver gave you one star. He wrote that you smelled like gun oil.")
 			await _brenner("Kids today. No respect for a man who cleans his weapon.")

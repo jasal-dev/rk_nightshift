@@ -640,7 +640,7 @@ func examine_item(id: String) -> void:
 			if room.has_method("open_peas"):
 				await say("Whatever's in there, I'll open it over the sink.")
 		"ride_receipt":
-			await say("My photo of Kenji's screen. Wednesday, 1:10 a.m. Blue Note, Hollywood, to Pryce Tower, Century City.")
+			await say("My photo of Kenji's screen. Tuesday night, 1:10 a.m. Blue Note, Hollywood, to Pryce Tower, Century City.")
 			await say("Rider: Walt B. Billed to Pryce Development, on the business account. One star. \"Wet, rude, smelled like gun oil.\"")
 		"uv_lamp":
 			await say("Gus's UV lamp. Masking tape on the handle: \"Modern ink glows. Old ink doesn't. Trust nobody.\"")

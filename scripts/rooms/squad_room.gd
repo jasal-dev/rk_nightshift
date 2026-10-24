@@ -1297,7 +1297,7 @@ func _ike_calls() -> void:
 	await main.say("Maybe. Give me ten minutes and a piano.")
 	main.clue("clue_takes_hint")
 	if Game.flag("got_ride_receipt"):
-		await main.say("One more thing. The rideshare case. Eleven dashcam cards came in from a freezer around three. Pull November. Wednesday, ten past one, the back-seat lens.")
+		await main.say("One more thing. The rideshare case. Eleven dashcam cards came in from a freezer around three. Pull November. Tuesday night, ten past one, the back-seat lens.")
 		await main.voice("You know what my job is, right? It's this. Fine.", Case5.CALL_AT, Case4.IKE_COLOR, "ike", true)
 		Game.set_flag("asked_cabin_clip")
 

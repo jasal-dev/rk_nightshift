@@ -151,10 +151,10 @@ func _interrogate() -> void:
 				await main.voice("In a Blue Note envelope, like a boy bringing his allowance.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.voice("He'd written something on the back. I didn't read it. I'm not his diary.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.say("Where's the envelope now?")
-				await main.voice("Tiny burns the trash every night. If it's anywhere, it's in the barrel.", VANCE_AT, VANCE_COLOR, "vance")
+				await main.voice("Tiny burns the barrel when it's full. If it's anywhere, it's in there.", VANCE_AT, VANCE_COLOR, "vance")
 				Game.set_flag("knows_envelope")
 			"anyone":
-				await main.voice("You're the second this week. Yesterday a man telephoned.", VANCE_AT, VANCE_COLOR, "vance")
+				await main.voice("You're the second this week. Wednesday a man telephoned.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.voice("Wanted to know if Danny had paid me, and in what.", VANCE_AT, VANCE_COLOR, "vance")
 				await main.say("Name?")
 				await main.voice("He didn't offer one. He talked like a cop who'd stopped being one.", VANCE_AT, VANCE_COLOR, "vance")

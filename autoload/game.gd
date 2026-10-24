@@ -201,7 +201,7 @@ const CLUES := {
 	"clue_takes_hint": [5, "Ike: Danny's Takes account, last upload Tuesday 11:52 p.m. Hint: \"the knock, the way I play it.\""],
 	"knows_password": [5, "The knock is D, E, C, A, F. Decaf."],
 	"clue_take": [5, "The take: Pryce, Haskell, Brenner. \"Then pay him, Walt.\""],
-	"clue_cabin_clip": [5, "Kenji's November cabin card: Brenner in the back seat at 1:12 a.m. Wednesday, wiping a revolver, Danny's phone in his lap."],
+	"clue_cabin_clip": [5, "Kenji's November cabin card: Brenner in the back seat at 1:12 a.m. Tuesday night, wiping a revolver, Danny's phone in his lap."],
 	"clue_brenner_number": [5, "Brenner's cell, 213-555-0163, from Vance."],
 }
 

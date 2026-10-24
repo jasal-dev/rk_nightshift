@@ -26,8 +26,8 @@ The street, the bar, the back room and Room 214 all connect on foot, since the B
 | Tuesday 11:00 p.m. | The bar closes to the public for a private booking: three men in the back booth, two Macallan 18s and a club soda, cash. Danny is paid to play late. | Sal's tab book, Tuesday page |
 | Tuesday 11:41 to 11:52 p.m. | Danny records the take: the second $50,000 for Haskell, "Then pay him, Walt." | The take |
 | Tuesday \~12:00 a.m. | Brenner shoots Danny in the alley with a .38 and takes his phone. | Case 1, the take, the .38 at Pier 9 |
-| Wednesday 1:10 a.m. | After an hour at the tape with the uniforms (Officer Park logs him), Brenner rides from the Blue Note to Pryce Tower in a Glide booked on Pryce Development's account. Kenji's cabin camera films him with Danny's phone. | Ride receipt (Case 2, optional); Kenji's November cabin card (Case 5, needs the receipt) |
-| Wednesday after 3 a.m. | Driving Pryce's Lincoln home to Glassell Park, Brenner throws Danny's phone off the Fletcher Drive bridge into the rain-swollen river. | Preacher (Case 4, optional), Andre (Case 4, optional) |
+| Tuesday night, 1:10 a.m. | After an hour at the tape with the uniforms (Officer Park logs him), Brenner rides from the Blue Note to Pryce Tower in a Glide booked on Pryce Development's account. Kenji's cabin camera films him with Danny's phone. | Ride receipt (Case 2, optional); Kenji's November cabin card (Case 5, needs the receipt) |
+| Tuesday night, after 3 a.m. | Driving Pryce's Lincoln home to Glassell Park, Brenner throws Danny's phone off the Fletcher Drive bridge into the rain-swollen river. | Preacher (Case 4, optional), Andre (Case 4, optional) |
 | Wednesday afternoon | Brenner phones Vance: did Danny pay, and in what? | Vance (Case 1, optional) |
 | Last Thursday | Brenner hands out Pryce cards on the block: "the jazz club too." | Brenner's card, Charlie (Case 3, optional) |
 | Tonight 1:20 a.m. | Brenner signs in at the front desk to see Doyle, with coffee for her and Otis. | Otis's visitor log |
@@ -401,7 +401,7 @@ DOYLE: All right. He works for Pryce. That tape's still a voice under a piano. P
 
 Answer: ride\_receipt.
 
-RAY: Wednesday, ten past one. A Glide from the Blue Note to Pryce Tower, billed to Pryce Development's business account. Rider: Walt B. The driver gave him one star and wrote that he smelled like gun oil. An hour after Danny went down, Walt went straight to the boss, on the boss's account. (With clue\_cabin\_clip: "And the driver's back-seat camera has him in that car holding Danny's phone.")
+RAY: Tuesday night, ten past one. A Glide from the Blue Note to Pryce Tower, billed to Pryce Development's business account. Rider: Walt B. The driver gave him one star and wrote that he smelled like gun oil. An hour after Danny went down, Walt went straight to the boss, on the boss's account. (With clue\_cabin\_clip: "And the driver's back-seat camera has him in that car holding Danny's phone.")
 
 Wrong card: DOYLE: "That doesn't put him in Century City on Tuesday night."
 
@@ -1035,7 +1035,7 @@ RAY: Maybe. Give me ten minutes and a piano. (sets clue\_takes\_hint; the piano 
 
 With got\_ride\_receipt, Ray adds before hanging up:
 
-RAY: One more thing. The rideshare case. Eleven dashcam cards came in from a freezer around three. Pull November. Wednesday, ten past one, the back-seat lens.
+RAY: One more thing. The rideshare case. Eleven dashcam cards came in from a freezer around three. Pull November. Tuesday night, ten past one, the back-seat lens.
 
 IKE: You know what my job is, right? It's this. Fine. (sets asked\_cabin\_clip)
 
@@ -1141,7 +1141,7 @@ RAY: I'll come get it on the way to doing something stupid.
 
 With asked\_cabin\_clip:
 
-IKE: And Ray. Your November card. Wednesday, twelve past one, back seat. A big man in an old raincoat, soaked, wiping down a revolver with a handkerchief. In his lap, a phone in a cracked black case with a Blue Note sticker. He tries a passcode twice and gives up. I'm texting you a still. The card stays here, logged.
+IKE: And Ray. Your November card. Tuesday night, twelve past one, back seat. A big man in an old raincoat, soaked, wiping down a revolver with a handkerchief. In his lap, a phone in a cracked black case with a Blue Note sticker. He tries a passcode twice and gives up. I'm texting you a still. The card stays here, logged.
 
 RAY: Smelled like gun oil. (sets clue\_cabin\_clip; Ray prints the still and it goes into Danny's box at Puzzle 6.2)
 
@@ -1386,7 +1386,7 @@ RAY: Tuesday night, eleven o'clock, a private booking in the back booth at the B
 
 **Seed options.** Each appears if its flag is set; each can be used once, any time before step 3 resolves.
 
-- "Wednesday, ten past one." (got\_ride\_receipt) RAY: "An hour after Danny went down, Harlan's office booked you a Glide on the company account, Blue Note to Pryce Tower. Your driver gave you one star. He wrote that you smelled like gun oil." BRENNER: "Kids today. No respect for a man who cleans his weapon." With clue\_cabin\_clip, Ray goes on: "Kenji had a camera on his back seat. November's card. You, at twelve past one, wiping down a revolver, with a phone in a cracked case with a Blue Note sticker in your lap." BRENNER: (a long pause, then) "I saw the camera. Kids put those in to sell clips of drunk actresses. Nobody was ever going to pay to watch an old man in a raincoat. (beat) And a wet revolver rusts by morning, son. You dry it when it's wet, not when it's smart. Thirty years of habit doesn't stop to check who's filming."
+- "Tuesday night, ten past one." (got\_ride\_receipt) RAY: "An hour after Danny went down, Harlan's office booked you a Glide on the company account, Blue Note to Pryce Tower. Your driver gave you one star. He wrote that you smelled like gun oil." BRENNER: "Kids today. No respect for a man who cleans his weapon." With clue\_cabin\_clip, Ray goes on: "Kenji had a camera on his back seat. November's card. You, at twelve past one, wiping down a revolver, with a phone in a cracked case with a Blue Note sticker in your lap." BRENNER: (a long pause, then) "I saw the camera. Kids put those in to sell clips of drunk actresses. Nobody was ever going to pay to watch an old man in a raincoat. (beat) And a wet revolver rusts by morning, son. You dry it when it's wet, not when it's smart. Thirty years of habit doesn't stop to check who's filming."
 - "Empty by Christmas." (got\_brenner\_card or clue\_block\_empty) RAY: "You handed out cards on that block last Thursday. Security consultant, Pryce Development. 'Empty by Christmas. The jazz club too.'" BRENNER: "It was a forecast. I'm good at forecasts."
 - "They drew a lobby." (got\_pryce\_invite) RAY: "Your boss threw a party for Ted Haskell last night and drew a forty-story lobby where the Blue Note is." BRENNER: "Harlan likes a nice drawing."
 - "A long gray car." (clue\_big\_man or clue\_pryce\_driver) RAY: (nodding at the Lincoln) "A long gray car stopped on the Fletcher Drive bridge Tuesday after three, and a big man in an old cop's coat threw something into the reeds. I fished it out tonight." BRENNER: (glances at the phone on the bollard) "The river was supposed to keep it." RAY: "The river's been concrete since 1938."

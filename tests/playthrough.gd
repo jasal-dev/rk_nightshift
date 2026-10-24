@@ -1146,7 +1146,7 @@ func _case5() -> void:
 	await act("tiny")
 	await act("radio")
 	await act("vance", "use", "", ["Thanks for coming.", "The man on the phone.", "Stay out of sight.", "I'm ready."])
-	await act("bollard", "use", "", ["Wednesday, ten past one.", "You called Nina Alvarez.", "Let's see what you've got, Walt."])
+	await act("bollard", "use", "", ["Tuesday night, ten past one.", "You called Nina Alvarez.", "Let's see what you've got, Walt."])
 	expect(["brenner_here", "brenner_lie1_broken"])
 	if not main.room.get_node("Lincoln").visible or not main.room.get_node("Actors/Brenner").visible:
 		_fail("Brenner and his Lincoln should be on the pier")

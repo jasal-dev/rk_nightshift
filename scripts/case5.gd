@@ -182,7 +182,7 @@ static func take(main: Node) -> void:
 	await main.voice("Already did. Something only an idiot would guess. Come get it before you do anything stupid.", CALL_AT, Case4.IKE_COLOR, "ike", true)
 	await main.say("I'll come get it on the way to doing something stupid.")
 	if Game.flag("asked_cabin_clip"):
-		await main.voice("And Ray. Your November card. Wednesday, twelve past one, back seat. A big man in an old raincoat, soaked, wiping down a revolver with a handkerchief.", CALL_AT, Case4.IKE_COLOR, "ike", true)
+		await main.voice("And Ray. Your November card. Tuesday night, twelve past one, back seat. A big man in an old raincoat, soaked, wiping down a revolver with a handkerchief.", CALL_AT, Case4.IKE_COLOR, "ike", true)
 		await main.voice("In his lap, a phone in a cracked black case with a Blue Note sticker. He tries a passcode twice and gives up. I'm texting you a still.", CALL_AT, Case4.IKE_COLOR, "ike", true)
 		await main.say("Smelled like gun oil.")
 		main.clue("clue_cabin_clip")
